@@ -1,0 +1,55 @@
+{
+  "id": "swamped",
+  "cat": "expr",
+  "sub": "새 표현",
+  "date": "2026-09-30",
+  "title": "\"I'm swamped\" — busy보다 100배 생생한 '나 바빠'",
+  "lead": "일이 산더미일 때 원어민이 입에 달고 사는 표현",
+  "description": "I'm swamped 뜻과 뉘앙스, 예문, 비슷한 표현(I'm slammed, a lot on my plate)을 연상법과 퀴즈로 정리했어요.",
+  "body_html": "<h2>뜻</h2>\n<div class=\"box\"><b>I'm swamped</b> = 할 일이 산더미야, 정신없이 바빠</div>\n<p>swamp는 원래 <b>'늪'</b>이라는 뜻이에요. 일이 늪처럼 밀려와서 허우적대는 느낌이라, 그냥 busy라고 할 때보다 훨씬 생생하게 들려요.</p>\n<div class=\"memo\">🧠 <b>연상법</b> — 일 더미로 된 늪에 허리까지 빠져서 허우적대는 나를 떠올려 보세요. 그게 swamped예요.</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Sorry, I'm swamped today. Rain check?</span><span class=\"ko\">미안, 오늘 일이 너무 많아. 다음에 하자!</span></li>\n<li><span class=\"en\">I'm swamped with emails.</span><span class=\"ko\">이메일이 산더미처럼 쌓였어.</span></li>\n<li><span class=\"en\">We've been swamped with orders since the sale.</span><span class=\"ko\">세일 이후로 주문이 몰려서 정신없어.</span></li>\n</ul></div>\n<h2>비슷한 표현</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I'm slammed.</span><span class=\"ko\">일에 두들겨 맞는 느낌. 직장 동료끼리 자주 써요.</span></li>\n<li><span class=\"en\">I have a lot on my plate.</span><span class=\"ko\">접시에 음식이 가득 = 해야 할 일이 많다.</span></li>\n<li><span class=\"en\">I'm up to my ears in work.</span><span class=\"ko\">일이 귀까지 차올랐다 = 일에 파묻혔다.</span></li>\n</ul></div>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "\"I'm swamped\"의 뜻으로 가장 알맞은 것은?",
+      "sub": "본문에서 배운 뉘앙스를 떠올려 보세요",
+      "options": [
+        "나 완전 지쳤어",
+        "나 일이 산더미야",
+        "나 물에 빠졌어",
+        "나 기분이 별로야"
+      ],
+      "answer": 1,
+      "explain": "swamped는 '지쳤다'가 아니라 '할 일이 너무 많다'예요. 피곤함보다 일의 양에 초점이 있어요.",
+      "mnemonic": "늪(swamp) = 일 더미. 늪에 빠져서 헤어나지 못하는 거지, 지쳐서 누운 게 아니에요!"
+    },
+    {
+      "tag": "상황",
+      "q": "\"I'm swamped\"를 쓰기 가장 자연스러운 상황은?",
+      "sub": "상황과 표현을 연결해 보세요",
+      "options": [
+        "친구가 주말에 뭐 했냐고 물을 때",
+        "동료가 오늘 점심 같이 먹자고 할 때",
+        "시험에 합격했다는 소식을 들었을 때",
+        "맛있는 음식을 먹었을 때"
+      ],
+      "answer": 1,
+      "explain": "\"Sorry, I'm swamped today. Rain check?\"처럼 제안을 부드럽게 거절할 때 딱이에요.",
+      "mnemonic": "늪에 빠진 사람은 점심 먹으러 못 나가요 → '거절할 때 swamped'로 기억하세요."
+    },
+    {
+      "tag": "전치사",
+      "q": "빈칸에 들어갈 말로 알맞은 것은?",
+      "sub": "I'm swamped ___ work this week.",
+      "options": [
+        "at",
+        "on",
+        "with",
+        "for"
+      ],
+      "answer": 2,
+      "explain": "swamped with ~ = ~로 정신없다. 무엇이 몰려왔는지 with 뒤에 붙여요. (with emails, with orders)",
+      "mnemonic": "늪이 '무엇으로' 가득 차 있나? → 가득 찬 재료에는 with! (filled with, packed with와 같은 친구)"
+    }
+  ]
+}

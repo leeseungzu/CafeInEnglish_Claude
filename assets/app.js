@@ -1,0 +1,251 @@
+/* 카페인영어 CafeInEnglish — 퀴즈 · 오답노트 · 필사 · 출력
+   페이지마다 <script id="page-data" type="application/json"> 에 데이터가 들어 있어요. */
+(function () {
+  "use strict";
+  const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const L = ["A", "B", "C", "D", "E"];
+  const DATA = (() => { try { return JSON.parse($("#page-data").textContent); } catch (e) { return {}; } })();
+
+  /* ---------- 저장소 (방문자 브라우저에만 저장, 로그인 없음) ---------- */
+  function makeStore(K) {
+    let mem = {};
+    const load = () => { try { const r = localStorage.getItem(K); return r ? JSON.parse(r) : {}; } catch (e) { return mem; } };
+    const save = d => { mem = d; try { localStorage.setItem(K, JSON.stringify(d)); } catch (e) {} };
+    return { load, save };
+  }
+  const wrongDB = makeStore("cafein_wrong_v1");
+  const copyDB = makeStore("cafein_copy_v1");
+  const wrong = {
+    all: () => wrongDB.load(),
+    add(id, snap, picked) { const d = wrongDB.load(); const c = d[id]; d[id] = { ...snap, picked, count: (c ? c.count : 0) + 1, at: Date.now() }; wrongDB.save(d); },
+    remove(id) { const d = wrongDB.load(); delete d[id]; wrongDB.save(d); },
+    clear() { wrongDB.save({}); }
+  };
+
+  function toast(msg) {
+    let t = $("#toast");
+    if (!t) { t = document.createElement("div"); t.id = "toast"; t.className = "toast"; document.body.appendChild(t); }
+    t.textContent = msg; t.classList.add("show"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 1800);
+  }
+  function updateBadge() {
+    const b = $("#nav-badge"); if (!b) return;
+    const n = Object.keys(wrong.all()).length; b.hidden = !n; b.textContent = n;
+  }
+
+  /* ---------- 퀴즈 엔진 (글 퀴즈 / 오답 다시 풀기 공용) ---------- */
+  function runQuiz(el, items, opt) {
+    let i = 0, score = 0, graduated = 0, newWrong = 0;
+    const review = opt.mode === "review";
+
+    function render() {
+      const d = items[i], n = items.length;
+      el.innerHTML = `<div class="cq">
+        <div class="cq-head"><span class="chip ${review ? "tip" : "expr"}">${review ? "🔁 오답 다시 풀기" : "☕ 오늘의 퀴즈"}</span><span class="cq-step">${i + 1} / ${n}</span></div>
+        <div class="cq-bar"><i style="width:${(i / n) * 100}%"></i></div>
+        <p class="cq-q">${esc(d.q)}</p><p class="cq-sub">${esc(d.sub || "")}</p>
+        <div class="cq-opts">${d.options.map((t, k) => `<button class="cq-opt" data-k="${k}"><b>${L[k]}</b><span>${esc(t)}</span></button>`).join("")}</div>
+        <div class="fb"></div></div>`;
+      $$(".cq-opt", el).forEach(b => b.onclick = () => pick(+b.dataset.k));
+    }
+
+    function pick(k) {
+      const d = items[i], right = k === d.answer;
+      $$(".cq-opt", el).forEach((b, j) => { b.disabled = true; b.classList.add(j === d.answer ? "ok" : j === k ? "bad" : "dim"); });
+      let extra = "";
+      if (right) {
+        score++;
+        if (review) { wrong.remove(d.id); graduated++; extra = `<div class="saved" style="color:var(--ok)">🎓 오답노트에서 졸업했어요!</div>`; }
+      } else {
+        const snap = { q: d.q, sub: d.sub, options: d.options, answer: d.answer, explain: d.explain, mnemonic: d.mnemonic, tag: d.tag,
+          postTitle: d.postTitle || DATA.title, postUrl: d.postUrl || DATA.url, cat: d.cat || DATA.cat, catName: d.catName || DATA.catName };
+        wrong.add(d.id, snap, k); newWrong++;
+        extra = `<div class="saved">📒 오답노트에 저장했어요. 나중에 다시 풀 수 있어요.</div>`;
+      }
+      updateBadge();
+      const last = i === items.length - 1;
+      $(".fb", el).innerHTML = `
+        <div class="cq-fb ${right ? "ok" : "bad"}">
+          <strong>${right ? "정답이에요! 👏" : `아쉬워요! 정답은 ${L[d.answer]}`}</strong>${esc(d.explain)}
+          <div class="mn">🧠 <b>연상법</b> — ${esc(d.mnemonic)}</div>${extra}
+        </div>
+        <button class="btn primary next" style="margin-top:12px">${last ? "결과 보기 🎉" : "다음 문제 →"}</button>`;
+      const nx = $(".next", el);
+      nx.onclick = () => { i++; i < items.length ? render() : result(); };
+      nx.focus({ preventScroll: true });
+    }
+
+    function result() {
+      const n = items.length, perfect = score === n;
+      if (review) {
+        const left = Object.keys(wrong.all()).length;
+        el.innerHTML = `<div class="cq"><div class="cq-result">
+          <div class="cq-emoji">${left ? "💪" : "🎓"}</div>
+          <div class="cq-score">${graduated}개 졸업!</div>
+          <p class="cq-msg">${left ? `아직 ${left}개가 남았어요. 연상법을 한 번 더 읽고 다시 도전해 보세요.` : "오답노트를 모두 졸업했어요. 대단해요!"}</p>
+          <div class="cq-cta">
+            <a class="btn primary" href="/notes/">📒 오답노트로 돌아가기</a>
+            <a class="btn ghost" href="/">새 표현 배우러 가기</a>
+            ${DATA.kakao ? `<a class="btn kakao" href="${DATA.kakao}" target="_blank" rel="noopener">💬 매일 아침 표현 하나, 카톡으로 받기</a>` : ""}
+          </div></div></div>`;
+        return;
+      }
+      const links = (DATA.links || []).map(l => `<a class="btn ghost" href="${l.href}">${esc(l.label)}</a>`).join("");
+      el.innerHTML = `<div class="cq"><div class="cq-result">
+        <div class="cq-emoji">${perfect ? "🏆" : score >= Math.ceil(n / 2) ? "☕" : "📚"}</div>
+        <div class="cq-score">${n}문제 중 ${score}개 정답</div>
+        <p class="cq-msg">${perfect ? "완벽해요! 이제 이 표현은 완전히 내 거예요." : `틀린 ${newWrong}문제는 오답노트에 모아뒀어요. 연상법으로 다시 복습해 보세요.`}</p>
+        <div class="cq-cta">
+          ${newWrong ? `<a class="btn primary" href="/notes/">📒 내 오답노트 복습하기 (${Object.keys(wrong.all()).length})</a>` : ""}
+          <div class="grid2">${links}</div>
+          ${DATA.kakao ? `<a class="btn kakao" href="${DATA.kakao}" target="_blank" rel="noopener">💬 매일 아침 표현 하나, 카톡으로 받기</a>` : ""}
+        </div>
+        <button class="btn danger again">다시 풀어보기</button>
+      </div></div>`;
+      $(".again", el).onclick = () => { i = 0; score = 0; newWrong = 0; render(); };
+    }
+    render();
+  }
+
+  /* ---------- 오답노트 페이지 ---------- */
+  function renderNotes(root) {
+    const data = wrong.all();
+    const ids = Object.keys(data).sort((a, b) => data[b].count - data[a].count || data[b].at - data[a].at);
+    if (!ids.length) {
+      root.innerHTML = `<div class="empty"><div class="e">🎓</div><p>오답노트가 비어 있어요.<br>퀴즈에서 틀린 문제가 여기에 자동으로 모여요.</p></div>
+        <a class="btn primary" href="/">퀴즈 풀러 가기</a>`;
+      return;
+    }
+    const tagCount = {}, tagUrl = {};
+    ids.forEach(id => { const t = data[id].tag || "기타"; tagCount[t] = (tagCount[t] || 0) + data[id].count; tagUrl[t] = data[id].postUrl; });
+    const weak = Object.entries(tagCount).sort((a, b) => b[1] - a[1])[0][0];
+    const total = ids.reduce((s, id) => s + data[id].count, 0);
+    root.innerHTML = `
+      <div class="stats">
+        <div class="stat"><div class="n">${ids.length}</div><div class="l">남은 오답</div></div>
+        <div class="stat"><div class="n">${total}</div><div class="l">누적 틀린 횟수</div></div>
+        <div class="stat"><div class="n">${esc(weak)}</div><div class="l">약한 유형</div></div>
+      </div>
+      <div class="weak">🎯 <b>'${esc(weak)}'</b> 문제를 가장 자주 틀렸어요. ${tagUrl[weak] ? `<a href="${tagUrl[weak]}">관련 글 다시 보기 →</a>` : ""}</div>
+      <button class="btn primary retry">🔁 오답만 다시 풀기 (${ids.length}문제)</button>
+      <div class="review"></div>
+      <div class="note-list">${ids.map(id => {
+        const d = data[id];
+        return `<div class="note">
+          <div class="note-top"><span><span class="chip ${esc(d.cat || "expr")}">${esc(d.catName || "")}</span><span class="chip ${esc(d.cat || "expr")}">${esc(d.tag || "")}</span></span><span>${d.count}번 틀림</span></div>
+          <h3>${esc(d.q)}${d.sub && d.sub.includes("___") ? `<br><span style="font-weight:400">${esc(d.sub)}</span>` : ""}</h3>
+          <div class="ans">
+            <div class="mine">❌ 내가 고른 답: ${esc(d.options[d.picked])}</div>
+            <div class="right">✅ 정답: ${esc(d.options[d.answer])}</div>
+          </div>
+          <details><summary>왜 틀렸을까? 복기하기</summary>
+            <div class="why">💡 ${esc(d.explain)}</div>
+            <div class="memo">🧠 <b>연상법</b> — ${esc(d.mnemonic)}</div>
+          </details>
+          <a class="src" href="${d.postUrl}">📖 원래 글 다시 보기: ${esc(d.postTitle)}</a>
+        </div>`; }).join("")}</div>
+      <button class="btn danger clear">오답노트 전체 비우기</button>`;
+    $(".retry", root).onclick = () => {
+      $(".retry", root).hidden = true; $(".note-list", root).hidden = true;
+      runQuiz($(".review", root), ids.map(id => ({ id, ...data[id] })), { mode: "review" });
+    };
+    $(".clear", root).onclick = () => { wrong.clear(); updateBadge(); renderNotes(root); toast("오답노트를 비웠어요"); };
+  }
+
+  /* ---------- 사유의 문장: 필사 · 빈칸 복기 · 나의 한 줄 ---------- */
+  const norm = w => w.toLowerCase().replace(/[’‘]/g, "'").replace(/[^a-z0-9']/g, "");
+  const copy = {
+    all: () => copyDB.load(),
+    rec(id, snap, patch) { const d = copyDB.load(); const c = d[id] || { count: 0, best: 0 }; d[id] = { ...c, ...snap, ...patch(c), at: Date.now() }; copyDB.save(d); }
+  };
+
+  function copyMode(pane, q, id, snap) {
+    pane.innerHTML = `<textarea placeholder="위 영어 문장을 보면서 그대로 따라 써 보세요"></textarea>
+      <div class="row"><button class="btn primary check">채점하기</button></div><div class="res"></div>`;
+    $(".check", pane).onclick = () => {
+      const src = q.en.split(/\s+/), a = src.map(norm);
+      const b = $("textarea", pane).value.split(/\s+/).map(norm).filter(Boolean);
+      const dp = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0));
+      for (let i = a.length - 1; i >= 0; i--) for (let j = b.length - 1; j >= 0; j--)
+        dp[i][j] = a[i] === b[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+      const hit = new Set(); let i = 0, j = 0;
+      while (i < a.length && j < b.length) { if (a[i] === b[j]) { hit.add(i); i++; j++; } else if (dp[i + 1][j] >= dp[i][j + 1]) i++; else j++; }
+      const acc = Math.round(hit.size / a.length * 100), extra = Math.max(0, b.length - hit.size);
+      copy.rec(id, snap, c => ({ count: c.count + 1, best: Math.max(c.best, acc) }));
+      $(".res", pane).innerHTML = `
+        <div class="diff">${src.map((w, k) => `<span class="w ${hit.has(k) ? "hit" : "miss"}">${esc(w)}</span>`).join(" ")}</div>
+        <div class="acc">${acc === 100 ? "🎉 완벽해요! 필사 노트에 담았어요." : `정확도 ${acc}% · 빨간 단어를 다시 확인해 보세요${extra ? ` (불필요한 단어 ${extra}개)` : ""}`}</div>`;
+    };
+  }
+
+  function blankMode(pane, q) {
+    const left = [...q.blanks];
+    const parts = q.en.split(/(\s+)/).map(tok => {
+      const k = left.findIndex(bw => norm(tok) === bw);
+      if (k < 0) return esc(tok);
+      const ans = left.splice(k, 1)[0];
+      const tail = tok.slice(tok.toLowerCase().indexOf(ans) + ans.length);
+      return `<input class="blank" data-a="${ans}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="빈칸">${esc(tail)}`;
+    });
+    pane.innerHTML = `<div class="blanks">${parts.join("")}</div>
+      <div class="row"><button class="btn primary check">확인하기</button><button class="btn ghost hint">힌트 (첫 글자)</button></div><div class="res"></div>`;
+    const inputs = $$("input.blank", pane);
+    $(".hint", pane).onclick = () => inputs.forEach(n => { if (!n.value) n.placeholder = n.dataset.a[0] + "…"; });
+    $(".check", pane).onclick = () => {
+      let ok = 0;
+      inputs.forEach(n => { const g = norm(n.value) === n.dataset.a; n.classList.toggle("ok", g); n.classList.toggle("bad", !g); if (g) ok++; });
+      $(".res", pane).innerHTML = `<div class="acc">${ok === inputs.length ? "🎉 전부 떠올렸어요! 이제 이 문장은 내 거예요." :
+        `${inputs.length}개 중 ${ok}개 · 빨간 칸을 다시 떠올려 보세요 (정답: ${inputs.filter(n => !n.classList.contains("ok")).map(n => n.dataset.a).join(", ")})`}</div>`;
+    };
+  }
+
+  function initThink() {
+    const rec = copy.all();
+    $$(".quote[data-i]").forEach(card => {
+      const q = DATA.quotes[+card.dataset.i], id = card.dataset.id, pane = $(".pane", card);
+      const snap = { en: q.en, ko: q.ko, title: DATA.title, speaker: DATA.speaker, url: DATA.url };
+      const modes = { copy: () => copyMode(pane, q, id, snap), blank: () => blankMode(pane, q) };
+      $$(".tabs button", card).forEach(b => b.onclick = () => { $$(".tabs button", card).forEach(x => x.classList.toggle("on", x === b)); modes[b.dataset.mode](); });
+      const note = $("textarea.note", card);
+      if (rec[id] && rec[id].note) note.value = rec[id].note;
+      $(".save-note", card).onclick = () => { copy.rec(id, snap, () => ({ note: note.value.trim() })); toast("나의 한 줄을 저장했어요 ✍️"); };
+      modes.copy();
+    });
+  }
+
+  function renderCopyNotes(root) {
+    const d = copy.all(), ids = Object.keys(d).sort((a, b) => d[b].at - d[a].at);
+    $("#copy-count") && ($("#copy-count").textContent = ids.length);
+    root.innerHTML = ids.length ? ids.map(id => { const r = d[id]; return `
+      <div class="quote">
+        <div class="meta"><span>${esc(r.speaker || "")}</span><span>필사 ${r.count || 0}회 · 최고 ${r.best || 0}%</span></div>
+        <p class="en">${esc(r.en)}</p><p class="ko">${esc(r.ko)}</p>
+        ${r.note ? `<div class="think-box">💭 <b>나의 한 줄</b> — ${esc(r.note)}</div>` : ""}
+        <a class="src" style="font-size:13px;color:var(--muted)" href="${r.url}">다시 필사하기 →</a>
+      </div>`; }).join("") :
+      `<div class="empty"><div class="e">✍️</div><p>아직 필사한 문장이 없어요.<br>문장을 따라 쓰면 여기에 나만의 문장집이 쌓여요.</p></div>`;
+  }
+
+  /* ---------- 영상 장면 이동 ---------- */
+  function initVideoSeek() {
+    const yt = $("#yt"); if (!yt) return;
+    $$(".ts[data-t]").forEach(b => b.onclick = () => {
+      const cmd = (func, args) => yt.contentWindow.postMessage(JSON.stringify({ event: "command", func, args }), "*");
+      cmd("seekTo", [+b.dataset.t, true]); cmd("playVideo", []);
+      yt.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  }
+
+  /* ---------- 시작 ---------- */
+  updateBadge();
+  const pb = $("#print-btn"); if (pb) pb.onclick = () => window.print();
+  if (DATA.type === "post") {
+    initVideoSeek();
+    const items = DATA.quiz.map((q, i) => ({ id: `${DATA.id}:${i}`, ...q }));
+    runQuiz($("#quiz"), items, { mode: "post" });
+  }
+  if (DATA.type === "think") initThink();
+  if (DATA.type === "notes") renderNotes($("#notes-root"));
+  if ($("#copy-notes")) renderCopyNotes($("#copy-notes"));
+})();

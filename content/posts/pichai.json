@@ -1,0 +1,105 @@
+{
+  "id": "pichai",
+  "cat": "video",
+  "sub": "스탠퍼드 졸업 연설",
+  "date": "2026-09-30",
+  "title": "구글 CEO 순다르 피차이 연설에서 건진 영어표현 5개",
+  "lead": "열심히 사는데도 불안한 당신에게 — 영상 보면서 표현 5개 챙기기",
+  "description": "순다르 피차이의 2026 스탠퍼드 졸업 연설에서 make-or-break, find one's footing 등 원어민 표현 5개를 예문, 연상법, 퀴즈로 정리했어요.",
+  "video": "BjtkTj1tq0I",
+  "think": "pichai",
+  "body_html": "<p>2026년 스탠퍼드 졸업식에서 순다르 피차이가 한 연설이에요. 핵심 메시지는 \"인생의 수많은 순간 중 정말 결정적인 건 몇 개 안 된다\"는 것. 표현마다 <b>▶ 듣기</b>를 누르면 그 장면으로 바로 이동해요.</p>",
+  "expressions_heading": "오늘의 표현 5개",
+  "expressions": [
+    {
+      "t": 148,
+      "en": "let you in on a little secret",
+      "ko": "작은 비밀 하나 알려줄게",
+      "orig": "I'm going to let you in on a little secret.",
+      "ex": "Let me let you in on a little secret: I was nervous too.",
+      "exKo": "비밀 하나 알려줄게. 나도 떨렸어.",
+      "memo": "let you in = 문을 열고 안으로 들여보내 주다. 비밀의 방에 너를 들여보내 주는 거예요."
+    },
+    {
+      "t": 268,
+      "en": "make-or-break",
+      "ko": "성패를 가르는, 결정적인",
+      "orig": "Very few of them are make-or-break.",
+      "ex": "This interview is make-or-break for me.",
+      "exKo": "이번 면접이 나한테는 결정적이야.",
+      "memo": "만들거나(make) 부서지거나(break), 둘 중 하나로 갈리는 순간!"
+    },
+    {
+      "t": 489,
+      "en": "find one's footing",
+      "ko": "자리를 잡다, 적응하다",
+      "orig": "It took me a while to find my footing.",
+      "ex": "It took me a few months to find my footing at the new job.",
+      "exKo": "새 직장에 적응하는 데 몇 달 걸렸어.",
+      "memo": "미끄러운 바닥에서 발 디딜 곳(footing)을 더듬어 찾는 모습을 떠올려 보세요."
+    },
+    {
+      "t": 574,
+      "en": "go out of one's way to ~",
+      "ko": "일부러 (애써서) ~하다",
+      "orig": "He went out of his way to dismiss us.",
+      "ex": "She went out of her way to help me.",
+      "exKo": "그녀는 일부러 시간을 내서 나를 도와줬어.",
+      "memo": "가던 길(way)에서 벗어나(out of)면서까지 한다 = 일부러!"
+    },
+    {
+      "t": 647,
+      "en": "jump at the chance",
+      "ko": "기회를 덥석 잡다",
+      "orig": "That's why I jumped at the chance to work on Chromebooks and Android.",
+      "ex": "I'd jump at the chance to study abroad.",
+      "exKo": "유학 기회가 오면 나는 바로 잡을 거야.",
+      "memo": "기회를 향해 폴짝 뛰어드는(jump) 모습!"
+    }
+  ],
+  "related": [],
+  "quiz": [
+    {
+      "tag": "영상표현",
+      "q": "\"Very few of them are make-or-break.\" 에서 make-or-break의 뜻은?",
+      "sub": "4:28 장면을 떠올려 보세요",
+      "options": [
+        "쉽게 만들 수 있는",
+        "성패를 가르는, 결정적인",
+        "부서지기 쉬운",
+        "다시 만들 수 있는"
+      ],
+      "answer": 1,
+      "explain": "피차이는 '인생의 순간들 중 정말 결정적인 건 아주 적다'고 말해요. make-or-break = 성공이냐 실패냐를 가르는.",
+      "mnemonic": "만들거나(make) 부서지거나(break) — 결과가 둘 중 하나로 갈리는 순간!"
+    },
+    {
+      "tag": "영상표현",
+      "q": "\"새 회사에 적응하는 데 시간이 좀 걸렸어.\"를 영어로 하면?",
+      "sub": "It took me a while to ___.",
+      "options": [
+        "find my footing",
+        "find my way out",
+        "take my foot",
+        "make my step"
+      ],
+      "answer": 0,
+      "explain": "find one's footing = 새로운 환경에서 자리를 잡다. 피차이도 구글에 오기 전까지 자리 잡는 데 오래 걸렸다고 했어요.",
+      "mnemonic": "발(foot) 디딜 곳을 찾아야 넘어지지 않고 설 수 있어요 → 자리 잡기!"
+    },
+    {
+      "tag": "영상표현",
+      "q": "\"She went out of her way to help me.\"의 뜻은?",
+      "sub": "out of one's way = ?",
+      "options": [
+        "그녀는 길을 잃은 채 나를 도왔다",
+        "그녀는 일부러 시간을 내서 나를 도와줬다",
+        "그녀는 나를 돕다가 길을 벗어났다",
+        "그녀는 나를 돕지 않고 떠났다"
+      ],
+      "answer": 1,
+      "explain": "go out of one's way to ~ = 굳이 애써서 ~하다. 좋은 뜻(도와주다)에도, 나쁜 뜻(깎아내리다)에도 모두 써요.",
+      "mnemonic": "자기 가던 길에서 벗어나면서까지 해준다 = 일부러!"
+    }
+  ]
+}
