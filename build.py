@@ -7,7 +7,7 @@ GitHub Pages 는 docs/ 폴더를 그대로 서비스합니다.
     python3 build.py          # docs/ 다시 만들기
     python3 build.py --serve  # 만들고 http://localhost:8000 에서 미리보기
 """
-import hashlib, html, io, json, shutil, sys
+import hashlib, html, io, json, re, shutil, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -16,6 +16,8 @@ CONTENT, ASSETS, OUT = ROOT / "content", ROOT / "assets", ROOT / "docs"
 SITE = json.loads((CONTENT / "site.json").read_text("utf-8"))
 DOMAIN = SITE["domain"].rstrip("/")
 CATS = {"video": "영상으로 배우기", "expr": "영어표현", "tip": "영어꿀팁", "think": "사유의 문장"}
+TILE_SUB = {"video": "카영 영상 속 표현을 장면과 함께", "expr": "새 표현 · 비슷한 표현 · 헷갈리는 표현",
+            "tip": "회화 · 단어 · 듣기 · 발음", "think": "필사하고 빈칸으로 복기"}
 CAT_LEAD = {
     "video": "카페인영어 영상 한 편에서 표현을 뽑아 정리하고, 퀴즈로 확인해요",
     "expr": "새 표현 · 비슷한 표현 · 헷갈리는 표현을 연상법과 퀴즈로",
@@ -57,7 +59,7 @@ def mmss(t):
 
 
 # ------------------------------------------------------------------ layout
-def layout(title, desc, path, body, nav="", data=None, og_type="website"):
+def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False):
     full_title = f"{title} | 카페인영어" if path != "/" else f"{SITE['name']} — {SITE['tagline']}"
     ads = (f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={e(SITE["adsense_client"])}" crossorigin="anonymous"></script>'
            if SITE.get("adsense_client") else "")
@@ -66,7 +68,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website"):
           if SITE.get("ga_id") else "")
     navlinks = "".join(
         f'<a href="/category/{k}/"{" class=on" if nav == k else ""}>{v}</a>' for k, v in CATS.items())
-    navlinks += f'<a href="/notes/"{" class=on" if nav == "notes" else ""}>내 오답노트<span class="badge" id="nav-badge" hidden></span></a>'
+    room = f'<a class="room{" on" if nav == "notes" else ""}" href="/notes/">내 공부방<span class="badge" id="nav-badge" hidden></span></a>'
     pjson = json.dumps(data or {}, ensure_ascii=False).replace("</", "<\\/")
     pdata = '<script id="page-data" type="application/json">' + pjson + '</script>'
     return f"""<!doctype html>
@@ -82,17 +84,22 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website"):
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{DOMAIN}{path}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="/assets/style.css?v={ASSET_V}">
 {ads}{ga}
 </head>
 <body>
 <header class="top"><div class="top-in">
-  <a class="logo" href="/">카페인영어 <span style="font-weight:600;color:var(--accent)">CafeInEnglish</span></a>
+  <a class="logo" href="/">카페인영어 <i>CafeInEnglish</i></a>
   <nav class="nav">{navlinks}</nav>
+  {room}
 </div></header>
+<div class="wrap{" has-side" if aside else ""}{" wide" if wide else ""}">
 <main>
 {body}
 </main>
+{f'<aside class="side no-print"><div class="side-in">{aside}</div></aside>' if aside else ""}
+</div>
 <footer class="foot no-print">
   <div>{e(SITE['name'])} · {e(SITE['tagline'])}</div>
   <div style="margin-top:8px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/contact/">문의</a>{f'<a href="{e(SITE["youtube"])}" target="_blank" rel="noopener">유튜브</a>' if SITE.get("youtube") else ""}</div>
@@ -106,7 +113,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website"):
 
 def card(href, chips, title, sub):
     chip_html = "".join('<span class="chip %s">%s</span>' % (c, e(t)) for c, t in chips)
-    return f'<a class="card" href="{href}">{chip_html}<h3>{e(title)}</h3><p>{e(sub)}</p></a>'
+    return f'<a class="card" href="{href}"><div class="chips">{chip_html}</div><h3>{e(title)}</h3><p>{e(sub)}</p></a>'
 
 
 def post_card(p):
@@ -121,7 +128,7 @@ def think_card(t):
 
 PRINT_BTN = """
 <div class="no-print" style="margin-top:22px">
-  <button class="btn ghost" id="print-btn">🖨️ 출력해서 복습하기 (PDF 저장)</button>
+  <button class="btn ghost js-print" id="print-btn">🖨️ 출력해서 복습하기 (PDF 저장)</button>
   <p class="lead" style="font-size:13px;text-align:center;margin-top:6px">인쇄 창에서 대상을 <b>'PDF로 저장'</b>으로 고르면 파일로 받을 수 있어요</p>
 </div>"""
 CIRC = ["①", "②", "③", "④", "⑤"]
@@ -150,20 +157,47 @@ def related_links(p):
     return links[:4]
 
 
+def add_heading_ids(body_html, toc):
+    """본문 <h2>에 id를 붙이고 목차(toc)에 추가"""
+    def sub(m):
+        n = len(toc) + 1
+        text = re.sub(r"<[^>]+>", "", m.group(2))
+        toc.append((f"s{n}", text))
+        return f'<h2{m.group(1)} id="s{n}">{m.group(2)}</h2>'
+    return re.sub(r"<h2([^>]*)>(.*?)</h2>", sub, body_html)
+
+
+def toc_html(toc, quiz_label="✅ 퀴즈 풀기"):
+    items = "".join(f'<li><a href="#{i}">{e(t)}</a></li>' for i, t in toc)
+    return f'<ol class="toc">{items}<li class="q"><a href="#quiz-sec">{quiz_label}</a></li></ol>'
+
+
+def side_common():
+    yt = (f'<div class="side-box"><h4>카페인영어 유튜브</h4><a class="btn ghost" href="{e(SITE["youtube"])}" target="_blank" rel="noopener">▶ 채널 구경하기</a></div>'
+          if SITE.get("youtube") else "")
+    kk = (f'<div class="side-box"><h4>매일 한 잔</h4><a class="btn kakao" href="{e(SITE["kakao"])}" target="_blank" rel="noopener">💬 카톡으로 매일 받기</a></div>'
+          if SITE.get("kakao") else "")
+    return kk + yt
+
+
 def page_post(p):
     url = post_url(p)
     video = p.get("video")
     parts = [f'<span class="chip {p["cat"]}">{CATS[p["cat"]]}</span><span class="chip {p["cat"]}">{e(p.get("sub", ""))}</span>',
              f'<h1>{e(p["title"])}</h1><p class="lead">{e(p.get("lead", ""))}</p><p class="date-line">{e(p.get("date", ""))}</p>']
+    toc_slot = len(parts)
     if video:
         parts.append(f'<div class="video-embed"><iframe id="yt" src="https://www.youtube.com/embed/{video}?enablejsapi=1&rel=0&playsinline=1" '
                      f'title="{e(p["title"])}" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>')
-    parts.append(p.get("body_html", ""))
+    toc = []
+    parts.append(add_heading_ids(p.get("body_html", ""), toc))
     if p.get("expressions"):
-        parts.append(f'<h2>{e(p.get("expressions_heading", "오늘의 표현"))}</h2>')
-        for x in p["expressions"]:
+        toc.append(("expr", p.get("expressions_heading", "오늘의 표현")))
+        parts.append(f'<h2 id="expr">{e(p.get("expressions_heading", "오늘의 표현"))}</h2>')
+        for xi, x in enumerate(p["expressions"]):
             ts = f'<button class="ts" data-t="{x["t"]}">▶ {mmss(x["t"])} 듣기</button>' if video and "t" in x else ""
-            parts.append(f"""<div class="box xp">
+            toc.append((f"x{xi + 1}", "· " + x["en"]))
+            parts.append(f"""<div class="box xp" id="x{xi + 1}">
   <h3>{e(x['en'])}{ts}</h3><div>{e(x['ko'])}</div>
   <div class="orig">🎙️ {e(x['orig'])}</div>
   <ul class="ex"><li><span class="en">{e(x['ex'])}</span><span class="ko">{e(x['exKo'])}</span></li></ul>
@@ -171,12 +205,12 @@ def page_post(p):
 </div>""")
     if p.get("think") in THINK_BY_ID:
         parts.append(f'<div class="think-box">✍️ <b>이 영상 속 마음에 남는 문장</b>은 <a href="{think_url(THINK_BY_ID[p["think"]])}">사유의 문장</a>에서 필사하고 복기할 수 있어요.</div>')
-    parts.append('<h2 class="quiz-h">✅ 오늘 배운 거 확인하기</h2><div id="quiz"></div>')
+    parts.append('<h2 class="quiz-h" id="quiz-sec">✅ 오늘 배운 거 확인하기</h2><div id="quiz"></div>')
     parts.append(PRINT_BTN)
     # 출력용 문제지 (화면에서는 숨김)
     qs = "".join(
         f'<div class="ws-q"><b>{i + 1}. {e(q["q"])}</b>'
-        + (f'<br><span style="font-family:Georgia,serif">{e(q["sub"])}</span>' if "___" in q.get("sub", "") else "")
+        + (f'<br><span>{e(q["sub"])}</span>' if "___" in q.get("sub", "") else "")
         + "<br>" + "".join(f'<span class="o">{CIRC[k]} {e(o)}</span>' for k, o in enumerate(q["options"])) + "</div>"
         for i, q in enumerate(p["quiz"]))
     key = "".join(f'<li><b>{CIRC[q["answer"]]} {e(q["options"][q["answer"]])}</b> — {e(q["explain"])}<br>🧠 {e(q["mnemonic"])}</li>' for q in p["quiz"])
@@ -187,16 +221,25 @@ def page_post(p):
 <div class="ws-line"></div><div class="ws-line"></div><div class="ws-line"></div><div class="ws-line"></div>
 <div class="ws-key"><b>정답과 연상법</b><ol>{key}</ol></div>
 <p style="font-size:12px;color:#555">{DOMAIN.replace("https://", "")} · 매일 표현 하나, 같이 공부해요</p></div>""")
+    parts.insert(toc_slot, f'<details class="toc-m no-print"><summary>📑 목차 · 퀴즈 바로가기</summary>{toc_html(toc)}</details>')
+    links = related_links(p)
+    link_items = "".join('<li><a href="%s">%s</a></li>' % (l["href"], e(l["label"])) for l in links)
+    aside = (f'<div class="side-box"><h4>이 글의 목차</h4>{toc_html(toc)}</div>'
+             f'<div class="side-box"><h4>복습하기</h4><a class="btn primary" href="#quiz-sec">✅ 퀴즈 풀기</a>'
+             f'<a class="btn ghost" href="/notes/">내 공부방<span class="n-pill js-notes-count"></span></a>'
+             f'<button class="btn ghost js-print">🖨️ 출력 · PDF 저장</button></div>'
+             + (f'<div class="side-box"><h4>이어서 보기</h4><ul class="side-links">{link_items}</ul></div>' if links else "")
+             + side_common())
     data = {"type": "post", "id": p["id"], "title": p["title"], "url": url, "cat": p["cat"], "catName": CATS[p["cat"]],
-            "quiz": p["quiz"], "links": related_links(p), "kakao": SITE.get("kakao", "")}
-    return layout(p["title"], p.get("description", p.get("lead", "")), url, "\n".join(parts), p["cat"], data, "article")
+            "quiz": p["quiz"], "links": links, "kakao": SITE.get("kakao", "")}
+    return layout(p["title"], p.get("description", p.get("lead", "")), url, "\n".join(parts), p["cat"], data, "article", aside)
 
 
 def page_think(t):
     url = think_url(t)
     cards = []
     for i, q in enumerate(t["quotes"]):
-        cards.append(f"""<div class="quote no-print" data-id="{t['id']}:{i}" data-i="{i}">
+        cards.append(f"""<div class="quote no-print" id="q{i + 1}" data-id="{t['id']}:{i}" data-i="{i}">
   <div class="meta"><span>문장 {i + 1} / {len(t['quotes'])}</span>
     <a class="ts" href="https://www.youtube.com/watch?v={t.get('video', '')}&t={q['t']}s" target="_blank" rel="noopener" style="text-decoration:none">▶ {mmss(q['t'])} 영상에서 듣기</a></div>
   <p class="en">{e(q['en'])}</p><p class="ko">{e(q['ko'])}</p>
@@ -221,45 +264,77 @@ def page_think(t):
 {PRINT_BTN}
 <div class="print-only ws">{ws_head("✍️ 필사 노트 — " + t["title"], t["speaker"], t.get("video"), url)}{ws}</div>
 <div class="cq-cta no-print" style="margin-top:16px">
-  <a class="btn primary" href="/category/think/">📓 내 필사 노트 보기</a>
+  <a class="btn primary" href="/notes/#copy">내 공부방에서 필사 노트 보기</a>
   {f'<a class="btn kakao" href="{e(SITE["kakao"])}" target="_blank" rel="noopener">💬 매일 아침 문장 하나, 카톡으로 받기</a>' if SITE.get("kakao") else ""}
 </div>"""
     data = {"type": "think", "id": t["id"], "title": t["title"], "speaker": t["speaker"], "url": url,
             "quotes": [{"en": q["en"], "ko": q["ko"], "blanks": q["blanks"]} for q in t["quotes"]]}
-    return layout(t["title"] + " — 필사하기", t.get("description", ""), url, body, "think", data, "article")
+    qlist = "".join(f'<li><a href="#q{i + 1}">{e(q["en"][:42] + ("…" if len(q["en"]) > 42 else ""))}</a></li>' for i, q in enumerate(t["quotes"]))
+    aside = (f'<div class="side-box"><h4>문장 목록</h4><ol class="toc">{qlist}</ol></div>'
+             f'<div class="side-box"><h4>복습하기</h4><a class="btn primary" href="/notes/#copy">내 필사 노트</a>'
+             f'<button class="btn ghost js-print">🖨️ 필사 노트 출력</button>'
+             + (f'<a class="btn ghost" href="{post_url(post)}">🎬 영상 표현 보기</a>' if post else "") + '</div>' + side_common())
+    return layout(t["title"] + " — 필사하기", t.get("description", ""), url, body, "think", data, "article", aside)
 
 
 def page_category(cat):
     url = f"/category/{cat}/"
     if cat == "think":
         cards = "".join(think_card(t) for t in THINKS)
-        body = (f'<h1>✍️ {CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p><div class="cards">{cards}</div>'
-                '<h2>📓 내 필사 노트 (<span id="copy-count">0</span>)</h2><div id="copy-notes"></div>')
+        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p><div class="cards">{cards}</div>'
+                '<p class="a-intro">필사한 문장은 <a href="/notes/#copy">내 공부방</a>에 모여요.</p>')
     else:
         items = [p for p in POSTS if p["cat"] == cat]
         cards = "".join(post_card(p) for p in items) or '<div class="empty"><p>곧 첫 글이 올라와요 ☕</p></div>'
         body = f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p><div class="cards">{cards}</div>'
-    return layout(CATS[cat], CAT_LEAD[cat], url, body, cat)
+    return layout(CATS[cat], CAT_LEAD[cat], url, body, cat, wide=True)
 
 
 def page_home():
-    latest = "".join(post_card(p) for p in POSTS[:12])
-    thinks = "".join(think_card(t) for t in THINKS[:4])
-    body = f"""<div class="hero">
-  <h1 style="margin:0">오늘도 영어 한 잔</h1>
-  <p>영어를 매일 조금씩이라도 하고 싶어서 제가 쓰려고 만든 공간이에요. 셀럽 인터뷰에서 건진 표현을 정리하고, 퀴즈로 확인하고, 틀린 건 오답노트로 다시 봐요. 같이 매일 한 잔씩 해요.</p>
-  <p style="font-size:13px;color:var(--muted)">— 카페인영어 CafeInEnglish</p>
-</div>
-<h2>새로 올라온 글</h2><div class="cards">{latest}</div>
-{f'<h2>✍️ 사유의 문장</h2><div class="cards">{thinks}</div>' if thinks else ""}"""
-    return layout(SITE["name"], SITE["tagline"], "/", body)
+    today = SITE.get("today") or {}
+    tp = POST_BY_ID.get(today.get("post")) or next((p for p in POSTS if p["cat"] == "expr"), POSTS[0])
+    t_en = today.get("en") or tp["title"]
+    t_ko = today.get("ko") or tp.get("lead", "")
+    t_desc = today.get("desc") or ""
+    words = t_en.split(" ")
+    phrase = e(" ".join(words[:-1])) + (" " if len(words) > 1 else "") + f'<span class="hl">{e(words[-1])}</span>'
+    vp = next((p for p in POSTS if p["cat"] == "video"), None)
+    feature = ""
+    if vp:
+        pills = "".join(f"<span>{e(x['en'])}</span>" for x in vp.get("expressions", [])[:3])
+        thumb = f'<img src="https://i.ytimg.com/vi/{vp["video"]}/hqdefault.jpg" alt="" loading="lazy">' if vp.get("video") else ""
+        feature = (f'<a class="a-feature" href="{post_url(vp)}"><div class="a-thumb">{thumb}<span class="a-play">'
+                   '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2A1A12" stroke-width="2.4" stroke-linejoin="round"><path d="M8 5l11 7-11 7z"/></svg></span></div>'
+                   f'<div class="k">영상으로 배우기</div><h3>{e(vp["title"])}</h3><div class="a-pills">{pills}</div></a>')
+    tiles = "".join(f'<a class="a-tile" href="/category/{k}/"><span class="n">0{n}</span><b>{v}</b><span>{TILE_SUB[k]}</span></a>'
+                    for n, (k, v) in enumerate(CATS.items(), 1))
+    latest = "".join(post_card(p) for p in POSTS[:6])
+    thinks = "".join(think_card(t) for t in THINKS[:3])
+    body = f"""<section class="a-hero">
+  <div>
+    <div class="a-kicker">오늘의 한 잔 · {CATS[tp["cat"]]}</div>
+    <h1 class="a-phrase">{phrase}</h1>
+    <p class="a-mean">{e(t_ko)}</p>
+    {f'<p class="a-desc">{e(t_desc)}</p>' if t_desc else ""}
+    <div class="a-btns"><a class="btn primary" href="{post_url(tp)}">글 읽고 퀴즈 풀기</a><a class="btn ghost" href="/notes/">내 공부방</a></div>
+  </div>
+  {feature}
+</section>
+<nav class="a-tiles" aria-label="카테고리">{tiles}</nav>
+<div class="a-head"><h2>새로 올라온 글</h2></div>
+<div class="cards">{latest}</div>
+{f'<div class="a-head" style="margin-top:36px"><h2>사유의 문장</h2><a href="/category/think/">전체 보기</a></div><div class="cards">{thinks}</div>' if thinks else ""}
+<p class="a-intro">영어를 매일 조금씩이라도 하고 싶어서 제가 쓰려고 만든 공간이에요. 셀럽 인터뷰에서 건진 표현을 정리하고, 퀴즈로 확인하고, 틀린 건 내 공부방에서 다시 봐요. 같이 매일 한 잔씩 해요. — 카페인영어</p>"""
+    return layout(SITE["name"], SITE["tagline"], "/", body, wide=True)
 
 
 def page_notes():
-    body = ('<h1>📒 내 오답노트</h1><p class="lead">틀린 문제는 다시 풀어서 맞히면 \'졸업\'해요. '
-            '오답노트는 이 기기의 브라우저에만 저장돼요.</p><div id="notes-root"></div>')
-    return layout("내 오답노트", "퀴즈에서 틀린 문제를 모아 다시 풀고 복기하는 나만의 오답노트", "/notes/", body, "notes",
-                  {"type": "notes", "kakao": SITE.get("kakao", "")})
+    body = ('<h1>내 공부방</h1><p class="lead">틀린 문제와 필사한 문장이 여기에 모여요. '
+            '기록은 이 기기의 브라우저에만 저장돼요.</p>'
+            '<h2 id="wrong">📒 오답노트</h2><p class="lead" style="font-size:15px">다시 풀어서 맞히면 \'졸업\'해요.</p><div id="notes-root"></div>'
+            '<h2 id="copy">✍️ 필사 노트 (<span id="copy-count">0</span>)</h2><div id="copy-notes"></div>')
+    return layout("내 공부방", "퀴즈 오답노트와 필사 노트를 모아 다시 복습하는 나만의 공부방", "/notes/", body, "notes",
+                  {"type": "notes", "kakao": SITE.get("kakao", "")}, wide=True)
 
 
 def page_static(slug, title, desc, inner):

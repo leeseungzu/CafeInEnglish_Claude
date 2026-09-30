@@ -30,8 +30,9 @@
     t.textContent = msg; t.classList.add("show"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 1800);
   }
   function updateBadge() {
-    const b = $("#nav-badge"); if (!b) return;
-    const n = Object.keys(wrong.all()).length; b.hidden = !n; b.textContent = n;
+    const n = Object.keys(wrong.all()).length;
+    const b = $("#nav-badge"); if (b) { b.hidden = !n; b.textContent = n; }
+    $$(".js-notes-count").forEach(x => { x.textContent = n || ""; x.dataset.n = n; });
   }
 
   /* ---------- 퀴즈 엔진 (글 퀴즈 / 오답 다시 풀기 공용) ---------- */
@@ -239,7 +240,7 @@
 
   /* ---------- 시작 ---------- */
   updateBadge();
-  const pb = $("#print-btn"); if (pb) pb.onclick = () => window.print();
+  $$(".js-print").forEach(b => b.onclick = () => window.print());
   if (DATA.type === "post") {
     initVideoSeek();
     const items = DATA.quiz.map((q, i) => ({ id: `${DATA.id}:${i}`, ...q }));
