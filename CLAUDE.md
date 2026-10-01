@@ -87,7 +87,7 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 
 ## 아직 채워야 할 것 (content/site.json)
 
-- `kakao`: 카카오톡 채널 친구추가 링크 (비어 있으면 카톡 버튼이 숨겨짐)
+- `kakao`: 카카오톡 채널 친구추가 링크 (비어 있으면 SNS 메뉴에서 누를 때 "곧 열려요" 안내. 주소를 넣으면 바로 연결. youtube · instagram도 site.json에서 관리)
 - `contact_email`: 문의 페이지에 공개할 이메일
 - `adsense_client`: 예) `ca-pub-XXXXXXXXXXXXXXXX` — 넣으면 광고 스크립트와 ads.txt 자동 생성
 - `ga_id`: 구글 애널리틱스 측정 ID (예: `G-XXXXXXX`)

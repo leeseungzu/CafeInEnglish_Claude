@@ -132,6 +132,30 @@ def ld_article(title, desc, url, img, date, mod, section, crumbs):
     return [art, bc]
 
 
+SNS_ICON = {
+    "kakao": '<svg width="26" height="24" viewBox="0 0 30 28" aria-hidden="true"><path d="M15 2C7.8 2 2 6.6 2 12.3c0 3.7 2.4 6.9 6.1 8.7l-1.3 4.8c-.1.4.4.7.7.5l5.7-3.8c.6.1 1.2.1 1.8.1 7.2 0 13-4.6 13-10.3S22.2 2 15 2z" fill="#3A1D1D"/></svg>',
+    "youtube": '<svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8z" fill="#fff"/><path d="M9.8 15.1V8.9l5.4 3.1z" fill="#FF0033"/></svg>',
+    "instagram": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="#fff" stroke="none"/></svg>',
+}
+
+
+def sns_fab():
+    """우측 하단 버튼 하나 → 누르면 SNS 목록이 펼쳐짐 (주소가 있는 채널만)"""
+    items = [("youtube", "유튜브", SITE.get("youtube")), ("instagram", "인스타그램", SITE.get("instagram")),
+             ("kakao", "카카오톡 채널", SITE.get("kakao"))]
+    # 카카오는 채널 주소가 비어 있어도 보여 주고, 누르면 '곧 열려요' 안내 (site.json에 주소만 넣으면 바로 연결)
+    links = "".join(
+        (f'<a class="fab-item {k}" href="{e(u)}" target="_blank" rel="noopener" aria-label="{n}" title="{n}">' if u else f'<a class="fab-item {k} pending" href="#" aria-label="{n}" title="{n}">')
+        + f'<span class="fab-ic">{SNS_ICON[k]}</span></a>'
+        for k, n, u in items if u or k == "kakao")
+    if not links:
+        return ""
+    return ('<div class="fab no-print" id="fab"><div class="fab-menu" id="fab-menu">' + links + '</div>'
+            '<button class="fab-main" type="button" aria-expanded="false" aria-controls="fab-menu" aria-label="카페인영어 SNS 채널 보기">'
+            '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>'
+            '</button></div>')
+
+
 def video_block(video, title, hint):
     """썸네일만 먼저 보여주고, 누르면 그때 유튜브 플레이어를 불러옵니다 (페이지 속도 ↑)."""
     return (f'<div class="video-slot no-print"><div class="video-embed" data-vid="{video}">'
@@ -254,11 +278,9 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 </div>
 <footer class="foot no-print">
   <div>{e(SITE['tagline'])}</div>
-  <div style="margin-top:8px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/contact/">문의</a>{f'<a href="{e(SITE["youtube"])}" target="_blank" rel="noopener">유튜브</a>' if SITE.get("youtube") else ""}</div>
+  <div style="margin-top:8px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/contact/">문의</a>{f'<a href="{e(SITE["youtube"])}" target="_blank" rel="noopener">유튜브</a>' if SITE.get("youtube") else ""}{f'<a href="{e(SITE["instagram"])}" target="_blank" rel="noopener">인스타그램</a>' if SITE.get("instagram") else ""}</div>
 </footer>
-<a class="kakao-fab{"" if SITE.get("kakao") else " pending"}" href="{e(SITE.get("kakao") or "#")}"{' target="_blank" rel="noopener"' if SITE.get("kakao") else ""} aria-label="카카오톡 채널">
-  <svg width="30" height="28" viewBox="0 0 30 28" aria-hidden="true"><path d="M15 2C7.8 2 2 6.6 2 12.3c0 3.7 2.4 6.9 6.1 8.7l-1.3 4.8c-.1.4.4.7.7.5l5.7-3.8c.6.1 1.2.1 1.8.1 7.2 0 13-4.6 13-10.3S22.2 2 15 2z" fill="#3A1D1D"/><text x="15" y="15.6" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="7.4" fill="#FEE500">TALK</text></svg>
-</a>
+{sns_fab()}
 {pdata}
 <script src="/assets/app.js?v={ASSET_V}" defer></script>
 </body>

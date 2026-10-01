@@ -448,8 +448,15 @@
     }
     toast("이메일 주소를 복사했어요");
   });
-  const fab = $(".kakao-fab.pending");
-  if (fab) fab.onclick = e => { e.preventDefault(); toast("카카오톡 채널은 곧 열려요"); };
+  const fab = $("#fab");
+  if (fab) {
+    const btn = $(".fab-main", fab);
+    const set = open => { fab.classList.toggle("open", open); btn.setAttribute("aria-expanded", open); };
+    btn.onclick = e => { e.stopPropagation(); set(!fab.classList.contains("open")); };
+    document.addEventListener("click", e => { if (!fab.contains(e.target)) set(false); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") set(false); });
+    $$(".fab-item.pending", fab).forEach(a => a.onclick = e => { e.preventDefault(); toast("카카오톡 채널은 곧 열려요"); });
+  }
   initVideo();
   initShare();
   initTocSpy();
