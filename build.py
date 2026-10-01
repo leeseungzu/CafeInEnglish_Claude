@@ -401,11 +401,17 @@ def card(href, chips, title, sub, thumb=None, play=False):
     return f'<a class="card{" has-th" if thumb else ""}" href="{href}">{th}<div class="chips">{chip_html}</div><h3>{e(title)}</h3><p>{e(sub)}</p></a>'
 
 
+def thumb_ver(th, theme):
+    """썸네일 내용이 바뀌면 주소 꼬리표도 바뀌어서, 브라우저·서버에 남은 옛 이미지 대신 새 이미지를 바로 불러와요"""
+    raw = json.dumps([th, theme, THEMES.get(theme)], ensure_ascii=False, sort_keys=True)
+    return hashlib.md5(raw.encode()).hexdigest()[:8]
+
+
 def post_thumb(p):
     """영상 글은 유튜브 썸네일, 나머지는 공유 이미지(og)를 썸네일로"""
     if p.get("video"):
         return f"https://i.ytimg.com/vi/{p['video']}/hqdefault.jpg", True
-    return f"/og/th-p-{p['id']}.png", False
+    return f"/og/th-p-{p['id']}.png?v={thumb_ver(p.get('thumb'), thumb_theme(p))}", False
 
 
 def post_card(p):
@@ -416,7 +422,7 @@ def post_card(p):
 
 def think_card(t):
     return card(think_url(t), [("think", "사유의 문장"), ("video", t["speaker"])], t["title"],
-                f"필사할 문장 {len(t['quotes'])}개", f"/og/th-t-{t['id']}.png")
+                f"필사할 문장 {len(t['quotes'])}개", f"/og/th-t-{t['id']}.png?v={thumb_ver(t.get('thumb'), 'olive')}")
 
 
 PRINT_BTN = """
