@@ -413,16 +413,21 @@
     const ids = [...new Set(links.map(a => a.getAttribute("href").slice(1)))];
     const secs = ids.map(id => document.getElementById(id)).filter(Boolean);
     if (!secs.length) return;
-    let cur = null, tick = false;
+    let cur = null, tick = false, lockUntil = 0;
+    function setActive(id) {
+      cur = id;
+      links.forEach(a => a.parentElement.classList.toggle("on", a.getAttribute("href") === "#" + id));
+    }
+    // 목차를 누르면 누른 항목을 바로 표시하고, 이동하는 동안은 바뀌지 않게
+    links.forEach(a => a.addEventListener("click", () => { setActive(a.getAttribute("href").slice(1)); lockUntil = Date.now() + 900; }));
     function update() {
       tick = false;
-      const hdr = ($(".top") ? $(".top").getBoundingClientRect().height : 0) + 120;
+      if (Date.now() < lockUntil) return;
+      const hdr = ($(".top") ? $(".top").getBoundingClientRect().height : 0) + 40;
       let active = secs[0];
       for (const s of secs) { if (s.getBoundingClientRect().top - hdr <= 0) active = s; else break; }
       if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) active = secs[secs.length - 1];
-      if (active.id === cur) return;
-      cur = active.id;
-      links.forEach(a => a.parentElement.classList.toggle("on", a.getAttribute("href") === "#" + cur));
+      if (active.id !== cur) setActive(active.id);
     }
     addEventListener("scroll", () => { if (!tick) { tick = true; requestAnimationFrame(update); } }, { passive: true });
     addEventListener("resize", update);
