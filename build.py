@@ -454,12 +454,22 @@ def similar_posts(p, n=4):
     return others[:n]
 
 
+def short_pair(o):
+    """퀴즈 결과 '이어서 배우기' 한 줄용 (굵은 영어, 짧은 뜻)"""
+    th = o.get("thumb") or {}
+    if th.get("text"):
+        return th["text"], th.get("ko", "")
+    og = o.get("og") or {}
+    return og.get("en") or o["title"], og.get("ko", "")
+
+
 def related_links(p):
-    links = list(p.get("related", []))
+    links = [dict(l, en=l["label"], ko="") for l in p.get("related", [])]
     if p.get("think") in THINK_BY_ID:
-        links.append({"label": "이 영상 문장 필사하기", "href": think_url(THINK_BY_ID[p["think"]])})
+        links.append({"label": "이 영상 문장 필사하기", "en": "사유의 문장", "ko": "이 영상 문장 필사하기", "href": think_url(THINK_BY_ID[p["think"]])})
     for o in similar_posts(p, 4):
-        links.append({"label": o["title"], "href": post_url(o)})
+        en, ko = short_pair(o)
+        links.append({"label": o["title"], "en": en, "ko": ko, "href": post_url(o)})
     return links[:4]
 
 
@@ -483,7 +493,7 @@ def side_common():
           if SITE.get("youtube") else "")
     kk = (f'<div class="side-box"><h4>카페인영어 카카오톡</h4><a class="btn kakao" href="{e(SITE["kakao"])}" target="_blank" rel="noopener">카톡 받아보기</a></div>'
           if SITE.get("kakao") else "")
-    return kk + yt
+    return ""  # 사이드바 홍보 버튼(카톡·유튜브)은 쓰지 않음 — 너무 홍보 느낌이라 우측 하단 + 버튼으로만 안내
 
 
 def page_post(p):
@@ -599,7 +609,7 @@ def page_think(t):
 <div class="print-only ws">{ws_head("필사 노트 — " + t["title"], t["speaker"], t.get("video"), url)}{ws}</div>
 <div class="cq-cta no-print" style="margin-top:16px">
   <a class="btn primary" href="/notes/#copy">내 공부방에서 필사 노트 보기</a>
-  {f'<a class="btn kakao" href="{e(SITE["kakao"])}" target="_blank" rel="noopener">매일 아침 문장 하나, 카톡으로 받기</a>' if SITE.get("kakao") else ""}
+  {f'<a class="btn kakao" href="{e(SITE["kakao"])}" target="_blank" rel="noopener">매일 아침 문장 하나, 카톡으로 받기<img class="kk-ic" src="/assets/kakao-talk.png" alt="" width="24" height="22"></a>' if SITE.get("kakao") else ""}
 </div>"""
     data = {"type": "think", "id": t["id"], "title": t["title"], "speaker": t["speaker"], "url": url,
             "quotes": [{"en": q["en"], "ko": q["ko"], "blanks": q["blanks"]} for q in t["quotes"]]}

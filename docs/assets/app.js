@@ -89,19 +89,19 @@
           <div class="cq-cta">
             <a class="btn primary" href="/notes/">오답노트로 돌아가기</a>
             <a class="btn ghost" href="/">새 표현 배우러 가기</a>
-            ${DATA.kakao ? `<a class="btn kakao" href="${DATA.kakao}" target="_blank" rel="noopener">매일 아침 표현 하나, 카톡으로 받기</a>` : ""}
+            ${DATA.kakao ? `<a class="btn kakao" href="${DATA.kakao}" target="_blank" rel="noopener">매일 아침 표현 하나, 카톡으로 받기<img class="kk-ic" src="/assets/kakao-talk.png" alt="" width="24" height="22"></a>` : ""}
           </div></div></div>`;
         return;
       }
-      const links = (DATA.links || []).map(l => `<a class="btn ghost" href="${l.href}">${esc(l.label)}</a>`).join("");
+      const links = (DATA.links || []).map(l => `<a href="${l.href}"><span class="en">${esc(l.en || l.label)}</span><span class="ko">${esc(l.ko || "")}</span><span class="ar" aria-hidden="true">→</span></a>`).join("");
       el.innerHTML = `<div class="cq"><div class="cq-result">
         
         <div class="cq-score">${n}문제 중 ${score}개 정답</div>
         <p class="cq-msg">${perfect ? "완벽해요! 이제 이 표현은 완전히 내 거예요." : `틀린 ${newWrong}문제는 오답노트에 모아뒀어요. 연상법으로 다시 복습해 보세요.`}</p>
         <div class="cq-cta">
           ${newWrong ? `<a class="btn primary" href="/notes/">내 공부방에서 복습하기 (${Object.keys(wrong.all()).length})</a>` : ""}
-          <div class="grid2">${links}</div>
-          ${DATA.kakao ? `<a class="btn kakao" href="${DATA.kakao}" target="_blank" rel="noopener">매일 아침 표현 하나, 카톡으로 받기</a>` : ""}
+          ${links ? `<p class="nx-h">NEXT · 이어서 배우기</p><div class="nx">${links}</div>` : ""}
+          ${DATA.kakao ? `<a class="btn kakao" href="${DATA.kakao}" target="_blank" rel="noopener">매일 아침 표현 하나, 카톡으로 받기<img class="kk-ic" src="/assets/kakao-talk.png" alt="" width="24" height="22"></a>` : ""}
         </div>
         <button class="btn danger again">다시 풀어보기</button>
       </div></div>`;
