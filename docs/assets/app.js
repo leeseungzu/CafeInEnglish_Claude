@@ -342,22 +342,52 @@
     });
   }
 
-  /* ---------- 예문 소리 내어 듣기 (브라우저 음성) ---------- */
+  /* ---------- 예문 원어민 음성 듣기 ----------
+     원어민 음성 파일(mp3)이 있으면 그걸 재생하고, 없을 때만 브라우저 영어 음성으로 읽어요.
+     같은 버튼을 한 번 더 누르면 천천히(0.75배) 들려줘요. */
   function initSpeak() {
-    if (!("speechSynthesis" in window)) return;
+    const files = DATA.audio || {};
+    const hasTTS = "speechSynthesis" in window;
     const icon = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>';
+    const audio = new Audio(); audio.preload = "none";
+    let curBtn = null;
+    const off = () => { $$(".say-btn.on").forEach(x => x.classList.remove("on")); curBtn = null; };
+    audio.onended = off;
+
+    // 브라우저 음성: 한국어 음성이 영어를 읽어 깨지지 않도록 영어(미국) 음성을 직접 골라요
+    let voice = null;
+    const PREF = [/Google US English/i, /Samantha/i, /Ava/i, /Aria.*Natural/i, /Jenny.*Natural/i, /Microsoft (Aria|Jenny|Guy)/i, /Alex/i];
+    function pickVoice() {
+      if (!hasTTS) return;
+      const en = speechSynthesis.getVoices().filter(v => /^en[-_]US/i.test(v.lang));
+      const all = en.length ? en : speechSynthesis.getVoices().filter(v => /^en/i.test(v.lang));
+      voice = PREF.map(r => all.find(v => r.test(v.name))).find(Boolean) || all.find(v => v.localService) || all[0] || null;
+    }
+    if (hasTTS) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+
     $$(".ex li .en").forEach(el => {
-      const text = el.textContent.replace(/→.*$/, "").trim();
-      if (!/[a-zA-Z]/.test(text)) return;
+      const full = el.textContent.replace(/\s+/g, " ").trim();
+      const text = full.replace(/→.*$/, "").trim();
+      const file = files[full];
+      if (!/[a-zA-Z]/.test(text) || (!file && !hasTTS)) return;
       const b = document.createElement("button");
-      b.className = "say-btn"; b.type = "button"; b.setAttribute("aria-label", "예문 듣기"); b.innerHTML = icon;
+      b.className = "say-btn"; b.type = "button"; b.setAttribute("aria-label", "원어민 발음 듣기"); b.innerHTML = icon;
+      let n = 0;
       b.onclick = () => {
-        speechSynthesis.cancel();
-        const u = new SpeechSynthesisUtterance(text); u.lang = "en-US"; u.rate = b.dataset.slow ? 0.7 : 0.95;
-        b.dataset.slow = b.dataset.slow ? "" : "1";
-        $$(".say-btn.on").forEach(x => x.classList.remove("on")); b.classList.add("on");
-        u.onend = () => b.classList.remove("on");
-        speechSynthesis.speak(u);
+        const slow = n++ % 2 === 1;                       // 1번째 보통 · 2번째 천천히 · 3번째 보통 …
+        audio.pause(); if (hasTTS) speechSynthesis.cancel();
+        $$(".say-btn.on").forEach(x => x.classList.remove("on")); b.classList.add("on"); curBtn = b;
+        if (file) {
+          if (!audio.src.endsWith(file)) audio.src = file;
+          audio.currentTime = 0; audio.playbackRate = slow ? 0.75 : 1;
+          if ("preservesPitch" in audio) audio.preservesPitch = true;
+          audio.play().catch(off);
+        } else {
+          const u = new SpeechSynthesisUtterance(text);
+          u.lang = "en-US"; if (voice) u.voice = voice; u.rate = slow ? 0.7 : 0.95;
+          u.onend = u.onerror = off;
+          speechSynthesis.speak(u);
+        }
       };
       el.appendChild(b);
     });

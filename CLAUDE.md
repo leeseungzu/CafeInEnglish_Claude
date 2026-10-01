@@ -20,8 +20,9 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 ## 작업 순서
 
 1. `content/` 의 JSON을 추가하거나 고친다 (디자인은 `assets/`).
-2. `python3 build.py` 로 `docs/` 를 다시 만든다. (QR 코드에는 `pip install segno` 필요)
-3. 승주가 GitHub Desktop에서 Commit → Push 하면 1~2분 뒤 사이트에 반영된다.
+2. 예문이 새로 생겼으면 `python3 tools/make_audio.py` 로 원어민 음성(mp3)을 만든다 (Kokoro TTS, `audio/` 에 저장. 이미 만든 문장은 건너뜀).
+3. `python3 build.py` 로 `docs/` 를 다시 만든다. (QR 코드에는 `pip install segno` 필요)
+4. 승주가 GitHub Desktop에서 Commit → Push 하면 1~2분 뒤 사이트에 반영된다.
 
 ## 주소 규칙
 
@@ -54,6 +55,8 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 
 - 글·사유의 문장마다 공유 미리보기 이미지 `docs/og/p-<id>.png`, `docs/og/t-<id>.png` (Pillow + `fonts/PretendardVariable.ttf`)
 - 영상은 썸네일만 먼저 보여주고, 누르거나 듣기 버튼을 누를 때 유튜브 플레이어를 불러온다 (속도).
+- 예문 스피커 버튼: `audio/index.json` 에 있는 문장은 원어민 음성 mp3 재생 (한 번 더 누르면 0.75배속). 없으면 브라우저 영어 음성.
+- 'A → B' 형태 예문(연음)은 'A ... B' 로 읽는다.
 - 글/사유의 문장 끝에 공유 버튼 (모바일은 기기 공유창 → 카톡 선택, PC는 링크 복사).
 
 ## 디자인 규칙 (A안)

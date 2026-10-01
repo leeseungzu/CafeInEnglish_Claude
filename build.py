@@ -148,6 +148,19 @@ def load(kind):
 
 
 POSTS, THINKS = load("posts"), load("think")
+AUDIO_DIR = ROOT / "audio"
+AUDIO = json.loads((AUDIO_DIR / "index.json").read_text("utf-8")) if (AUDIO_DIR / "index.json").exists() else {}
+
+
+def audio_map(*htmls):
+    """이 페이지 예문 중 원어민 음성(mp3)이 있는 것만 {문장: 주소}"""
+    found = {}
+    for h in htmls:
+        for m in re.findall(r'<span class="en">(.*?)</span>', h, re.S):
+            t = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", m))).strip()
+            if t in AUDIO:
+                found[t] = "/audio/" + AUDIO[t]
+    return found
 POST_BY_ID, THINK_BY_ID = {p["id"]: p for p in POSTS}, {t["id"]: t for t in THINKS}
 post_url = lambda p: f"/p/{p['id']}/"
 think_url = lambda t: f"/think/{t['id']}/"
@@ -353,7 +366,7 @@ def page_post(p):
              + (f'<div class="side-box"><h4>이어서 보기</h4><ul class="side-links">{link_items}</ul></div>' if links else "")
              + side_common())
     data = {"type": "post", "id": p["id"], "title": p["title"], "url": url, "cat": p["cat"], "catName": CATS[p["cat"]],
-            "quiz": p["quiz"], "links": links, "kakao": SITE.get("kakao", "")}
+            "quiz": p["quiz"], "links": links, "kakao": SITE.get("kakao", ""), "audio": audio_map("\n".join(parts))}
     og = p.get("og") or {}
     xs = p.get("expressions") or [{}]
     img = og_image("p-" + p["id"], CATS[p["cat"]], og.get("en") or xs[0].get("en") or p["title"],
@@ -568,6 +581,8 @@ def build():
     before = {f for f in OUT.rglob("*") if f.is_file()} if OUT.exists() else set()
     OUT.mkdir(exist_ok=True)
     shutil.copytree(ASSETS, OUT / "assets", dirs_exist_ok=True)
+    if AUDIO_DIR.exists():
+        shutil.copytree(AUDIO_DIR, OUT / "audio", dirs_exist_ok=True, ignore=shutil.ignore_patterns("index.json"))
     pages = ["/"]
     write("/", page_home())
     for p in POSTS:
@@ -591,7 +606,7 @@ def build():
         pub = SITE["adsense_client"].replace("ca-", "")
         (OUT / "ads.txt").write_text(f"google.com, {pub}, DIRECT, f08c47fec0942fa0\n", "utf-8")
     after = {f for f in OUT.rglob("*") if f.is_file()}
-    written = {OUT / "assets" / f.name for f in ASSETS.glob("*")} | {f for f in after if f.stat().st_mtime >= START}
+    written = {OUT / "assets" / f.name for f in ASSETS.glob("*")} | {OUT / "audio" / f.name for f in AUDIO_DIR.glob("*.mp3")} | {f for f in after if f.stat().st_mtime >= START}
     stale = sorted(str(f.relative_to(OUT)) for f in before - written if f.name != ".DS_Store")
     if stale:
         print("🧹 더 이상 쓰지 않는 파일 (지워도 됨):", ", ".join(stale))
