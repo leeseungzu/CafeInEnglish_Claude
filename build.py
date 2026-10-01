@@ -253,7 +253,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{DOMAIN}{og_img}">
-<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="preconnect" href="https://i.ytimg.com">{f'<meta name="google-site-verification" content="{e(SITE["google_verify"])}">' if SITE.get("google_verify") else ""}{f'<meta name="naver-site-verification" content="{e(SITE["naver_verify"])}">' if SITE.get("naver_verify") else ""}
 {ld_html(ld)}
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
