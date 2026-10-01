@@ -1,0 +1,59 @@
+{
+  "id": "would-you-mind",
+  "cat": "tip",
+  "sub": "회화",
+  "date": "2026-10-01",
+  "title": "\"Would you mind ~?\"에 No라고 해야 '괜찮아요'예요",
+  "lead": "정중한 부탁 표현과 대답할 때 생기는 함정",
+  "description": "Can you, Could you, Would you mind의 정중함 차이와, Would you mind ~?에 No(Not at all)라고 해야 허락이 되는 이유를 예문과 퀴즈로 정리한 꿀팁.",
+  "og": {
+    "en": "Would you mind?",
+    "ko": "No라고 해야 '괜찮아요'예요"
+  },
+  "body_html": "<h2>부탁의 정중함 단계</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Can you open the window?</span><span class=\"ko\">창문 좀 열어 줄래? (편한 사이)</span></li>\n<li><span class=\"en\">Could you open the window?</span><span class=\"ko\">창문 좀 열어 주시겠어요? (정중)</span></li>\n<li><span class=\"en\">Would you mind opening the window?</span><span class=\"ko\">창문 좀 열어 주실 수 있을까요? (아주 정중)</span></li>\n</ul></div>\n<h2>대답할 때 함정</h2>\n<p>mind는 <b>'꺼리다, 싫어하다'</b>라는 뜻이에요. 그래서 Would you mind ~?는 '~하는 거 꺼리세요?'라는 질문이고, 해 주겠다는 대답은 <b>No</b>예요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Would you mind closing the door? Not at all.</span><span class=\"ko\">문 좀 닫아 주실래요? 그럼요.</span></li>\n<li><span class=\"en\">Do you mind if I sit here? No, go ahead.</span><span class=\"ko\">여기 앉아도 될까요? 그럼요, 앉으세요.</span></li>\n</ul></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> mind = 꺼리다. '꺼리세요?' → '아뇨(No), 전혀요!' = 해도 돼요.</div>\n<p><b class=\"lbl\">알아 두기</b> 실제 대화에선 원어민도 Sure!나 No problem!으로 많이 대답해요. 하지만 Yes만 단독으로 하면 '네, 꺼려요(싫어요)'로 들릴 수 있어요.</p>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "대답",
+      "q": "\"Would you mind opening the door?\" 기꺼이 열어 주고 싶을 때 대답은?",
+      "sub": "mind = 꺼리다",
+      "options": [
+        "Yes, I mind.",
+        "Not at all.",
+        "Yes, I would.",
+        "I mind it."
+      ],
+      "answer": 1,
+      "explain": "'꺼리세요?'에 대한 대답이라 Not at all(전혀요)이 '해 줄게요'예요.",
+      "mnemonic": "꺼리세요? → 전혀요(Not at all) = 해 줄게요!"
+    },
+    {
+      "tag": "뜻",
+      "q": "Would you mind ~?에서 mind의 뜻은?",
+      "sub": "",
+      "options": [
+        "생각하다",
+        "꺼리다, 싫어하다",
+        "기억하다",
+        "마음에 들다"
+      ],
+      "answer": 1,
+      "explain": "mind는 여기서 '꺼리다'예요. Do you mind? = 꺼리세요? 싫으세요?",
+      "mnemonic": "mind = 마음에 걸리다 → 꺼리다"
+    },
+    {
+      "tag": "정중함",
+      "q": "다음 중 가장 정중한 부탁은?",
+      "sub": "",
+      "options": [
+        "Open the window.",
+        "Can you open the window?",
+        "Could you open the window?",
+        "Would you mind opening the window?"
+      ],
+      "answer": 3,
+      "explain": "Would you mind ~ing?가 가장 정중해요. Can you는 편한 사이, Could you는 정중한 표현이에요.",
+      "mnemonic": "Can → Could → Would you mind 순서로 정중해져요!"
+    }
+  ]
+}

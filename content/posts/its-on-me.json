@@ -1,0 +1,59 @@
+{
+  "id": "its-on-me",
+  "cat": "expr",
+  "sub": "새 표현",
+  "date": "2026-10-01",
+  "title": "\"It's on me\" — '내가 쏠게'를 영어로",
+  "lead": "'쏘다'를 직역해서 I'll shoot이라고 하면 안 통해요",
+  "description": "'내가 쏠게'를 뜻하는 It's on me, My treat과 나눠 낼 때 쓰는 Let's split the bill까지 계산할 때 꼭 필요한 표현을 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "It's on me.",
+    "ko": "'내가 쏠게'를 영어로"
+  },
+  "body_html": "<h2>뜻</h2>\n<div class=\"box\"><b>It's on me.</b> / <b>This one's on me.</b> / <b>My treat.</b> = 내가 낼게, 내가 쏠게</div>\n<p>'쏘다'를 그대로 옮겨 <b>I'll shoot</b>이라고 하면 '내가 낼게'라는 뜻은 전혀 안 통하고, 총이나 사진을 '쏜다'는 말로 이상하게 들려요. 계산할 땐 on me를 기억하세요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 계산서가 내 위에(on me) 올라와 있다 = 내가 짊어질게!</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Put your wallet away. It's on me.</span><span class=\"ko\">지갑 넣어. 내가 낼게.</span></li>\n<li><span class=\"en\">Thanks for helping me move. Dinner's on me.</span><span class=\"ko\">이사 도와줘서 고마워. 저녁은 내가 살게.</span></li>\n<li><span class=\"en\">Next round is on you!</span><span class=\"ko\">다음 건 네가 사!</span></li>\n</ul></div>\n<h2>나눠 낼 때</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Let's split the bill.</span><span class=\"ko\">나눠서 내자.</span></li>\n<li><span class=\"en\">Can we pay separately?</span><span class=\"ko\">따로 계산할 수 있을까요?</span></li>\n</ul></div>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "표현",
+      "q": "친구에게 '오늘은 내가 쏠게!'를 영어로 하면?",
+      "sub": "",
+      "options": [
+        "I'll shoot today!",
+        "It's on me today!",
+        "I'm on it today!",
+        "Shoot me today!"
+      ],
+      "answer": 1,
+      "explain": "It's on me = 내가 낼게. I'll shoot은 '내가 낼게'로 안 통해요. I'm on it은 '내가 처리할게'라는 다른 표현이에요.",
+      "mnemonic": "계산서가 내 위에(on me)!"
+    },
+    {
+      "tag": "뜻",
+      "q": "\"Let's split the bill.\"의 뜻은?",
+      "sub": "split = 나누다",
+      "options": [
+        "계산서를 찢자",
+        "나눠서 내자",
+        "네가 다 내",
+        "계산서를 다시 보자"
+      ],
+      "answer": 1,
+      "explain": "split the bill = 계산을 나눠 내다.",
+      "mnemonic": "계산서(bill)를 쪼개자(split)!"
+    },
+    {
+      "tag": "뜻",
+      "q": "\"My treat.\"의 뜻은?",
+      "sub": "treat = 대접",
+      "options": [
+        "내 간식이야",
+        "내가 대접할게",
+        "내 차례야",
+        "내가 치료할게"
+      ],
+      "answer": 1,
+      "explain": "My treat = 내가 대접할게, 내가 살게. It's on me와 같은 뜻이에요.",
+      "mnemonic": "treat = 대접 → 내 대접!"
+    }
+  ]
+}

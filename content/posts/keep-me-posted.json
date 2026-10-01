@@ -1,0 +1,59 @@
+{
+  "id": "keep-me-posted",
+  "cat": "expr",
+  "sub": "새 표현",
+  "date": "2026-10-01",
+  "title": "\"Keep me posted\" — '진행 상황 계속 알려줘'를 한마디로",
+  "lead": "Let me know와 비슷하지만 쓰임이 조금 달라요",
+  "description": "Keep me posted 뜻과 Let me know와의 차이, 회사에서 자주 쓰는 Keep me in the loop까지 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Keep me posted.",
+    "ko": "'진행 상황 계속 알려줘'를 한마디로"
+  },
+  "body_html": "<h2>뜻</h2>\n<div class=\"box\"><b>Keep me posted.</b> = 진행되는 대로 계속 알려줘</div>\n<p><b>Let me know</b>는 결과나 답을 '한 번' 알려 달라는 말이고, <b>Keep me posted</b>는 상황이 바뀔 때마다 '계속' 알려 달라는 말이에요. 면접, 이사, 프로젝트처럼 진행 중인 일에 딱이에요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> post는 '소식을 붙이다, 알리다'. 내 소식판(me)에 새 소식을 계속(keep) 붙여 달라는 거예요.</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Let me know when you get home.</span><span class=\"ko\">집에 도착하면 알려줘.</span></li>\n<li><span class=\"en\">Keep me posted on the interview!</span><span class=\"ko\">면접 어떻게 되는지 계속 알려줘!</span></li>\n<li><span class=\"en\">I'll keep you posted.</span><span class=\"ko\">상황 보고 계속 알려줄게.</span></li>\n</ul></div>\n<h2>회사에서 자주 쓰는 말</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Keep me in the loop.</span><span class=\"ko\">나도 계속 알 수 있게 공유해 줘.</span></li>\n<li><span class=\"en\">I'll loop you in.</span><span class=\"ko\">너도 포함해서 공유할게.</span></li>\n</ul></div>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "친구가 이사 준비 중이라고 하자 \"Keep me posted!\"라고 했어요. 무슨 뜻일까요?",
+      "sub": "",
+      "options": [
+        "편지 보내 줘",
+        "진행되는 대로 계속 알려 줘",
+        "나도 도와줄게",
+        "게시물 올려 줘"
+      ],
+      "answer": 1,
+      "explain": "Keep me posted = 상황이 바뀔 때마다 계속 알려 달라는 뜻이에요.",
+      "mnemonic": "내 소식판(me)에 소식을 계속(keep) 붙여(post) 줘!"
+    },
+    {
+      "tag": "차이",
+      "q": "\"집에 도착하면 (한 번) 알려 줘\"에 더 잘 맞는 말은?",
+      "sub": "한 번이냐, 계속이냐",
+      "options": [
+        "Let me know when you get home.",
+        "Keep me posted when you get home.",
+        "Post me home.",
+        "Keep me home."
+      ],
+      "answer": 0,
+      "explain": "도착했다는 소식은 한 번이면 되니까 Let me know가 자연스러워요. Keep me posted는 계속 진행되는 일에 써요.",
+      "mnemonic": "한 번 = Let me know / 계속 = Keep me posted"
+    },
+    {
+      "tag": "전치사",
+      "q": "빈칸에 알맞은 말은?",
+      "sub": "Keep me posted ___ the results.",
+      "options": [
+        "on",
+        "at",
+        "to",
+        "by"
+      ],
+      "answer": 0,
+      "explain": "무엇에 대한 소식인지는 on으로 붙여요. Keep me posted on ~ = ~에 대해 계속 알려 줘.",
+      "mnemonic": "소식판 위에(on) 붙는 주제!"
+    }
+  ]
+}

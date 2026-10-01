@@ -1,0 +1,59 @@
+{
+  "id": "video-call",
+  "cat": "tip",
+  "sub": "회화",
+  "date": "2026-10-01",
+  "title": "화상회의에서 바로 쓰는 영어 — 'You're on mute'",
+  "lead": "줌, 팀즈, 구글 밋에서 매번 나오는 말들",
+  "description": "화상회의나 영상통화에서 자주 쓰는 You're on mute, You're breaking up, Can you see my screen?, Sorry, go ahead 등을 예문과 퀴즈로 정리한 꿀팁.",
+  "og": {
+    "en": "You're on mute.",
+    "ko": "화상회의에서 바로 쓰는 영어"
+  },
+  "body_html": "<h2>소리 · 화면 문제</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Can you hear me okay?</span><span class=\"ko\">제 목소리 잘 들리세요?</span></li>\n<li><span class=\"en\">You're on mute.</span><span class=\"ko\">음소거 되어 있어요.</span></li>\n<li><span class=\"en\">You're breaking up.</span><span class=\"ko\">소리가 끊겨요.</span></li>\n<li><span class=\"en\">Can you see my screen?</span><span class=\"ko\">제 화면 보이세요?</span></li>\n</ul></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> breaking up = 목소리가 조각조각(break) 깨져서 들린다. 회의 중엔 '헤어지자'가 아니에요!</div>\n<h2>말이 겹쳤을 때 / 일정</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Sorry, go ahead.</span><span class=\"ko\">죄송해요, 먼저 말씀하세요.</span></li>\n<li><span class=\"en\">Sorry, I have a hard stop at three.</span><span class=\"ko\">죄송해요, 3시에는 꼭 나가야 해요.</span></li>\n<li><span class=\"en\">Let's pick this up next time.</span><span class=\"ko\">이건 다음에 이어서 해요.</span></li>\n</ul></div>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "회의 중 동료가 \"You're on mute.\"라고 했어요. 무슨 뜻일까요?",
+      "sub": "",
+      "options": [
+        "말 좀 그만해",
+        "음소거 되어 있어요",
+        "화면이 꺼졌어요",
+        "조용히 해 주세요"
+      ],
+      "answer": 1,
+      "explain": "on mute = 음소거 상태. 말하는데 소리가 안 들릴 때 알려 주는 말이에요.",
+      "mnemonic": "mute(음소거) 위에(on) 있다 = 음소거 중!"
+    },
+    {
+      "tag": "상황",
+      "q": "상대와 동시에 말을 시작했어요. 가장 자연스러운 말은?",
+      "sub": "",
+      "options": [
+        "Stop, please.",
+        "Sorry, go ahead.",
+        "You're on mute.",
+        "Wait me."
+      ],
+      "answer": 1,
+      "explain": "Sorry, go ahead = 죄송해요, 먼저 말씀하세요. 말이 겹칠 때 정말 자주 써요.",
+      "mnemonic": "go ahead = 앞으로 가세요 → 먼저 하세요!"
+    },
+    {
+      "tag": "뜻",
+      "q": "\"You're breaking up.\"의 뜻은?",
+      "sub": "통화 중이에요",
+      "options": [
+        "우리 헤어지자",
+        "소리가 끊겨요",
+        "너 지금 쉬는 중이야?",
+        "화면이 깨졌어요"
+      ],
+      "answer": 1,
+      "explain": "통화나 회의 중에는 '소리가 끊긴다'는 뜻이에요.",
+      "mnemonic": "목소리가 조각조각(break up)!"
+    }
+  ]
+}

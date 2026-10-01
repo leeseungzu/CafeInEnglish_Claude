@@ -1,0 +1,59 @@
+{
+  "id": "sounds-good",
+  "cat": "expr",
+  "sub": "비슷한 표현",
+  "date": "2026-10-01",
+  "title": "\"Sounds good\" — OK보다 자연스러운 '좋아요'",
+  "lead": "제안이나 약속에 동의할 때 원어민이 제일 많이 하는 말",
+  "description": "Sounds good, Sounds like a plan, That works for me처럼 제안에 자연스럽게 동의하는 표현과 자주 하는 실수를 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Sounds good!",
+    "ko": "OK보다 자연스러운 '좋아요'"
+  },
+  "body_html": "<h2>뜻</h2>\n<div class=\"box\"><b>Sounds good.</b> = 좋아요, 그렇게 해요</div>\n<p>누가 계획이나 제안을 말했을 때 '좋아, 그렇게 하자'라는 대답이에요. 원래는 <b>That sounds good</b>인데 That을 빼고 말해요. 그래서 대답할 땐 <b>s를 빼면 안 돼요.</b> 단, 상대에게 물어볼 때는 Does that sound good?을 줄여 <b>Sound good?</b>이라고도 해요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 듣고 보니(sounds) 좋다(good). 제안을 '들은' 다음에 하는 대답이에요.</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Let's meet at six. Sounds good!</span><span class=\"ko\">6시에 만나자. 좋아!</span></li>\n<li><span class=\"en\">How about Friday? That works for me.</span><span class=\"ko\">금요일 어때? 난 괜찮아.</span></li>\n<li><span class=\"en\">We'll grab dinner after the movie. Sounds like a plan.</span><span class=\"ko\">영화 보고 저녁 먹자. 좋은 계획이네, 그러자.</span></li>\n</ul></div>\n<h2>비슷한 표현</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Sounds great!</span><span class=\"ko\">너무 좋아!</span></li>\n<li><span class=\"en\">Works for me.</span><span class=\"ko\">난 좋아. (일정, 계획이 나한테 맞아)</span></li>\n</ul></div>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "상황",
+      "q": "\"Sounds good\"을 쓰기 가장 자연스러운 상황은?",
+      "sub": "",
+      "options": [
+        "친구가 7시에 만나자고 할 때",
+        "음악 소리가 클 때",
+        "내 기분을 말할 때",
+        "길을 물어볼 때"
+      ],
+      "answer": 0,
+      "explain": "제안이나 계획을 듣고 동의할 때 써요.",
+      "mnemonic": "제안을 듣고(sounds) → 좋아(good)!"
+    },
+    {
+      "tag": "문법",
+      "q": "다음 중 바른 것은?",
+      "sub": "주어 That이 생략된 문장이에요",
+      "options": [
+        "Sound good!",
+        "Sounds good!",
+        "Sounding good!",
+        "Sounded good!"
+      ],
+      "answer": 1,
+      "explain": "원래 That sounds good이라 3인칭 단수 s가 붙어요. That만 빼고 sounds는 그대로 둬요.",
+      "mnemonic": "That(이) 숨어 있으니 s는 그대로!"
+    },
+    {
+      "tag": "뜻",
+      "q": "\"How about Monday?\"에 \"That works for me.\"라고 하면?",
+      "sub": "",
+      "options": [
+        "월요일엔 일해야 해",
+        "월요일 좋아, 난 괜찮아",
+        "월요일에 일 줄게",
+        "잘 모르겠어"
+      ],
+      "answer": 1,
+      "explain": "works for me = 나한테 맞아, 괜찮아. 일정을 정할 때 자주 써요.",
+      "mnemonic": "일정이 나한테(for me) 잘 돌아간다(works)!"
+    }
+  ]
+}

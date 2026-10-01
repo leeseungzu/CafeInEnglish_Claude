@@ -1,0 +1,59 @@
+{
+  "id": "in-vs-after",
+  "cat": "tip",
+  "sub": "단어",
+  "date": "2026-10-01",
+  "title": "\"10분 후에 갈게\" — after 10 minutes 말고 in 10 minutes",
+  "lead": "한국인이 가장 많이 틀리는 시간 표현",
+  "description": "'지금부터 ~ 후에'는 after가 아니라 in을 써요. in, after, within의 차이를 예문과 퀴즈로 정리한 영어 꿀팁.",
+  "og": {
+    "en": "in 10 minutes",
+    "ko": "after 10 minutes 말고 in"
+  },
+  "body_html": "<h2>지금부터 ~ 뒤 = in</h2>\n<p>'지금부터 10분 뒤에'라는 미래 이야기에는 <b>in</b>을 써요. after 10 minutes라고 하면 어색하게 들려요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I'll be there in ten minutes.</span><span class=\"ko\">10분 뒤에 도착해.</span></li>\n<li><span class=\"en\">The movie starts in an hour.</span><span class=\"ko\">영화 한 시간 뒤에 시작해.</span></li>\n<li><span class=\"en\">I'll call you back in five.</span><span class=\"ko\">5분 뒤에 다시 전화할게.</span></li>\n</ul></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 지금부터 10분이라는 시간 상자 안(in)을 지나면 도착!</div>\n<h2>어떤 일 이후 = after</h2>\n<p>after는 '어떤 일이나 시점 다음'이에요. 시간 길이와 쓸 때는 주로 지난 일을 말하거나, '다른 일 기준으로 ~ 뒤'를 말할 때 써요. (Bake it, and after ten minutes, check it. 구워서 10분 뒤에 확인해.)</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Let's take a walk after lunch.</span><span class=\"ko\">점심 먹고 산책하자.</span></li>\n<li><span class=\"en\">He left after ten minutes.</span><span class=\"ko\">그는 10분 있다가 떠났어.</span></li>\n</ul></div>\n<h2>~ 안에, 이내에 = within</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Please reply within 24 hours.</span><span class=\"ko\">24시간 이내에 답장 주세요.</span></li>\n</ul></div>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "빈칸",
+      "q": "친구에게 '10분 뒤에 도착해'라고 할 때 빈칸에 알맞은 말은?",
+      "sub": "I'll be there ___ ten minutes.",
+      "options": [
+        "after",
+        "in",
+        "on",
+        "at"
+      ],
+      "answer": 1,
+      "explain": "지금부터 얼마 뒤의 미래는 in이에요.",
+      "mnemonic": "지금부터 시간 상자 안(in)을 지나면 도착!"
+    },
+    {
+      "tag": "빈칸",
+      "q": "지난 일을 말할 때 빈칸에 알맞은 말은?",
+      "sub": "He gave up ___ thirty minutes of waiting.",
+      "options": [
+        "in",
+        "after",
+        "at",
+        "on"
+      ],
+      "answer": 1,
+      "explain": "30분 기다린 '다음에' 포기했다는 지난 일이라 after예요.",
+      "mnemonic": "어떤 일 다음 = after!"
+    },
+    {
+      "tag": "뜻",
+      "q": "\"Please reply within 24 hours.\"의 뜻은?",
+      "sub": "",
+      "options": [
+        "24시간 뒤에 답장 주세요",
+        "24시간 이내에 답장 주세요",
+        "24시간 동안 답장하지 마세요",
+        "24시에 답장 주세요"
+      ],
+      "answer": 1,
+      "explain": "within = ~ 이내에. 24시간이 지나기 전에 답장해 달라는 뜻이에요.",
+      "mnemonic": "within = 울타리 안쪽(이내)!"
+    }
+  ]
+}
