@@ -12,7 +12,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "images"
 FONT = ROOT / "fonts" / "PretendardVariable.ttf"
-BG, CARD, INK, LIME, MUTED, LINE, SOFT = "#F4EEE4", "#FFFDF8", "#2A1A12", "#CDEB5B", "#7A6A5E", "#E3D9CB", "#D9CDBE"
+BG, CARD, INK, LIME, MUTED, LINE, SOFT = "#FAF8F5", "#FFFFFF", "#2A1A12", "#CDEB5B", "#7A6A5E", "#ECE6DD", "#D9CDBE"
 W, M = 1080, 64
 _fc = {}
 
@@ -95,7 +95,7 @@ class Canvas:
         # 카드 배경을 깔고 내용을 다시 올림 (배경색 BG 위 그림만 유지)
         mask = Image.eval(content.convert("L"), lambda v: 0)
         diff = Image.new("L", content.size, 0)
-        px, bgc = content.load(), (244, 238, 228)
+        px, bgc = content.load(), (250, 248, 245)
         dpx = diff.load()
         for yy in range(content.size[1]):
             for xx in range(content.size[0]):
