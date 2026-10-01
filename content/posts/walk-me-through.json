@@ -56,5 +56,9 @@
       "explain": "Let me walk you through it = 제가 차근차근 설명해 드릴게요.",
       "mnemonic": "내가 같이 걸으며 안내해 줄게!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "Walk me through it.",
+    "key": "Walk me through"
+  }
 }

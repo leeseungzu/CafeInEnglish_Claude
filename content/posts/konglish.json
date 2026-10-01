@@ -56,5 +56,9 @@
       "explain": "가게 쇼윈도(window)만 구경한다고 해서 window shopping이에요.",
       "mnemonic": "눈(eye)이 아니라 창문(window) 너머로 구경!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "You got this!",
+    "key": "got this!"
+  }
 }

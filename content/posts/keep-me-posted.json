@@ -56,5 +56,9 @@
       "explain": "무엇에 대한 소식인지는 on으로 붙여요. Keep me posted on ~ = ~에 대해 계속 알려 줘.",
       "mnemonic": "소식판 위에(on) 붙는 주제!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "Keep me posted.",
+    "key": "posted."
+  }
 }

@@ -56,5 +56,9 @@
       "explain": "separate checks = 계산서를 따로따로. 각자 계산할 때 써요.",
       "mnemonic": "separate(따로) + checks(계산서들)!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "Can we get the check?",
+    "key": "check?"
+  }
 }

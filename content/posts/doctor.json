@@ -56,5 +56,9 @@
       "explain": "prescription = 처방전. 처방전 없이 살 수 있는 약은 over-the-counter(OTC)라고 해요.",
       "mnemonic": "pre(앞에) + scribe(쓰다) → 의사가 '지시를 써 준 것' = 처방전!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "I have a sore throat.",
+    "key": "sore throat."
+  }
 }

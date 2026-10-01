@@ -56,5 +56,9 @@
       "explain": "Sorry?를 끝을 올려 말하고 I didn't catch that(잘 못 들었어요)을 붙이면 정중해요. What?만 하면 퉁명스럽게 들릴 수 있어요.",
       "mnemonic": "catch = 말을 공처럼 잡다 → 못 잡았어요!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "Excuse me? Sorry?",
+    "key": "Excuse me?"
+  }
 }

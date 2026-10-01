@@ -56,5 +56,9 @@
       "explain": "짧게 받고(Good) 바로 상대에게 넘기는(how about you?) 게 가장 자연스러워요. Fine만 하면 퉁명스럽게 들릴 수 있어요.",
       "mnemonic": "인사는 탁구! 받고 → 넘기고!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "How are you?",
+    "key": "you?"
+  }
 }

@@ -56,5 +56,9 @@
       "explain": "Would you mind ~ing?가 가장 정중해요. Can you는 편한 사이, Could you는 정중한 표현이에요.",
       "mnemonic": "Can → Could → Would you mind 순서로 정중해져요!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "Would you mind?",
+    "key": "mind?"
+  }
 }

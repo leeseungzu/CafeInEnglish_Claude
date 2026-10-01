@@ -56,5 +56,9 @@
       "explain": "No worries / All good = 괜찮아, 신경 쓰지 마. You're welcome은 고맙다는 말에 하는 대답이에요.",
       "mnemonic": "사과엔 No worries, 감사엔 You're welcome!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "My bad!",
+    "key": "bad!"
+  }
 }

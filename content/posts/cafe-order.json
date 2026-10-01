@@ -56,5 +56,9 @@
       "explain": "That's it = 그게 다예요. 뒤에 thanks를 붙이면 더 자연스러워요.",
       "mnemonic": "That's it = 그게 다예요 (That's all과 같은 뜻) → 그거면 끝!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "Can I get a latte?",
+    "key": "Can I get"
+  }
 }

@@ -111,6 +111,111 @@ def og_image(name, chip, big, small, foot="읽고 · 듣고 · 퀴즈로 확인"
     return f"/og/{name}.png"
 
 
+SERIF_I = ROOT / "fonts" / "LiberationSerif-BoldItalic.ttf"
+
+
+def _wrap(d, text, font, maxw):
+    words, lines, cur = text.split(), [], ""
+    for w in words:
+        t = (cur + " " + w).strip()
+        if d.textlength(t, font=font) <= maxw or not cur:
+            cur = t
+        else:
+            lines.append(cur); cur = w
+    lines.append(cur)
+    return lines
+
+
+def _spaced(d, xy, text, font, fill, spacing, anchor_right=False):
+    """글자 사이를 띄워서 쓰기 (라벨용)"""
+    w = sum(d.textlength(c, font=font) for c in text) + spacing * (len(text) - 1)
+    x, y = xy
+    if anchor_right:
+        x -= w
+    for c in text:
+        d.text((x, y), c, font=font, fill=fill)
+        x += d.textlength(c, font=font) + spacing
+
+
+THEMES = {  # 배경, 글자, 핵심 단어 스타일
+    "dark": ("#2A1A12", "#F4EEE4", "lime"),
+    "lime": ("#CDEB5B", "#2A1A12", "underline"),
+    "cream": ("#E9DFD0", "#2A1A12", "pill"),
+}
+
+
+def thumb_image(name, theme, label, num, text, key):
+    """목록 카드용 썸네일 (1안 · 빅 타이포): 색 블록 + 아주 큰 표현 + 핵심 단어 강조"""
+    if not (Image and FONT.exists()):
+        return None
+    W, H, PAD = 960, 504, 56
+    bg, fg, style = THEMES[theme]
+    LIME, INK = "#CDEB5B", "#2A1A12"
+    im = Image.new("RGB", (W, H), bg)
+    d = ImageDraw.Draw(im)
+    lf = _font(24, 800)
+    _spaced(d, (PAD, 46), label, lf, fg, 5)
+    if num:
+        _spaced(d, (W - PAD, 46), num, lf, fg, 2, anchor_right=True)
+    words = text.split()
+    kw = key.split()
+    keyidx = set()
+    for i in range(len(words) - len(kw) + 1):
+        if words[i:i + len(kw)] == kw:
+            keyidx = set(range(i, i + len(kw)))
+            break
+    maxw = W - PAD * 2 - (20 if style == "pill" else 0)
+    for size in range(132, 50, -4):
+        f = _font(size, 900)
+        lines = _wrap(d, text, f, maxw)
+        if len(lines) <= 3 and len(lines) * size * 0.98 <= H - 170 and all(d.textlength(l, font=f) <= maxw for l in lines):
+            break
+    lh = int(size * 0.98)
+    y = H - PAD - lh * len(lines) - int(size * .06)
+    wi = 0
+    for ln in lines:
+        x = PAD + (10 if style == "pill" else 0)
+        lw = ln.split()
+        # 같은 줄의 핵심 단어 구간
+        span = [j for j in range(len(lw)) if wi + j in keyidx]
+        if span and style == "pill":
+            xs = x + d.textlength(" ".join(lw[:span[0]]) + (" " if span[0] else ""), font=f)
+            xe = x + d.textlength(" ".join(lw[:span[-1] + 1]), font=f)
+            d.rounded_rectangle((xs - 14, y + int(size * .04), xe + 14, y + int(size * 1.1)), int(size * .18), fill=INK)
+        for j, w in enumerate(lw):
+            iskey = wi + j in keyidx
+            col = fg
+            if iskey and style == "lime":
+                col = LIME
+            if iskey and style == "pill":
+                col = LIME
+            d.text((x, y - int(size * .06)), w, font=f, fill=col)
+            ww = d.textlength(w, font=f)
+            if iskey and style == "underline":
+                nxt = d.textlength(" ", font=f) if (j + 1 < len(lw) and wi + j + 1 in keyidx) else 0
+                d.rectangle((x, y + int(size * .97), x + ww + nxt, y + int(size * .97) + max(5, size // 16)), fill=INK)
+            x += ww + d.textlength(" ", font=f)
+        wi += len(lw)
+        y += lh
+    out = OUT / "og" / f"{name}.png"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    im.convert("P", palette=Image.ADAPTIVE, colors=64).save(out, optimize=True)
+    return f"/og/{name}.png"
+
+
+def thumb_theme(p):
+    """카테고리별 색: 꿀팁=라임, 표현=에스프레소/베이지 번갈아"""
+    if p["cat"] == "tip":
+        return "lime"
+    order = [o["id"] for o in sorted(POSTS, key=lambda o: (o.get("date", ""), o["id"])) if o["cat"] == p["cat"]]
+    return "dark" if order.index(p["id"]) % 2 == 0 else "cream"
+
+
+def thumb_num(p):
+    order = [o["id"] for o in sorted(POSTS, key=lambda o: (o.get("date", ""), o["id"])) if o["cat"] == p["cat"]]
+    return f"No.{order.index(p['id']) + 1:02d}"
+
+
 ORG = {"@type": "Organization", "name": "카페인영어 CafeInEnglish", "url": DOMAIN + "/",
        "logo": {"@type": "ImageObject", "url": DOMAIN + "/assets/icon-512.png"}}
 
@@ -288,19 +393,32 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 """
 
 
-def card(href, chips, title, sub):
+def card(href, chips, title, sub, thumb=None, play=False):
     chip_html = "".join('<span class="chip %s">%s</span>' % (c, e(t)) for c, t in chips)
-    return f'<a class="card" href="{href}"><div class="chips">{chip_html}</div><h3>{e(title)}</h3><p>{e(sub)}</p></a>'
+    th = ""
+    if thumb:
+        badge = ('<span class="th-play"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="#2A1A12"/></svg></span>'
+                 if play else "")
+        th = f'<div class="thumb"><img src="{thumb}" alt="" loading="lazy" width="960" height="504">{badge}</div>'
+    return f'<a class="card{" has-th" if thumb else ""}" href="{href}">{th}<div class="chips">{chip_html}</div><h3>{e(title)}</h3><p>{e(sub)}</p></a>'
+
+
+def post_thumb(p):
+    """영상 글은 유튜브 썸네일, 나머지는 공유 이미지(og)를 썸네일로"""
+    if p.get("video"):
+        return f"https://i.ytimg.com/vi/{p['video']}/hqdefault.jpg", True
+    return f"/og/th-p-{p['id']}.png", False
 
 
 def post_card(p):
+    th, play = post_thumb(p)
     return card(post_url(p), [(p["cat"], CATS[p["cat"]]), (p["cat"], p.get("sub", ""))], p["title"],
-                f"{p.get('lead', '')} · 퀴즈 {len(p['quiz'])}문제")
+                f"{p.get('lead', '')} · 퀴즈 {len(p['quiz'])}문제", th, play)
 
 
 def think_card(t):
     return card(think_url(t), [("think", "사유의 문장"), ("video", t["speaker"])], t["title"],
-                f"필사할 문장 {len(t['quotes'])}개")
+                f"필사할 문장 {len(t['quotes'])}개", f"/og/th-t-{t['id']}.png")
 
 
 PRINT_BTN = """
@@ -429,6 +547,9 @@ def page_post(p):
     og = p.get("og") or {}
     xs = p.get("expressions") or [{}]
     data["share"] = og.get("en") or xs[0].get("en") or ""
+    if p.get("thumb") and not p.get("video"):
+        thumb_image("th-p-" + p["id"], thumb_theme(p), {"expr": "EXPRESSION", "tip": "ENGLISH TIP"}.get(p["cat"], "VIDEO"),
+                    thumb_num(p), p["thumb"]["text"], p["thumb"]["key"])
     img = og_image("p-" + p["id"], CATS[p["cat"]], og.get("en") or xs[0].get("en") or p["title"],
                    og.get("ko") or p.get("lead", ""))
     desc = p.get("description", p.get("lead", ""))
@@ -487,6 +608,8 @@ def page_think(t):
     og = t.get("og") or {}
     shortest = min(t["quotes"], key=lambda q: len(q["en"]))["en"]
     data["share"] = og.get("en") or shortest
+    tq = t.get("thumb") or {"text": og.get("en") or shortest, "key": ""}
+    thumb_image("th-t-" + t["id"], "dark", "THINK · " + t["speaker"].split(" · ")[0], "", tq["text"], tq["key"])
     img = og_image("t-" + t["id"], "사유의 문장 · 필사", og.get("en") or shortest, og.get("ko") or t["title"], "듣고 · 따라 쓰고 · 빈칸으로 복기")
     ld = ld_article(t["title"], t.get("description", ""), url, img, t.get("date", ""), t["_mod"], "사유의 문장",
                     [("홈", "/"), ("사유의 문장", "/category/think/"), (t["title"], url)])

@@ -56,5 +56,9 @@
       "explain": "My treat = 내가 대접할게, 내가 살게. It's on me와 같은 뜻이에요.",
       "mnemonic": "treat = 대접 → 내 대접!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "It's on me.",
+    "key": "on me."
+  }
 }

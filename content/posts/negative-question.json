@@ -56,5 +56,9 @@
       "explain": "안 먹었다(부정)니까 No, I didn't예요. 한국어로는 '응, 안 먹었어'지만 영어는 No예요.",
       "mnemonic": "부정 대답 = No + didn't, 세트로 기억!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "Don't you like coffee?",
+    "key": "Don't"
+  }
 }

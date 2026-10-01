@@ -56,5 +56,9 @@
       "explain": "feeling down은 기분이 가라앉았다는 뜻이에요. 제안에 대한 대답이 아니라 내 감정을 말할 때 써요.",
       "mnemonic": "feeling(기분)이 아래로(down) 내려갔다 = 우울!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "I'm down!",
+    "key": "down!"
+  }
 }

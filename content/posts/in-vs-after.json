@@ -56,5 +56,9 @@
       "explain": "within = ~ 이내에. 24시간이 지나기 전에 답장해 달라는 뜻이에요.",
       "mnemonic": "within = 울타리 안쪽(이내)!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "in 10 minutes",
+    "key": "in"
+  }
 }

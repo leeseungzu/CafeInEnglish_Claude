@@ -56,5 +56,9 @@
       "explain": "통화나 회의 중에는 '소리가 끊긴다'는 뜻이에요.",
       "mnemonic": "목소리가 조각조각(break up)!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "You're on mute.",
+    "key": "mute."
+  }
 }

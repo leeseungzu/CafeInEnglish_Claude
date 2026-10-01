@@ -56,5 +56,9 @@
       "explain": "sense와 짝꿍 동사는 make예요. It doesn't make sense = 말이 안 돼.",
       "mnemonic": "감각은 만들어지는(make) 것!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "Does that make sense?",
+    "key": "make sense?"
+  }
 }

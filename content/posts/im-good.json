@@ -56,5 +56,9 @@
       "explain": "I'm all set = 필요한 건 다 갖췄어요, 더 필요한 거 없어요.",
       "mnemonic": "all(다) set(갖춰짐) = 끝!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "I'm good, thanks.",
+    "key": "good,"
+  }
 }

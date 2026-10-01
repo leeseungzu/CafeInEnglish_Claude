@@ -56,5 +56,9 @@
       "explain": "Would you like ~? = ~하시겠어요?, ~드릴까요? 받고 싶으면 Yes, please. 필요 없으면 No, thanks.",
       "mnemonic": "Would you like = Do you want의 공손 버전!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "I'd like to ~",
+    "key": "I'd like to"
+  }
 }

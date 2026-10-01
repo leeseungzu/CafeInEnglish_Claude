@@ -56,5 +56,9 @@
       "explain": "I could go for ~ = ~가 있으면 딱 좋겠다, ~하고 싶다. 부드럽게 원하는 걸 말할 때 써요.",
       "mnemonic": "커피를 향해(for) 갈(go) 수 있을 것 같아 = 땡겨!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "I'm craving pizza.",
+    "key": "craving"
+  }
 }

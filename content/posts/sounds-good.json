@@ -56,5 +56,9 @@
       "explain": "works for me = 나한테 맞아, 괜찮아. 일정을 정할 때 자주 써요.",
       "mnemonic": "일정이 나한테(for me) 잘 돌아간다(works)!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "Sounds good!",
+    "key": "good!"
+  }
 }

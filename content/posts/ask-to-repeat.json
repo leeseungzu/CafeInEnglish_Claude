@@ -56,5 +56,9 @@
       "explain": "Just to make sure, you mean ~? = 확인차 여쭤볼게요, ~ 말씀이시죠? 정중하고 자연스러워요.",
       "mnemonic": "make sure = 확실하게 하기!"
     }
-  ]
+  ],
+  "thumb": {
+    "text": "Could you say that again?",
+    "key": "again?"
+  }
 }
