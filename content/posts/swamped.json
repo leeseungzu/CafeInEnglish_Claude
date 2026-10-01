@@ -44,7 +44,7 @@
     {
       "tag": "전치사",
       "q": "빈칸에 들어갈 말로 알맞은 것은?",
-      "sub": "I'm swamped ___ work this week.",
+      "sub": "I'm swamped ___ emails this week.",
       "options": [
         "at",
         "on",
@@ -52,7 +52,7 @@
         "for"
       ],
       "answer": 2,
-      "explain": "swamped with ~ = ~로 정신없다. 무엇이 몰려왔는지 with 뒤에 붙여요. (with emails, with orders)",
+      "explain": "swamped with ~ = ~로 정신없다. 무엇이 몰려왔는지 with 뒤에 붙여요. (with emails, with orders) 참고로 '회사에서 바쁘다'는 I'm swamped at work처럼 at을 써요.",
       "mnemonic": "늪이 '무엇으로' 가득 차 있나? → 가득 찬 재료에는 with! (filled with, packed with와 같은 친구)"
     }
   ]

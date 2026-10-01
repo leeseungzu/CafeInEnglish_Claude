@@ -1,0 +1,59 @@
+{
+  "id": "im-down",
+  "cat": "expr",
+  "sub": "헷갈리는 표현",
+  "date": "2026-10-01",
+  "title": "\"I'm down\" — 우울하다는 뜻 아니에요, '콜! 나도 낄래'",
+  "lead": "친구가 뭐 하자고 할 때 원어민이 제일 많이 하는 대답",
+  "description": "I'm down은 '우울해'가 아니라 '좋아, 나도 할래'예요. I'm feeling down과의 차이, down for/down to 쓰는 법을 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "I'm down!",
+    "ko": "우울하다는 뜻 아니에요, '콜! 나도 낄래'"
+  },
+  "body_html": "<h2>뜻</h2>\n<div class=\"box\"><b>I'm down.</b> = 좋아, 나도 할래! (콜!)</div>\n<p>누가 뭔가를 하자고 <b>제안한 뒤에</b> I'm down이 나오면 '나도 찬성'이라는 뜻이에요. 뒤에 무엇에 찬성하는지 붙이려면 <b>down for + 명사</b>, <b>down to + 동사</b>를 써요.</p>\n<p>친구끼리 쓰는 <b>캐주얼한 말</b>이에요. 상사나 처음 만난 사람에게는 <b>Sounds good!</b>이나 <b>I'd love to.</b>가 더 무난해요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 제안 테이블 위에 내 이름표를 '쿵(down)' 하고 내려놓는 모습. '나도 여기 낄게!'</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Pizza tonight? I'm down!</span><span class=\"ko\">오늘 밤 피자? 콜!</span></li>\n<li><span class=\"en\">I'm down for a movie this weekend.</span><span class=\"ko\">이번 주말에 영화 좋아.</span></li>\n<li><span class=\"en\">Are you down to go hiking tomorrow?</span><span class=\"ko\">내일 등산 갈래?</span></li>\n</ul></div>\n<h2>헷갈리면 안 되는 표현</h2>\n<p>제안과 상관없이 <b>기분</b>을 말할 때는 정반대예요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I'm feeling down today.</span><span class=\"ko\">오늘 좀 우울해.</span></li>\n<li><span class=\"en\">He's been a little down lately.</span><span class=\"ko\">걔 요즘 좀 기운이 없어.</span></li>\n</ul></div>\n<h2>비슷한 표현</h2>\n<p>참고로 <b>I'm down with that.</b>은 '나 그거 좋아, 찬성'이라는 뜻이에요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I'm in!</span><span class=\"ko\">나도 낄래!</span></li>\n<li><span class=\"en\">Count me in.</span><span class=\"ko\">나도 끼워줘.</span></li>\n</ul></div>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "친구가 \"Let's get tacos!\" 하자 \"I'm down!\"이라고 했어요. 무슨 뜻일까요?",
+      "sub": "제안 바로 뒤에 나온 말이에요",
+      "options": [
+        "나 지금 우울해",
+        "좋아, 나도 갈래!",
+        "나 배 안 고파",
+        "나중에 얘기하자"
+      ],
+      "answer": 1,
+      "explain": "제안 뒤의 I'm down은 '찬성, 나도 낄래'예요. 기분이 가라앉았다는 뜻이 아니에요.",
+      "mnemonic": "제안 테이블에 내 이름표를 쿵(down) 내려놓기 = 콜!"
+    },
+    {
+      "tag": "전치사",
+      "q": "빈칸에 알맞은 말은?",
+      "sub": "I'm down ___ a movie tonight.",
+      "options": [
+        "for",
+        "at",
+        "of",
+        "on"
+      ],
+      "answer": 0,
+      "explain": "명사가 오면 down for, 동사가 오면 down to예요. (down for a movie / down to watch a movie)",
+      "mnemonic": "for 뒤엔 무엇(명사), to 뒤엔 무엇을 할지(동사)!"
+    },
+    {
+      "tag": "헷갈리는 표현",
+      "q": "\"I'm feeling down today.\"의 뜻은?",
+      "sub": "feeling이 들어갔어요",
+      "options": [
+        "오늘 컨디션 최고야",
+        "오늘 좀 우울해",
+        "오늘 다 찬성이야",
+        "오늘 일찍 잘래"
+      ],
+      "answer": 1,
+      "explain": "feeling down은 기분이 가라앉았다는 뜻이에요. 제안에 대한 대답이 아니라 내 감정을 말할 때 써요.",
+      "mnemonic": "feeling(기분)이 아래로(down) 내려갔다 = 우울!"
+    }
+  ]
+}

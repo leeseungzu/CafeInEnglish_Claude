@@ -1,0 +1,59 @@
+{
+  "id": "im-on-it",
+  "cat": "expr",
+  "sub": "새 표현",
+  "date": "2026-10-01",
+  "title": "\"I'm on it\" — '바로 할게요'를 한마디로",
+  "lead": "일을 맡았을 때 믿음 가는 대답",
+  "description": "I'm on it 뜻과 회사, 일상에서 쓰는 법, 비슷한 표현 Will do, Consider it done까지 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "I'm on it.",
+    "ko": "'바로 할게요'를 한마디로"
+  },
+  "body_html": "<h2>뜻</h2>\n<div class=\"box\"><b>I'm on it.</b> = 지금 바로 할게요 / 제가 처리하고 있어요</div>\n<p>누가 일을 부탁했을 때 OK보다 훨씬 믿음직하게 들려요. '이미 시작했다'는 느낌까지 줘서 회사에서 특히 자주 써요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 문제 위에(on) 내가 올라타서 꽉 붙잡고 있는 모습. '이건 내가 잡고 있어!'</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Can you send me the file? Sure, I'm on it.</span><span class=\"ko\">파일 보내줄 수 있어요? 네, 바로 보낼게요.</span></li>\n<li><span class=\"en\">Don't worry, I'm on it.</span><span class=\"ko\">걱정 마, 내가 처리하고 있어.</span></li>\n<li><span class=\"en\">We're on it.</span><span class=\"ko\">저희가 처리하고 있습니다.</span></li>\n</ul></div>\n<h2>비슷한 표현</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Will do.</span><span class=\"ko\">그렇게 할게요.</span></li>\n<li><span class=\"en\">Consider it done.</span><span class=\"ko\">다 된 걸로 생각하세요. (확실히 할게요)</span></li>\n</ul></div>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "팀장님이 \"Can you check this report?\"라고 하자 \"I'm on it.\"이라고 했어요. 무슨 뜻일까요?",
+      "sub": "일을 부탁받은 상황이에요",
+      "options": [
+        "저 지금 그 위에 있어요",
+        "바로 확인할게요",
+        "그건 제 일이 아니에요",
+        "이미 다 끝났어요"
+      ],
+      "answer": 1,
+      "explain": "I'm on it은 '지금 바로 할게요, 제가 처리할게요'예요.",
+      "mnemonic": "일 위에(on) 올라타서 붙잡고 있다!"
+    },
+    {
+      "tag": "상황",
+      "q": "\"I'm on it\"을 쓰기 가장 자연스러운 상황은?",
+      "sub": "",
+      "options": [
+        "친구가 생일 축하한다고 할 때",
+        "동료가 고객 메일 답장을 부탁할 때",
+        "날씨가 좋다고 할 때",
+        "밥 먹었냐고 물을 때"
+      ],
+      "answer": 1,
+      "explain": "누군가 일을 부탁하거나 문제가 생겼을 때 '내가 맡을게'라는 대답이에요.",
+      "mnemonic": "부탁이 오면 → 올라탄다(on it)!"
+    },
+    {
+      "tag": "비슷한 표현",
+      "q": "\"Consider it done.\"의 뜻은?",
+      "sub": "consider = ~라고 여기다",
+      "options": [
+        "이미 끝났으니 잊어",
+        "다 된 걸로 생각하세요 (확실히 할게요)",
+        "다시 생각해 볼게요",
+        "끝났는지 확인해 줘"
+      ],
+      "answer": 1,
+      "explain": "아직 안 했지만 '확실히 해 놓을 테니 끝난 걸로 생각하라'는 자신감 있는 대답이에요.",
+      "mnemonic": "부탁하는 순간 이미 끝난(done) 걸로!"
+    }
+  ]
+}

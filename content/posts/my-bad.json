@@ -1,0 +1,59 @@
+{
+  "id": "my-bad",
+  "cat": "expr",
+  "sub": "새 표현",
+  "date": "2026-10-01",
+  "title": "\"My bad\" — I'm sorry보다 가볍게, 쿨하게 사과하기",
+  "lead": "작은 실수엔 무거운 사과 대신 이 한마디",
+  "description": "My bad 뜻과 쓰는 상황, 쓰면 안 되는 상황, 받아치는 법(No worries, All good)까지 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "My bad!",
+    "ko": "I'm sorry보다 가볍게, 쿨하게 사과하기"
+  },
+  "body_html": "<h2>뜻</h2>\n<div class=\"box\"><b>My bad.</b> = 내 실수야, 미안!</div>\n<p>방을 잘못 보냈거나, 남의 자리에 앉았거나, 길을 살짝 막았을 때처럼 <b>가벼운 실수</b>에 써요. I'm sorry보다 훨씬 캐주얼하고 쿨하게 들려요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> bad(잘못)를 내 쪽(my)으로 끌어오는 말. '이건 내 잘못이니까 내가 가져갈게!'</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Oops, my bad! Wrong chat.</span><span class=\"ko\">앗, 미안! 방을 잘못 보냈네.</span></li>\n<li><span class=\"en\">My bad, I thought this seat was empty.</span><span class=\"ko\">미안해요, 빈자리인 줄 알았어요.</span></li>\n<li><span class=\"en\">That was my bad. I'll fix it.</span><span class=\"ko\">그건 내 실수야. 내가 고칠게.</span></li>\n</ul></div>\n<h2>주의: 이럴 땐 쓰지 마세요</h2>\n<p>상사나 고객에게, 또는 큰 실수를 했을 때 My bad라고 하면 가볍게 넘기는 것처럼 들려요. 이럴 땐 정중하게 말해요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I apologize for the mistake.</span><span class=\"ko\">실수해서 죄송합니다.</span></li>\n<li><span class=\"en\">That was my mistake. It won't happen again.</span><span class=\"ko\">제 실수였어요. 다시는 그런 일 없을 거예요.</span></li>\n</ul></div>\n<h2>받아치는 법</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">No worries.</span><span class=\"ko\">괜찮아, 신경 쓰지 마.</span></li>\n<li><span class=\"en\">All good.</span><span class=\"ko\">다 괜찮아.</span></li>\n</ul></div>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "\"My bad!\"의 뜻으로 알맞은 것은?",
+      "sub": "가볍게 하는 말이에요",
+      "options": [
+        "내 기분이 나빠",
+        "내 실수야, 미안",
+        "나 몸이 안 좋아",
+        "그거 별로야"
+      ],
+      "answer": 1,
+      "explain": "My bad는 '내 잘못이야, 미안'이라는 가벼운 사과예요.",
+      "mnemonic": "bad(잘못)를 my(내 쪽)로 가져오기!"
+    },
+    {
+      "tag": "상황",
+      "q": "My bad를 쓰기 어색한 상황은?",
+      "sub": "가벼움의 정도를 생각해 보세요",
+      "options": [
+        "친구에게 단톡방을 잘못 보냈을 때",
+        "카페에서 남의 컵을 집었을 때",
+        "고객 주문을 크게 잘못 처리했을 때",
+        "친구 발을 살짝 밟았을 때"
+      ],
+      "answer": 2,
+      "explain": "큰 실수나 공식적인 자리에서는 가볍게 들려요. I apologize for the mistake처럼 정중하게 말해요.",
+      "mnemonic": "큰 실수엔 큰 사과! My bad는 작은 실수 전용이에요."
+    },
+    {
+      "tag": "대답",
+      "q": "친구가 \"My bad!\"라고 할 때 자연스러운 대답은?",
+      "sub": "괜찮다고 말해 주세요",
+      "options": [
+        "No worries.",
+        "You're welcome.",
+        "Me too.",
+        "Good job."
+      ],
+      "answer": 0,
+      "explain": "No worries / All good = 괜찮아, 신경 쓰지 마. You're welcome은 고맙다는 말에 하는 대답이에요.",
+      "mnemonic": "사과엔 No worries, 감사엔 You're welcome!"
+    }
+  ]
+}

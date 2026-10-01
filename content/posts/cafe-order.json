@@ -1,0 +1,59 @@
+{
+  "id": "cafe-order",
+  "cat": "tip",
+  "sub": "회화",
+  "date": "2026-10-01",
+  "title": "카페 주문, \"Give me ~\" 대신 \"Can I get ~?\"",
+  "lead": "Give me는 문법은 맞지만 명령처럼 들릴 수 있어요",
+  "description": "해외 카페에서 자연스럽게 주문하는 법(Can I get ~?, I'll have ~)과 직원이 꼭 묻는 질문(For here or to go?, Anything else?)을 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Can I get a latte?",
+    "ko": "Give me 대신 이렇게 주문해요"
+  },
+  "body_html": "<h2>왜 바꿔야 할까?</h2>\n<p><b>Give me a latte.</b>는 틀린 말은 아니지만, please 없이 말하면 '라떼 줘.'처럼 퉁명스럽게 들릴 수 있어요. 원어민은 주문할 때 보통 부탁하는 모양으로 말해요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Can I get a latte?</span><span class=\"ko\">라떼 하나 주세요.</span></li>\n<li><span class=\"en\">I'll have an iced Americano.</span><span class=\"ko\">아이스 아메리카노로 할게요.</span></li>\n<li><span class=\"en\">Could I get a small cappuccino, please?</span><span class=\"ko\">스몰 카푸치노 하나 주시겠어요?</span></li>\n</ul></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> Can I get = '제가 받아도 될까요?' 부탁하는 모양이라 저절로 공손해져요.</div>\n<h2>직원이 꼭 묻는 질문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">For here or to go?</span><span class=\"ko\">드시고 가세요, 가져가세요?</span></li>\n<li><span class=\"en\">To go, please.</span><span class=\"ko\">가져갈게요.</span></li>\n<li><span class=\"en\">Can I get a name for the order?</span><span class=\"ko\">주문하신 분 성함이요?</span></li>\n<li><span class=\"en\">Anything else?</span><span class=\"ko\">더 필요한 거 있으세요?</span></li>\n<li><span class=\"en\">That's it, thanks.</span><span class=\"ko\">그거면 돼요, 감사합니다.</span></li>\n</ul></div>\n<p><b class=\"lbl\">연습법</b> 다음에 카페 가면 속으로 Can I get ~?으로 주문해 보세요. 한 번 입에 붙으면 식당, 가게 어디서든 써먹을 수 있어요.</p>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "주문",
+      "q": "가장 자연스러운 주문은?",
+      "sub": "부탁하는 모양을 골라요",
+      "options": [
+        "Give me a latte.",
+        "I want latte.",
+        "Can I get a latte?",
+        "Latte, now."
+      ],
+      "answer": 2,
+      "explain": "Can I get ~?은 '~ 주세요'를 부드럽게 말하는 가장 흔한 주문 표현이에요.",
+      "mnemonic": "Can I get = 받아도 될까요? → 저절로 공손!"
+    },
+    {
+      "tag": "뜻",
+      "q": "직원이 \"For here or to go?\"라고 물었어요. 무슨 뜻일까요?",
+      "sub": "",
+      "options": [
+        "여기 처음이세요?",
+        "드시고 가세요, 가져가세요?",
+        "어디로 가세요?",
+        "여기서 기다리실 거예요?"
+      ],
+      "answer": 1,
+      "explain": "for here = 여기서 먹을 건지, to go = 가지고 갈 건지예요. 대답은 For here, please 또는 To go, please.",
+      "mnemonic": "here(여기) or go(가져가기)!"
+    },
+    {
+      "tag": "대답",
+      "q": "\"Anything else?\"에 '그거면 돼요'라고 할 때 알맞은 말은?",
+      "sub": "",
+      "options": [
+        "That's it, thanks.",
+        "Nothing else me.",
+        "It's all.",
+        "No anything."
+      ],
+      "answer": 0,
+      "explain": "That's it = 그게 다예요. 뒤에 thanks를 붙이면 더 자연스러워요.",
+      "mnemonic": "That's it = 그게 다예요 (That's all과 같은 뜻) → 그거면 끝!"
+    }
+  ]
+}

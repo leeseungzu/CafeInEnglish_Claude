@@ -20,7 +20,7 @@
       "en": "let you in on a little secret",
       "ko": "작은 비밀 하나 알려줄게",
       "orig": "I'm going to let you in on a little secret.",
-      "ex": "Let me let you in on a little secret: I was nervous too.",
+      "ex": "I'll let you in on a little secret: I was nervous too.",
       "exKo": "비밀 하나 알려줄게. 나도 떨렸어.",
       "memo": "let you in = 문을 열고 안으로 들여보내 주다. 비밀의 방에 너를 들여보내 주는 거예요.",
       "end": 152,
@@ -88,7 +88,7 @@
       "end": 651,
       "say": "와이 아이 점패더 챈스 투 워컨",
       "tips": [
-        "jumped at the → 점패더 : ed와 at이 이어지고 th는 약하게",
+        "jumped at the → 점프태더 : ed의 t 소리가 at과 이어지고 th는 약하게",
         "work on → 워컨 : k가 다음 모음과 붙어요"
       ]
     }
@@ -98,7 +98,7 @@
     {
       "tag": "영상표현",
       "q": "\"Very few of them are make-or-break.\" 에서 make-or-break의 뜻은?",
-      "sub": "4:28 장면을 떠올려 보세요",
+      "sub": "4:25 장면을 떠올려 보세요",
       "options": [
         "쉽게 만들 수 있는",
         "성패를 가르는, 결정적인",

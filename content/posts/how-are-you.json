@@ -1,0 +1,59 @@
+{
+  "id": "how-are-you",
+  "cat": "tip",
+  "sub": "회화",
+  "date": "2026-10-01",
+  "title": "\"How are you?\"에 I'm fine, thank you, and you? 말고 이렇게",
+  "lead": "교과서 대답은 틀린 건 아니지만 로봇처럼 들려요",
+  "description": "How are you?, How's it going?, What's up?에 원어민처럼 자연스럽게 대답하는 법을 예문과 퀴즈로 정리한 회화 꿀팁.",
+  "og": {
+    "en": "How are you?",
+    "ko": "I'm fine, thank you 말고 이렇게"
+  },
+  "body_html": "<h2>왜 바꿔야 할까?</h2>\n<p>How are you?는 진짜 안부를 묻는 질문이라기보다 <b>'안녕하세요'에 가까운 인사</b>예요. 그래서 짧게 받고 바로 상대에게 넘기면 돼요. I'm fine, thank you, and you?는 틀리진 않지만 너무 딱딱하게 들려요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 인사는 탁구예요! 짧게 받아치고(Good) 바로 상대에게 넘기기(you?).</div>\n<h2>How are you? / How's it going?</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Good, how about you?</span><span class=\"ko\">좋아, 너는?</span></li>\n<li><span class=\"en\">Pretty good, you?</span><span class=\"ko\">꽤 괜찮아, 너는?</span></li>\n<li><span class=\"en\">Not bad. How's it going with you?</span><span class=\"ko\">나쁘지 않아. 너는 어때?</span></li>\n<li><span class=\"en\">Can't complain.</span><span class=\"ko\">나쁘지 않아. (불평할 게 없어)</span></li>\n<li><span class=\"en\">Hanging in there.</span><span class=\"ko\">그럭저럭 버티는 중이야.</span></li>\n</ul></div>\n<h2>What's up?</h2>\n<p>What's up?은 '뭐 해?, 별일 없어?'라는 인사라서 기분 대답보다 이렇게 받아요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Not much. You?</span><span class=\"ko\">별일 없어. 너는?</span></li>\n<li><span class=\"en\">Just chilling.</span><span class=\"ko\">그냥 쉬고 있어.</span></li>\n</ul></div>\n<p><b class=\"lbl\">연습법</b> 오늘 하루 How are you?를 들으면 <b>한 단어 + you?</b>만 기억하세요. Good, you? 이것만으로 충분해요.</p>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "대답",
+      "q": "\"What's up?\"에 가장 자연스러운 대답은?",
+      "sub": "What's up은 '별일 없어?'에 가까워요",
+      "options": [
+        "I'm fine, thank you.",
+        "Not much. You?",
+        "Yes, it is.",
+        "I'm up."
+      ],
+      "answer": 1,
+      "explain": "What's up?은 기분보다 '무슨 일 있어?'를 묻는 인사라 Not much(별일 없어)로 받아요.",
+      "mnemonic": "What's up? → 위에(up) 뭐 있어? → 별거 없어(Not much)!"
+    },
+    {
+      "tag": "뜻",
+      "q": "\"Can't complain.\"의 뜻은?",
+      "sub": "complain = 불평하다",
+      "options": [
+        "불평할 수 없어서 답답해",
+        "나쁘지 않아, 잘 지내",
+        "말하기 싫어",
+        "몸이 안 좋아"
+      ],
+      "answer": 1,
+      "explain": "불평할 게 없을 정도로 괜찮다는 뜻이에요. 원어민이 자주 쓰는 여유 있는 대답이에요.",
+      "mnemonic": "불평(complain)할 거리가 없다 = 괜찮다!"
+    },
+    {
+      "tag": "자연스러움",
+      "q": "How are you?에 가장 원어민스러운 대답은?",
+      "sub": "짧게 받고 넘기기!",
+      "options": [
+        "I'm fine, thank you, and you?",
+        "Good, how about you?",
+        "I am very well, thank you very much.",
+        "Fine."
+      ],
+      "answer": 1,
+      "explain": "짧게 받고(Good) 바로 상대에게 넘기는(how about you?) 게 가장 자연스러워요. Fine만 하면 퉁명스럽게 들릴 수 있어요.",
+      "mnemonic": "인사는 탁구! 받고 → 넘기고!"
+    }
+  ]
+}

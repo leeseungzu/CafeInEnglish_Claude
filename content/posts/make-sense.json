@@ -1,0 +1,59 @@
+{
+  "id": "make-sense",
+  "cat": "expr",
+  "sub": "비슷한 표현",
+  "date": "2026-10-01",
+  "title": "\"Do you understand?\" 대신 \"Does that make sense?\"",
+  "lead": "설명한 뒤 이해했냐고 물을 때, 상대 기분 상하지 않게",
+  "description": "Do you understand?가 무례하게 들릴 수 있는 이유와, 대신 쓰는 Does that make sense?, 대답하는 법(Makes sense)을 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Does that make sense?",
+    "ko": "Do you understand? 대신 이렇게"
+  },
+  "body_html": "<h2>왜 바꿔야 할까?</h2>\n<p><b>Do you understand?</b>는 문법은 맞지만, 선생님이 학생에게 묻듯 '너 알아들었어?'처럼 상대의 이해력을 확인하는 느낌이 날 수 있어요.</p>\n<div class=\"box\"><b>Does that make sense?</b> = 제 설명, 이해되세요? (말이 돼요?)</div>\n<p>질문의 초점이 상대가 아니라 <b>내 설명</b>에 있어서 훨씬 부드러워요. 회의, 수업, 친구끼리 어디서나 써요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> make sense = 감각(sense)이 만들어지다(make). 머릿속에 그림이 딱 그려지냐는 질문이에요.</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">So we meet at seven and go together. Does that make sense?</span><span class=\"ko\">그러니까 7시에 만나서 같이 가는 거야. 이해돼?</span></li>\n<li><span class=\"en\">That makes sense.</span><span class=\"ko\">아, 그렇구나. 이해돼.</span></li>\n<li><span class=\"en\">It doesn't make sense.</span><span class=\"ko\">그건 말이 안 돼.</span></li>\n</ul></div>\n<h2>대답하는 법</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Yeah, makes sense.</span><span class=\"ko\">응, 이해했어.</span></li>\n<li><span class=\"en\">Not really. Could you explain that again?</span><span class=\"ko\">잘 모르겠어. 다시 설명해 줄래?</span></li>\n</ul></div>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "뉘앙스",
+      "q": "설명 끝에 \"Does that make sense?\"가 Do you understand?보다 부드러운 이유는?",
+      "sub": "질문의 초점을 생각해 보세요",
+      "options": [
+        "더 짧아서",
+        "상대 이해력이 아니라 내 설명을 묻는 말이라서",
+        "더 어려운 표현이라서",
+        "미국에서만 써서"
+      ],
+      "answer": 1,
+      "explain": "Does that make sense?는 '내 설명이 말이 되나요?'라는 뜻이라 상대를 평가하는 느낌이 없어요.",
+      "mnemonic": "Do YOU understand? → 너를 봄 / Does THAT make sense? → 내 설명을 봄"
+    },
+    {
+      "tag": "뜻",
+      "q": "친구가 내 설명을 듣고 \"Makes sense.\"라고 했어요. 무슨 뜻일까요?",
+      "sub": "짧게 줄인 말이에요",
+      "options": [
+        "말도 안 돼",
+        "아, 이해했어",
+        "다시 설명해 줘",
+        "잘 모르겠어"
+      ],
+      "answer": 1,
+      "explain": "Makes sense = That makes sense를 줄인 말로 '이해됐어, 그렇구나'예요.",
+      "mnemonic": "머릿속에 그림(sense)이 만들어졌다(makes) = 이해 완료!"
+    },
+    {
+      "tag": "빈칸",
+      "q": "빈칸에 알맞은 말은?",
+      "sub": "That doesn't ___ sense.",
+      "options": [
+        "do",
+        "have",
+        "make",
+        "take"
+      ],
+      "answer": 2,
+      "explain": "sense와 짝꿍 동사는 make예요. It doesn't make sense = 말이 안 돼.",
+      "mnemonic": "감각은 만들어지는(make) 것!"
+    }
+  ]
+}
