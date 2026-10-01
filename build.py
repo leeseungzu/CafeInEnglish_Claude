@@ -479,9 +479,9 @@ def toc_html(toc, quiz_label="퀴즈 풀기"):
 
 
 def side_common():
-    yt = (f'<div class="side-box"><h4>카페인영어 유튜브</h4><a class="btn ghost" href="{e(SITE["youtube"])}" target="_blank" rel="noopener">▶ 채널 구경하기</a></div>'
+    yt = (f'<div class="side-box"><h4>카페인영어 유튜브</h4><a class="btn ghost" href="{e(SITE["youtube"])}" target="_blank" rel="noopener">채널 구경하기</a></div>'
           if SITE.get("youtube") else "")
-    kk = (f'<div class="side-box"><h4>매일 한 잔</h4><a class="btn kakao" href="{e(SITE["kakao"])}" target="_blank" rel="noopener">카톡으로 매일 받기</a></div>'
+    kk = (f'<div class="side-box"><h4>카페인영어 카카오톡</h4><a class="btn kakao" href="{e(SITE["kakao"])}" target="_blank" rel="noopener">카톡 받아보기</a></div>'
           if SITE.get("kakao") else "")
     return kk + yt
 
