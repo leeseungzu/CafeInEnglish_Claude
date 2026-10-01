@@ -572,3 +572,16 @@ h1{letter-spacing:-.03em}
 .fig{margin:18px 0}
 .fig img{display:block;width:100%;height:auto;border-radius:16px}
 .fig figcaption{font-size:13px;color:var(--muted);text-align:center;margin-top:8px}
+/* 자주 하는 실수 */
+.fix .no{display:block;color:#A2412F;font-weight:600;text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:rgba(162,65,47,.55);margin-bottom:2px}
+.fix .no::before{content:"✕ ";text-decoration:none;display:inline-block;margin-right:2px}
+.fix .en::before{content:"○ ";color:#4C7A1E;font-weight:800}
+/* 한눈에 정리 표 */
+.tbl{overflow-x:auto;margin:12px 0;border-radius:14px;border:1px solid var(--line);background:var(--card)}
+.cmp{width:100%;border-collapse:collapse;font-size:15px;line-height:1.5}
+.cmp th{background:var(--text);color:var(--bg);font-weight:700;text-align:left;padding:10px 12px;white-space:nowrap}
+.cmp td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
+.cmp td:last-child{font-weight:700}
+@media (max-width:599px){ .cmp{font-size:14px} .cmp th,.cmp td{padding:9px 10px} }
+@media print{ .tbl{overflow:visible} }
+.fix .ctx{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bottom:2px}
