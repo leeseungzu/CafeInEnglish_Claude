@@ -59,6 +59,7 @@
   ],
   "thumb": {
     "text": "Can we get the check?",
-    "key": "check?"
+    "key": "check?",
+    "ko": "계산서 주세요"
   }
 }

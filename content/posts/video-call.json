@@ -59,6 +59,7 @@
   ],
   "thumb": {
     "text": "You're on mute.",
-    "key": "mute."
+    "key": "mute.",
+    "ko": "음소거 되어 있어요"
   }
 }

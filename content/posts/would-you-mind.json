@@ -59,6 +59,7 @@
   ],
   "thumb": {
     "text": "Would you mind?",
-    "key": "mind?"
+    "key": "mind?",
+    "ko": "대답은 Yes? No?"
   }
 }

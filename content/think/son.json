@@ -68,6 +68,7 @@
   ],
   "thumb": {
     "text": "Say hello first.",
-    "key": "hello"
+    "key": "hello",
+    "ko": "손흥민의 문장"
   }
 }

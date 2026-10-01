@@ -141,10 +141,11 @@ THEMES = {  # 배경, 글자, 핵심 단어 스타일
     "dark": ("#2A1A12", "#F4EEE4", "lime"),
     "lime": ("#CDEB5B", "#2A1A12", "underline"),
     "cream": ("#E9DFD0", "#2A1A12", "pill"),
+    "olive": ("#3B4430", "#F4EEE4", "lime"),
 }
 
 
-def thumb_image(name, theme, label, num, text, key):
+def thumb_image(name, theme, ko, text, key):
     """목록 카드용 썸네일 (1안 · 빅 타이포): 색 블록 + 아주 큰 표현 + 핵심 단어 강조"""
     if not (Image and FONT.exists()):
         return None
@@ -153,10 +154,7 @@ def thumb_image(name, theme, label, num, text, key):
     LIME, INK = "#CDEB5B", "#2A1A12"
     im = Image.new("RGB", (W, H), bg)
     d = ImageDraw.Draw(im)
-    lf = _font(24, 800)
-    _spaced(d, (PAD, 46), label, lf, fg, 5)
-    if num:
-        _spaced(d, (W - PAD, 46), num, lf, fg, 2, anchor_right=True)
+    kf = _font(44, 700)
     words = text.split()
     kw = key.split()
     keyidx = set()
@@ -168,13 +166,16 @@ def thumb_image(name, theme, label, num, text, key):
     for size in range(132, 50, -4):
         f = _font(size, 900)
         lines = _wrap(d, text, f, maxw)
-        if len(lines) <= 3 and len(lines) * size * 0.98 <= H - 170 and all(d.textlength(l, font=f) <= maxw for l in lines):
+        if len(lines) <= 3 and len(lines) * size * 0.98 <= H - 200 and all(d.textlength(l, font=f) <= maxw for l in lines):
             break
     lh = int(size * 0.98)
-    y = H - PAD - lh * len(lines) - int(size * .06)
+    block = 44 * 1.2 + 18 + lh * len(lines)
+    y0 = int((H - block) / 2) + 6
+    d.text((PAD, y0), ko, font=kf, fill=fg if theme != "dark" else "#D9CDBE")
+    y = int(y0 + 44 * 1.2 + 18 - size * .04)
     wi = 0
     for ln in lines:
-        x = PAD + (10 if style == "pill" else 0)
+        x = PAD
         lw = ln.split()
         # 같은 줄의 핵심 단어 구간
         span = [j for j in range(len(lw)) if wi + j in keyidx]
@@ -204,11 +205,8 @@ def thumb_image(name, theme, label, num, text, key):
 
 
 def thumb_theme(p):
-    """카테고리별 색: 꿀팁=라임, 표현=에스프레소/베이지 번갈아"""
-    if p["cat"] == "tip":
-        return "lime"
-    order = [o["id"] for o in sorted(POSTS, key=lambda o: (o.get("date", ""), o["id"])) if o["cat"] == p["cat"]]
-    return "dark" if order.index(p["id"]) % 2 == 0 else "cream"
+    """카테고리별 고정 색: 영어표현=에스프레소, 영어꿀팁=크림, 사유의 문장=올리브 (라임은 핵심 단어에만)"""
+    return {"expr": "dark", "tip": "cream"}.get(p["cat"], "dark")
 
 
 def thumb_num(p):
@@ -548,8 +546,7 @@ def page_post(p):
     xs = p.get("expressions") or [{}]
     data["share"] = og.get("en") or xs[0].get("en") or ""
     if p.get("thumb") and not p.get("video"):
-        thumb_image("th-p-" + p["id"], thumb_theme(p), {"expr": "EXPRESSION", "tip": "ENGLISH TIP"}.get(p["cat"], "VIDEO"),
-                    thumb_num(p), p["thumb"]["text"], p["thumb"]["key"])
+        thumb_image("th-p-" + p["id"], thumb_theme(p), p["thumb"].get("ko", ""), p["thumb"]["text"], p["thumb"]["key"])
     img = og_image("p-" + p["id"], CATS[p["cat"]], og.get("en") or xs[0].get("en") or p["title"],
                    og.get("ko") or p.get("lead", ""))
     desc = p.get("description", p.get("lead", ""))
@@ -609,7 +606,7 @@ def page_think(t):
     shortest = min(t["quotes"], key=lambda q: len(q["en"]))["en"]
     data["share"] = og.get("en") or shortest
     tq = t.get("thumb") or {"text": og.get("en") or shortest, "key": ""}
-    thumb_image("th-t-" + t["id"], "dark", "THINK · " + t["speaker"].split(" · ")[0], "", tq["text"], tq["key"])
+    thumb_image("th-t-" + t["id"], "olive", tq.get("ko", ""), tq["text"], tq["key"])
     img = og_image("t-" + t["id"], "사유의 문장 · 필사", og.get("en") or shortest, og.get("ko") or t["title"], "듣고 · 따라 쓰고 · 빈칸으로 복기")
     ld = ld_article(t["title"], t.get("description", ""), url, img, t.get("date", ""), t["_mod"], "사유의 문장",
                     [("홈", "/"), ("사유의 문장", "/category/think/"), (t["title"], url)])
