@@ -507,8 +507,20 @@ def page_category(cat):
     return layout(CATS[cat], CAT_LEAD[cat], url, body, cat, wide=True)
 
 
+def daily_index(n):
+    """한국 날짜 기준으로 매일 하나씩 돌아가며 (app.js와 같은 계산)"""
+    import time
+    return int((time.time() + 9 * 3600) // 86400) % n
+
+
 def page_home():
-    today = SITE.get("today") or {}
+    daily = []
+    if (CONTENT / "daily.json").exists():
+        for it in json.loads((CONTENT / "daily.json").read_text("utf-8")):
+            p = POST_BY_ID.get(it["post"])
+            if p:
+                daily.append({**it, "url": post_url(p), "cat": CATS[p["cat"]]})
+    today = daily[daily_index(len(daily))] if daily else (SITE.get("today") or {})
     tp = POST_BY_ID.get(today.get("post")) or next((p for p in POSTS if p["cat"] == "expr"), POSTS[0])
     t_en = today.get("en") or tp["title"]
     t_ko = today.get("ko") or tp.get("lead", "")
@@ -530,11 +542,11 @@ def page_home():
     thinks = "".join(think_card(t) for t in THINKS[:3])
     body = f"""<section class="a-hero">
   <div>
-    <div class="a-kicker">오늘의 한 잔 · {CATS[tp["cat"]]}</div>
-    <h1 class="a-phrase">{phrase}</h1>
-    <p class="a-mean">{e(t_ko)}</p>
-    {f'<p class="a-desc">{e(t_desc)}</p>' if t_desc else ""}
-    <div class="a-btns"><a class="btn primary" href="{post_url(tp)}">글 읽고 퀴즈 풀기</a><a class="btn ghost" href="/notes/">내 공부방</a></div>
+    <div class="a-kicker">오늘의 한 잔 · <span id="td-cat">{CATS[tp["cat"]]}</span></div>
+    <h1 class="a-phrase{" long" if len(t_en) > 16 else ""}" id="td-en">{phrase}</h1>
+    <p class="a-mean" id="td-ko">{e(t_ko)}</p>
+    <p class="a-desc" id="td-desc">{e(t_desc)}</p>
+    <div class="a-btns"><a class="btn primary" id="td-link" href="{post_url(tp)}">글 읽고 퀴즈 풀기</a><a class="btn ghost" href="/notes/">내 공부방</a></div>
   </div>
   {feature}
 </section>
@@ -543,7 +555,7 @@ def page_home():
 {f'<div class="a-head" style="margin-top:36px"><h2>사유의 문장</h2><a href="/category/think/">전체 보기</a></div><div class="cards">{thinks}</div>' if thinks else ""}
 """
     ld = [{"@type": "WebSite", "name": "카페인영어 CafeInEnglish", "alternateName": "카페인영어", "url": DOMAIN + "/", "inLanguage": "ko"}, ORG]
-    return layout(SITE["name"], SITE["tagline"], "/", body, wide=True, ld=ld)
+    return layout(SITE["name"], SITE["tagline"], "/", body, wide=True, ld=ld, data={"type": "home", "daily": daily})
 
 
 def page_notes():

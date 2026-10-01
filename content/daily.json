@@ -1,0 +1,110 @@
+[
+  {
+    "post": "swamped",
+    "en": "I'm swamped.",
+    "ko": "할 일이 산더미야, 정신없이 바빠",
+    "desc": "swamp는 '늪'. 일이 늪처럼 밀려와 허우적대는 느낌이라 busy보다 훨씬 생생해요."
+  },
+  {
+    "post": "pichai",
+    "en": "make-or-break",
+    "ko": "성패를 가르는, 결정적인",
+    "desc": "만들거나(make) 부서지거나(break), 결과가 둘 중 하나로 갈리는 순간이에요."
+  },
+  {
+    "post": "im-good",
+    "en": "I'm good, thanks.",
+    "ko": "괜찮아요, 됐어요",
+    "desc": "뭔가를 권할 때 나오는 I'm good은 '좋아요'가 아니라 정중한 거절이에요."
+  },
+  {
+    "post": "son",
+    "en": "since day one",
+    "ko": "처음부터, 첫날부터",
+    "desc": "손흥민이 처음부터 응원해 준 팬들을 이야기하며 쓴 표현이에요."
+  },
+  {
+    "post": "im-down",
+    "en": "I'm down.",
+    "ko": "좋아, 나도 낄래!",
+    "desc": "친구가 뭔가 하자고 할 때 하는 대답이에요. 우울하다는 뜻이 아니에요."
+  },
+  {
+    "post": "jensen",
+    "en": "How hard could it be?",
+    "ko": "뭐 얼마나 어렵겠어?",
+    "desc": "만만하게 보고 하는 말. 뒤에 It turns out(알고 보니)이 오면 반전이 시작돼요."
+  },
+  {
+    "post": "sounds-good",
+    "en": "Sounds good!",
+    "ko": "좋아요, 그렇게 해요",
+    "desc": "제안이나 약속에 동의할 때 OK보다 자연스러운 한마디예요."
+  },
+  {
+    "post": "my-bad",
+    "en": "My bad.",
+    "ko": "내 실수야, 미안",
+    "desc": "작은 실수에 가볍게 하는 사과예요. 상사나 고객에겐 I apologize가 좋아요."
+  },
+  {
+    "post": "pichai",
+    "en": "find one's footing",
+    "ko": "자리를 잡다, 적응하다",
+    "desc": "미끄러운 바닥에서 발 디딜 곳(footing)을 찾는 모습을 떠올려 보세요."
+  },
+  {
+    "post": "keep-me-posted",
+    "en": "Keep me posted.",
+    "ko": "진행되는 대로 계속 알려줘",
+    "desc": "한 번이면 Let me know, 계속이면 Keep me posted예요."
+  },
+  {
+    "post": "craving",
+    "en": "I'm craving pizza.",
+    "ko": "피자가 너무 당겨",
+    "desc": "crave는 '간절히 원하다'. want보다 훨씬 생생한 '당긴다'예요."
+  },
+  {
+    "post": "son",
+    "en": "give back",
+    "ko": "받은 걸 돌려주다, 보답하다",
+    "desc": "받은 걸 다시(back) 주다(give)! 손흥민은 팬들에게 돌려주고 싶다고 했어요."
+  },
+  {
+    "post": "make-sense",
+    "en": "Does that make sense?",
+    "ko": "제 설명, 이해되세요?",
+    "desc": "Do you understand?보다 부드러워요. 상대가 아니라 내 설명을 묻는 말이거든요."
+  },
+  {
+    "post": "its-on-me",
+    "en": "It's on me.",
+    "ko": "내가 낼게, 내가 쏠게",
+    "desc": "계산서가 내 위에(on me)! I'll shoot이라고 하면 안 통해요."
+  },
+  {
+    "post": "jensen",
+    "en": "a dream come true",
+    "ko": "꿈이 이루어진 것, 꿈만 같은 일",
+    "desc": "젠슨 황은 '나는 부모님의 꿈이 이루어진 모습'이라고 말했어요."
+  },
+  {
+    "post": "im-on-it",
+    "en": "I'm on it.",
+    "ko": "바로 할게요, 제가 처리할게요",
+    "desc": "일을 부탁받았을 때 OK보다 훨씬 믿음직한 대답이에요."
+  },
+  {
+    "post": "walk-me-through",
+    "en": "Could you walk me through it?",
+    "ko": "차근차근 설명해 주시겠어요?",
+    "desc": "처음 하는 절차 앞에서 '모르겠어요' 대신 쓰는 말이에요."
+  },
+  {
+    "post": "id-like-to",
+    "en": "I'd like to open an account.",
+    "ko": "계좌를 개설하고 싶어요",
+    "desc": "I want보다 정중한 I'd like to. 은행, 병원 창구에서 첫마디로 딱이에요."
+  }
+]

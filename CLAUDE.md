@@ -10,6 +10,7 @@ content/
   site.json          사이트 설정 (도메인, 카톡 채널, 문의 이메일, 애드센스, GA)
   posts/<id>.json    글 1편 = 파일 1개 (영상으로 배우기 / 영어표현 / 영어꿀팁)
   think/<id>.json    사유의 문장 1세트 = 파일 1개
+  daily.json         홈 '오늘의 한 잔' 목록 [{post, en, ko, desc}] — 한국 날짜 기준 매일 하나씩 돌아가며 표시 (새 글을 쓰면 1~2개 추가)
 assets/
   style.css          전체 디자인
   app.js             퀴즈 · 오답노트 · 필사 · 출력 기능

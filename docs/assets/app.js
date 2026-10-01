@@ -434,6 +434,21 @@
     update();
   }
 
+
+  /* ---------- 홈: 오늘의 한 잔 (한국 날짜 기준 매일 바뀜) ---------- */
+  function initDaily() {
+    const list = DATA.daily || [];
+    if (!list.length || !$("#td-en")) return;
+    const it = list[Math.floor((Date.now() / 1000 + 9 * 3600) / 86400) % list.length];
+    const w = it.en.split(" "), last = w.pop();
+    $("#td-en").innerHTML = (w.length ? esc(w.join(" ")) + " " : "") + `<span class="hl">${esc(last)}</span>`;
+    $("#td-en").classList.toggle("long", it.en.length > 16);
+    $("#td-ko").textContent = it.ko;
+    $("#td-desc").textContent = it.desc || "";
+    $("#td-cat").textContent = it.cat;
+    $("#td-link").href = it.url;
+  }
+
   /* ---------- 시작 ---------- */
   updateBadge();
   alignNav();
@@ -460,6 +475,7 @@
   initVideo();
   initShare();
   initTocSpy();
+  initDaily();
   if (DATA.type === "post") {
     const items = DATA.quiz.map((q, i) => ({ id: `${DATA.id}:${i}`, ...q }));
     runQuiz($("#quiz"), items, { mode: "post" });
