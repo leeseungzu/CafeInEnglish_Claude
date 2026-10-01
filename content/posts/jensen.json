@@ -1,0 +1,139 @@
+{
+  "id": "jensen",
+  "cat": "video",
+  "sub": "카네기멜론 졸업 연설",
+  "date": "2026-10-01",
+  "title": "엔비디아 CEO 젠슨 황 연설에서 건진 영어표현 5개",
+  "lead": "9살 이민자 소년은 어떻게 세계 1위 CEO가 되었나 — 영상 보면서 표현 5개 챙기기",
+  "description": "젠슨 황의 2026 카네기멜론대 졸업 연설에서 a dream come true, end up, How hard could it be? 등 원어민 표현 5개를 예문, 연상법, 퀴즈로 정리했어요.",
+  "og": {
+    "en": "How hard could it be?",
+    "ko": "젠슨 황 연설에서 건진 표현 5개"
+  },
+  "video": "MV4Y9fIEhU8",
+  "think": "jensen",
+  "body_html": "<p>2026년 카네기멜론대 졸업식에서 엔비디아 CEO 젠슨 황이 한 연설이에요. 9살에 미국으로 건너온 이민자 소년이 기숙학교와 식당 접시닦이를 거쳐 엔비디아를 세우기까지의 이야기예요. 핵심 메시지는 \"실패는 성공의 반대가 아니다\"예요. 표현마다 <b>듣기</b>를 누르면 그 장면만 바로 들을 수 있어요.</p>",
+  "expressions_heading": "오늘의 표현 5개",
+  "expressions": [
+    {
+      "t": 26.8,
+      "end": 28.9,
+      "en": "a dream come true",
+      "ko": "꿈이 이루어진 것, 꿈만 같은 일",
+      "orig": "I am their dream come true.",
+      "say": "아이 앰 데얼 드림 컴 츄루",
+      "tips": [
+        "their dream → 데얼드림 : r 받침을 살짝 굴려요",
+        "come true → 컴 츄루 : tr은 'ㅊ'에 가깝게 들려요"
+      ],
+      "ex": "Getting into this school was a dream come true.",
+      "exKo": "이 학교에 합격한 건 꿈만 같은 일이었어.",
+      "memo": "꿈(dream)이 실제로 와서(come) 진짜(true)가 된 것!"
+    },
+    {
+      "t": 45.25,
+      "end": 49.55,
+      "en": "end up ~",
+      "ko": "결국 ~하게 되다, ~에 가게 되다",
+      "orig": "We ended up at a Baptist boarding school in Oneida, Kentucky.",
+      "say": "위 엔디덥 애러 뱁티스트 보오딩 스쿨 인 오나이다 켄터키",
+      "tips": [
+        "ended up → 엔디덥 : d가 up과 붙어요",
+        "at a → 애러 : 모음 사이 t는 부드러운 'ㄹ'"
+      ],
+      "ex": "We ended up eating at home.",
+      "exKo": "결국 우리는 집에서 밥을 먹게 됐어.",
+      "memo": "끝(end)에 가서 보니(up) 거기 있더라. 계획과 상관없이 결국 도착한 곳이에요."
+    },
+    {
+      "t": 57.2,
+      "end": 59.05,
+      "en": "with little to nothing",
+      "ko": "거의 빈손으로",
+      "orig": "They came with little to nothing.",
+      "say": "데이 케임 위드 리를 투 낫띵",
+      "tips": [
+        "little → 리를 : 모음 사이 t는 'ㄹ'처럼",
+        "to는 '터'처럼 아주 약하게, nothing에 힘을 줘요"
+      ],
+      "ex": "She started her business with little to nothing.",
+      "exKo": "그녀는 거의 빈손으로 사업을 시작했어.",
+      "memo": "조금(little)에서 아무것도 없음(nothing)까지. 있어 봤자 아주 조금이에요."
+    },
+    {
+      "t": 142.65,
+      "end": 147.4,
+      "en": "How hard could it be?",
+      "ko": "뭐 얼마나 어렵겠어?",
+      "orig": "I just thought, \"How hard could it be?\" It turns out it is super hard.",
+      "say": "아이 저슷 쏟, 하우 하알 쿠릿 비? 잇 턴자웃 잇 이즈 수퍼 하알",
+      "tips": [
+        "could it → 쿠릿 : d가 'ㄹ'처럼 굴러요",
+        "turns out → 턴자웃 : s와 out이 한 덩어리"
+      ],
+      "ex": "It's just one presentation. How hard could it be?",
+      "exKo": "발표 한 번인데 뭐, 얼마나 어렵겠어?",
+      "memo": "만만하게 보고 하는 말! 뒤에 It turns out(알고 보니)이 따라오면 반전이 시작돼요."
+    },
+    {
+      "t": 151.28,
+      "end": 152.7,
+      "en": "run out of ~",
+      "ko": "~이 바닥나다, 다 떨어지다",
+      "orig": "We nearly ran out of money.",
+      "say": "위 니얼리 래나우러브 머니",
+      "tips": [
+        "ran out of → 래나우러브 : n이 out에 붙고, t는 'ㄹ', of는 '어브'",
+        "nearly는 '니얼리'로 r을 살짝 굴려요"
+      ],
+      "ex": "My phone is running out of battery.",
+      "exKo": "휴대폰 배터리가 다 떨어져 가.",
+      "memo": "통 밖으로(out of) 다 흘러나가(run) 텅 빈 모습을 떠올려 보세요."
+    }
+  ],
+  "related": [],
+  "quiz": [
+    {
+      "tag": "영상표현",
+      "q": "\"We ended up at a Baptist boarding school.\" 에서 ended up의 뜻은?",
+      "sub": "0:45 장면을 떠올려 보세요",
+      "options": [
+        "결국 ~에 가게 됐다",
+        "~을 끝냈다",
+        "~에서 일찍 일어났다",
+        "~을 포기했다"
+      ],
+      "answer": 0,
+      "explain": "계획한 건 아니지만 결국 그 학교에 가게 됐다는 뜻이에요. end up은 '결국 ~하게 되다'.",
+      "mnemonic": "끝(end)에 가서 보니(up) 거기 있더라!"
+    },
+    {
+      "tag": "영상표현",
+      "q": "\"부모님은 거의 빈손으로 오셨어요.\"를 영어로 하면?",
+      "sub": "They came with ___.",
+      "options": [
+        "little to nothing",
+        "a little nothing",
+        "nothing to little",
+        "less and less"
+      ],
+      "answer": 0,
+      "explain": "with little to nothing = 거의 아무것도 없이. little(조금)에서 nothing(전혀 없음) 사이라는 뜻이에요.",
+      "mnemonic": "조금 → 아무것도 없음. 있어 봤자 아주 조금!"
+    },
+    {
+      "tag": "영상표현",
+      "q": "\"How hard could it be?\"의 진짜 뉘앙스는?",
+      "sub": "젠슨 황이 회사를 처음 세울 때 한 생각이에요",
+      "options": [
+        "얼마나 어려울지 정말 궁금하다",
+        "뭐 얼마나 어렵겠어? (만만하게 봄)",
+        "너무 어려워서 포기하고 싶다",
+        "어려운 정도를 재 보자"
+      ],
+      "answer": 1,
+      "explain": "질문 같지만 '별로 안 어렵겠지'라는 자신감(또는 방심)이에요. 바로 뒤에 It turns out it is super hard(알고 보니 엄청 어렵더라)로 반전이 와요.",
+      "mnemonic": "얼마나 어렵겠어? → 알고 보니(It turns out) 엄청 어려움!"
+    }
+  ]
+}
