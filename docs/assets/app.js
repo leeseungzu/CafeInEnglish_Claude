@@ -334,7 +334,8 @@
   function initShare() {
     const url = location.origin + location.pathname;
     const title = DATA.title ? `${DATA.title} | 카페인영어` : document.title;
-    const text = DATA.type === "think" ? "이 문장 같이 필사해요" : "이 표현 같이 공부해요";
+    const word = DATA.type === "think" ? "문장" : "표현";
+    const text = DATA.share ? `"${DATA.share}" 이거 알았어? 오늘 이 ${word} 하나만 챙겨가자 우리!` : `오늘 이 ${word} 하나만 챙겨가자 우리!`;
     $$(".js-copylink").forEach(b => b.onclick = async () => { await copyText(url); toast("링크를 복사했어요"); });
     $$(".js-share").forEach(b => b.onclick = async () => {
       if (navigator.share) { try { await navigator.share({ title, text, url }); } catch (e) {} return; }

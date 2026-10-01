@@ -560,3 +560,7 @@ h1{letter-spacing:-.03em}
 .logo-mark{flex:none;width:30px;height:30px;border-radius:8px;display:block}
 @media (max-width:599px){ .logo-mark{width:26px;height:26px;border-radius:7px} .logo{gap:7px} }
 @media (min-width:1024px){ .logo-mark{width:34px;height:34px;border-radius:9px} }
+/* 모바일 로고 1pt 키움 */
+@media (max-width:599px){ .logo{font-size:19px} .logo-mark{width:28px;height:28px;border-radius:7.5px} }
+/* 정답 해설(어두운 배경)에서 '연상법' 라벨 글자가 라임색으로 덮여 안 보이던 문제 */
+.cq-fb .mn b.lbl,.cq-fb.ok .mn b.lbl{color:var(--text)!important;background:var(--lime)}

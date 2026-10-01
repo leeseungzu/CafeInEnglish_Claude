@@ -369,6 +369,7 @@ def page_post(p):
             "quiz": p["quiz"], "links": links, "kakao": SITE.get("kakao", ""), "audio": audio_map("\n".join(parts))}
     og = p.get("og") or {}
     xs = p.get("expressions") or [{}]
+    data["share"] = og.get("en") or xs[0].get("en") or ""
     img = og_image("p-" + p["id"], CATS[p["cat"]], og.get("en") or xs[0].get("en") or p["title"],
                    og.get("ko") or p.get("lead", ""))
     return layout(p["title"], p.get("description", p.get("lead", "")), url, "\n".join(parts), p["cat"], data, "article", aside, og_img=img)
@@ -422,6 +423,7 @@ def page_think(t):
              + (f'<a class="btn ghost" href="{post_url(post)}">영상 표현 보기</a>' if post else "") + '</div>' + side_common())
     og = t.get("og") or {}
     shortest = min(t["quotes"], key=lambda q: len(q["en"]))["en"]
+    data["share"] = og.get("en") or shortest
     img = og_image("t-" + t["id"], "사유의 문장 · 필사", og.get("en") or shortest, og.get("ko") or t["title"], "듣고 · 따라 쓰고 · 빈칸으로 복기")
     return layout(t["title"] + " — 필사하기", t.get("description", ""), url, body, "think", data, "article", aside, og_img=img)
 
