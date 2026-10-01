@@ -84,6 +84,14 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{DOMAIN}{path}">
+<meta property="og:image" content="{DOMAIN}/assets/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="icon" href="/assets/icon-192.png" sizes="192x192" type="image/png">
+<meta name="theme-color" content="#F4EEE4">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="/assets/style.css?v={ASSET_V}">
 {ads}{ga}
@@ -131,7 +139,7 @@ def think_card(t):
 
 PRINT_BTN = """
 <div class="no-print" style="margin-top:22px">
-  <button class="btn ghost js-print" id="print-btn">🖨️ 출력해서 복습하기 (PDF 저장)</button>
+  <button class="btn ghost js-print" id="print-btn">출력해서 복습하기 (PDF 저장)</button>
   <p class="lead" style="font-size:13px;text-align:center;margin-top:6px">인쇄 창에서 대상을 <b>'PDF로 저장'</b>으로 고르면 파일로 받을 수 있어요</p>
 </div>"""
 CIRC = ["①", "②", "③", "④", "⑤"]
@@ -140,8 +148,8 @@ CIRC = ["①", "②", "③", "④", "⑤"]
 def ws_head(title, sub, video, path):
     qrs = ""
     if video:
-        qrs += f'<div class="ws-qr">{qr_svg("https://youtu.be/" + video)}<div>🎬 영상<br>다시 보기</div></div>'
-    qrs += f'<div class="ws-qr">{qr_svg(DOMAIN + path + "?src=print")}<div>📝 퀴즈·오답노트<br>다시 풀기</div></div>'
+        qrs += f'<div class="ws-qr">{qr_svg("https://youtu.be/" + video)}<div>영상<br>다시 보기</div></div>'
+    qrs += f'<div class="ws-qr">{qr_svg(DOMAIN + path + "?src=print")}<div>퀴즈·오답노트<br>다시 풀기</div></div>'
     return (f'<div class="ws-head"><div><div class="brand">카페인영어 CafeInEnglish · 복습 노트</div>'
             f'<h1 style="margin:4px 0 0">{e(title)}</h1><div class="date">{e(sub)}</div>'
             f'<div class="date" style="margin-top:6px">공부한 날: ______ / ______</div></div>'
@@ -152,7 +160,7 @@ def ws_head(title, sub, video, path):
 def related_links(p):
     links = list(p.get("related", []))
     if p.get("think") in THINK_BY_ID:
-        links.append({"label": "✍️ 이 영상 문장 필사하기", "href": think_url(THINK_BY_ID[p["think"]])})
+        links.append({"label": "이 영상 문장 필사하기", "href": think_url(THINK_BY_ID[p["think"]])})
     for cat, label in (("expr", "다른 표현 보러가기 →"), ("tip", "다른 꿀팁 보러가기 →"), ("video", "다른 영상 표현 보기 →")):
         other = next((o for o in POSTS if o["cat"] == cat and o["id"] != p["id"]), None)
         if other:
@@ -170,7 +178,7 @@ def add_heading_ids(body_html, toc):
     return re.sub(r"<h2([^>]*)>(.*?)</h2>", sub, body_html)
 
 
-def toc_html(toc, quiz_label="✅ 퀴즈 풀기"):
+def toc_html(toc, quiz_label="퀴즈 풀기"):
     items = "".join(f'<li><a href="#{i}">{e(t)}</a></li>' for i, t in toc)
     return f'<ol class="toc">{items}<li class="q"><a href="#quiz-sec">{quiz_label}</a></li></ol>'
 
@@ -178,7 +186,7 @@ def toc_html(toc, quiz_label="✅ 퀴즈 풀기"):
 def side_common():
     yt = (f'<div class="side-box"><h4>카페인영어 유튜브</h4><a class="btn ghost" href="{e(SITE["youtube"])}" target="_blank" rel="noopener">▶ 채널 구경하기</a></div>'
           if SITE.get("youtube") else "")
-    kk = (f'<div class="side-box"><h4>매일 한 잔</h4><a class="btn kakao" href="{e(SITE["kakao"])}" target="_blank" rel="noopener">💬 카톡으로 매일 받기</a></div>'
+    kk = (f'<div class="side-box"><h4>매일 한 잔</h4><a class="btn kakao" href="{e(SITE["kakao"])}" target="_blank" rel="noopener">카톡으로 매일 받기</a></div>'
           if SITE.get("kakao") else "")
     return kk + yt
 
@@ -202,13 +210,13 @@ def page_post(p):
             toc.append((f"x{xi + 1}", "· " + x["en"]))
             parts.append(f"""<div class="box xp" id="x{xi + 1}">
   <h3>{e(x['en'])}{ts}</h3><div>{e(x['ko'])}</div>
-  <div class="orig">🎙️ {e(x['orig'])}</div>
+  <div class="orig">{e(x['orig'])}</div>
   <ul class="ex"><li><span class="en">{e(x['ex'])}</span><span class="ko">{e(x['exKo'])}</span></li></ul>
-  <div class="memo" style="margin-bottom:0">🧠 <b>연상법</b> — {e(x['memo'])}</div>
+  <div class="memo" style="margin-bottom:0"><b class="lbl">연상법</b> {e(x['memo'])}</div>
 </div>""")
     if p.get("think") in THINK_BY_ID:
-        parts.append(f'<div class="think-box">✍️ <b>이 영상 속 마음에 남는 문장</b>은 <a href="{think_url(THINK_BY_ID[p["think"]])}">사유의 문장</a>에서 필사하고 복기할 수 있어요.</div>')
-    parts.append('<h2 class="quiz-h" id="quiz-sec">✅ 오늘 배운 거 확인하기</h2><div id="quiz"></div>')
+        parts.append(f'<div class="think-box"><b>이 영상 속 마음에 남는 문장</b>은 <a href="{think_url(THINK_BY_ID[p["think"]])}">사유의 문장</a>에서 필사하고 복기할 수 있어요.</div>')
+    parts.append('<h2 class="quiz-h" id="quiz-sec">오늘 배운 거 확인하기</h2><div id="quiz"></div>')
     parts.append(PRINT_BTN)
     # 출력용 문제지 (화면에서는 숨김)
     qs = "".join(
@@ -216,21 +224,21 @@ def page_post(p):
         + (f'<br><span>{e(q["sub"])}</span>' if "___" in q.get("sub", "") else "")
         + "<br>" + "".join(f'<span class="o">{CIRC[k]} {e(o)}</span>' for k, o in enumerate(q["options"])) + "</div>"
         for i, q in enumerate(p["quiz"]))
-    key = "".join(f'<li><b>{CIRC[q["answer"]]} {e(q["options"][q["answer"]])}</b> — {e(q["explain"])}<br>🧠 {e(q["mnemonic"])}</li>' for q in p["quiz"])
+    key = "".join(f'<li><b>{CIRC[q["answer"]]} {e(q["options"][q["answer"]])}</b> — {e(q["explain"])}<br>연상법 · {e(q["mnemonic"])}</li>' for q in p["quiz"])
     parts.append(f"""<div class="print-only ws"><div style="break-before:page"></div>
-{ws_head("✏️ 확인 문제", p["title"], video, url)}
+{ws_head("확인 문제", p["title"], video, url)}
 <p style="font-size:13px">본문을 다시 읽은 뒤, 정답에 ○ 표시해 보세요. 정답과 연상법은 맨 아래에 있어요.</p>{qs}
-<h2>✍️ 오늘의 표현, 직접 써 보기</h2><div class="ws-label">오늘 배운 표현으로 나만의 문장 2개 만들기</div>
+<h2>오늘의 표현, 직접 써 보기</h2><div class="ws-label">오늘 배운 표현으로 나만의 문장 2개 만들기</div>
 <div class="ws-line"></div><div class="ws-line"></div><div class="ws-line"></div><div class="ws-line"></div>
 <div class="ws-key"><b>정답과 연상법</b><ol>{key}</ol></div>
 <p style="font-size:12px;color:#555">{DOMAIN.replace("https://", "")} · 매일 표현 하나, 같이 공부해요</p></div>""")
-    parts.insert(toc_slot, f'<details class="toc-m no-print"><summary>📑 목차 · 퀴즈 바로가기</summary>{toc_html(toc)}</details>')
+    parts.insert(toc_slot, f'<details class="toc-m no-print"><summary>목차 · 퀴즈 바로가기</summary>{toc_html(toc)}</details>')
     links = related_links(p)
     link_items = "".join('<li><a href="%s">%s</a></li>' % (l["href"], e(l["label"])) for l in links)
     aside = (f'<div class="side-box"><h4>이 글의 목차</h4>{toc_html(toc)}</div>'
-             f'<div class="side-box"><h4>복습하기</h4><a class="btn primary" href="#quiz-sec">✅ 퀴즈 풀기</a>'
+             f'<div class="side-box"><h4>복습하기</h4><a class="btn primary" href="#quiz-sec">퀴즈 풀기</a>'
              f'<a class="btn ghost" href="/notes/">내 공부방<span class="n-pill js-notes-count"></span></a>'
-             f'<button class="btn ghost js-print">🖨️ 출력 · PDF 저장</button></div>'
+             f'<button class="btn ghost js-print">출력 · PDF 저장</button></div>'
              + (f'<div class="side-box"><h4>이어서 보기</h4><ul class="side-links">{link_items}</ul></div>' if links else "")
              + side_common())
     data = {"type": "post", "id": p["id"], "title": p["title"], "url": url, "cat": p["cat"], "catName": CATS[p["cat"]],
@@ -246,37 +254,37 @@ def page_think(t):
   <div class="meta"><span>문장 {i + 1} / {len(t['quotes'])}</span>
     <a class="ts" href="https://www.youtube.com/watch?v={t.get('video', '')}&t={q['t']}s" target="_blank" rel="noopener" style="text-decoration:none">▶ {mmss(q['t'])} 영상에서 듣기</a></div>
   <p class="en">{e(q['en'])}</p><p class="ko">{e(q['ko'])}</p>
-  <div class="think-box">💭 <b>생각해 보기</b> — {e(q['think'])}<br><br>❓ {e(q['ask'])}</div>
-  <div class="tabs"><button class="on" data-mode="copy">✍️ 필사하기</button><button data-mode="blank">🧩 빈칸 복기</button></div>
+  <div class="think-box"><b class="lbl">생각해 보기</b> {e(q['think'])}<span class="ask">{e(q['ask'])}</span></div>
+  <div class="tabs"><button class="on" data-mode="copy">필사하기</button><button data-mode="blank">빈칸 복기</button></div>
   <div class="pane"></div>
-  <div style="margin-top:14px;font-size:14px;font-weight:700">💬 나의 한 줄</div>
+  <div style="margin-top:14px;font-size:14px;font-weight:700">나의 한 줄</div>
   <textarea class="note" placeholder="이 문장이 나에게 주는 의미를 한 줄로 남겨 보세요" style="min-height:60px;margin-top:6px"></textarea>
   <div class="row"><button class="btn ghost save-note">저장</button></div>
 </div>""")
     ws = "".join(f"""<div class="ws-quote"><p class="en">{i + 1}. {e(q['en'])}</p><p class="ko">{e(q['ko'])}</p>
 <div class="ws-label">따라 쓰기</div><div class="ws-line"></div><div class="ws-line"></div>
-<div class="ws-label">❓ {e(q['ask'])}</div><div class="ws-line"></div></div>""" for i, q in enumerate(t["quotes"]))
+<div class="ws-label">Q. {e(q['ask'])}</div><div class="ws-line"></div></div>""" for i, q in enumerate(t["quotes"]))
     post = POST_BY_ID.get(t.get("post"))
     body = f"""<div class="no-print">
 <span class="chip think">사유의 문장</span><span class="chip video">{e(t['speaker'])}</span>
 <h1>{e(t['title'])}</h1>
 <p class="lead">따라 쓰고(필사), 빈칸으로 다시 떠올리고(복기), 나의 한 줄을 남겨 보세요.</p>
-{f'<a class="btn ghost" href="{post_url(post)}">🎬 이 영상의 영어표현 먼저 보기</a>' if post else ""}
+{f'<a class="btn ghost" href="{post_url(post)}">이 영상의 영어표현 먼저 보기</a>' if post else ""}
 </div>
 {"".join(cards)}
 {PRINT_BTN}
-<div class="print-only ws">{ws_head("✍️ 필사 노트 — " + t["title"], t["speaker"], t.get("video"), url)}{ws}</div>
+<div class="print-only ws">{ws_head("필사 노트 — " + t["title"], t["speaker"], t.get("video"), url)}{ws}</div>
 <div class="cq-cta no-print" style="margin-top:16px">
   <a class="btn primary" href="/notes/#copy">내 공부방에서 필사 노트 보기</a>
-  {f'<a class="btn kakao" href="{e(SITE["kakao"])}" target="_blank" rel="noopener">💬 매일 아침 문장 하나, 카톡으로 받기</a>' if SITE.get("kakao") else ""}
+  {f'<a class="btn kakao" href="{e(SITE["kakao"])}" target="_blank" rel="noopener">매일 아침 문장 하나, 카톡으로 받기</a>' if SITE.get("kakao") else ""}
 </div>"""
     data = {"type": "think", "id": t["id"], "title": t["title"], "speaker": t["speaker"], "url": url,
             "quotes": [{"en": q["en"], "ko": q["ko"], "blanks": q["blanks"]} for q in t["quotes"]]}
     qlist = "".join(f'<li><a href="#q{i + 1}">{e(q["en"][:42] + ("…" if len(q["en"]) > 42 else ""))}</a></li>' for i, q in enumerate(t["quotes"]))
     aside = (f'<div class="side-box"><h4>문장 목록</h4><ol class="toc">{qlist}</ol></div>'
              f'<div class="side-box"><h4>복습하기</h4><a class="btn primary" href="/notes/#copy">내 필사 노트</a>'
-             f'<button class="btn ghost js-print">🖨️ 필사 노트 출력</button>'
-             + (f'<a class="btn ghost" href="{post_url(post)}">🎬 영상 표현 보기</a>' if post else "") + '</div>' + side_common())
+             f'<button class="btn ghost js-print">필사 노트 출력</button>'
+             + (f'<a class="btn ghost" href="{post_url(post)}">영상 표현 보기</a>' if post else "") + '</div>' + side_common())
     return layout(t["title"] + " — 필사하기", t.get("description", ""), url, body, "think", data, "article", aside)
 
 
@@ -288,7 +296,7 @@ def page_category(cat):
                 '<p class="a-intro">필사한 문장은 <a href="/notes/#copy">내 공부방</a>에 모여요.</p>')
     else:
         items = [p for p in POSTS if p["cat"] == cat]
-        cards = "".join(post_card(p) for p in items) or '<div class="empty"><p>곧 첫 글이 올라와요 ☕</p></div>'
+        cards = "".join(post_card(p) for p in items) or '<div class="empty"><p>곧 첫 글이 올라와요.</p></div>'
         body = f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p><div class="cards">{cards}</div>'
     return layout(CATS[cat], CAT_LEAD[cat], url, body, cat, wide=True)
 
@@ -311,7 +319,8 @@ def page_home():
                    f'<div class="k">영상으로 배우기</div><h3>{e(vp["title"])}</h3><div class="a-pills">{pills}</div></a>')
     tiles = "".join(f'<a class="a-tile" href="/category/{k}/"><span class="n">0{n}</span><b>{v}</b><span>{TILE_SUB[k]}</span></a>'
                     for n, (k, v) in enumerate(CATS.items(), 1))
-    latest = "".join(post_card(p) for p in POSTS[:6])
+    shown = {tp["id"]} | ({vp["id"]} if vp else set())
+    latest = "".join(post_card(p) for p in [p for p in POSTS if p["id"] not in shown][:6])
     thinks = "".join(think_card(t) for t in THINKS[:3])
     body = f"""<section class="a-hero">
   <div>
@@ -324,18 +333,17 @@ def page_home():
   {feature}
 </section>
 <nav class="a-tiles" aria-label="카테고리">{tiles}</nav>
-<div class="a-head"><h2>새로 올라온 글</h2></div>
-<div class="cards">{latest}</div>
+{f'<div class="a-head"><h2>새로 올라온 글</h2></div><div class="cards">{latest}</div>' if latest else ""}
 {f'<div class="a-head" style="margin-top:36px"><h2>사유의 문장</h2><a href="/category/think/">전체 보기</a></div><div class="cards">{thinks}</div>' if thinks else ""}
-<p class="a-intro"><b>매일 조금씩, 하지만 깊게!</b><br>재미있어야 오래 가잖아요〰️<br>거창한 계획 말고, 커피 한 잔 마시는 마음으로 같이 시작해요!</p>"""
+"""
     return layout(SITE["name"], SITE["tagline"], "/", body, wide=True)
 
 
 def page_notes():
     body = ('<h1>내 공부방</h1><p class="lead">틀린 문제와 필사한 문장이 여기에 모여요. '
             '기록은 이 기기의 브라우저에만 저장돼요.</p>'
-            '<h2 id="wrong">📒 오답노트</h2><p class="lead" style="font-size:15px">다시 풀어서 맞히면 \'졸업\'해요.</p><div id="notes-root"></div>'
-            '<h2 id="copy">✍️ 필사 노트 (<span id="copy-count">0</span>)</h2><div id="copy-notes"></div>')
+            '<h2 id="wrong">오답노트</h2><p class="lead" style="font-size:15px">다시 풀어서 맞히면 \'졸업\'해요.</p><div id="notes-root"></div>'
+            '<h2 id="copy">필사 노트 (<span id="copy-count">0</span>)</h2><div id="copy-notes"></div>')
     return layout("내 공부방", "퀴즈 오답노트와 필사 노트를 모아 다시 복습하는 나만의 공부방", "/notes/", body, "notes",
                   {"type": "notes", "kakao": SITE.get("kakao", "")}, wide=True)
 
@@ -346,6 +354,19 @@ def page_static(slug, title, desc, inner):
 
 EMAIL = SITE.get("contact_email") or ""
 email_html = f'<a href="mailto:{e(EMAIL)}">{e(EMAIL)}</a>' if EMAIL else "(문의 이메일 준비 중)"
+def _about_card():
+    today = SITE.get("today") or {}
+    tp = POST_BY_ID.get(today.get("post")) or next((p for p in POSTS if p["cat"] == "expr"), POSTS[0])
+    en = today.get("en") or tp["title"]
+    words = en.split(" ")
+    phrase = e(" ".join(words[:-1])) + (" " if len(words) > 1 else "") + f'<span class="hl">{e(words[-1])}</span>'
+    return (f'<a class="today-card" href="{post_url(tp)}"><div><div class="tc-k">오늘의 한 잔 · {CATS[tp["cat"]]}</div>'
+            f'<div class="tc-en">{phrase}</div><div class="tc-ko">{e(today.get("ko") or tp.get("lead", ""))}</div></div>'
+            '<span class="tc-go" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>'
+            '<p class="tc-note">거창한 계획 말고,<br class="m-br"> 커피 한 잔 마시는 마음으로 시작해보세요!</p>')
+
+
+ABOUT_CARD = _about_card()
 ABOUT = f"""
 <p class="about-tag">매일 조금씩, 깊게 스며드는 CafeInEnglish</p>
 <p>안녕하세요, 유튜브 <b>카페인영어 CafeInEnglish</b>예요.</p>
@@ -353,13 +374,11 @@ ABOUT = f"""
 <p>그때부터 진짜 영어를 하고 싶어졌어요. 문법 문제가 아니라, 사람들이 실제로 쓰는 말로 생각하고 이야기하는 영어요.</p>
 <p>저는 지금 영주권을 받고 미국 이민을 앞두고 있어요. 낯선 곳에서의 새로운 도전을 준비하면서 느끼는 건, 영어는 결국 <b>생각을 넓혀주는 도구</b>라는 거예요. 새로운 언어로 세상을 보면, 보이는 것도 달라지니까요.</p>
 <p>카페인영어는 그 여정을 기록하고 나누는 공간이에요. 셀럽 인터뷰와 연설 속 살아있는 표현으로 매일 조금씩, 하지만 깊게. 영어라는 언어로 생각을 넓히면서 같이 성장해요. <b>재미있게, 그리고 쉽게!</b></p>
+<div class="brand-c"><img src="/assets/icon-192.png" alt="" width="64" height="64"><div><b>C.</b> 매일 한 잔의 커피처럼, 대화 속 진짜 영어를 꾸준히.<br><span>오늘의 한 문장에 마침표를 찍는 곳, CafeInEnglish.</span></div></div>
 <h2>이런 걸 할 수 있어요</h2>
 <div class="feats"><div class="feat"><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5l11 7-11 7z"/></svg></span><div><b>영상으로 배우기</b><p>카페인영어 영상 속 표현을 실제 장면과 함께 익혀요.</p></div></div><div class="feat"><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h11M4 18h7"/></svg></span><div><b>영어표현 · 영어꿀팁</b><p>새 표현과 헷갈리는 표현부터 회화, 단어, 듣기 요령까지 담았어요.</p></div></div><div class="feat"><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></span><div><b>퀴즈와 오답노트</b><p>글 끝 퀴즈로 확인하고, 틀린 문제는 내 공부방에 자동으로 모여요.</p></div></div><div class="feat"><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><div><b>사유의 문장</b><p>마음에 남는 문장을 따라 쓰고, 빈칸으로 다시 떠올려요.</p></div></div><div class="feat"><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="6" y="14" width="12" height="7" rx="1"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/></svg></span><div><b>출력해서 복습하기</b><p>글마다 PDF 복습지로 저장하거나 인쇄해서 볼 수 있어요.</p></div></div></div>
-<div class="about-end">
-  <p><b>거창한 계획 말고,<br class="m-br"> 커피 한 잔 마시는 마음으로 같이 시작해요!</b></p>
-  <a class="btn-start" href="/">카영 시작하기!</a>
-</div>
-<p class="about-note">인터뷰와 연설 속 문장은 학습을 위해 짧게 인용하고 출처를 밝혀요. 문제가 있다면 <a href="/contact/">문의</a>로 알려주세요.</p>"""
+{ABOUT_CARD}
+"""
 PRIVACY = f"""
 <p>{e(SITE['name'])}(이하 '사이트')는 이용자의 개인정보를 소중히 여깁니다. 이 방침은 {e(DOMAIN.replace('https://', ''))} 에 적용됩니다.</p>
 <h2>1. 수집하는 정보</h2>
@@ -375,18 +394,35 @@ PRIVACY = f"""
 <h2>6. 문의</h2>
 <p>개인정보 관련 문의: {email_html}</p>
 <p>시행일: 2026년 10월 1일</p>"""
-CONTACT = f"""
-<p>사이트나 콘텐츠에 대한 의견, 오류 제보, 저작권 관련 요청은 편하게 메일로 보내주세요.</p>
-<div class="mail-card">
-  <span class="mail-label">이메일</span>
-  <span class="mail-addr">{e(EMAIL) or "(문의 이메일 준비 중)"}</span>
-  {f'<a class="btn primary" href="mailto:{e(EMAIL)}">메일 보내기</a>' if EMAIL else ""}
-</div>"""
+def _contact():
+    from urllib.parse import quote
+    icons = {
+        "bulb": '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/>',
+        "bug": '<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>',
+        "shield": '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+        "hand": '<path d="M17 11V6a2 2 0 0 0-4 0v5M13 10V4a2 2 0 0 0-4 0v7M9 10.5V6a2 2 0 0 0-4 0v8a8 8 0 0 0 16 0v-3a2 2 0 0 0-4 0"/>',
+    }
+    svg = lambda d, n=22: f'<svg width="{n}" height="{n}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{d}</svg>'
+    arrow = svg('<path d="M5 12h14M13 6l6 6-6 6"/>', 18)
+    kinds = [("bulb", "표현·콘텐츠 제안", "궁금한 표현, 다뤄줬으면 하는 영상"),
+             ("bug", "오류 제보", "틀린 해설, 화면·기능 오류"),
+             ("shield", "저작권 요청", "인용된 콘텐츠의 수정·삭제 요청"),
+             ("hand", "협업·제휴", "콘텐츠 협업, 광고, 강의 제안")]
+    tiles = "".join(
+        f'<a class="ct-tile" href="mailto:{e(EMAIL)}?subject={quote("[" + t + "] ")}"><span class="ct-i">{svg(icons[i])}</span>'
+        f'<span class="ct-t"><b>{t}</b><span>{d}</span></span><span class="ct-go">{arrow}</span></a>' for i, t, d in kinds)
+    copy_icon = svg('<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/>', 16)
+    return (f'<p class="lead">어떤 이야기든 편하게 보내주세요.</p><div class="ct-grid">{tiles}</div>'
+            f'<div class="ct-mail"><span class="ct-k">이메일</span><span class="ct-addr">{e(EMAIL)}</span>'
+            f'<button class="ct-copy" data-copy="{e(EMAIL)}">{copy_icon}<span>주소 복사</span></button></div>')
+
+
+CONTACT = _contact() if EMAIL else "<p>(문의 이메일 준비 중)</p>"
 
 
 def page_404():
     return layout("페이지를 찾을 수 없어요", "요청한 페이지가 없어요", "/404.html",
-                  '<div class="empty"><div class="e">☕</div><p>찾으시는 페이지가 없어요.<br>주소가 바뀌었거나 삭제된 글일 수 있어요.</p></div>'
+                  '<div class="empty"><p>찾으시는 페이지가 없어요.<br>주소가 바뀌었거나 삭제된 글일 수 있어요.</p></div>'
                   '<a class="btn primary" href="/">홈으로 가기</a>')
 
 

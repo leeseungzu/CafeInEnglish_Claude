@@ -419,3 +419,54 @@ h1{letter-spacing:-.03em}
   /* '사유의 문장'의 '장' 끝 = '내 공부방'의 '방' 끝 */
   .nav{margin:4px 0 0 -8px;width:calc(100% + 3px)}
 }
+
+/* ===== 메뉴: 형광펜 밑줄로 통일 ===== */
+.nav a{position:relative;z-index:0;background:transparent!important;color:var(--text)!important}
+.nav a::after{content:"";position:absolute;z-index:-1;left:8px;right:8px;bottom:8px;height:.5em;background:var(--lime);border-radius:2px;transform:scaleX(0);transform-origin:left center;transition:transform .2s ease}
+.nav a:hover::after,.nav a.on::after{transform:scaleX(1)}
+.nav a.on{font-weight:800}
+@media (min-width:1024px){ .nav a::after{left:14px;right:14px} }
+.nav a::after{bottom:11px;height:.55em}
+
+/* 소개 마무리: 오늘의 한 잔 카드 */
+.today-card{display:flex;align-items:center;justify-content:space-between;gap:16px;text-decoration:none;background:var(--card);border-radius:24px;padding:22px 24px;margin-top:8px;transition:box-shadow .15s,transform .15s}
+.today-card:hover{box-shadow:0 0 0 1.5px var(--text);transform:translateY(-2px)}
+.tc-k{font-size:14px;color:var(--muted)}
+.tc-en{font-size:32px;font-weight:800;letter-spacing:-.04em;line-height:1.15;margin:6px 0 4px}
+.tc-ko{font-size:15px}
+.tc-go{flex:none;width:52px;height:52px;border-radius:50%;background:var(--text);color:var(--lime);display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s}
+.today-card:hover .tc-go{background:var(--lime);color:var(--text)}
+.tc-note{text-align:center;color:var(--muted);font-size:15px;margin:16px 0 0}
+@media (min-width:1024px){ .tc-en{font-size:40px} .today-card{padding:26px 30px} }
+
+/* 문의: 유형 카드 */
+.ct-grid{display:grid;gap:12px;margin-top:8px}
+@media (min-width:700px){ .ct-grid{grid-template-columns:1fr 1fr} }
+.ct-tile{display:flex;gap:14px;align-items:center;text-decoration:none;background:var(--card);border-radius:20px;padding:18px 20px;transition:box-shadow .15s,transform .15s}
+.ct-tile:hover{box-shadow:0 0 0 1.5px var(--text);transform:translateY(-2px)}
+.ct-i{flex:none;width:46px;height:46px;border-radius:14px;background:var(--lime);display:flex;align-items:center;justify-content:center}
+.ct-t{display:flex;flex-direction:column;min-width:0}
+.ct-t b{font-size:17px;letter-spacing:-.02em}
+.ct-t span{font-size:14px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ct-go{margin-left:auto;color:var(--muted);flex:none;transition:transform .15s}
+.ct-tile:hover .ct-go{transform:translateX(3px);color:var(--text)}
+.ct-mail{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px;padding:16px 18px;border-radius:16px;border:1.5px dashed #D6CABA}
+.ct-k{font-size:13px;font-weight:600;color:var(--muted)}
+.ct-addr{font-weight:700;word-break:break-all}
+.ct-copy{margin-left:auto;display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--text);border-radius:999px;padding:7px 14px;font:inherit;font-weight:700;font-size:14px;background:none;color:var(--text);cursor:pointer;transition:background .15s,color .15s}
+.ct-copy:hover{background:var(--text);color:var(--lime)}
+
+/* 이모지 대신 라임 라벨 */
+.lbl{display:inline-block;background:var(--lime);color:var(--text)!important;font-size:12px;font-weight:800;letter-spacing:0;padding:2px 9px;border-radius:999px;margin-right:6px;vertical-align:1px}
+.think-box .ask{display:block;margin-top:10px;font-weight:700;color:var(--text)}
+.ans b{font-size:12px;font-weight:800;margin-right:6px}
+.ans .mine b{color:var(--bad)} .ans .right b{color:var(--ok)}
+.cq-result .cq-score{margin-top:6px}
+@media (max-width:599px){ .nav{width:calc(100% + 9px)} }
+
+/* 소개: 브랜드 C. */
+.brand-c{display:flex;gap:16px;align-items:center;background:var(--card);border-radius:20px;padding:18px 20px;margin:22px 0 6px}
+.brand-c img{flex:none;width:56px;height:56px;border-radius:14px}
+.brand-c b{font-size:18px;margin-right:4px}
+.brand-c div{font-size:15px;line-height:1.65}
+.brand-c span{color:var(--muted)}
