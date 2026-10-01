@@ -263,7 +263,7 @@ aside.side{display:none}
 .chips .chip{margin:0}
 
 /* ================= A 디자인 ================= */
-.top{background:rgba(250,248,245,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top{background:rgba(244,238,228,.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .logo{font-weight:800;letter-spacing:-.02em;font-size:18px}
 .logo i{font-family:var(--serif);font-weight:500}
 .nav a{color:var(--text);font-weight:600}

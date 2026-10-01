@@ -362,7 +362,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="icon" href="/assets/icon-192.png" sizes="192x192" type="image/png">
-<meta name="theme-color" content="#FAF8F5">
+<meta name="theme-color" content="#F4EEE4">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="/assets/style.css?v={ASSET_V}">
 {ads}{ga}
