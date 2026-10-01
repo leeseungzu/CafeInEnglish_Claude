@@ -12,49 +12,81 @@
   "expressions_heading": "오늘의 표현 5개",
   "expressions": [
     {
-      "t": 148,
+      "t": 148.3,
       "en": "let you in on a little secret",
       "ko": "작은 비밀 하나 알려줄게",
       "orig": "I'm going to let you in on a little secret.",
       "ex": "Let me let you in on a little secret: I was nervous too.",
       "exKo": "비밀 하나 알려줄게. 나도 떨렸어.",
-      "memo": "let you in = 문을 열고 안으로 들여보내 주다. 비밀의 방에 너를 들여보내 주는 거예요."
+      "memo": "let you in = 문을 열고 안으로 들여보내 주다. 비밀의 방에 너를 들여보내 주는 거예요.",
+      "end": 152,
+      "say": "아임 거나 레츄 이너너 리를 씨크릿",
+      "tips": [
+        "let you → 레츄 : t와 y가 만나 'ㅊ' 소리",
+        "in on a → 이너너 : 세 단어가 한 덩어리로 이어져요",
+        "little → 리를 : 모음 사이 t는 부드러운 'ㄹ'"
+      ]
     },
     {
-      "t": 268,
+      "t": 265.6,
       "en": "make-or-break",
       "ko": "성패를 가르는, 결정적인",
       "orig": "Very few of them are make-or-break.",
       "ex": "This interview is make-or-break for me.",
       "exKo": "이번 면접이 나한테는 결정적이야.",
-      "memo": "만들거나(make) 부서지거나(break), 둘 중 하나로 갈리는 순간!"
+      "memo": "만들거나(make) 부서지거나(break), 둘 중 하나로 갈리는 순간!",
+      "end": 270,
+      "say": "베리 퓨 어브뎀 아 메이커브레익",
+      "tips": [
+        "make or → 메이커 : k가 다음 모음과 붙어요",
+        "or는 약하게 '어'로, break에 힘을 주세요"
+      ]
     },
     {
-      "t": 489,
+      "t": 489.2,
       "en": "find one's footing",
       "ko": "자리를 잡다, 적응하다",
       "orig": "It took me a while to find my footing.",
       "ex": "It took me a few months to find my footing at the new job.",
       "exKo": "새 직장에 적응하는 데 몇 달 걸렸어.",
-      "memo": "미끄러운 바닥에서 발 디딜 곳(footing)을 더듬어 찾는 모습을 떠올려 보세요."
+      "memo": "미끄러운 바닥에서 발 디딜 곳(footing)을 더듬어 찾는 모습을 떠올려 보세요.",
+      "end": 491.6,
+      "say": "툭 미 어 와일 투 파인 마이 푸링",
+      "tips": [
+        "took me → 툭미 : k는 거의 삼키듯",
+        "footing → 푸링 : 모음 사이 t는 'ㄹ'처럼"
+      ]
     },
     {
-      "t": 574,
+      "t": 574.0,
       "en": "go out of one's way to ~",
       "ko": "일부러 (애써서) ~하다",
       "orig": "He went out of his way to dismiss us.",
       "ex": "She went out of her way to help me.",
       "exKo": "그녀는 일부러 시간을 내서 나를 도와줬어.",
-      "memo": "가던 길(way)에서 벗어나(out of)면서까지 한다 = 일부러!"
+      "memo": "가던 길(way)에서 벗어나(out of)면서까지 한다 = 일부러!",
+      "end": 578.4,
+      "say": "히 웬 아우러브 히즈 웨이 투 디스미스 어스",
+      "tips": [
+        "went out → 웬아웃 : t가 약해지며 이어져요",
+        "out of → 아우러브 : t는 'ㄹ', of는 '어브'",
+        "his는 '히즈'보다 '이즈'처럼 h가 약해지기도 해요"
+      ]
     },
     {
-      "t": 647,
+      "t": 645.6,
       "en": "jump at the chance",
       "ko": "기회를 덥석 잡다",
       "orig": "That's why I jumped at the chance to work on Chromebooks and Android.",
       "ex": "I'd jump at the chance to study abroad.",
       "exKo": "유학 기회가 오면 나는 바로 잡을 거야.",
-      "memo": "기회를 향해 폴짝 뛰어드는(jump) 모습!"
+      "memo": "기회를 향해 폴짝 뛰어드는(jump) 모습!",
+      "end": 651,
+      "say": "와이 아이 점패더 챈스 투 워컨",
+      "tips": [
+        "jumped at the → 점패더 : ed와 at이 이어지고 th는 약하게",
+        "work on → 워컨 : k가 다음 모음과 붙어요"
+      ]
     }
   ],
   "related": [],

@@ -230,12 +230,90 @@
   }
 
   /* ---------- 영상 장면 이동 ---------- */
-  function initVideoSeek() {
+  /* ---------- 영상: 구간 듣기 · 반복 · 속도 · 따라오는 영상 ---------- */
+  function initVideo() {
     const yt = $("#yt"); if (!yt) return;
-    $$(".ts[data-t]").forEach(b => b.onclick = () => {
-      const cmd = (func, args) => yt.contentWindow.postMessage(JSON.stringify({ event: "command", func, args }), "*");
-      cmd("seekTo", [+b.dataset.t, true]); cmd("playVideo", []);
-      yt.scrollIntoView({ behavior: "smooth", block: "center" });
+    const slot = $(".video-slot"), box = $(".video-embed");
+    let player = null, ready = false, started = false, dismissed = false, seg = null, timer = null, rate = 1, queued = null;
+
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api"; document.head.appendChild(tag);
+    window.onYouTubeIframeAPIReady = () => {
+      player = new YT.Player("yt", { events: {
+        onReady: () => { ready = true; if (queued) { const q = queued; queued = null; playSeg(q.t, q.end, q.n, q.btn); } },
+        onStateChange: ev => { if (ev.data === 1) { started = true; updateFloat(); } }
+      } });
+    };
+
+    function stopSeg() {
+      clearInterval(timer); timer = null; seg = null;
+      $$(".sh-play.on").forEach(b => { b.classList.remove("on"); b.querySelector(".cnt") && b.querySelector(".cnt").remove(); });
+    }
+    function playSeg(t, end, n, btn) {
+      if (!ready) { queued = { t, end, n, btn }; return; }
+      stopSeg();
+      seg = { t, end, left: n, btn }; btn.classList.add("on");
+      const cnt = document.createElement("span"); cnt.className = "cnt"; btn.appendChild(cnt);
+      const show = () => { cnt.textContent = n > 1 ? ` ${n - seg.left + 1}/${n}` : ""; };
+      show();
+      player.setPlaybackRate(rate); player.seekTo(t, true); player.playVideo();
+      started = true; updateFloat();
+      timer = setInterval(() => {
+        if (!seg) return;
+        const ct = player.getCurrentTime ? player.getCurrentTime() : 0;
+        if (ct >= seg.end || ct < seg.t - 1.5) {
+          seg.left--;
+          if (seg.left > 0) { show(); player.seekTo(seg.t, true); player.playVideo(); }
+          else { player.pauseVideo(); stopSeg(); }
+        }
+      }, 150);
+    }
+    $$(".sh-play").forEach(b => b.onclick = () => {
+      if (b.classList.contains("on")) { player && player.pauseVideo(); stopSeg(); return; }
+      playSeg(+b.dataset.t, +b.dataset.end, +b.dataset.n, b);
+    });
+    $$(".spd").forEach(b => b.onclick = () => {
+      rate = +b.dataset.r; $$(".spd").forEach(x => x.classList.toggle("on", x === b));
+      if (ready) player.setPlaybackRate(rate);
+    });
+
+    // 스크롤해도 영상이 따라오도록 (재생을 시작한 뒤에만)
+    let past = false;
+    function headerH() { const h = $(".top"); return h ? h.getBoundingClientRect().height : 0; }
+    function updateFloat() {
+      const on = past && started && !dismissed;
+      box.classList.toggle("float", on);
+      document.documentElement.style.setProperty("--hdr", headerH() + "px");
+      document.documentElement.classList.toggle("v-floating", on && innerWidth < 1024);
+    }
+    const io = new IntersectionObserver(([en]) => {
+      past = !en.isIntersecting && en.boundingClientRect.top < 0;
+      if (en.isIntersecting) dismissed = false;
+      updateFloat();
+    }, { rootMargin: `-${Math.round(headerH())}px 0px 0px 0px` });
+    io.observe(slot);
+    $(".v-close").onclick = () => { dismissed = true; updateFloat(); };
+    addEventListener("resize", updateFloat);
+  }
+
+  /* ---------- 예문 소리 내어 듣기 (브라우저 음성) ---------- */
+  function initSpeak() {
+    if (!("speechSynthesis" in window)) return;
+    const icon = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>';
+    $$(".ex li .en").forEach(el => {
+      const text = el.textContent.replace(/→.*$/, "").trim();
+      if (!/[a-zA-Z]/.test(text)) return;
+      const b = document.createElement("button");
+      b.className = "say-btn"; b.type = "button"; b.setAttribute("aria-label", "예문 듣기"); b.innerHTML = icon;
+      b.onclick = () => {
+        speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text); u.lang = "en-US"; u.rate = b.dataset.slow ? 0.7 : 0.95;
+        b.dataset.slow = b.dataset.slow ? "" : "1";
+        $$(".say-btn.on").forEach(x => x.classList.remove("on")); b.classList.add("on");
+        u.onend = () => b.classList.remove("on");
+        speechSynthesis.speak(u);
+      };
+      el.appendChild(b);
     });
   }
 
@@ -243,13 +321,13 @@
   function alignNav() {
     const nav = $(".nav"), room = $(".room");
     if (!nav || !room) return;
-    nav.style.width = "";
+    room.style.marginRight = "";
     if (innerWidth >= 600) return;
     const last = nav.lastElementChild, rg = document.createRange();
     rg.selectNodeContents(last);
     const t = rg.getBoundingClientRect(), r = room.getBoundingClientRect();
-    const d = (r.left + r.right) / 2 - (t.left + t.right) / 2;
-    if (Math.abs(d) > 0.5) nav.style.width = (nav.getBoundingClientRect().width + d) + "px";
+    const d = (r.left + r.right) / 2 - (t.left + t.right) / 2;   // >0 이면 버튼을 왼쪽으로
+    room.style.marginRight = Math.max(0, d) + "px";
   }
 
   /* ---------- 시작 ---------- */
@@ -269,10 +347,11 @@
   const fab = $(".kakao-fab.pending");
   if (fab) fab.onclick = e => { e.preventDefault(); toast("카카오톡 채널은 곧 열려요"); };
   if (DATA.type === "post") {
-    initVideoSeek();
+    initVideo();
     const items = DATA.quiz.map((q, i) => ({ id: `${DATA.id}:${i}`, ...q }));
     runQuiz($("#quiz"), items, { mode: "post" });
   }
+  initSpeak();
   if (DATA.type === "think") initThink();
   if (DATA.type === "notes") renderNotes($("#notes-root"));
   if ($("#copy-notes")) renderCopyNotes($("#copy-notes"));

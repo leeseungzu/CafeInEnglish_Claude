@@ -55,6 +55,7 @@ ASSET_V = hashlib.md5(b"".join(f.read_bytes() for f in sorted(ASSETS.glob("*")))
 
 
 def mmss(t):
+    t = int(t)
     return f"{t // 60}:{t % 60:02d}"
 
 
@@ -198,19 +199,32 @@ def page_post(p):
              f'<h1>{e(p["title"])}</h1><p class="lead">{e(p.get("lead", ""))}</p><p class="date-line">{e(p.get("date", ""))}</p>']
     toc_slot = len(parts)
     if video:
-        parts.append(f'<div class="video-embed"><iframe id="yt" src="https://www.youtube.com/embed/{video}?enablejsapi=1&rel=0&playsinline=1" '
-                     f'title="{e(p["title"])}" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>')
+        parts.append(f'<div class="video-slot no-print"><div class="video-embed"><iframe id="yt" src="https://www.youtube.com/embed/{video}?enablejsapi=1&rel=0&playsinline=1" '
+                     f'title="{e(p["title"])}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'
+                     '<button class="v-close" aria-label="작은 화면 닫기"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div>'
+                     '<div class="vbar no-print"><span class="vbar-k">재생 속도</span><button class="spd" data-r="0.75">0.75x</button><button class="spd on" data-r="1">1x</button>'
+                     '<span class="vbar-hint">표현의 <b>듣기</b>·<b>3번 반복</b>으로 따라 말해 보세요</span></div>')
     toc = []
     parts.append(add_heading_ids(p.get("body_html", ""), toc))
     if p.get("expressions"):
         toc.append(("expr", p.get("expressions_heading", "오늘의 표현")))
         parts.append(f'<h2 id="expr">{e(p.get("expressions_heading", "오늘의 표현"))}</h2>')
         for xi, x in enumerate(p["expressions"]):
-            ts = f'<button class="ts" data-t="{x["t"]}">▶ {mmss(x["t"])} 듣기</button>' if video and "t" in x else ""
+            ts = ""
+            shadow = ""
+            if video and "t" in x:
+                end = x.get("end", x["t"] + 4)
+                say = f'<div class="sh-say"><span class="lbl">따라 말하기</span><b>{e(x["say"])}</b></div>' if x.get("say") else ""
+                tips = "".join(f"<li>{e(tp)}</li>" for tp in x.get("tips", []))
+                shadow = (f'<div class="shadow"><div class="sh-btns">'
+                          f'<button class="sh-play" data-t="{x["t"]}" data-end="{end}" data-n="1"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4l13 8-13 8z"/></svg>{mmss(x["t"])} 듣기</button>'
+                          f'<button class="sh-play" data-t="{x["t"]}" data-end="{end}" data-n="3"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg>3번 반복</button></div>'
+                          f'{say}{f"<ul class=sh-tips>{tips}</ul>" if tips else ""}</div>')
             toc.append((f"x{xi + 1}", "· " + x["en"]))
             parts.append(f"""<div class="box xp" id="x{xi + 1}">
   <h3>{e(x['en'])}{ts}</h3><div>{e(x['ko'])}</div>
   <div class="orig">{e(x['orig'])}</div>
+  {shadow}
   <ul class="ex"><li><span class="en">{e(x['ex'])}</span><span class="ko">{e(x['exKo'])}</span></li></ul>
   <div class="memo" style="margin-bottom:0"><b class="lbl">연상법</b> {e(x['memo'])}</div>
 </div>""")

@@ -470,3 +470,58 @@ h1{letter-spacing:-.03em}
 .brand-c b{font-size:18px;margin-right:4px}
 .brand-c div{font-size:15px;line-height:1.65}
 .brand-c span{color:var(--muted)}
+
+/* ===== 모바일 간격 표준화 ===== */
+@media (max-width:599px){
+  .nav{width:auto!important;margin:4px 0 0 -6px;justify-content:flex-start;gap:6px}
+  .nav a{padding:6px 6px}
+  .nav a::after{left:6px;right:6px}
+  .wrap>main{padding:16px 0 48px}
+  h1{margin:6px 0 4px}
+  h2{margin:26px 0 8px}
+  .lead{margin:0 0 8px}
+  .a-hero{gap:20px;padding:4px 0 24px}
+  .a-tiles{gap:14px 12px;margin:0 0 28px}
+  .cards{gap:10px}
+  .card{padding:14px 16px}
+  .box{padding:14px 16px;margin:10px 0}
+  .xp h3{font-size:19px}
+  .cq{padding:16px 14px}
+  .cq-opts{gap:8px}
+  .foot{margin-top:28px;padding:20px 16px 32px}
+  .feat{padding:14px 16px}
+  .ct-tile{padding:14px 16px}
+}
+/* ===== 따라오는 영상 ===== */
+.video-slot{position:relative;aspect-ratio:16/9;margin:14px 0 8px}
+.video-slot .video-embed{position:absolute;inset:0;padding-top:0;margin:0}
+.video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.v-close{display:none;position:absolute;top:6px;right:6px;z-index:2;width:30px;height:30px;border-radius:50%;border:0;background:rgba(42,26,18,.75);color:#fff;align-items:center;justify-content:center;cursor:pointer}
+.video-embed.float{position:fixed;z-index:30;box-shadow:0 10px 30px rgba(42,26,18,.3)}
+.video-embed.float .v-close{display:flex}
+@media (max-width:1023px){
+  .video-embed.float{top:var(--hdr,96px);left:0;right:0;width:100%;height:auto;aspect-ratio:16/9;border-radius:0}
+  html.v-floating{scroll-padding-top:calc(var(--hdr,96px) + 56.25vw + 12px)}
+  html.v-floating [id]{scroll-margin-top:calc(var(--hdr,96px) + 56.25vw + 12px)}
+}
+@media (min-width:1024px){
+  .video-embed.float{right:24px;bottom:96px;left:auto;top:auto;width:400px;height:225px;border-radius:14px}
+}
+.vbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:0 0 14px}
+.vbar-k{font-weight:700;margin-right:2px}
+.spd{font:inherit;font-size:13px;font-weight:700;border:1.5px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:4px 11px;cursor:pointer}
+.spd.on{background:var(--text);color:var(--lime);border-color:var(--text)}
+.vbar-hint{margin-left:6px}
+@media (max-width:599px){ .vbar-hint{display:none} }
+/* ===== 따라 말하기 ===== */
+.shadow{background:var(--bg);border-radius:14px;padding:12px 14px;margin:10px 0}
+.sh-btns{display:flex;gap:8px;flex-wrap:wrap}
+.sh-play{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:14px;font-weight:700;border:1.5px solid var(--text);background:var(--card);color:var(--text);border-radius:999px;padding:7px 14px;cursor:pointer;transition:background .15s,color .15s}
+.sh-play:hover,.sh-play.on{background:var(--text);color:var(--lime)}
+.sh-say{margin-top:10px;display:flex;align-items:center;flex-wrap:wrap;gap:4px;font-size:16px}
+.sh-say b{font-size:17px;letter-spacing:-.01em}
+.sh-tips{margin:8px 0 0;padding-left:18px;font-size:14px;color:var(--muted);line-height:1.7}
+/* 예문 듣기 */
+.say-btn{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;margin-left:8px;vertical-align:-6px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);color:var(--text);cursor:pointer;transition:background .15s,color .15s}
+.say-btn:hover,.say-btn.on{background:var(--text);color:var(--lime);border-color:var(--text)}
+@media print{ .shadow .sh-btns,.say-btn,.vbar{display:none!important} }
