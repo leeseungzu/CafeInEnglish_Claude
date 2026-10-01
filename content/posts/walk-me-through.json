@@ -1,0 +1,59 @@
+{
+  "id": "walk-me-through",
+  "cat": "expr",
+  "sub": "새 표현",
+  "date": "2026-10-01",
+  "title": "\"Could you walk me through it?\" — '차근차근 설명해 주세요'",
+  "lead": "새 직장, 은행, 관공서에서 처음 하는 일 앞에서 꼭 필요한 말",
+  "description": "walk someone through 뜻과 쓰는 법, 처음 하는 절차를 물어볼 때 쓰는 Could you walk me through ~?, Could you break it down?을 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Could you walk me through it?",
+    "ko": "'차근차근 설명해 주세요'"
+  },
+  "body_html": "<h2>뜻</h2>\n<div class=\"box\"><b>walk someone through ~</b> = ~를 처음부터 하나씩 차근차근 설명해 주다</div>\n<p>처음 해 보는 서류 작성, 회사 시스템, 은행 절차 앞에서 '모르겠어요'라고만 하면 막막하게 들려요. <b>Could you walk me through it?</b>이라고 하면 '하나씩 설명해 주시겠어요?'라는 뜻이라 자연스럽고 프로페셔널하게 들려요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 길을 같이 걸으며(walk) 처음부터 끝까지(through) 안내해 주는 모습을 떠올려 보세요.</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Could you walk me through the process?</span><span class=\"ko\">절차를 차근차근 설명해 주시겠어요?</span></li>\n<li><span class=\"en\">Can you walk me through how to fill out this form?</span><span class=\"ko\">이 서류 어떻게 작성하는지 하나씩 알려 주실래요?</span></li>\n<li><span class=\"en\">Sure, let me walk you through it.</span><span class=\"ko\">네, 제가 하나씩 설명해 드릴게요.</span></li>\n</ul></div>\n<h2>비슷한 표현</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Could you show me how to do this?</span><span class=\"ko\">이거 어떻게 하는지 보여 주시겠어요?</span></li>\n<li><span class=\"en\">Could you break it down for me?</span><span class=\"ko\">좀 더 쉽게 나눠서 설명해 주시겠어요?</span></li>\n</ul></div>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "\"Could you walk me through the process?\"의 뜻은?",
+      "sub": "",
+      "options": [
+        "절차까지 같이 걸어가 주실래요?",
+        "절차를 차근차근 설명해 주시겠어요?",
+        "절차를 건너뛰어도 될까요?",
+        "절차가 끝났나요?"
+      ],
+      "answer": 1,
+      "explain": "walk someone through = 하나씩 차근차근 설명해 주다. 실제로 걷는다는 뜻이 아니에요.",
+      "mnemonic": "같이 걸으며(walk) 끝까지(through) 안내!"
+    },
+    {
+      "tag": "빈칸",
+      "q": "빈칸에 알맞은 말은?",
+      "sub": "Could you walk me ___ it?",
+      "options": [
+        "through",
+        "across",
+        "over",
+        "into"
+      ],
+      "answer": 0,
+      "explain": "walk someone through it = 처음부터 끝까지 설명해 주다. through가 '처음부터 끝까지'를 뜻해요.",
+      "mnemonic": "터널을 처음부터 끝까지 통과(through)!"
+    },
+    {
+      "tag": "뜻",
+      "q": "직원이 \"Let me walk you through it.\"이라고 했어요. 무슨 뜻일까요?",
+      "sub": "",
+      "options": [
+        "밖으로 안내해 드릴게요",
+        "제가 하나씩 설명해 드릴게요",
+        "같이 산책해요",
+        "먼저 가세요"
+      ],
+      "answer": 1,
+      "explain": "Let me walk you through it = 제가 차근차근 설명해 드릴게요.",
+      "mnemonic": "내가 같이 걸으며 안내해 줄게!"
+    }
+  ]
+}

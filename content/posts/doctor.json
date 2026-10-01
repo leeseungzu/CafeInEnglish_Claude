@@ -1,0 +1,59 @@
+{
+  "id": "doctor",
+  "cat": "tip",
+  "sub": "회화",
+  "date": "2026-10-01",
+  "title": "병원·약국에서 증상 말하는 영어 — 아플 때 꼭 필요한 문장",
+  "lead": "아플 때 영어가 안 나오면 정말 막막해요. 이 문장들만 알아 두세요",
+  "description": "해외 병원과 약국에서 증상, 아픈 기간, 아픈 곳, 알레르기, 약 먹는 법을 말하고 묻는 영어 문장을 예문과 퀴즈로 정리한 꿀팁.",
+  "og": {
+    "en": "I have a sore throat.",
+    "ko": "병원·약국에서 증상 말하는 영어"
+  },
+  "body_html": "<h2>증상: I have a ~</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I have a headache.</span><span class=\"ko\">머리가 아파요.</span></li>\n<li><span class=\"en\">I have a sore throat.</span><span class=\"ko\">목이 아파요.</span></li>\n<li><span class=\"en\">I have a fever.</span><span class=\"ko\">열이 나요.</span></li>\n<li><span class=\"en\">I have a runny nose.</span><span class=\"ko\">콧물이 나요.</span></li>\n<li><span class=\"en\">I have a stomachache.</span><span class=\"ko\">배가 아파요.</span></li>\n</ul></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> ache(통증)가 붙는 건 head, stomach, tooth, back, ear. 목은 throatache가 아니라 sore throat!</div>\n<h2>언제부터, 어디가</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I've been coughing for three days.</span><span class=\"ko\">사흘째 기침이 나요.</span></li>\n<li><span class=\"en\">It started yesterday.</span><span class=\"ko\">어제부터 시작됐어요.</span></li>\n<li><span class=\"en\">It hurts here.</span><span class=\"ko\">여기가 아파요.</span></li>\n<li><span class=\"en\">It hurts when I swallow.</span><span class=\"ko\">삼킬 때 아파요.</span></li>\n</ul></div>\n<h2>약국에서</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Do I need a prescription for this?</span><span class=\"ko\">이거 처방전이 필요한가요?</span></li>\n<li><span class=\"en\">I'm allergic to penicillin.</span><span class=\"ko\">페니실린 알레르기가 있어요.</span></li>\n<li><span class=\"en\">How often should I take this?</span><span class=\"ko\">이거 얼마나 자주 먹어야 해요?</span></li>\n</ul></div>\n<p><b class=\"lbl\">알아 두기</b> 미국 응급 전화는 911이에요(영국은 999). 응급실은 ER(emergency room, 영국은 A&amp;E), 생명이 위험하지 않은 증상으로 예약 없이 가는 진료소는 urgent care예요. 가슴 통증이나 호흡 곤란 같은 응급 상황은 바로 911이나 ER로 가세요!</p>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "증상",
+      "q": "'목이 아파요'를 영어로 하면?",
+      "sub": "",
+      "options": [
+        "I have a throatache.",
+        "I have a sore throat.",
+        "My neck is sick.",
+        "I have a throat pain sick."
+      ],
+      "answer": 1,
+      "explain": "목 안이 아플 땐 sore throat이라고 해요. throatache라고는 거의 하지 않아요.",
+      "mnemonic": "목은 ache 대신 sore!"
+    },
+    {
+      "tag": "기간",
+      "q": "'사흘째 기침이 나요'를 영어로 하면?",
+      "sub": "지금까지 계속되고 있어요",
+      "options": [
+        "I coughed three days.",
+        "I've been coughing for three days.",
+        "I cough after three days.",
+        "I will cough for three days."
+      ],
+      "answer": 1,
+      "explain": "지금까지 계속되는 일은 I've been ~ing for + 기간으로 말해요.",
+      "mnemonic": "'ve been ~ing = 쭉 ~해 오고 있어요!"
+    },
+    {
+      "tag": "뜻",
+      "q": "약사에게 \"Do I need a prescription for this?\"라고 물었어요. 무슨 뜻일까요?",
+      "sub": "prescription = ?",
+      "options": [
+        "이거 얼마예요?",
+        "이거 처방전이 필요한가요?",
+        "이거 부작용 있나요?",
+        "이거 어디서 팔아요?"
+      ],
+      "answer": 1,
+      "explain": "prescription = 처방전. 처방전 없이 살 수 있는 약은 over-the-counter(OTC)라고 해요.",
+      "mnemonic": "pre(앞에) + scribe(쓰다) → 의사가 '지시를 써 준 것' = 처방전!"
+    }
+  ]
+}
