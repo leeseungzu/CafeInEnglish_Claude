@@ -42,6 +42,106 @@ def qr_svg(url):
     return b.getvalue().decode().strip()
 
 
+try:
+    from PIL import Image, ImageDraw, ImageFont
+except ImportError:  # 공유 이미지 없이도 빌드는 됩니다
+    Image = None
+FONT = ROOT / "fonts" / "PretendardVariable.ttf"
+
+
+def _font(size, weight):
+    f = ImageFont.truetype(str(FONT), size)
+    try:
+        f.set_variation_by_axes([weight])
+    except Exception:
+        pass
+    return f
+
+
+def og_image(name, chip, big, small, foot="읽고 · 듣고 · 퀴즈로 확인"):
+    """글마다 카톡·SNS 미리보기 이미지(1200×630)를 만들고 주소를 돌려줍니다."""
+    if not (Image and FONT.exists()):
+        return "/assets/og.png"
+    W, H, PAD = 1200, 630, 80
+    BG, INK, LIME, MUTED = "#F4EEE4", "#2A1A12", "#CDEB5B", "#7A6A5E"
+    im = Image.new("RGB", (W, H), BG)
+    d = ImageDraw.Draw(im)
+    # 상단: C. 배지 + 브랜드
+    d.rounded_rectangle((PAD, 62, PAD + 64, 126), 16, fill=INK)
+    d.text((PAD + 15, 94), "C", font=_font(44, 800), fill=BG, anchor="lm")
+    d.ellipse((PAD + 43, 102, PAD + 53, 112), fill=LIME)
+    d.text((PAD + 84, 94), "카페인영어 CafeInEnglish", font=_font(30, 700), fill=INK, anchor="lm")
+    # 카테고리 칩
+    cf = _font(26, 700)
+    cw = d.textlength(chip, font=cf)
+    d.rounded_rectangle((PAD, 168, PAD + cw + 40, 214), 23, fill=INK)
+    d.text((PAD + 20, 191), chip, font=cf, fill=BG, anchor="lm")
+    # 큰 영어 표현: 폭에 맞춰 글자 크기 자동 조절, 최대 2줄
+    maxw = W - PAD * 2
+    for size in range(124, 54, -4):
+        bf = _font(size, 800)
+        words, lines, cur = big.split(), [], ""
+        for w in words:
+            t = (cur + " " + w).strip()
+            if d.textlength(t, font=bf) <= maxw or not cur:
+                cur = t
+            else:
+                lines.append(cur); cur = w
+        lines.append(cur)
+        if (len(lines) <= 2 and len(lines) * size * 1.12 <= 230
+                and all(d.textlength(l, font=bf) <= maxw for l in lines)):
+            break
+    lh = int(size * 1.12)
+    y = 246 + (230 - len(lines) * lh) // 2 - int(size * .08)
+    for l in lines:
+        lw = d.textlength(l, font=bf)
+        d.rectangle((PAD - 6, y + int(size * .62), PAD + lw + 6, y + int(size * .98)), fill=LIME)
+        d.text((PAD, y), l, font=bf, fill=INK)
+        y += lh
+    # 한국어 설명 + 하단 주소
+    sf = _font(38, 600)
+    while d.textlength(small, font=sf) > maxw and len(small) > 4:
+        small = small[:-2].rstrip() + "…"
+    d.text((PAD, 492), small, font=sf, fill=INK)
+    d.text((PAD, 566), "cafeinenglish.com", font=_font(26, 600), fill=MUTED)
+    d.text((W - PAD, 566), foot, font=_font(26, 600), fill=MUTED, anchor="ra")
+    out = OUT / "og" / f"{name}.png"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    im.save(out, optimize=True)
+    return f"/og/{name}.png"
+
+
+def video_block(video, title, hint):
+    """썸네일만 먼저 보여주고, 누르면 그때 유튜브 플레이어를 불러옵니다 (페이지 속도 ↑)."""
+    return (f'<div class="video-slot no-print"><div class="video-embed" data-vid="{video}">'
+            f'<button class="v-facade" type="button" aria-label="{e(title)} 영상 재생">'
+            f'<img src="https://i.ytimg.com/vi/{video}/hqdefault.jpg" alt="" width="480" height="360">'
+            '<span class="v-play"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></button>'
+            '<div id="yt"></div>'
+            '<button class="v-close" aria-label="작은 화면 닫기"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div>'
+            '<div class="vbar no-print"><span class="vbar-k">재생 속도</span><button class="spd" data-r="0.75">0.75x</button><button class="spd on" data-r="1">1x</button>'
+            f'<span class="vbar-hint">{hint}</span></div>')
+
+
+ICON_PLAY = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4l13 8-13 8z"/></svg>'
+ICON_LOOP = ('<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">'
+             '<path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg>')
+
+
+def seg_buttons(t, end):
+    return (f'<div class="sh-btns"><button class="sh-play" data-t="{t}" data-end="{end}" data-n="1">{ICON_PLAY}{mmss(t)} 듣기</button>'
+            f'<button class="sh-play" data-t="{t}" data-end="{end}" data-n="3">{ICON_LOOP}3번 반복</button></div>')
+
+
+def share_block(label):
+    return ('<div class="share no-print">'
+            f'<div class="share-t">{label}</div>'
+            '<div class="share-b"><button class="btn primary js-share" type="button">'
+            '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>공유하기</button>'
+            '<button class="btn ghost js-copylink" type="button">'
+            '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>링크 복사</button></div></div>')
+
+
 def load(kind):
     items = [json.loads(p.read_text("utf-8")) for p in sorted((CONTENT / kind).glob("*.json"))]
     return sorted(items, key=lambda x: (x.get("date", ""), x["id"]), reverse=True)
@@ -60,7 +160,7 @@ def mmss(t):
 
 
 # ------------------------------------------------------------------ layout
-def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False):
+def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og.png"):
     full_title = f"{title} | 카페인영어" if path != "/" else f"카페인영어 — {SITE['tagline']}"
     ads = (f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={e(SITE["adsense_client"])}" crossorigin="anonymous"></script>'
            if SITE.get("adsense_client") else "")
@@ -85,9 +185,11 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{DOMAIN}{path}">
-<meta property="og:image" content="{DOMAIN}/assets/og.png">
+<meta property="og:image" content="{DOMAIN}{og_img}">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{DOMAIN}{og_img}">
+<link rel="preconnect" href="https://i.ytimg.com">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -99,7 +201,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 </head>
 <body>
 <header class="top"><div class="top-in">
-  <a class="logo" href="/">카페인영어 <i>CafeInEnglish</i></a>
+  <a class="logo" href="/"><img class="logo-mark" src="/assets/icon-192.png" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
   <nav class="nav">{navlinks}</nav>
   {room}
 </div></header>
@@ -199,11 +301,7 @@ def page_post(p):
              f'<h1>{e(p["title"])}</h1><p class="lead">{e(p.get("lead", ""))}</p><p class="date-line">{e(p.get("date", ""))}</p>']
     toc_slot = len(parts)
     if video:
-        parts.append(f'<div class="video-slot no-print"><div class="video-embed"><iframe id="yt" src="https://www.youtube.com/embed/{video}?enablejsapi=1&rel=0&playsinline=1" '
-                     f'title="{e(p["title"])}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'
-                     '<button class="v-close" aria-label="작은 화면 닫기"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div>'
-                     '<div class="vbar no-print"><span class="vbar-k">재생 속도</span><button class="spd" data-r="0.75">0.75x</button><button class="spd on" data-r="1">1x</button>'
-                     '<span class="vbar-hint">표현의 <b>듣기</b>·<b>3번 반복</b>으로 따라 말해 보세요</span></div>')
+        parts.append(video_block(video, p["title"], "표현의 <b>듣기</b>·<b>3번 반복</b>으로 따라 말해 보세요"))
     toc = []
     parts.append(add_heading_ids(p.get("body_html", ""), toc))
     if p.get("expressions"):
@@ -216,9 +314,7 @@ def page_post(p):
                 end = x.get("end", x["t"] + 4)
                 say = f'<div class="sh-say"><span class="lbl">따라 말하기</span><b>{e(x["say"])}</b></div>' if x.get("say") else ""
                 tips = "".join(f"<li>{e(tp)}</li>" for tp in x.get("tips", []))
-                shadow = (f'<div class="shadow"><div class="sh-btns">'
-                          f'<button class="sh-play" data-t="{x["t"]}" data-end="{end}" data-n="1"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4l13 8-13 8z"/></svg>{mmss(x["t"])} 듣기</button>'
-                          f'<button class="sh-play" data-t="{x["t"]}" data-end="{end}" data-n="3"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg>3번 반복</button></div>'
+                shadow = (f'<div class="shadow">{seg_buttons(x["t"], end)}'
                           f'{say}{f"<ul class=sh-tips>{tips}</ul>" if tips else ""}</div>')
             toc.append((f"x{xi + 1}", "· " + x["en"]))
             parts.append(f"""<div class="box xp" id="x{xi + 1}">
@@ -231,6 +327,7 @@ def page_post(p):
     if p.get("think") in THINK_BY_ID:
         parts.append(f'<div class="think-box"><b>이 영상 속 마음에 남는 문장</b>은 <a href="{think_url(THINK_BY_ID[p["think"]])}">사유의 문장</a>에서 필사하고 복기할 수 있어요.</div>')
     parts.append('<h2 class="quiz-h" id="quiz-sec">오늘 배운 거 확인하기</h2><div id="quiz"></div>')
+    parts.append(share_block("같이 공부할 친구에게 이 글 보내기"))
     parts.append(PRINT_BTN)
     # 출력용 문제지 (화면에서는 숨김)
     qs = "".join(
@@ -257,7 +354,16 @@ def page_post(p):
              + side_common())
     data = {"type": "post", "id": p["id"], "title": p["title"], "url": url, "cat": p["cat"], "catName": CATS[p["cat"]],
             "quiz": p["quiz"], "links": links, "kakao": SITE.get("kakao", "")}
-    return layout(p["title"], p.get("description", p.get("lead", "")), url, "\n".join(parts), p["cat"], data, "article", aside)
+    og = p.get("og") or {}
+    xs = p.get("expressions") or [{}]
+    img = og_image("p-" + p["id"], CATS[p["cat"]], og.get("en") or xs[0].get("en") or p["title"],
+                   og.get("ko") or p.get("lead", ""))
+    return layout(p["title"], p.get("description", p.get("lead", "")), url, "\n".join(parts), p["cat"], data, "article", aside, og_img=img)
+
+
+def q_end(q):
+    """끝 시간이 없으면 단어 수로 대략 계산 (초당 2.4단어 + 여유 1.2초)"""
+    return q.get("end") or round(q["t"] + len(q["en"].split()) / 2.4 + 1.2, 1)
 
 
 def page_think(t):
@@ -265,9 +371,9 @@ def page_think(t):
     cards = []
     for i, q in enumerate(t["quotes"]):
         cards.append(f"""<div class="quote no-print" id="q{i + 1}" data-id="{t['id']}:{i}" data-i="{i}">
-  <div class="meta"><span>문장 {i + 1} / {len(t['quotes'])}</span>
-    <a class="ts" href="https://www.youtube.com/watch?v={t.get('video', '')}&t={q['t']}s" target="_blank" rel="noopener" style="text-decoration:none">▶ {mmss(q['t'])} 영상에서 듣기</a></div>
+  <div class="meta"><span>문장 {i + 1} / {len(t['quotes'])}</span></div>
   <p class="en">{e(q['en'])}</p><p class="ko">{e(q['ko'])}</p>
+  {seg_buttons(q['t'], q_end(q)) if t.get('video') else ''}
   <div class="think-box"><b class="lbl">생각해 보기</b> {e(q['think'])}<span class="ask">{e(q['ask'])}</span></div>
   <div class="tabs"><button class="on" data-mode="copy">필사하기</button><button data-mode="blank">빈칸 복기</button></div>
   <div class="pane"></div>
@@ -283,9 +389,11 @@ def page_think(t):
 <span class="chip think">사유의 문장</span><span class="chip video">{e(t['speaker'])}</span>
 <h1>{e(t['title'])}</h1>
 <p class="lead">따라 쓰고(필사), 빈칸으로 다시 떠올리고(복기), 나의 한 줄을 남겨 보세요.</p>
-{f'<a class="btn ghost" href="{post_url(post)}">이 영상의 영어표현 먼저 보기</a>' if post else ""}
 </div>
+{video_block(t["video"], t["title"], "문장마다 <b>듣기</b>·<b>3번 반복</b>으로 소리까지 익혀요") if t.get("video") else ""}
+{f'<a class="btn ghost no-print" href="{post_url(post)}">이 영상의 영어표현 먼저 보기</a>' if post else ""}
 {"".join(cards)}
+{share_block("마음에 남는 문장, 친구와 같이 필사해요")}
 {PRINT_BTN}
 <div class="print-only ws">{ws_head("필사 노트 — " + t["title"], t["speaker"], t.get("video"), url)}{ws}</div>
 <div class="cq-cta no-print" style="margin-top:16px">
@@ -299,7 +407,10 @@ def page_think(t):
              f'<div class="side-box"><h4>복습하기</h4><a class="btn primary" href="/notes/#copy">내 필사 노트</a>'
              f'<button class="btn ghost js-print">필사 노트 출력</button>'
              + (f'<a class="btn ghost" href="{post_url(post)}">영상 표현 보기</a>' if post else "") + '</div>' + side_common())
-    return layout(t["title"] + " — 필사하기", t.get("description", ""), url, body, "think", data, "article", aside)
+    og = t.get("og") or {}
+    shortest = min(t["quotes"], key=lambda q: len(q["en"]))["en"]
+    img = og_image("t-" + t["id"], "사유의 문장 · 필사", og.get("en") or shortest, og.get("ko") or t["title"], "듣고 · 따라 쓰고 · 빈칸으로 복기")
+    return layout(t["title"] + " — 필사하기", t.get("description", ""), url, body, "think", data, "article", aside, og_img=img)
 
 
 def page_category(cat):

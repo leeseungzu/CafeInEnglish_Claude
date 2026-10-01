@@ -6,6 +6,10 @@
   "title": "원어민의 wanna·gonna·gotta, 이렇게 들으면 안 들리던 게 들려요",
   "lead": "단어를 몰라서가 아니라 '붙여 읽기' 때문에 안 들리는 거예요",
   "description": "gonna, wanna, gotta, whaddaya처럼 원어민이 붙여 말하는 소리를 연상법과 퀴즈로 정리한 영어 듣기 꿀팁.",
+  "og": {
+    "en": "wanna · gonna · gotta",
+    "ko": "이렇게 들으면 안 들리던 게 들려요"
+  },
   "body_html": "<h2>왜 안 들릴까?</h2>\n<p>원어민은 자주 쓰는 덩어리를 <b>한 단어처럼 붙여서</b> 말해요. 교과서 발음만 알고 있으면 아는 단어도 처음 듣는 소리처럼 들려요.</p>\n<h2>꼭 알아야 할 3가지</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">going to → gonna</span><span class=\"ko\">I'm gonna call you. (전화할게)</span></li>\n<li><span class=\"en\">want to → wanna</span><span class=\"ko\">Do you wanna grab coffee? (커피 한잔할래?)</span></li>\n<li><span class=\"en\">(have) got to → gotta</span><span class=\"ko\">You gotta try this! (이거 꼭 먹어봐야 해!)</span></li>\n</ul></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 입이 게을러지면 생기는 소리예요. going to를 세 번 빠르게 말해 보세요. 고잉투 → 고너 → gonna!</div>\n<h2>한 단계 더: 질문도 붙는다</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">What do you want? → Whaddaya want?</span><span class=\"ko\">'와더야' 처럼 들려요.</span></li>\n<li><span class=\"en\">Did you eat? → Didja eat?</span><span class=\"ko\">'디줴잇' 처럼 들려요.</span></li>\n</ul></div>\n<p><b class=\"lbl\">연습법</b> 좋아하는 셀럽 인터뷰에서 이 소리가 나올 때마다 일시정지하고 따라 해 보세요. 귀보다 입이 먼저 익으면 훨씬 잘 들려요.</p>",
   "related": [],
   "quiz": [

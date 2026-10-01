@@ -39,14 +39,29 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 | `video` | (선택) 유튜브 영상 ID. 있으면 글 맨 위 삽입 + 출력물 영상 QR |
 | `think` | (선택) 연결된 사유의 문장 id |
 | `body_html` | 본문 HTML. 사용 가능한 블록: `.box` `.memo`(연상법) `ul.ex > li > span.en + span.ko` |
-| `expressions` | (선택) `[{t(초), en, ko, orig(원문), ex, exKo, memo(연상법)}]` — t가 있으면 ▶ 듣기 버튼 |
+| `og` | (선택) `{en, ko}` 카톡·SNS 미리보기 이미지 문구. en=크게 보일 표현, ko=아래 한 줄. 없으면 첫 표현/리드 사용 |
+| `expressions` | (선택) `[{t(초), end(초), en, ko, orig(원문), say(한글 발음), tips[연음 팁], ex, exKo, memo(연상법)}]` — t가 있으면 듣기·3번 반복 버튼 |
 | `related` | (선택) `[{label, href}]` 추가 추천 링크 |
 | `quiz` | 3문제 권장. `{tag, q, sub, options[4], answer(0부터), explain, mnemonic}` |
 
 ## 사유의 문장(think) JSON 형식
 
-`{id, date, post, video, title, speaker, description, quotes:[{t, en, ko, blanks[], think, ask}]}`
+`{id, date, post, video, title, speaker, description, og{en,ko}, quotes:[{t, end, en, ko, blanks[], think, ask}]}`
+- `end` 가 없으면 단어 수로 끝 시간을 대략 계산해요. 정확히 하려면 end(초)를 넣는다.
 - `blanks` 는 빈칸 복기에서 가릴 단어 (소문자, 문장에 실제 있는 단어)
+
+## 자동으로 만들어지는 것
+
+- 글·사유의 문장마다 공유 미리보기 이미지 `docs/og/p-<id>.png`, `docs/og/t-<id>.png` (Pillow + `fonts/PretendardVariable.ttf`)
+- 영상은 썸네일만 먼저 보여주고, 누르거나 듣기 버튼을 누를 때 유튜브 플레이어를 불러온다 (속도).
+- 글/사유의 문장 끝에 공유 버튼 (모바일은 기기 공유창 → 카톡 선택, PC는 링크 복사).
+
+## 디자인 규칙 (A안)
+
+- 색: 크림 #F4EEE4 · 에스프레소 #2A1A12 · 라임 #CDEB5B, 폰트 Pretendard. 이모지 대신 라임 라벨(`.lbl`).
+- 메뉴 호버/선택 = 라임 형광펜 밑줄. 내 공부방 호버 = 에스프레소 배경 + 크림 글자.
+- 로고/파비콘 "C." (에스프레소 바탕, 크림 C, 라임 점).
+- 모바일 메뉴는 화면 폭에 맞춰 양끝 정렬.
 
 ## 콘텐츠 원칙
 

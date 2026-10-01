@@ -229,47 +229,75 @@
       `<div class="empty"><p>아직 필사한 문장이 없어요.<br>문장을 따라 쓰면 여기에 나만의 문장집이 쌓여요.</p></div>`;
   }
 
-  /* ---------- 영상 장면 이동 ---------- */
-  /* ---------- 영상: 구간 듣기 · 반복 · 속도 · 따라오는 영상 ---------- */
+  /* ---------- 영상: 썸네일 먼저 · 구간 듣기 · 반복 · 속도 · 따라오는 영상 ---------- */
   function initVideo() {
-    const yt = $("#yt"); if (!yt) return;
-    const slot = $(".video-slot"), box = $(".video-embed");
-    let player = null, ready = false, started = false, dismissed = false, seg = null, timer = null, rate = 1, queued = null;
+    const box = $(".video-embed[data-vid]"); if (!box) return;
+    const slot = $(".video-slot"), facade = $(".v-facade", box), vid = box.dataset.vid;
+    let player = null, ready = false, creating = false, started = false, dismissed = false;
+    let seg = null, timer = null, rate = 1, queued = null, apiLoading = false;
 
-    const tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api"; document.head.appendChild(tag);
-    window.onYouTubeIframeAPIReady = () => {
-      player = new YT.Player("yt", { events: {
-        onReady: () => { ready = true; if (queued) { const q = queued; queued = null; playSeg(q.t, q.end, q.n, q.btn); } },
-        onStateChange: ev => { if (ev.data === 1) { started = true; updateFloat(); } }
-      } });
-    };
+    // 플레이어 API는 가볍게 미리 받아 두고, 실제 영상(무거운 부분)은 누를 때 불러와요
+    function loadAPI() {
+      if (apiLoading || (window.YT && YT.Player)) return; apiLoading = true;
+      const tag = document.createElement("script"); tag.src = "https://www.youtube.com/iframe_api"; document.head.appendChild(tag);
+    }
+    const idle = window.requestIdleCallback || (f => setTimeout(f, 1500));
+    idle(loadAPI);
+    ["pointerdown", "touchstart", "scroll"].forEach(ev => addEventListener(ev, loadAPI, { once: true, passive: true }));
+
+    function create() {
+      if (creating) return; creating = true;
+      box.classList.add("loading");
+      player = new YT.Player("yt", {
+        videoId: vid, host: "https://www.youtube.com",
+        playerVars: { autoplay: 1, rel: 0, playsinline: 1, modestbranding: 1 },
+        events: {
+          onReady: () => {
+            ready = true; box.classList.remove("loading"); box.classList.add("live");
+            player.setPlaybackRate(rate);
+            const q = queued; queued = null; q ? q() : player.playVideo();
+          },
+          onStateChange: ev => { if (ev.data === 1) { started = true; updateFloat(); } }
+        }
+      });
+    }
+    function withPlayer(fn) {
+      if (ready) return fn();
+      queued = fn;
+      if (window.YT && YT.Player) create();
+      else { loadAPI(); window.onYouTubeIframeAPIReady = create; }
+    }
+    facade.onclick = () => withPlayer(() => player.playVideo());
 
     function stopSeg() {
       clearInterval(timer); timer = null; seg = null;
-      $$(".sh-play.on").forEach(b => { b.classList.remove("on"); b.querySelector(".cnt") && b.querySelector(".cnt").remove(); });
+      $$(".sh-play.on").forEach(b => { b.classList.remove("on"); const c = b.querySelector(".cnt"); c && c.remove(); });
     }
     function playSeg(t, end, n, btn) {
-      if (!ready) { queued = { t, end, n, btn }; return; }
       stopSeg();
-      seg = { t, end, left: n, btn }; btn.classList.add("on");
+      seg = { t, end, left: n, btn, since: Date.now() }; btn.classList.add("on");
       const cnt = document.createElement("span"); cnt.className = "cnt"; btn.appendChild(cnt);
       const show = () => { cnt.textContent = n > 1 ? ` ${n - seg.left + 1}/${n}` : ""; };
       show();
-      player.setPlaybackRate(rate); player.seekTo(t, true); player.playVideo();
-      started = true; updateFloat();
-      timer = setInterval(() => {
+      withPlayer(() => {
         if (!seg) return;
-        const ct = player.getCurrentTime ? player.getCurrentTime() : 0;
-        if (ct >= seg.end || ct < seg.t - 1.5) {
-          seg.left--;
-          if (seg.left > 0) { show(); player.seekTo(seg.t, true); player.playVideo(); }
-          else { player.pauseVideo(); stopSeg(); }
-        }
-      }, 150);
+        seg.since = Date.now();
+        player.setPlaybackRate(rate); player.seekTo(t, true); player.playVideo();
+        started = true; updateFloat();
+        timer = setInterval(() => {
+          if (!seg || Date.now() - seg.since < 700) return;          // 이동 직후엔 시간이 바로 안 바뀌어요
+          if (player.getPlayerState() !== 1) return;                 // 재생 중일 때만 셉니다
+          const ct = player.getCurrentTime();
+          if (ct >= seg.end || ct < seg.t - 1.5) {
+            seg.left--;
+            if (seg.left > 0) { show(); seg.since = Date.now(); player.seekTo(seg.t, true); player.playVideo(); }
+            else { player.pauseVideo(); stopSeg(); }
+          }
+        }, 150);
+      });
     }
     $$(".sh-play").forEach(b => b.onclick = () => {
-      if (b.classList.contains("on")) { player && player.pauseVideo(); stopSeg(); return; }
+      if (b.classList.contains("on")) { ready && player.pauseVideo(); stopSeg(); return; }
       playSeg(+b.dataset.t, +b.dataset.end, +b.dataset.n, b);
     });
     $$(".spd").forEach(b => b.onclick = () => {
@@ -294,6 +322,24 @@
     io.observe(slot);
     $(".v-close").onclick = () => { dismissed = true; updateFloat(); };
     addEventListener("resize", updateFloat);
+  }
+
+  /* ---------- 공유 · 링크 복사 ---------- */
+  async function copyText(v) {
+    try { await navigator.clipboard.writeText(v); return true; } catch (e) {
+      const t = document.createElement("textarea"); t.value = v; document.body.appendChild(t); t.select();
+      let ok = false; try { ok = document.execCommand("copy"); } catch (e2) {} t.remove(); return ok;
+    }
+  }
+  function initShare() {
+    const url = location.origin + location.pathname;
+    const title = DATA.title ? `${DATA.title} | 카페인영어` : document.title;
+    const text = DATA.type === "think" ? "이 문장 같이 필사해요" : "이 표현 같이 공부해요";
+    $$(".js-copylink").forEach(b => b.onclick = async () => { await copyText(url); toast("링크를 복사했어요"); });
+    $$(".js-share").forEach(b => b.onclick = async () => {
+      if (navigator.share) { try { await navigator.share({ title, text, url }); } catch (e) {} return; }
+      await copyText(url); toast("링크를 복사했어요");
+    });
   }
 
   /* ---------- 예문 소리 내어 듣기 (브라우저 음성) ---------- */
@@ -346,8 +392,9 @@
   });
   const fab = $(".kakao-fab.pending");
   if (fab) fab.onclick = e => { e.preventDefault(); toast("카카오톡 채널은 곧 열려요"); };
+  initVideo();
+  initShare();
   if (DATA.type === "post") {
-    initVideo();
     const items = DATA.quiz.map((q, i) => ({ id: `${DATA.id}:${i}`, ...q }));
     runQuiz($("#quiz"), items, { mode: "post" });
   }
