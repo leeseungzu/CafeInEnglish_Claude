@@ -585,3 +585,18 @@ h1{letter-spacing:-.03em}
 @media (max-width:599px){ .cmp{font-size:14px} .cmp th,.cmp td{padding:9px 10px} }
 @media print{ .tbl{overflow:visible} }
 .fix .ctx{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bottom:2px}
+/* 테두리 버튼: 기본 흰 배경, 마우스 올리면 에스프레소 */
+.btn.ghost{background:var(--card);color:var(--text)}
+.btn.ghost:hover{background:var(--text);color:var(--bg);border-color:var(--text)}
+.btn.ghost:hover .n-pill{background:var(--lime);color:var(--text)}
+/* 목차 '퀴즈 풀기'도 다른 항목과 같은 굵기 */
+.toc .q a{color:var(--text);font-weight:inherit}
+/* 도식: PC에서는 적당한 크기로 가운데, 인쇄(PDF)에서는 페이지에서 잘리지 않게 */
+@media (min-width:600px){ .fig img{max-width:460px;margin:0 auto} }
+.fig{break-inside:avoid;page-break-inside:avoid}
+@media print{
+  .fig{margin:6mm 0}
+  .fig img{max-width:95mm;max-height:150mm;width:auto;margin:0 auto;border-radius:0}
+  .fig figcaption{font-size:10pt}
+  .tbl,.fix li,.cmp tr{break-inside:avoid;page-break-inside:avoid}
+}

@@ -157,7 +157,7 @@ def seg_buttons(t, end):
 def share_block(label):
     return ('<div class="share no-print">'
             f'<div class="share-t">{label}</div>'
-            '<div class="share-b"><button class="btn primary js-share" type="button">'
+            '<div class="share-b"><button class="btn ghost js-share" type="button">'
             '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>공유하기</button>'
             '<button class="btn ghost js-copylink" type="button">'
             '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>링크 복사</button></div></div>')
@@ -376,8 +376,6 @@ def page_post(p):
         parts.append(f'<div class="think-box"><b>이 영상 속 마음에 남는 문장</b>은 <a href="{think_url(THINK_BY_ID[p["think"]])}">사유의 문장</a>에서 필사하고 복기할 수 있어요.</div>')
     parts.append('<h2 class="quiz-h" id="quiz-sec">오늘 배운 거 확인하기</h2><div id="quiz"></div>')
     parts.append(share_block("같이 공부할 친구에게 이 글 보내기"))
-    parts.append('<h2 class="rel-h no-print">같이 보면 좋은 글</h2><div class="cards rel no-print">'
-                 + "".join(post_card(o) for o in similar_posts(p, 4)) + "</div>")
     parts.append(PRINT_BTN)
     # 출력용 문제지 (화면에서는 숨김)
     qs = "".join(
@@ -393,11 +391,13 @@ def page_post(p):
 <div class="ws-line"></div><div class="ws-line"></div><div class="ws-line"></div><div class="ws-line"></div>
 <div class="ws-key"><b>정답과 연상법</b><ol>{key}</ol></div>
 <p style="font-size:12px;color:#555">{DOMAIN.replace("https://", "")} · 매일 표현 하나, 같이 공부해요</p></div>""")
+    parts.append('<h2 class="rel-h no-print">같이 보면 좋은 글</h2><div class="cards rel no-print">'
+                 + "".join(post_card(o) for o in similar_posts(p, 4)) + "</div>")
     parts.insert(toc_slot, f'<details class="toc-m no-print"><summary>목차 · 퀴즈 바로가기</summary>{toc_html(toc)}</details>')
     links = related_links(p)
     link_items = "".join('<li><a href="%s">%s</a></li>' % (l["href"], e(l["label"])) for l in links)
     aside = (f'<div class="side-box"><h4>이 글의 목차</h4>{toc_html(toc)}</div>'
-             f'<div class="side-box"><h4>복습하기</h4><a class="btn primary" href="#quiz-sec">퀴즈 풀기</a>'
+             f'<div class="side-box"><h4>복습하기</h4><a class="btn ghost" href="#quiz-sec">퀴즈 풀기</a>'
              f'<a class="btn ghost" href="/notes/">내 공부방<span class="n-pill js-notes-count"></span></a>'
              f'<button class="btn ghost js-print">출력 · PDF 저장</button></div>'
              + (f'<div class="side-box"><h4>이어서 보기</h4><ul class="side-links">{link_items}</ul></div>' if links else "")
@@ -459,7 +459,7 @@ def page_think(t):
             "quotes": [{"en": q["en"], "ko": q["ko"], "blanks": q["blanks"]} for q in t["quotes"]]}
     qlist = "".join(f'<li><a href="#q{i + 1}">{e(q["en"][:42] + ("…" if len(q["en"]) > 42 else ""))}</a></li>' for i, q in enumerate(t["quotes"]))
     aside = (f'<div class="side-box"><h4>문장 목록</h4><ol class="toc">{qlist}</ol></div>'
-             f'<div class="side-box"><h4>복습하기</h4><a class="btn primary" href="/notes/#copy">내 필사 노트</a>'
+             f'<div class="side-box"><h4>복습하기</h4><a class="btn ghost" href="/notes/#copy">내 필사 노트</a>'
              f'<button class="btn ghost js-print">필사 노트 출력</button>'
              + (f'<a class="btn ghost" href="{post_url(post)}">영상 표현 보기</a>' if post else "") + '</div>' + side_common())
     og = t.get("og") or {}
