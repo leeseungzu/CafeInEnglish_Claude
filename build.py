@@ -245,7 +245,7 @@ SNS_ICON = {
 def sns_fab():
     """우측 하단 버튼 하나 → 누르면 SNS 목록이 펼쳐짐 (주소가 있는 채널만)"""
     items = [("youtube", "유튜브", SITE.get("youtube")), ("instagram", "인스타그램", SITE.get("instagram")),
-             ("kakao", "카카오톡 채널", SITE.get("kakao"))]
+             ("kakao", "카카오톡 오픈채팅", SITE.get("kakao"))]
     # 카카오는 채널 주소가 비어 있어도 보여 주고, 누르면 '곧 열려요' 안내 (site.json에 주소만 넣으면 바로 연결)
     links = "".join(
         (f'<a class="fab-item {k}" href="{e(u)}" target="_blank" rel="noopener" aria-label="{n}" title="{n}">' if u else f'<a class="fab-item {k} pending" href="#" aria-label="{n}" title="{n}">')
