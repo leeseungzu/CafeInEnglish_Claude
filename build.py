@@ -389,7 +389,7 @@ def page_post(p):
             toc.append((f"x{xi + 1}", x["en"]))
             parts.append(f"""<div class="box xp" id="x{xi + 1}">
   <h3>{e(x['en'])}{ts}</h3><div>{e(x['ko'])}</div>
-  <div class="orig">{e(x['orig'])}</div>
+  <div class="orig">{e(x['orig'])}{f'<span class="orig-ko">{e(x["origKo"])}</span>' if x.get("origKo") else ""}</div>
   {shadow}
   <ul class="ex"><li><span class="en">{e(x['ex'])}</span><span class="ko">{e(x['exKo'])}</span></li></ul>
   <div class="memo" style="margin-bottom:0"><b class="lbl">연상법</b> {e(x['memo'])}</div>

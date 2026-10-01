@@ -42,7 +42,7 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 | `think` | (선택) 연결된 사유의 문장 id |
 | `body_html` | 본문 HTML. 사용 가능한 블록: `.box` `.memo`(연상법) `ul.ex > li > span.en + span.ko` |
 | `og` | (선택) `{en, ko}` 카톡·SNS 미리보기 이미지 문구. en=크게 보일 표현, ko=아래 한 줄. 없으면 첫 표현/리드 사용 |
-| `expressions` | (선택) `[{t(초), end(초), en, ko, orig(원문), say(한글 발음), tips[연음 팁], ex, exKo, memo(연상법)}]` — t가 있으면 듣기·3번 반복 버튼 |
+| `expressions` | (선택) `[{t(초), end(초), en, ko, orig(원문), origKo(원문 해석), say(한글 발음), tips[연음 팁], ex, exKo, memo(연상법)}]` — t가 있으면 듣기·3번 반복 버튼 |
 | `related` | (선택) `[{label, href}]` 추가 추천 링크 |
 | `quiz` | 3문제 권장. `{tag, q, sub, options[4], answer(0부터), explain, mnemonic}` |
 

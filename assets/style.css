@@ -627,3 +627,4 @@ h1{letter-spacing:-.03em}
 .fab-item.kakao .fab-ic{background:#FEE500}
 @media (max-width:599px){ .fab{right:14px;bottom:72px} .fab-main{width:54px;height:54px} }
 @media print{ .fab{display:none!important} }
+.xp .orig-ko{display:block;margin-top:3px;color:var(--text);font-size:14px}
