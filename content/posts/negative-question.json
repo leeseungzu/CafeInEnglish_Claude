@@ -4,13 +4,14 @@
   "sub": "회화",
   "date": "2026-10-01",
   "title": "\"Don't you like coffee?\" — Yes라고 하면 좋아한다는 뜻이에요",
+  "seo_title": "부정의문문 대답법 — Don't you like 질문에 Yes, No",
   "lead": "한국인이 가장 많이 헷갈리는 부정 질문 대답법",
   "description": "Don't you like ~?, Aren't you ~? 같은 부정 질문에 Yes와 No로 대답하는 법을 한국어와 비교해 예문과 퀴즈로 정리한 꿀팁.",
   "og": {
     "en": "Don't you like coffee?",
     "ko": "Yes라고 하면 좋아한다는 뜻이에요"
   },
-  "body_html": "<h2>한국어와 정반대예요</h2>\n<p>한국어는 질문에 <b>동의하면 '응'</b>이에요. ('커피 안 좋아해?' '응, 안 좋아해') 영어는 질문 모양과 상관없이 <b>내 대답이 긍정이면 Yes, 부정이면 No</b>예요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Don't you like coffee? Yes, I do.</span><span class=\"ko\">커피 안 좋아해? → 아니, 좋아해.</span></li>\n<li><span class=\"en\">Don't you like coffee? No, I don't.</span><span class=\"ko\">커피 안 좋아해? → 응, 안 좋아해.</span></li>\n<li><span class=\"en\">Aren't you hungry? Yes, I'm starving.</span><span class=\"ko\">배 안 고파? → 아니, 엄청 고파.</span></li>\n<li><span class=\"en\">Didn't you go? No, I didn't.</span><span class=\"ko\">안 갔어? → 응, 안 갔어.</span></li>\n</ul></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 부정 질문에 대답할 때는 Yes 뒤엔 긍정(I do), No 뒤엔 부정(I don't)으로 짝을 맞춰요!</div>\n<h2>헷갈릴 땐 이렇게</h2>\n<p>Yes, No가 바로 안 나오면 빼고 <b>뒷부분만</b> 말해도 충분해요. 오히려 더 확실하게 전달돼요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I do! I love coffee.</span><span class=\"ko\">좋아해! 커피 엄청 좋아해.</span></li>\n<li><span class=\"en\">I'm not, actually.</span><span class=\"ko\">사실 안 고파.</span></li>\n</ul></div>",
+  "body_html": "<h2>한국어와 정반대예요</h2>\n<p>한국어는 질문에 <b>동의하면 '응'</b>이에요. ('커피 안 좋아해?' '응, 안 좋아해') 영어는 질문 모양과 상관없이 <b>내 대답이 긍정이면 Yes, 부정이면 No</b>예요.</p>\n<figure class=\"fig\"><img src=\"/images/negative-question-answer-yes-no.png\" alt=\"부정 질문 Don't you like coffee?에 대답하는 법: 커피를 좋아하면 한국어로 아니, 좋아해 / 영어로 Yes, I do. 안 좋아하면 한국어로 응, 안 좋아해 / 영어로 No, I don't.\" width=\"1080\" height=\"1805\" loading=\"lazy\"><figcaption>한국어는 질문에 동의하는지, 영어는 내 대답이 긍정인지로 정해요</figcaption></figure>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Don't you like coffee? Yes, I do.</span><span class=\"ko\">커피 안 좋아해? → 아니, 좋아해.</span></li>\n<li><span class=\"en\">Don't you like coffee? No, I don't.</span><span class=\"ko\">커피 안 좋아해? → 응, 안 좋아해.</span></li>\n<li><span class=\"en\">Aren't you hungry? Yes, I'm starving.</span><span class=\"ko\">배 안 고파? → 아니, 엄청 고파.</span></li>\n<li><span class=\"en\">Didn't you go? No, I didn't.</span><span class=\"ko\">안 갔어? → 응, 안 갔어.</span></li>\n</ul></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 부정 질문에 대답할 때는 Yes 뒤엔 긍정(I do), No 뒤엔 부정(I don't)으로 짝을 맞춰요!</div>\n<h2>헷갈릴 땐 이렇게</h2>\n<p>Yes, No가 바로 안 나오면 빼고 <b>뒷부분만</b> 말해도 충분해요. 오히려 더 확실하게 전달돼요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I do! I love coffee.</span><span class=\"ko\">좋아해! 커피 엄청 좋아해.</span></li>\n<li><span class=\"en\">I'm not, actually.</span><span class=\"ko\">사실 안 고파.</span></li>\n</ul></div>",
   "related": [],
   "quiz": [
     {

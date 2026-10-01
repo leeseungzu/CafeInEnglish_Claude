@@ -111,6 +111,27 @@ def og_image(name, chip, big, small, foot="읽고 · 듣고 · 퀴즈로 확인"
     return f"/og/{name}.png"
 
 
+ORG = {"@type": "Organization", "name": "카페인영어 CafeInEnglish", "url": DOMAIN + "/",
+       "logo": {"@type": "ImageObject", "url": DOMAIN + "/assets/icon-512.png"}}
+
+
+def ld_html(objs):
+    """구글 구조화 데이터 (JSON-LD)"""
+    if not objs:
+        return ""
+    j = json.dumps({"@context": "https://schema.org", "@graph": objs}, ensure_ascii=False).replace("</", "<\\/")
+    return '<script type="application/ld+json">' + j + "</script>"
+
+
+def ld_article(title, desc, url, img, date, mod, section, crumbs):
+    art = {"@type": "Article", "headline": title[:110], "description": desc, "image": DOMAIN + img,
+           "datePublished": date, "dateModified": mod, "inLanguage": "ko", "articleSection": section,
+           "author": ORG, "publisher": ORG, "mainEntityOfPage": DOMAIN + url}
+    bc = {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": i + 1, "name": n, "item": DOMAIN + u} for i, (n, u) in enumerate(crumbs)]}
+    return [art, bc]
+
+
 def video_block(video, title, hint):
     """썸네일만 먼저 보여주고, 누르면 그때 유튜브 플레이어를 불러옵니다 (페이지 속도 ↑)."""
     return (f'<div class="video-slot no-print"><div class="video-embed" data-vid="{video}">'
@@ -143,7 +164,13 @@ def share_block(label):
 
 
 def load(kind):
-    items = [json.loads(p.read_text("utf-8")) for p in sorted((CONTENT / kind).glob("*.json"))]
+    import datetime
+    items = []
+    for f in sorted((CONTENT / kind).glob("*.json")):
+        it = json.loads(f.read_text("utf-8"))
+        mod = datetime.date.fromtimestamp(f.stat().st_mtime).isoformat()
+        it["_mod"] = max(mod, it.get("date", mod))   # 수정일 (사이트맵 · 구조화 데이터용)
+        items.append(it)
     return sorted(items, key=lambda x: (x.get("date", ""), x["id"]), reverse=True)
 
 
@@ -173,8 +200,8 @@ def mmss(t):
 
 
 # ------------------------------------------------------------------ layout
-def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og.png"):
-    full_title = f"{title} | 카페인영어" if path != "/" else f"카페인영어 — {SITE['tagline']}"
+def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og.png", seo_title=None, ld=None):
+    full_title = f"{seo_title or title} | 카페인영어" if path != "/" else f"카페인영어 — {SITE['tagline']}"
     ads = (f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={e(SITE["adsense_client"])}" crossorigin="anonymous"></script>'
            if SITE.get("adsense_client") else "")
     ga = (f'<script async src="https://www.googletagmanager.com/gtag/js?id={e(SITE["ga_id"])}"></script>'
@@ -203,6 +230,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{DOMAIN}{og_img}">
 <link rel="preconnect" href="https://i.ytimg.com">
+{ld_html(ld)}
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -273,14 +301,21 @@ def ws_head(title, sub, video, path):
 
 
 # ------------------------------------------------------------------ pages
+def similar_posts(p, n=4):
+    """같은 카테고리·세부 분류 우선, 최신 순으로 관련 글 고르기"""
+    def score(o):
+        return (2 if o["cat"] == p["cat"] else 0) + (1 if o.get("sub") == p.get("sub") else 0)
+    others = [o for o in POSTS if o["id"] != p["id"]]
+    others.sort(key=lambda o: (score(o), o.get("date", ""), o["id"]), reverse=True)
+    return others[:n]
+
+
 def related_links(p):
     links = list(p.get("related", []))
     if p.get("think") in THINK_BY_ID:
         links.append({"label": "이 영상 문장 필사하기", "href": think_url(THINK_BY_ID[p["think"]])})
-    for cat, label in (("expr", "다른 표현 보러가기 →"), ("tip", "다른 꿀팁 보러가기 →"), ("video", "다른 영상 표현 보기 →")):
-        other = next((o for o in POSTS if o["cat"] == cat and o["id"] != p["id"]), None)
-        if other:
-            links.append({"label": label, "href": post_url(other)})
+    for o in similar_posts(p, 4):
+        links.append({"label": o["title"], "href": post_url(o)})
     return links[:4]
 
 
@@ -341,6 +376,8 @@ def page_post(p):
         parts.append(f'<div class="think-box"><b>이 영상 속 마음에 남는 문장</b>은 <a href="{think_url(THINK_BY_ID[p["think"]])}">사유의 문장</a>에서 필사하고 복기할 수 있어요.</div>')
     parts.append('<h2 class="quiz-h" id="quiz-sec">오늘 배운 거 확인하기</h2><div id="quiz"></div>')
     parts.append(share_block("같이 공부할 친구에게 이 글 보내기"))
+    parts.append('<h2 class="rel-h no-print">같이 보면 좋은 글</h2><div class="cards rel no-print">'
+                 + "".join(post_card(o) for o in similar_posts(p, 4)) + "</div>")
     parts.append(PRINT_BTN)
     # 출력용 문제지 (화면에서는 숨김)
     qs = "".join(
@@ -372,7 +409,11 @@ def page_post(p):
     data["share"] = og.get("en") or xs[0].get("en") or ""
     img = og_image("p-" + p["id"], CATS[p["cat"]], og.get("en") or xs[0].get("en") or p["title"],
                    og.get("ko") or p.get("lead", ""))
-    return layout(p["title"], p.get("description", p.get("lead", "")), url, "\n".join(parts), p["cat"], data, "article", aside, og_img=img)
+    desc = p.get("description", p.get("lead", ""))
+    ld = ld_article(p["title"], desc, url, img, p.get("date", ""), p["_mod"], CATS[p["cat"]],
+                    [("홈", "/"), (CATS[p["cat"]], f"/category/{p['cat']}/"), (p["title"], url)])
+    return layout(p["title"], desc, url, "\n".join(parts), p["cat"], data, "article", aside, og_img=img,
+                  seo_title=p.get("seo_title"), ld=ld)
 
 
 def q_end(q):
@@ -425,7 +466,10 @@ def page_think(t):
     shortest = min(t["quotes"], key=lambda q: len(q["en"]))["en"]
     data["share"] = og.get("en") or shortest
     img = og_image("t-" + t["id"], "사유의 문장 · 필사", og.get("en") or shortest, og.get("ko") or t["title"], "듣고 · 따라 쓰고 · 빈칸으로 복기")
-    return layout(t["title"] + " — 필사하기", t.get("description", ""), url, body, "think", data, "article", aside, og_img=img)
+    ld = ld_article(t["title"], t.get("description", ""), url, img, t.get("date", ""), t["_mod"], "사유의 문장",
+                    [("홈", "/"), ("사유의 문장", "/category/think/"), (t["title"], url)])
+    return layout(t["title"] + " — 필사하기", t.get("description", ""), url, body, "think", data, "article", aside, og_img=img,
+                  seo_title=t.get("seo_title"), ld=ld)
 
 
 def page_category(cat):
@@ -476,7 +520,8 @@ def page_home():
 {f'<div class="a-head"><h2>새로 올라온 글</h2></div><div class="cards">{latest}</div>' if latest else ""}
 {f'<div class="a-head" style="margin-top:36px"><h2>사유의 문장</h2><a href="/category/think/">전체 보기</a></div><div class="cards">{thinks}</div>' if thinks else ""}
 """
-    return layout(SITE["name"], SITE["tagline"], "/", body, wide=True)
+    ld = [{"@type": "WebSite", "name": "카페인영어 CafeInEnglish", "alternateName": "카페인영어", "url": DOMAIN + "/", "inLanguage": "ko"}, ORG]
+    return layout(SITE["name"], SITE["tagline"], "/", body, wide=True, ld=ld)
 
 
 def page_notes():
@@ -583,8 +628,18 @@ def build():
     before = {f for f in OUT.rglob("*") if f.is_file()} if OUT.exists() else set()
     OUT.mkdir(exist_ok=True)
     shutil.copytree(ASSETS, OUT / "assets", dirs_exist_ok=True)
+    if (ROOT / "images").exists():
+        shutil.copytree(ROOT / "images", OUT / "images", dirs_exist_ok=True)
     if AUDIO_DIR.exists():
         shutil.copytree(AUDIO_DIR, OUT / "audio", dirs_exist_ok=True, ignore=shutil.ignore_patterns("index.json"))
+    global LASTMOD
+    LASTMOD = {post_url(p): p["_mod"] for p in POSTS}
+    LASTMOD.update({think_url(t): t["_mod"] for t in THINKS})
+    newest = max(LASTMOD.values()) if LASTMOD else None
+    if newest:
+        LASTMOD["/"] = newest
+        for c in CATS:
+            LASTMOD[f"/category/{c}/"] = max([v for p in POSTS if p["cat"] == c for v in [p["_mod"]]] or [newest]) if c != "think" else max(t["_mod"] for t in THINKS)
     pages = ["/"]
     write("/", page_home())
     for p in POSTS:
@@ -600,7 +655,8 @@ def build():
     (OUT / "404.html").write_text(page_404(), "utf-8")
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-        + "".join(f"  <url><loc>{DOMAIN}{u}</loc></url>\n" for u in pages) + "</urlset>\n", "utf-8")
+        + "".join(f"  <url><loc>{DOMAIN}{u}</loc>" + (f"<lastmod>{LASTMOD[u]}</lastmod>" if u in LASTMOD else "") + "</url>\n" for u in pages)
+        + "</urlset>\n", "utf-8")
     (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n", "utf-8")
     (OUT / "CNAME").write_text(DOMAIN.replace("https://", "") + "\n", "utf-8")
     (OUT / ".nojekyll").write_text("", "utf-8")
@@ -608,7 +664,7 @@ def build():
         pub = SITE["adsense_client"].replace("ca-", "")
         (OUT / "ads.txt").write_text(f"google.com, {pub}, DIRECT, f08c47fec0942fa0\n", "utf-8")
     after = {f for f in OUT.rglob("*") if f.is_file()}
-    written = {OUT / "assets" / f.name for f in ASSETS.glob("*")} | {OUT / "audio" / f.name for f in AUDIO_DIR.glob("*.mp3")} | {f for f in after if f.stat().st_mtime >= START}
+    written = {OUT / "assets" / f.name for f in ASSETS.glob("*")} | {OUT / "audio" / f.name for f in AUDIO_DIR.glob("*.mp3")} | {OUT / "images" / f.name for f in (ROOT / "images").glob("*")} | {f for f in after if f.stat().st_mtime >= START}
     stale = sorted(str(f.relative_to(OUT)) for f in before - written if f.name != ".DS_Store")
     if stale:
         print("🧹 더 이상 쓰지 않는 파일 (지워도 됨):", ", ".join(stale))

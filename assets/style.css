@@ -564,3 +564,11 @@ h1{letter-spacing:-.03em}
 @media (max-width:599px){ .logo{font-size:19px} .logo-mark{width:28px;height:28px;border-radius:7.5px} }
 /* 정답 해설(어두운 배경)에서 '연상법' 라벨 글자가 라임색으로 덮여 안 보이던 문제 */
 .cq-fb .mn b.lbl,.cq-fb.ok .mn b.lbl{color:var(--text)!important;background:var(--lime)}
+/* 같이 보면 좋은 글 */
+.rel-h{margin-top:34px}
+.cards.rel{display:grid;gap:10px}
+@media (min-width:600px){ .cards.rel{grid-template-columns:1fr 1fr} }
+/* 글 속 도식 */
+.fig{margin:18px 0}
+.fig img{display:block;width:100%;height:auto;border-radius:16px}
+.fig figcaption{font-size:13px;color:var(--muted);text-align:center;margin-top:8px}

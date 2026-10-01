@@ -4,13 +4,14 @@
   "sub": "헷갈리는 표현",
   "date": "2026-10-01",
   "title": "\"I'm good\" — '좋아요'가 아니라 '괜찮아요, 됐어요'일 때",
+  "seo_title": "I'm good 뜻 — '좋아요'가 아니라 '괜찮아요(거절)'일 때",
   "lead": "뭔가를 권할 때 나오는 I'm good은 정중한 거절이에요",
   "description": "I'm good이 '잘 지내'일 때와 '괜찮아요(됐어요)'일 때의 차이, 받고 싶을 때 대답하는 법, I'm all set까지 예문과 퀴즈로 정리했어요.",
   "og": {
     "en": "I'm good, thanks.",
     "ko": "'좋아요'가 아니라 '괜찮아요, 됐어요'"
   },
-  "body_html": "<h2>뜻이 두 개예요</h2>\n<div class=\"box\">① How are you?에 대한 대답: <b>I'm good.</b> = 잘 지내<br>② 뭔가를 권할 때의 대답: <b>I'm good.</b> = 괜찮아요, 됐어요 (정중한 거절)</div>\n<p>한국인이 자주 헷갈리는 건 ②예요. 점원이 봉투가 필요하냐고 물었는데 I'm good이라고 하면 '필요 없어요'라는 뜻이에요. 받고 싶을 땐 <b>Yes, please.</b>라고 해요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> '나는 이미 충분히 good한 상태라 더 필요 없어요'라고 생각해 보세요.</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Do you want some more? I'm good, thanks.</span><span class=\"ko\">더 줄까? 아니 괜찮아, 고마워.</span></li>\n<li><span class=\"en\">Do you need a bag? I'm good.</span><span class=\"ko\">봉투 필요하세요? 괜찮아요.</span></li>\n<li><span class=\"en\">Can I get you anything to drink? I'm good for now.</span><span class=\"ko\">마실 거 갖다 드릴까요? 지금은 괜찮아요.</span></li>\n</ul></div>\n<h2>비슷한 표현</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">No, thanks.</span><span class=\"ko\">괜찮아요, 고마워요.</span></li>\n<li><span class=\"en\">I'm all set.</span><span class=\"ko\">다 됐어요. (더 필요한 거 없어요)</span></li>\n</ul></div>",
+  "body_html": "<h2>뜻이 두 개예요</h2>\n<div class=\"box\">① How are you?에 대한 대답: <b>I'm good.</b> = 잘 지내<br>② 뭔가를 권할 때의 대답: <b>I'm good.</b> = 괜찮아요, 됐어요 (정중한 거절)</div>\n<figure class=\"fig\"><img src=\"/images/im-good-two-meanings.png\" alt=\"I'm good의 두 가지 뜻: How are you?에 대한 대답이면 잘 지내, Do you need a bag?처럼 권할 때의 대답이면 괜찮아요(거절), 받고 싶으면 Yes, please\" width=\"1080\" height=\"1567\" loading=\"lazy\"><figcaption>같은 I'm good, 질문에 따라 뜻이 달라요</figcaption></figure>\n<p>한국인이 자주 헷갈리는 건 ②예요. 점원이 봉투가 필요하냐고 물었는데 I'm good이라고 하면 '필요 없어요'라는 뜻이에요. 받고 싶을 땐 <b>Yes, please.</b>라고 해요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> '나는 이미 충분히 good한 상태라 더 필요 없어요'라고 생각해 보세요.</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Do you want some more? I'm good, thanks.</span><span class=\"ko\">더 줄까? 아니 괜찮아, 고마워.</span></li>\n<li><span class=\"en\">Do you need a bag? I'm good.</span><span class=\"ko\">봉투 필요하세요? 괜찮아요.</span></li>\n<li><span class=\"en\">Can I get you anything to drink? I'm good for now.</span><span class=\"ko\">마실 거 갖다 드릴까요? 지금은 괜찮아요.</span></li>\n</ul></div>\n<h2>비슷한 표현</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">No, thanks.</span><span class=\"ko\">괜찮아요, 고마워요.</span></li>\n<li><span class=\"en\">I'm all set.</span><span class=\"ko\">다 됐어요. (더 필요한 거 없어요)</span></li>\n</ul></div>",
   "related": [],
   "quiz": [
     {

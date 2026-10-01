@@ -4,13 +4,14 @@
   "sub": "회화",
   "date": "2026-10-01",
   "title": "Excuse me, Sorry, Pardon — 언제 뭘 써야 할까?",
+  "seo_title": "Excuse me, Sorry, Pardon 차이 — 상황별 영어",
   "lead": "상황마다 쓰는 말이 달라요",
   "description": "길을 비켜 달라고 할 때, 부딪혔을 때, 말을 못 알아들었을 때 Excuse me, Sorry, Pardon을 구분해서 쓰는 법을 예문과 퀴즈로 정리한 회화 꿀팁.",
   "og": {
     "en": "Excuse me vs Sorry",
     "ko": "언제 뭘 써야 할까?"
   },
-  "body_html": "<h2>Excuse me = 양해를 구할 때</h2>\n<p>지나가야 할 때, 사람을 부를 때, 끼어들어야 할 때처럼 <b>미리</b> 양해를 구하는 말이에요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Excuse me, can I get past?</span><span class=\"ko\">실례합니다, 좀 지나갈게요.</span></li>\n<li><span class=\"en\">Excuse me, is this seat taken?</span><span class=\"ko\">저기요, 여기 자리 있어요?</span></li>\n</ul></div>\n<h2>Sorry = 이미 실수했을 때</h2>\n<p>부딪히거나 발을 밟은 <b>뒤</b>에 하는 사과예요. (미국에선 살짝 부딪힌 뒤에 Excuse me라고 하기도 해요.)</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Oh, sorry! Are you okay?</span><span class=\"ko\">앗, 죄송해요! 괜찮으세요?</span></li>\n<li><span class=\"en\">Sorry, my mistake.</span><span class=\"ko\">죄송해요, 제 실수예요.</span></li>\n</ul></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 부딪히기 전엔 Excuse me, 부딪힌 후엔 Sorry!</div>\n<h2>Sorry? / Pardon? = 못 알아들었을 때</h2>\n<p>끝을 <b>올려서</b> 말하면 '네? 뭐라고요?'라는 뜻이 돼요. What?이라고만 하면 퉁명스럽게 들릴 수 있어요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Sorry? I didn't catch that.</span><span class=\"ko\">네? 잘 못 들었어요.</span></li>\n<li><span class=\"en\">Could you say that again?</span><span class=\"ko\">다시 한번 말씀해 주시겠어요?</span></li>\n</ul></div>",
+  "body_html": "<figure class=\"fig\"><img src=\"/images/excuse-me-sorry-pardon.png\" alt=\"Excuse me, Sorry, Pardon 상황별 정리: 실수하기 전·양해 구할 때 Excuse me, 실수한 뒤 Sorry, 못 알아들었을 때 끝을 올려 Sorry? 또는 Pardon?\" width=\"1080\" height=\"1563\" loading=\"lazy\"><figcaption>한눈에 보기: 언제 뭘 쓸까?</figcaption></figure>\n<h2>Excuse me = 양해를 구할 때</h2>\n<p>지나가야 할 때, 사람을 부를 때, 끼어들어야 할 때처럼 <b>미리</b> 양해를 구하는 말이에요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Excuse me, can I get past?</span><span class=\"ko\">실례합니다, 좀 지나갈게요.</span></li>\n<li><span class=\"en\">Excuse me, is this seat taken?</span><span class=\"ko\">저기요, 여기 자리 있어요?</span></li>\n</ul></div>\n<h2>Sorry = 이미 실수했을 때</h2>\n<p>부딪히거나 발을 밟은 <b>뒤</b>에 하는 사과예요. (미국에선 살짝 부딪힌 뒤에 Excuse me라고 하기도 해요.)</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Oh, sorry! Are you okay?</span><span class=\"ko\">앗, 죄송해요! 괜찮으세요?</span></li>\n<li><span class=\"en\">Sorry, my mistake.</span><span class=\"ko\">죄송해요, 제 실수예요.</span></li>\n</ul></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 부딪히기 전엔 Excuse me, 부딪힌 후엔 Sorry!</div>\n<h2>Sorry? / Pardon? = 못 알아들었을 때</h2>\n<p>끝을 <b>올려서</b> 말하면 '네? 뭐라고요?'라는 뜻이 돼요. What?이라고만 하면 퉁명스럽게 들릴 수 있어요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Sorry? I didn't catch that.</span><span class=\"ko\">네? 잘 못 들었어요.</span></li>\n<li><span class=\"en\">Could you say that again?</span><span class=\"ko\">다시 한번 말씀해 주시겠어요?</span></li>\n</ul></div>",
   "related": [],
   "quiz": [
     {
