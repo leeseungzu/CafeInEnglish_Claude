@@ -405,6 +405,30 @@
     room.style.marginRight = Math.max(0, d) + "px";
   }
 
+
+  /* ---------- 목차: 지금 읽고 있는 곳 표시 ---------- */
+  function initTocSpy() {
+    const links = $$(".toc a[href^='#']");
+    if (!links.length) return;
+    const ids = [...new Set(links.map(a => a.getAttribute("href").slice(1)))];
+    const secs = ids.map(id => document.getElementById(id)).filter(Boolean);
+    if (!secs.length) return;
+    let cur = null, tick = false;
+    function update() {
+      tick = false;
+      const hdr = ($(".top") ? $(".top").getBoundingClientRect().height : 0) + 120;
+      let active = secs[0];
+      for (const s of secs) { if (s.getBoundingClientRect().top - hdr <= 0) active = s; else break; }
+      if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) active = secs[secs.length - 1];
+      if (active.id === cur) return;
+      cur = active.id;
+      links.forEach(a => a.parentElement.classList.toggle("on", a.getAttribute("href") === "#" + cur));
+    }
+    addEventListener("scroll", () => { if (!tick) { tick = true; requestAnimationFrame(update); } }, { passive: true });
+    addEventListener("resize", update);
+    update();
+  }
+
   /* ---------- 시작 ---------- */
   updateBadge();
   alignNav();
@@ -423,6 +447,7 @@
   if (fab) fab.onclick = e => { e.preventDefault(); toast("카카오톡 채널은 곧 열려요"); };
   initVideo();
   initShare();
+  initTocSpy();
   if (DATA.type === "post") {
     const items = DATA.quiz.map((q, i) => ({ id: `${DATA.id}:${i}`, ...q }));
     runQuiz($("#quiz"), items, { mode: "post" });

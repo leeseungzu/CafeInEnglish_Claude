@@ -364,7 +364,7 @@ def page_post(p):
                 tips = "".join(f"<li>{e(tp)}</li>" for tp in x.get("tips", []))
                 shadow = (f'<div class="shadow">{seg_buttons(x["t"], end)}'
                           f'{say}{f"<ul class=sh-tips>{tips}</ul>" if tips else ""}</div>')
-            toc.append((f"x{xi + 1}", "· " + x["en"]))
+            toc.append((f"x{xi + 1}", x["en"]))
             parts.append(f"""<div class="box xp" id="x{xi + 1}">
   <h3>{e(x['en'])}{ts}</h3><div>{e(x['ko'])}</div>
   <div class="orig">{e(x['orig'])}</div>
