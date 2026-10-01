@@ -666,7 +666,7 @@ def page_home():
     <h1 class="a-phrase{" long" if len(t_en) > 16 else ""}" id="td-en">{phrase}</h1>
     <p class="a-mean" id="td-ko">{e(t_ko)}</p>
     <p class="a-desc" id="td-desc">{e(t_desc)}</p>
-    <div class="a-btns"><a class="btn primary" id="td-link" href="{post_url(tp)}">글 읽고 퀴즈 풀기</a><a class="btn ghost" href="/notes/">내 공부방</a></div>
+    <div class="a-btns"><a class="btn ghost" id="td-link" href="{post_url(tp)}">글 읽고 퀴즈 풀기</a><a class="btn ghost" href="/notes/">내 공부방</a></div>
   </div>
   {feature}
 </section>
