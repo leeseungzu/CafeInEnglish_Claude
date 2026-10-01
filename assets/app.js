@@ -241,6 +241,8 @@
   /* ---------- 시작 ---------- */
   updateBadge();
   $$(".js-print").forEach(b => b.onclick = () => window.print());
+  const fab = $(".kakao-fab.pending");
+  if (fab) fab.onclick = e => { e.preventDefault(); toast("카카오톡 채널은 곧 열려요 ☕"); };
   if (DATA.type === "post") {
     initVideoSeek();
     const items = DATA.quiz.map((q, i) => ({ id: `${DATA.id}:${i}`, ...q }));
