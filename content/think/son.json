@@ -1,0 +1,68 @@
+{
+  "id": "son",
+  "date": "2026-10-01",
+  "post": "son",
+  "video": "Fu2dDpHO3HQ",
+  "title": "잘하는 것보다 중요한 것",
+  "speaker": "손흥민 · LAFC 이적 후 인터뷰",
+  "description": "손흥민의 영어 인터뷰 속, 실력보다 사람을 먼저 생각하게 하는 문장 4개를 필사하고 빈칸으로 복기해 보세요.",
+  "og": {
+    "en": "Say hello first.",
+    "ko": "잘하는 것보다 중요한 것"
+  },
+  "quotes": [
+    {
+      "t": 60.25,
+      "end": 63.05,
+      "en": "It doesn't matter how good you are as a footballer.",
+      "ko": "축구를 얼마나 잘하는지는 중요하지 않아요.",
+      "blanks": [
+        "matter",
+        "good",
+        "footballer"
+      ],
+      "think": "부모님이 늘 강조하신 건 축구 실력보다 어떤 사람인가였대요. 세계적인 선수가 된 지금도 그 가르침을 붙잡고 있어요.",
+      "ask": "내가 '잘하는 것'에만 집중하느라 놓치고 있는 건 뭘까요?"
+    },
+    {
+      "t": 67.95,
+      "end": 71.05,
+      "en": "Stay humble, be nice, help the people.",
+      "ko": "겸손하고, 친절하고, 사람들을 도와라.",
+      "blanks": [
+        "humble",
+        "nice",
+        "help"
+      ],
+      "think": "부모님이 가장 중요하게 여긴 세 가지예요. 단순하지만 매일 지키기는 쉽지 않죠. (원어민은 보통 help people이라고 해요.)",
+      "ask": "오늘 이 셋 중 하나를 실천한다면 무엇을 고를까요?"
+    },
+    {
+      "t": 97.4,
+      "end": 102.9,
+      "en": "Say hello first. Sometimes it's easy, but sometimes the easiest thing is the hardest.",
+      "ko": "먼저 인사하세요. 쉬울 때도 있지만, 때로는 가장 쉬운 일이 가장 어려워요.",
+      "blanks": [
+        "hello",
+        "easiest",
+        "hardest"
+      ],
+      "think": "먼저 인사하기. 누구나 할 수 있지만 그래서 오히려 매번 하기는 어려운 일이에요. (인터뷰 말투를 문장으로 살짝 다듬었어요.)",
+      "ask": "오늘 내가 먼저 인사할 수 있는 사람은 누구일까요?"
+    },
+    {
+      "t": 198.75,
+      "end": 201.85,
+      "en": "I haven't reached my dream yet. There's still room to improve.",
+      "ko": "아직 꿈에 도달하지 못했어요. 아직 더 나아질 여지가 있어요.",
+      "blanks": [
+        "reached",
+        "dream",
+        "room",
+        "improve"
+      ],
+      "think": "어릴 때 이런 커리어를 꿈꿨냐는 질문에, 어릴 때 꿈꾸던 자리에 와 있지만 아직 꿈에 닿지 않았다고 답해요. 이미 이룬 자리에서도 자랄 자리(room)를 보는 태도예요. (인터뷰 말투를 문장으로 살짝 다듬었어요.)",
+      "ask": "내가 이미 '다 왔다'고 생각하는 곳에서, 아직 자랄 수 있는 부분은 뭘까요?"
+    }
+  ]
+}

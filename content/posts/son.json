@@ -1,0 +1,139 @@
+{
+  "id": "son",
+  "cat": "video",
+  "sub": "LAFC 인터뷰",
+  "date": "2026-10-01",
+  "title": "손흥민 영어 인터뷰에서 건진 영어표현 5개",
+  "lead": "영어로도 느껴지는 월드클래스 인성 — 영상 보면서 표현 5개 챙기기",
+  "description": "손흥민의 LAFC 이적 후 영어 인터뷰에서 every single moment, on the flip side, give back, since day one 등 실생활 표현 5개를 예문, 연상법, 퀴즈로 정리했어요.",
+  "og": {
+    "en": "since day one",
+    "ko": "손흥민 영어 인터뷰에서 건진 표현 5개"
+  },
+  "video": "Fu2dDpHO3HQ",
+  "think": "son",
+  "body_html": "<p>LA로 이적한 뒤 손흥민 선수가 한 영어 인터뷰예요. 날씨 이야기부터 부모님께 배운 태도, 팬들에 대한 마음까지 담겨 있어요. 표현마다 <b>듣기</b>를 누르면 그 장면만 바로 들을 수 있어요.</p>\n<div class=\"memo\"><b class=\"lbl\">눈여겨볼 점</b> 손흥민 선수의 영어는 문법이 완벽하지 않아도 뜻이 막힘없이 전달돼요. 완벽하게 말하려고 멈추기보다 자신 있게 이어 가는 것, 그게 이 인터뷰의 진짜 교훈이에요. 원문 문장은 들리는 대로 적되, 뜻이 헷갈릴 만한 곳은 원어민식 표현을 괄호로 보충했어요.</div>",
+  "expressions_heading": "오늘의 표현 5개",
+  "expressions": [
+    {
+      "t": 6.2,
+      "end": 7.7,
+      "en": "every single ~",
+      "ko": "하나하나 모든 ~ (강조)",
+      "orig": "I'm enjoying every single moment.",
+      "say": "아임 인조잉 에브리 씽글 모먼트",
+      "tips": [
+        "every single → 에브리 씽글 : single에 힘을 줘서 강조해요",
+        "moment의 끝 t는 거의 삼키듯 '모먼'"
+      ],
+      "ex": "I read every single comment.",
+      "exKo": "댓글 하나하나 다 읽어.",
+      "memo": "every(모든)로는 부족해서 single(하나하나)까지 붙인 강조예요!"
+    },
+    {
+      "t": 42.3,
+      "end": 45.05,
+      "en": "I'm trying.",
+      "ko": "(칭찬에) 노력 중이에요",
+      "orig": "You seem like a very nice guy. / I'm trying.",
+      "say": "유 씸 라이커 베리 나이스 가이. 아임 츄라잉",
+      "tips": [
+        "seem like a → 씸 라이커 : like와 a가 붙어요",
+        "trying → 츄라잉 : tr은 'ㅊ'에 가깝게 들려요"
+      ],
+      "ex": "You're such a good dad! Thanks, I'm trying.",
+      "exKo": "정말 좋은 아빠야! 고마워, 노력 중이야.",
+      "memo": "칭찬을 '아니에요'로 밀어내지 않고 '노력 중이에요'로 받는 말. 겸손하면서도 칭찬을 기분 좋게 받아들여요."
+    },
+    {
+      "t": 84.7,
+      "end": 88.2,
+      "en": "on the flip side",
+      "ko": "반면에, 다른 면으로는",
+      "orig": "But flip side of that, off the pitch...",
+      "say": "벗 플립 싸이더브댓, 오프 더 피치",
+      "tips": [
+        "side of that → 싸이더브댓 : d와 of가 붙어요",
+        "원어민은 보통 앞에 on을 붙여 On the flip side라고 해요"
+      ],
+      "ex": "The job pays well. On the flip side, I barely have any free time.",
+      "exKo": "그 일은 돈은 잘 벌어. 반면에 자유 시간이 거의 없어.",
+      "memo": "동전을 뒤집으면(flip) 나오는 반대쪽 면(side)!"
+    },
+    {
+      "t": 134.85,
+      "end": 136.5,
+      "en": "give back",
+      "ko": "받은 걸 돌려주다, 보답하다",
+      "orig": "I just want to give something back.",
+      "say": "아이 저슷 워너 기브 썸띵 백",
+      "tips": [
+        "want to → 워너 : 빠르게 말하면 wanna처럼 들려요",
+        "give something → 기브썸띵 : 끊지 말고 이어서"
+      ],
+      "ex": "She volunteers to give back to her community.",
+      "exKo": "그녀는 지역 사회에 보답하려고 봉사해.",
+      "memo": "받은 걸 다시(back) 주다(give)!"
+    },
+    {
+      "t": 163.8,
+      "end": 167.0,
+      "en": "since day one",
+      "ko": "처음부터, 첫날부터",
+      "orig": "A lot of people who (have been) supporting me since day one.",
+      "say": "어 랏 어브 피플 후 써포팅 미 씬스 데이 원",
+      "tips": [
+        "since day → 씬스데이 : since의 s가 day에 바로 붙어요",
+        "day one → 데이원 : 끊지 말고 한 번에"
+      ],
+      "ex": "My best friend has been with me since day one.",
+      "exKo": "제일 친한 친구는 처음부터 내 곁에 있었어.",
+      "memo": "첫째 날(day one)부터(since) 쭉!"
+    }
+  ],
+  "related": [],
+  "quiz": [
+    {
+      "tag": "영상표현",
+      "q": "\"You seem like a very nice guy.\"라는 칭찬에 손흥민은 \"I'm trying.\"이라고 했어요. 무슨 뜻일까요?",
+      "sub": "0:42 장면을 떠올려 보세요",
+      "options": [
+        "아직 해 본 적 없어요",
+        "좋은 사람이 되려고 노력 중이에요",
+        "저는 착하지 않아요",
+        "시도해 볼게요"
+      ],
+      "answer": 1,
+      "explain": "칭찬을 부정하지 않으면서 '그렇게 되려고 노력하고 있어요'라고 겸손하게 받는 말이에요.",
+      "mnemonic": "칭찬엔 '아니에요' 대신 I'm trying!"
+    },
+    {
+      "tag": "영상표현",
+      "q": "\"On the flip side, I barely have any free time.\"에서 on the flip side의 뜻은?",
+      "sub": "",
+      "options": [
+        "뒤집어 보면 재미있게도",
+        "반면에, 다른 면으로는",
+        "결론적으로",
+        "옆쪽에서"
+      ],
+      "answer": 1,
+      "explain": "on the flip side = 반면에. 앞에서 말한 것과 반대되는 면을 말할 때 써요.",
+      "mnemonic": "동전을 뒤집으면(flip) 반대쪽 면(side)!"
+    },
+    {
+      "tag": "영상표현",
+      "q": "\"그 친구는 처음부터 나를 응원해 줬어.\"를 영어로 하면?",
+      "sub": "He has supported me ___.",
+      "options": [
+        "since day one",
+        "from one day",
+        "at day first",
+        "since one day"
+      ],
+      "answer": 0,
+      "explain": "since day one = 처음부터, 첫날부터. 오랫동안 변함없이 함께한 사람을 말할 때 자주 써요. from day one도 같은 뜻이에요.",
+      "mnemonic": "첫째 날(day one)부터(since) 쭉!"
+    }
+  ]
+}
