@@ -656,6 +656,10 @@ def page_home():
             p = POST_BY_ID.get(it["post"])
             if p:
                 daily.append({**it, "url": post_url(p), "cat": CATS[p["cat"]]})
+    # 카톡 '오늘의 한 잔' 예약 작업이 읽는 공개 목록 (홈과 같은 순서·같은 날짜 계산)
+    (OUT / "daily.json").write_text(json.dumps(
+        [{"en": d["en"], "ko": d["ko"], "desc": d.get("desc", ""), "url": DOMAIN + d["url"]} for d in daily],
+        ensure_ascii=False, indent=1), "utf-8")
     today = daily[daily_index(len(daily))] if daily else (SITE.get("today") or {})
     tp = POST_BY_ID.get(today.get("post")) or next((p for p in POSTS if p["cat"] == "expr"), POSTS[0])
     t_en = today.get("en") or tp["title"]
