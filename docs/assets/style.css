@@ -683,3 +683,6 @@ body{word-break:keep-all;overflow-wrap:break-word}
   .nx .en{font-size:16px}
 }
 .btn .kk-ic{display:inline-block;width:auto;height:1.35em;vertical-align:-.32em;margin-left:7px}
+/* 자주 하는 실수: 왜 그런지 */
+.fix .why{display:block;margin-top:8px;padding:10px 12px;background:var(--bg);border-radius:10px;font-size:14px;line-height:1.65;color:var(--text)}
+.fix .why b{display:inline-block;background:var(--lime);color:var(--text);font-size:12px;font-weight:800;padding:1px 8px;border-radius:999px;margin-right:6px;vertical-align:1px}
