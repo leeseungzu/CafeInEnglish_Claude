@@ -259,11 +259,37 @@ def sns_fab():
             '</button></div>')
 
 
+
+def yt_thumb(video):
+    """유튜브 썸네일을 사이트 안에 16:9 WebP(640x360, 20KB 안팎)로 저장해 써요.
+    images/yt/<id>.webp 가 없으면 빌드할 때 한 번 내려받아 만들고, 실패하면 유튜브 주소를 그대로 써요."""
+    f = ROOT / "images" / "yt" / f"{video}.webp"
+    if not f.exists():
+        try:
+            import urllib.request, io
+            from PIL import Image
+            data = None
+            for q in ("maxresdefault", "hqdefault"):
+                try:
+                    data = urllib.request.urlopen(f"https://i.ytimg.com/vi/{video}/{q}.jpg", timeout=10).read()
+                    break
+                except Exception:
+                    continue
+            im = Image.open(io.BytesIO(data)).convert("RGB")
+            w, h = im.size
+            ch = round(w * 9 / 16)
+            im = im.crop((0, (h - ch) // 2, w, (h - ch) // 2 + ch)).resize((640, 360), Image.LANCZOS)
+            f.parent.mkdir(parents=True, exist_ok=True)
+            im.save(f, "WEBP", quality=80)
+        except Exception:
+            return f"https://i.ytimg.com/vi/{video}/hqdefault.jpg"
+    return f"/images/yt/{video}.webp"
+
 def video_block(video, title, hint):
     """썸네일만 먼저 보여주고, 누르면 그때 유튜브 플레이어를 불러옵니다 (페이지 속도 ↑)."""
     return (f'<div class="video-slot no-print"><div class="video-embed" data-vid="{video}">'
             f'<button class="v-facade" type="button" aria-label="{e(title)} 영상 재생">'
-            f'<img src="https://i.ytimg.com/vi/{video}/hqdefault.jpg" alt="" width="480" height="360">'
+            f'<img src="{yt_thumb(video)}" alt="" width="640" height="360" fetchpriority="high">'
             '<span class="v-play"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></button>'
             '<div id="yt"></div>'
             '<button class="v-close" aria-label="작은 화면 닫기"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div>'
@@ -356,7 +382,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{DOMAIN}{og_img}">
-<link rel="preconnect" href="https://i.ytimg.com">{f'<meta name="google-site-verification" content="{e(SITE["google_verify"])}">' if SITE.get("google_verify") else ""}{f'<meta name="naver-site-verification" content="{e(SITE["naver_verify"])}">' if SITE.get("naver_verify") else ""}
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>{f'<meta name="google-site-verification" content="{e(SITE["google_verify"])}">' if SITE.get("google_verify") else ""}{f'<meta name="naver-site-verification" content="{e(SITE["naver_verify"])}">' if SITE.get("naver_verify") else ""}
 {ld_html(ld)}
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
@@ -410,7 +436,7 @@ def thumb_ver(th, theme):
 def post_thumb(p):
     """영상 글은 유튜브 썸네일, 나머지는 공유 이미지(og)를 썸네일로"""
     if p.get("video"):
-        return f"https://i.ytimg.com/vi/{p['video']}/hqdefault.jpg", True
+        return yt_thumb(p["video"]), True
     return f"/og/th-p-{p['id']}.png?v={thumb_ver(p.get('thumb'), thumb_theme(p))}", False
 
 
@@ -671,7 +697,7 @@ def page_home():
     feature = ""
     if vp:
         pills = "".join(f"<span>{e(x['en'])}</span>" for x in vp.get("expressions", [])[:3])
-        thumb = f'<img src="https://i.ytimg.com/vi/{vp["video"]}/hqdefault.jpg" alt="" loading="lazy">' if vp.get("video") else ""
+        thumb = f'<img src="{yt_thumb(vp["video"])}" alt="" width="640" height="360" fetchpriority="high">' if vp.get("video") else ""
         feature = (f'<a class="a-feature" href="{post_url(vp)}"><div class="a-thumb">{thumb}<span class="a-play">'
                    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2A1A12" stroke-width="2.4" stroke-linejoin="round"><path d="M8 5l11 7-11 7z"/></svg></span></div>'
                    f'<div class="k">영상으로 배우기</div><h3>{e(vp["title"])}</h3><div class="a-pills">{pills}</div></a>')
@@ -680,6 +706,7 @@ def page_home():
     shown = {tp["id"]} | ({vp["id"]} if vp else set())
     latest = "".join(post_card(p) for p in [p for p in POSTS if p["id"] not in shown][:6])
     thinks = "".join(think_card(t) for t in THINKS[:3])
+    daily_js = json.dumps([{"en": d["en"], "ko": d["ko"], "desc": d.get("desc", ""), "cat": d["cat"], "url": d["url"]} for d in daily], ensure_ascii=False).replace("</", "<\\/") if daily else "[]"
     body = f"""<section class="a-hero">
   <div>
     <div class="a-kicker">오늘의 한 잔 · <span id="td-cat">{CATS[tp["cat"]]}</span></div>
@@ -690,6 +717,7 @@ def page_home():
   </div>
   {feature}
 </section>
+<script>(function(){{var L={daily_js},it=L[Math.floor((Date.now()/1000+9*3600)/86400)%L.length];if(!it)return;var w=it.en.split(" "),last=w.pop(),q=function(i){{return document.getElementById(i)}},x=function(t){{return String(t).replace(/[&<>"]/g,function(c){{return{{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}}[c]}})}};q("td-en").innerHTML=(w.length?x(w.join(" "))+" ":"")+'<span class="hl">'+x(last)+'</span>';q("td-en").classList.toggle("long",it.en.length>16);q("td-ko").textContent=it.ko;q("td-desc").textContent=it.desc||"";q("td-cat").textContent=it.cat;q("td-link").href=it.url}})();</script>
 <nav class="a-tiles" aria-label="카테고리">{tiles}</nav>
 {f'<div class="a-head"><h2>새로 올라온 글</h2></div><div class="cards">{latest}</div>' if latest else ""}
 {f'<div class="a-head" style="margin-top:36px"><h2>사유의 문장</h2><a href="/category/think/">전체 보기</a></div><div class="cards">{thinks}</div>' if thinks else ""}
@@ -838,7 +866,7 @@ def build():
         pub = SITE["adsense_client"].replace("ca-", "")
         (OUT / "ads.txt").write_text(f"google.com, {pub}, DIRECT, f08c47fec0942fa0\n", "utf-8")
     after = {f for f in OUT.rglob("*") if f.is_file()}
-    written = {OUT / "assets" / f.name for f in ASSETS.glob("*")} | {OUT / "audio" / f.name for f in AUDIO_DIR.glob("*.mp3")} | {OUT / "images" / f.name for f in (ROOT / "images").glob("*")} | {f for f in after if f.stat().st_mtime >= START}
+    written = {OUT / "assets" / f.name for f in ASSETS.glob("*")} | {OUT / "audio" / f.name for f in AUDIO_DIR.glob("*.mp3")} | {OUT / "images" / f.relative_to(ROOT / "images") for f in (ROOT / "images").rglob("*") if f.is_file()} | {f for f in after if f.stat().st_mtime >= START}
     stale = sorted(str(f.relative_to(OUT)) for f in before - written if f.name != ".DS_Store")
     if stale:
         print("🧹 더 이상 쓰지 않는 파일 (지워도 됨):", ", ".join(stale))
