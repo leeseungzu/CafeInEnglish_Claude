@@ -354,7 +354,7 @@ def mmss(t):
 
 # ------------------------------------------------------------------ layout
 def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og.png", seo_title=None, ld=None):
-    full_title = f"{seo_title or title} | 카페인영어" if path != "/" else f"카페인영어 — {SITE['tagline']}"
+    full_title = f"{seo_title or title} | 카페인영어" if path != "/" else f"카페인영어 - {SITE['tagline']}"
     ads = (f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={e(SITE["adsense_client"])}" crossorigin="anonymous"></script>'
            if SITE.get("adsense_client") else "")
     ga = (f'<script async src="https://www.googletagmanager.com/gtag/js?id={e(SITE["ga_id"])}"></script>'
@@ -632,7 +632,7 @@ def page_think(t):
 {"".join(cards)}
 {share_block("마음에 남는 문장, 친구와 같이 필사해요")}
 {PRINT_BTN}
-<div class="print-only ws">{ws_head("필사 노트 — " + t["title"], t["speaker"], t.get("video"), url)}{ws}</div>
+<div class="print-only ws">{ws_head("필사 노트 - " + t["title"], t["speaker"], t.get("video"), url)}{ws}</div>
 <div class="cq-cta no-print" style="margin-top:16px">
   <a class="btn primary" href="/notes/#copy">내 공부방에서 필사 노트 보기</a>
   {f'<a class="btn kakao" href="{e(SITE["kakao"])}" target="_blank" rel="noopener">매일 아침 문장 하나, 카톡으로 받기<img class="kk-ic" src="/assets/kakao-talk.png" alt="" width="24" height="22"></a>' if SITE.get("kakao") else ""}
@@ -652,7 +652,7 @@ def page_think(t):
     img = og_image("t-" + t["id"], "사유의 문장 · 필사", og.get("en") or shortest, og.get("ko") or t["title"], "듣고 · 따라 쓰고 · 빈칸으로 복기")
     ld = ld_article(t["title"], t.get("description", ""), url, img, t.get("date", ""), t["_mod"], "사유의 문장",
                     [("홈", "/"), ("사유의 문장", "/category/think/"), (t["title"], url)])
-    return layout(t["title"] + " — 필사하기", t.get("description", ""), url, body, "think", data, "article", aside, og_img=img,
+    return layout(t["title"] + " - 필사하기", t.get("description", ""), url, body, "think", data, "article", aside, og_img=img,
                   seo_title=t.get("seo_title"), ld=ld)
 
 
