@@ -320,23 +320,6 @@ ICON_LOOP = ('<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke
              '<path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg>')
 
 
-
-def word_spans(text, t, end, wt=None):
-    """듣기 중 지금 나오는 단어에 음영을 주기 위해 단어마다 시작 시간(data-s)을 붙여요.
-    wt(단어별 실제 시작 시간 목록)가 있으면 그대로 쓰고, 없으면 음절 수로 구간을 나눠 근사해요."""
-    words = text.split(" ")
-    if not (wt and len(wt) == len(words)):
-        def weight(w):
-            core = re.sub(r"[^A-Za-z']", "", w)
-            syl = max(1, len(re.findall(r"[aeiouy]+", core.lower())) - (1 if core.lower().endswith("e") and len(core) > 3 else 0))
-            return syl + (0.6 if re.search(r"[,.!?;:]$", w) else 0)
-        start, stop = t + 0.1, max(t + 0.5, end - 0.3)
-        ws = [weight(w) for w in words]
-        tot, acc, wt = sum(ws), 0.0, []
-        for x in ws:
-            wt.append(round(start + (stop - start) * acc / tot, 2)); acc += x
-    return " ".join(f'<span class="w" data-s="{s}">{e(w)}</span>' for w, s in zip(words, wt))
-
 def seg_buttons(t, end):
     return (f'<div class="sh-btns"><button class="sh-play" data-t="{t}" data-end="{end}" data-n="1">{ICON_PLAY}{mmss(t)} 듣기</button>'
             f'<button class="sh-play" data-t="{t}" data-end="{end}" data-n="3">{ICON_LOOP}3번 반복</button></div>')
@@ -697,7 +680,7 @@ def page_think(t):
     for i, q in enumerate(t["quotes"]):
         cards.append(f"""<div class="quote no-print" id="q{i + 1}" data-id="{t['id']}:{i}" data-i="{i}">
   <div class="meta"><span>문장 {i + 1} / {len(t['quotes'])}</span></div>
-  <p class="en"{f' data-t="{q["t"]}" data-end="{q_end(q)}"' if t.get('video') else ''}>{word_spans(q['en'], q['t'], q_end(q), q.get('wt')) if t.get('video') else e(q['en'])}</p><p class="ko">{e(q['ko'])}</p>
+  <p class="en">{e(q['en'])}</p><p class="ko">{e(q['ko'])}</p>
   {seg_buttons(q['t'], q_end(q)) if t.get('video') else ''}
   <div class="think-box"><b class="lbl">생각해 보기</b> {e(q['think'])}<span class="ask">{e(q['ask'])}</span></div>
   <div class="tabs"><button class="on" data-mode="copy">필사하기</button><button data-mode="blank">빈칸 복기</button></div>

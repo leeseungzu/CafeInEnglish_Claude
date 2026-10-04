@@ -284,13 +284,6 @@
         seg.since = Date.now();
         player.setPlaybackRate(rate); player.seekTo(t, true); player.playVideo();
         started = true; updateFloat();
-        // 모바일에서 따라오는 영상이 듣는 문장을 가리지 않도록, 문장을 영상 바로 아래로 살짝 내려 보여줘요
-        const line = btn.closest(".quote") && btn.closest(".quote").querySelector(".en");
-        if (line) setTimeout(() => {
-          if (!box.classList.contains("float") || innerWidth >= 1024) return;
-          const vb = box.getBoundingClientRect().bottom, r = line.getBoundingClientRect();
-          if (r.top < vb + 12 || r.top > innerHeight * 0.6) scrollBy({ top: r.top - (vb + 20), behavior: "smooth" });
-        }, 450);
         timer = setInterval(() => {
           if (!seg || Date.now() - seg.since < 700) return;          // 이동 직후엔 시간이 바로 안 바뀌어요
           if (player.getPlayerState() !== 1) return;                 // 재생 중일 때만 셉니다
@@ -303,21 +296,6 @@
         }, 150);
       });
     }
-    // 듣는 동안 지금 나오는 단어에 음영 (영상 시간 기준, 속도·반복에도 그대로)
-    const lines = $$(".en[data-t]").map(el => ({ el, t: +el.dataset.t, end: +el.dataset.end, ws: $$(".w", el).map(w => ({ w, s: +w.dataset.s })) }));
-    let litLine = null, litWord = null;
-    function clearLit() { litWord && litWord.classList.remove("on"); litLine && litLine.classList.remove("live"); litLine = litWord = null; }
-    if (lines.length) setInterval(() => {
-      if (!ready || player.getPlayerState() !== 1) return;
-      const ct = player.getCurrentTime();
-      const ln = lines.find(l => ct >= l.t - 0.05 && ct < l.end + 0.25);
-      if (!ln) { clearLit(); return; }
-      let cur = ln.ws[0];
-      for (const x of ln.ws) { if (x.s <= ct) cur = x; else break; }
-      if (litLine !== ln.el) { clearLit(); litLine = ln.el; ln.el.classList.add("live"); }
-      if (litWord !== cur.w) { litWord && litWord.classList.remove("on"); litWord = cur.w; cur.w.classList.add("on"); }
-    }, 80);
-
     $$(".sh-play").forEach(b => b.onclick = () => {
       if (b.classList.contains("on")) { ready && player.pauseVideo(); stopSeg(); return; }
       playSeg(+b.dataset.t, +b.dataset.end, +b.dataset.n, b);

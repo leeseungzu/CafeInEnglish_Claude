@@ -695,7 +695,3 @@ body{word-break:keep-all;overflow-wrap:break-word}
 .fix .why b{display:inline-block;background:var(--lime);color:var(--text);font-size:12px;font-weight:800;padding:1px 8px;border-radius:999px;margin-right:6px;vertical-align:1px}
 /* 작은 화면(360px 이하): 로고 영문을 줄여 내 공부방 버튼이 한 줄에 오도록 */
 @media (max-width:374px){ .logo i{display:none} }
-
-/* ===== 듣기 중 단어 음영 (사유의 문장) ===== */
-.en .w{border-radius:5px;padding:0 1px;margin:0 -1px;transition:background-color .12s,color .12s;box-decoration-break:clone;-webkit-box-decoration-break:clone}
-.en.live .w.on{background:var(--lime)}
