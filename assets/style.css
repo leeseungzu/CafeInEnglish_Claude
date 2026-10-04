@@ -552,6 +552,11 @@ h1{letter-spacing:-.03em}
   .nav a{padding:6px;font-size:clamp(14px,4.1vw,16px)}
   .nav a::after{left:6px;right:6px}
 }
+/* 홈 탭 추가 후: 메뉴 5개가 한 줄에 들어가도록 */
+@media (max-width:599px){
+  .nav a{padding:6px 4px;font-size:clamp(12.5px,3.6vw,15px)}
+  .nav a::after{left:4px;right:4px}
+}
 .share-b .btn{white-space:nowrap;padding:12px 10px}
 
 /* ===== 로고 마크 C. ===== */

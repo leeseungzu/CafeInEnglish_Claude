@@ -360,7 +360,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
     ga = (f'<script async src="https://www.googletagmanager.com/gtag/js?id={e(SITE["ga_id"])}"></script>'
           f"<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag('js',new Date());gtag('config','{e(SITE['ga_id'])}');</script>"
           if SITE.get("ga_id") else "")
-    navlinks = "".join(
+    navlinks = f'<a href="/"{" class=on" if path == "/" else ""}>홈</a>' + "".join(
         f'<a href="/category/{k}/"{" class=on" if nav == k else ""}>{v}</a>' for k, v in CATS.items())
     room = f'<a class="room{" on" if nav == "notes" else ""}" href="/notes/">내 공부방<span class="badge" id="nav-badge" hidden></span></a>'
     pjson = json.dumps(data or {}, ensure_ascii=False).replace("</", "<\\/")
