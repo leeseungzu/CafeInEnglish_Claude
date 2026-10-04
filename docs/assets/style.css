@@ -555,7 +555,7 @@ h1{letter-spacing:-.03em}
 /* 홈 탭 추가 후: 메뉴 5개를 로고 왼쪽 끝 ~ 내 공부방 오른쪽 끝에 딱 맞춰 정렬 */
 @media (max-width:599px){
   .nav{width:100%!important;margin:6px 0 0!important;justify-content:space-between;gap:0}
-  .nav a{padding:6px 0;font-size:clamp(12.5px,3.7vw,15px)}
+  .nav a{padding:6px 0;font-size:clamp(12.5px,3.95vw,17px)}
   .nav a::after{left:0;right:0}
   .room{margin-right:0!important}
 }
