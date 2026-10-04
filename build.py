@@ -201,6 +201,8 @@ def thumb_image(name, theme, ko, text, key):
     out = OUT / "og" / f"{name}.png"
     out.parent.mkdir(parents=True, exist_ok=True)
     im.convert("P", palette=Image.ADAPTIVE, colors=64).save(out, optimize=True)
+    # 목록 카드용 작은 WebP (카드 폭 325px 기준, 2배 해상도 대비 480px)
+    im.resize((480, round(480 * H / W)), Image.LANCZOS).save(out.with_suffix(".webp"), "WEBP", quality=82)
     return f"/og/{name}.png"
 
 
@@ -283,13 +285,29 @@ def yt_thumb(video):
             im.save(f, "WEBP", quality=80)
         except Exception:
             return f"https://i.ytimg.com/vi/{video}/hqdefault.jpg"
+    small = f.with_name(f"{video}-400.webp")
+    if not small.exists():
+        try:
+            from PIL import Image
+            Image.open(f).resize((400, 225), Image.LANCZOS).save(small, "WEBP", quality=78)
+        except Exception:
+            pass
     return f"/images/yt/{video}.webp"
+
+
+def yt_img(video, attrs):
+    """휴대폰엔 400px, 큰 화면엔 640px 썸네일을 보내요"""
+    src = yt_thumb(video)
+    if src.startswith("/images/yt/") and (ROOT / "images" / "yt" / f"{video}-400.webp").exists():
+        return (f'<img src="/images/yt/{video}-400.webp" srcset="/images/yt/{video}-400.webp 400w, {src} 640w" '
+                f'sizes="(max-width:600px) 92vw, 480px" alt="" width="640" height="360" {attrs}>')
+    return f'<img src="{src}" alt="" width="640" height="360" {attrs}>'
 
 def video_block(video, title, hint):
     """썸네일만 먼저 보여주고, 누르면 그때 유튜브 플레이어를 불러옵니다 (페이지 속도 ↑)."""
     return (f'<div class="video-slot no-print"><div class="video-embed" data-vid="{video}">'
             f'<button class="v-facade" type="button" aria-label="{e(title)} 영상 재생">'
-            f'<img src="{yt_thumb(video)}" alt="" width="640" height="360" fetchpriority="high">'
+            + yt_img(video, 'fetchpriority="high"') +
             '<span class="v-play"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></button>'
             '<div id="yt"></div>'
             '<button class="v-close" aria-label="작은 화면 닫기"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div>'
@@ -471,7 +489,12 @@ def card(href, chips, title, sub, thumb=None, play=False):
     if thumb:
         badge = ('<span class="th-play"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="#2A1A12"/></svg></span>'
                  if play else "")
-        th = f'<div class="thumb"><img src="{thumb}" alt="" loading="lazy" width="960" height="504">{badge}</div>'
+        if thumb.startswith("/images/yt/"):
+            vid = thumb.rsplit("/", 1)[1].replace(".webp", "")
+            img = yt_img(vid, 'loading="lazy"').replace('sizes="(max-width:600px) 92vw, 480px"', 'sizes="(max-width:600px) 92vw, 340px"')
+        else:
+            img = f'<img src="{thumb.replace(".png?", ".webp?")}" alt="" loading="lazy" width="960" height="504">'
+        th = f'<div class="thumb">{img}{badge}</div>'
     return f'<a class="card{" has-th" if thumb else ""}" href="{href}">{th}<div class="chips">{chip_html}</div><h3>{e(title)}</h3><p>{e(sub)}</p></a>'
 
 
@@ -745,7 +768,7 @@ def page_home():
     feature = ""
     if vp:
         pills = "".join(f"<span>{e(x['en'])}</span>" for x in vp.get("expressions", [])[:3])
-        thumb = f'<img src="{yt_thumb(vp["video"])}" alt="" width="640" height="360" fetchpriority="high">' if vp.get("video") else ""
+        thumb = yt_img(vp["video"], 'fetchpriority="high"') if vp.get("video") else ""
         feature = (f'<a class="a-feature" href="{post_url(vp)}"><div class="a-thumb">{thumb}<span class="a-play">'
                    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2A1A12" stroke-width="2.4" stroke-linejoin="round"><path d="M8 5l11 7-11 7z"/></svg></span></div>'
                    f'<div class="k">영상으로 배우기</div><h3>{e(vp["title"])}</h3><div class="a-pills">{pills}</div></a>')
@@ -899,6 +922,8 @@ def build():
     for c in CATS:
         write(f"/category/{c}/", page_category(c)); pages.append(f"/category/{c}/")
     write("/notes/", page_notes())
+    if (ROOT / "images").exists():  # 빌드 중 새로 만든 유튜브 썸네일까지 다시 복사
+        shutil.copytree(ROOT / "images", OUT / "images", dirs_exist_ok=True)
     write("/about/", page_static("about", "카페인영어 소개", "제가 매일 영어 공부하려고 만든 공간, 카페인영어를 소개해요", ABOUT)); pages.append("/about/")
     write("/privacy/", page_static("privacy", "개인정보처리방침", "카페인영어 개인정보처리방침", PRIVACY)); pages.append("/privacy/")
     write("/contact/", page_static("contact", "문의", "카페인영어 문의하기", CONTACT)); pages.append("/contact/")
