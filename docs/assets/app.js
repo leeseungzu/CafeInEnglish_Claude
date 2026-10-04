@@ -397,7 +397,7 @@
     const nav = $(".nav"), room = $(".room");
     if (!nav || !room) return;
     room.style.marginRight = "";
-    if (innerWidth >= 600) return;
+    return; // 모바일 메뉴는 CSS로 로고~내 공부방 폭에 맞춰 정렬 (버튼은 움직이지 않음)
     const last = nav.lastElementChild, rg = document.createRange();
     rg.selectNodeContents(last);
     const t = rg.getBoundingClientRect(), r = room.getBoundingClientRect();
