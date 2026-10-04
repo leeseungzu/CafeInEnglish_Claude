@@ -344,7 +344,50 @@ def audio_map(*htmls):
 POST_BY_ID, THINK_BY_ID = {p["id"]: p for p in POSTS}, {t["id"]: t for t in THINKS}
 post_url = lambda p: f"/p/{p['id']}/"
 think_url = lambda t: f"/think/{t['id']}/"
+# ------------------------------------------------------------------ font (속도)
+FONT_FILE = ASSETS / "pretendard-subset.woff2"
+FONT_CHARS = ASSETS / "pretendard-subset.chars"
+
+
+def site_font():
+    """사이트에 실제로 쓰인 글자만 담은 Pretendard 글꼴 1개(woff2, 120KB 안팎)를 만들어요.
+    외부 CDN 글꼴(조각 파일 14개, 350KB)을 대신해서 첫 화면이 빨리 떠요.
+    글자 목록이 바뀌었을 때만 다시 만들고, fontTools·brotli가 없으면 기존 파일을 그대로 써요."""
+    chars = set()
+    for f in list(CONTENT.rglob("*.json")) + [ROOT / "build.py", ASSETS / "app.js"]:
+        chars |= set(f.read_text("utf-8"))
+    chars |= {chr(c) for c in range(0x20, 0x7F)}
+    text = "".join(sorted(c for c in chars if ord(c) >= 0x20))
+    old = FONT_CHARS.read_text("utf-8") if FONT_CHARS.exists() else ""
+    if FONT_FILE.exists() and set(text) <= set(old):
+        return
+    try:
+        from fontTools.ttLib import TTFont
+        from fontTools.varLib import instancer
+        from fontTools import subset
+        import brotli  # noqa: F401  (woff2 저장에 필요)
+    except ImportError:
+        if FONT_FILE.exists():
+            print("⚠️  새 글자가 생겼지만 fontTools/brotli가 없어 글꼴을 다시 만들지 못했어요 (pip install fonttools brotli)")
+        return
+    font = instancer.instantiateVariableFont(TTFont(ROOT / "fonts" / "PretendardVariable.ttf"), {"wght": (400, 800)})
+    opts = subset.Options()
+    opts.flavor = "woff2"
+    opts.layout_features = ["kern", "liga", "calt"]
+    sub = subset.Subsetter(opts)
+    sub.populate(text=text, unicodes=list(range(0xA0, 0x100)) + list(range(0x2010, 0x2028)) + list(range(0x2190, 0x2194)))
+    sub.subset(font)
+    font.flavor = "woff2"
+    font.save(FONT_FILE)
+    FONT_CHARS.write_text(text, "utf-8")
+    print(f"🔤 글꼴 다시 만듦: {len(text)}자, {FONT_FILE.stat().st_size // 1024}KB")
+
+
+site_font()
+
 ASSET_V = hashlib.md5(b"".join(f.read_bytes() for f in sorted(ASSETS.glob("*")))).hexdigest()[:8]
+FONT_V = hashlib.md5(FONT_FILE.read_bytes()).hexdigest()[:8] if FONT_FILE.exists() else ""
+STYLE_CSS = (ASSETS / "style.css").read_text("utf-8")
 
 
 def mmss(t):
@@ -357,9 +400,14 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
     full_title = f"{seo_title or title} | 카페인영어" if path != "/" else f"카페인영어 - {SITE['tagline']}"
     ads = (f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={e(SITE["adsense_client"])}" crossorigin="anonymous"></script>'
            if SITE.get("adsense_client") else "")
-    ga = (f'<script async src="https://www.googletagmanager.com/gtag/js?id={e(SITE["ga_id"])}"></script>'
-          f"<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag('js',new Date());gtag('config','{e(SITE['ga_id'])}');</script>"
+    # 방문 통계(GA)는 페이지가 다 뜬 뒤에 불러와요 (첫 화면 속도 ↑, 방문 기록은 그대로 남아요)
+    ga = (f"<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag('js',new Date());gtag('config','{e(SITE['ga_id'])}');"
+          f"addEventListener('load',function(){{setTimeout(function(){{var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id={e(SITE['ga_id'])}';document.head.appendChild(s)}},1500)}});</script>"
           if SITE.get("ga_id") else "")
+    font_head = (f'<link rel="preload" href="/assets/pretendard-subset.woff2?v={FONT_V}" as="font" type="font/woff2" crossorigin>'
+                 f"<style>@font-face{{font-family:'Pretendard Variable';font-weight:400 800;font-style:normal;font-display:swap;"
+                 f"src:url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2-variations'),url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2')}}</style>"
+                 if FONT_V else '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">')
     navlinks = f'<a href="/"{" class=on" if path == "/" else ""}>홈</a>' + "".join(
         f'<a href="/category/{k}/"{" class=on" if nav == k else ""}>{v}</a>' for k, v in CATS.items())
     room = f'<a class="room{" on" if nav == "notes" else ""}" href="/notes/">내 공부방<span class="badge" id="nav-badge" hidden></span></a>'
@@ -382,20 +430,20 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{DOMAIN}{og_img}">
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>{f'<meta name="google-site-verification" content="{e(SITE["google_verify"])}">' if SITE.get("google_verify") else ""}{f'<meta name="naver-site-verification" content="{e(SITE["naver_verify"])}">' if SITE.get("naver_verify") else ""}
+{f'<meta name="google-site-verification" content="{e(SITE["google_verify"])}">' if SITE.get("google_verify") else ""}{f'<meta name="naver-site-verification" content="{e(SITE["naver_verify"])}">' if SITE.get("naver_verify") else ""}
 {ld_html(ld)}
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="icon" href="/assets/icon-192.png" sizes="192x192" type="image/png">
 <meta name="theme-color" content="#F4EEE4">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="/assets/style.css?v={ASSET_V}">
+{font_head}
+<style>{STYLE_CSS}</style>
 {ads}{ga}
 </head>
 <body>
 <header class="top"><div class="top-in">
-  <a class="logo" href="/"><img class="logo-mark" src="/assets/icon-192.png" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
+  <a class="logo" href="/"><img class="logo-mark" src="/assets/logo-mark.png" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
   <nav class="nav">{navlinks}</nav>
   {room}
 </div></header>

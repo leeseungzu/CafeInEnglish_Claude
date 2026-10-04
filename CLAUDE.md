@@ -94,3 +94,10 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 - `adsense_client`: 예) `ca-pub-XXXXXXXXXXXXXXXX` — 넣으면 광고 스크립트와 ads.txt 자동 생성
 - `google_verify` / `naver_verify`: 서치콘솔·서치어드바이저 'HTML 태그' 인증 코드 (content 값만)
 - `ga_id`: 구글 애널리틱스 측정 ID (예: `G-XXXXXXX`)
+
+## 속도 (모바일 PageSpeed)
+
+- 글꼴: 외부 CDN 대신 `assets/pretendard-subset.woff2` (사이트에 쓰인 글자만 담은 Pretendard, 굵기 400~800). build.py가 content·build.py·app.js의 글자를 모아 새 글자가 생기면 다시 만든다 (`pip install fonttools brotli` 필요, 없으면 기존 파일 사용 + 경고).
+- style.css는 각 페이지 `<head>`에 인라인으로 들어간다 (렌더링 차단 요청 없음).
+- 유튜브 썸네일은 `images/yt/<id>.webp` (640x360)로 저장해 쓰고, 홈 첫 화면 썸네일은 fetchpriority=high.
+- GA는 페이지 load 1.5초 뒤에 불러온다.
