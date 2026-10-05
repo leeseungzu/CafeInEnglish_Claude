@@ -455,6 +455,39 @@
   addEventListener("resize", alignNav);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(alignNav);
   $$(".js-print").forEach(b => b.onclick = () => window.print());
+  // 문의 폼 (FormSubmit으로 전송, 실패하면 메일 앱으로)
+  const cf = $("#contact-form");
+  if (cf) {
+    let kind = $(".cf-chip.on", cf)?.dataset.kind || "기타";
+    $$(".cf-chip", cf).forEach(c => c.onclick = () => {
+      $$(".cf-chip", cf).forEach(x => { x.classList.toggle("on", x === c); x.setAttribute("aria-pressed", x === c); });
+      kind = c.dataset.kind;
+    });
+    const err = $("#cf-err"), btn = $(".cf-send", cf);
+    const fail = m => { err.textContent = m; err.hidden = false; };
+    cf.onsubmit = async ev => {
+      ev.preventDefault(); err.hidden = true;
+      const msg = $("#cf-msg").value.trim(), mail = $("#cf-mail").value.trim();
+      if (msg.length < 2) return fail("궁금한 내용을 적어 주세요.");
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) return fail("답장 받을 이메일을 확인해 주세요.");
+      if (cf._honey && cf._honey.value) return;
+      const to = cf.dataset.to, subject = `[카페인영어 문의] ${kind}`;
+      btn.disabled = true; btn.textContent = "보내는 중…";
+      try {
+        const r = await fetch(`https://formsubmit.co/ajax/${to}`, {
+          method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({ _subject: subject, _template: "table", _replyto: mail, "문의 유형": kind, "내용": msg, "답장 이메일": mail, "보낸 페이지": location.href })
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok || String(j.success) === "false") throw new Error("send");
+        cf.hidden = true; $("#cf-done").hidden = false;
+      } catch (e) {
+        btn.disabled = false; btn.textContent = "문의 보내기";
+        fail("지금 바로 보내지 못했어요. 메일 앱으로 이어서 보낼게요.");
+        setTimeout(() => { location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msg + "\n\n답장 이메일: " + mail)}`; }, 900);
+      }
+    };
+  }
   $$(".ct-copy").forEach(b => b.onclick = async () => {
     const v = b.dataset.copy;
     try { await navigator.clipboard.writeText(v); } catch (e) {

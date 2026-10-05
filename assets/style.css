@@ -921,3 +921,25 @@ main h2{font-size:22px;line-height:1.45;font-weight:700;margin:52px 0 14px}
 .hs-txt .btn{background:#191F28;color:#fff;border-color:#191F28;border-radius:14px}
 .hs-txt .btn:hover{background:#333D4B}
 @media (min-width:600px){ .hs .a-phrase{font-size:62px} .hs .a-phrase.long{font-size:52px} }
+/* ===== 문의 폼 (A안) ===== */
+.cf{max-width:640px;margin-top:8px}
+.cf-step{font-size:14px;font-weight:700;color:var(--muted);margin:22px 0 10px}
+.cf-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.cf-chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 16px;font:inherit;font-size:15px;font-weight:600;color:var(--sub);cursor:pointer;transition:background .15s,color .15s}
+.cf-chip:hover{border-color:#C9CFD6}
+.cf-chip.on{background:#191F28;border-color:#191F28;color:#fff}
+.cf-l{display:block;font-size:14px;font-weight:700;color:var(--sub);margin:22px 0 8px}
+.cf-in{display:block;width:100%;border:1.5px solid transparent;background:var(--soft);border-radius:14px;padding:16px 18px;font:inherit;font-size:16px;color:var(--text);transition:border-color .15s,background .15s}
+.cf-in::placeholder{color:#8B95A1}
+.cf-in:focus{outline:none;background:#fff;border-color:#191F28}
+textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
+.cf-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.cf-err{margin:14px 0 0;font-size:14px;font-weight:600;color:#C9372C}
+.cf-send{display:block;width:100%;margin-top:26px;border:0;background:#191F28;color:#fff;border-radius:16px;padding:18px;font:inherit;font-size:17px;font-weight:700;cursor:pointer}
+.cf-send:hover{background:#333D4B}
+.cf-send:disabled{opacity:.6;cursor:default}
+.cf-note{font-size:13px;color:#8B95A1;margin:12px 0 0;text-align:center}
+.cf-done{max-width:640px;margin-top:16px;background:var(--soft);border-radius:24px;padding:36px 28px;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.cf-done b{font-size:22px;color:var(--text)}
+.cf-done span{color:var(--sub);margin-bottom:14px}
+.cf-done[hidden],.cf[hidden]{display:none}

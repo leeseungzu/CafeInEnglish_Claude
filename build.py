@@ -1148,26 +1148,27 @@ PRIVACY = f"""
 <p>개인정보 관련 문의: {email_html}</p>
 <p>시행일: 2026년 10월 1일</p>"""
 def _contact():
-    from urllib.parse import quote
-    icons = {
-        "bulb": '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/>',
-        "bug": '<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>',
-        "shield": '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
-        "hand": '<path d="M17 11V6a2 2 0 0 0-4 0v5M13 10V4a2 2 0 0 0-4 0v7M9 10.5V6a2 2 0 0 0-4 0v8a8 8 0 0 0 16 0v-3a2 2 0 0 0-4 0"/>',
-    }
-    svg = lambda d, n=22: f'<svg width="{n}" height="{n}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{d}</svg>'
-    arrow = svg('<path d="M5 12h14M13 6l6 6-6 6"/>', 18)
-    kinds = [("bulb", "표현·콘텐츠 제안", "궁금한 표현, 다뤄줬으면 하는 영상"),
-             ("bug", "오류 제보", "틀린 해설, 화면·기능 오류"),
-             ("shield", "저작권 요청", "인용된 콘텐츠의 수정·삭제 요청"),
-             ("hand", "협업·제휴", "콘텐츠 협업, 광고, 강의 제안")]
-    tiles = "".join(
-        f'<a class="ct-tile" href="mailto:{e(EMAIL)}?subject={quote("[" + t + "] ")}"><span class="ct-i">{svg(icons[i])}</span>'
-        f'<span class="ct-t"><b>{t}</b><span>{d}</span></span><span class="ct-go">{arrow}</span></a>' for i, t, d in kinds)
-    copy_icon = svg('<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/>', 16)
-    return (f'<p class="lead">어떤 이야기든 편하게 보내주세요.</p><div class="ct-grid">{tiles}</div>'
-            f'<div class="ct-mail"><span class="ct-k">이메일</span><span class="ct-addr">{e(EMAIL)}</span>'
-            f'<button class="ct-copy" data-copy="{e(EMAIL)}">{copy_icon}<span>주소 복사</span></button></div>')
+    """문의 폼 (A안): 유형 → 내용 → 답장 이메일 → 보내기.
+    서버가 없어서 FormSubmit(formsubmit.co)으로 승주 메일함에 바로 보내요. 실패하면 메일 앱으로 이어서 보내요.
+    처음 한 번은 FormSubmit이 보내는 '확인(Activate)' 메일을 눌러야 이후 문의가 들어와요."""
+    kinds = ["표현·콘텐츠 제안", "오류 제보", "저작권 요청", "협업·제휴", "기타"]
+    chips = "".join(f'<button type="button" class="cf-chip{" on" if n == 0 else ""}" data-kind="{e(k)}" aria-pressed="{"true" if n == 0 else "false"}">{e(k)}</button>'
+                    for n, k in enumerate(kinds))
+    return (f'<p class="lead">어떤 이야기든 편하게 남겨 주세요. 보통 1~2일 안에 답장드려요.</p>'
+            f'<form class="cf" id="contact-form" data-to="{e(EMAIL)}" novalidate>'
+            f'<div class="cf-step" id="cf-kind-l">어떤 문의인가요?</div>'
+            f'<div class="cf-chips" role="group" aria-labelledby="cf-kind-l">{chips}</div>'
+            '<label class="cf-l" for="cf-msg">궁금한 내용</label>'
+            '<textarea class="cf-in" id="cf-msg" name="message" rows="6" maxlength="3000" required '
+            'placeholder="예) \'I\'m down\'처럼 헷갈리는 표현을 더 다뤄 주세요"></textarea>'
+            '<label class="cf-l" for="cf-mail">답장 받을 이메일</label>'
+            '<input class="cf-in" id="cf-mail" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="name@example.com">'
+            '<input type="text" name="_honey" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">'
+            '<p class="cf-err" id="cf-err" role="alert" hidden></p>'
+            '<button class="cf-send" type="submit">문의 보내기</button>'
+            '<p class="cf-note">보내 주신 이메일은 답장에만 사용해요</p></form>'
+            '<div class="cf-done" id="cf-done" hidden><b>문의가 잘 전달됐어요</b><span>1~2일 안에 남겨 주신 이메일로 답장드릴게요.</span>'
+            '<a class="btn ghost" href="/">홈으로</a></div>')
 
 
 CONTACT = _contact() if EMAIL else "<p>(문의 이메일 준비 중)</p>"
