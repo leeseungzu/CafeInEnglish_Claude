@@ -6,5 +6,5 @@
   {"id": "mistakes", "title": "한국인이 자주 틀리는 영어", "desc": "문법은 맞는데 뜻이 반대로 전해지는 함정 표현과 콩글리시 바로잡기",
    "posts": ["negative-question", "would-you-mind", "in-vs-after", "konglish", "im-good", "im-down"]},
   {"id": "leaders", "title": "리더들의 영어 연설", "desc": "젠슨 황, 순다르 피차이, 손흥민의 실제 연설과 인터뷰에서 건진 표현과 문장",
-   "posts": ["jensen", "pichai", "son"], "thinks": ["jensen", "pichai", "son"]}
+   "posts": ["jensen", "pichai", "son", "jensen-trump-call"], "thinks": ["jensen", "pichai", "son"]}
 ]
