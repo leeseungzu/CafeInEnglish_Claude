@@ -68,6 +68,115 @@ def _font(size, weight):
     return f
 
 
+EN_FONT = ROOT / "fonts" / "PlusJakartaSans-Bold.ttf"
+OG_BG = [("#FFF3EC", "#FFE0CF"), ("#EEF5FF", "#D6E6FF"), ("#F4F0FF", "#E2D8FF"), ("#EFFAF3", "#D2F0DE"), ("#FFF9E9", "#FCEBB6")]
+
+
+def og_chat(name, chip, en, ko, chat, icon, key_id):
+    """C안 공유 이미지(1200×630): 왼쪽 표현 + 오른쪽 실제 대화 카드 + 3D 아이콘. 카톡·SNS 미리보기용."""
+    if not (Image and FONT.exists()):
+        return "/assets/og.png"
+    from PIL import ImageFilter
+    W, H, PAD = 1200, 630, 72
+    INK, BODY, MUTED, LIME = "#191F28", "#333D4B", "#6B7684", "#CDEB5B"
+    c1, c2 = OG_BG[int(hashlib.md5(key_id.encode()).hexdigest(), 16) % len(OG_BG)]
+    hx = lambda c: tuple(int(c[i:i + 2], 16) for i in (1, 3, 5))
+    g = Image.new("RGB", (2, 2)); g.putdata([hx(c1), hx(c1), hx(c1), hx(c2)])
+    im = g.resize((W, H), Image.BILINEAR).convert("RGBA")
+    glow = Image.new("RGBA", (W, H), (255, 255, 255, 0))
+    ImageDraw.Draw(glow).ellipse((560, -220, 1260, 380), fill=(255, 255, 255, 170))
+    im = Image.alpha_composite(im, glow.filter(ImageFilter.GaussianBlur(90)))
+    d = ImageDraw.Draw(im)
+    enf = lambda sz: ImageFont.truetype(str(EN_FONT), sz) if EN_FONT.exists() else _font(sz, 800)
+    # 브랜드 + 칩
+    d.rounded_rectangle((PAD, 56, PAD + 52, 108), 14, fill=INK)
+    d.text((PAD + 12, 82), "C", font=_font(36, 800), fill="#FFFFFF", anchor="lm")
+    d.ellipse((PAD + 35, 88, PAD + 43, 96), fill=LIME)
+    d.text((PAD + 68, 82), "카페인영어 CafeInEnglish", font=_font(26, 700), fill=INK, anchor="lm")
+    cf = _font(22, 700); cw = d.textlength(chip, font=cf)
+    d.rounded_rectangle((PAD, 150, PAD + cw + 32, 190), 20, fill=(255, 255, 255, 200))
+    d.text((PAD + 16, 170), chip, font=cf, fill=BODY, anchor="lm")
+    # 큰 영어 표현 (왼쪽 칸, 최대 3줄)
+    maxw = 470
+    for size in range(84, 40, -4):
+        bf = enf(size); lines = _wrap(d, en, bf, maxw)
+        if len(lines) <= 3 and all(d.textlength(l, font=bf) <= maxw for l in lines) and len(lines) * size * 1.15 <= 250:
+            break
+    lh = int(size * 1.15); y = 222 + (250 - len(lines) * lh) // 2
+    for i, l in enumerate(lines):
+        lw = d.textlength(l, font=bf)
+        if i == len(lines) - 1:
+            d.rectangle((PAD - 4, y + int(size * .78), PAD + lw + 4, y + int(size * 1.02)), fill=LIME)
+        d.text((PAD, y), l, font=bf, fill=INK)
+        y += lh
+    kf = _font(32, 700)
+    while d.textlength(ko, font=kf) > maxw and len(ko) > 4:
+        ko = ko[:-2].rstrip() + "…"
+    d.text((PAD, 492), ko, font=kf, fill=BODY)
+    d.text((PAD, 560), "cafeinenglish.com", font=_font(24, 600), fill=MUTED)
+    # 오른쪽 대화 카드 (그림자 → 카드)
+    cx0, cx1, cy0 = 600, 1140, 130
+    qf, af, lf = _font(27, 500), _font(31, 700), _font(20, 600)
+    bw = cx1 - cx0 - 72
+    ql = _wrap(d, chat.get("q", ""), qf, bw - 40) if chat.get("q") else []
+    # 내 대답: 단어마다 색 (핵심 표현은 라임)
+    a, key = chat["a"], chat.get("key", "")
+    i0 = a.find(key) if key else -1
+    words = []
+    pos = 0
+    for w in a.split(" "):
+        st = a.find(w, pos); pos = st + len(w)
+        words.append((w, i0 >= 0 and st < i0 + len(key) and pos > i0))
+    alines, cur = [], []
+    for w in words:
+        t = " ".join(x for x, _ in cur + [w])
+        if cur and d.textlength(t, font=af) > bw - 44:
+            alines.append(cur); cur = [w]
+        else:
+            cur.append(w)
+    alines.append(cur)
+    qh = len(ql) * 38 + 30 if ql else 0
+    ah = len(alines) * 42 + 30
+    ch = 46 + 30 + qh + (18 if ql else 0) + ah + 26 + 34
+    cy1 = cy0 + ch
+    sh = Image.new("RGBA", (W, H), (30, 40, 70, 0))
+    ImageDraw.Draw(sh).rounded_rectangle((cx0 + 24, cy0 + 40, cx1 - 24, cy1 + 24), 36, fill=(30, 40, 70, 30))
+    im = Image.alpha_composite(im, sh.filter(ImageFilter.GaussianBlur(22)))
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((cx0, cy0, cx1, cy1), 36, fill=(255, 255, 255, 235))
+    y = cy0 + 36
+    d.text((cx0 + 36, y), "실제 대화에선 이렇게", font=lf, fill="#8B95A1")
+    y += 46
+    if ql:
+        qw = max(d.textlength(l, font=qf) for l in ql) + 40
+        d.rounded_rectangle((cx0 + 36, y, cx0 + 36 + qw, y + qh), 24, fill="#F2F4F6")
+        for k, l in enumerate(ql):
+            d.text((cx0 + 56, y + 15 + k * 38), l, font=qf, fill=BODY)
+        y += qh + 18
+    aw = max(d.textlength(" ".join(x for x, _ in ln), font=af) for ln in alines) + 44
+    d.rounded_rectangle((cx1 - 36 - aw, y, cx1 - 36, y + ah), 26, fill=INK)
+    for k, ln in enumerate(alines):
+        x = cx1 - 36 - aw + 22
+        for w, hit in ln:
+            d.text((x, y + 13 + k * 42), w, font=af, fill=LIME if hit else "#FFFFFF")
+            x += d.textlength(w + " ", font=af)
+    y += ah + 14
+    d.text((cx1 - 40, y), ko, font=lf, fill="#8B95A1", anchor="ra")
+    # 3D 아이콘 (카드 왼쪽 아래에 걸치게)
+    ip = ASSETS / "icons" / f"{icon}.webp"
+    if icon and ip.exists():
+        ic = Image.open(ip).convert("RGBA").resize((150, 150), Image.LANCZOS)
+        shd = Image.new("RGBA", (W, H), (30, 40, 60, 0))
+        alpha = ic.split()[3].point(lambda v: v * .28)
+        shd.paste((30, 40, 60, 255), (cx0 - 30, cy1 - 70 + 14), alpha)
+        im = Image.alpha_composite(im, shd.filter(ImageFilter.GaussianBlur(10)))
+        im.alpha_composite(ic, (cx0 - 36, min(cy1 - 70, H - 160)))
+    out = OUT / "og" / f"{name}.png"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    im.convert("RGB").save(out, optimize=True)
+    return f"/og/{name}.png"
+
+
 def og_image(name, chip, big, small, foot="읽고 · 듣고 · 퀴즈로 확인"):
     """글마다 카톡·SNS 미리보기 이미지(1200×630)를 만들고 주소를 돌려줍니다."""
     if not (Image and FONT.exists()):
@@ -719,10 +828,16 @@ def page_post(p):
     og = p.get("og") or {}
     xs = p.get("expressions") or [{}]
     data["share"] = og.get("en") or xs[0].get("en") or ""
-    if p.get("thumb") and not p.get("video"):
+    if p.get("thumb") and not p.get("video") and not p.get("chat"):
         thumb_image("th-p-" + p["id"], thumb_theme(p), p["thumb"].get("ko", ""), p["thumb"]["text"], p["thumb"]["key"])
-    img = og_image("p-" + p["id"], CATS[p["cat"]], og.get("en") or xs[0].get("en") or p["title"],
-                   og.get("ko") or p.get("lead", ""))
+    if p.get("chat"):
+        c = p["chat"]
+        en = (p.get("thumb") or {}).get("text") or og.get("en") or p["title"]
+        ver = hashlib.md5(json.dumps([c, en, p.get("icon"), "og2"], ensure_ascii=False).encode()).hexdigest()[:6]
+        img = og_chat(f"p-{p['id']}-{ver}", CATS[p["cat"]] + " · " + p.get("sub", ""), en, c.get("ko", ""), c, p.get("icon", ""), p["id"])
+    else:
+        img = og_image("p-" + p["id"], CATS[p["cat"]], og.get("en") or xs[0].get("en") or p["title"],
+                       og.get("ko") or p.get("lead", ""))
     desc = p.get("description", p.get("lead", ""))
     ld = ld_article(p["title"], desc, url, img, p.get("date", ""), p["_mod"], CATS[p["cat"]],
                     [("홈", "/"), (CATS[p["cat"]], f"/category/{p['cat']}/"), (p["title"], url)])

@@ -118,3 +118,4 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 - (C안 확정) 영어표현·영어꿀팁 썸네일과 홈 첫 화면은 '실제 대화 카드'. 글 JSON에 `"chat": {"q": 상대 말, "a": 내 대답(표현 포함), "key": a 안에서 라임으로 강조할 부분(그대로 포함돼야 함), "ko": 한국어 뜻}` + `"icon"`. 배경색은 글 id로 자동(5가지 파스텔).
 - 영상 글이 '오늘의 한 잔'에 나오면 그 표현의 예문(ex)으로 대화 카드를 자동으로 만들고, 영상 썸네일을 작게 붙임.
 - 홈 첫 화면 영어 큰 글씨 = Plus Jakarta Sans Bold (assets/jakarta-700.woff2, 영문만 6KB, OFL 라이선스).
+- 카톡·SNS 공유 이미지(og:image)도 C안: `chat`이 있는 글은 build.py `og_chat()`이 대화 카드 이미지를 만들고, 파일명에 내용 해시가 붙어(`og/p-<id>-<해시>.png`) 바뀌면 카톡이 새 이미지로 인식해요. 영문 글꼴 fonts/PlusJakartaSans-Bold.ttf.
