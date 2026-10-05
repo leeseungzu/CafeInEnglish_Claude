@@ -418,11 +418,18 @@ def yt_thumb(video):
     return f"/images/yt/{video}.webp"
 
 
+def yt_ver(video, suf=""):
+    f = ROOT / "images" / "yt" / f"{video}{suf}.webp"
+    return hashlib.md5(f.read_bytes()).hexdigest()[:8] if f.exists() else "0"
+
+
 def yt_img(video, attrs):
     """휴대폰엔 400px, 큰 화면엔 640px 썸네일을 보내요"""
     src = yt_thumb(video)
     if src.startswith("/images/yt/") and (ROOT / "images" / "yt" / f"{video}-400.webp").exists():
-        return (f'<img src="/images/yt/{video}-400.webp" srcset="/images/yt/{video}-400.webp 400w, {src} 640w" '
+        # 파일 내용이 바뀌면 주소(?v=)도 바뀌어서 브라우저·카톡이 옛 이미지를 쓰지 않아요
+        v1, v4 = yt_ver(video), yt_ver(video, "-400")
+        return (f'<img src="/images/yt/{video}-400.webp?v={v4}" srcset="/images/yt/{video}-400.webp?v={v4} 400w, {src}?v={v1} 640w" '
                 f'sizes="(max-width:600px) 92vw, 480px" alt="" width="640" height="360" {attrs}>')
     return f'<img src="{src}" alt="" width="640" height="360" {attrs}>'
 
@@ -1080,7 +1087,7 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
         pre = f'<link rel="preload" as="image" href="/assets/icons/{p0["icon"]}.webp?v={ASSET_V}" fetchpriority="high">'
     if vp and vp.get("video") and (ROOT / "images" / "yt" / f'{vp["video"]}-400.webp').exists():
         v = vp["video"]
-        pre = (f'<link rel="preload" as="image" href="/images/yt/{v}-400.webp" imagesrcset="/images/yt/{v}-400.webp 400w, /images/yt/{v}.webp 640w" '
+        pre = (f'<link rel="preload" as="image" href="/images/yt/{v}-400.webp?v={yt_ver(v, "-400")}" imagesrcset="/images/yt/{v}-400.webp?v={yt_ver(v, "-400")} 400w, /images/yt/{v}.webp?v={yt_ver(v)} 640w" '
                'imagesizes="(max-width:600px) 92vw, 480px" fetchpriority="high">')
     return layout(SITE["name"], SITE["tagline"], "/", body, wide=True, ld=ld, data={"type": "home", "daily": daily}, preload=pre)
 
