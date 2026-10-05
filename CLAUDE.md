@@ -119,4 +119,4 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 - 영상 글이 '오늘의 한 잔'에 나오면 그 표현의 예문(ex)으로 대화 카드를 자동으로 만들고, 영상 썸네일을 작게 붙임.
 - 홈 첫 화면 영어 큰 글씨 = Plus Jakarta Sans Bold (assets/jakarta-700.woff2, 영문만 6KB, OFL 라이선스).
 - 카톡·SNS 공유 이미지(og:image)도 C안: `chat`이 있는 글은 build.py `og_chat()`이 대화 카드 이미지를 만들고, 파일명에 내용 해시가 붙어(`og/p-<id>-<해시>.png`) 바뀌면 카톡이 새 이미지로 인식해요. 영문 글꼴 fonts/PlusJakartaSans-Bold.ttf.
-- 문의 페이지(/contact/)는 A안 폼: 유형 칩 → 내용 → 답장 이메일 → 보내기. 서버가 없어 FormSubmit(formsubmit.co/ajax/<이메일>)으로 전송하고, 실패하면 메일 앱(mailto)으로 이어서 보냄. 처음 한 번은 FormSubmit 확인 메일의 Activate를 눌러야 접수 시작.
+- 문의 페이지(/contact/)는 A안 폼: 유형 칩 → 내용 → 답장 이메일 → 보내기. 서버가 없어 FormSubmit(formsubmit.co/ajax/<이메일>)으로 바로 전송 (메일 앱으로 넘기지 않음). 처음 한 번은 FormSubmit 확인 메일의 Activate를 눌러야 접수 시작.

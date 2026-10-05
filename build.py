@@ -1149,13 +1149,13 @@ PRIVACY = f"""
 <p>시행일: 2026년 10월 1일</p>"""
 def _contact():
     """문의 폼 (A안): 유형 → 내용 → 답장 이메일 → 보내기.
-    서버가 없어서 FormSubmit(formsubmit.co)으로 승주 메일함에 바로 보내요. 실패하면 메일 앱으로 이어서 보내요.
+    서버가 없어서 FormSubmit(formsubmit.co)으로 승주 메일함에 바로 보내요.
     처음 한 번은 FormSubmit이 보내는 '확인(Activate)' 메일을 눌러야 이후 문의가 들어와요."""
     kinds = ["표현·콘텐츠 제안", "오류 제보", "저작권 요청", "협업·제휴", "기타"]
     chips = "".join(f'<button type="button" class="cf-chip{" on" if n == 0 else ""}" data-kind="{e(k)}" aria-pressed="{"true" if n == 0 else "false"}">{e(k)}</button>'
                     for n, k in enumerate(kinds))
     return (f'<p class="lead">어떤 이야기든 편하게 남겨 주세요. 보통 1~2일 안에 답장드려요.</p>'
-            f'<form class="cf" id="contact-form" data-to="{e(EMAIL)}" novalidate>'
+            f'<form class="cf" id="contact-form" data-to="{e(SITE.get("formsubmit_id") or EMAIL)}" novalidate>'
             f'<div class="cf-step" id="cf-kind-l">어떤 문의인가요?</div>'
             f'<div class="cf-chips" role="group" aria-labelledby="cf-kind-l">{chips}</div>'
             '<label class="cf-l" for="cf-msg">궁금한 내용</label>'

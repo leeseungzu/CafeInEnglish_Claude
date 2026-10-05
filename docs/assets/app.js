@@ -455,7 +455,7 @@
   addEventListener("resize", alignNav);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(alignNav);
   $$(".js-print").forEach(b => b.onclick = () => window.print());
-  // 문의 폼 (FormSubmit으로 전송, 실패하면 메일 앱으로)
+  // 문의 폼 (FormSubmit으로 바로 전송)
   const cf = $("#contact-form");
   if (cf) {
     let kind = $(".cf-chip.on", cf)?.dataset.kind || "기타";
@@ -483,8 +483,7 @@
         cf.hidden = true; $("#cf-done").hidden = false;
       } catch (e) {
         btn.disabled = false; btn.textContent = "문의 보내기";
-        fail("지금 바로 보내지 못했어요. 메일 앱으로 이어서 보낼게요.");
-        setTimeout(() => { location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msg + "\n\n답장 이메일: " + mail)}`; }, 900);
+        fail("지금 바로 보내지 못했어요. 잠시 후 한 번만 다시 눌러 주세요.");
       }
     };
   }
