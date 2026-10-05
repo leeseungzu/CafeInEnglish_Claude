@@ -106,5 +106,17 @@
     "en": "I'd like to open an account.",
     "ko": "계좌를 개설하고 싶어요",
     "desc": "I want보다 정중한 I'd like to. 은행, 병원 창구에서 첫마디로 딱이에요."
+  },
+  {
+    "post": "james-conversation",
+    "en": "Is there a ~ around here?",
+    "ko": "이 근처에 ~ 있나요?",
+    "desc": "길 물을 땐 Do you have the time? 대신 이 한마디로 대화를 시작해 보세요."
+  },
+  {
+    "post": "james-conversation",
+    "en": "right off the bat",
+    "ko": "처음부터 바로, 대뜸",
+    "desc": "야구공이 배트에 맞자마자 튀어 나가듯, 시작하자마자!"
   }
 ]
