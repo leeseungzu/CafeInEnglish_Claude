@@ -57,6 +57,13 @@
       "mnemonic": "소식판 위에(on) 붙는 주제!"
     }
   ],
+  "icon": "bell",
+  "chat": {
+    "q": "The client hasn't replied yet.",
+    "a": "Okay, keep me posted.",
+    "key": "keep me posted.",
+    "ko": "계속 알려줘"
+  },
   "thumb": {
     "text": "Keep me posted.",
     "key": "posted.",

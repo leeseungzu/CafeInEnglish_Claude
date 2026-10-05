@@ -57,6 +57,13 @@
       "mnemonic": "부정 대답 = No + didn't, 세트로 기억!"
     }
   ],
+  "icon": "question-mark",
+  "chat": {
+    "q": "Don't you like coffee?",
+    "a": "Yes, I do! I love it.",
+    "key": "Yes, I do!",
+    "ko": "아니, 좋아해! (Yes = 좋아함)"
+  },
   "thumb": {
     "text": "Don't you like coffee?",
     "key": "Don't",

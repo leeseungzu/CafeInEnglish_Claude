@@ -57,6 +57,13 @@
       "mnemonic": "부탁하는 순간 이미 끝난(done) 걸로!"
     }
   ],
+  "icon": "rocket",
+  "chat": {
+    "q": "Can you send the report by noon?",
+    "a": "Sure, I'm on it.",
+    "key": "I'm on it.",
+    "ko": "바로 할게요"
+  },
   "thumb": {
     "text": "I'm on it.",
     "key": "on it.",

@@ -57,6 +57,13 @@
       "mnemonic": "pre(앞에) + scribe(쓰다) → 의사가 '지시를 써 준 것' = 처방전!"
     }
   ],
+  "icon": "pill",
+  "chat": {
+    "q": "What seems to be the problem?",
+    "a": "I have a sore throat.",
+    "key": "sore throat.",
+    "ko": "목이 아파요"
+  },
   "thumb": {
     "text": "I have a sore throat.",
     "key": "sore throat.",

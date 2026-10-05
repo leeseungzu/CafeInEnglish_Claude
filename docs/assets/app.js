@@ -463,6 +463,22 @@
     }
     toast("이메일 주소를 복사했어요");
   });
+
+  // 상단 메뉴: 내리면 아래 실선
+  const topbar = $(".top");
+  if (topbar) { const f = () => topbar.classList.toggle("scrolled", scrollY > 4); f(); addEventListener("scroll", f, { passive: true }); }
+  // 카테고리 분류 필터
+  $$(".subfilter .sf-b").forEach(b => b.onclick = () => {
+    $$(".subfilter .sf-b").forEach(x => x.classList.toggle("on", x === b));
+    const v = b.dataset.sub;
+    $$(".cat-grid .card").forEach(c => c.classList.toggle("sf-hide", !!v && c.dataset.sub !== v));
+  });
+  // 홈 전체 아티클 페이지 넘기기
+  $$("#pager button").forEach(b => b.onclick = () => {
+    $$("#pager button").forEach(x => x.classList.toggle("on", x === b));
+    $$("#all-arts .card").forEach(c => c.classList.toggle("pg-hide", c.dataset.pg !== b.dataset.pg));
+    const h = $("#all-arts"); if (h) scrollTo({ top: h.getBoundingClientRect().top + scrollY - 120, behavior: "smooth" });
+  });
   const fab = $("#fab");
   if (fab) {
     const btn = $(".fab-main", fab);

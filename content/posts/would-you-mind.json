@@ -57,6 +57,13 @@
       "mnemonic": "Can → Could → Would you mind 순서로 정중해져요!"
     }
   ],
+  "icon": "window",
+  "chat": {
+    "q": "Would you mind closing the window?",
+    "a": "Not at all!",
+    "key": "Not at all!",
+    "ko": "그럼요, 닫을게요"
+  },
   "thumb": {
     "text": "Would you mind?",
     "key": "mind?",

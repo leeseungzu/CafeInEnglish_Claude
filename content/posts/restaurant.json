@@ -57,6 +57,13 @@
       "mnemonic": "separate(따로) + checks(계산서들)!"
     }
   ],
+  "icon": "fork-knife-plate",
+  "chat": {
+    "q": "Can I get you anything else?",
+    "a": "Can we get the check, please?",
+    "key": "get the check,",
+    "ko": "계산서 주세요"
+  },
   "thumb": {
     "text": "Can we get the check?",
     "key": "check?",

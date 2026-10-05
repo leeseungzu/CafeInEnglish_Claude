@@ -57,6 +57,13 @@
       "mnemonic": "catch = 말을 공처럼 잡다 → 못 잡았어요!"
     }
   ],
+  "icon": "speech-balloon",
+  "chat": {
+    "q": "Oh, am I in your way?",
+    "a": "Excuse me, can I get through?",
+    "key": "Excuse me,",
+    "ko": "잠시만요, 지나갈게요"
+  },
   "thumb": {
     "text": "Excuse me? Sorry?",
     "key": "Excuse me?",

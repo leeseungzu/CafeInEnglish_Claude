@@ -57,6 +57,13 @@
       "mnemonic": "일정이 나한테(for me) 잘 돌아간다(works)!"
     }
   ],
+  "icon": "thumbs-up",
+  "chat": {
+    "q": "Let's meet at six.",
+    "a": "Sounds good!",
+    "key": "Sounds good!",
+    "ko": "좋아, 그러자"
+  },
   "thumb": {
     "text": "Sounds good!",
     "key": "good!",

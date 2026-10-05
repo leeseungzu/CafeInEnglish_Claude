@@ -57,6 +57,13 @@
       "mnemonic": "내가 같이 걸으며 안내해 줄게!"
     }
   ],
+  "icon": "clipboard",
+  "chat": {
+    "q": "Here's the new system.",
+    "a": "Could you walk me through it?",
+    "key": "walk me through",
+    "ko": "차근차근 설명해 주세요"
+  },
   "thumb": {
     "text": "Walk me through it.",
     "key": "Walk me through",

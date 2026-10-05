@@ -57,6 +57,13 @@
       "mnemonic": "all(다) set(갖춰짐) = 끝!"
     }
   ],
+  "icon": "raised-hand",
+  "chat": {
+    "q": "More coffee?",
+    "a": "I'm good, thanks.",
+    "key": "I'm good,",
+    "ko": "괜찮아요, 됐어요"
+  },
   "thumb": {
     "text": "I'm good, thanks.",
     "key": "good,",

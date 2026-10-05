@@ -57,6 +57,13 @@
       "mnemonic": "인사는 탁구! 받고 → 넘기고!"
     }
   ],
+  "icon": "waving-hand",
+  "chat": {
+    "q": "Hey, how are you?",
+    "a": "Pretty good! How about you?",
+    "key": "Pretty good!",
+    "ko": "꽤 좋아! 너는?"
+  },
   "thumb": {
     "text": "How are you?",
     "key": "you?",

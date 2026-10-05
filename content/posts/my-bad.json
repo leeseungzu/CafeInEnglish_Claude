@@ -57,6 +57,13 @@
       "mnemonic": "사과엔 No worries, 감사엔 You're welcome!"
     }
   ],
+  "icon": "grimacing-face",
+  "chat": {
+    "q": "You sent me the wrong file.",
+    "a": "Oh, my bad! Here it is.",
+    "key": "my bad!",
+    "ko": "앗, 내 실수!"
+  },
   "thumb": {
     "text": "My bad!",
     "key": "bad!",

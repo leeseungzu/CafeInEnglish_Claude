@@ -57,6 +57,13 @@
       "mnemonic": "Would you like = Do you want의 공손 버전!"
     }
   ],
+  "icon": "bellhop-bell",
+  "chat": {
+    "q": "How can I help you today?",
+    "a": "I'd like to open an account.",
+    "key": "I'd like to",
+    "ko": "계좌를 만들고 싶어요"
+  },
   "thumb": {
     "text": "I'd like to ~",
     "key": "I'd like to",

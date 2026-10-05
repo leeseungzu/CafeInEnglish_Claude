@@ -57,6 +57,13 @@
       "mnemonic": "'와-더-야!' = '뭐 원해?'를 급하게 외치는 장면을 떠올리세요. 두(do)가 '더'로 뭉개진 거예요."
     }
   ],
+  "icon": "headphone",
+  "chat": {
+    "q": "What are you gonna do tonight?",
+    "a": "I wanna stay home.",
+    "key": "wanna",
+    "ko": "집에 있고 싶어"
+  },
   "thumb": {
     "text": "gonna · wanna · gotta",
     "key": "gonna",

@@ -57,6 +57,13 @@
       "mnemonic": "That's it = 그게 다예요 (That's all과 같은 뜻) → 그거면 끝!"
     }
   ],
+  "icon": "hot-beverage",
+  "chat": {
+    "q": "Hi, what can I get for you?",
+    "a": "Can I get an iced latte?",
+    "key": "Can I get",
+    "ko": "아이스 라떼 주세요"
+  },
   "thumb": {
     "text": "Can I get a latte?",
     "key": "Can I get",

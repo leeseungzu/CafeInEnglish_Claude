@@ -57,6 +57,13 @@
       "mnemonic": "목소리가 조각조각(break up)!"
     }
   ],
+  "icon": "laptop",
+  "chat": {
+    "q": "Can everyone hear me?",
+    "a": "You're on mute!",
+    "key": "You're on mute!",
+    "ko": "음소거 되어 있어요"
+  },
   "thumb": {
     "text": "You're on mute.",
     "key": "mute.",

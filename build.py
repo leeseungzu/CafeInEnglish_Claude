@@ -418,7 +418,7 @@ def site_font():
 
 site_font()
 
-ASSET_V = hashlib.md5(b"".join(f.read_bytes() for f in sorted(ASSETS.glob("*")))).hexdigest()[:8]
+ASSET_V = hashlib.md5(b"".join(f.read_bytes() for f in sorted(ASSETS.rglob("*")) if f.is_file())).hexdigest()[:8]
 FONT_V = hashlib.md5(FONT_FILE.read_bytes()).hexdigest()[:8] if FONT_FILE.exists() else ""
 STYLE_CSS = (ASSETS / "style.css").read_text("utf-8")
 
@@ -470,7 +470,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="icon" href="/assets/icon-192.png" sizes="192x192" type="image/png">
-<meta name="theme-color" content="#F4EEE4">
+<meta name="theme-color" content="#FFFFFF">
 {font_head}
 <style>{STYLE_CSS}</style>
 {ads}{ga}
@@ -499,19 +499,27 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 """
 
 
-def card(href, chips, title, sub, thumb=None, play=False, alt="", hl=3):
+def card(href, chips, title, sub, thumb=None, play=False, alt="", hl=3, data_sub=""):
     chip_html = "".join('<span class="chip %s">%s</span>' % (c, e(t)) for c, t in chips)
     th = ""
     if thumb:
         badge = ('<span class="th-play"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="#2A1A12"/></svg></span>'
                  if play else "")
-        if thumb.startswith("/images/yt/"):
+        if thumb.startswith("<"):
+            th = f'<div class="thumb cthumb">{thumb}</div>'
+        elif thumb.startswith("icon:"):
+            name = thumb[5:]
+            img = f'<img src="/assets/icons/{name}.webp?v={ASSET_V}" alt="{e(alt)}" loading="lazy" width="96" height="96">'
+            th = f'<div class="thumb ic ic-{chips[0][0]}">{img}</div>'
+        elif thumb.startswith("/images/yt/"):
             vid = thumb.rsplit("/", 1)[1].replace(".webp", "")
             img = yt_img(vid, 'loading="lazy"').replace('sizes="(max-width:600px) 92vw, 480px"', 'sizes="(max-width:600px) 92vw, 340px"')
         else:
             img = f'<img src="{thumb.replace(".png?", ".webp?")}" alt="{e(alt)}" loading="lazy" width="960" height="504">'
-        th = f'<div class="thumb">{img}{badge}</div>'
-    return f'<a class="card{" has-th" if thumb else ""}" href="{href}">{th}<div class="chips">{chip_html}</div><h{hl}>{e(title)}</h{hl}><p>{e(sub)}</p></a>'
+        if not thumb.startswith(("icon:", "<")):
+            th = f'<div class="thumb">{img}{badge}</div>'
+    ds = f' data-sub="{e(data_sub)}"' if data_sub else ""
+    return f'<a class="card{" has-th" if thumb else ""}" href="{href}"{ds}>{th}<div class="chips">{chip_html}</div><h{hl}>{e(title)}</h{hl}><p>{e(sub)}</p></a>'
 
 
 def thumb_ver(th, theme):
@@ -520,10 +528,42 @@ def thumb_ver(th, theme):
     return hashlib.md5(raw.encode()).hexdigest()[:8]
 
 
+CHAT_BG = ["linear-gradient(150deg,#FFF3EC,#FFE0CF)", "linear-gradient(150deg,#EEF5FF,#D6E6FF)",
+           "linear-gradient(150deg,#F4F0FF,#E2D8FF)", "linear-gradient(150deg,#EFFAF3,#D2F0DE)",
+           "linear-gradient(150deg,#FFF9E9,#FCEBB6)"]
+
+
+def chat_bg(key):
+    return CHAT_BG[int(hashlib.md5(key.encode()).hexdigest(), 16) % len(CHAT_BG)]
+
+
+def chat_html(q, a, key, ko, art="", bg="", big=False):
+    """실제 대화 카드 (C안): 상대 말풍선 + 내 말풍선(핵심 표현 라임) + 작은 3D 아이콘"""
+    ah = e(a)
+    if key and e(key) in ah:
+        ah = ah.replace(e(key), f"<b>{e(key)}</b>", 1)
+    qh = f'<div class="cv-q">{e(q)}</div>' if q else ""
+    lbl = '<div class="cv-lbl">실제 대화에선 이렇게</div>' if big else ""
+    koh = f'<div class="cv-ko">{e(ko)}</div>' if (big and ko) else ""
+    return (f'<div class="chatv{" big" if big else ""}" style="background:{bg}" aria-hidden="true"><div class="cv-card">{lbl}{qh}'
+            f'<div class="cv-a"><span>{ah}</span></div>{koh}</div>{art}</div>')
+
+
+def icon_img(name, cls="cv-ic", lazy=True):
+    lz = ' loading="lazy"' if lazy else ""
+    return f'<img class="{cls}" src="/assets/icons/{name}.webp?v={ASSET_V}" alt=""{lz} width="96" height="96">'
+
+
 def post_thumb(p):
     """영상 글은 유튜브 썸네일, 나머지는 공유 이미지(og)를 썸네일로"""
     if p.get("video"):
         return yt_thumb(p["video"]), True
+    if p.get("chat"):
+        c = p["chat"]
+        art = icon_img(p["icon"]) if p.get("icon") else ""
+        return chat_html(c["q"], c["a"], c.get("key", ""), c.get("ko", ""), art, chat_bg(p["id"])), False
+    if p.get("icon") and (ASSETS / "icons" / f"{p['icon']}.webp").exists():
+        return "icon:" + p["icon"], False
     return f"/og/th-p-{p['id']}.png?v={thumb_ver(p.get('thumb'), thumb_theme(p))}", False
 
 
@@ -534,12 +574,12 @@ def thumb_alt(th):
 def post_card(p, hl=3):
     th, play = post_thumb(p)
     return card(post_url(p), [(p["cat"], CATS[p["cat"]]), (p["cat"], p.get("sub", ""))], p["title"],
-                f"{p.get('lead', '')} · 퀴즈 {len(p['quiz'])}문제", th, play, thumb_alt(p.get("thumb")), hl)
+                f"{p.get('lead', '')} · 퀴즈 {len(p['quiz'])}문제", th, play, thumb_alt(p.get("thumb")), hl, p.get("sub", ""))
 
 
 def think_card(t, hl=3):
     return card(think_url(t), [("think", "사유의 문장"), ("speaker", t["speaker"])], t["title"],
-                f"필사할 문장 {len(t['quotes'])}개", f"/og/th-t-{t['id']}.png?v={thumb_ver(t.get('thumb'), 'olive')}",
+                f"필사할 문장 {len(t['quotes'])}개", yt_thumb(t["video"]) if t.get("video") else f"/og/th-t-{t['id']}.png?v={thumb_ver(t.get('thumb'), 'olive')}",
                 alt=thumb_alt(t.get("thumb")), hl=hl)
 
 
@@ -663,7 +703,7 @@ def page_post(p):
 <div class="ws-line"></div><div class="ws-line"></div><div class="ws-line"></div><div class="ws-line"></div>
 <div class="ws-key"><b>정답과 연상법</b><ol>{key}</ol></div>
 <p style="font-size:12px;color:#555">{DOMAIN.replace("https://", "")} · 매일 표현 하나, 같이 공부해요</p></div>""")
-    parts.append('<h2 class="rel-h no-print">같이 보면 좋은 글</h2><div class="cards rel no-print">'
+    parts.append('<h2 class="rel-h no-print">같이 보면 좋은 글</h2><div class="cards rel list no-print">'
                  + "".join(post_card(o) for o in similar_posts(p, 4)) + "</div>")
     parts.insert(toc_slot, f'<details class="toc-m no-print"><summary>목차 · 퀴즈 바로가기</summary>{toc_html(toc)}</details>')
     links = related_links(p)
@@ -753,12 +793,20 @@ def page_category(cat):
     if cat == "think":
         items = THINKS
         cards = "".join(think_card(t, 2) for t in THINKS)
-        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p><div class="cards">{cards}</div>'
+        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p><div class="cards list">{cards}</div>'
                 '<p class="a-intro">필사한 문장은 <a href="/notes/#copy">내 공부방</a>에 모여요.</p>')
     else:
         items = [p for p in POSTS if p["cat"] == cat]
         cards = "".join(post_card(p, 2) for p in items) or '<div class="empty"><p>곧 첫 글이 올라와요.</p></div>'
-        body = f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p><div class="cards">{cards}</div>'
+        subs = [x for x in dict.fromkeys(p.get("sub", "") for p in items) if x]
+        filt = ""
+        if cat != "video" and len(subs) > 1:
+            btn = lambda v, n, lbl, on="": f'<button type="button" class="sf-b{on}" data-sub="{e(v)}"><span>{e(lbl)}</span><em>{n}</em></button>'
+            filt = ('<aside class="subfilter" aria-label="분류"><div class="sf-h">분류</div>'
+                    + btn("", len(items), "전체", " on")
+                    + "".join(btn(x, sum(1 for p in items if p.get("sub") == x), x) for x in subs) + "</aside>")
+        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>'
+                f'<div class="cat-grid{" has-filter" if filt else ""}"><div class="cards list">{cards}</div>{filt}</div>')
     seo_t, seo_d = CAT_SEO[cat]
     links = [think_url(t) for t in items] if cat == "think" else [post_url(p) for p in items]
     ld = [{"@type": "CollectionPage", "name": CATS[cat], "description": seo_d, "url": DOMAIN + url, "inLanguage": "ko",
@@ -770,6 +818,23 @@ def page_category(cat):
               {"@type": "ListItem", "position": 2, "name": CATS[cat], "item": DOMAIN + url}]}]
     img = og_image("c-" + cat, "카테고리", CATS[cat], CAT_LEAD[cat], "읽고 · 듣고 · 퀴즈로 확인")
     return layout(CATS[cat], seo_d, url, body, cat, wide=True, seo_title=seo_t, ld=ld, og_img=img)
+
+
+SERIES = json.loads((CONTENT / "series.json").read_text("utf-8")) if (CONTENT / "series.json").exists() else []
+
+
+def page_series(sr):
+    url = f"/series/{sr['id']}/"
+    items = [POST_BY_ID[i] for i in sr["posts"] if i in POST_BY_ID]
+    cards = "".join(post_card(p, 2) for p in items) + "".join(think_card(THINK_BY_ID[i], 2) for i in sr.get("thinks", []) if i in THINK_BY_ID)
+    body = (f'<div class="chips"><span class="chip">아티클 시리즈</span></div><h1>{e(sr["title"])}</h1><p class="lead">{e(sr["desc"])}</p>'
+            f'<div class="cat-grid"><div class="cards list">{cards}</div></div>')
+    ld = [{"@type": "CollectionPage", "name": sr["title"], "description": sr["desc"], "url": DOMAIN + url, "inLanguage": "ko"},
+          {"@type": "BreadcrumbList", "itemListElement": [
+              {"@type": "ListItem", "position": 1, "name": "홈", "item": DOMAIN + "/"},
+              {"@type": "ListItem", "position": 2, "name": sr["title"], "item": DOMAIN + url}]}]
+    img = og_image("s-" + sr["id"], "아티클 시리즈", sr["title"], sr["desc"], "읽고 · 듣고 · 퀴즈로 확인")
+    return layout(sr["title"], sr["desc"], url, body, wide=True, seo_title=f'{sr["title"]} - 영어 공부 시리즈', ld=ld, og_img=img)
 
 
 def daily_index(n):
@@ -796,38 +861,108 @@ def page_home():
     t_desc = today.get("desc") or ""
     words = t_en.split(" ")
     phrase = e(" ".join(words[:-1])) + (" " if len(words) > 1 else "") + f'<span class="hl">{e(words[-1])}</span>'
-    vp = next((p for p in POSTS if p["cat"] == "video"), None)
-    feature = ""
-    if vp:
-        pills = "".join(f"<span>{e(x['en'])}</span>" for x in vp.get("expressions", [])[:3])
-        thumb = yt_img(vp["video"], 'fetchpriority="high"') if vp.get("video") else ""
-        feature = (f'<a class="a-feature" href="{post_url(vp)}"><div class="a-thumb">{thumb}<span class="a-play">'
-                   '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2A1A12" stroke-width="2.4" stroke-linejoin="round"><path d="M8 5l11 7-11 7z"/></svg></span></div>'
-                   f'<div class="k">영상으로 배우기</div><h2>{e(vp["title"])}</h2><div class="a-pills">{pills}</div></a>')
-    tiles = "".join(f'<a class="a-tile" href="/category/{k}/"><span class="n">0{n}</span><b>{v}</b><span>{TILE_SUB[k]}</span></a>'
-                    for n, (k, v) in enumerate(CATS.items(), 1))
-    shown = {tp["id"]} | ({vp["id"]} if vp else set())
-    latest = "".join(post_card(p) for p in [p for p in POSTS if p["id"] not in shown][:6])
-    thinks = "".join(think_card(t) for t in THINKS[:3])
-    daily_js = json.dumps([{"en": d["en"], "ko": d["ko"], "desc": d.get("desc", ""), "cat": d["cat"], "url": d["url"]} for d in daily], ensure_ascii=False).replace("</", "<\\/") if daily else "[]"
+    # ── 1. 오늘의 한 잔 슬라이드 (오늘 · 어제 · 그 전 날들, 옆으로 넘겨 보기) ──
+    def vis(p, d, n):
+        bg = CHAT_BG[n % len(CHAT_BG)]
+        if p and p.get("chat") and p["cat"] != "video":
+            c = p["chat"]
+            return chat_html(c["q"], c["a"], c.get("key", ""), c.get("ko", ""), icon_img(p["icon"], "cv-ic", False) if p.get("icon") else "", bg, True)
+        # 영상 글: 그 표현의 예문으로 대화 만들기 + 영상 썸네일
+        norm = lambda t: re.sub(r"[^a-z' ]", "", t.lower()).strip()
+        x = next((x for x in (p or {}).get("expressions", []) if norm(x["en"]) == norm(d["en"])), None)
+        q, a = "", d["en"]
+        if x:
+            parts = re.split(r"(?<=[.!?])\s+", x["ex"].strip())
+            q, a = (" ".join(parts[:-1]), parts[-1]) if len(parts) > 1 else ("", parts[0])
+        key = d["en"].replace("~", "").strip()
+        key = next((m.group(0) for m in [re.search(re.escape(key), a, re.I)] if m), key)
+        art = f'<div class="cv-yt">{yt_img(p["video"], "loading=lazy")}</div>' if p and p.get("video") else ""
+        return chat_html(q, a, key, d.get("ko", ""), art, bg, True)
+    slides_data = [{"en": d["en"], "ko": d["ko"], "desc": d.get("desc", ""), "cat": d["cat"], "url": d["url"],
+                    "vis": vis(POST_BY_ID.get(d.get("post")), d, n)} for n, d in enumerate(daily)]
+    N_SLIDES = min(5, len(slides_data))
+    def slide_html(it, label):
+        w = it["en"].split(" ")
+        ph = e(" ".join(w[:-1])) + (" " if len(w) > 1 else "") + f'<span class="hl">{e(w[-1])}</span>'
+        return (f'<article class="hs-slide"><div class="hs-txt"><div class="a-kicker">{e(label)} · {e(it["cat"])}</div>'
+                f'<p class="a-phrase{" long" if len(it["en"]) > 16 else ""}">{ph}</p><p class="a-mean">{e(it["ko"])}</p>'
+                f'<p class="a-desc">{e(it["desc"])}</p><a class="btn ghost" href="{it["url"]}">글 읽고 퀴즈 풀기</a></div>'
+                f'<a class="hs-art" href="{it["url"]}" tabindex="-1" aria-hidden="true">{it["vis"]}</a></article>')
+    import time as _t
+    kst = _t.gmtime(_t.time() + 9 * 3600)
+    def label(k, day_secs):
+        if k == 0: return "오늘의 한 잔"
+        if k == 1: return "어제의 한 잔"
+        g = _t.gmtime(day_secs - k * 86400)
+        return f"{g.tm_mon}월 {g.tm_mday}일의 한 잔"
+    i0 = daily_index(len(slides_data)) if slides_data else 0
+    now_k = _t.time() + 9 * 3600
+    slides = "".join(slide_html(slides_data[(i0 - k) % len(slides_data)], label(k, now_k)) for k in range(N_SLIDES))
+    hero = f"""<section class="hs" aria-label="오늘의 한 잔">
+  <div class="hs-track" id="hs-track">{slides}</div>
+  <div class="hs-ctl"><button type="button" class="hs-btn" id="hs-prev" aria-label="이전 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="hs-btn" id="hs-next" aria-label="다음 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button><span class="hs-dots" id="hs-dots"></span></div>
+</section>"""
+    slides_js = json.dumps(slides_data, ensure_ascii=False).replace("</", "<\\/")
+    hero_js = """<script>(function(){var L=%s,n=Math.min(5,L.length);if(!n)return;var day=Math.floor((Date.now()/1000+9*3600)/86400),i0=day%%L.length,tr=document.getElementById("hs-track");
+if(i0!==%d){var x=function(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+var lab=function(k){if(!k)return"오늘의 한 잔";if(k===1)return"어제의 한 잔";var d=new Date((day-k)*86400000);return(d.getUTCMonth()+1)+"월 "+d.getUTCDate()+"일의 한 잔"};
+tr.innerHTML=Array.from({length:n},function(_,k){var it=L[((i0-k)%%L.length+L.length)%%L.length],w=it.en.split(" "),last=w.pop();
+return '<article class="hs-slide"><div class="hs-txt"><div class="a-kicker">'+lab(k)+' · '+x(it.cat)+'</div><p class="a-phrase'+(it.en.length>16?' long':'')+'">'+(w.length?x(w.join(" "))+" ":"")+'<span class="hl">'+x(last)+'</span></p><p class="a-mean">'+x(it.ko)+'</p><p class="a-desc">'+x(it.desc||"")+'</p><a class="btn ghost" href="'+it.url+'">글 읽고 퀴즈 풀기</a></div><a class="hs-art" href="'+it.url+'" tabindex="-1" aria-hidden="true">'+it.vis+'</a></article>'}).join("")}
+var dots=document.getElementById("hs-dots");dots.innerHTML=Array.from({length:n},function(){return"<i></i>"}).join("");
+var cur=function(){return Math.round(tr.scrollLeft/tr.clientWidth)},paint=function(){var c=cur();[].forEach.call(dots.children,function(d,j){d.className=j===c?"on":""});document.getElementById("hs-prev").disabled=c<=0;document.getElementById("hs-next").disabled=c>=n-1};
+var go=function(d){tr.scrollTo({left:(cur()+d)*tr.clientWidth,behavior:"smooth"})};
+document.getElementById("hs-prev").onclick=function(){go(-1)};document.getElementById("hs-next").onclick=function(){go(1)};
+tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(paint,60)},{passive:true});paint()})();</script>""" % (slides_js, i0)
+
+    # ── 2. 전체 아티클 (8개씩 페이지) + 인기 있는 글 ──
+    PER = 8
+    allitems = sorted([("p", p) for p in POSTS] + [("t", t) for t in THINKS],
+                      key=lambda x: (x[1].get("date", ""), x[1]["id"]), reverse=True)
+    arts = "".join((post_card(o) if k == "p" else think_card(o)).replace('<a class="card', f'<a data-pg="{n // PER + 1}" class="card' + (" pg-hide" if n >= PER else ""), 1)
+                   for n, (k, o) in enumerate(allitems))
+    pages_n = (len(allitems) + PER - 1) // PER
+    pager = ('<nav class="pager" id="pager" aria-label="페이지">'
+             + "".join(f'<button type="button" class="{"on" if i == 1 else ""}" data-pg="{i}">{i}</button>' for i in range(1, pages_n + 1))
+             + "</nav>") if pages_n > 1 else ""
+    pop_ids = SITE.get("popular") or [p["id"] for p in POSTS[:5]]
+    pop = []
+    for pid in pop_ids:
+        o = POST_BY_ID.get(pid)
+        if o:
+            pop.append((post_url(o), o["title"], CATS[o["cat"]]))
+        elif pid in THINK_BY_ID:
+            t = THINK_BY_ID[pid]; pop.append((think_url(t), t["title"], "사유의 문장"))
+    pop_html = "".join(f'<li><a href="{u}"><span class="pop-n">{i}</span><span><b>{e(tt)}</b><small>{e(c)}</small></span></a></li>'
+                       for i, (u, tt, c) in enumerate(pop[:5], 1))
+
+    # ── 3. 아티클 시리즈 ──
+    series_html = ""
+    for sr in SERIES:
+        sp = [POST_BY_ID[i] for i in sr["posts"] if i in POST_BY_ID]
+        icons = [o["icon"] for o in sp if o.get("icon")][:3]
+        if icons:
+            cover = f'<div class="sr-cover ic-{sp[0]["cat"]}">' + "".join(f'<img src="/assets/icons/{ic}.webp?v={ASSET_V}" alt="" loading="lazy" width="96" height="96">' for ic in icons) + "</div>"
+        else:
+            vids = [o for o in sp if o.get("video")]
+            lazy = 'loading="lazy"'
+            cover = ('<div class="sr-cover yt">' + yt_img(vids[0]["video"], lazy) + '</div>') if vids else '<div class="sr-cover"></div>'
+        series_html += (f'<a class="sr-card" href="/series/{sr["id"]}/">{cover}<h3>{e(sr["title"])}</h3>'
+                        f'<p>{e(sr["desc"])}</p><span class="sr-n">글 {len(sp) + len(sr.get("thinks", []))}개</span></a>')
+
     body = f"""<h1 class="sr-only">카페인영어 CafeInEnglish - 매일 조금씩, 깊게 스며드는 영어 공부</h1>
-<section class="a-hero">
-  <div>
-    <div class="a-kicker">오늘의 한 잔 · <span id="td-cat">{CATS[tp["cat"]]}</span></div>
-    <p class="a-phrase{" long" if len(t_en) > 16 else ""}" id="td-en">{phrase}</p>
-    <p class="a-mean" id="td-ko">{e(t_ko)}</p>
-    <p class="a-desc" id="td-desc">{e(t_desc)}</p>
-    <div class="a-btns"><a class="btn ghost" id="td-link" href="{post_url(tp)}">글 읽고 퀴즈 풀기</a><a class="btn ghost" href="/notes/">내 공부방</a></div>
-  </div>
-  {feature}
-</section>
-<script>(function(){{var L={daily_js},it=L[Math.floor((Date.now()/1000+9*3600)/86400)%L.length];if(!it)return;var w=it.en.split(" "),last=w.pop(),q=function(i){{return document.getElementById(i)}},x=function(t){{return String(t).replace(/[&<>"]/g,function(c){{return{{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}}[c]}})}};q("td-en").innerHTML=(w.length?x(w.join(" "))+" ":"")+'<span class="hl">'+x(last)+'</span>';q("td-en").classList.toggle("long",it.en.length>16);q("td-ko").textContent=it.ko;q("td-desc").textContent=it.desc||"";q("td-cat").textContent=it.cat;q("td-link").href=it.url}})();</script>
-<nav class="a-tiles" aria-label="카테고리">{tiles}</nav>
-{f'<div class="a-head"><h2>새로 올라온 글</h2></div><div class="cards">{latest}</div>' if latest else ""}
-{f'<div class="a-head" style="margin-top:36px"><h2>사유의 문장</h2><a href="/category/think/" >전체 보기<span class="sr-only"> - 사유의 문장</span></a></div><div class="cards">{thinks}</div>' if thinks else ""}
+{hero}{hero_js}
+<div class="home-grid">
+  <section><h2 class="home-h">전체 아티클</h2><div class="cards list" id="all-arts">{arts}</div>{pager}</section>
+  <aside class="pop"><h2 class="pop-h">인기 있는 글</h2><ol>{pop_html}</ol></aside>
+</div>
+<section class="series"><h2 class="home-h">아티클 시리즈</h2><div class="sr-grid">{series_html}</div></section>
 """
+    vp = None
     ld = [{"@type": "WebSite", "name": "카페인영어 CafeInEnglish", "alternateName": "카페인영어", "url": DOMAIN + "/", "inLanguage": "ko"}, ORG]
     pre = ""
+    p0 = POST_BY_ID.get(daily[i0]["post"]) if daily else None
+    if p0 and p0.get("icon"):
+        pre = f'<link rel="preload" as="image" href="/assets/icons/{p0["icon"]}.webp?v={ASSET_V}" fetchpriority="high">'
     if vp and vp.get("video") and (ROOT / "images" / "yt" / f'{vp["video"]}-400.webp').exists():
         v = vp["video"]
         pre = (f'<link rel="preload" as="image" href="/images/yt/{v}-400.webp" imagesrcset="/images/yt/{v}-400.webp 400w, /images/yt/{v}.webp 640w" '
@@ -959,6 +1094,8 @@ def build():
         write(think_url(t), page_think(t)); pages.append(think_url(t))
     for c in CATS:
         write(f"/category/{c}/", page_category(c)); pages.append(f"/category/{c}/")
+    for sr in SERIES:
+        write(f"/series/{sr['id']}/", page_series(sr)); pages.append(f"/series/{sr['id']}/")
     write("/notes/", page_notes())
     if (ROOT / "images").exists():  # 빌드 중 새로 만든 유튜브 썸네일까지 다시 복사
         shutil.copytree(ROOT / "images", OUT / "images", dirs_exist_ok=True)
@@ -977,7 +1114,7 @@ def build():
         pub = SITE["adsense_client"].replace("ca-", "")
         (OUT / "ads.txt").write_text(f"google.com, {pub}, DIRECT, f08c47fec0942fa0\n", "utf-8")
     after = {f for f in OUT.rglob("*") if f.is_file()}
-    written = {OUT / "assets" / f.name for f in ASSETS.glob("*")} | {OUT / "audio" / f.name for f in AUDIO_DIR.glob("*.mp3")} | {OUT / "images" / f.relative_to(ROOT / "images") for f in (ROOT / "images").rglob("*") if f.is_file()} | {f for f in after if f.stat().st_mtime >= START}
+    written = {OUT / "assets" / f.relative_to(ASSETS) for f in ASSETS.rglob("*") if f.is_file()} | {OUT / "audio" / f.name for f in AUDIO_DIR.glob("*.mp3")} | {OUT / "images" / f.relative_to(ROOT / "images") for f in (ROOT / "images").rglob("*") if f.is_file()} | {f for f in after if f.stat().st_mtime >= START}
     stale = sorted(str(f.relative_to(OUT)) for f in before - written if f.name != ".DS_Store")
     if stale:
         print("🧹 더 이상 쓰지 않는 파일 (지워도 됨):", ", ".join(stale))

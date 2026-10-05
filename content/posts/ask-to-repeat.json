@@ -57,6 +57,13 @@
       "mnemonic": "make sure = 확실하게 하기!"
     }
   ],
+  "icon": "ear",
+  "chat": {
+    "q": "The meeting's moved to 3:15.",
+    "a": "Sorry, could you say that again?",
+    "key": "say that again?",
+    "ko": "다시 말씀해 주시겠어요?"
+  },
   "thumb": {
     "text": "Could you say that again?",
     "key": "again?",

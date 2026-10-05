@@ -57,6 +57,13 @@
       "mnemonic": "within = 울타리 안쪽(이내)!"
     }
   ],
+  "icon": "alarm-clock",
+  "chat": {
+    "q": "Where are you?",
+    "a": "I'll be there in 10 minutes.",
+    "key": "in 10 minutes.",
+    "ko": "10분 뒤에 도착해"
+  },
   "thumb": {
     "text": "in 10 minutes",
     "key": "in",

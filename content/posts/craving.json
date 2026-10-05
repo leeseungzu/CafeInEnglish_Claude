@@ -57,6 +57,13 @@
       "mnemonic": "커피를 향해(for) 갈(go) 수 있을 것 같아 = 땡겨!"
     }
   ],
+  "icon": "pizza",
+  "chat": {
+    "q": "Any plans for dinner?",
+    "a": "I'm craving pizza tonight.",
+    "key": "I'm craving",
+    "ko": "피자가 너무 당겨"
+  },
   "thumb": {
     "text": "I'm craving pizza.",
     "key": "craving",

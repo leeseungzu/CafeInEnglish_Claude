@@ -57,6 +57,13 @@
       "mnemonic": "feeling(기분)이 아래로(down) 내려갔다 = 우울!"
     }
   ],
+  "icon": "party-popper",
+  "chat": {
+    "q": "Drinks after work. Want to come?",
+    "a": "I'm down!",
+    "key": "I'm down!",
+    "ko": "콜! 나도 낄래"
+  },
   "thumb": {
     "text": "I'm down!",
     "key": "down!",

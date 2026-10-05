@@ -57,6 +57,13 @@
       "mnemonic": "treat = 대접 → 내 대접!"
     }
   ],
+  "icon": "credit-card",
+  "chat": {
+    "q": "Let me pay my half.",
+    "a": "No, no. It's on me.",
+    "key": "It's on me.",
+    "ko": "내가 낼게"
+  },
   "thumb": {
     "text": "It's on me.",
     "key": "on me.",

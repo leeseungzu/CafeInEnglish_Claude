@@ -57,6 +57,13 @@
       "mnemonic": "눈(eye)이 아니라 창문(window) 너머로 구경!"
     }
   ],
+  "icon": "mobile-phone",
+  "chat": {
+    "q": "I have a big interview tomorrow.",
+    "a": "You got this! Good luck!",
+    "key": "You got this!",
+    "ko": "화이팅! 잘될 거야"
+  },
   "thumb": {
     "text": "You got this!",
     "key": "got this!",

@@ -57,6 +57,13 @@
       "mnemonic": "감각은 만들어지는(make) 것!"
     }
   ],
+  "icon": "light-bulb",
+  "chat": {
+    "q": "Sorry, could you explain that again?",
+    "a": "Sure. Does that make sense now?",
+    "key": "Does that make sense",
+    "ko": "이제 이해되세요?"
+  },
   "thumb": {
     "text": "Does that make sense?",
     "key": "make sense?",

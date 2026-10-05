@@ -57,6 +57,13 @@
       "mnemonic": "늪이 '무엇으로' 가득 차 있나? → 가득 찬 재료에는 with! (filled with, packed with와 같은 친구)"
     }
   ],
+  "icon": "hourglass",
+  "chat": {
+    "q": "Can we talk this afternoon?",
+    "a": "Sorry, I'm swamped today.",
+    "key": "I'm swamped",
+    "ko": "오늘 정신없이 바빠"
+  },
   "thumb": {
     "text": "I'm swamped.",
     "key": "swamped.",
