@@ -22,12 +22,12 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="icon" href="/assets/icon-192.png" sizes="192x192" type="image/png">
 <meta name="theme-color" content="#F4EEE4">
-<link rel="preload" href="/assets/pretendard-subset.woff2?v=b38bb43b" as="font" type="font/woff2" crossorigin><style>@font-face{font-family:'Pretendard Variable';font-weight:400 800;font-style:normal;font-display:swap;src:url('/assets/pretendard-subset.woff2?v=b38bb43b') format('woff2-variations'),url('/assets/pretendard-subset.woff2?v=b38bb43b') format('woff2')}</style>
+<link rel="preload" as="image" href="/images/yt/Fu2dDpHO3HQ-400.webp" imagesrcset="/images/yt/Fu2dDpHO3HQ-400.webp 400w, /images/yt/Fu2dDpHO3HQ.webp 640w" imagesizes="(max-width:600px) 92vw, 480px" fetchpriority="high"><link rel="preload" href="/assets/pretendard-subset.woff2?v=b38bb43b" as="font" type="font/woff2" crossorigin><style>@font-face{font-family:'Pretendard Variable';font-weight:400 800;font-style:normal;font-display:swap;src:url('/assets/pretendard-subset.woff2?v=b38bb43b') format('woff2-variations'),url('/assets/pretendard-subset.woff2?v=b38bb43b') format('woff2')}</style>
 <style>:root{
   /* A. 에디토리얼 카페 — 오프화이트 · 에스프레소 · 라임 */
   --bg:#FAF8F5; --card:#FFFFFF; --text:#2A1A12; --muted:#6E5E54; --line:#ECE6DD;
   --accent:#2A1A12; --accent-soft:#EBE2D5; --lime:#CDEB5B;
-  --ok:#4A7010; --ok-soft:#E9F5C4; --bad:#B5412F; --bad-soft:#F6E0D9;
+  --ok:#4A7010; --ok-soft:#E9F5C4; --bad:#A63A2A; --bad-soft:#F6E0D9;
   --tip:#2F5E8A; --tip-soft:#E2EAF1; --memo:#7A5A12; --memo-soft:#F3EAD2;
   --serif:"Pretendard Variable",Pretendard,-apple-system,sans-serif;
 }
@@ -92,7 +92,7 @@ h2{font-size:19px;margin:30px 0 8px}
 .cards{display:grid;gap:12px}
 .card{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;transition:border-color .15s}
 .card:hover{border-color:var(--accent)}
-.card h3{margin:6px 0 2px;font-size:17px}
+.card h3,.card h2{margin:6px 0 2px;font-size:17px}
 .card p{margin:0;color:var(--muted);font-size:14px}
 .btn{all:unset;cursor:pointer;display:block;text-align:center;font-weight:700;padding:13px;border-radius:12px;box-sizing:border-box;width:100%}
 .btn.primary{background:var(--accent);color:#fff}
@@ -262,7 +262,7 @@ aside.side{display:none}
   .lead{font-size:18px}
   .cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
   .card{padding:20px 22px}
-  .card h3{font-size:18px}
+  .card h3,.card h2{font-size:18px}
   .hero{padding:34px 40px}
   .hero h1{font-size:36px}
   .hero p{font-size:17px;max-width:760px}
@@ -328,7 +328,7 @@ aside.side{display:none}
 .a-thumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85}
 .a-play{position:absolute;inset:0;margin:auto;width:60px;height:60px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center}
 .a-feature .k{font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--lime);margin:16px 0 6px}
-.a-feature h3{margin:0 0 12px;font-size:20px;line-height:1.4}
+.a-feature h3,.a-feature h2{margin:0 0 12px;font-size:20px;line-height:1.4}
 .a-pills{display:flex;flex-wrap:wrap;gap:6px}
 .a-pills span{font-family:var(--serif);font-style:italic;font-size:14px;border:1px solid #6B5445;border-radius:999px;padding:4px 11px}
 .a-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 16px;margin:6px 0 38px}
@@ -347,7 +347,7 @@ aside.side{display:none}
   .a-mean{font-size:22px}
   .a-desc{font-size:16px}
   .a-feature{padding:26px}
-  .a-feature h3{font-size:23px}
+  .a-feature h3,.a-feature h2{font-size:23px}
   .a-tiles{grid-template-columns:repeat(4,minmax(0,1fr))}
   .a-tile .n{font-size:28px}
   .a-tile b{font-size:17px}
@@ -360,7 +360,7 @@ aside.side{display:none}
 
 /* ================= 심플 타이포 (Pretendard) ================= */
 body{letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
-h1,h2,h3,.cq-q,.a-phrase,.a-mean,.xp h3,.quote .en,.card h3,.logo{letter-spacing:-.035em}
+h1,h2,h3,.cq-q,.a-phrase,.a-mean,.xp h3,.quote .en,.card h3,.card h2,.logo{letter-spacing:-.035em}
 h1{font-weight:800} h2{font-weight:700}
 .logo i{font-style:normal;font-weight:600;color:var(--muted)}
 .a-phrase{font-weight:800;letter-spacing:-.05em;line-height:1.05}
@@ -372,7 +372,7 @@ h1{font-weight:800} h2{font-weight:700}
 .ws-quote .en{font-family:inherit;font-weight:700}
 @media (min-width:1024px){ .a-phrase{font-size:96px} .quote .en{font-size:24px} }
 body{letter-spacing:normal}
-h2,h3,.card h3,.cq-q,.a-mean,.logo{letter-spacing:-.02em}
+h2,h3,.card h3,.card h2,.cq-q,.a-mean,.logo{letter-spacing:-.02em}
 h1{letter-spacing:-.03em}
 .a-kicker,.a-feature .k{letter-spacing:.02em}
 /* 오늘의 한 잔 라벨: 보통 굵기, 크게 */
@@ -720,6 +720,29 @@ body{word-break:keep-all;overflow-wrap:break-word}
 .fix .why b{display:inline-block;background:var(--lime);color:var(--text);font-size:12px;font-weight:800;padding:1px 8px;border-radius:999px;margin-right:6px;vertical-align:1px}
 /* 작은 화면(360px 이하): 로고 영문을 줄여 내 공부방 버튼이 한 줄에 오도록 */
 @media (max-width:374px){ .logo i{display:none} }
+/* 사유의 문장 · 화자 칩 (올리브 계열) */
+.chip.speaker{background:#E6EADD;color:#3B4430}
+/* 복습 노트 제목 (인쇄용, h2) */
+.ws-head .ws-title{font-size:21px;line-height:1.35;margin:4px 0 0;border:0;padding:0}
+/* 모바일: 아래로 스크롤하는 동안 + 버튼을 살짝 숨겨 본문을 가리지 않게 */
+@media (max-width:599px){
+  .fab{right:14px;bottom:18px;transition:transform .25s ease,opacity .25s ease}
+  .fab-main{width:52px;height:52px}
+  .fab.hide:not(.open){transform:translateY(90px);opacity:0;pointer-events:none}
+}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* 모바일 목록: 썸네일 왼쪽 + 글 오른쪽 (스크롤 길이 절반) */
+@media (max-width:599px){
+  .card.has-th{display:grid;grid-template-columns:44% 1fr;grid-template-rows:auto auto 1fr;column-gap:12px;align-items:start;padding:10px 12px 10px 10px}
+  .card.has-th .thumb{grid-row:1/4;margin:0;border-radius:10px;align-self:center}
+  .card.has-th .thumb::after{border-radius:10px}
+  .card.has-th .chips{grid-column:2}
+  .card.has-th .chips .chip:nth-child(n+2){display:none}
+  .card.has-th h3,.card.has-th h2{grid-column:2;font-size:15px;line-height:1.38;margin:5px 0 3px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .card.has-th p{grid-column:2;font-size:12.5px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .card.has-th .th-play{transform:scale(.7)}
+  .cards.rel .card.has-th p{display:none}
+}
 </style>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-ZTK7QZC3NK');addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-ZTK7QZC3NK';document.head.appendChild(s)},1500)});</script>
 </head>
@@ -731,20 +754,21 @@ body{word-break:keep-all;overflow-wrap:break-word}
 </div></header>
 <div class="wrap wide">
 <main>
+<h1 class="sr-only">카페인영어 CafeInEnglish - 매일 조금씩, 깊게 스며드는 영어 공부</h1>
 <section class="a-hero">
   <div>
     <div class="a-kicker">오늘의 한 잔 · <span id="td-cat">영어표현</span></div>
-    <h1 class="a-phrase long" id="td-en">Does that make <span class="hl">sense?</span></h1>
-    <p class="a-mean" id="td-ko">제 설명, 이해되세요?</p>
-    <p class="a-desc" id="td-desc">Do you understand?보다 부드러워요. 상대가 아니라 내 설명을 묻는 말이거든요.</p>
-    <div class="a-btns"><a class="btn ghost" id="td-link" href="/p/make-sense/">글 읽고 퀴즈 풀기</a><a class="btn ghost" href="/notes/">내 공부방</a></div>
+    <p class="a-phrase" id="td-en">It&#x27;s on <span class="hl">me.</span></p>
+    <p class="a-mean" id="td-ko">내가 낼게, 내가 쏠게</p>
+    <p class="a-desc" id="td-desc">계산서가 내 위에(on me)! I&#x27;ll shoot이라고 하면 안 통해요.</p>
+    <div class="a-btns"><a class="btn ghost" id="td-link" href="/p/its-on-me/">글 읽고 퀴즈 풀기</a><a class="btn ghost" href="/notes/">내 공부방</a></div>
   </div>
-  <a class="a-feature" href="/p/son/"><div class="a-thumb"><img src="/images/yt/Fu2dDpHO3HQ-400.webp" srcset="/images/yt/Fu2dDpHO3HQ-400.webp 400w, /images/yt/Fu2dDpHO3HQ.webp 640w" sizes="(max-width:600px) 92vw, 480px" alt="" width="640" height="360" fetchpriority="high"><span class="a-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2A1A12" stroke-width="2.4" stroke-linejoin="round"><path d="M8 5l11 7-11 7z"/></svg></span></div><div class="k">영상으로 배우기</div><h3>손흥민 영어 인터뷰에서 건진 영어표현 5개</h3><div class="a-pills"><span>every single ~</span><span>I&#x27;m trying.</span><span>on the flip side</span></div></a>
+  <a class="a-feature" href="/p/son/"><div class="a-thumb"><img src="/images/yt/Fu2dDpHO3HQ-400.webp" srcset="/images/yt/Fu2dDpHO3HQ-400.webp 400w, /images/yt/Fu2dDpHO3HQ.webp 640w" sizes="(max-width:600px) 92vw, 480px" alt="" width="640" height="360" fetchpriority="high"><span class="a-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2A1A12" stroke-width="2.4" stroke-linejoin="round"><path d="M8 5l11 7-11 7z"/></svg></span></div><div class="k">영상으로 배우기</div><h2>손흥민 영어 인터뷰에서 건진 영어표현 5개</h2><div class="a-pills"><span>every single ~</span><span>I&#x27;m trying.</span><span>on the flip side</span></div></a>
 </section>
 <script>(function(){var L=[{"en": "I'm swamped.", "ko": "할 일이 산더미야, 정신없이 바빠", "desc": "swamp는 '늪'. 일이 늪처럼 밀려와 허우적대는 느낌이라 busy보다 훨씬 생생해요.", "cat": "영어표현", "url": "/p/swamped/"}, {"en": "make-or-break", "ko": "성패를 가르는, 결정적인", "desc": "만들거나(make) 부서지거나(break), 결과가 둘 중 하나로 갈리는 순간이에요.", "cat": "영상으로 배우기", "url": "/p/pichai/"}, {"en": "I'm good, thanks.", "ko": "괜찮아요, 됐어요", "desc": "뭔가를 권할 때 나오는 I'm good은 '좋아요'가 아니라 정중한 거절이에요.", "cat": "영어표현", "url": "/p/im-good/"}, {"en": "since day one", "ko": "처음부터, 첫날부터", "desc": "손흥민이 처음부터 응원해 준 팬들을 이야기하며 쓴 표현이에요.", "cat": "영상으로 배우기", "url": "/p/son/"}, {"en": "I'm down.", "ko": "좋아, 나도 낄래!", "desc": "친구가 뭔가 하자고 할 때 하는 대답이에요. 우울하다는 뜻이 아니에요.", "cat": "영어표현", "url": "/p/im-down/"}, {"en": "How hard could it be?", "ko": "뭐 얼마나 어렵겠어?", "desc": "만만하게 보고 하는 말. 뒤에 It turns out(알고 보니)이 오면 반전이 시작돼요.", "cat": "영상으로 배우기", "url": "/p/jensen/"}, {"en": "Sounds good!", "ko": "좋아요, 그렇게 해요", "desc": "제안이나 약속에 동의할 때 OK보다 자연스러운 한마디예요.", "cat": "영어표현", "url": "/p/sounds-good/"}, {"en": "My bad.", "ko": "내 실수야, 미안", "desc": "작은 실수에 가볍게 하는 사과예요. 상사나 고객에겐 I apologize가 좋아요.", "cat": "영어표현", "url": "/p/my-bad/"}, {"en": "find one's footing", "ko": "자리를 잡다, 적응하다", "desc": "미끄러운 바닥에서 발 디딜 곳(footing)을 찾는 모습을 떠올려 보세요.", "cat": "영상으로 배우기", "url": "/p/pichai/"}, {"en": "Keep me posted.", "ko": "진행되는 대로 계속 알려줘", "desc": "한 번이면 Let me know, 계속이면 Keep me posted예요.", "cat": "영어표현", "url": "/p/keep-me-posted/"}, {"en": "I'm craving pizza.", "ko": "피자가 너무 당겨", "desc": "crave는 '간절히 원하다'. want보다 훨씬 생생한 '당긴다'예요.", "cat": "영어표현", "url": "/p/craving/"}, {"en": "give back", "ko": "받은 걸 돌려주다, 보답하다", "desc": "받은 걸 다시(back) 주다(give)! 손흥민은 팬들에게 돌려주고 싶다고 했어요.", "cat": "영상으로 배우기", "url": "/p/son/"}, {"en": "Does that make sense?", "ko": "제 설명, 이해되세요?", "desc": "Do you understand?보다 부드러워요. 상대가 아니라 내 설명을 묻는 말이거든요.", "cat": "영어표현", "url": "/p/make-sense/"}, {"en": "It's on me.", "ko": "내가 낼게, 내가 쏠게", "desc": "계산서가 내 위에(on me)! I'll shoot이라고 하면 안 통해요.", "cat": "영어표현", "url": "/p/its-on-me/"}, {"en": "a dream come true", "ko": "꿈이 이루어진 것, 꿈만 같은 일", "desc": "젠슨 황은 '나는 부모님의 꿈이 이루어진 모습'이라고 말했어요.", "cat": "영상으로 배우기", "url": "/p/jensen/"}, {"en": "I'm on it.", "ko": "바로 할게요, 제가 처리할게요", "desc": "일을 부탁받았을 때 OK보다 훨씬 믿음직한 대답이에요.", "cat": "영어표현", "url": "/p/im-on-it/"}, {"en": "Could you walk me through it?", "ko": "차근차근 설명해 주시겠어요?", "desc": "처음 하는 절차 앞에서 '모르겠어요' 대신 쓰는 말이에요.", "cat": "영어표현", "url": "/p/walk-me-through/"}, {"en": "I'd like to open an account.", "ko": "계좌를 개설하고 싶어요", "desc": "I want보다 정중한 I'd like to. 은행, 병원 창구에서 첫마디로 딱이에요.", "cat": "영어표현", "url": "/p/id-like-to/"}],it=L[Math.floor((Date.now()/1000+9*3600)/86400)%L.length];if(!it)return;var w=it.en.split(" "),last=w.pop(),q=function(i){return document.getElementById(i)},x=function(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};q("td-en").innerHTML=(w.length?x(w.join(" "))+" ":"")+'<span class="hl">'+x(last)+'</span>';q("td-en").classList.toggle("long",it.en.length>16);q("td-ko").textContent=it.ko;q("td-desc").textContent=it.desc||"";q("td-cat").textContent=it.cat;q("td-link").href=it.url})();</script>
 <nav class="a-tiles" aria-label="카테고리"><a class="a-tile" href="/category/video/"><span class="n">01</span><b>영상으로 배우기</b><span>카영 영상 속 표현을 장면과 함께</span></a><a class="a-tile" href="/category/expr/"><span class="n">02</span><b>영어표현</b><span>새 표현 · 비슷한 표현 · 헷갈리는 표현</span></a><a class="a-tile" href="/category/tip/"><span class="n">03</span><b>영어꿀팁</b><span>회화 · 단어 · 듣기 · 발음</span></a><a class="a-tile" href="/category/think/"><span class="n">04</span><b>사유의 문장</b><span>필사하고 빈칸으로 복기</span></a></nav>
-<div class="a-head"><h2>새로 올라온 글</h2></div><div class="cards"><a class="card has-th" href="/p/would-you-mind/"><div class="thumb"><img src="/og/th-p-would-you-mind.webp?v=6fd68bfc" alt="" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip tip">영어꿀팁</span><span class="chip tip">회화</span></div><h3>&quot;Would you mind ~?&quot;에 No라고 해야 &#x27;괜찮아요&#x27;예요</h3><p>정중한 부탁 표현과 대답할 때 생기는 함정 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/walk-me-through/"><div class="thumb"><img src="/og/th-p-walk-me-through.webp?v=3ef92d37" alt="" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip expr">영어표현</span><span class="chip expr">새 표현</span></div><h3>&quot;Could you walk me through it?&quot;, &#x27;차근차근 설명해 주세요&#x27;</h3><p>새 직장, 은행, 관공서에서 처음 하는 일 앞에서 꼭 필요한 말 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/video-call/"><div class="thumb"><img src="/og/th-p-video-call.webp?v=cd24ecc3" alt="" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip tip">영어꿀팁</span><span class="chip tip">회화</span></div><h3>화상회의에서 바로 쓰는 영어, &#x27;You&#x27;re on mute&#x27;</h3><p>줌, 팀즈, 구글 밋에서 매번 나오는 말들 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/sounds-good/"><div class="thumb"><img src="/og/th-p-sounds-good.webp?v=e4fe5c9f" alt="" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip expr">영어표현</span><span class="chip expr">비슷한 표현</span></div><h3>&quot;Sounds good&quot;, OK보다 자연스러운 &#x27;좋아요&#x27;</h3><p>제안이나 약속에 동의할 때 원어민이 제일 많이 하는 말 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/restaurant/"><div class="thumb"><img src="/og/th-p-restaurant.webp?v=757056be" alt="" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip tip">영어꿀팁</span><span class="chip tip">회화</span></div><h3>해외 식당에서 꼭 쓰는 영어, 자리부터 계산까지</h3><p>Check, please 하나로 끝나지 않아요 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/negative-question/"><div class="thumb"><img src="/og/th-p-negative-question.webp?v=e2f760f8" alt="" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip tip">영어꿀팁</span><span class="chip tip">회화</span></div><h3>&quot;Don&#x27;t you like coffee?&quot;, Yes라고 하면 좋아한다는 뜻이에요</h3><p>한국인이 가장 많이 헷갈리는 부정 질문 대답법 · 퀴즈 3문제</p></a></div>
-<div class="a-head" style="margin-top:36px"><h2>사유의 문장</h2><a href="/category/think/">전체 보기</a></div><div class="cards"><a class="card has-th" href="/think/son/"><div class="thumb"><img src="/og/th-t-son.webp?v=fe5b4c50" alt="" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip think">사유의 문장</span><span class="chip video">손흥민 · LAFC 이적 후 인터뷰</span></div><h3>잘하는 것보다 중요한 것</h3><p>필사할 문장 4개</p></a><a class="card has-th" href="/think/jensen/"><div class="thumb"><img src="/og/th-t-jensen.webp?v=54889ac2" alt="" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip think">사유의 문장</span><span class="chip video">젠슨 황 · 2026 카네기멜론대 졸업 연설</span></div><h3>실패가 두려운 당신에게</h3><p>필사할 문장 4개</p></a><a class="card has-th" href="/think/pichai/"><div class="thumb"><img src="/og/th-t-pichai.webp?v=e84e3c02" alt="" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip think">사유의 문장</span><span class="chip video">순다르 피차이 · 2026 스탠퍼드 졸업 연설</span></div><h3>열심히 사는데도 불안한 당신에게</h3><p>필사할 문장 4개</p></a></div>
+<div class="a-head"><h2>새로 올라온 글</h2></div><div class="cards"><a class="card has-th" href="/p/would-you-mind/"><div class="thumb"><img src="/og/th-p-would-you-mind.webp?v=c6edeabb" alt="Would you mind? - 대답은 Yes? No?" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip tip">영어꿀팁</span><span class="chip tip">회화</span></div><h3>&quot;Would you mind ~?&quot;에 No라고 해야 &#x27;괜찮아요&#x27;예요</h3><p>정중한 부탁 표현과 대답할 때 생기는 함정 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/walk-me-through/"><div class="thumb"><img src="/og/th-p-walk-me-through.webp?v=3ef92d37" alt="Walk me through it. - 차근차근 설명해 주세요" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip expr">영어표현</span><span class="chip expr">새 표현</span></div><h3>&quot;Could you walk me through it?&quot;, &#x27;차근차근 설명해 주세요&#x27;</h3><p>새 직장, 은행, 관공서에서 처음 하는 일 앞에서 꼭 필요한 말 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/video-call/"><div class="thumb"><img src="/og/th-p-video-call.webp?v=c7b66378" alt="You&#x27;re on mute. - 음소거 되어 있어요" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip tip">영어꿀팁</span><span class="chip tip">회화</span></div><h3>화상회의에서 바로 쓰는 영어, &#x27;You&#x27;re on mute&#x27;</h3><p>줌, 팀즈, 구글 밋에서 매번 나오는 말들 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/sounds-good/"><div class="thumb"><img src="/og/th-p-sounds-good.webp?v=e4fe5c9f" alt="Sounds good! - 좋아, 그러자" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip expr">영어표현</span><span class="chip expr">비슷한 표현</span></div><h3>&quot;Sounds good&quot;, OK보다 자연스러운 &#x27;좋아요&#x27;</h3><p>제안이나 약속에 동의할 때 원어민이 제일 많이 하는 말 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/restaurant/"><div class="thumb"><img src="/og/th-p-restaurant.webp?v=bd5d69e3" alt="Can we get the check? - 계산서 주세요" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip tip">영어꿀팁</span><span class="chip tip">회화</span></div><h3>해외 식당에서 꼭 쓰는 영어, 자리부터 계산까지</h3><p>Check, please 하나로 끝나지 않아요 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/negative-question/"><div class="thumb"><img src="/og/th-p-negative-question.webp?v=f5186c7e" alt="Don&#x27;t you like coffee? - &#x27;커피 안 좋아해?&#x27; 대답은?" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip tip">영어꿀팁</span><span class="chip tip">회화</span></div><h3>&quot;Don&#x27;t you like coffee?&quot;, Yes라고 하면 좋아한다는 뜻이에요</h3><p>한국인이 가장 많이 헷갈리는 부정 질문 대답법 · 퀴즈 3문제</p></a></div>
+<div class="a-head" style="margin-top:36px"><h2>사유의 문장</h2><a href="/category/think/" >전체 보기<span class="sr-only"> - 사유의 문장</span></a></div><div class="cards"><a class="card has-th" href="/think/son/"><div class="thumb"><img src="/og/th-t-son.webp?v=fe5b4c50" alt="Say hello first. - 손흥민의 문장" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip think">사유의 문장</span><span class="chip speaker">손흥민 · LAFC 이적 후 인터뷰</span></div><h3>잘하는 것보다 중요한 것</h3><p>필사할 문장 4개</p></a><a class="card has-th" href="/think/jensen/"><div class="thumb"><img src="/og/th-t-jensen.webp?v=54889ac2" alt="Not a guarantee, but a chance. - 젠슨 황의 문장" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip think">사유의 문장</span><span class="chip speaker">젠슨 황 · 2026 카네기멜론대 졸업 연설</span></div><h3>실패가 두려운 당신에게</h3><p>필사할 문장 4개</p></a><a class="card has-th" href="/think/pichai/"><div class="thumb"><img src="/og/th-t-pichai.webp?v=e84e3c02" alt="We prefer to call it golden. - 순다르 피차이의 문장" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip think">사유의 문장</span><span class="chip speaker">순다르 피차이 · 2026 스탠퍼드 졸업 연설</span></div><h3>열심히 사는데도 불안한 당신에게</h3><p>필사할 문장 4개</p></a></div>
 
 </main>
 
@@ -755,6 +779,6 @@ body{word-break:keep-all;overflow-wrap:break-word}
 </footer>
 <div class="fab no-print" id="fab"><div class="fab-menu" id="fab-menu"><a class="fab-item youtube" href="https://www.youtube.com/@CAFEINENGLISH" target="_blank" rel="noopener" aria-label="유튜브" title="유튜브"><span class="fab-ic"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8z" fill="#fff"/><path d="M9.8 15.1V8.9l5.4 3.1z" fill="#FF0033"/></svg></span></a><a class="fab-item instagram" href="https://www.instagram.com/cafe_in_english" target="_blank" rel="noopener" aria-label="인스타그램" title="인스타그램"><span class="fab-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="#fff" stroke="none"/></svg></span></a><a class="fab-item kakao" href="https://open.kakao.com/o/gxsl5iQi" target="_blank" rel="noopener" aria-label="카카오톡 오픈채팅" title="카카오톡 오픈채팅"><span class="fab-ic"><svg width="26" height="24" viewBox="0 0 30 28" aria-hidden="true"><path d="M15 2C7.8 2 2 6.6 2 12.3c0 3.7 2.4 6.9 6.1 8.7l-1.3 4.8c-.1.4.4.7.7.5l5.7-3.8c.6.1 1.2.1 1.8.1 7.2 0 13-4.6 13-10.3S22.2 2 15 2z" fill="#3A1D1D"/></svg></span></a></div><button class="fab-main" type="button" aria-expanded="false" aria-controls="fab-menu" aria-label="카페인영어 SNS 채널 보기"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
 <script id="page-data" type="application/json">{"type": "home", "daily": [{"post": "swamped", "en": "I'm swamped.", "ko": "할 일이 산더미야, 정신없이 바빠", "desc": "swamp는 '늪'. 일이 늪처럼 밀려와 허우적대는 느낌이라 busy보다 훨씬 생생해요.", "url": "/p/swamped/", "cat": "영어표현"}, {"post": "pichai", "en": "make-or-break", "ko": "성패를 가르는, 결정적인", "desc": "만들거나(make) 부서지거나(break), 결과가 둘 중 하나로 갈리는 순간이에요.", "url": "/p/pichai/", "cat": "영상으로 배우기"}, {"post": "im-good", "en": "I'm good, thanks.", "ko": "괜찮아요, 됐어요", "desc": "뭔가를 권할 때 나오는 I'm good은 '좋아요'가 아니라 정중한 거절이에요.", "url": "/p/im-good/", "cat": "영어표현"}, {"post": "son", "en": "since day one", "ko": "처음부터, 첫날부터", "desc": "손흥민이 처음부터 응원해 준 팬들을 이야기하며 쓴 표현이에요.", "url": "/p/son/", "cat": "영상으로 배우기"}, {"post": "im-down", "en": "I'm down.", "ko": "좋아, 나도 낄래!", "desc": "친구가 뭔가 하자고 할 때 하는 대답이에요. 우울하다는 뜻이 아니에요.", "url": "/p/im-down/", "cat": "영어표현"}, {"post": "jensen", "en": "How hard could it be?", "ko": "뭐 얼마나 어렵겠어?", "desc": "만만하게 보고 하는 말. 뒤에 It turns out(알고 보니)이 오면 반전이 시작돼요.", "url": "/p/jensen/", "cat": "영상으로 배우기"}, {"post": "sounds-good", "en": "Sounds good!", "ko": "좋아요, 그렇게 해요", "desc": "제안이나 약속에 동의할 때 OK보다 자연스러운 한마디예요.", "url": "/p/sounds-good/", "cat": "영어표현"}, {"post": "my-bad", "en": "My bad.", "ko": "내 실수야, 미안", "desc": "작은 실수에 가볍게 하는 사과예요. 상사나 고객에겐 I apologize가 좋아요.", "url": "/p/my-bad/", "cat": "영어표현"}, {"post": "pichai", "en": "find one's footing", "ko": "자리를 잡다, 적응하다", "desc": "미끄러운 바닥에서 발 디딜 곳(footing)을 찾는 모습을 떠올려 보세요.", "url": "/p/pichai/", "cat": "영상으로 배우기"}, {"post": "keep-me-posted", "en": "Keep me posted.", "ko": "진행되는 대로 계속 알려줘", "desc": "한 번이면 Let me know, 계속이면 Keep me posted예요.", "url": "/p/keep-me-posted/", "cat": "영어표현"}, {"post": "craving", "en": "I'm craving pizza.", "ko": "피자가 너무 당겨", "desc": "crave는 '간절히 원하다'. want보다 훨씬 생생한 '당긴다'예요.", "url": "/p/craving/", "cat": "영어표현"}, {"post": "son", "en": "give back", "ko": "받은 걸 돌려주다, 보답하다", "desc": "받은 걸 다시(back) 주다(give)! 손흥민은 팬들에게 돌려주고 싶다고 했어요.", "url": "/p/son/", "cat": "영상으로 배우기"}, {"post": "make-sense", "en": "Does that make sense?", "ko": "제 설명, 이해되세요?", "desc": "Do you understand?보다 부드러워요. 상대가 아니라 내 설명을 묻는 말이거든요.", "url": "/p/make-sense/", "cat": "영어표현"}, {"post": "its-on-me", "en": "It's on me.", "ko": "내가 낼게, 내가 쏠게", "desc": "계산서가 내 위에(on me)! I'll shoot이라고 하면 안 통해요.", "url": "/p/its-on-me/", "cat": "영어표현"}, {"post": "jensen", "en": "a dream come true", "ko": "꿈이 이루어진 것, 꿈만 같은 일", "desc": "젠슨 황은 '나는 부모님의 꿈이 이루어진 모습'이라고 말했어요.", "url": "/p/jensen/", "cat": "영상으로 배우기"}, {"post": "im-on-it", "en": "I'm on it.", "ko": "바로 할게요, 제가 처리할게요", "desc": "일을 부탁받았을 때 OK보다 훨씬 믿음직한 대답이에요.", "url": "/p/im-on-it/", "cat": "영어표현"}, {"post": "walk-me-through", "en": "Could you walk me through it?", "ko": "차근차근 설명해 주시겠어요?", "desc": "처음 하는 절차 앞에서 '모르겠어요' 대신 쓰는 말이에요.", "url": "/p/walk-me-through/", "cat": "영어표현"}, {"post": "id-like-to", "en": "I'd like to open an account.", "ko": "계좌를 개설하고 싶어요", "desc": "I want보다 정중한 I'd like to. 은행, 병원 창구에서 첫마디로 딱이에요.", "url": "/p/id-like-to/", "cat": "영어표현"}]}</script>
-<script src="/assets/app.js?v=62a74865" defer></script>
+<script src="/assets/app.js?v=7d8283de" defer></script>
 </body>
 </html>

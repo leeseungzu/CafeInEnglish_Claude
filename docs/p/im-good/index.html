@@ -27,7 +27,7 @@
   /* A. 에디토리얼 카페 — 오프화이트 · 에스프레소 · 라임 */
   --bg:#FAF8F5; --card:#FFFFFF; --text:#2A1A12; --muted:#6E5E54; --line:#ECE6DD;
   --accent:#2A1A12; --accent-soft:#EBE2D5; --lime:#CDEB5B;
-  --ok:#4A7010; --ok-soft:#E9F5C4; --bad:#B5412F; --bad-soft:#F6E0D9;
+  --ok:#4A7010; --ok-soft:#E9F5C4; --bad:#A63A2A; --bad-soft:#F6E0D9;
   --tip:#2F5E8A; --tip-soft:#E2EAF1; --memo:#7A5A12; --memo-soft:#F3EAD2;
   --serif:"Pretendard Variable",Pretendard,-apple-system,sans-serif;
 }
@@ -92,7 +92,7 @@ h2{font-size:19px;margin:30px 0 8px}
 .cards{display:grid;gap:12px}
 .card{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;transition:border-color .15s}
 .card:hover{border-color:var(--accent)}
-.card h3{margin:6px 0 2px;font-size:17px}
+.card h3,.card h2{margin:6px 0 2px;font-size:17px}
 .card p{margin:0;color:var(--muted);font-size:14px}
 .btn{all:unset;cursor:pointer;display:block;text-align:center;font-weight:700;padding:13px;border-radius:12px;box-sizing:border-box;width:100%}
 .btn.primary{background:var(--accent);color:#fff}
@@ -262,7 +262,7 @@ aside.side{display:none}
   .lead{font-size:18px}
   .cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
   .card{padding:20px 22px}
-  .card h3{font-size:18px}
+  .card h3,.card h2{font-size:18px}
   .hero{padding:34px 40px}
   .hero h1{font-size:36px}
   .hero p{font-size:17px;max-width:760px}
@@ -328,7 +328,7 @@ aside.side{display:none}
 .a-thumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85}
 .a-play{position:absolute;inset:0;margin:auto;width:60px;height:60px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center}
 .a-feature .k{font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--lime);margin:16px 0 6px}
-.a-feature h3{margin:0 0 12px;font-size:20px;line-height:1.4}
+.a-feature h3,.a-feature h2{margin:0 0 12px;font-size:20px;line-height:1.4}
 .a-pills{display:flex;flex-wrap:wrap;gap:6px}
 .a-pills span{font-family:var(--serif);font-style:italic;font-size:14px;border:1px solid #6B5445;border-radius:999px;padding:4px 11px}
 .a-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 16px;margin:6px 0 38px}
@@ -347,7 +347,7 @@ aside.side{display:none}
   .a-mean{font-size:22px}
   .a-desc{font-size:16px}
   .a-feature{padding:26px}
-  .a-feature h3{font-size:23px}
+  .a-feature h3,.a-feature h2{font-size:23px}
   .a-tiles{grid-template-columns:repeat(4,minmax(0,1fr))}
   .a-tile .n{font-size:28px}
   .a-tile b{font-size:17px}
@@ -360,7 +360,7 @@ aside.side{display:none}
 
 /* ================= 심플 타이포 (Pretendard) ================= */
 body{letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
-h1,h2,h3,.cq-q,.a-phrase,.a-mean,.xp h3,.quote .en,.card h3,.logo{letter-spacing:-.035em}
+h1,h2,h3,.cq-q,.a-phrase,.a-mean,.xp h3,.quote .en,.card h3,.card h2,.logo{letter-spacing:-.035em}
 h1{font-weight:800} h2{font-weight:700}
 .logo i{font-style:normal;font-weight:600;color:var(--muted)}
 .a-phrase{font-weight:800;letter-spacing:-.05em;line-height:1.05}
@@ -372,7 +372,7 @@ h1{font-weight:800} h2{font-weight:700}
 .ws-quote .en{font-family:inherit;font-weight:700}
 @media (min-width:1024px){ .a-phrase{font-size:96px} .quote .en{font-size:24px} }
 body{letter-spacing:normal}
-h2,h3,.card h3,.cq-q,.a-mean,.logo{letter-spacing:-.02em}
+h2,h3,.card h3,.card h2,.cq-q,.a-mean,.logo{letter-spacing:-.02em}
 h1{letter-spacing:-.03em}
 .a-kicker,.a-feature .k{letter-spacing:.02em}
 /* 오늘의 한 잔 라벨: 보통 굵기, 크게 */
@@ -720,6 +720,29 @@ body{word-break:keep-all;overflow-wrap:break-word}
 .fix .why b{display:inline-block;background:var(--lime);color:var(--text);font-size:12px;font-weight:800;padding:1px 8px;border-radius:999px;margin-right:6px;vertical-align:1px}
 /* 작은 화면(360px 이하): 로고 영문을 줄여 내 공부방 버튼이 한 줄에 오도록 */
 @media (max-width:374px){ .logo i{display:none} }
+/* 사유의 문장 · 화자 칩 (올리브 계열) */
+.chip.speaker{background:#E6EADD;color:#3B4430}
+/* 복습 노트 제목 (인쇄용, h2) */
+.ws-head .ws-title{font-size:21px;line-height:1.35;margin:4px 0 0;border:0;padding:0}
+/* 모바일: 아래로 스크롤하는 동안 + 버튼을 살짝 숨겨 본문을 가리지 않게 */
+@media (max-width:599px){
+  .fab{right:14px;bottom:18px;transition:transform .25s ease,opacity .25s ease}
+  .fab-main{width:52px;height:52px}
+  .fab.hide:not(.open){transform:translateY(90px);opacity:0;pointer-events:none}
+}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* 모바일 목록: 썸네일 왼쪽 + 글 오른쪽 (스크롤 길이 절반) */
+@media (max-width:599px){
+  .card.has-th{display:grid;grid-template-columns:44% 1fr;grid-template-rows:auto auto 1fr;column-gap:12px;align-items:start;padding:10px 12px 10px 10px}
+  .card.has-th .thumb{grid-row:1/4;margin:0;border-radius:10px;align-self:center}
+  .card.has-th .thumb::after{border-radius:10px}
+  .card.has-th .chips{grid-column:2}
+  .card.has-th .chips .chip:nth-child(n+2){display:none}
+  .card.has-th h3,.card.has-th h2{grid-column:2;font-size:15px;line-height:1.38;margin:5px 0 3px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .card.has-th p{grid-column:2;font-size:12.5px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .card.has-th .th-play{transform:scale(.7)}
+  .cards.rel .card.has-th p{display:none}
+}
 </style>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-ZTK7QZC3NK');addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-ZTK7QZC3NK';document.head.appendChild(s)},1500)});</script>
 </head>
@@ -765,13 +788,13 @@ body{word-break:keep-all;overflow-wrap:break-word}
   <p class="lead" style="font-size:13px;text-align:center;margin-top:6px">인쇄 창에서 대상을 <b>'PDF로 저장'</b>으로 고르면 파일로 받을 수 있어요</p>
 </div>
 <div class="print-only ws"><div style="break-before:page"></div>
-<div class="ws-head"><div><div class="brand">카페인영어 CafeInEnglish · 복습 노트</div><h1 style="margin:4px 0 0">확인 문제</h1><div class="date">&quot;I&#x27;m good&quot;, &#x27;좋아요&#x27;가 아니라 &#x27;괜찮아요, 됐어요&#x27;일 때</div><div class="date" style="margin-top:6px">공부한 날: ______ / ______</div></div><div class="ws-qrs"><div class="ws-qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 148" class="segno"><g transform="scale(4)"><path fill="#fff" d="M0 0h37v37h-37z"/><path class="qrline" stroke="#111" d="M2 2.5h7m3 0h1m1 0h1m1 0h3m1 0h2m1 0h3m2 0h7m-33 1h1m5 0h1m3 0h2m3 0h1m1 0h1m2 0h2m1 0h2m1 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h1m2 0h1m1 0h2m3 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m3 0h4m3 0h1m1 0h1m2 0h3m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m2 0h1m2 0h1m3 0h2m1 0h1m2 0h3m1 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m1 0h2m1 0h1m6 0h1m1 0h2m2 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-24 1h3m2 0h1m2 0h1m1 0h3m-22 1h1m2 0h1m1 0h2m1 0h1m3 0h5m2 0h1m1 0h1m1 0h3m1 0h1m-28 1h6m2 0h3m1 0h1m1 0h1m1 0h1m3 0h2m2 0h4m3 0h2m-33 1h1m1 0h1m1 0h1m1 0h4m1 0h1m4 0h2m1 0h2m3 0h1m1 0h3m1 0h1m1 0h1m-32 1h1m1 0h1m5 0h2m1 0h1m1 0h1m1 0h2m3 0h1m1 0h4m1 0h2m2 0h1m-33 1h1m1 0h3m1 0h1m1 0h1m2 0h1m3 0h1m3 0h3m1 0h2m1 0h1m2 0h1m-30 1h6m2 0h5m2 0h2m4 0h1m2 0h1m1 0h1m1 0h1m1 0h3m-31 1h1m3 0h3m1 0h1m2 0h1m3 0h2m2 0h1m1 0h5m2 0h2m-32 1h1m4 0h1m2 0h2m1 0h5m1 0h3m1 0h1m4 0h1m1 0h2m1 0h1m-32 1h2m1 0h1m2 0h2m1 0h1m1 0h1m2 0h1m2 0h1m1 0h4m1 0h1m1 0h1m1 0h1m2 0h1m-31 1h1m5 0h1m3 0h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h1m3 0h1m1 0h1m1 0h1m-32 1h1m1 0h1m2 0h5m1 0h3m4 0h1m2 0h2m2 0h1m4 0h3m-31 1h3m3 0h1m4 0h1m2 0h3m1 0h3m1 0h4m3 0h2m-33 1h2m1 0h1m2 0h2m2 0h1m2 0h2m1 0h3m2 0h1m1 0h1m7 0h2m-32 1h1m2 0h2m1 0h1m1 0h3m1 0h7m1 0h1m2 0h1m1 0h1m3 0h3m-33 1h4m2 0h1m1 0h3m2 0h1m1 0h1m1 0h4m1 0h1m3 0h5m1 0h1m-32 1h2m5 0h1m1 0h1m2 0h2m1 0h1m1 0h2m1 0h3m4 0h2m1 0h1m-32 1h1m1 0h2m1 0h2m1 0h2m2 0h1m2 0h3m2 0h2m2 0h5m3 0h1m-25 1h2m3 0h1m5 0h2m1 0h1m1 0h1m3 0h2m2 0h1m-33 1h7m2 0h1m4 0h1m1 0h1m5 0h1m1 0h1m1 0h1m1 0h3m-31 1h1m5 0h1m1 0h4m4 0h1m3 0h3m1 0h1m3 0h1m2 0h1m-32 1h1m1 0h3m1 0h1m2 0h2m1 0h1m1 0h3m4 0h2m1 0h6m1 0h2m-33 1h1m1 0h3m1 0h1m1 0h1m1 0h4m1 0h1m1 0h1m5 0h2m1 0h1m1 0h2m-30 1h1m1 0h3m1 0h1m4 0h1m1 0h2m3 0h1m1 0h1m1 0h4m2 0h2m2 0h1m-33 1h1m5 0h1m3 0h2m1 0h5m1 0h3m2 0h3m-27 1h7m1 0h1m2 0h2m3 0h1m1 0h2m1 0h1m2 0h3m1 0h2m1 0h1"/></g></svg><div>퀴즈·오답노트<br>다시 풀기</div></div></div></div>
+<div class="ws-head"><div><div class="brand">카페인영어 CafeInEnglish · 복습 노트</div><h2 class="ws-title">확인 문제</h2><div class="date">&quot;I&#x27;m good&quot;, &#x27;좋아요&#x27;가 아니라 &#x27;괜찮아요, 됐어요&#x27;일 때</div><div class="date" style="margin-top:6px">공부한 날: ______ / ______</div></div><div class="ws-qrs"><div class="ws-qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 148" class="segno"><g transform="scale(4)"><path fill="#fff" d="M0 0h37v37h-37z"/><path class="qrline" stroke="#111" d="M2 2.5h7m3 0h1m1 0h1m1 0h3m1 0h2m1 0h3m2 0h7m-33 1h1m5 0h1m3 0h2m3 0h1m1 0h1m2 0h2m1 0h2m1 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h1m2 0h1m1 0h2m3 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m3 0h4m3 0h1m1 0h1m2 0h3m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m2 0h1m2 0h1m3 0h2m1 0h1m2 0h3m1 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m1 0h2m1 0h1m6 0h1m1 0h2m2 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-24 1h3m2 0h1m2 0h1m1 0h3m-22 1h1m2 0h1m1 0h2m1 0h1m3 0h5m2 0h1m1 0h1m1 0h3m1 0h1m-28 1h6m2 0h3m1 0h1m1 0h1m1 0h1m3 0h2m2 0h4m3 0h2m-33 1h1m1 0h1m1 0h1m1 0h4m1 0h1m4 0h2m1 0h2m3 0h1m1 0h3m1 0h1m1 0h1m-32 1h1m1 0h1m5 0h2m1 0h1m1 0h1m1 0h2m3 0h1m1 0h4m1 0h2m2 0h1m-33 1h1m1 0h3m1 0h1m1 0h1m2 0h1m3 0h1m3 0h3m1 0h2m1 0h1m2 0h1m-30 1h6m2 0h5m2 0h2m4 0h1m2 0h1m1 0h1m1 0h1m1 0h3m-31 1h1m3 0h3m1 0h1m2 0h1m3 0h2m2 0h1m1 0h5m2 0h2m-32 1h1m4 0h1m2 0h2m1 0h5m1 0h3m1 0h1m4 0h1m1 0h2m1 0h1m-32 1h2m1 0h1m2 0h2m1 0h1m1 0h1m2 0h1m2 0h1m1 0h4m1 0h1m1 0h1m1 0h1m2 0h1m-31 1h1m5 0h1m3 0h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h1m3 0h1m1 0h1m1 0h1m-32 1h1m1 0h1m2 0h5m1 0h3m4 0h1m2 0h2m2 0h1m4 0h3m-31 1h3m3 0h1m4 0h1m2 0h3m1 0h3m1 0h4m3 0h2m-33 1h2m1 0h1m2 0h2m2 0h1m2 0h2m1 0h3m2 0h1m1 0h1m7 0h2m-32 1h1m2 0h2m1 0h1m1 0h3m1 0h7m1 0h1m2 0h1m1 0h1m3 0h3m-33 1h4m2 0h1m1 0h3m2 0h1m1 0h1m1 0h4m1 0h1m3 0h5m1 0h1m-32 1h2m5 0h1m1 0h1m2 0h2m1 0h1m1 0h2m1 0h3m4 0h2m1 0h1m-32 1h1m1 0h2m1 0h2m1 0h2m2 0h1m2 0h3m2 0h2m2 0h5m3 0h1m-25 1h2m3 0h1m5 0h2m1 0h1m1 0h1m3 0h2m2 0h1m-33 1h7m2 0h1m4 0h1m1 0h1m5 0h1m1 0h1m1 0h1m1 0h3m-31 1h1m5 0h1m1 0h4m4 0h1m3 0h3m1 0h1m3 0h1m2 0h1m-32 1h1m1 0h3m1 0h1m2 0h2m1 0h1m1 0h3m4 0h2m1 0h6m1 0h2m-33 1h1m1 0h3m1 0h1m1 0h1m1 0h4m1 0h1m1 0h1m5 0h2m1 0h1m1 0h2m-30 1h1m1 0h3m1 0h1m4 0h1m1 0h2m3 0h1m1 0h1m1 0h4m2 0h2m2 0h1m-33 1h1m5 0h1m3 0h2m1 0h5m1 0h3m2 0h3m-27 1h7m1 0h1m2 0h2m3 0h1m1 0h2m1 0h1m2 0h3m1 0h2m1 0h1"/></g></svg><div>퀴즈·오답노트<br>다시 풀기</div></div></div></div>
 <p style="font-size:13px">본문을 다시 읽은 뒤, 정답에 ○ 표시해 보세요. 정답과 연상법은 맨 아래에 있어요.</p><div class="ws-q"><b>1. 식당 직원이 &quot;More water?&quot;라고 묻자 친구가 &quot;I&#x27;m good.&quot;이라고 했어요. 무슨 뜻일까요?</b><br><span class="o">① 네, 더 주세요</span><span class="o">② 괜찮아요, 됐어요</span><span class="o">③ 저 기분 좋아요</span><span class="o">④ 물이 맛있어요</span></div><div class="ws-q"><b>2. 점원이 &quot;Do you need a bag?&quot;라고 했어요. 봉투가 필요하면?</b><br><span class="o">① I&#x27;m good.</span><span class="o">② Yes, please.</span><span class="o">③ I&#x27;m all set.</span><span class="o">④ No, thanks.</span></div><div class="ws-q"><b>3. 식당에서 직원이 &quot;Anything else?&quot; 하자 &quot;I&#x27;m all set.&quot;이라고 했어요. 무슨 뜻일까요?</b><br><span class="o">① 다 준비됐어요, 더 필요 없어요</span><span class="o">② 아직 세팅 중이에요</span><span class="o">③ 자리 바꿔 주세요</span><span class="o">④ 모두 주세요</span></div>
 <h2>오늘의 표현, 직접 써 보기</h2><div class="ws-label">오늘 배운 표현으로 나만의 문장 2개 만들기</div>
 <div class="ws-line"></div><div class="ws-line"></div><div class="ws-line"></div><div class="ws-line"></div>
 <div class="ws-key"><b>정답과 연상법</b><ol><li><b>② 괜찮아요, 됐어요</b> — 뭔가를 권할 때의 I&#x27;m good은 &#x27;괜찮아요, 필요 없어요&#x27;라는 정중한 거절이에요.<br>연상법 · 이미 good한 상태 → 더 필요 없음!</li><li><b>② Yes, please.</b> — 받고 싶을 땐 Yes, please. 나머지는 모두 &#x27;필요 없어요&#x27;라는 뜻이에요.<br>연상법 · 받을 땐 Yes, please / 거절은 I&#x27;m good</li><li><b>① 다 준비됐어요, 더 필요 없어요</b> — I&#x27;m all set = 필요한 건 다 갖췄어요, 더 필요한 거 없어요.<br>연상법 · all(다) set(갖춰짐) = 끝!</li></ol></div>
 <p style="font-size:12px;color:#555">www.cafeinenglish.com · 매일 표현 하나, 같이 공부해요</p></div>
-<h2 class="rel-h no-print">같이 보면 좋은 글</h2><div class="cards rel no-print"><a class="card has-th" href="/p/im-down/"><div class="thumb"><img src="/og/th-p-im-down.webp?v=e73dce73" alt="" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip expr">영어표현</span><span class="chip expr">헷갈리는 표현</span></div><h3>&quot;I&#x27;m down&quot;, 우울하다는 뜻 아니에요, &#x27;콜! 나도 낄래&#x27;</h3><p>친구가 뭐 하자고 할 때 원어민이 제일 많이 하는 대답 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/walk-me-through/"><div class="thumb"><img src="/og/th-p-walk-me-through.webp?v=3ef92d37" alt="" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip expr">영어표현</span><span class="chip expr">새 표현</span></div><h3>&quot;Could you walk me through it?&quot;, &#x27;차근차근 설명해 주세요&#x27;</h3><p>새 직장, 은행, 관공서에서 처음 하는 일 앞에서 꼭 필요한 말 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/sounds-good/"><div class="thumb"><img src="/og/th-p-sounds-good.webp?v=e4fe5c9f" alt="" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip expr">영어표현</span><span class="chip expr">비슷한 표현</span></div><h3>&quot;Sounds good&quot;, OK보다 자연스러운 &#x27;좋아요&#x27;</h3><p>제안이나 약속에 동의할 때 원어민이 제일 많이 하는 말 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/my-bad/"><div class="thumb"><img src="/og/th-p-my-bad.webp?v=811e5296" alt="" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip expr">영어표현</span><span class="chip expr">새 표현</span></div><h3>&quot;My bad&quot;, I&#x27;m sorry보다 가볍게, 쿨하게 사과하기</h3><p>작은 실수엔 무거운 사과 대신 이 한마디 · 퀴즈 3문제</p></a></div>
+<h2 class="rel-h no-print">같이 보면 좋은 글</h2><div class="cards rel no-print"><a class="card has-th" href="/p/im-down/"><div class="thumb"><img src="/og/th-p-im-down.webp?v=e73dce73" alt="I&#x27;m down! - 콜! 나도 낄래" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip expr">영어표현</span><span class="chip expr">헷갈리는 표현</span></div><h3>&quot;I&#x27;m down&quot;, 우울하다는 뜻 아니에요, &#x27;콜! 나도 낄래&#x27;</h3><p>친구가 뭐 하자고 할 때 원어민이 제일 많이 하는 대답 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/walk-me-through/"><div class="thumb"><img src="/og/th-p-walk-me-through.webp?v=3ef92d37" alt="Walk me through it. - 차근차근 설명해 주세요" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip expr">영어표현</span><span class="chip expr">새 표현</span></div><h3>&quot;Could you walk me through it?&quot;, &#x27;차근차근 설명해 주세요&#x27;</h3><p>새 직장, 은행, 관공서에서 처음 하는 일 앞에서 꼭 필요한 말 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/sounds-good/"><div class="thumb"><img src="/og/th-p-sounds-good.webp?v=e4fe5c9f" alt="Sounds good! - 좋아, 그러자" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip expr">영어표현</span><span class="chip expr">비슷한 표현</span></div><h3>&quot;Sounds good&quot;, OK보다 자연스러운 &#x27;좋아요&#x27;</h3><p>제안이나 약속에 동의할 때 원어민이 제일 많이 하는 말 · 퀴즈 3문제</p></a><a class="card has-th" href="/p/my-bad/"><div class="thumb"><img src="/og/th-p-my-bad.webp?v=811e5296" alt="My bad! - 앗, 내 실수!" loading="lazy" width="960" height="504"></div><div class="chips"><span class="chip expr">영어표현</span><span class="chip expr">새 표현</span></div><h3>&quot;My bad&quot;, I&#x27;m sorry보다 가볍게, 쿨하게 사과하기</h3><p>작은 실수엔 무거운 사과 대신 이 한마디 · 퀴즈 3문제</p></a></div>
 </main>
 <aside class="side no-print"><div class="side-in"><div class="side-box"><h4>이 글의 목차</h4><ol class="toc"><li><a href="#s1">뜻이 두 개예요</a></li><li><a href="#s2">예문</a></li><li><a href="#s3">비슷한 표현</a></li><li><a href="#s4">한눈에 정리</a></li><li><a href="#s5">자주 하는 실수</a></li><li class="q"><a href="#quiz-sec">퀴즈 풀기</a></li></ol></div><div class="side-box"><h4>복습하기</h4><a class="btn ghost" href="#quiz-sec">퀴즈 풀기</a><a class="btn ghost" href="/notes/">내 공부방<span class="n-pill js-notes-count"></span></a><button class="btn ghost js-print">출력 · PDF 저장</button></div><div class="side-box"><h4>이어서 보기</h4><ul class="side-links"><li><a href="/p/im-down/">&quot;I&#x27;m down&quot;, 우울하다는 뜻 아니에요, &#x27;콜! 나도 낄래&#x27;</a></li><li><a href="/p/walk-me-through/">&quot;Could you walk me through it?&quot;, &#x27;차근차근 설명해 주세요&#x27;</a></li><li><a href="/p/sounds-good/">&quot;Sounds good&quot;, OK보다 자연스러운 &#x27;좋아요&#x27;</a></li><li><a href="/p/my-bad/">&quot;My bad&quot;, I&#x27;m sorry보다 가볍게, 쿨하게 사과하기</a></li></ul></div></div></aside>
 </div>
@@ -781,6 +804,6 @@ body{word-break:keep-all;overflow-wrap:break-word}
 </footer>
 <div class="fab no-print" id="fab"><div class="fab-menu" id="fab-menu"><a class="fab-item youtube" href="https://www.youtube.com/@CAFEINENGLISH" target="_blank" rel="noopener" aria-label="유튜브" title="유튜브"><span class="fab-ic"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8z" fill="#fff"/><path d="M9.8 15.1V8.9l5.4 3.1z" fill="#FF0033"/></svg></span></a><a class="fab-item instagram" href="https://www.instagram.com/cafe_in_english" target="_blank" rel="noopener" aria-label="인스타그램" title="인스타그램"><span class="fab-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="#fff" stroke="none"/></svg></span></a><a class="fab-item kakao" href="https://open.kakao.com/o/gxsl5iQi" target="_blank" rel="noopener" aria-label="카카오톡 오픈채팅" title="카카오톡 오픈채팅"><span class="fab-ic"><svg width="26" height="24" viewBox="0 0 30 28" aria-hidden="true"><path d="M15 2C7.8 2 2 6.6 2 12.3c0 3.7 2.4 6.9 6.1 8.7l-1.3 4.8c-.1.4.4.7.7.5l5.7-3.8c.6.1 1.2.1 1.8.1 7.2 0 13-4.6 13-10.3S22.2 2 15 2z" fill="#3A1D1D"/></svg></span></a></div><button class="fab-main" type="button" aria-expanded="false" aria-controls="fab-menu" aria-label="카페인영어 SNS 채널 보기"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
 <script id="page-data" type="application/json">{"type": "post", "id": "im-good", "title": "\"I'm good\", '좋아요'가 아니라 '괜찮아요, 됐어요'일 때", "url": "/p/im-good/", "cat": "expr", "catName": "영어표현", "quiz": [{"tag": "뜻", "q": "식당 직원이 \"More water?\"라고 묻자 친구가 \"I'm good.\"이라고 했어요. 무슨 뜻일까요?", "sub": "권유에 대한 대답이에요", "options": ["네, 더 주세요", "괜찮아요, 됐어요", "저 기분 좋아요", "물이 맛있어요"], "answer": 1, "explain": "뭔가를 권할 때의 I'm good은 '괜찮아요, 필요 없어요'라는 정중한 거절이에요.", "mnemonic": "이미 good한 상태 → 더 필요 없음!"}, {"tag": "대답", "q": "점원이 \"Do you need a bag?\"라고 했어요. 봉투가 필요하면?", "sub": "받고 싶을 때!", "options": ["I'm good.", "Yes, please.", "I'm all set.", "No, thanks."], "answer": 1, "explain": "받고 싶을 땐 Yes, please. 나머지는 모두 '필요 없어요'라는 뜻이에요.", "mnemonic": "받을 땐 Yes, please / 거절은 I'm good"}, {"tag": "뜻", "q": "식당에서 직원이 \"Anything else?\" 하자 \"I'm all set.\"이라고 했어요. 무슨 뜻일까요?", "sub": "", "options": ["다 준비됐어요, 더 필요 없어요", "아직 세팅 중이에요", "자리 바꿔 주세요", "모두 주세요"], "answer": 0, "explain": "I'm all set = 필요한 건 다 갖췄어요, 더 필요한 거 없어요.", "mnemonic": "all(다) set(갖춰짐) = 끝!"}], "links": [{"label": "\"I'm down\", 우울하다는 뜻 아니에요, '콜! 나도 낄래'", "en": "I'm down!", "ko": "콜! 나도 낄래", "href": "/p/im-down/"}, {"label": "\"Could you walk me through it?\", '차근차근 설명해 주세요'", "en": "Walk me through it.", "ko": "차근차근 설명해 주세요", "href": "/p/walk-me-through/"}, {"label": "\"Sounds good\", OK보다 자연스러운 '좋아요'", "en": "Sounds good!", "ko": "좋아, 그러자", "href": "/p/sounds-good/"}, {"label": "\"My bad\", I'm sorry보다 가볍게, 쿨하게 사과하기", "en": "My bad!", "ko": "앗, 내 실수!", "href": "/p/my-bad/"}], "kakao": "https://open.kakao.com/o/gxsl5iQi", "audio": {"Do you want some more? I'm good, thanks.": "/audio/f704c9b067dc.mp3", "Do you need a bag? I'm good.": "/audio/64ab982251d4.mp3", "Can I get you anything to drink? I'm good for now.": "/audio/0e5e631ed328.mp3", "No, thanks.": "/audio/801ea2200946.mp3", "I'm all set.": "/audio/b4cdf073f19b.mp3", "Yes, please.": "/audio/eee3c5f86b5f.mp3"}, "share": "I'm good, thanks."}</script>
-<script src="/assets/app.js?v=62a74865" defer></script>
+<script src="/assets/app.js?v=7d8283de" defer></script>
 </body>
 </html>

@@ -471,6 +471,14 @@
     document.addEventListener("click", e => { if (!fab.contains(e.target)) set(false); });
     document.addEventListener("keydown", e => { if (e.key === "Escape") set(false); });
     $$(".fab-item.pending", fab).forEach(a => a.onclick = e => { e.preventDefault(); toast("카카오톡 채널은 곧 열려요"); });
+    // 모바일: 내려 읽는 동안엔 숨기고, 조금이라도 올리거나 맨 아래에 닿으면 다시 보여줘요
+    let lastY = scrollY;
+    addEventListener("scroll", () => {
+      const y = scrollY, end = innerHeight + y >= document.body.scrollHeight - 80;
+      if (Math.abs(y - lastY) < 8) return;
+      fab.classList.toggle("hide", y > lastY && y > 200 && !end);
+      lastY = y;
+    }, { passive: true });
   }
   initVideo();
   initShare();

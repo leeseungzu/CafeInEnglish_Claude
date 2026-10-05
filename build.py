@@ -18,6 +18,16 @@ DOMAIN = SITE["domain"].rstrip("/")
 CATS = {"video": "영상으로 배우기", "expr": "영어표현", "tip": "영어꿀팁", "think": "사유의 문장"}
 TILE_SUB = {"video": "카영 영상 속 표현을 장면과 함께", "expr": "새 표현 · 비슷한 표현 · 헷갈리는 표현",
             "tip": "회화 · 단어 · 듣기 · 발음", "think": "필사하고 빈칸으로 복기"}
+CAT_SEO = {  # 카테고리 페이지 검색용 제목 · 설명
+    "video": ("영상으로 배우는 영어 - 카페인영어 영상 속 표현 정리와 퀴즈",
+              "카페인영어 유튜브 영상 한 편에서 실제로 쓰는 영어 표현을 뽑아 뜻, 예문, 발음과 함께 정리하고 퀴즈로 확인해요."),
+    "expr": ("원어민 영어표현 - 뜻, 예문, 비슷한 표현, 헷갈리는 표현 정리",
+             "Sounds good, My bad, I'm on it처럼 원어민이 매일 쓰는 영어표현을 뜻, 예문, 비슷한 표현, 자주 하는 실수와 연상법, 퀴즈로 정리했어요."),
+    "tip": ("영어꿀팁 - 회화, 발음, 듣기, 콩글리시까지 바로 써먹는 영어 팁",
+            "한국인이 자주 틀리는 영어 회화, 발음, 듣기, 콩글리시를 쉽게 풀어 정리했어요. 식당, 카페, 병원, 화상회의에서 바로 쓰는 문장과 퀴즈까지."),
+    "think": ("영어 명언 필사 - 사유의 문장, 연설과 인터뷰 속 영어 문장",
+              "손흥민, 젠슨 황, 순다르 피차이의 영어 연설과 인터뷰 속 곱씹을 문장을 영상으로 듣고, 따라 쓰고, 빈칸으로 다시 떠올려 보세요."),
+}
 CAT_LEAD = {
     "video": "카페인영어 영상 한 편에서 표현을 뽑아 정리하고, 퀴즈로 확인해요",
     "expr": "새 표현 · 비슷한 표현 · 헷갈리는 표현을 연상법과 퀴즈로",
@@ -140,7 +150,7 @@ def _spaced(d, xy, text, font, fill, spacing, anchor_right=False):
 THEMES = {  # 배경, 글자, 핵심 단어 스타일
     "dark": ("#2A1A12", "#F4EEE4", "lime"),
     "lime": ("#CDEB5B", "#2A1A12", "underline"),
-    "cream": ("#E9DFD0", "#2A1A12", "pill"),
+    "cream": ("#EFE7DA", "#2A1A12", "marker"),
     "olive": ("#3B4430", "#F4EEE4", "lime"),
 }
 
@@ -179,6 +189,10 @@ def thumb_image(name, theme, ko, text, key):
         lw = ln.split()
         # 같은 줄의 핵심 단어 구간
         span = [j for j in range(len(lw)) if wi + j in keyidx]
+        if span and style == "marker":
+            xs = x + d.textlength(" ".join(lw[:span[0]]) + (" " if span[0] else ""), font=f)
+            xe = x + d.textlength(" ".join(lw[:span[-1] + 1]), font=f)
+            d.rectangle((xs - 8, y + int(size * .44), xe + 8, y + int(size * .84)), fill=LIME)
         if span and style == "pill":
             xs = x + d.textlength(" ".join(lw[:span[0]]) + (" " if span[0] else ""), font=f)
             xe = x + d.textlength(" ".join(lw[:span[-1] + 1]), font=f)
@@ -320,6 +334,7 @@ ICON_LOOP = ('<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke
              '<path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg>')
 
 
+
 def seg_buttons(t, end):
     return (f'<div class="sh-btns"><button class="sh-play" data-t="{t}" data-end="{end}" data-n="1">{ICON_PLAY}{mmss(t)} 듣기</button>'
             f'<button class="sh-play" data-t="{t}" data-end="{end}" data-n="3">{ICON_LOOP}3번 반복</button></div>')
@@ -414,7 +429,7 @@ def mmss(t):
 
 
 # ------------------------------------------------------------------ layout
-def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og.png", seo_title=None, ld=None):
+def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og.png", seo_title=None, ld=None, preload="", robots=""):
     full_title = f"{seo_title or title} | 카페인영어" if path != "/" else f"카페인영어 - {SITE['tagline']}"
     ads = (f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={e(SITE["adsense_client"])}" crossorigin="anonymous"></script>'
            if SITE.get("adsense_client") else "")
@@ -422,7 +437,8 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
     ga = (f"<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag('js',new Date());gtag('config','{e(SITE['ga_id'])}');"
           f"addEventListener('load',function(){{setTimeout(function(){{var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id={e(SITE['ga_id'])}';document.head.appendChild(s)}},1500)}});</script>"
           if SITE.get("ga_id") else "")
-    font_head = (f'<link rel="preload" href="/assets/pretendard-subset.woff2?v={FONT_V}" as="font" type="font/woff2" crossorigin>'
+    # 첫 화면 큰 이미지를 head에서 가장 먼저 요청 (그다음 글꼴)
+    font_head = (preload + f'<link rel="preload" href="/assets/pretendard-subset.woff2?v={FONT_V}" as="font" type="font/woff2" crossorigin>'
                  f"<style>@font-face{{font-family:'Pretendard Variable';font-weight:400 800;font-style:normal;font-display:swap;"
                  f"src:url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2-variations'),url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2')}}</style>"
                  if FONT_V else '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">')
@@ -438,7 +454,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(full_title)}</title>
 <meta name="description" content="{e(desc)}">
-<link rel="canonical" href="{DOMAIN}{path}">
+<link rel="canonical" href="{DOMAIN}{path}">{f'<meta name="robots" content="{robots}">' if robots else ""}
 <meta property="og:type" content="{og_type}">
 <meta property="og:site_name" content="{e(SITE['name'])}">
 <meta property="og:title" content="{e(title)}">
@@ -483,7 +499,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 """
 
 
-def card(href, chips, title, sub, thumb=None, play=False):
+def card(href, chips, title, sub, thumb=None, play=False, alt="", hl=3):
     chip_html = "".join('<span class="chip %s">%s</span>' % (c, e(t)) for c, t in chips)
     th = ""
     if thumb:
@@ -493,9 +509,9 @@ def card(href, chips, title, sub, thumb=None, play=False):
             vid = thumb.rsplit("/", 1)[1].replace(".webp", "")
             img = yt_img(vid, 'loading="lazy"').replace('sizes="(max-width:600px) 92vw, 480px"', 'sizes="(max-width:600px) 92vw, 340px"')
         else:
-            img = f'<img src="{thumb.replace(".png?", ".webp?")}" alt="" loading="lazy" width="960" height="504">'
+            img = f'<img src="{thumb.replace(".png?", ".webp?")}" alt="{e(alt)}" loading="lazy" width="960" height="504">'
         th = f'<div class="thumb">{img}{badge}</div>'
-    return f'<a class="card{" has-th" if thumb else ""}" href="{href}">{th}<div class="chips">{chip_html}</div><h3>{e(title)}</h3><p>{e(sub)}</p></a>'
+    return f'<a class="card{" has-th" if thumb else ""}" href="{href}">{th}<div class="chips">{chip_html}</div><h{hl}>{e(title)}</h{hl}><p>{e(sub)}</p></a>'
 
 
 def thumb_ver(th, theme):
@@ -511,15 +527,20 @@ def post_thumb(p):
     return f"/og/th-p-{p['id']}.png?v={thumb_ver(p.get('thumb'), thumb_theme(p))}", False
 
 
-def post_card(p):
+def thumb_alt(th):
+    return f"{th.get('text', '')} - {th.get('ko', '')}".strip(" -") if th else ""
+
+
+def post_card(p, hl=3):
     th, play = post_thumb(p)
     return card(post_url(p), [(p["cat"], CATS[p["cat"]]), (p["cat"], p.get("sub", ""))], p["title"],
-                f"{p.get('lead', '')} · 퀴즈 {len(p['quiz'])}문제", th, play)
+                f"{p.get('lead', '')} · 퀴즈 {len(p['quiz'])}문제", th, play, thumb_alt(p.get("thumb")), hl)
 
 
-def think_card(t):
-    return card(think_url(t), [("think", "사유의 문장"), ("video", t["speaker"])], t["title"],
-                f"필사할 문장 {len(t['quotes'])}개", f"/og/th-t-{t['id']}.png?v={thumb_ver(t.get('thumb'), 'olive')}")
+def think_card(t, hl=3):
+    return card(think_url(t), [("think", "사유의 문장"), ("speaker", t["speaker"])], t["title"],
+                f"필사할 문장 {len(t['quotes'])}개", f"/og/th-t-{t['id']}.png?v={thumb_ver(t.get('thumb'), 'olive')}",
+                alt=thumb_alt(t.get("thumb")), hl=hl)
 
 
 PRINT_BTN = """
@@ -536,7 +557,7 @@ def ws_head(title, sub, video, path):
         qrs += f'<div class="ws-qr">{qr_svg("https://youtu.be/" + video)}<div>영상<br>다시 보기</div></div>'
     qrs += f'<div class="ws-qr">{qr_svg(DOMAIN + path + "?src=print")}<div>퀴즈·오답노트<br>다시 풀기</div></div>'
     return (f'<div class="ws-head"><div><div class="brand">카페인영어 CafeInEnglish · 복습 노트</div>'
-            f'<h1 style="margin:4px 0 0">{e(title)}</h1><div class="date">{e(sub)}</div>'
+            f'<h2 class="ws-title">{e(title)}</h2><div class="date">{e(sub)}</div>'
             f'<div class="date" style="margin-top:6px">공부한 날: ______ / ______</div></div>'
             f'<div class="ws-qrs">{qrs if segno else ""}</div></div>')
 
@@ -694,7 +715,7 @@ def page_think(t):
 <div class="ws-label">Q. {e(q['ask'])}</div><div class="ws-line"></div></div>""" for i, q in enumerate(t["quotes"]))
     post = POST_BY_ID.get(t.get("post"))
     body = f"""<div class="no-print">
-<span class="chip think">사유의 문장</span><span class="chip video">{e(t['speaker'])}</span>
+<span class="chip think">사유의 문장</span><span class="chip speaker">{e(t['speaker'])}</span>
 <h1>{e(t['title'])}</h1>
 <p class="lead">따라 쓰고(필사), 빈칸으로 다시 떠올리고(복기), 나의 한 줄을 남겨 보세요.</p>
 </div>
@@ -730,14 +751,25 @@ def page_think(t):
 def page_category(cat):
     url = f"/category/{cat}/"
     if cat == "think":
-        cards = "".join(think_card(t) for t in THINKS)
+        items = THINKS
+        cards = "".join(think_card(t, 2) for t in THINKS)
         body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p><div class="cards">{cards}</div>'
                 '<p class="a-intro">필사한 문장은 <a href="/notes/#copy">내 공부방</a>에 모여요.</p>')
     else:
         items = [p for p in POSTS if p["cat"] == cat]
-        cards = "".join(post_card(p) for p in items) or '<div class="empty"><p>곧 첫 글이 올라와요.</p></div>'
+        cards = "".join(post_card(p, 2) for p in items) or '<div class="empty"><p>곧 첫 글이 올라와요.</p></div>'
         body = f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p><div class="cards">{cards}</div>'
-    return layout(CATS[cat], CAT_LEAD[cat], url, body, cat, wide=True)
+    seo_t, seo_d = CAT_SEO[cat]
+    links = [think_url(t) for t in items] if cat == "think" else [post_url(p) for p in items]
+    ld = [{"@type": "CollectionPage", "name": CATS[cat], "description": seo_d, "url": DOMAIN + url, "inLanguage": "ko",
+           "isPartOf": {"@type": "WebSite", "name": SITE["name"], "url": DOMAIN + "/"},
+           "mainEntity": {"@type": "ItemList", "itemListElement": [
+               {"@type": "ListItem", "position": i + 1, "url": DOMAIN + u} for i, u in enumerate(links)]}},
+          {"@type": "BreadcrumbList", "itemListElement": [
+              {"@type": "ListItem", "position": 1, "name": "홈", "item": DOMAIN + "/"},
+              {"@type": "ListItem", "position": 2, "name": CATS[cat], "item": DOMAIN + url}]}]
+    img = og_image("c-" + cat, "카테고리", CATS[cat], CAT_LEAD[cat], "읽고 · 듣고 · 퀴즈로 확인")
+    return layout(CATS[cat], seo_d, url, body, cat, wide=True, seo_title=seo_t, ld=ld, og_img=img)
 
 
 def daily_index(n):
@@ -771,17 +803,18 @@ def page_home():
         thumb = yt_img(vp["video"], 'fetchpriority="high"') if vp.get("video") else ""
         feature = (f'<a class="a-feature" href="{post_url(vp)}"><div class="a-thumb">{thumb}<span class="a-play">'
                    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2A1A12" stroke-width="2.4" stroke-linejoin="round"><path d="M8 5l11 7-11 7z"/></svg></span></div>'
-                   f'<div class="k">영상으로 배우기</div><h3>{e(vp["title"])}</h3><div class="a-pills">{pills}</div></a>')
+                   f'<div class="k">영상으로 배우기</div><h2>{e(vp["title"])}</h2><div class="a-pills">{pills}</div></a>')
     tiles = "".join(f'<a class="a-tile" href="/category/{k}/"><span class="n">0{n}</span><b>{v}</b><span>{TILE_SUB[k]}</span></a>'
                     for n, (k, v) in enumerate(CATS.items(), 1))
     shown = {tp["id"]} | ({vp["id"]} if vp else set())
     latest = "".join(post_card(p) for p in [p for p in POSTS if p["id"] not in shown][:6])
     thinks = "".join(think_card(t) for t in THINKS[:3])
     daily_js = json.dumps([{"en": d["en"], "ko": d["ko"], "desc": d.get("desc", ""), "cat": d["cat"], "url": d["url"]} for d in daily], ensure_ascii=False).replace("</", "<\\/") if daily else "[]"
-    body = f"""<section class="a-hero">
+    body = f"""<h1 class="sr-only">카페인영어 CafeInEnglish - 매일 조금씩, 깊게 스며드는 영어 공부</h1>
+<section class="a-hero">
   <div>
     <div class="a-kicker">오늘의 한 잔 · <span id="td-cat">{CATS[tp["cat"]]}</span></div>
-    <h1 class="a-phrase{" long" if len(t_en) > 16 else ""}" id="td-en">{phrase}</h1>
+    <p class="a-phrase{" long" if len(t_en) > 16 else ""}" id="td-en">{phrase}</p>
     <p class="a-mean" id="td-ko">{e(t_ko)}</p>
     <p class="a-desc" id="td-desc">{e(t_desc)}</p>
     <div class="a-btns"><a class="btn ghost" id="td-link" href="{post_url(tp)}">글 읽고 퀴즈 풀기</a><a class="btn ghost" href="/notes/">내 공부방</a></div>
@@ -791,10 +824,15 @@ def page_home():
 <script>(function(){{var L={daily_js},it=L[Math.floor((Date.now()/1000+9*3600)/86400)%L.length];if(!it)return;var w=it.en.split(" "),last=w.pop(),q=function(i){{return document.getElementById(i)}},x=function(t){{return String(t).replace(/[&<>"]/g,function(c){{return{{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}}[c]}})}};q("td-en").innerHTML=(w.length?x(w.join(" "))+" ":"")+'<span class="hl">'+x(last)+'</span>';q("td-en").classList.toggle("long",it.en.length>16);q("td-ko").textContent=it.ko;q("td-desc").textContent=it.desc||"";q("td-cat").textContent=it.cat;q("td-link").href=it.url}})();</script>
 <nav class="a-tiles" aria-label="카테고리">{tiles}</nav>
 {f'<div class="a-head"><h2>새로 올라온 글</h2></div><div class="cards">{latest}</div>' if latest else ""}
-{f'<div class="a-head" style="margin-top:36px"><h2>사유의 문장</h2><a href="/category/think/">전체 보기</a></div><div class="cards">{thinks}</div>' if thinks else ""}
+{f'<div class="a-head" style="margin-top:36px"><h2>사유의 문장</h2><a href="/category/think/" >전체 보기<span class="sr-only"> - 사유의 문장</span></a></div><div class="cards">{thinks}</div>' if thinks else ""}
 """
     ld = [{"@type": "WebSite", "name": "카페인영어 CafeInEnglish", "alternateName": "카페인영어", "url": DOMAIN + "/", "inLanguage": "ko"}, ORG]
-    return layout(SITE["name"], SITE["tagline"], "/", body, wide=True, ld=ld, data={"type": "home", "daily": daily})
+    pre = ""
+    if vp and vp.get("video") and (ROOT / "images" / "yt" / f'{vp["video"]}-400.webp').exists():
+        v = vp["video"]
+        pre = (f'<link rel="preload" as="image" href="/images/yt/{v}-400.webp" imagesrcset="/images/yt/{v}-400.webp 400w, /images/yt/{v}.webp 640w" '
+               'imagesizes="(max-width:600px) 92vw, 480px" fetchpriority="high">')
+    return layout(SITE["name"], SITE["tagline"], "/", body, wide=True, ld=ld, data={"type": "home", "daily": daily}, preload=pre)
 
 
 def page_notes():
@@ -803,7 +841,7 @@ def page_notes():
             '<h2 id="wrong">오답노트</h2><p class="lead" style="font-size:15px">다시 풀어서 맞히면 \'졸업\'해요.</p><div id="notes-root"></div>'
             '<h2 id="copy">필사 노트 (<span id="copy-count">0</span>)</h2><div id="copy-notes"></div>')
     return layout("내 공부방", "퀴즈 오답노트와 필사 노트를 모아 다시 복습하는 나만의 공부방", "/notes/", body, "notes",
-                  {"type": "notes", "kakao": SITE.get("kakao", "")}, wide=True)
+                  {"type": "notes", "kakao": SITE.get("kakao", "")}, wide=True, robots="noindex,follow")
 
 
 def page_static(slug, title, desc, inner):

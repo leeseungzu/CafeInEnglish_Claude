@@ -27,7 +27,7 @@
   /* A. 에디토리얼 카페 — 오프화이트 · 에스프레소 · 라임 */
   --bg:#FAF8F5; --card:#FFFFFF; --text:#2A1A12; --muted:#6E5E54; --line:#ECE6DD;
   --accent:#2A1A12; --accent-soft:#EBE2D5; --lime:#CDEB5B;
-  --ok:#4A7010; --ok-soft:#E9F5C4; --bad:#B5412F; --bad-soft:#F6E0D9;
+  --ok:#4A7010; --ok-soft:#E9F5C4; --bad:#A63A2A; --bad-soft:#F6E0D9;
   --tip:#2F5E8A; --tip-soft:#E2EAF1; --memo:#7A5A12; --memo-soft:#F3EAD2;
   --serif:"Pretendard Variable",Pretendard,-apple-system,sans-serif;
 }
@@ -92,7 +92,7 @@ h2{font-size:19px;margin:30px 0 8px}
 .cards{display:grid;gap:12px}
 .card{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;transition:border-color .15s}
 .card:hover{border-color:var(--accent)}
-.card h3{margin:6px 0 2px;font-size:17px}
+.card h3,.card h2{margin:6px 0 2px;font-size:17px}
 .card p{margin:0;color:var(--muted);font-size:14px}
 .btn{all:unset;cursor:pointer;display:block;text-align:center;font-weight:700;padding:13px;border-radius:12px;box-sizing:border-box;width:100%}
 .btn.primary{background:var(--accent);color:#fff}
@@ -262,7 +262,7 @@ aside.side{display:none}
   .lead{font-size:18px}
   .cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
   .card{padding:20px 22px}
-  .card h3{font-size:18px}
+  .card h3,.card h2{font-size:18px}
   .hero{padding:34px 40px}
   .hero h1{font-size:36px}
   .hero p{font-size:17px;max-width:760px}
@@ -328,7 +328,7 @@ aside.side{display:none}
 .a-thumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85}
 .a-play{position:absolute;inset:0;margin:auto;width:60px;height:60px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center}
 .a-feature .k{font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--lime);margin:16px 0 6px}
-.a-feature h3{margin:0 0 12px;font-size:20px;line-height:1.4}
+.a-feature h3,.a-feature h2{margin:0 0 12px;font-size:20px;line-height:1.4}
 .a-pills{display:flex;flex-wrap:wrap;gap:6px}
 .a-pills span{font-family:var(--serif);font-style:italic;font-size:14px;border:1px solid #6B5445;border-radius:999px;padding:4px 11px}
 .a-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 16px;margin:6px 0 38px}
@@ -347,7 +347,7 @@ aside.side{display:none}
   .a-mean{font-size:22px}
   .a-desc{font-size:16px}
   .a-feature{padding:26px}
-  .a-feature h3{font-size:23px}
+  .a-feature h3,.a-feature h2{font-size:23px}
   .a-tiles{grid-template-columns:repeat(4,minmax(0,1fr))}
   .a-tile .n{font-size:28px}
   .a-tile b{font-size:17px}
@@ -360,7 +360,7 @@ aside.side{display:none}
 
 /* ================= 심플 타이포 (Pretendard) ================= */
 body{letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
-h1,h2,h3,.cq-q,.a-phrase,.a-mean,.xp h3,.quote .en,.card h3,.logo{letter-spacing:-.035em}
+h1,h2,h3,.cq-q,.a-phrase,.a-mean,.xp h3,.quote .en,.card h3,.card h2,.logo{letter-spacing:-.035em}
 h1{font-weight:800} h2{font-weight:700}
 .logo i{font-style:normal;font-weight:600;color:var(--muted)}
 .a-phrase{font-weight:800;letter-spacing:-.05em;line-height:1.05}
@@ -372,7 +372,7 @@ h1{font-weight:800} h2{font-weight:700}
 .ws-quote .en{font-family:inherit;font-weight:700}
 @media (min-width:1024px){ .a-phrase{font-size:96px} .quote .en{font-size:24px} }
 body{letter-spacing:normal}
-h2,h3,.card h3,.cq-q,.a-mean,.logo{letter-spacing:-.02em}
+h2,h3,.card h3,.card h2,.cq-q,.a-mean,.logo{letter-spacing:-.02em}
 h1{letter-spacing:-.03em}
 .a-kicker,.a-feature .k{letter-spacing:.02em}
 /* 오늘의 한 잔 라벨: 보통 굵기, 크게 */
@@ -720,6 +720,29 @@ body{word-break:keep-all;overflow-wrap:break-word}
 .fix .why b{display:inline-block;background:var(--lime);color:var(--text);font-size:12px;font-weight:800;padding:1px 8px;border-radius:999px;margin-right:6px;vertical-align:1px}
 /* 작은 화면(360px 이하): 로고 영문을 줄여 내 공부방 버튼이 한 줄에 오도록 */
 @media (max-width:374px){ .logo i{display:none} }
+/* 사유의 문장 · 화자 칩 (올리브 계열) */
+.chip.speaker{background:#E6EADD;color:#3B4430}
+/* 복습 노트 제목 (인쇄용, h2) */
+.ws-head .ws-title{font-size:21px;line-height:1.35;margin:4px 0 0;border:0;padding:0}
+/* 모바일: 아래로 스크롤하는 동안 + 버튼을 살짝 숨겨 본문을 가리지 않게 */
+@media (max-width:599px){
+  .fab{right:14px;bottom:18px;transition:transform .25s ease,opacity .25s ease}
+  .fab-main{width:52px;height:52px}
+  .fab.hide:not(.open){transform:translateY(90px);opacity:0;pointer-events:none}
+}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* 모바일 목록: 썸네일 왼쪽 + 글 오른쪽 (스크롤 길이 절반) */
+@media (max-width:599px){
+  .card.has-th{display:grid;grid-template-columns:44% 1fr;grid-template-rows:auto auto 1fr;column-gap:12px;align-items:start;padding:10px 12px 10px 10px}
+  .card.has-th .thumb{grid-row:1/4;margin:0;border-radius:10px;align-self:center}
+  .card.has-th .thumb::after{border-radius:10px}
+  .card.has-th .chips{grid-column:2}
+  .card.has-th .chips .chip:nth-child(n+2){display:none}
+  .card.has-th h3,.card.has-th h2{grid-column:2;font-size:15px;line-height:1.38;margin:5px 0 3px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .card.has-th p{grid-column:2;font-size:12.5px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .card.has-th .th-play{transform:scale(.7)}
+  .cards.rel .card.has-th p{display:none}
+}
 </style>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-ZTK7QZC3NK');addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-ZTK7QZC3NK';document.head.appendChild(s)},1500)});</script>
 </head>
@@ -732,7 +755,7 @@ body{word-break:keep-all;overflow-wrap:break-word}
 <div class="wrap has-side">
 <main>
 <div class="no-print">
-<span class="chip think">사유의 문장</span><span class="chip video">젠슨 황 · 2026 카네기멜론대 졸업 연설</span>
+<span class="chip think">사유의 문장</span><span class="chip speaker">젠슨 황 · 2026 카네기멜론대 졸업 연설</span>
 <h1>실패가 두려운 당신에게</h1>
 <p class="lead">따라 쓰고(필사), 빈칸으로 다시 떠올리고(복기), 나의 한 줄을 남겨 보세요.</p>
 </div>
@@ -785,7 +808,7 @@ body{word-break:keep-all;overflow-wrap:break-word}
   <button class="btn ghost js-print" id="print-btn">출력해서 복습하기 (PDF 저장)</button>
   <p class="lead" style="font-size:13px;text-align:center;margin-top:6px">인쇄 창에서 대상을 <b>'PDF로 저장'</b>으로 고르면 파일로 받을 수 있어요</p>
 </div>
-<div class="print-only ws"><div class="ws-head"><div><div class="brand">카페인영어 CafeInEnglish · 복습 노트</div><h1 style="margin:4px 0 0">필사 노트 - 실패가 두려운 당신에게</h1><div class="date">젠슨 황 · 2026 카네기멜론대 졸업 연설</div><div class="date" style="margin-top:6px">공부한 날: ______ / ______</div></div><div class="ws-qrs"><div class="ws-qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 132" class="segno"><g transform="scale(4)"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#111" d="M2 2.5h7m2 0h1m1 0h5m3 0h1m2 0h7m-29 1h1m5 0h1m1 0h1m2 0h2m1 0h2m1 0h2m3 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m2 0h4m1 0h3m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h3m5 0h1m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h1m1 0h1m5 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m4 0h1m7 0h2m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-20 1h6m1 0h2m1 0h1m-19 1h3m1 0h2m3 0h1m1 0h1m2 0h1m4 0h1m5 0h2m-28 1h3m1 0h1m2 0h2m1 0h1m1 0h1m2 0h1m2 0h1m1 0h7m1 0h1m-29 1h2m3 0h2m6 0h1m1 0h4m1 0h1m1 0h1m2 0h3m-28 1h1m7 0h1m1 0h6m3 0h1m4 0h1m3 0h1m-29 1h1m1 0h1m2 0h2m1 0h1m2 0h1m1 0h5m1 0h1m1 0h1m1 0h1m1 0h1m1 0h2m-29 1h1m4 0h1m2 0h1m2 0h1m1 0h1m1 0h1m1 0h3m2 0h2m1 0h2m-25 1h2m2 0h1m1 0h4m2 0h1m4 0h7m1 0h2m-28 1h1m1 0h2m3 0h3m1 0h1m1 0h1m3 0h1m2 0h2m1 0h2m2 0h1m-28 1h2m1 0h1m1 0h1m3 0h1m2 0h1m1 0h1m1 0h1m1 0h3m2 0h2m1 0h2m-28 1h1m1 0h1m1 0h1m2 0h1m1 0h5m5 0h1m1 0h1m-23 1h1m1 0h1m2 0h2m3 0h3m1 0h1m5 0h1m1 0h3m1 0h1m-24 1h3m1 0h2m2 0h2m2 0h4m2 0h4m1 0h1m-26 1h1m3 0h6m1 0h6m1 0h6m1 0h2m-20 1h2m3 0h2m1 0h5m3 0h2m1 0h2m-29 1h7m2 0h3m2 0h1m3 0h3m1 0h1m1 0h1m1 0h1m-27 1h1m5 0h1m1 0h1m1 0h1m1 0h1m2 0h3m2 0h1m3 0h1m2 0h2m-29 1h1m1 0h3m1 0h1m2 0h8m3 0h7m-27 1h1m1 0h3m1 0h1m1 0h2m2 0h2m5 0h1m4 0h4m-28 1h1m1 0h3m1 0h1m1 0h2m1 0h4m2 0h2m1 0h1m2 0h1m1 0h1m2 0h1m-29 1h1m5 0h1m1 0h1m4 0h3m2 0h1m2 0h2m1 0h2m1 0h1m-28 1h7m4 0h3m4 0h4m1 0h1m1 0h3"/></g></svg><div>영상<br>다시 보기</div></div><div class="ws-qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 148" class="segno"><g transform="scale(4)"><path fill="#fff" d="M0 0h37v37h-37z"/><path class="qrline" stroke="#111" d="M2 2.5h7m2 0h2m1 0h2m4 0h4m1 0h1m2 0h7m-33 1h1m5 0h1m2 0h1m1 0h6m3 0h1m5 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m1 0h1m4 0h1m1 0h2m1 0h7m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m3 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h4m1 0h1m1 0h1m1 0h7m2 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m1 0h2m1 0h6m4 0h1m4 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-25 1h1m2 0h2m1 0h2m2 0h6m-24 1h1m1 0h5m2 0h2m2 0h3m1 0h1m1 0h1m2 0h3m1 0h5m-31 1h2m1 0h1m1 0h1m1 0h2m1 0h1m3 0h1m1 0h1m1 0h4m1 0h1m2 0h2m1 0h2m1 0h1m-31 1h6m1 0h1m5 0h2m1 0h1m5 0h3m1 0h1m1 0h2m-32 1h1m3 0h2m2 0h5m1 0h1m1 0h1m1 0h4m1 0h1m2 0h1m1 0h4m-32 1h3m1 0h3m2 0h1m2 0h1m5 0h2m2 0h2m1 0h1m1 0h3m2 0h1m-33 1h2m1 0h1m4 0h3m1 0h10m1 0h4m2 0h1m1 0h2m-33 1h1m1 0h6m2 0h4m4 0h1m1 0h1m1 0h1m2 0h2m4 0h1m-32 1h1m2 0h3m2 0h4m2 0h1m1 0h1m4 0h1m1 0h1m1 0h2m2 0h2m-29 1h3m1 0h1m3 0h2m1 0h1m3 0h1m1 0h1m2 0h4m1 0h2m3 0h1m-33 1h1m1 0h1m1 0h1m2 0h3m6 0h2m1 0h3m1 0h5m1 0h2m1 0h1m-32 1h3m2 0h1m1 0h2m1 0h2m1 0h4m2 0h1m6 0h2m1 0h2m-30 1h1m2 0h1m1 0h1m4 0h3m2 0h2m1 0h4m1 0h6m-30 1h2m2 0h3m1 0h1m2 0h5m7 0h2m1 0h3m2 0h1m-33 1h2m1 0h3m1 0h1m2 0h1m3 0h2m2 0h7m1 0h1m5 0h1m-33 1h1m1 0h1m2 0h2m1 0h1m4 0h6m2 0h2m1 0h2m1 0h3m1 0h1m-32 1h1m1 0h1m1 0h1m2 0h1m3 0h5m3 0h1m1 0h3m1 0h4m1 0h2m-32 1h1m1 0h2m1 0h4m3 0h2m1 0h1m1 0h1m4 0h7m2 0h1m-24 1h4m2 0h1m1 0h1m1 0h3m2 0h2m3 0h1m1 0h1m1 0h1m-33 1h7m2 0h1m1 0h5m2 0h1m2 0h4m1 0h1m1 0h1m1 0h2m-32 1h1m5 0h1m1 0h1m2 0h1m1 0h2m1 0h1m2 0h6m3 0h3m-31 1h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m4 0h3m1 0h1m1 0h6m1 0h1m-32 1h1m1 0h3m1 0h1m1 0h2m1 0h1m3 0h3m1 0h2m1 0h2m1 0h1m2 0h2m1 0h2m-33 1h1m1 0h3m1 0h1m1 0h2m2 0h2m4 0h1m2 0h1m1 0h5m1 0h1m-30 1h1m5 0h1m3 0h2m4 0h1m1 0h1m2 0h2m2 0h1m2 0h3m-31 1h7m1 0h2m1 0h2m4 0h2m3 0h4m1 0h1m3 0h1"/></g></svg><div>퀴즈·오답노트<br>다시 풀기</div></div></div></div><div class="ws-quote"><p class="en">1. That was my view of America: not easy, but full of opportunities; not a guarantee, but a chance.</p><p class="ko">그게 제가 본 미국이었어요. 쉽진 않지만 기회로 가득하고, 보장은 없지만 기회가 있는 곳.</p>
+<div class="print-only ws"><div class="ws-head"><div><div class="brand">카페인영어 CafeInEnglish · 복습 노트</div><h2 class="ws-title">필사 노트 - 실패가 두려운 당신에게</h2><div class="date">젠슨 황 · 2026 카네기멜론대 졸업 연설</div><div class="date" style="margin-top:6px">공부한 날: ______ / ______</div></div><div class="ws-qrs"><div class="ws-qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 132" class="segno"><g transform="scale(4)"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#111" d="M2 2.5h7m2 0h1m1 0h5m3 0h1m2 0h7m-29 1h1m5 0h1m1 0h1m2 0h2m1 0h2m1 0h2m3 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m2 0h4m1 0h3m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h3m5 0h1m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h1m1 0h1m5 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m4 0h1m7 0h2m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-20 1h6m1 0h2m1 0h1m-19 1h3m1 0h2m3 0h1m1 0h1m2 0h1m4 0h1m5 0h2m-28 1h3m1 0h1m2 0h2m1 0h1m1 0h1m2 0h1m2 0h1m1 0h7m1 0h1m-29 1h2m3 0h2m6 0h1m1 0h4m1 0h1m1 0h1m2 0h3m-28 1h1m7 0h1m1 0h6m3 0h1m4 0h1m3 0h1m-29 1h1m1 0h1m2 0h2m1 0h1m2 0h1m1 0h5m1 0h1m1 0h1m1 0h1m1 0h1m1 0h2m-29 1h1m4 0h1m2 0h1m2 0h1m1 0h1m1 0h1m1 0h3m2 0h2m1 0h2m-25 1h2m2 0h1m1 0h4m2 0h1m4 0h7m1 0h2m-28 1h1m1 0h2m3 0h3m1 0h1m1 0h1m3 0h1m2 0h2m1 0h2m2 0h1m-28 1h2m1 0h1m1 0h1m3 0h1m2 0h1m1 0h1m1 0h1m1 0h3m2 0h2m1 0h2m-28 1h1m1 0h1m1 0h1m2 0h1m1 0h5m5 0h1m1 0h1m-23 1h1m1 0h1m2 0h2m3 0h3m1 0h1m5 0h1m1 0h3m1 0h1m-24 1h3m1 0h2m2 0h2m2 0h4m2 0h4m1 0h1m-26 1h1m3 0h6m1 0h6m1 0h6m1 0h2m-20 1h2m3 0h2m1 0h5m3 0h2m1 0h2m-29 1h7m2 0h3m2 0h1m3 0h3m1 0h1m1 0h1m1 0h1m-27 1h1m5 0h1m1 0h1m1 0h1m1 0h1m2 0h3m2 0h1m3 0h1m2 0h2m-29 1h1m1 0h3m1 0h1m2 0h8m3 0h7m-27 1h1m1 0h3m1 0h1m1 0h2m2 0h2m5 0h1m4 0h4m-28 1h1m1 0h3m1 0h1m1 0h2m1 0h4m2 0h2m1 0h1m2 0h1m1 0h1m2 0h1m-29 1h1m5 0h1m1 0h1m4 0h3m2 0h1m2 0h2m1 0h2m1 0h1m-28 1h7m4 0h3m4 0h4m1 0h1m1 0h3"/></g></svg><div>영상<br>다시 보기</div></div><div class="ws-qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 148" class="segno"><g transform="scale(4)"><path fill="#fff" d="M0 0h37v37h-37z"/><path class="qrline" stroke="#111" d="M2 2.5h7m2 0h2m1 0h2m4 0h4m1 0h1m2 0h7m-33 1h1m5 0h1m2 0h1m1 0h6m3 0h1m5 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m1 0h1m4 0h1m1 0h2m1 0h7m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m3 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m1 0h4m1 0h1m1 0h1m1 0h7m2 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m1 0h2m1 0h6m4 0h1m4 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-25 1h1m2 0h2m1 0h2m2 0h6m-24 1h1m1 0h5m2 0h2m2 0h3m1 0h1m1 0h1m2 0h3m1 0h5m-31 1h2m1 0h1m1 0h1m1 0h2m1 0h1m3 0h1m1 0h1m1 0h4m1 0h1m2 0h2m1 0h2m1 0h1m-31 1h6m1 0h1m5 0h2m1 0h1m5 0h3m1 0h1m1 0h2m-32 1h1m3 0h2m2 0h5m1 0h1m1 0h1m1 0h4m1 0h1m2 0h1m1 0h4m-32 1h3m1 0h3m2 0h1m2 0h1m5 0h2m2 0h2m1 0h1m1 0h3m2 0h1m-33 1h2m1 0h1m4 0h3m1 0h10m1 0h4m2 0h1m1 0h2m-33 1h1m1 0h6m2 0h4m4 0h1m1 0h1m1 0h1m2 0h2m4 0h1m-32 1h1m2 0h3m2 0h4m2 0h1m1 0h1m4 0h1m1 0h1m1 0h2m2 0h2m-29 1h3m1 0h1m3 0h2m1 0h1m3 0h1m1 0h1m2 0h4m1 0h2m3 0h1m-33 1h1m1 0h1m1 0h1m2 0h3m6 0h2m1 0h3m1 0h5m1 0h2m1 0h1m-32 1h3m2 0h1m1 0h2m1 0h2m1 0h4m2 0h1m6 0h2m1 0h2m-30 1h1m2 0h1m1 0h1m4 0h3m2 0h2m1 0h4m1 0h6m-30 1h2m2 0h3m1 0h1m2 0h5m7 0h2m1 0h3m2 0h1m-33 1h2m1 0h3m1 0h1m2 0h1m3 0h2m2 0h7m1 0h1m5 0h1m-33 1h1m1 0h1m2 0h2m1 0h1m4 0h6m2 0h2m1 0h2m1 0h3m1 0h1m-32 1h1m1 0h1m1 0h1m2 0h1m3 0h5m3 0h1m1 0h3m1 0h4m1 0h2m-32 1h1m1 0h2m1 0h4m3 0h2m1 0h1m1 0h1m4 0h7m2 0h1m-24 1h4m2 0h1m1 0h1m1 0h3m2 0h2m3 0h1m1 0h1m1 0h1m-33 1h7m2 0h1m1 0h5m2 0h1m2 0h4m1 0h1m1 0h1m1 0h2m-32 1h1m5 0h1m1 0h1m2 0h1m1 0h2m1 0h1m2 0h6m3 0h3m-31 1h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m4 0h3m1 0h1m1 0h6m1 0h1m-32 1h1m1 0h3m1 0h1m1 0h2m1 0h1m3 0h3m1 0h2m1 0h2m1 0h1m2 0h2m1 0h2m-33 1h1m1 0h3m1 0h1m1 0h2m2 0h2m4 0h1m2 0h1m1 0h5m1 0h1m-30 1h1m5 0h1m3 0h2m4 0h1m1 0h1m2 0h2m2 0h1m2 0h3m-31 1h7m1 0h2m1 0h2m4 0h2m3 0h4m1 0h1m3 0h1"/></g></svg><div>퀴즈·오답노트<br>다시 풀기</div></div></div></div><div class="ws-quote"><p class="en">1. That was my view of America: not easy, but full of opportunities; not a guarantee, but a chance.</p><p class="ko">그게 제가 본 미국이었어요. 쉽진 않지만 기회로 가득하고, 보장은 없지만 기회가 있는 곳.</p>
 <div class="ws-label">따라 쓰기</div><div class="ws-line"></div><div class="ws-line"></div>
 <div class="ws-label">Q. 지금 내 앞에 있는 &#x27;보장은 없지만 기회인 것&#x27;은 뭘까요?</div><div class="ws-line"></div></div><div class="ws-quote"><p class="en">2. I learned early that being CEO is not about power, but the responsibility that comes with keeping the company alive.</p><p class="ko">일찍 깨달았어요. CEO라는 건 권력이 아니라, 회사를 살아남게 하는 책임이라는 걸.</p>
 <div class="ws-label">따라 쓰기</div><div class="ws-line"></div><div class="ws-line"></div>
@@ -807,6 +830,6 @@ body{word-break:keep-all;overflow-wrap:break-word}
 </footer>
 <div class="fab no-print" id="fab"><div class="fab-menu" id="fab-menu"><a class="fab-item youtube" href="https://www.youtube.com/@CAFEINENGLISH" target="_blank" rel="noopener" aria-label="유튜브" title="유튜브"><span class="fab-ic"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8z" fill="#fff"/><path d="M9.8 15.1V8.9l5.4 3.1z" fill="#FF0033"/></svg></span></a><a class="fab-item instagram" href="https://www.instagram.com/cafe_in_english" target="_blank" rel="noopener" aria-label="인스타그램" title="인스타그램"><span class="fab-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="#fff" stroke="none"/></svg></span></a><a class="fab-item kakao" href="https://open.kakao.com/o/gxsl5iQi" target="_blank" rel="noopener" aria-label="카카오톡 오픈채팅" title="카카오톡 오픈채팅"><span class="fab-ic"><svg width="26" height="24" viewBox="0 0 30 28" aria-hidden="true"><path d="M15 2C7.8 2 2 6.6 2 12.3c0 3.7 2.4 6.9 6.1 8.7l-1.3 4.8c-.1.4.4.7.7.5l5.7-3.8c.6.1 1.2.1 1.8.1 7.2 0 13-4.6 13-10.3S22.2 2 15 2z" fill="#3A1D1D"/></svg></span></a></div><button class="fab-main" type="button" aria-expanded="false" aria-controls="fab-menu" aria-label="카페인영어 SNS 채널 보기"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
 <script id="page-data" type="application/json">{"type": "think", "id": "jensen", "title": "실패가 두려운 당신에게", "speaker": "젠슨 황 · 2026 카네기멜론대 졸업 연설", "url": "/think/jensen/", "quotes": [{"en": "That was my view of America: not easy, but full of opportunities; not a guarantee, but a chance.", "ko": "그게 제가 본 미국이었어요. 쉽진 않지만 기회로 가득하고, 보장은 없지만 기회가 있는 곳.", "blanks": ["easy", "opportunities", "guarantee", "chance"]}, {"en": "I learned early that being CEO is not about power, but the responsibility that comes with keeping the company alive.", "ko": "일찍 깨달았어요. CEO라는 건 권력이 아니라, 회사를 살아남게 하는 책임이라는 걸.", "blanks": ["power", "responsibility", "alive"]}, {"en": "We learned never to see failure as the opposite of success.", "ko": "우리는 실패를 성공의 반대로 보지 않는 법을 배웠어요.", "blanks": ["failure", "opposite", "success"]}, {"en": "The resilience forged through setbacks is what gives you the strength to go again.", "ko": "좌절을 겪으며 단련된 회복력이, 다시 나아갈 힘을 줘요.", "blanks": ["resilience", "setbacks", "strength"]}], "share": "Not a guarantee, but a chance."}</script>
-<script src="/assets/app.js?v=62a74865" defer></script>
+<script src="/assets/app.js?v=7d8283de" defer></script>
 </body>
 </html>

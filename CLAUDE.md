@@ -44,7 +44,7 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 | `body_html` | 본문 HTML. 사용 가능한 블록: `.box` `.memo`(연상법) `ul.ex > li > span.en + span.ko` |
 | `og` | (선택) `{en, ko}` 카톡·SNS 미리보기 이미지 문구. en=크게 보일 표현, ko=아래 한 줄. 없으면 첫 표현/리드 사용 |
 | `expressions` | (선택) `[{t(초), end(초), en, ko, orig(원문), origKo(원문 해석), say(한글 발음), tips[연음 팁], ex, exKo, memo(연상법)}]` — t가 있으면 듣기·3번 반복 버튼 |
-| `thumb` | 목록 카드 썸네일 `{ko, text, key}` — ko=위 한국어 한 줄(궁금증), text=크게 쓸 영어, key=라임으로 강조할 단어. 배경은 카테고리별 고정: 영어표현=에스프레소, 영어꿀팁=크림, 사유의 문장=올리브 (라임은 핵심 단어에만). 영상 글은 유튜브 썸네일 |
+| `thumb` | 목록 카드 썸네일 `{ko, text, key}` — ko=위 한국어 한 줄(궁금증), text=크게 쓸 영어, key=라임으로 강조할 단어. 배경은 카테고리별 고정: 영어표현=에스프레소, 영어꿀팁=크림(핵심 단어에 라임 형광펜), 사유의 문장=올리브 (라임은 핵심 단어에만). 썸네일 alt는 `text - ko`로 자동. 영상 글은 유튜브 썸네일 |
 | `related` | (선택) `[{label, href}]` 추가 추천 링크 |
 | `quiz` | 3문제 권장. `{tag, q, sub, options[4], answer(0부터), explain, mnemonic}` |
 
@@ -101,3 +101,9 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 - style.css는 각 페이지 `<head>`에 인라인으로 들어간다 (렌더링 차단 요청 없음).
 - 유튜브 썸네일은 `images/yt/<id>.webp` (640x360)로 저장해 쓰고, 홈 첫 화면 썸네일은 fetchpriority=high.
 - GA는 페이지 load 1.5초 뒤에 불러온다.
+
+## SEO 규칙 (2026-10 점검)
+- 카테고리 페이지 검색 제목·설명은 build.py `CAT_SEO`에서 관리. 카테고리별 OG 이미지(`og/c-<cat>.png`)와 CollectionPage·Breadcrumb 구조화 데이터 자동 생성.
+- 한 페이지에 h1은 하나. 홈 h1은 화면에 안 보이는 사이트 소개 문장, 오늘의 표현은 p. 목록 카드 제목은 카테고리 페이지에선 h2, 홈·관련 글에선 h3.
+- 내 공부방(/notes/)은 noindex (개인 기록이라 검색 노출 X).
+- 글 seo_title은 "핵심 표현 뜻 - 한국어 설명" 형식, description은 70~120자.
