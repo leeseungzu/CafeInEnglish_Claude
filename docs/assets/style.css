@@ -1065,3 +1065,76 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 .tv-tile.on{background:#fff;border:2px solid #3182F6;box-shadow:0 6px 18px rgba(49,130,246,.15);opacity:1}
 .tv-tile.on .tv-go{display:inline-block;margin-top:4px;background:#3182F6;color:#fff;border-radius:999px;padding:4px 10px;font-size:12px;align-self:flex-start}
 @media(min-width:720px){.tv-steps{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}.tv-step:nth-last-child(2){border-bottom:0}}
+
+/* 2026-10 통일 디자인: 버튼 · 목록형 액션 · 공유/출력 · 대답 카드 · 여행 플랜/카톡 */
+.btn{border-radius:14px}
+.btn.primary{border-radius:14px}
+.btn.ghost{background:#fff;color:#333D4B;border:0;box-shadow:inset 0 0 0 1px #E5E8EB;border-radius:14px}
+.btn.ghost:hover{background:#F2F4F6;color:#191F28;border-color:transparent}
+.btn.kakao{background:#191F28;color:#fff;border:0;border-radius:14px}
+.btn.kakao:hover{background:#333D4B;color:#fff}
+.act{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:40px 1fr auto;gap:12px;align-items:center;width:100%;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:inset 0 0 0 1px #E5E8EB;text-decoration:none;color:#191F28;transition:background .15s}
+.act:hover{background:#F9FAFB}
+.act:focus-visible{outline:2px solid #3182F6;outline-offset:2px}
+.act-ic{width:40px;height:40px;border-radius:12px;background:#F2F4F6;display:flex;align-items:center;justify-content:center;color:#4E5968;transition:background .15s}
+.act-t{min-width:0}
+.act-t b{display:block;font-size:15.5px;font-weight:700;color:#191F28;line-height:1.35;letter-spacing:-.02em}
+.act-t small{display:block;font-size:13px;color:#8B95A1;line-height:1.45}
+.act-r{display:flex;align-items:center;gap:6px}
+.act-r .chev,.tv-pic .chev{font-style:normal;color:#B0B8C1;font-size:20px;line-height:1}
+.act .n-pill{background:#191F28;color:#CDEB5B;font-weight:800;margin:0}
+.act-r .n-pill:not(:empty)+.chev{display:none}
+.side-box .acts{display:grid;gap:2px;margin:0 -6px}
+.side-box .act{box-shadow:none;padding:8px 6px;grid-template-columns:36px 1fr auto;gap:10px;border-radius:12px}
+.side-box .act:hover{background:#F2F4F6}
+.side-box .act:hover .act-ic{background:#fff}
+.side-box .act-ic{width:36px;height:36px;border-radius:11px}
+.side-box .act-t b{font-size:14.5px}
+.side-box .act-t small{font-size:12px}
+.share{margin-top:28px;padding:20px;border-radius:22px;background:#F9FAFB;text-align:left}
+.share-hd{margin-top:20px}
+.share-t{font-size:17px;font-weight:700;color:#191F28;letter-spacing:-.02em;margin:0}
+.share-s{font-size:13.5px;color:#8B95A1;margin:2px 0 12px}
+.share-b .btn{padding:13px 10px;font-size:15px}
+.ex.ans li{background:#fff;border:1px solid #E5E8EB!important;border-radius:18px;padding:18px 18px 16px}
+.ex.ans .hn{display:block;font-size:12px;font-weight:800;color:#3182F6;margin-bottom:4px}
+.ex.ans .hn em{font-style:normal;font-weight:600;color:#8B95A1}
+.ex.ans .en{font-size:18px}
+.ex.ans .ko{margin-top:4px}
+.ex.ans .alt{display:block;margin-top:12px;background:#F2F4F6;border-radius:12px;padding:12px 14px 6px;font-size:14px;color:#4E5968}
+.ex.ans .alt small{display:block;background:none;border:0;border-radius:0;padding:0;margin:0 0 6px;font-size:12px;font-weight:700;color:#8B95A1}
+.ex.ans .alt .c{display:inline-flex;gap:6px;align-items:baseline;background:#fff;border-radius:10px;padding:6px 10px;margin:0 6px 6px 0;font-weight:600;color:#191F28}
+.ex.ans .alt .c i{font-style:normal;font-weight:400;font-size:12.5px;color:#8B95A1}
+.ex.ans .alt .t{display:block;padding-bottom:6px}
+.tv-plan2{display:flex;flex-direction:column}
+.tv-pr{display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;padding:12px 8px;margin:0 -8px;border-radius:16px;text-decoration:none;transition:background .15s}
+.tv-pr+.tv-pr{border-top:1px solid #F2F4F6}
+.tv-pr:hover{background:#F9FAFB}
+.tv-dd{width:52px;height:52px;border-radius:16px;background:#F2F4F6;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
+.tv-dd small{font-size:11px;font-weight:700;color:#8B95A1}
+.tv-dd b{font-size:19px;font-weight:800;color:#191F28;letter-spacing:-.5px}
+.tv-pr.last .tv-dd{background:#191F28}.tv-pr.last .tv-dd small{color:#CDEB5B}.tv-pr.last .tv-dd b{color:#fff}
+.tv-pt{min-width:0}
+.tv-pt b{display:block;font-size:16.5px;color:#191F28;letter-spacing:-.02em;line-height:1.4}
+.tv-pt span{display:block;font-size:13.5px;color:#8B95A1;line-height:1.5}
+.tv-pic{display:flex;align-items:center;gap:6px}
+.tv-pic .tv-pi{width:32px;height:32px}
+.tv-pic .tv-pi+.tv-pi{margin-left:-14px}
+.tv-plan-foot{margin-top:10px;background:#F9FAFB;border-radius:14px;padding:12px 14px;font-size:14px;color:#6B7684}
+.tv-plan-foot b{color:#191F28}
+.tv-kk{margin-top:40px;background:#F9FAFB;border-radius:24px;padding:22px;display:grid;grid-template-columns:1fr 210px;gap:20px;align-items:center}
+.tv-kk-l b{display:block;margin:8px 0 6px;font-size:19px;color:#191F28;letter-spacing:-.03em;line-height:1.4}
+.tv-kk-l>span:not(.lbl){display:block;font-size:14.5px;color:#6B7684;line-height:1.6;margin-bottom:16px}
+.tv-kk-btn{display:inline-flex!important;align-items:center;gap:8px;width:auto!important;padding:13px 18px!important;font-size:15px}
+.kk-dot{width:20px;height:20px;border-radius:6px;background:#FEE500;display:inline-flex;align-items:center;justify-content:center}
+.tv-kk-msg{background:#fff;border-radius:18px;padding:14px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.tv-kk-top{display:flex;justify-content:space-between;font-size:11px;color:#8B95A1;margin-bottom:8px}
+.tv-kk-bub{background:#F2F4F6;border-radius:4px 14px 14px 14px;padding:10px 12px;font-size:13px;color:#333D4B;line-height:1.5}
+.tv-kk-bub b{display:block;font-size:15px;color:#191F28;margin:2px 0}
+@media(max-width:560px){.tv-kk{grid-template-columns:1fr}.tv-kk-btn{width:100%!important;justify-content:center}}
+@media print{.share,.act{display:none!important}}
+.cq-cta .btn.kakao{background:#fff;color:#191F28;box-shadow:inset 0 0 0 1px #E5E8EB}
+.cq-cta .btn.kakao:hover{background:#F2F4F6;color:#191F28}
+.end-print{margin-top:28px}
+.end-print+.share{margin-top:16px}
+.share-hd{margin-top:0}

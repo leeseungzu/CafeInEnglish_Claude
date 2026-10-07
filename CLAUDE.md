@@ -120,3 +120,9 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 - 홈 첫 화면 영어 큰 글씨 = Plus Jakarta Sans Bold (assets/jakarta-700.woff2, 영문만 6KB, OFL 라이선스).
 - 카톡·SNS 공유 이미지(og:image)도 C안: `chat`이 있는 글은 build.py `og_chat()`이 대화 카드 이미지를 만들고, 파일명에 내용 해시가 붙어(`og/p-<id>-<해시>.png`) 바뀌면 카톡이 새 이미지로 인식해요. 영문 글꼴 fonts/PlusJakartaSans-Bold.ttf.
 - 문의 페이지(/contact/)는 A안 폼: 유형 칩 → 내용 → 답장 이메일 → 보내기. 서버가 없어 FormSubmit(formsubmit.co/ajax/<이메일>)으로 바로 전송 (메일 앱으로 넘기지 않음). 처음 한 번은 FormSubmit 확인 메일의 Activate를 눌러야 접수 시작.
+
+## 2026-10 버튼·카드 통일 규칙
+- 버튼 모서리 14px 통일. 보조 버튼(.btn.ghost) = 흰 바탕 + 연회색 테두리선, 카톡 버튼(.btn.kakao) = 남색 #191F28 (노란색은 작은 카톡 아이콘에만). 결과 화면처럼 버튼이 여러 개 쌓이는 곳의 카톡 버튼은 흰 보조 버튼.
+- 출력·복습하기·내 공부방 같은 이동 버튼은 목록형 `act_row()` (아이콘 + 제목/설명 + ›). 글 끝은 `share_block()`이 [출력해서 복습하기 줄(따로 떨어진 흰 카드)] → [회색 카드: 친구에게 보내기 제목 + 공유하기·링크 복사] 순서로 그린다. PRINT_BTN은 더 이상 쓰지 않음.
+- 여행 상황 글의 대답 카드(`ul.ex.ans`)는 질문 카드와 같은 테두리 카드. 맨 앞에 `<span class="hn">A1 <em>· Q1·Q2에 대한 대답</em></span>` (먼저 말할 때·먼저 물어볼 때·먼저 부탁할 때도 가능). '바꿔 쓰기'는 "영어 한국어 · 영어 한국어" 형식으로 쓰면 build.py `alt_chips()`가 칩으로 바꾼다.
+- /travel/ '출발 전 7일 플랜'은 build.py `TRAVEL_PLAN` (D-7 → D-1 목록, 질문 수 자동). 상단 숫자(질문·대답 수)도 상황 글에서 자동으로 센다.

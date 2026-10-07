@@ -456,13 +456,46 @@ def seg_buttons(t, end):
             f'<button class="sh-play" data-t="{t}" data-end="{end}" data-n="3">{ICON_LOOP}3번 반복</button></div>')
 
 
-def share_block(label):
-    return ('<div class="share no-print">'
-            f'<div class="share-t">{label}</div>'
+SVG_PRINT = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="6" y="14" width="12" height="7" rx="1"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/></svg>'
+SVG_QUIZ = '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>'
+SVG_BOOK = '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>'
+SVG_PEN = '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>'
+SVG_PLAY = '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5l11 7-11 7z"/></svg>'
+
+
+def act_row(icon, title, sub="", href=None, cls="", right=""):
+    """아이콘 + 제목/설명 + 화살표로 된 목록형 버튼 (출력·복습하기·내 공부방 등 공통)"""
+    inner = (f'<span class="act-ic">{icon}</span><span class="act-t"><b>{title}</b>'
+             + (f'<small>{sub}</small>' if sub else "") + f'</span><span class="act-r">{right}<i class="chev">›</i></span>')
+    if href:
+        return f'<a class="act {cls}" href="{href}">{inner}</a>'
+    return f'<button class="act {cls}" type="button">{inner}</button>'
+
+
+def share_block(label, print_title="출력해서 복습하기", print_sub="A4 복습지로 인쇄하거나 PDF로 저장해요"):
+    pr = act_row(SVG_PRINT, print_title, print_sub, cls="js-print") if print_title else ""
+    return ((f'<div class="end-print no-print">{pr}</div>' if pr else "") + '<div class="share no-print">' +
+            f'<div class="share-hd"><div class="share-t">{label}</div><div class="share-s">링크만 보내면 미리보기 카드로 보여요</div></div>'
             '<div class="share-b"><button class="btn ghost js-share" type="button">'
             '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>공유하기</button>'
             '<button class="btn ghost js-copylink" type="button">'
             '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>링크 복사</button></div></div>')
+
+
+def alt_chips(html_text):
+    """대답 카드의 '바꿔 쓰기' 문구(on business 출장 · to visit family 가족 방문)를 칩으로 바꿔요"""
+    def conv(m):
+        out = []
+        for part in [x.strip() for x in m.group(1).split(" · ") if x.strip()]:
+            mm = re.match(r"^([A-Za-z0-9][^가-힣]*?)\s+([가-힣].*)$", part)
+            if mm:
+                out.append(f'<span class="c">{mm.group(1)}<i>{mm.group(2)}</i></span>')
+            elif not re.search(r"[가-힣]", part):
+                out.append(f'<span class="c">{part}</span>')
+            else:
+                out.append(f'<span class="t">{part}</span>')
+        return '<span class="alt"><small>이렇게 바꿔 말해도 돼요</small>' + "".join(out) + "</span>"
+    return re.sub(r'<span class="alt"><small>바꿔 쓰기</small>(.*?)</span>', conv, html_text, flags=re.S)
 
 
 def load(kind):
@@ -779,7 +812,7 @@ def page_post(p):
     if video:
         parts.append(video_block(video, p["title"], "표현의 <b>듣기</b>·<b>3번 반복</b>으로 따라 말해 보세요"))
     toc = []
-    parts.append(add_heading_ids(p.get("body_html", ""), toc))
+    parts.append(add_heading_ids(alt_chips(p.get("body_html", "")), toc))
     if p.get("expressions"):
         toc.append(("expr", p.get("expressions_heading", "오늘의 표현")))
         parts.append(f'<h2 id="expr">{e(p.get("expressions_heading", "오늘의 표현"))}</h2>')
@@ -804,7 +837,6 @@ def page_post(p):
         parts.append(f'<div class="think-box"><b>이 영상 속 마음에 남는 문장</b>은 <a href="{think_url(THINK_BY_ID[p["think"]])}">사유의 문장</a>에서 필사하고 복기할 수 있어요.</div>')
     parts.append('<h2 class="quiz-h" id="quiz-sec">오늘 배운 거 확인하기</h2><div id="quiz"></div>')
     parts.append(share_block("같이 공부할 친구에게 이 글 보내기"))
-    parts.append(PRINT_BTN)
     # 출력용 문제지 (화면에서는 숨김)
     qs = "".join(
         f'<div class="ws-q"><b>{i + 1}. {e(q["q"])}</b>'
@@ -825,9 +857,10 @@ def page_post(p):
     links = related_links(p)
     link_items = "".join('<li><a href="%s">%s</a></li>' % (l["href"], e(l["label"])) for l in links)
     aside = (f'<div class="side-box"><h4>이 글의 목차</h4>{toc_html(toc)}</div>'
-             f'<div class="side-box"><h4>복습하기</h4><a class="btn ghost" href="#quiz-sec">퀴즈 풀기</a>'
-             f'<a class="btn ghost" href="/notes/">내 공부방<span class="n-pill js-notes-count"></span></a>'
-             f'<button class="btn ghost js-print">출력 · PDF 저장</button></div>'
+             f'<div class="side-box"><h4>복습하기</h4><div class="acts">'
+             + act_row(SVG_QUIZ, "퀴즈 풀기", f"{len(p['quiz'])}문제 · 1분", href="#quiz-sec")
+             + act_row(SVG_BOOK, "내 공부방", "틀린 문제 다시 보기", href="/notes/", right='<span class="n-pill js-notes-count"></span>')
+             + act_row(SVG_PRINT, "출력 · PDF 저장", "A4 복습지", cls="js-print") + '</div></div>'
              + (f'<div class="side-box"><h4>이어서 보기</h4><ul class="side-links">{link_items}</ul></div>' if links else "")
              + side_common())
     data = {"type": "post", "id": p["id"], "title": p["title"], "url": url, "cat": p["cat"], "catName": CATS[p["cat"]],
@@ -884,8 +917,7 @@ def page_think(t):
 {video_block(t["video"], t["title"], "문장마다 <b>듣기</b>·<b>3번 반복</b>으로 소리까지 익혀요") if t.get("video") else ""}
 {f'<a class="btn ghost no-print" href="{post_url(post)}">이 영상의 영어표현 먼저 보기</a>' if post else ""}
 {"".join(cards)}
-{share_block("마음에 남는 문장, 친구와 같이 필사해요")}
-{PRINT_BTN}
+{share_block("마음에 남는 문장, 친구와 같이 필사해요", "필사 노트 출력하기", "A4로 인쇄해서 손으로 따라 써요 · PDF 저장도 돼요")}
 <div class="print-only ws">{ws_head("필사 노트 - " + t["title"], t["speaker"], t.get("video"), url)}{ws}</div>
 <div class="cq-cta no-print" style="margin-top:16px">
   <a class="btn primary" href="/notes/#copy">내 공부방에서 필사 노트 보기</a>
@@ -895,9 +927,10 @@ def page_think(t):
             "quotes": [{"en": q["en"], "ko": q["ko"], "blanks": q["blanks"]} for q in t["quotes"]]}
     qlist = "".join(f'<li><a href="#q{i + 1}">{e(q["en"][:42] + ("…" if len(q["en"]) > 42 else ""))}</a></li>' for i, q in enumerate(t["quotes"]))
     aside = (f'<div class="side-box"><h4>문장 목록</h4><ol class="toc">{qlist}</ol></div>'
-             f'<div class="side-box"><h4>복습하기</h4><a class="btn ghost" href="/notes/#copy">내 필사 노트</a>'
-             f'<button class="btn ghost js-print">필사 노트 출력</button>'
-             + (f'<a class="btn ghost" href="{post_url(post)}">영상 표현 보기</a>' if post else "") + '</div>' + side_common())
+             f'<div class="side-box"><h4>복습하기</h4><div class="acts">'
+             + act_row(SVG_PEN, "내 필사 노트", "써 둔 문장 다시 보기", href="/notes/#copy")
+             + act_row(SVG_PRINT, "필사 노트 출력", "A4로 따라 쓰기", cls="js-print")
+             + (act_row(SVG_PLAY, "영상 표현 보기", "이 영상의 영어표현", href=post_url(post)) if post else "") + '</div></div>' + side_common())
     og = t.get("og") or {}
     shortest = min(t["quotes"], key=lambda q: len(q["en"]))["en"]
     data["share"] = og.get("en") or shortest
@@ -1208,7 +1241,14 @@ TRAVEL_PDF = "files/travel-english.pdf"
 TRAVEL_SITUATIONS = [("기내", "airplane", "in-flight"), ("입국심사", "passport-control", "immigration"), ("수하물·세관", "luggage", "baggage-customs"),
                      ("교통", "taxi", "transportation"), ("호텔", "hotel", "hotel-check-in"), ("카페", "hot-beverage", "travel-cafe"), ("식당", "fork-knife-plate", "travel-restaurant"),
                      ("쇼핑·계산", "shopping-bags", "shopping-checkout"), ("길 찾기", "world-map", "asking-directions"), ("문제 상황", "pill", "travel-trouble")]
-TRAVEL_PLAN = ["살아남는 문장 + 기내", "입국심사 + 수하물", "교통", "호텔", "카페 + 식당", "쇼핑 + 길 찾기", "문제 상황 + 복습"]
+# 출발 전 7일 플랜: (제목, [글 id], 설명) — 설명의 {0},{1}은 그 글의 질문 수로 자동 채워져요. 줄을 누르면 첫 번째 글로 가요.
+TRAVEL_PLAN = [("기내 + 살아남는 문장", ["in-flight"], "승무원 질문 {0}개 · 되묻는 한 문장"),
+               ("입국심사 + 수하물·세관", ["immigration", "baggage-customs"], "심사관 질문 {0}개 · 세관 질문 {1}개"),
+               ("교통", ["transportation"], "택시·버스·지하철에서 들리는 말 {0}개"),
+               ("호텔", ["hotel-check-in"], "체크인 질문 {0}개 · 요청 문장"),
+               ("카페 + 식당", ["travel-cafe", "travel-restaurant"], "카페 질문 {0}개 · 서버 질문 {1}개"),
+               ("쇼핑 + 길 찾기", ["shopping-checkout", "asking-directions"], "계산대 질문 {0}개 · 길 안내 {1}개"),
+               ("문제 상황 + 전체 복습", ["travel-trouble"], "분실·결항·아플 때 · 퀴즈로 마무리")]
 
 def page_travel():
     pdf_ok = (ROOT / TRAVEL_PDF).exists()
@@ -1231,9 +1271,19 @@ def page_travel():
     n_q = n_a = 0
     for _, _, pid in TRAVEL_SITUATIONS:
         bh = POST_BY_ID[pid].get("body_html", "") if pid in POST_BY_ID else ""
-        n_q += bh.count('<span class="hn">')
+        n_q += bh.count('<span class="hn">Q')
         n_a += sum(blk.count("<li") for blk in re.findall(r'<ul class="ex ans">(.*?)</ul>', bh, re.S))
-    plan = "".join(f'<div class="tv-day"><span>Day {i + 1}</span><b>{e(t)}</b></div>' for i, t in enumerate(TRAVEL_PLAN))
+    icon_of = {pid: ic for _, ic, pid in TRAVEL_SITUATIONS}
+    def qn(pid):
+        return POST_BY_ID[pid].get("body_html", "").count('<span class="hn">Q') if pid in POST_BY_ID else 0
+    plan = ""
+    for i, (title, pids, sub) in enumerate(TRAVEL_PLAN):
+        d = len(TRAVEL_PLAN) - i
+        ics = "".join(icon_img(icon_of[x], "tv-pi") for x in pids if x in icon_of)
+        href = post_url(POST_BY_ID[pids[0]]) if pids[0] in POST_BY_ID else "/travel/"
+        plan += (f'<a class="tv-pr{" last" if d == 1 else ""}" href="{href}"><span class="tv-dd"><small>D-</small><b>{d}</b></span>'
+                 f'<span class="tv-pt"><b>{e(title)}</b><span>{e(sub.format(*[qn(x) for x in pids]))}</span></span>'
+                 f'<span class="tv-pic">{ics}<i class="chev">›</i></span></a>')
     faq = [("정말 무료인가요?", "네, 무료예요. 제가 공부하면서 정리한 걸 필요한 분과 같이 쓰고 싶어서 만들었어요."),
            ("어느 나라에서 쓸 수 있나요?", "미국 영어 기준이에요. 영국에서 다르게 쓰는 표현은 따로 표시했고, 영어를 쓰는 대부분의 국제공항과 관광지에서 그대로 통해요."),
            ("출력해서 봐도 되나요?", "네, A4로 출력하기 좋게 만들었어요. 폰에 저장해 두고 공항에서 꺼내 봐도 좋아요.")]
@@ -1261,12 +1311,14 @@ def page_travel():
 <h2>상황별로 바로 공부하기</h2>
 <div class="tv-grid">{tiles}</div>
 <h2>출발 전 7일 플랜</h2>
-<div class="tv-plan">{plan}</div>
-<p class="tv-cap">하루 10~15분이면 충분해요.</p>
+<div class="tv-plan2">{plan}</div>
+<div class="tv-plan-foot"><b>하루 10~15분</b>이면 충분해요. 출발 날짜에 맞춰 D-7부터 시작해 보세요.</div>
 <h2>자주 묻는 질문</h2>
 {faq_html}
-<div class="tv-cta">{icon_img("alarm-clock", "tv-ic")}<b>여행 끝나고도 이어가고 싶다면</b><span>매일 아침 7시, 실제로 쓰이는 영어 표현 하나를 카톡으로 보내드려요.</span>
-{f'<a class="btn kakao" href="{e(kakao)}" target="_blank" rel="noopener">매일 아침 1일 1영 받아보기</a>' if kakao else ""}</div>
+<div class="tv-kk"><div class="tv-kk-l"><span class="lbl">여행 끝나고도</span><b>매일 아침 7시, 표현 하나씩 카톡으로</b>
+<span>여행에서 들었던 그 영어, 잊기 전에 하루 한 문장씩 이어가요. 무료예요.</span>
+{f'<a class="btn kakao tv-kk-btn" href="{e(kakao)}" target="_blank" rel="noopener"><i class="kk-dot"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path fill="#191919" d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7L5.8 21l4-2.6c.7.1 1.4.2 2.2.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></i>1일 1영 받아보기</a>' if kakao else ""}</div>
+<div class="tv-kk-msg" aria-hidden="true"><div class="tv-kk-top"><span>카페인영어</span><span>오전 7:00</span></div><div class="tv-kk-bub">오늘의 한 잔<b>You can't miss it.</b>금방 찾으실 거예요</div></div></div>
 </div>"""
     return layout("여행영어 무료 PDF, 공항부터 호텔까지", "입국심사, 호텔, 카페, 식당에서 직원이 실제로 하는 말과 바로 쓰는 대답을 상황별로 정리한 여행영어 무료 자료예요. 원어민 발음 듣기와 출력용 PDF를 함께 드려요.",
                   "/travel/", body, seo_title="여행영어 무료 PDF - 공항부터 호텔까지, 현지에서 들리는 영어")

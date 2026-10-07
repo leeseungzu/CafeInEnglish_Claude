@@ -22,7 +22,7 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="icon" href="/assets/icon-192.png" sizes="192x192" type="image/png">
 <meta name="theme-color" content="#FFFFFF">
-<link rel="preload" href="/assets/pretendard-subset.woff2?v=3b412f4d" as="font" type="font/woff2" crossorigin><style>@font-face{font-family:'Pretendard Variable';font-weight:400 800;font-style:normal;font-display:swap;src:url('/assets/pretendard-subset.woff2?v=3b412f4d') format('woff2-variations'),url('/assets/pretendard-subset.woff2?v=3b412f4d') format('woff2')}</style>
+<link rel="preload" href="/assets/pretendard-subset.woff2?v=ce9c0d9c" as="font" type="font/woff2" crossorigin><style>@font-face{font-family:'Pretendard Variable';font-weight:400 800;font-style:normal;font-display:swap;src:url('/assets/pretendard-subset.woff2?v=ce9c0d9c') format('woff2-variations'),url('/assets/pretendard-subset.woff2?v=ce9c0d9c') format('woff2')}</style>
 <style>:root{
   /* A. 에디토리얼 카페 — 오프화이트 · 에스프레소 · 라임 */
   --bg:#FAF8F5; --card:#FFFFFF; --text:#2A1A12; --muted:#6E5E54; --line:#ECE6DD;
@@ -1090,6 +1090,79 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 .tv-tile.on{background:#fff;border:2px solid #3182F6;box-shadow:0 6px 18px rgba(49,130,246,.15);opacity:1}
 .tv-tile.on .tv-go{display:inline-block;margin-top:4px;background:#3182F6;color:#fff;border-radius:999px;padding:4px 10px;font-size:12px;align-self:flex-start}
 @media(min-width:720px){.tv-steps{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}.tv-step:nth-last-child(2){border-bottom:0}}
+
+/* 2026-10 통일 디자인: 버튼 · 목록형 액션 · 공유/출력 · 대답 카드 · 여행 플랜/카톡 */
+.btn{border-radius:14px}
+.btn.primary{border-radius:14px}
+.btn.ghost{background:#fff;color:#333D4B;border:0;box-shadow:inset 0 0 0 1px #E5E8EB;border-radius:14px}
+.btn.ghost:hover{background:#F2F4F6;color:#191F28;border-color:transparent}
+.btn.kakao{background:#191F28;color:#fff;border:0;border-radius:14px}
+.btn.kakao:hover{background:#333D4B;color:#fff}
+.act{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:40px 1fr auto;gap:12px;align-items:center;width:100%;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:inset 0 0 0 1px #E5E8EB;text-decoration:none;color:#191F28;transition:background .15s}
+.act:hover{background:#F9FAFB}
+.act:focus-visible{outline:2px solid #3182F6;outline-offset:2px}
+.act-ic{width:40px;height:40px;border-radius:12px;background:#F2F4F6;display:flex;align-items:center;justify-content:center;color:#4E5968;transition:background .15s}
+.act-t{min-width:0}
+.act-t b{display:block;font-size:15.5px;font-weight:700;color:#191F28;line-height:1.35;letter-spacing:-.02em}
+.act-t small{display:block;font-size:13px;color:#8B95A1;line-height:1.45}
+.act-r{display:flex;align-items:center;gap:6px}
+.act-r .chev,.tv-pic .chev{font-style:normal;color:#B0B8C1;font-size:20px;line-height:1}
+.act .n-pill{background:#191F28;color:#CDEB5B;font-weight:800;margin:0}
+.act-r .n-pill:not(:empty)+.chev{display:none}
+.side-box .acts{display:grid;gap:2px;margin:0 -6px}
+.side-box .act{box-shadow:none;padding:8px 6px;grid-template-columns:36px 1fr auto;gap:10px;border-radius:12px}
+.side-box .act:hover{background:#F2F4F6}
+.side-box .act:hover .act-ic{background:#fff}
+.side-box .act-ic{width:36px;height:36px;border-radius:11px}
+.side-box .act-t b{font-size:14.5px}
+.side-box .act-t small{font-size:12px}
+.share{margin-top:28px;padding:20px;border-radius:22px;background:#F9FAFB;text-align:left}
+.share-hd{margin-top:20px}
+.share-t{font-size:17px;font-weight:700;color:#191F28;letter-spacing:-.02em;margin:0}
+.share-s{font-size:13.5px;color:#8B95A1;margin:2px 0 12px}
+.share-b .btn{padding:13px 10px;font-size:15px}
+.ex.ans li{background:#fff;border:1px solid #E5E8EB!important;border-radius:18px;padding:18px 18px 16px}
+.ex.ans .hn{display:block;font-size:12px;font-weight:800;color:#3182F6;margin-bottom:4px}
+.ex.ans .hn em{font-style:normal;font-weight:600;color:#8B95A1}
+.ex.ans .en{font-size:18px}
+.ex.ans .ko{margin-top:4px}
+.ex.ans .alt{display:block;margin-top:12px;background:#F2F4F6;border-radius:12px;padding:12px 14px 6px;font-size:14px;color:#4E5968}
+.ex.ans .alt small{display:block;background:none;border:0;border-radius:0;padding:0;margin:0 0 6px;font-size:12px;font-weight:700;color:#8B95A1}
+.ex.ans .alt .c{display:inline-flex;gap:6px;align-items:baseline;background:#fff;border-radius:10px;padding:6px 10px;margin:0 6px 6px 0;font-weight:600;color:#191F28}
+.ex.ans .alt .c i{font-style:normal;font-weight:400;font-size:12.5px;color:#8B95A1}
+.ex.ans .alt .t{display:block;padding-bottom:6px}
+.tv-plan2{display:flex;flex-direction:column}
+.tv-pr{display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;padding:12px 8px;margin:0 -8px;border-radius:16px;text-decoration:none;transition:background .15s}
+.tv-pr+.tv-pr{border-top:1px solid #F2F4F6}
+.tv-pr:hover{background:#F9FAFB}
+.tv-dd{width:52px;height:52px;border-radius:16px;background:#F2F4F6;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
+.tv-dd small{font-size:11px;font-weight:700;color:#8B95A1}
+.tv-dd b{font-size:19px;font-weight:800;color:#191F28;letter-spacing:-.5px}
+.tv-pr.last .tv-dd{background:#191F28}.tv-pr.last .tv-dd small{color:#CDEB5B}.tv-pr.last .tv-dd b{color:#fff}
+.tv-pt{min-width:0}
+.tv-pt b{display:block;font-size:16.5px;color:#191F28;letter-spacing:-.02em;line-height:1.4}
+.tv-pt span{display:block;font-size:13.5px;color:#8B95A1;line-height:1.5}
+.tv-pic{display:flex;align-items:center;gap:6px}
+.tv-pic .tv-pi{width:32px;height:32px}
+.tv-pic .tv-pi+.tv-pi{margin-left:-14px}
+.tv-plan-foot{margin-top:10px;background:#F9FAFB;border-radius:14px;padding:12px 14px;font-size:14px;color:#6B7684}
+.tv-plan-foot b{color:#191F28}
+.tv-kk{margin-top:40px;background:#F9FAFB;border-radius:24px;padding:22px;display:grid;grid-template-columns:1fr 210px;gap:20px;align-items:center}
+.tv-kk-l b{display:block;margin:8px 0 6px;font-size:19px;color:#191F28;letter-spacing:-.03em;line-height:1.4}
+.tv-kk-l>span:not(.lbl){display:block;font-size:14.5px;color:#6B7684;line-height:1.6;margin-bottom:16px}
+.tv-kk-btn{display:inline-flex!important;align-items:center;gap:8px;width:auto!important;padding:13px 18px!important;font-size:15px}
+.kk-dot{width:20px;height:20px;border-radius:6px;background:#FEE500;display:inline-flex;align-items:center;justify-content:center}
+.tv-kk-msg{background:#fff;border-radius:18px;padding:14px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.tv-kk-top{display:flex;justify-content:space-between;font-size:11px;color:#8B95A1;margin-bottom:8px}
+.tv-kk-bub{background:#F2F4F6;border-radius:4px 14px 14px 14px;padding:10px 12px;font-size:13px;color:#333D4B;line-height:1.5}
+.tv-kk-bub b{display:block;font-size:15px;color:#191F28;margin:2px 0}
+@media(max-width:560px){.tv-kk{grid-template-columns:1fr}.tv-kk-btn{width:100%!important;justify-content:center}}
+@media print{.share,.act{display:none!important}}
+.cq-cta .btn.kakao{background:#fff;color:#191F28;box-shadow:inset 0 0 0 1px #E5E8EB}
+.cq-cta .btn.kakao:hover{background:#F2F4F6;color:#191F28}
+.end-print{margin-top:28px}
+.end-print+.share{margin-top:16px}
+.share-hd{margin-top:0}
 </style>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-ZTK7QZC3NK');addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-ZTK7QZC3NK';document.head.appendChild(s)},1500)});</script>
 </head>
@@ -1149,12 +1222,7 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
   <textarea class="note" placeholder="이 문장이 나에게 주는 의미를 한 줄로 남겨 보세요" style="min-height:60px;margin-top:6px"></textarea>
   <div class="row"><button class="btn ghost save-note">저장</button></div>
 </div>
-<div class="share no-print"><div class="share-t">마음에 남는 문장, 친구와 같이 필사해요</div><div class="share-b"><button class="btn ghost js-share" type="button"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>공유하기</button><button class="btn ghost js-copylink" type="button"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>링크 복사</button></div></div>
-
-<div class="no-print" style="margin-top:22px">
-  <button class="btn ghost js-print" id="print-btn">출력해서 복습하기 (PDF 저장)</button>
-  <p class="lead" style="font-size:13px;text-align:center;margin-top:6px">인쇄 창에서 대상을 <b>'PDF로 저장'</b>으로 고르면 파일로 받을 수 있어요</p>
-</div>
+<div class="end-print no-print"><button class="act js-print" type="button"><span class="act-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="6" y="14" width="12" height="7" rx="1"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/></svg></span><span class="act-t"><b>필사 노트 출력하기</b><small>A4로 인쇄해서 손으로 따라 써요 · PDF 저장도 돼요</small></span><span class="act-r"><i class="chev">›</i></span></button></div><div class="share no-print"><div class="share-hd"><div class="share-t">마음에 남는 문장, 친구와 같이 필사해요</div><div class="share-s">링크만 보내면 미리보기 카드로 보여요</div></div><div class="share-b"><button class="btn ghost js-share" type="button"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>공유하기</button><button class="btn ghost js-copylink" type="button"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>링크 복사</button></div></div>
 <div class="print-only ws"><div class="ws-head"><div><div class="brand">카페인영어 CafeInEnglish · 복습 노트</div><h2 class="ws-title">필사 노트 - 말을 잘하는 것보다 먼저인 것</h2><div class="date">James · engVid 영어 회화 강의</div><div class="date" style="margin-top:6px">공부한 날: ______ / ______</div></div><div class="ws-qrs"><div class="ws-qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 132" class="segno"><g transform="scale(4)"><path fill="#fff" d="M0 0h33v33h-33z"/><path class="qrline" stroke="#111" d="M2 2.5h7m2 0h1m1 0h4m3 0h1m1 0h1m1 0h7m-29 1h1m5 0h1m1 0h1m3 0h1m1 0h2m1 0h2m3 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h4m1 0h3m2 0h2m2 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h2m4 0h1m1 0h1m1 0h2m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h1m1 0h2m3 0h3m2 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m4 0h1m1 0h2m3 0h3m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-19 1h5m1 0h4m-19 1h3m1 0h2m2 0h2m2 0h1m1 0h2m9 0h2m-28 1h1m1 0h1m1 0h1m3 0h1m1 0h2m3 0h1m2 0h1m1 0h2m1 0h4m1 0h1m-29 1h2m1 0h1m1 0h4m2 0h1m1 0h1m1 0h1m1 0h2m3 0h4m1 0h1m-28 1h1m1 0h1m4 0h1m2 0h2m1 0h3m3 0h2m2 0h3m2 0h1m-29 1h1m4 0h4m2 0h1m1 0h2m1 0h2m1 0h1m1 0h1m1 0h1m1 0h4m-25 1h2m2 0h2m1 0h1m3 0h1m1 0h3m2 0h2m1 0h2m-27 1h1m1 0h2m1 0h2m1 0h1m2 0h1m2 0h1m4 0h7m1 0h2m-29 1h1m2 0h2m3 0h1m1 0h1m1 0h1m5 0h1m2 0h1m2 0h2m2 0h1m-29 1h4m2 0h1m1 0h1m3 0h1m2 0h1m1 0h1m1 0h3m1 0h3m1 0h2m-28 1h2m2 0h1m1 0h1m2 0h2m1 0h1m7 0h1m1 0h1m1 0h1m-26 1h1m1 0h2m1 0h3m2 0h1m3 0h1m5 0h1m1 0h1m2 0h1m-24 1h1m1 0h2m2 0h1m3 0h1m2 0h4m1 0h4m1 0h2m-26 1h1m3 0h6m1 0h6m1 0h6m2 0h1m-20 1h2m3 0h2m1 0h5m3 0h2m1 0h2m-29 1h7m2 0h3m1 0h1m4 0h3m1 0h1m1 0h1m1 0h1m-27 1h1m5 0h1m1 0h3m1 0h1m2 0h3m2 0h1m3 0h1m2 0h2m-29 1h1m1 0h3m1 0h1m2 0h3m1 0h1m1 0h2m3 0h7m-27 1h1m1 0h3m1 0h1m1 0h2m2 0h3m4 0h1m4 0h1m1 0h2m-28 1h1m1 0h3m1 0h1m1 0h2m2 0h3m2 0h2m1 0h1m2 0h1m1 0h1m2 0h1m-29 1h1m5 0h1m1 0h1m2 0h1m1 0h3m2 0h2m4 0h1m2 0h1m-28 1h7m4 0h3m4 0h4m1 0h1m1 0h1m1 0h1"/></g></svg><div>영상<br>다시 보기</div></div><div class="ws-qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 148" class="segno"><g transform="scale(4)"><path fill="#fff" d="M0 0h37v37h-37z"/><path class="qrline" stroke="#111" d="M2 2.5h7m3 0h3m1 0h3m1 0h2m2 0h2m2 0h7m-33 1h1m5 0h1m2 0h1m5 0h1m1 0h1m2 0h1m1 0h3m1 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m4 0h1m2 0h1m2 0h4m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m4 0h3m3 0h1m1 0h1m2 0h3m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m2 0h3m4 0h5m2 0h1m2 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m1 0h1m1 0h2m6 0h4m2 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-23 1h2m2 0h1m2 0h1m2 0h2m-22 1h1m2 0h1m1 0h2m1 0h3m2 0h4m4 0h1m1 0h3m1 0h1m-28 1h1m1 0h2m1 0h1m3 0h2m1 0h1m1 0h1m1 0h1m3 0h2m2 0h4m3 0h2m-33 1h1m1 0h1m1 0h1m1 0h2m3 0h1m4 0h2m1 0h3m2 0h1m2 0h2m1 0h1m1 0h1m-31 1h4m1 0h2m2 0h2m1 0h1m1 0h2m3 0h4m1 0h1m1 0h2m2 0h1m-33 1h1m2 0h6m3 0h1m2 0h1m3 0h1m1 0h3m1 0h2m2 0h1m-25 1h1m1 0h1m2 0h2m3 0h2m2 0h3m2 0h1m1 0h1m1 0h1m1 0h3m-31 1h1m1 0h1m1 0h1m2 0h2m1 0h1m1 0h1m2 0h2m2 0h1m1 0h1m1 0h5m1 0h1m-32 1h1m1 0h2m1 0h1m1 0h1m1 0h2m1 0h4m1 0h2m1 0h2m2 0h1m1 0h2m3 0h1m-32 1h1m1 0h2m1 0h4m1 0h2m5 0h1m2 0h5m1 0h1m1 0h1m2 0h1m-32 1h2m1 0h3m1 0h1m3 0h3m2 0h1m1 0h1m4 0h1m3 0h1m1 0h1m1 0h1m-30 1h2m1 0h6m2 0h1m4 0h1m6 0h2m3 0h3m-33 1h1m2 0h1m4 0h1m1 0h1m5 0h3m1 0h2m2 0h2m1 0h1m-28 1h2m1 0h1m2 0h2m1 0h1m1 0h4m1 0h3m2 0h1m1 0h1m1 0h1m6 0h1m-32 1h1m3 0h1m2 0h1m4 0h6m1 0h3m3 0h1m2 0h4m-33 1h2m4 0h6m3 0h1m1 0h3m2 0h1m3 0h1m1 0h2m2 0h1m-32 1h2m4 0h1m4 0h2m2 0h1m1 0h7m2 0h2m2 0h2m-33 1h1m2 0h1m1 0h2m1 0h1m1 0h1m2 0h5m1 0h3m1 0h6m2 0h2m-25 1h3m2 0h1m5 0h4m1 0h1m3 0h2m2 0h1m-33 1h7m3 0h2m4 0h1m5 0h1m1 0h1m1 0h1m1 0h4m-32 1h1m5 0h1m1 0h2m2 0h1m3 0h1m3 0h2m2 0h1m3 0h1m2 0h1m-32 1h1m1 0h3m1 0h1m2 0h2m1 0h1m2 0h2m3 0h3m1 0h6m2 0h1m-33 1h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h2m1 0h1m4 0h3m1 0h1m1 0h3m-31 1h1m1 0h3m1 0h1m2 0h1m2 0h2m4 0h1m1 0h1m1 0h4m2 0h2m2 0h1m-33 1h1m5 0h1m2 0h4m1 0h4m1 0h1m1 0h1m1 0h2m-25 1h7m1 0h1m1 0h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h4m1 0h2m1 0h1"/></g></svg><div>퀴즈·오답노트<br>다시 풀기</div></div></div></div><div class="ws-quote"><p class="en">1. You got to be sincere.</p><p class="ko">진심이어야 해요.</p>
 <div class="ws-label">따라 쓰기</div><div class="ws-line"></div><div class="ws-line"></div>
 <div class="ws-label">Q. 최근에 누군가에게 빈말이 아니라 진심으로 건넨 한마디가 있었나요?</div><div class="ws-line"></div></div><div class="ws-quote"><p class="en">2. Because you won&#x27;t be able to follow up on that. And that&#x27;s the important part of conversation.</p><p class="ko">그러면 그다음 말을 이어 갈 수가 없거든요. 그게 대화에서 중요한 부분이에요.</p>
@@ -1169,7 +1237,7 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
   <a class="btn kakao" href="https://open.kakao.com/o/gxsl5iQi" target="_blank" rel="noopener">매일 아침 문장 하나, 카톡으로 받기<img class="kk-ic" src="/assets/kakao-talk.png" alt="" width="24" height="22"></a>
 </div>
 </main>
-<aside class="side no-print"><div class="side-in"><div class="side-box"><h4>문장 목록</h4><ol class="toc"><li><a href="#q1">You got to be sincere.</a></li><li><a href="#q2">Because you won&#x27;t be able to follow up on …</a></li><li><a href="#q3">When people know you&#x27;re being real, they&#x27;r…</a></li><li><a href="#q4">The whole thing here is to open the door t…</a></li></ol></div><div class="side-box"><h4>복습하기</h4><a class="btn ghost" href="/notes/#copy">내 필사 노트</a><button class="btn ghost js-print">필사 노트 출력</button><a class="btn ghost" href="/p/james-conversation/">영상 표현 보기</a></div></div></aside>
+<aside class="side no-print"><div class="side-in"><div class="side-box"><h4>문장 목록</h4><ol class="toc"><li><a href="#q1">You got to be sincere.</a></li><li><a href="#q2">Because you won&#x27;t be able to follow up on …</a></li><li><a href="#q3">When people know you&#x27;re being real, they&#x27;r…</a></li><li><a href="#q4">The whole thing here is to open the door t…</a></li></ol></div><div class="side-box"><h4>복습하기</h4><div class="acts"><a class="act " href="/notes/#copy"><span class="act-ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><span class="act-t"><b>내 필사 노트</b><small>써 둔 문장 다시 보기</small></span><span class="act-r"><i class="chev">›</i></span></a><button class="act js-print" type="button"><span class="act-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="6" y="14" width="12" height="7" rx="1"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/></svg></span><span class="act-t"><b>필사 노트 출력</b><small>A4로 따라 쓰기</small></span><span class="act-r"><i class="chev">›</i></span></button><a class="act " href="/p/james-conversation/"><span class="act-ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5l11 7-11 7z"/></svg></span><span class="act-t"><b>영상 표현 보기</b><small>이 영상의 영어표현</small></span><span class="act-r"><i class="chev">›</i></span></a></div></div></div></aside>
 </div>
 <footer class="foot no-print">
   <div>매일 조금씩, 깊게 스며드는 CafeInEnglish</div>
@@ -1177,6 +1245,6 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 </footer>
 <div class="fab no-print" id="fab"><div class="fab-menu" id="fab-menu"><a class="fab-item youtube" href="https://www.youtube.com/@CAFEINENGLISH" target="_blank" rel="noopener" aria-label="유튜브" title="유튜브"><span class="fab-ic"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8z" fill="#fff"/><path d="M9.8 15.1V8.9l5.4 3.1z" fill="#FF0033"/></svg></span></a><a class="fab-item instagram" href="https://www.instagram.com/cafe_in_english" target="_blank" rel="noopener" aria-label="인스타그램" title="인스타그램"><span class="fab-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="#fff" stroke="none"/></svg></span></a><a class="fab-item kakao" href="https://open.kakao.com/o/gxsl5iQi" target="_blank" rel="noopener" aria-label="카카오톡 오픈채팅" title="카카오톡 오픈채팅"><span class="fab-ic"><svg width="26" height="24" viewBox="0 0 30 28" aria-hidden="true"><path d="M15 2C7.8 2 2 6.6 2 12.3c0 3.7 2.4 6.9 6.1 8.7l-1.3 4.8c-.1.4.4.7.7.5l5.7-3.8c.6.1 1.2.1 1.8.1 7.2 0 13-4.6 13-10.3S22.2 2 15 2z" fill="#3A1D1D"/></svg></span></a></div><button class="fab-main" type="button" aria-expanded="false" aria-controls="fab-menu" aria-label="카페인영어 SNS 채널 보기"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
 <script id="page-data" type="application/json">{"type": "think", "id": "james", "title": "말을 잘하는 것보다 먼저인 것", "speaker": "James · engVid 영어 회화 강의", "url": "/think/james/", "quotes": [{"en": "You got to be sincere.", "ko": "진심이어야 해요.", "blanks": ["sincere"]}, {"en": "Because you won't be able to follow up on that. And that's the important part of conversation.", "ko": "그러면 그다음 말을 이어 갈 수가 없거든요. 그게 대화에서 중요한 부분이에요.", "blanks": ["follow", "important", "conversation"]}, {"en": "When people know you're being real, they're generally more honest and open with you as well.", "ko": "내가 진짜라는 걸 알면, 사람들도 대개 더 솔직하고 열린 마음으로 대해 줘요.", "blanks": ["real", "honest", "open"]}, {"en": "The whole thing here is to open the door to start a conversation.", "ko": "핵심은 대화를 시작할 수 있게 문을 여는 거예요.", "blanks": ["door", "start", "conversation"]}], "share": "You got to be sincere."}</script>
-<script src="/assets/app.js?v=ec1d7bfb" defer></script>
+<script src="/assets/app.js?v=1d562d27" defer></script>
 </body>
 </html>
