@@ -17,7 +17,7 @@ SITE = json.loads((CONTENT / "site.json").read_text("utf-8"))
 DOMAIN = SITE["domain"].rstrip("/")
 CATS = {"video": "영상으로 배우기", "expr": "영어표현", "tip": "영어꿀팁", "think": "사유의 문장"}
 TILE_SUB = {"video": "카영 영상 속 표현을 장면과 함께", "expr": "새 표현 · 비슷한 표현 · 헷갈리는 표현",
-            "tip": "회화 · 단어 · 듣기 · 발음", "think": "필사하고 빈칸으로 복기"}
+            "tip": "여행 · 회화 · 단어 · 듣기 · 발음", "think": "필사하고 빈칸으로 복기"}
 CAT_SEO = {  # 카테고리 페이지 검색용 제목 · 설명
     "video": ("영상으로 배우는 영어 - 카페인영어 영상 속 표현 정리와 퀴즈",
               "카페인영어 유튜브 영상 한 편에서 실제로 쓰는 영어 표현을 뽑아 뜻, 예문, 발음과 함께 정리하고 퀴즈로 확인해요."),
@@ -31,7 +31,7 @@ CAT_SEO = {  # 카테고리 페이지 검색용 제목 · 설명
 CAT_LEAD = {
     "video": "카페인영어 영상 한 편에서 표현을 뽑아 정리하고, 퀴즈로 확인해요",
     "expr": "새 표현 · 비슷한 표현 · 헷갈리는 표현을 연상법과 퀴즈로",
-    "tip": "회화 · 단어 · 듣기 · 발음, 바로 써먹는 영어 꿀팁",
+    "tip": "여행 · 회화 · 단어 · 듣기 · 발음, 바로 써먹는 영어 꿀팁",
     "think": "영상 속 곱씹을 문장을 필사하고, 빈칸으로 다시 떠올려 보세요",
 }
 e = lambda s: html.escape(str(s), quote=True)
@@ -638,7 +638,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 </div>
 <footer class="foot no-print">
   <div>{e(SITE['tagline'])}</div>
-  <div style="margin-top:8px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/contact/">문의</a>{f'<a href="{e(SITE["youtube"])}" target="_blank" rel="noopener">유튜브</a>' if SITE.get("youtube") else ""}{f'<a href="{e(SITE["instagram"])}" target="_blank" rel="noopener">인스타그램</a>' if SITE.get("instagram") else ""}</div>
+  <div style="margin-top:8px"><a href="/about/">소개</a><a href="/travel/">여행영어 PDF</a><a href="/privacy/">개인정보처리방침</a><a href="/contact/">문의</a>{f'<a href="{e(SITE["youtube"])}" target="_blank" rel="noopener">유튜브</a>' if SITE.get("youtube") else ""}{f'<a href="{e(SITE["instagram"])}" target="_blank" rel="noopener">인스타그램</a>' if SITE.get("instagram") else ""}</div>
 </footer>
 {sns_fab()}
 {pdata}
@@ -993,7 +993,9 @@ def page_series(sr):
     url = f"/series/{sr['id']}/"
     items = [POST_BY_ID[i] for i in sr["posts"] if i in POST_BY_ID]
     cards = "".join(post_card(p, 2) for p in items) + "".join(think_card(THINK_BY_ID[i], 2) for i in sr.get("thinks", []) if i in THINK_BY_ID)
+    sn = sr.get("notice") or (TRAVEL_NOTICE if sr["id"] == "travel" else None)
     body = (f'<div class="chips"><span class="chip">아티클 시리즈</span></div><h1>{e(sr["title"])}</h1><p class="lead">{e(sr["desc"])}</p>'
+            + (notice_html(sn) if sn else "") +
             f'<div class="cat-grid"><div class="cards list">{cards}</div></div>')
     ld = [{"@type": "CollectionPage", "name": sr["title"], "description": sr["desc"], "url": DOMAIN + url, "inLanguage": "ko"},
           {"@type": "BreadcrumbList", "itemListElement": [
@@ -1010,9 +1012,9 @@ def daily_index(n):
 
 
 
-def notice_html():
-    """홈 공지 배너 — site.json 의 notice {label, title, sub, href} 가 있을 때만 보여요."""
-    n = SITE.get("notice")
+def notice_html(n=None):
+    """홈 공지 배너 — site.json 의 notice {label, title, sub, href} 가 있을 때만 보여요. n을 주면 그 내용으로 그려요."""
+    n = n or SITE.get("notice")
     if not n:
         return ""
     return (f'<a class="notice" href="{e(n["href"])}"><span class="lbl">{e(n.get("label", "공지"))}</span>'
@@ -1249,6 +1251,7 @@ def write(path, text):
 # PDF는 files/travel-english.pdf 에 넣으면 다운로드 버튼이 자동으로 켜져요 (없으면 '준비 중' 안내).
 # 인스타 DM 링크와 PDF 속 QR이 이 주소를 가리키니, 주소(/travel/)와 상황 글 id는 바꾸지 않아요.
 TRAVEL_PDF = "files/travel-english.pdf"
+TRAVEL_NOTICE = {"label": "무료 자료", "title": "여행영어 PDF, 공항부터 호텔까지", "sub": "10가지 상황 · 7일 플랜 · 원어민 발음 QR", "href": "/travel/"}
 TRAVEL_SITUATIONS = [("기내", "airplane", "in-flight"), ("입국심사", "passport-control", "immigration"), ("수하물·세관", "luggage", "baggage-customs"),
                      ("교통", "taxi", "transportation"), ("호텔", "hotel", "hotel-check-in"), ("카페", "hot-beverage", "travel-cafe"), ("식당", "fork-knife-plate", "travel-restaurant"),
                      ("쇼핑·계산", "shopping-bags", "shopping-checkout"), ("길 찾기", "world-map", "asking-directions"), ("문제 상황", "pill", "travel-trouble")]
