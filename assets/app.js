@@ -397,7 +397,7 @@
     const nav = $(".nav"), room = $(".room");
     if (!nav || !room) return;
     room.style.marginRight = "";
-    if (innerWidth >= 600) return;
+    return; // 모바일 메뉴는 CSS로 로고~내 공부방 폭에 맞춰 정렬 (버튼은 움직이지 않음)
     const last = nav.lastElementChild, rg = document.createRange();
     rg.selectNodeContents(last);
     const t = rg.getBoundingClientRect(), r = room.getBoundingClientRect();
@@ -455,6 +455,38 @@
   addEventListener("resize", alignNav);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(alignNav);
   $$(".js-print").forEach(b => b.onclick = () => window.print());
+  // 문의 폼 (FormSubmit으로 바로 전송)
+  const cf = $("#contact-form");
+  if (cf) {
+    let kind = $(".cf-chip.on", cf)?.dataset.kind || "기타";
+    $$(".cf-chip", cf).forEach(c => c.onclick = () => {
+      $$(".cf-chip", cf).forEach(x => { x.classList.toggle("on", x === c); x.setAttribute("aria-pressed", x === c); });
+      kind = c.dataset.kind;
+    });
+    const err = $("#cf-err"), btn = $(".cf-send", cf);
+    const fail = m => { err.textContent = m; err.hidden = false; };
+    cf.onsubmit = async ev => {
+      ev.preventDefault(); err.hidden = true;
+      const msg = $("#cf-msg").value.trim(), mail = $("#cf-mail").value.trim();
+      if (msg.length < 2) return fail("궁금한 내용을 적어 주세요.");
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) return fail("답장 받을 이메일을 확인해 주세요.");
+      if (cf._honey && cf._honey.value) return;
+      const to = cf.dataset.to, subject = `[카페인영어 문의] ${kind}`;
+      btn.disabled = true; btn.textContent = "보내는 중…";
+      try {
+        const r = await fetch(`https://formsubmit.co/ajax/${to}`, {
+          method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({ _subject: subject, _template: "table", _replyto: mail, "문의 유형": kind, "내용": msg, "답장 이메일": mail, "보낸 페이지": location.href })
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok || String(j.success) === "false") throw new Error("send");
+        cf.hidden = true; $("#cf-done").hidden = false;
+      } catch (e) {
+        btn.disabled = false; btn.textContent = "문의 보내기";
+        fail("지금 바로 보내지 못했어요. 잠시 후 한 번만 다시 눌러 주세요.");
+      }
+    };
+  }
   $$(".ct-copy").forEach(b => b.onclick = async () => {
     const v = b.dataset.copy;
     try { await navigator.clipboard.writeText(v); } catch (e) {
@@ -462,6 +494,22 @@
       try { document.execCommand("copy"); } catch (e2) {} t.remove();
     }
     toast("이메일 주소를 복사했어요");
+  });
+
+  // 상단 메뉴: 내리면 아래 실선
+  const topbar = $(".top");
+  if (topbar) { const f = () => topbar.classList.toggle("scrolled", scrollY > 4); f(); addEventListener("scroll", f, { passive: true }); }
+  // 카테고리 분류 필터
+  $$(".subfilter .sf-b").forEach(b => b.onclick = () => {
+    $$(".subfilter .sf-b").forEach(x => x.classList.toggle("on", x === b));
+    const v = b.dataset.sub;
+    $$(".cat-grid .card").forEach(c => c.classList.toggle("sf-hide", !!v && c.dataset.sub !== v));
+  });
+  // 홈 전체 아티클 페이지 넘기기
+  $$("#pager button").forEach(b => b.onclick = () => {
+    $$("#pager button").forEach(x => x.classList.toggle("on", x === b));
+    $$("#all-arts .card").forEach(c => c.classList.toggle("pg-hide", c.dataset.pg !== b.dataset.pg));
+    const h = $("#all-arts"); if (h) scrollTo({ top: h.getBoundingClientRect().top + scrollY - 120, behavior: "smooth" });
   });
   const fab = $("#fab");
   if (fab) {
@@ -471,6 +519,14 @@
     document.addEventListener("click", e => { if (!fab.contains(e.target)) set(false); });
     document.addEventListener("keydown", e => { if (e.key === "Escape") set(false); });
     $$(".fab-item.pending", fab).forEach(a => a.onclick = e => { e.preventDefault(); toast("카카오톡 채널은 곧 열려요"); });
+    // 모바일: 내려 읽는 동안엔 숨기고, 조금이라도 올리거나 맨 아래에 닿으면 다시 보여줘요
+    let lastY = scrollY;
+    addEventListener("scroll", () => {
+      const y = scrollY, end = innerHeight + y >= document.body.scrollHeight - 80;
+      if (Math.abs(y - lastY) < 8) return;
+      fab.classList.toggle("hide", y > lastY && y > 200 && !end);
+      lastY = y;
+    }, { passive: true });
   }
   initVideo();
   initShare();
