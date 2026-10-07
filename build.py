@@ -638,7 +638,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 </div>
 <footer class="foot no-print">
   <div>{e(SITE['tagline'])}</div>
-  <div style="margin-top:8px"><a href="/about/">소개</a><a href="/travel/">여행영어 PDF</a><a href="/privacy/">개인정보처리방침</a><a href="/contact/">문의</a>{f'<a href="{e(SITE["youtube"])}" target="_blank" rel="noopener">유튜브</a>' if SITE.get("youtube") else ""}{f'<a href="{e(SITE["instagram"])}" target="_blank" rel="noopener">인스타그램</a>' if SITE.get("instagram") else ""}</div>
+  <div style="margin-top:8px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/contact/">문의</a>{f'<a href="{e(SITE["youtube"])}" target="_blank" rel="noopener">유튜브</a>' if SITE.get("youtube") else ""}{f'<a href="{e(SITE["instagram"])}" target="_blank" rel="noopener">인스타그램</a>' if SITE.get("instagram") else ""}</div>
 </footer>
 {sns_fab()}
 {pdata}
