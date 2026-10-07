@@ -1218,13 +1218,13 @@ def page_travel():
              ("mobile-phone", "QR 찍기", "페이지마다 QR로 발음을 들어요"),
              ("speech-balloon", "따라 말하기", "느리게 한 번, 보통 속도로 한 번"),
              ("check", "써 본 문장 체크", "여행 중에 써 본 문장에 표시해요")]
-    steps_html = "".join(f'<div class="tv-step">{icon_img(ic, "tv-ic")}<span class="tv-n">{i + 1}</span>'
-                         f'<b>{e(t)}</b><span>{e(d)}</span></div>' for i, (ic, t, d) in enumerate(steps))
+    steps_html = "".join(f'<div class="tv-step">{icon_img(ic, "tv-ic")}<div><span class="tv-n">STEP {i + 1}</span>'
+                         f'<b>{e(t)}</b><span>{e(d)}</span></div></div>' for i, (ic, t, d) in enumerate(steps))
     tiles = ""
     for name, ic, pid in TRAVEL_SITUATIONS:
         inner = f'{icon_img(ic, "tv-ic")}<b>{e(name)}</b>'
         if pid in POST_BY_ID:
-            tiles += f'<a class="tv-tile on" href="{post_url(POST_BY_ID[pid])}">{inner}<span class="tv-go">공부하기 ›</span></a>'
+            tiles += f'<a class="tv-tile on" href="{post_url(POST_BY_ID[pid])}">{inner}<span class="tv-go">지금 공부하기 ›</span></a>'
         else:
             tiles += f'<div class="tv-tile">{inner}<span class="tv-wait">곧 열려요</span></div>'
     plan = "".join(f'<div class="tv-day"><span>Day {i + 1}</span><b>{e(t)}</b></div>' for i, t in enumerate(TRAVEL_PLAN))
@@ -1235,6 +1235,7 @@ def page_travel():
     kakao = SITE.get("kakao", "")
     body = f"""<div class="tv">
 <section class="tv-hero">
+  {icon_img("passport-control", "tv-hero-ic", lazy=False)}
   <span class="lbl">무료 자료</span>
   <h1>여행영어,<br>공항부터 호텔까지</h1>
   <p>현지에서 <b>실제로 들리는 영어</b>를 상황별로 정리했어요.</p>

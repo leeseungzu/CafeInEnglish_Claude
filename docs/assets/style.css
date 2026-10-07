@@ -1002,3 +1002,66 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 .tv-cta b{font-size:17px;color:#191F28}
 .tv-cta span{font-size:14px;color:#6B7684;margin-bottom:10px}
 @media(min-width:720px){.tv-steps{grid-template-columns:repeat(4,1fr)}.tv-grid{grid-template-columns:repeat(5,1fr)}.tv-plan{display:grid;grid-template-columns:repeat(7,1fr);overflow:visible}.tv-day{flex:none}.tv-hero h1 br{display:none}}
+
+/* 상황 글(듣기형) — 토스 블로그 스타일 */
+.keypt{background:#F2F4F6;border-radius:18px;padding:18px 20px;margin:8px 0 8px}
+.keypt>b{font-size:15px;color:#191F28}
+.keypt ol{margin:8px 0 0;padding-left:20px;color:#333D4B;font-size:15px;line-height:1.8}
+.h-sub{color:#6B7684;font-size:14px;margin:-4px 0 14px}
+.ex.hear{display:flex;flex-direction:column;gap:12px}
+.ex.hear li{border:1px solid #E5E8EB!important;border-radius:18px;padding:18px 18px 16px}
+.ex.hear .hn{display:block;font-size:12px;font-weight:800;color:#3182F6;margin-bottom:4px}
+.ex.hear .en{font-size:18px;color:#191F28}
+.ex.hear .ko{margin-top:4px}
+.ex.hear .snd{display:block;margin-top:12px;background:#F2F7FF;border-radius:12px;padding:12px 14px;font-size:20px;font-weight:800;color:#3182F6;letter-spacing:-.2px}
+.ex.hear .snd small{display:block;font-size:12px;font-weight:700;color:#6B9AE8;margin-bottom:2px;letter-spacing:0}
+.ex.hear .rsn{display:block;margin-top:8px;font-size:13px;color:#6B7684;line-height:1.6}
+.ex.hear .rsn::before{content:"왜?  ";font-weight:800;color:#8B95A1}
+.ex.ans{display:flex;flex-direction:column;gap:10px}
+.ex.ans li{background:#F9FAFB;border:0!important;border-radius:16px;padding:14px 16px}
+.ex.ans .en{font-size:17px;color:#191F28}
+.ex.ans .alt{display:block;margin-top:8px;font-size:13px;color:#4E5968}
+.ex.ans .alt small{display:inline-block;background:#fff;border:1px solid #E5E8EB;border-radius:999px;padding:1px 8px;margin-right:6px;font-size:11px;font-weight:700;color:#6B7684}
+.ex.talk{display:flex;flex-direction:column;gap:6px}
+.ex.talk li{border:0!important;padding:0;max-width:86%}
+.ex.talk li .en{display:inline-block;background:#F2F4F6;border-radius:18px;padding:10px 14px;color:#191F28}
+.ex.talk li .ko{font-size:12px;margin:2px 6px 4px}
+.ex.talk li.me{align-self:flex-end;text-align:right}
+.ex.talk li.me .en{background:#3182F6;color:#fff}
+.prep{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.prep div{background:#F9FAFB;border-radius:16px;padding:14px}
+.prep b{display:block;color:#191F28;margin-bottom:4px}
+.prep span{font-size:13px;color:#6B7684;line-height:1.5}
+.steps3{display:flex;flex-direction:column;gap:8px}
+.steps3 div{display:grid;grid-template-columns:32px 1fr;column-gap:12px;align-items:center;background:#F9FAFB;border-radius:16px;padding:12px 14px}
+.steps3 span{grid-row:span 2;width:32px;height:32px;border-radius:50%;background:#3182F6;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.steps3 b{color:#191F28}
+.steps3 small{color:#6B7684;font-size:13px}
+.pdf-cta{display:block;margin:28px 0 8px;background:#191F28;border-radius:18px;padding:18px 20px;text-decoration:none}
+.pdf-cta b{display:block;color:#fff;font-size:16px}
+.pdf-cta span{color:#9FC5FF;font-size:14px;font-weight:700}
+/* 홈 공지 위치 보정 */
+.notice{margin:-8px 0 40px!important}
+
+/* /travel/ 2차 개편: 위계 강화 */
+.tv-hero{position:relative;background:linear-gradient(160deg,#EAF3FF 0%,#F7FAFF 70%);padding:28px 22px 22px;overflow:hidden}
+.tv-hero-ic{position:absolute;right:14px;top:18px;width:96px;height:96px;transform:rotate(6deg)}
+.tv-hero h1{font-size:30px;letter-spacing:-.6px;max-width:72%}
+.tv-hero p{max-width:80%}
+.tv-stats div{box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.tv-stats b{color:#3182F6;font-size:26px}
+.tv-demo{background:#fff;box-shadow:0 6px 24px rgba(25,31,40,.06);border:0}
+.tv-bub{font-size:16px}
+.tv-steps{display:flex;flex-direction:column;gap:0;border:1px solid #E5E8EB;border-radius:18px;padding:4px 16px}
+.tv-step{flex-direction:row;align-items:center;gap:14px;background:none;border-radius:0;padding:14px 0;border-bottom:1px solid #F2F4F6}
+.tv-step:last-child{border-bottom:0}
+.tv-step .tv-ic{width:48px;height:48px;margin:0;flex:none}
+.tv-step>div{display:flex;flex-direction:column;gap:1px}
+.tv-n{position:static;font-size:11px!important;color:#3182F6!important;letter-spacing:.5px}
+.tv-step b{font-size:16px}
+.tv-tile{padding:16px;gap:4px;min-height:120px}
+.tv-tile .tv-ic{width:52px;height:52px}
+.tv-tile:not(.on){opacity:.55}
+.tv-tile.on{background:#fff;border:2px solid #3182F6;box-shadow:0 6px 18px rgba(49,130,246,.15);opacity:1}
+.tv-tile.on .tv-go{display:inline-block;margin-top:4px;background:#3182F6;color:#fff;border-radius:999px;padding:4px 10px;font-size:12px;align-self:flex-start}
+@media(min-width:720px){.tv-steps{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}.tv-step:nth-last-child(2){border-bottom:0}}
