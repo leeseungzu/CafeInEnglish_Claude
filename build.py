@@ -837,6 +837,17 @@ def page_post(p):
         parts.append(f'<div class="think-box"><b>이 영상 속 마음에 남는 문장</b>은 <a href="{think_url(THINK_BY_ID[p["think"]])}">사유의 문장</a>에서 필사하고 복기할 수 있어요.</div>')
     parts.append('<h2 class="quiz-h" id="quiz-sec">오늘 배운 거 확인하기</h2><div id="quiz"></div>')
     parts.append(share_block("같이 공부할 친구에게 이 글 보내기"))
+    tv_ids = [pid for _, _, pid in TRAVEL_SITUATIONS if pid in POST_BY_ID]
+    if p["id"] in tv_ids:
+        k = tv_ids.index(p["id"])
+        name_of = {pid: (nm, ic) for nm, ic, pid in TRAVEL_SITUATIONS}
+        if k + 1 < len(tv_ids):
+            nx = POST_BY_ID[tv_ids[k + 1]]; nm, ic = name_of[nx["id"]]
+            parts.append(f'<div class="tv-next no-print"><span class="tv-next-h">여행영어 {k + 1}/{len(tv_ids)} · 다음 상황</span>'
+                         + act_row(icon_img(ic, "act-img"), e(nm) + " 영어", e(nx["title"]), href=post_url(nx)) + '</div>')
+        else:
+            parts.append('<div class="tv-next no-print"><span class="tv-next-h">여행영어 10가지 상황을 다 봤어요</span>'
+                         + act_row(icon_img("passport-control", "act-img"), "처음부터 복습하기", "7일 플랜과 무료 PDF 보러 가기", href="/travel/") + '</div>')
     # 출력용 문제지 (화면에서는 숨김)
     qs = "".join(
         f'<div class="ws-q"><b>{i + 1}. {e(q["q"])}</b>'
@@ -1272,7 +1283,10 @@ def page_travel():
     for _, _, pid in TRAVEL_SITUATIONS:
         bh = POST_BY_ID[pid].get("body_html", "") if pid in POST_BY_ID else ""
         n_q += bh.count('<span class="hn">Q')
-        n_a += sum(blk.count("<li") for blk in re.findall(r'<ul class="ex ans">(.*?)</ul>', bh, re.S))
+        ans_en = set(re.findall(r'<div class="rep-a"><span class="en">(.*?)</span>', bh))
+        for blk in re.findall(r'<ul class="ex ans">(.*?)</ul>', bh, re.S):
+            ans_en |= set(re.findall(r'<span class="en">(.*?)</span>', blk))
+        n_a += len(ans_en)
     icon_of = {pid: ic for _, ic, pid in TRAVEL_SITUATIONS}
     def qn(pid):
         return POST_BY_ID[pid].get("body_html", "").count('<span class="hn">Q') if pid in POST_BY_ID else 0

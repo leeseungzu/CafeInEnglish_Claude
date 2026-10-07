@@ -1139,3 +1139,28 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 .end-print{margin-top:28px}
 .end-print+.share{margin-top:16px}
 .share-hd{margin-top:0}
+/* 질문 카드 안의 대답 */
+.ex.hear .rep{margin-top:14px;padding-top:14px;border-top:1px dashed #E5E8EB}
+.ex.hear .rep>small{display:inline-block;font-size:12px;font-weight:800;color:#191F28;background:#CDEB5B;border-radius:6px;padding:1px 8px;margin-bottom:8px}
+.ex.hear .rep-a+.rep-a{margin-top:12px}
+.ex.hear .rep .en{font-size:16.5px}
+.ex.hear .rep .ko{font-size:14px;margin-top:2px}
+.rep .alt{display:block;margin-top:10px;background:#F2F4F6;border-radius:12px;padding:12px 14px 6px;font-size:14px;color:#4E5968}
+.rep .alt small{display:block;font-size:12px;font-weight:700;color:#8B95A1;margin:0 0 6px}
+.rep .alt .c{display:inline-flex;gap:6px;align-items:baseline;background:#fff;border-radius:10px;padding:6px 10px;margin:0 6px 6px 0;font-weight:600;color:#191F28}
+.rep .alt .c i{font-style:normal;font-weight:400;font-size:12.5px;color:#8B95A1}
+.rep .alt .t{display:block;padding-bottom:6px}
+/* 사이드바 '이어서 보기' — 누를 수 있게 보이도록 */
+.side-links li{padding:0;border:0!important}
+.side-links li+li{border-top:1px solid #F2F4F6!important}
+.side-links a{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 8px;margin:0 -8px;border-radius:10px;color:#333D4B;line-height:1.5;transition:background .15s,color .15s}
+.side-links a::after{content:"›";flex:none;color:#B0B8C1;font-size:18px;transition:color .15s,transform .15s}
+@media (hover:hover){.side-links a:hover{background:#F2F4F6;color:#191F28}.side-links a:hover::after{color:#3182F6;transform:translateX(2px)}}
+/* 여행 상황 글 끝 '다음 상황' */
+.tv-next{margin-top:28px}
+.tv-next-h{display:block;font-size:13px;font-weight:700;color:#8B95A1;margin:0 0 8px 2px}
+.act-ic .act-img{width:30px;height:30px}
+.tv-next .act-t small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 모바일: 7일 플랜 화살표가 화면 끝에 붙지 않게 */
+@media(max-width:560px){.tv-pr{margin:0;padding:12px 4px;gap:12px}.tv-pr+.tv-pr::before{left:4px;right:4px}.tv-pic{gap:4px;padding-right:2px}}
+.btn.retry{margin-bottom:16px}

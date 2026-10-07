@@ -12,7 +12,12 @@
     "ko": "해외 식당, 자리부터 계산까지"
   },
   "body_html": "<h2>들어갈 때 / 주문할 때</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Table for two, please.</span><span class=\"ko\">두 명이에요.</span></li>\n<li><span class=\"en\">Can we have a few more minutes?</span><span class=\"ko\">조금만 더 보고 주문할게요.</span></li>\n<li><span class=\"en\">I'll have the steak, please.</span><span class=\"ko\">스테이크로 할게요.</span></li>\n</ul></div>\n<h2>남은 음식 포장</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Can I get a box for this?</span><span class=\"ko\">이거 포장 용기 좀 주시겠어요?</span></li>\n</ul></div>\n<h2>계산할 때</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Can we get the check, please?</span><span class=\"ko\">계산서 주시겠어요?</span></li>\n<li><span class=\"en\">Can we split the check?</span><span class=\"ko\">나눠서 계산할 수 있을까요?</span></li>\n<li><span class=\"en\">Separate checks, please.</span><span class=\"ko\">따로 계산해 주세요.</span></li>\n</ul></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 미국에선 계산서가 check, 영국에선 bill이에요. check는 '확인'이 아니라 '계산서'!</div>\n<p><b class=\"lbl\">알아 두기</b> 미국 식당에선 보통 직원이 테이블로 계산서를 가져다줘요. 팁은 보통 세금 전 금액의 18~20% 정도를 따로 내요. (15%는 다소 적은 편이에요)</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"no\">Calculate, please.</span><span class=\"en\">Can we get the check, please?</span><span class=\"ko\">계산서는 미국은 주로 check, 영국은 bill이라고 해요. (미국에서도 bill은 통해요)</span><span class=\"why\"><b>왜?</b>calculate는 '숫자를 셈하다'라는 뜻이라 '계산해 주세요'로 통하지 않아요. 식당에서는 계산서(check, bill)를 달라고 말해요.</span></li>\n<li><span class=\"no\">Is this service?</span><span class=\"en\">Is this on the house?</span><span class=\"ko\">한국의 '서비스(공짜)'는 영어로 on the house예요.</span><span class=\"why\"><b>왜?</b>영어의 service는 '접객, 응대'라는 뜻이라 '공짜'라는 의미가 없어요. on the house는 '가게(house)가 낸다'는 뜻이라 무료로 주는 것이 돼요.</span></li>\n</ul></div>",
-  "related": [],
+  "related": [
+    {
+      "label": "식당 서버 질문, 실제로 들리는 발음",
+      "href": "/p/travel-restaurant/"
+    }
+  ],
   "quiz": [
     {
       "tag": "표현",
