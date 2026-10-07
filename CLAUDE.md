@@ -23,7 +23,8 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 1. `content/` 의 JSON을 추가하거나 고친다 (디자인은 `assets/`).
 2. 예문이 새로 생겼으면 `python3 tools/make_audio.py` 로 원어민 음성(mp3)을 만든다 (Kokoro TTS, `audio/` 에 저장. 이미 만든 문장은 건너뜀).
 3. `python3 build.py` 로 `docs/` 를 다시 만든다. (QR 코드에는 `pip install segno` 필요)
-4. 승주가 GitHub Desktop에서 Commit → Push 하면 1~2분 뒤 사이트에 반영된다.
+4. Claude가 이 폴더에서 직접 수정·빌드·화면 확인까지 마친 뒤 커밋까지 해 둔다 (커밋 메시지는 한국어로 무엇을 바꿨는지).
+5. 승주는 GitHub Desktop에서 History로 내용을 확인하고 **Push origin**만 누른다. 1~2분 뒤 사이트에 반영된다.
 
 ## 주소 규칙
 
@@ -129,3 +130,8 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 - 여행 상황 글의 sub는 "여행" (영어꿀팁 → 여행 필터). /travel/ 입구: 홈 공지(site.json notice), 시리즈 페이지 상단 카드(TRAVEL_NOTICE, series.json에 notice를 넣으면 다른 시리즈에도 가능).
 - 여행 상황 글은 질문 카드 안에 대답(`.rep` '이렇게 대답해요')을 붙인다. 질문에 딸리지 않은 대답은 '내가 먼저 말할 때' 섹션. 글 끝에 '여행영어 n/10 · 다음 상황' 카드가 자동으로 붙는다.
 - 여행영어 PDF: `tools/make_travel_pdf.py`가 상황 글 10개를 읽어 A4 HTML을 만들고, 크롬(Playwright) PDF 인쇄로 `files/travel-english.pdf` 저장 (상황 1개 = 1쪽, QR로 발음 듣기). 상황 글을 고치면 PDF도 다시 만든다.
+
+## 작업 시 주의 (2026-10-08 사고 기록)
+
+- 수정은 항상 이 폴더(승주 컴퓨터)의 최신 원본에서 직접 한다. 클라우드 작업공간에 남은 예전 사본으로 build.py를 돌려 docs/를 덮어쓰지 않는다 (예전 버전으로 사이트가 되돌아간 적 있음).
+- 개인정보처리방침은 문의 양식(FormSubmit)·GA·애드센스 등 실제로 쓰는 서비스가 바뀌면 함께 고친다.

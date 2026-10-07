@@ -1195,6 +1195,38 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
   .video-embed.float{top:calc(var(--hdr,68px) + 20px);left:20px;right:auto;bottom:auto;
     width:clamp(280px,calc((100vw - 1076px)/2 - 40px),440px);height:auto;aspect-ratio:16/9}
 }
+
+/* 소개 페이지 */
+.feat p a{color:var(--text);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.about-cta{background:var(--card);border-radius:24px;padding:26px 22px;text-align:center;margin:8px 0 12px}
+.about-cta p{margin:0 0 16px;font-size:17px;font-weight:700;letter-spacing:-.02em}
+.about-cta-btns{display:grid;gap:10px;max-width:420px;margin:0 auto}
+.about-cta-btns .btn{font-size:15px;padding:13px 16px}
+.prose ul{padding-left:20px;margin:6px 0 14px}
+.prose li{margin:4px 0;line-height:1.7}
+.feat p a{white-space:nowrap}
+
+/* 소개·개인정보처리방침: 현재 디자인(act 목록·시리즈 카드·카톡 박스)에 맞춤 */
+.prose .about-acts{display:grid;gap:10px;margin:10px 0 30px}
+@media (min-width:700px){ .prose .about-acts{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.about-act .act-img{width:28px;height:28px}
+.about-act .act-t b{font-size:15.5px}
+.about-act .act-t small{font-size:13px}
+.about-sub{color:var(--muted);margin:-4px 0 14px}
+.prose .about-sr{margin:0 0 30px}
+.prose .about-sr a{text-decoration:none}
+@media (min-width:860px){ .prose .about-sr{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px} .prose .about-sr .sr-card{padding:14px;border-radius:20px} .prose .about-sr h3{font-size:15px} .prose .about-sr p{font-size:12.5px} }
+.about-kk-btns{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:12px}
+.about-kk .tv-kk-btn{margin:0}
+.about-yt{font-size:14px;font-weight:700;color:inherit;text-decoration:none;opacity:.85}
+.about-yt:hover{opacity:1;text-decoration:underline}
+.pv-sum{display:grid;gap:10px;margin:6px 0 26px}
+@media (min-width:700px){ .pv-sum{grid-template-columns:repeat(3,minmax(0,1fr))} }
+.pv-item{display:grid;grid-template-columns:40px 1fr;column-gap:12px;row-gap:2px;align-items:center;background:var(--soft,#F7F8FA);border-radius:18px;padding:16px}
+.pv-item .pv-ic{width:40px;height:40px;grid-row:1/3}
+@media (min-width:700px){ .pv-item{display:flex;flex-direction:column;align-items:flex-start;gap:4px} .pv-item .pv-ic{margin-bottom:4px} }
+.pv-item b{font-size:15.5px}
+.pv-item span{font-size:13.5px;color:var(--muted)}
 </style>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-ZTK7QZC3NK');addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-ZTK7QZC3NK';document.head.appendChild(s)},1500)});</script>
 </head>
@@ -1215,8 +1247,11 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 <p>카페인영어는 그 여정을 기록하고 나누는 공간이에요. 셀럽 인터뷰와 연설 속 살아있는 표현으로 매일 조금씩, 하지만 깊게. 영어라는 언어로 생각을 넓히면서 같이 성장해요. <b>재미있게, 그리고 쉽게!</b></p>
 <div class="brand-c"><img src="/assets/icon-192.png" alt="" width="64" height="64"><div><b>C.</b> 매일 한 잔의 커피처럼, 대화 속 진짜 영어를 꾸준히.<br><span>오늘의 한 문장에 마침표를 찍는 곳, CafeInEnglish.</span></div></div>
 <h2>이런 걸 할 수 있어요</h2>
-<div class="feats"><div class="feat"><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5l11 7-11 7z"/></svg></span><div><b>영상으로 배우기</b><p>카페인영어 영상 속 표현을 실제 장면과 함께 익혀요.</p></div></div><div class="feat"><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h11M4 18h7"/></svg></span><div><b>영어표현 · 영어꿀팁</b><p>새 표현과 헷갈리는 표현부터 회화, 단어, 듣기 요령까지 담았어요.</p></div></div><div class="feat"><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></span><div><b>퀴즈와 오답노트</b><p>글 끝 퀴즈로 확인하고, 틀린 문제는 내 공부방에 자동으로 모여요.</p></div></div><div class="feat"><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><div><b>사유의 문장</b><p>마음에 남는 문장을 따라 쓰고, 빈칸으로 다시 떠올려요.</p></div></div><div class="feat"><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="6" y="14" width="12" height="7" rx="1"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/></svg></span><div><b>출력해서 복습하기</b><p>글마다 PDF 복습지로 저장하거나 인쇄해서 볼 수 있어요.</p></div></div></div>
-<a class="today-card" href="/p/swamped/"><div><div class="tc-k">오늘의 한 잔 · 영어표현</div><div class="tc-en">I&#x27;m <span class="hl">swamped.</span></div><div class="tc-ko">할 일이 산더미야, 정신없이 바빠</div></div><span class="tc-go" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><p class="tc-note">거창한 계획 말고,<br class="m-br"> 커피 한 잔 마시는 마음으로 시작해보세요!</p>
+<div class="about-acts"><a class="act about-act" href="/category/video/"><span class="act-ic"><img class="act-img" src="/assets/icons/headphone.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"></span><span class="act-t"><b>영상으로 배우기</b><small>셀럽 인터뷰·연설 장면을 구간별로 듣고 3번 반복</small></span><span class="act-r"><i class="chev">›</i></span></a><a class="act about-act" href="/category/expr/"><span class="act-ic"><img class="act-img" src="/assets/icons/speech-balloon.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"></span><span class="act-t"><b>영어표현 · 영어꿀팁</b><small>새 표현, 헷갈리는 표현, 생활 회화 요령</small></span><span class="act-r"><i class="chev">›</i></span></a><a class="act about-act" href="/travel/"><span class="act-ic"><img class="act-img" src="/assets/icons/world-map.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"></span><span class="act-t"><b>여행영어 무료 PDF</b><small>공항부터 호텔까지 10가지 상황 · 7일 플랜</small></span><span class="act-r"><i class="chev">›</i></span></a><a class="act about-act" href="/notes/"><span class="act-ic"><img class="act-img" src="/assets/icons/check.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"></span><span class="act-t"><b>퀴즈와 내 공부방</b><small>틀린 문제는 모였다가, 다시 맞히면 졸업</small></span><span class="act-r"><i class="chev">›</i></span></a><a class="act about-act" href="/category/think/"><span class="act-ic"><img class="act-img" src="/assets/icons/light-bulb.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"></span><span class="act-t"><b>사유의 문장</b><small>마음에 남는 문장을 따라 쓰고 빈칸으로 떠올리기</small></span><span class="act-r"><i class="chev">›</i></span></a><div class="act about-act"><span class="act-ic"><img class="act-img" src="/assets/icons/page.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"></span><span class="act-t"><b>출력해서 복습하기</b><small>글마다 A4 복습지, QR로 발음 다시 듣기</small></span><span class="act-r"></span></div></div>
+<h2>아티클 시리즈</h2>
+<p class="about-sub">상황별로 모아 두었어요. 필요한 곳부터 골라 보세요.</p>
+<div class="sr-grid about-sr"><a class="sr-card" href="/series/travel/"><div class="sr-cover ic-tip"><img src="/assets/icons/airplane.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"><img src="/assets/icons/ear.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"><img src="/assets/icons/luggage.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"></div><h3>해외에서 살아남는 영어</h3><p>카페, 식당, 병원처럼 해외에서 꼭 마주치는 순간에 바로 꺼내 쓰는 문장 모음</p><span class="sr-n">글 16개</span></a><a class="sr-card" href="/series/work/"><div class="sr-cover ic-expr"><img src="/assets/icons/clipboard.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"><img src="/assets/icons/bell.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"><img src="/assets/icons/rocket.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"></div><h3>회사에서 바로 쓰는 영어</h3><p>회의, 메일, 메신저에서 원어민 동료가 매일 쓰는 짧고 센스 있는 표현</p><span class="sr-n">글 7개</span></a><a class="sr-card" href="/series/mistakes/"><div class="sr-cover ic-tip"><img src="/assets/icons/question-mark.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"><img src="/assets/icons/window.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"><img src="/assets/icons/alarm-clock.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"></div><h3>한국인이 자주 틀리는 영어</h3><p>문법은 맞는데 뜻이 반대로 전해지는 함정 표현과 콩글리시 바로잡기</p><span class="sr-n">글 6개</span></a><a class="sr-card" href="/series/leaders/"><div class="sr-cover yt"><img src="/images/yt/MV4Y9fIEhU8-400.webp?v=c3cd260a" srcset="/images/yt/MV4Y9fIEhU8-400.webp?v=c3cd260a 400w, /images/yt/MV4Y9fIEhU8.webp?v=27232bac 640w" sizes="(max-width:600px) 92vw, 480px" alt="" width="640" height="360" loading="lazy"></div><h3>리더들의 영어 연설</h3><p>젠슨 황, 순다르 피차이, 손흥민의 실제 연설과 인터뷰에서 건진 표현과 문장</p><span class="sr-n">글 7개</span></a></div>
+<div class="tv-kk about-kk"><div class="tv-kk-l"><span class="lbl">매일 한 잔</span><b>매일 아침 7시, 표현 하나씩 카톡으로</b><span>거창한 계획 말고, 커피 한 잔 마시는 마음으로. 무료예요.</span><div class="about-kk-btns"><a class="btn kakao tv-kk-btn" href="https://open.kakao.com/o/gxsl5iQi" target="_blank" rel="noopener"><i class="kk-dot"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path fill="#191919" d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7L5.8 21l4-2.6c.7.1 1.4.2 2.2.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></i>1일 1영 받아보기</a><a class="about-yt" href="https://www.youtube.com/@CAFEINENGLISH" target="_blank" rel="noopener">유튜브 채널 보기 ›</a></div></div><div class="tv-kk-msg" aria-hidden="true"><div class="tv-kk-top"><span>카페인영어</span><span>오전 7:00</span></div><div class="tv-kk-bub">오늘의 한 잔<b>I'm on it.</b>바로 할게요</div></div></div>
 </div>
 </main>
 
@@ -1227,6 +1262,6 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 </footer>
 <div class="fab no-print" id="fab"><div class="fab-menu" id="fab-menu"><a class="fab-item youtube" href="https://www.youtube.com/@CAFEINENGLISH" target="_blank" rel="noopener" aria-label="유튜브" title="유튜브"><span class="fab-ic"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8z" fill="#fff"/><path d="M9.8 15.1V8.9l5.4 3.1z" fill="#FF0033"/></svg></span></a><a class="fab-item instagram" href="https://www.instagram.com/cafe_in_english" target="_blank" rel="noopener" aria-label="인스타그램" title="인스타그램"><span class="fab-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="#fff" stroke="none"/></svg></span></a><a class="fab-item kakao" href="https://open.kakao.com/o/gxsl5iQi" target="_blank" rel="noopener" aria-label="카카오톡 오픈채팅" title="카카오톡 오픈채팅"><span class="fab-ic"><svg width="26" height="24" viewBox="0 0 30 28" aria-hidden="true"><path d="M15 2C7.8 2 2 6.6 2 12.3c0 3.7 2.4 6.9 6.1 8.7l-1.3 4.8c-.1.4.4.7.7.5l5.7-3.8c.6.1 1.2.1 1.8.1 7.2 0 13-4.6 13-10.3S22.2 2 15 2z" fill="#3A1D1D"/></svg></span></a></div><button class="fab-main" type="button" aria-expanded="false" aria-controls="fab-menu" aria-label="카페인영어 SNS 채널 보기"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
 <script id="page-data" type="application/json">{}</script>
-<script src="/assets/app.js?v=f12572f2" defer></script>
+<script src="/assets/app.js?v=7e840042" defer></script>
 </body>
 </html>

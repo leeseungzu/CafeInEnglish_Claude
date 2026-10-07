@@ -1176,6 +1176,46 @@ def _about_card():
             '<p class="tc-note">거창한 계획 말고,<br class="m-br"> 커피 한 잔 마시는 마음으로 시작해보세요!</p>')
 
 
+
+def _about_acts():
+    items = [("headphone", "영상으로 배우기", "셀럽 인터뷰·연설 장면을 구간별로 듣고 3번 반복", "/category/video/"),
+             ("speech-balloon", "영어표현 · 영어꿀팁", "새 표현, 헷갈리는 표현, 생활 회화 요령", "/category/expr/"),
+             ("world-map", "여행영어 무료 PDF", "공항부터 호텔까지 10가지 상황 · 7일 플랜", "/travel/"),
+             ("check", "퀴즈와 내 공부방", "틀린 문제는 모였다가, 다시 맞히면 졸업", "/notes/"),
+             ("light-bulb", "사유의 문장", "마음에 남는 문장을 따라 쓰고 빈칸으로 떠올리기", "/category/think/"),
+             ("page", "출력해서 복습하기", "글마다 A4 복습지, QR로 발음 다시 듣기", None)]
+    out = ""
+    for ic, t, sub, href in items:
+        out += act_row(icon_img(ic, "act-img"), e(t), e(sub), href=href, cls="about-act") if href else (
+            f'<div class="act about-act"><span class="act-ic">{icon_img(ic, "act-img")}</span><span class="act-t"><b>{e(t)}</b><small>{e(sub)}</small></span><span class="act-r"></span></div>')
+    return out
+
+
+def _about_series():
+    html = ""
+    for sr in SERIES:
+        sp = [POST_BY_ID[i] for i in sr["posts"] if i in POST_BY_ID]
+        icons = [o["icon"] for o in sp if o.get("icon")][:3]
+        if icons:
+            cover = f'<div class="sr-cover ic-{sp[0]["cat"]}">' + "".join(f'<img src="/assets/icons/{ic}.webp?v={ASSET_V}" alt="" loading="lazy" width="96" height="96">' for ic in icons) + "</div>"
+        else:
+            vids = [o for o in sp if o.get("video")]
+            cover = ('<div class="sr-cover yt">' + yt_img(vids[0]["video"], 'loading="lazy"') + '</div>') if vids else '<div class="sr-cover"></div>'
+        html += (f'<a class="sr-card" href="/series/{sr["id"]}/">{cover}<h3>{e(sr["title"])}</h3>'
+                 f'<p>{e(sr["desc"])}</p><span class="sr-n">글 {len(sp) + len(sr.get("thinks", []))}개</span></a>')
+    return html
+
+
+def _about_kakao():
+    kakao = SITE.get("kakao")
+    yt = SITE.get("youtube")
+    btn = (f'<a class="btn kakao tv-kk-btn" href="{e(kakao)}" target="_blank" rel="noopener"><i class="kk-dot"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path fill="#191919" d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7L5.8 21l4-2.6c.7.1 1.4.2 2.2.2 5.5 0 10-3.6 10-8S17.5 3 12 3z"/></svg></i>1일 1영 받아보기</a>' if kakao else "")
+    ytb = (f'<a class="about-yt" href="{e(yt)}" target="_blank" rel="noopener">유튜브 채널 보기 ›</a>' if yt else "")
+    return (f'<div class="tv-kk about-kk"><div class="tv-kk-l"><span class="lbl">매일 한 잔</span><b>매일 아침 7시, 표현 하나씩 카톡으로</b>'
+            f'<span>거창한 계획 말고, 커피 한 잔 마시는 마음으로. 무료예요.</span><div class="about-kk-btns">{btn}{ytb}</div></div>'
+            '<div class="tv-kk-msg" aria-hidden="true"><div class="tv-kk-top"><span>카페인영어</span><span>오전 7:00</span></div>'
+            '<div class="tv-kk-bub">오늘의 한 잔<b>I\'m on it.</b>바로 할게요</div></div></div>')
+
 ABOUT_CARD = _about_card()
 ABOUT = f"""
 <p class="about-tag">매일 조금씩, 깊게 스며드는 CafeInEnglish</p>
@@ -1186,24 +1226,51 @@ ABOUT = f"""
 <p>카페인영어는 그 여정을 기록하고 나누는 공간이에요. 셀럽 인터뷰와 연설 속 살아있는 표현으로 매일 조금씩, 하지만 깊게. 영어라는 언어로 생각을 넓히면서 같이 성장해요. <b>재미있게, 그리고 쉽게!</b></p>
 <div class="brand-c"><img src="/assets/icon-192.png" alt="" width="64" height="64"><div><b>C.</b> 매일 한 잔의 커피처럼, 대화 속 진짜 영어를 꾸준히.<br><span>오늘의 한 문장에 마침표를 찍는 곳, CafeInEnglish.</span></div></div>
 <h2>이런 걸 할 수 있어요</h2>
-<div class="feats"><div class="feat"><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5l11 7-11 7z"/></svg></span><div><b>영상으로 배우기</b><p>카페인영어 영상 속 표현을 실제 장면과 함께 익혀요.</p></div></div><div class="feat"><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h11M4 18h7"/></svg></span><div><b>영어표현 · 영어꿀팁</b><p>새 표현과 헷갈리는 표현부터 회화, 단어, 듣기 요령까지 담았어요.</p></div></div><div class="feat"><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></span><div><b>퀴즈와 오답노트</b><p>글 끝 퀴즈로 확인하고, 틀린 문제는 내 공부방에 자동으로 모여요.</p></div></div><div class="feat"><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><div><b>사유의 문장</b><p>마음에 남는 문장을 따라 쓰고, 빈칸으로 다시 떠올려요.</p></div></div><div class="feat"><span class="feat-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="6" y="14" width="12" height="7" rx="1"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/></svg></span><div><b>출력해서 복습하기</b><p>글마다 PDF 복습지로 저장하거나 인쇄해서 볼 수 있어요.</p></div></div></div>
-{ABOUT_CARD}
+<div class="about-acts">{_about_acts()}</div>
+<h2>아티클 시리즈</h2>
+<p class="about-sub">상황별로 모아 두었어요. 필요한 곳부터 골라 보세요.</p>
+<div class="sr-grid about-sr">{_about_series()}</div>
+{_about_kakao()}
 """
 PRIVACY = f"""
-<p>{e(SITE['name'])}(이하 '사이트')는 이용자의 개인정보를 소중히 여깁니다. 이 방침은 {e(DOMAIN.replace('https://', ''))} 에 적용됩니다.</p>
-<h2>1. 수집하는 정보</h2>
-<p>사이트는 회원가입이 없으며 이름, 연락처 등 개인정보를 직접 수집하지 않습니다.</p>
-<h2>2. 브라우저 저장소 이용</h2>
-<p>퀴즈 오답노트, 필사 기록, '나의 한 줄'은 이용자의 기기 브라우저(localStorage)에만 저장되며 사이트 서버로 전송되지 않습니다. 브라우저의 사이트 데이터를 삭제하면 기록도 함께 삭제됩니다.</p>
-<h2>3. 광고 (Google AdSense)</h2>
-<p>사이트는 Google AdSense 광고를 게재할 수 있습니다. Google을 포함한 제3자 공급업체는 쿠키를 사용하여 이용자의 이전 방문 기록을 바탕으로 광고를 게재할 수 있습니다. 이용자는 <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google 광고 설정</a>에서 맞춤 광고를 해제할 수 있습니다. 자세한 내용은 <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Google 광고 정책</a>을 참고하세요.</p>
-<h2>4. 방문 통계</h2>
-<p>사이트는 방문자 수 등 통계 확인을 위해 Google Analytics를 사용할 수 있으며, 이 과정에서 쿠키 등 비식별 정보가 수집될 수 있습니다.</p>
-<h2>5. 외부 콘텐츠</h2>
-<p>사이트에 삽입된 YouTube 영상은 YouTube(Google)의 개인정보처리방침이 적용됩니다.</p>
-<h2>6. 문의</h2>
-<p>개인정보 관련 문의: {email_html}</p>
-<p>시행일: 2026년 10월 1일</p>"""
+<div class="pv-sum">
+<div class="pv-item">{icon_img("raised-hand", "pv-ic")}<b>회원가입 없음</b><span>이름·연락처를 묻지 않아요</span></div>
+<div class="pv-item">{icon_img("mobile-phone", "pv-ic")}<b>기록은 내 기기에만</b><span>오답노트·필사는 브라우저에 저장</span></div>
+<div class="pv-item">{icon_img("speech-balloon", "pv-ic")}<b>문의 이메일은 답장에만</b><span>답변 후 1년 보관, 요청 시 즉시 삭제</span></div>
+</div>
+<p>{e(SITE['name'])}(이하 '사이트')는 이용자의 개인정보를 소중히 여기며, 「개인정보 보호법」 등 관련 법령을 지킵니다. 이 방침은 {e(DOMAIN.replace('https://', ''))} 에 적용됩니다.</p>
+<h2>1. 수집하는 정보와 목적</h2>
+<p>사이트는 회원가입 없이 이용할 수 있으며, 이름·연락처 같은 개인정보를 따로 요구하지 않습니다. 다만 아래의 경우에 한해 최소한의 정보를 처리합니다.</p>
+<ul>
+<li><b>문의하기</b>: 답장 받을 이메일 주소와 문의 내용 — 문의에 답변하기 위해서만 사용합니다.</li>
+<li><b>방문 통계</b>: 방문 페이지, 이용 시간, 기기·브라우저 종류, 대략적인 지역 등 개인을 알아볼 수 없는 정보 — 사이트 개선을 위해 사용합니다.</li>
+</ul>
+<h2>2. 보유 기간과 파기</h2>
+<p>문의 내용과 이메일은 답변을 마친 뒤 1년간 보관했다가 삭제합니다. 이용자가 삭제를 요청하면 바로 삭제합니다. 방문 통계는 Google Analytics 설정에 따라 보관 기간이 지나면 자동으로 삭제됩니다.</p>
+<h2>3. 처리를 맡기는 곳 (위탁·국외 이전)</h2>
+<ul>
+<li><b>FormSubmit</b> (formsubmit.co, 미국): 문의 양식의 내용을 운영자 메일함으로 전달합니다.</li>
+<li><b>Google</b> (미국): 방문 통계(Google Analytics), 광고(Google AdSense), 영상(YouTube) 서비스를 제공합니다.</li>
+</ul>
+<p>위 경우 외에는 이용자의 정보를 제3자에게 제공하지 않습니다.</p>
+<h2>4. 브라우저에만 저장되는 기록</h2>
+<p>오답노트, 필사 기록, '나의 한 줄', 학습 진도는 이용자 기기의 브라우저(localStorage)에만 저장되며 사이트 서버로 전송되지 않습니다. 브라우저의 사이트 데이터를 삭제하면 기록도 함께 삭제됩니다.</p>
+<h2>5. 쿠키와 광고</h2>
+<p>사이트는 방문 통계와 광고를 위해 쿠키를 사용합니다. Google을 포함한 제3자 공급업체는 쿠키를 사용해 이용자의 이전 방문 기록을 바탕으로 광고를 게재할 수 있습니다.</p>
+<ul>
+<li>맞춤 광고 해제: <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google 광고 설정</a> · 자세한 내용은 <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Google 광고 정책</a></li>
+<li>방문 통계 거부: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics 차단 부가기능</a></li>
+<li>쿠키 거부: 브라우저 설정에서 쿠키 저장을 막을 수 있어요. 이 경우에도 사이트 이용에는 문제가 없습니다.</li>
+</ul>
+<h2>6. 외부 서비스</h2>
+<p>사이트에 삽입된 YouTube 영상, 그리고 연결된 카카오톡 오픈채팅·인스타그램·유튜브 채널은 각 서비스의 개인정보처리방침이 적용됩니다.</p>
+<h2>7. 이용자의 권리</h2>
+<p>이용자는 언제든 자신의 정보에 대해 열람, 정정, 삭제, 처리 정지를 요청할 수 있습니다. 아래 이메일로 요청하시면 지체 없이 처리합니다.</p>
+<h2>8. 개인정보 보호책임자</h2>
+<p>카페인영어 운영자 · {email_html}</p>
+<h2>9. 방침의 변경</h2>
+<p>이 방침이 바뀌면 이 페이지에서 알려드립니다.</p>
+<p>시행일: 2026년 10월 8일 (이전 버전: 2026년 10월 1일)</p>"""
 def _contact():
     """문의 폼 (A안): 유형 → 내용 → 답장 이메일 → 보내기.
     서버가 없어서 FormSubmit(formsubmit.co)으로 승주 메일함에 바로 보내요.

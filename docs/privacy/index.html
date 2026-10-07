@@ -1195,6 +1195,38 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
   .video-embed.float{top:calc(var(--hdr,68px) + 20px);left:20px;right:auto;bottom:auto;
     width:clamp(280px,calc((100vw - 1076px)/2 - 40px),440px);height:auto;aspect-ratio:16/9}
 }
+
+/* 소개 페이지 */
+.feat p a{color:var(--text);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.about-cta{background:var(--card);border-radius:24px;padding:26px 22px;text-align:center;margin:8px 0 12px}
+.about-cta p{margin:0 0 16px;font-size:17px;font-weight:700;letter-spacing:-.02em}
+.about-cta-btns{display:grid;gap:10px;max-width:420px;margin:0 auto}
+.about-cta-btns .btn{font-size:15px;padding:13px 16px}
+.prose ul{padding-left:20px;margin:6px 0 14px}
+.prose li{margin:4px 0;line-height:1.7}
+.feat p a{white-space:nowrap}
+
+/* 소개·개인정보처리방침: 현재 디자인(act 목록·시리즈 카드·카톡 박스)에 맞춤 */
+.prose .about-acts{display:grid;gap:10px;margin:10px 0 30px}
+@media (min-width:700px){ .prose .about-acts{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.about-act .act-img{width:28px;height:28px}
+.about-act .act-t b{font-size:15.5px}
+.about-act .act-t small{font-size:13px}
+.about-sub{color:var(--muted);margin:-4px 0 14px}
+.prose .about-sr{margin:0 0 30px}
+.prose .about-sr a{text-decoration:none}
+@media (min-width:860px){ .prose .about-sr{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px} .prose .about-sr .sr-card{padding:14px;border-radius:20px} .prose .about-sr h3{font-size:15px} .prose .about-sr p{font-size:12.5px} }
+.about-kk-btns{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:12px}
+.about-kk .tv-kk-btn{margin:0}
+.about-yt{font-size:14px;font-weight:700;color:inherit;text-decoration:none;opacity:.85}
+.about-yt:hover{opacity:1;text-decoration:underline}
+.pv-sum{display:grid;gap:10px;margin:6px 0 26px}
+@media (min-width:700px){ .pv-sum{grid-template-columns:repeat(3,minmax(0,1fr))} }
+.pv-item{display:grid;grid-template-columns:40px 1fr;column-gap:12px;row-gap:2px;align-items:center;background:var(--soft,#F7F8FA);border-radius:18px;padding:16px}
+.pv-item .pv-ic{width:40px;height:40px;grid-row:1/3}
+@media (min-width:700px){ .pv-item{display:flex;flex-direction:column;align-items:flex-start;gap:4px} .pv-item .pv-ic{margin-bottom:4px} }
+.pv-item b{font-size:15.5px}
+.pv-item span{font-size:13.5px;color:var(--muted)}
 </style>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-ZTK7QZC3NK');addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-ZTK7QZC3NK';document.head.appendChild(s)},1500)});</script>
 </head>
@@ -1207,20 +1239,44 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 <div class="wrap">
 <main>
 <h1>개인정보처리방침</h1><div class="prose">
-<p>카페인영어 CafeInEnglish(이하 '사이트')는 이용자의 개인정보를 소중히 여깁니다. 이 방침은 www.cafeinenglish.com 에 적용됩니다.</p>
-<h2>1. 수집하는 정보</h2>
-<p>사이트는 회원가입이 없으며 이름, 연락처 등 개인정보를 직접 수집하지 않습니다.</p>
-<h2>2. 브라우저 저장소 이용</h2>
-<p>퀴즈 오답노트, 필사 기록, '나의 한 줄'은 이용자의 기기 브라우저(localStorage)에만 저장되며 사이트 서버로 전송되지 않습니다. 브라우저의 사이트 데이터를 삭제하면 기록도 함께 삭제됩니다.</p>
-<h2>3. 광고 (Google AdSense)</h2>
-<p>사이트는 Google AdSense 광고를 게재할 수 있습니다. Google을 포함한 제3자 공급업체는 쿠키를 사용하여 이용자의 이전 방문 기록을 바탕으로 광고를 게재할 수 있습니다. 이용자는 <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google 광고 설정</a>에서 맞춤 광고를 해제할 수 있습니다. 자세한 내용은 <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Google 광고 정책</a>을 참고하세요.</p>
-<h2>4. 방문 통계</h2>
-<p>사이트는 방문자 수 등 통계 확인을 위해 Google Analytics를 사용할 수 있으며, 이 과정에서 쿠키 등 비식별 정보가 수집될 수 있습니다.</p>
-<h2>5. 외부 콘텐츠</h2>
-<p>사이트에 삽입된 YouTube 영상은 YouTube(Google)의 개인정보처리방침이 적용됩니다.</p>
-<h2>6. 문의</h2>
-<p>개인정보 관련 문의: <a href="mailto:leeseungzu0609@gmail.com">leeseungzu0609@gmail.com</a></p>
-<p>시행일: 2026년 10월 1일</p></div>
+<div class="pv-sum">
+<div class="pv-item"><img class="pv-ic" src="/assets/icons/raised-hand.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"><b>회원가입 없음</b><span>이름·연락처를 묻지 않아요</span></div>
+<div class="pv-item"><img class="pv-ic" src="/assets/icons/mobile-phone.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"><b>기록은 내 기기에만</b><span>오답노트·필사는 브라우저에 저장</span></div>
+<div class="pv-item"><img class="pv-ic" src="/assets/icons/speech-balloon.webp?v=7e840042" alt="" loading="lazy" width="96" height="96"><b>문의 이메일은 답장에만</b><span>답변 후 1년 보관, 요청 시 즉시 삭제</span></div>
+</div>
+<p>카페인영어 CafeInEnglish(이하 '사이트')는 이용자의 개인정보를 소중히 여기며, 「개인정보 보호법」 등 관련 법령을 지킵니다. 이 방침은 www.cafeinenglish.com 에 적용됩니다.</p>
+<h2>1. 수집하는 정보와 목적</h2>
+<p>사이트는 회원가입 없이 이용할 수 있으며, 이름·연락처 같은 개인정보를 따로 요구하지 않습니다. 다만 아래의 경우에 한해 최소한의 정보를 처리합니다.</p>
+<ul>
+<li><b>문의하기</b>: 답장 받을 이메일 주소와 문의 내용 — 문의에 답변하기 위해서만 사용합니다.</li>
+<li><b>방문 통계</b>: 방문 페이지, 이용 시간, 기기·브라우저 종류, 대략적인 지역 등 개인을 알아볼 수 없는 정보 — 사이트 개선을 위해 사용합니다.</li>
+</ul>
+<h2>2. 보유 기간과 파기</h2>
+<p>문의 내용과 이메일은 답변을 마친 뒤 1년간 보관했다가 삭제합니다. 이용자가 삭제를 요청하면 바로 삭제합니다. 방문 통계는 Google Analytics 설정에 따라 보관 기간이 지나면 자동으로 삭제됩니다.</p>
+<h2>3. 처리를 맡기는 곳 (위탁·국외 이전)</h2>
+<ul>
+<li><b>FormSubmit</b> (formsubmit.co, 미국): 문의 양식의 내용을 운영자 메일함으로 전달합니다.</li>
+<li><b>Google</b> (미국): 방문 통계(Google Analytics), 광고(Google AdSense), 영상(YouTube) 서비스를 제공합니다.</li>
+</ul>
+<p>위 경우 외에는 이용자의 정보를 제3자에게 제공하지 않습니다.</p>
+<h2>4. 브라우저에만 저장되는 기록</h2>
+<p>오답노트, 필사 기록, '나의 한 줄', 학습 진도는 이용자 기기의 브라우저(localStorage)에만 저장되며 사이트 서버로 전송되지 않습니다. 브라우저의 사이트 데이터를 삭제하면 기록도 함께 삭제됩니다.</p>
+<h2>5. 쿠키와 광고</h2>
+<p>사이트는 방문 통계와 광고를 위해 쿠키를 사용합니다. Google을 포함한 제3자 공급업체는 쿠키를 사용해 이용자의 이전 방문 기록을 바탕으로 광고를 게재할 수 있습니다.</p>
+<ul>
+<li>맞춤 광고 해제: <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google 광고 설정</a> · 자세한 내용은 <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Google 광고 정책</a></li>
+<li>방문 통계 거부: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics 차단 부가기능</a></li>
+<li>쿠키 거부: 브라우저 설정에서 쿠키 저장을 막을 수 있어요. 이 경우에도 사이트 이용에는 문제가 없습니다.</li>
+</ul>
+<h2>6. 외부 서비스</h2>
+<p>사이트에 삽입된 YouTube 영상, 그리고 연결된 카카오톡 오픈채팅·인스타그램·유튜브 채널은 각 서비스의 개인정보처리방침이 적용됩니다.</p>
+<h2>7. 이용자의 권리</h2>
+<p>이용자는 언제든 자신의 정보에 대해 열람, 정정, 삭제, 처리 정지를 요청할 수 있습니다. 아래 이메일로 요청하시면 지체 없이 처리합니다.</p>
+<h2>8. 개인정보 보호책임자</h2>
+<p>카페인영어 운영자 · <a href="mailto:leeseungzu0609@gmail.com">leeseungzu0609@gmail.com</a></p>
+<h2>9. 방침의 변경</h2>
+<p>이 방침이 바뀌면 이 페이지에서 알려드립니다.</p>
+<p>시행일: 2026년 10월 8일 (이전 버전: 2026년 10월 1일)</p></div>
 </main>
 
 </div>
@@ -1230,6 +1286,6 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 </footer>
 <div class="fab no-print" id="fab"><div class="fab-menu" id="fab-menu"><a class="fab-item youtube" href="https://www.youtube.com/@CAFEINENGLISH" target="_blank" rel="noopener" aria-label="유튜브" title="유튜브"><span class="fab-ic"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8z" fill="#fff"/><path d="M9.8 15.1V8.9l5.4 3.1z" fill="#FF0033"/></svg></span></a><a class="fab-item instagram" href="https://www.instagram.com/cafe_in_english" target="_blank" rel="noopener" aria-label="인스타그램" title="인스타그램"><span class="fab-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="#fff" stroke="none"/></svg></span></a><a class="fab-item kakao" href="https://open.kakao.com/o/gxsl5iQi" target="_blank" rel="noopener" aria-label="카카오톡 오픈채팅" title="카카오톡 오픈채팅"><span class="fab-ic"><svg width="26" height="24" viewBox="0 0 30 28" aria-hidden="true"><path d="M15 2C7.8 2 2 6.6 2 12.3c0 3.7 2.4 6.9 6.1 8.7l-1.3 4.8c-.1.4.4.7.7.5l5.7-3.8c.6.1 1.2.1 1.8.1 7.2 0 13-4.6 13-10.3S22.2 2 15 2z" fill="#3A1D1D"/></svg></span></a></div><button class="fab-main" type="button" aria-expanded="false" aria-controls="fab-menu" aria-label="카페인영어 SNS 채널 보기"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
 <script id="page-data" type="application/json">{}</script>
-<script src="/assets/app.js?v=f12572f2" defer></script>
+<script src="/assets/app.js?v=7e840042" defer></script>
 </body>
 </html>
