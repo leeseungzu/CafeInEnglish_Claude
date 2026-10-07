@@ -23,5 +23,11 @@
     "jensen",
     "im-down"
   ],
-  "formsubmit_id": "d640264ea360b094426f725895cc2bf9"
+  "formsubmit_id": "d640264ea360b094426f725895cc2bf9",
+  "notice": {
+    "label": "무료 자료",
+    "title": "여행영어 PDF, 공항부터 호텔까지",
+    "sub": "직원이 실제로 하는 말과 바로 쓰는 대답, 원어민 발음까지",
+    "href": "/travel/"
+  }
 }

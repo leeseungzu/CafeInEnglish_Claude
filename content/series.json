@@ -1,6 +1,6 @@
 [
   {"id": "travel", "title": "해외에서 살아남는 영어", "desc": "카페, 식당, 병원처럼 해외에서 꼭 마주치는 순간에 바로 꺼내 쓰는 문장 모음",
-   "posts": ["cafe-order", "restaurant", "doctor", "ask-to-repeat", "excuse-me-sorry", "how-are-you"]},
+   "posts": ["immigration", "cafe-order", "restaurant", "doctor", "ask-to-repeat", "excuse-me-sorry", "how-are-you"]},
   {"id": "work", "title": "회사에서 바로 쓰는 영어", "desc": "회의, 메일, 메신저에서 원어민 동료가 매일 쓰는 짧고 센스 있는 표현",
    "posts": ["walk-me-through", "keep-me-posted", "im-on-it", "video-call", "swamped", "make-sense", "sounds-good"]},
   {"id": "mistakes", "title": "한국인이 자주 틀리는 영어", "desc": "문법은 맞는데 뜻이 반대로 전해지는 함정 표현과 콩글리시 바로잡기",

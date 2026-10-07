@@ -965,6 +965,16 @@ def daily_index(n):
     return int((time.time() + 9 * 3600) // 86400) % n
 
 
+
+def notice_html():
+    """홈 공지 배너 — site.json 의 notice {label, title, sub, href} 가 있을 때만 보여요."""
+    n = SITE.get("notice")
+    if not n:
+        return ""
+    return (f'<a class="notice" href="{e(n["href"])}"><span class="lbl">{e(n.get("label", "공지"))}</span>'
+            f'<span class="nt-body"><b>{e(n["title"])}</b><span>{e(n.get("sub", ""))}</span></span>'
+            f'<span class="nt-go" aria-hidden="true">›</span></a>')
+
 def page_home():
     daily = []
     if (CONTENT / "daily.json").exists():
@@ -1073,6 +1083,7 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
 
     body = f"""<h1 class="sr-only">카페인영어 CafeInEnglish - 매일 조금씩, 깊게 스며드는 영어 공부</h1>
 {hero}{hero_js}
+{notice_html()}
 <div class="home-grid">
   <section><h2 class="home-h">전체 아티클</h2><div class="cards list" id="all-arts">{arts}</div>{pager}</section>
   <aside class="pop"><h2 class="pop-h">인기 있는 글</h2><ol>{pop_html}</ol></aside>
@@ -1189,6 +1200,70 @@ def write(path, text):
     f.write_text(text, "utf-8")
 
 
+
+# ── 여행영어 무료 자료 안내 페이지 (/travel/) ──────────────────────────────
+# PDF는 files/travel-english.pdf 에 넣으면 다운로드 버튼이 자동으로 켜져요 (없으면 '준비 중' 안내).
+# 인스타 DM 링크와 PDF 속 QR이 이 주소를 가리키니, 주소(/travel/)와 상황 글 id는 바꾸지 않아요.
+TRAVEL_PDF = "files/travel-english.pdf"
+TRAVEL_SITUATIONS = [("기내", "airplane", None), ("입국심사", "passport-control", "immigration"), ("수하물·세관", "luggage", None),
+                     ("교통", "taxi", None), ("호텔", "hotel", None), ("카페", "hot-beverage", None), ("식당", "fork-knife-plate", None),
+                     ("쇼핑·계산", "shopping-bags", None), ("길 찾기", "world-map", None), ("문제 상황", "pill", None)]
+TRAVEL_PLAN = ["살아남는 문장 + 기내", "입국심사 + 수하물", "교통", "호텔", "카페 + 식당", "쇼핑 + 길 찾기", "문제 상황 + 복습"]
+
+def page_travel():
+    pdf_ok = (ROOT / TRAVEL_PDF).exists()
+    dl = (f'<a class="btn primary tv-dl" href="/{TRAVEL_PDF}" download>여행영어 PDF 내려받기</a>' if pdf_ok
+          else '<div class="tv-soon">PDF를 마무리하고 있어요. 곧 여기서 내려받을 수 있어요.</div>')
+    steps = [("page", "PDF 받기", "출력하거나 폰에 저장해요"),
+             ("mobile-phone", "QR 찍기", "페이지마다 QR로 발음을 들어요"),
+             ("speech-balloon", "따라 말하기", "느리게 한 번, 보통 속도로 한 번"),
+             ("check", "써 본 문장 체크", "여행 중에 써 본 문장에 표시해요")]
+    steps_html = "".join(f'<div class="tv-step">{icon_img(ic, "tv-ic")}<span class="tv-n">{i + 1}</span>'
+                         f'<b>{e(t)}</b><span>{e(d)}</span></div>' for i, (ic, t, d) in enumerate(steps))
+    tiles = ""
+    for name, ic, pid in TRAVEL_SITUATIONS:
+        inner = f'{icon_img(ic, "tv-ic")}<b>{e(name)}</b>'
+        if pid in POST_BY_ID:
+            tiles += f'<a class="tv-tile on" href="{post_url(POST_BY_ID[pid])}">{inner}<span class="tv-go">공부하기 ›</span></a>'
+        else:
+            tiles += f'<div class="tv-tile">{inner}<span class="tv-wait">곧 열려요</span></div>'
+    plan = "".join(f'<div class="tv-day"><span>Day {i + 1}</span><b>{e(t)}</b></div>' for i, t in enumerate(TRAVEL_PLAN))
+    faq = [("정말 무료인가요?", "네, 무료예요. 제가 공부하면서 정리한 걸 필요한 분과 같이 쓰고 싶어서 만들었어요."),
+           ("어느 나라에서 쓸 수 있나요?", "미국 영어 기준이에요. 영국에서 다르게 쓰는 표현은 따로 표시했고, 영어를 쓰는 대부분의 국제공항과 관광지에서 그대로 통해요."),
+           ("출력해서 봐도 되나요?", "네, A4로 출력하기 좋게 만들었어요. 폰에 저장해 두고 공항에서 꺼내 봐도 좋아요.")]
+    faq_html = "".join(f'<details class="tv-faq"><summary>{e(q)}</summary><p>{e(a)}</p></details>' for q, a in faq)
+    kakao = SITE.get("kakao", "")
+    body = f"""<div class="tv">
+<section class="tv-hero">
+  <span class="lbl">무료 자료</span>
+  <h1>여행영어,<br>공항부터 호텔까지</h1>
+  <p>현지에서 <b>실제로 들리는 영어</b>를 상황별로 정리했어요.</p>
+  <div class="tv-stats"><div><b>10</b><span>상황</span></div><div><b>34</b><span>직원 질문</span></div><div><b>53</b><span>바로 쓰는 대답</span></div></div>
+  {dl}
+</section>
+<h2>이런 걸 배워요</h2>
+<div class="tv-demo">
+  <div class="tv-row"><span class="tv-who">직원</span><span class="tv-bub">What brings you here?</span></div>
+  <div class="tv-hear"><span class="lbl">이렇게 들려요</span><b>왓 브링쥬 히어?</b></div>
+  <div class="tv-row me"><span class="tv-bub me">I'm here on vacation.</span></div>
+  <div class="tv-ko">여행 왔어요</div>
+</div>
+<p class="tv-cap">문장을 몰라서가 아니라, 소리가 낯설어서 막히는 거예요.<br>직원 질문이 실제로 어떻게 들리는지부터 익혀요.</p>
+<h2>이렇게 쓰면 돼요</h2>
+<div class="tv-steps">{steps_html}</div>
+<h2>상황별로 바로 공부하기</h2>
+<div class="tv-grid">{tiles}</div>
+<h2>출발 전 7일 플랜</h2>
+<div class="tv-plan">{plan}</div>
+<p class="tv-cap">하루 10~15분이면 충분해요.</p>
+<h2>자주 묻는 질문</h2>
+{faq_html}
+<div class="tv-cta">{icon_img("alarm-clock", "tv-ic")}<b>여행 끝나고도 이어가고 싶다면</b><span>매일 아침 7시, 실제로 쓰이는 영어 표현 하나를 카톡으로 보내드려요.</span>
+{f'<a class="btn kakao" href="{e(kakao)}" target="_blank" rel="noopener">매일 아침 1일 1영 받아보기</a>' if kakao else ""}</div>
+</div>"""
+    return layout("여행영어 무료 PDF, 공항부터 호텔까지", "입국심사, 호텔, 카페, 식당에서 직원이 실제로 하는 말과 바로 쓰는 대답을 상황별로 정리한 여행영어 무료 자료예요. 원어민 발음 듣기와 출력용 PDF를 함께 드려요.",
+                  "/travel/", body, seo_title="여행영어 무료 PDF - 공항부터 호텔까지, 현지에서 들리는 영어")
+
 def build():
     global START
     import time
@@ -1225,6 +1300,9 @@ def build():
     write("/about/", page_static("about", "카페인영어 소개", "제가 매일 영어 공부하려고 만든 공간, 카페인영어를 소개해요", ABOUT)); pages.append("/about/")
     write("/privacy/", page_static("privacy", "개인정보처리방침", "카페인영어 개인정보처리방침", PRIVACY)); pages.append("/privacy/")
     write("/contact/", page_static("contact", "문의", "카페인영어 문의하기", CONTACT)); pages.append("/contact/")
+    if (ROOT / "files").exists():
+        shutil.copytree(ROOT / "files", OUT / "files", dirs_exist_ok=True)
+    write("/travel/", page_travel()); pages.append("/travel/")
     (OUT / "404.html").write_text(page_404(), "utf-8")
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
