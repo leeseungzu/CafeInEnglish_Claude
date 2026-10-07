@@ -1205,9 +1205,9 @@ def write(path, text):
 # PDF는 files/travel-english.pdf 에 넣으면 다운로드 버튼이 자동으로 켜져요 (없으면 '준비 중' 안내).
 # 인스타 DM 링크와 PDF 속 QR이 이 주소를 가리키니, 주소(/travel/)와 상황 글 id는 바꾸지 않아요.
 TRAVEL_PDF = "files/travel-english.pdf"
-TRAVEL_SITUATIONS = [("기내", "airplane", None), ("입국심사", "passport-control", "immigration"), ("수하물·세관", "luggage", None),
-                     ("교통", "taxi", None), ("호텔", "hotel", None), ("카페", "hot-beverage", None), ("식당", "fork-knife-plate", None),
-                     ("쇼핑·계산", "shopping-bags", None), ("길 찾기", "world-map", None), ("문제 상황", "pill", None)]
+TRAVEL_SITUATIONS = [("기내", "airplane", "in-flight"), ("입국심사", "passport-control", "immigration"), ("수하물·세관", "luggage", "baggage-customs"),
+                     ("교통", "taxi", "transportation"), ("호텔", "hotel", "hotel-check-in"), ("카페", "hot-beverage", "travel-cafe"), ("식당", "fork-knife-plate", "travel-restaurant"),
+                     ("쇼핑·계산", "shopping-bags", "shopping-checkout"), ("길 찾기", "world-map", "asking-directions"), ("문제 상황", "pill", "travel-trouble")]
 TRAVEL_PLAN = ["살아남는 문장 + 기내", "입국심사 + 수하물", "교통", "호텔", "카페 + 식당", "쇼핑 + 길 찾기", "문제 상황 + 복습"]
 
 def page_travel():
@@ -1227,6 +1227,12 @@ def page_travel():
             tiles += f'<a class="tv-tile on" href="{post_url(POST_BY_ID[pid])}">{inner}<span class="tv-go">지금 공부하기 ›</span></a>'
         else:
             tiles += f'<div class="tv-tile">{inner}<span class="tv-wait">곧 열려요</span></div>'
+    # 숫자는 상황 글에서 직접 세요: 질문 = .ex.hear 항목, 대답 = .ex.ans 항목
+    n_q = n_a = 0
+    for _, _, pid in TRAVEL_SITUATIONS:
+        bh = POST_BY_ID[pid].get("body_html", "") if pid in POST_BY_ID else ""
+        n_q += bh.count('<span class="hn">')
+        n_a += sum(blk.count("<li") for blk in re.findall(r'<ul class="ex ans">(.*?)</ul>', bh, re.S))
     plan = "".join(f'<div class="tv-day"><span>Day {i + 1}</span><b>{e(t)}</b></div>' for i, t in enumerate(TRAVEL_PLAN))
     faq = [("정말 무료인가요?", "네, 무료예요. 제가 공부하면서 정리한 걸 필요한 분과 같이 쓰고 싶어서 만들었어요."),
            ("어느 나라에서 쓸 수 있나요?", "미국 영어 기준이에요. 영국에서 다르게 쓰는 표현은 따로 표시했고, 영어를 쓰는 대부분의 국제공항과 관광지에서 그대로 통해요."),
@@ -1239,7 +1245,7 @@ def page_travel():
   <span class="lbl">무료 자료</span>
   <h1>여행영어,<br>공항부터 호텔까지</h1>
   <p>현지에서 <b>실제로 들리는 영어</b>를 상황별로 정리했어요.</p>
-  <div class="tv-stats"><div><b>10</b><span>상황</span></div><div><b>34</b><span>직원 질문</span></div><div><b>53</b><span>바로 쓰는 대답</span></div></div>
+  <div class="tv-stats"><div><b>{len(TRAVEL_SITUATIONS)}</b><span>상황</span></div><div><b>{n_q}</b><span>직원 질문</span></div><div><b>{n_a}</b><span>바로 쓰는 대답</span></div></div>
   {dl}
 </section>
 <h2>이런 걸 배워요</h2>
