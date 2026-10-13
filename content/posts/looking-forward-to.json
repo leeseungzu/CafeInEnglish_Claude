@@ -1,0 +1,72 @@
+{
+  "id": "looking-forward-to",
+  "cat": "tip",
+  "sub": "단어",
+  "date": "2026-10-14",
+  "title": "\"I'm looking forward to see you\"? to 뒤에는 -ing가 와요",
+  "seo_title": "looking forward to 뒤에 ing 쓰는 이유 - 자주 틀리는 영어",
+  "lead": "이메일 끝인사에 꼭 나오는 표현, 한국인이 가장 많이 틀리는 한 글자",
+  "description": "look forward to 뒤에 동사원형이 아니라 -ing나 명사가 오는 이유와 이메일·대화에서 바로 쓰는 예문, 격식에 따른 끝인사 차이를 퀴즈로 정리한 영어꿀팁.",
+  "og": {
+    "en": "looking forward to seeing you",
+    "ko": "to 뒤에 see가 아니라 seeing"
+  },
+  "body_html": "<h2>to 뒤에 왜 -ing일까</h2>\n<p>to 다음엔 동사원형이라고 배워서 헷갈리기 쉬워요. 그런데 look forward to의 to는 <b>'~ 쪽으로'라는 전치사</b>예요. 전치사 뒤에는 명사가 와야 해서, 동사를 쓰고 싶으면 명사처럼 바꾼 <b>-ing</b>를 붙여요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I'm looking forward to seeing you.</span><span class=\"ko\">만나길 기대하고 있어요.</span></li>\n<li><span class=\"en\">I'm looking forward to the weekend.</span><span class=\"ko\">주말만 기다리고 있어.</span></li>\n<li><span class=\"en\">We look forward to hearing from you.</span><span class=\"ko\">답장 기다리겠습니다. (격식 있는 메일)</span></li>\n</ul></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> look(보다) + forward(앞으로) + to(~ 쪽으로). to는 방향을 가리키는 화살표예요. 화살표 끝에는 '무엇'(명사)이 와야 하니까 see가 아니라 seeing!</div>\n<p><b class=\"lbl\">알아 두기</b> 같은 함정이 있는 표현: <b>be used to -ing</b>(~에 익숙하다), <b>when it comes to -ing</b>(~에 관해서라면). I'm used to waking up early처럼 써요. used to wake up(예전에 일찍 일어났다)과는 뜻이 달라요.</p>\n<h2>한눈에 정리</h2>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>표현</th><th>느낌</th><th>언제</th></tr></thead><tbody><tr><td>I'm looking forward to it!</td><td>친근하고 들뜬</td><td>친구, 동료</td></tr><tr><td>I look forward to hearing from you.</td><td>정중, 격식</td><td>처음 연락, 거래처 메일</td></tr><tr><td>Can't wait!</td><td>아주 캐주얼</td><td>친한 사이</td></tr></tbody></table></div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"no\">I'm looking forward to see you.</span><span class=\"en\">I'm looking forward to seeing you.</span><span class=\"ko\">to 뒤에는 -ing가 와요.</span><span class=\"why\"><b>왜?</b>여기 to는 to부정사가 아니라 '~ 쪽으로'라는 전치사라서 뒤에 명사나 -ing가 와요. to 자리 뒤에 the party 같은 명사를 넣어 봤을 때 말이 되면 전치사 to예요.</span></li>\n<li><span class=\"no\">I'm looking forward for your reply.</span><span class=\"en\">I'm looking forward to your reply.</span><span class=\"ko\">look forward는 to와 짝이에요.</span><span class=\"why\"><b>왜?</b>for는 '~을 위해'라는 목적이라 기다리는 방향을 나타내지 못해요. 앞을 내다보며 그쪽(to)을 기다리는 그림이라 to를 써요.</span></li>\n</ul></div>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "빈칸",
+      "q": "I'm looking forward to ___ you.",
+      "sub": "",
+      "options": [
+        "see",
+        "seeing",
+        "saw",
+        "to see"
+      ],
+      "answer": 1,
+      "explain": "look forward to의 to는 전치사라서 뒤에 -ing가 와요.",
+      "mnemonic": "to는 화살표, 화살표 끝엔 명사(-ing)!"
+    },
+    {
+      "tag": "같은 원리",
+      "q": "다음 중 to 뒤에 -ing가 오는 표현은?",
+      "sub": "",
+      "options": [
+        "I want to ~",
+        "I need to ~",
+        "I'm used to ~ (익숙하다)",
+        "I have to ~"
+      ],
+      "answer": 2,
+      "explain": "be used to(~에 익숙하다)의 to도 전치사라 I'm used to driving처럼 -ing가 와요.",
+      "mnemonic": "익숙하다 = used to + -ing"
+    },
+    {
+      "tag": "메일",
+      "q": "거래처 메일 끝에 가장 알맞은 문장은?",
+      "sub": "",
+      "options": [
+        "Can't wait!",
+        "I look forward to hearing from you.",
+        "See ya!",
+        "Waiting your answer."
+      ],
+      "answer": 1,
+      "explain": "I look forward to hearing from you는 격식 있는 메일의 대표 끝인사예요.",
+      "mnemonic": "격식 = I look forward to, 친근 = I'm looking forward to"
+    }
+  ],
+  "icon": "party-popper",
+  "chat": {
+    "q": "See you at dinner tomorrow!",
+    "a": "Looking forward to it!",
+    "key": "Looking forward to it!",
+    "ko": "기대할게!"
+  },
+  "thumb": {
+    "ko": "to 뒤에 see? seeing?",
+    "text": "looking forward to",
+    "key": "to"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "what-do-you-call",
+  "cat": "tip",
+  "sub": "회화",
+  "date": "2026-10-14",
+  "title": "\"How do you call this?\" 말고 \"What do you call this?\"",
+  "seo_title": "How do you call 틀린 이유 - What do you call this in English",
+  "lead": "'이거 영어로 뭐라고 해요?' 물어볼 때 자주 하는 실수",
+  "description": "'뭐라고 불러요?'를 How로 묻는 실수와 What do you call, How do you say의 차이, 모르는 단어·뜻·철자를 물어보는 문장을 예문과 퀴즈로 정리한 영어꿀팁.",
+  "og": {
+    "en": "What do you call this?",
+    "ko": "'뭐라고 해요?'는 How가 아니라 What"
+  },
+  "body_html": "<h2>'뭐라고'는 What</h2>\n<p>한국어 '뭐라고 불러요?'가 '어떻게 불러요?'처럼 느껴져서 How를 쓰기 쉬워요. 그런데 call은 <b>call A B(A를 B라고 부르다)</b> 구조예요. 내가 모르는 건 B, 즉 <b>이름</b>이고, 이름은 '무엇'이니까 What으로 물어요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">What do you call this in English?</span><span class=\"ko\">이거 영어로 뭐라고 해요?</span></li>\n<li><span class=\"en\">We call it a stapler.</span><span class=\"ko\">그건 스테이플러라고 해요.</span></li>\n<li><span class=\"en\">How do you say this in English?</span><span class=\"ko\">이 말을 영어로 어떻게 해요?</span></li>\n</ul></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> We call it <b>a stapler</b>. 빈칸이 이름 자리라 What! 반대로 say는 '말하는 방법'을 묻는 거라 How예요.</div>\n<h2>모를 때 꺼내 쓰는 질문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">What does \"awkward\" mean?</span><span class=\"ko\">'awkward'가 무슨 뜻이에요?</span></li>\n<li><span class=\"en\">How do you spell that?</span><span class=\"ko\">철자가 어떻게 돼요?</span></li>\n<li><span class=\"en\">What's the word for a person who doesn't eat meat?</span><span class=\"ko\">고기 안 먹는 사람을 뭐라고 하더라?</span></li>\n</ul></div>\n<h2>한눈에 정리</h2>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>질문</th><th>무엇을 묻나</th><th>예</th></tr></thead><tbody><tr><td>What do you call ~?</td><td>물건·개념의 이름</td><td>이 물건 이름이 뭐예요?</td></tr><tr><td>How do you say ~?</td><td>말·문장을 영어로</td><td>이 말을 영어로 어떻게 해요?</td></tr><tr><td>What does ~ mean?</td><td>뜻</td><td>이 단어 무슨 뜻이에요?</td></tr><tr><td>How do you spell ~?</td><td>철자</td><td>철자가 어떻게 돼요?</td></tr></tbody></table></div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"no\">How do you call this in English?</span><span class=\"en\">What do you call this in English?</span><span class=\"ko\">이름을 물을 땐 What이에요.</span><span class=\"why\"><b>왜?</b>call A B에서 모르는 건 B 자리의 이름이에요. 이름은 '무엇'이라 What으로 물어요. How do you call ~?은 '어떤 방법으로 부르나요(연락하나요)?'처럼 들릴 수 있어요.</span></li>\n<li><span class=\"no\">What does it mean \"awkward\"?</span><span class=\"en\">What does \"awkward\" mean?</span><span class=\"ko\">묻는 단어를 주어 자리에 넣어요.</span><span class=\"why\"><b>왜?</b>의문문은 does 바로 뒤에 주어가 와요. 궁금한 단어 \"awkward\"가 주어 자리에 들어가고, mean은 맨 끝으로 가요.</span></li>\n</ul></div>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "이름",
+      "q": "처음 보는 물건의 영어 이름을 물을 때 맞는 문장은?",
+      "sub": "",
+      "options": [
+        "How do you call this?",
+        "What do you call this?",
+        "What do you say this?",
+        "How call this?"
+      ],
+      "answer": 1,
+      "explain": "call A B에서 모르는 건 이름(B)이라 What으로 물어요.",
+      "mnemonic": "call it ___ → 빈칸이 이름 → What"
+    },
+    {
+      "tag": "말",
+      "q": "'고맙습니다'를 영어로 어떻게 말하는지 물을 때는?",
+      "sub": "",
+      "options": [
+        "What do you call \"고맙습니다\" in English?",
+        "How do you say \"고맙습니다\" in English?",
+        "How do you call \"고맙습니다\" in English?",
+        "What do you say \"고맙습니다\" English?"
+      ],
+      "answer": 1,
+      "explain": "말이나 문장을 영어로 옮기는 방법을 물을 땐 How do you say ~?예요.",
+      "mnemonic": "say(말하는 방법) = How"
+    },
+    {
+      "tag": "뜻",
+      "q": "단어 'awkward'의 뜻을 물을 때 맞는 문장은?",
+      "sub": "",
+      "options": [
+        "What does \"awkward\" mean?",
+        "What does it mean \"awkward\"?",
+        "What means \"awkward\"?",
+        "What is mean \"awkward\"?"
+      ],
+      "answer": 0,
+      "explain": "does 뒤에 주어(\"awkward\")가 오고 mean은 맨 끝으로 가요.",
+      "mnemonic": "What does + 단어 + mean?"
+    }
+  ],
+  "icon": "question-mark",
+  "chat": {
+    "q": "What do you call this in English?",
+    "a": "It's called a stapler.",
+    "key": "stapler",
+    "ko": "스테이플러라고 해요"
+  },
+  "thumb": {
+    "ko": "How? What?",
+    "text": "What do you call this?",
+    "key": "What"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "this-vs-next",
+  "cat": "tip",
+  "sub": "단어",
+  "date": "2026-10-14",
+  "title": "\"next Friday\"는 이번 주 금요일일까, 다음 주 금요일일까?",
+  "seo_title": "this Friday next Friday 차이 - 원어민도 헷갈리는 날짜 영어",
+  "lead": "약속 날짜 잡을 때 원어민끼리도 되묻는 표현, 오해 없이 말하는 법",
+  "description": "this Friday와 next Friday의 차이, 원어민도 헷갈리는 이유와 날짜를 오해 없이 확인하는 영어 문장, 시간 표현 앞 전치사 실수를 퀴즈로 정리했어요.",
+  "og": {
+    "en": "this Friday or next Friday?",
+    "ko": "원어민도 헷갈려요"
+  },
+  "body_html": "<h2>기본 규칙</h2>\n<p><b>this Friday</b>는 '이번에 돌아오는 금요일'이에요. 오늘이 수요일이면 이틀 뒤 금요일이죠. <b>next Friday</b>는 보통 '다음 주 금요일'로 쓰지만, 사람에 따라 '돌아오는 금요일'로 쓰기도 해요. 그래서 원어민끼리도 자주 되물어요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Are you free this Friday?</span><span class=\"ko\">이번 주 금요일에 시간 돼?</span></li>\n<li><span class=\"en\">Let's meet next Friday.</span><span class=\"ko\">다음 주 금요일에 만나자.</span></li>\n<li><span class=\"en\">Do you mean this Friday or next Friday?</span><span class=\"ko\">이번 주 금요일 말하는 거야, 다음 주 금요일 말하는 거야?</span></li>\n</ul></div>\n<h2>오해 없이 말하는 법</h2>\n<p>중요한 약속이면 <b>날짜 숫자를 같이</b> 말하는 게 가장 확실해요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">How about Friday the 16th?</span><span class=\"ko\">16일 금요일 어때요?</span></li>\n<li><span class=\"en\">Let's do Friday, October 23rd.</span><span class=\"ko\">10월 23일 금요일로 하죠.</span></li>\n<li><span class=\"en\">I'll see you a week from Friday.</span><span class=\"ko\">이번 금요일에서 일주일 뒤에 봐요. (다음 주 금요일)</span></li>\n</ul></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> this = 손에 닿는 '이번' 것, next = 하나 건너 '다음' 것. 그래도 헷갈리면 숫자(the 16th)를 붙이면 끝!</div>\n<p><b class=\"lbl\">알아 두기</b> this coming Friday라고 하면 '이번에 돌아오는 금요일'이라는 뜻이 더 분명해져요.</p>\n<h2>한눈에 정리</h2>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>표현</th><th>뜻</th><th>오해 가능성</th></tr></thead><tbody><tr><td>this Friday</td><td>이번에 돌아오는 금요일</td><td>거의 없음</td></tr><tr><td>this coming Friday</td><td>이번에 돌아오는 금요일</td><td>없음</td></tr><tr><td>next Friday</td><td>보통 다음 주 금요일</td><td>사람마다 달라서 확인 필요</td></tr><tr><td>a week from Friday</td><td>다음 주 금요일</td><td>없음 (미국에서 자주 씀)</td></tr></tbody></table></div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"no\">I'll see you at next Friday.</span><span class=\"en\">I'll see you next Friday.</span><span class=\"ko\">next 앞에는 전치사를 붙이지 않아요.</span><span class=\"why\"><b>왜?</b>next, this, last가 붙은 시간 표현은 그 자체로 '언제'를 나타내요. 그래서 on Friday는 되지만 on next Friday, at next Friday처럼 전치사를 또 붙이지 않아요.</span></li>\n<li><span class=\"no\">I'm busy in this week.</span><span class=\"en\">I'm busy this week.</span><span class=\"ko\">this week 앞에도 in이 필요 없어요.</span><span class=\"why\"><b>왜?</b>this week, next month, last year도 같은 규칙이에요. 이미 '이번 주에'라는 뜻이 들어 있어서 in을 붙이면 겹쳐요.</span></li>\n</ul></div>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "이번 주",
+      "q": "오늘이 월요일이에요. '이번 주 금요일'은?",
+      "sub": "",
+      "options": [
+        "this Friday",
+        "next Friday",
+        "last Friday",
+        "on next Friday"
+      ],
+      "answer": 0,
+      "explain": "this Friday는 '이번에 돌아오는 금요일'이에요.",
+      "mnemonic": "this = 손에 닿는 이번 것"
+    },
+    {
+      "tag": "확인",
+      "q": "next Friday가 헷갈릴 때 가장 확실하게 말하는 방법은?",
+      "sub": "",
+      "options": [
+        "next next Friday",
+        "Friday the 23rd",
+        "in Friday",
+        "the Friday"
+      ],
+      "answer": 1,
+      "explain": "날짜 숫자를 붙이면 원어민끼리도 오해가 없어요.",
+      "mnemonic": "헷갈리면 숫자!"
+    },
+    {
+      "tag": "전치사",
+      "q": "자연스러운 문장은?",
+      "sub": "",
+      "options": [
+        "See you at next Monday.",
+        "See you on next Monday.",
+        "See you next Monday.",
+        "See you in next Monday."
+      ],
+      "answer": 2,
+      "explain": "next가 붙은 시간 표현 앞에는 전치사를 쓰지 않아요.",
+      "mnemonic": "next·this·last 앞엔 전치사 X"
+    }
+  ],
+  "icon": "calendar",
+  "chat": {
+    "q": "Are you free next Friday?",
+    "a": "You mean the 23rd?",
+    "key": "the 23rd",
+    "ko": "23일 말하는 거지?"
+  },
+  "thumb": {
+    "ko": "이번 주? 다음 주?",
+    "text": "next Friday",
+    "key": "next"
+  }
+}

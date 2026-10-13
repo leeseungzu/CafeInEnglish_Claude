@@ -1,0 +1,72 @@
+{
+  "id": "email-phrases",
+  "cat": "tip",
+  "sub": "회화",
+  "date": "2026-10-14",
+  "title": "영어 이메일, 첫 줄과 끝 줄만 바꿔도 자연스러워져요",
+  "seo_title": "영어 이메일 첫 문장 끝인사 - 비즈니스 메일 자주 쓰는 표현",
+  "lead": "번역기 느낌 나는 메일에서 벗어나는 가장 쉬운 방법",
+  "description": "영어 비즈니스 이메일의 첫 인사, 용건 꺼내기, 첨부·확인 요청, 끝인사 표현을 상황별로 정리하고 Mr. 호칭과 wait 실수까지 퀴즈로 확인하는 영어꿀팁.",
+  "og": {
+    "en": "I've attached the file.",
+    "ko": "영어 메일, 첫 줄과 끝 줄부터"
+  },
+  "body_html": "<h2>첫 줄: 인사</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Hi Jenny,</span><span class=\"ko\">안녕하세요 제니, (가장 무난한 시작)</span></li>\n<li><span class=\"en\">I hope you're doing well.</span><span class=\"ko\">잘 지내시죠?</span></li>\n<li><span class=\"en\">Thanks for getting back to me.</span><span class=\"ko\">답장 주셔서 감사해요.</span></li>\n</ul></div>\n<h2>용건 꺼내기</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I'm writing to ask about the schedule.</span><span class=\"ko\">일정 관련해서 여쭤보려고 메일 드려요.</span></li>\n<li><span class=\"en\">Just following up on my last email.</span><span class=\"ko\">지난번 메일 관련해서 다시 연락드려요.</span></li>\n<li><span class=\"en\">I've attached the file.</span><span class=\"ko\">파일 첨부했어요.</span></li>\n</ul></div>\n<h2>끝 줄</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Let me know if you have any questions.</span><span class=\"ko\">궁금한 점 있으면 알려 주세요.</span></li>\n<li><span class=\"en\">Thanks in advance.</span><span class=\"ko\">미리 감사드려요.</span></li>\n<li><span class=\"en\">Best regards,</span><span class=\"ko\">(이름 앞에 쓰는 정중한 끝인사)</span></li>\n</ul></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 메일은 샌드위치예요. 인사(빵) → 용건(속) → 끝인사(빵). 빵만 자연스러워도 메일 전체가 훨씬 자연스러워 보여요.</div>\n<p><b class=\"lbl\">알아 두기</b> Please find attached도 여전히 쓰지만 딱딱하다고 느끼는 사람이 많아서, 요즘은 I've attached ~가 더 흔해요.</p>\n<h2>한눈에 정리</h2>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>끝인사</th><th>느낌</th><th>언제</th></tr></thead><tbody><tr><td>Best regards,</td><td>정중</td><td>처음 연락, 거래처</td></tr><tr><td>Best,</td><td>무난</td><td>동료, 대부분의 메일</td></tr><tr><td>Thanks,</td><td>가벼움</td><td>부탁한 뒤</td></tr><tr><td>Cheers,</td><td>캐주얼</td><td>영국·호주에서 흔함</td></tr></tbody></table></div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"no\">Dear Mr. David,</span><span class=\"en\">Hi David,</span><span class=\"ko\">Mr. 뒤에는 성(last name)이 와요.</span><span class=\"why\"><b>왜?</b>Mr., Ms.는 성 앞에 붙이는 호칭이에요. 이름(first name)을 부를 땐 호칭 없이 Hi David처럼 쓰고, 격식을 차릴 땐 Dear Mr. Smith처럼 성을 써요.</span></li>\n<li><span class=\"no\">I'm waiting your reply.</span><span class=\"en\">I look forward to hearing from you.</span><span class=\"ko\">메일에선 부드럽게 기다린다고 말해요.</span><span class=\"why\"><b>왜?</b>wait는 기다리는 대상을 받을 때 for가 필요해요(wait for). 그리고 '답장 기다리고 있어요'는 재촉처럼 들릴 수 있어서, 메일에선 look forward to로 부드럽게 말해요.</span></li>\n</ul></div>",
+  "related": [],
+  "quiz": [
+    {
+      "tag": "첨부",
+      "q": "동료에게 파일을 보낼 때 자연스러운 문장은?",
+      "sub": "",
+      "options": [
+        "I've attached the file.",
+        "I attached file to you.",
+        "Please find the attach.",
+        "File is attach."
+      ],
+      "answer": 0,
+      "explain": "I've attached the file이 가장 흔하고 자연스러워요.",
+      "mnemonic": "첨부 = attach, 이미 했으니 I've attached"
+    },
+    {
+      "tag": "호칭",
+      "q": "처음 연락하는 John Smith 씨에게 쓰는 인사로 맞는 것은?",
+      "sub": "",
+      "options": [
+        "Dear Mr. John,",
+        "Dear Mr. Smith,",
+        "Dear Smith Mr.,",
+        "Dear Mister John,"
+      ],
+      "answer": 1,
+      "explain": "Mr. 뒤에는 성(Smith)이 와요.",
+      "mnemonic": "Mr. + 성"
+    },
+    {
+      "tag": "답장",
+      "q": "정중하게 답장을 기다린다고 할 때는?",
+      "sub": "",
+      "options": [
+        "I'm waiting your reply.",
+        "Reply me quickly.",
+        "I look forward to hearing from you.",
+        "I wait you."
+      ],
+      "answer": 2,
+      "explain": "I look forward to hearing from you가 정중한 메일의 대표 끝 문장이에요.",
+      "mnemonic": "기다림은 look forward to로 부드럽게"
+    }
+  ],
+  "icon": "page",
+  "chat": {
+    "q": "Can you send me the file?",
+    "a": "I've attached it to the email.",
+    "key": "I've attached",
+    "ko": "메일에 첨부했어요"
+  },
+  "thumb": {
+    "ko": "번역기 느낌 그만",
+    "text": "I've attached it.",
+    "key": "attached"
+  }
+}
