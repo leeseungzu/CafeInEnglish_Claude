@@ -1007,7 +1007,7 @@ def page_series(sr):
               {"@type": "ListItem", "position": 1, "name": "홈", "item": DOMAIN + "/"},
               {"@type": "ListItem", "position": 2, "name": sr["title"], "item": DOMAIN + url}]}]
     img = og_image("s-" + sr["id"], "아티클 시리즈", sr["title"], sr["desc"], "읽고 · 듣고 · 퀴즈로 확인")
-    return layout(sr["title"], sr["desc"], url, body, wide=True, seo_title=f'{sr["title"]} - 영어 공부 시리즈', ld=ld, og_img=img)
+    return layout(sr["title"], sr["desc"] + ". 예문과 원어민 발음 듣기, 퀴즈로 함께 복습해요.", url, body, wide=True, seo_title=f'{sr["title"]} - 영어 공부 시리즈', ld=ld, og_img=img)
 
 
 def daily_index(n):
@@ -1151,7 +1151,7 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
         v = vp["video"]
         pre = (f'<link rel="preload" as="image" href="/images/yt/{v}-400.webp?v={yt_ver(v, "-400")}" imagesrcset="/images/yt/{v}-400.webp?v={yt_ver(v, "-400")} 400w, /images/yt/{v}.webp?v={yt_ver(v)} 640w" '
                'imagesizes="(max-width:600px) 92vw, 480px" fetchpriority="high">')
-    return layout(SITE["name"], SITE["tagline"], "/", body, wide=True, ld=ld, data={"type": "home", "daily": daily}, preload=pre)
+    return layout(SITE["name"], SITE.get("description") or SITE["tagline"], "/", body, wide=True, ld=ld, data={"type": "home", "daily": daily}, preload=pre)
 
 
 def page_notes():
@@ -1445,9 +1445,9 @@ def build():
     write("/notes/", page_notes())
     if (ROOT / "images").exists():  # 빌드 중 새로 만든 유튜브 썸네일까지 다시 복사
         shutil.copytree(ROOT / "images", OUT / "images", dirs_exist_ok=True)
-    write("/about/", page_static("about", "카페인영어 소개", "제가 매일 영어 공부하려고 만든 공간, 카페인영어를 소개해요", ABOUT)); pages.append("/about/")
-    write("/privacy/", page_static("privacy", "개인정보처리방침", "카페인영어 개인정보처리방침", PRIVACY)); pages.append("/privacy/")
-    write("/contact/", page_static("contact", "문의", "카페인영어 문의하기", CONTACT)); pages.append("/contact/")
+    write("/about/", page_static("about", "카페인영어 소개", "유튜브 카페인영어를 운영하는 제가 직접 공부하며 정리한 영어표현 사이트예요. 영상 복습, 원어민 발음 듣기, 퀴즈와 오답노트, 여행·회사 영어 시리즈를 소개해요.", ABOUT)); pages.append("/about/")
+    write("/privacy/", page_static("privacy", "개인정보처리방침", "카페인영어(cafeinenglish.com) 개인정보처리방침. 회원가입 없이 이용하는 사이트의 수집 항목과 보유 기간, 쿠키와 광고(Google 애드센스), 이용자 권리와 문의 방법을 안내해요.", PRIVACY)); pages.append("/privacy/")
+    write("/contact/", page_static("contact", "문의", "카페인영어에 콘텐츠 제안, 표현 오류 신고, 제휴 문의를 남겨 주세요. 남겨 주신 메시지는 확인한 뒤 이메일로 답장드려요.", CONTACT)); pages.append("/contact/")
     if (ROOT / "files").exists():
         shutil.copytree(ROOT / "files", OUT / "files", dirs_exist_ok=True)
     write("/travel/", page_travel()); pages.append("/travel/")
