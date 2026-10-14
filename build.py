@@ -1093,7 +1093,7 @@ def page_home():
         ph = e(" ".join(w[:-1])) + (" " if len(w) > 1 else "") + f'<span class="hl">{e(w[-1])}</span>'
         return (f'<article class="hs-slide"><div class="hs-txt"><div class="a-kicker">{e(label)} · {e(it["cat"])}</div>'
                 f'<p class="a-phrase{" long" if len(it["en"]) > 16 else ""}">{ph}</p><p class="a-mean">{e(it["ko"])}</p>'
-                f'<p class="a-desc">{e(it["desc"])}</p><a class="btn ghost" href="{it["url"]}">글 읽고 퀴즈 풀기</a></div>'
+                f'<p class="a-desc">{e(it["desc"])}</p><div class="hs-btns">' + ('<a class="btn hs-rt" href="/notes/#routine">5분 루틴으로 내 것 만들기</a>' if label == "오늘의 한 잔" else "") + f'<a class="btn ghost" href="{it["url"]}">글 읽고 퀴즈 풀기</a></div></div>'
                 f'<a class="hs-art" href="{it["url"]}" tabindex="-1" aria-hidden="true">{it["vis"]}</a></article>')
     import time as _t
     kst = _t.gmtime(_t.time() + 9 * 3600)
@@ -1114,7 +1114,7 @@ def page_home():
 if(i0!==%d){var x=function(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
 var lab=function(k){if(!k)return"오늘의 한 잔";if(k===1)return"어제의 한 잔";var d=new Date((day-k)*86400000);return(d.getUTCMonth()+1)+"월 "+d.getUTCDate()+"일의 한 잔"};
 tr.innerHTML=Array.from({length:n},function(_,k){var it=L[((i0-k)%%L.length+L.length)%%L.length],w=it.en.split(" "),last=w.pop();
-return '<article class="hs-slide"><div class="hs-txt"><div class="a-kicker">'+lab(k)+' · '+x(it.cat)+'</div><p class="a-phrase'+(it.en.length>16?' long':'')+'">'+(w.length?x(w.join(" "))+" ":"")+'<span class="hl">'+x(last)+'</span></p><p class="a-mean">'+x(it.ko)+'</p><p class="a-desc">'+x(it.desc||"")+'</p><a class="btn ghost" href="'+it.url+'">글 읽고 퀴즈 풀기</a></div><a class="hs-art" href="'+it.url+'" tabindex="-1" aria-hidden="true">'+it.vis+'</a></article>'}).join("")}
+return '<article class="hs-slide"><div class="hs-txt"><div class="a-kicker">'+lab(k)+' · '+x(it.cat)+'</div><p class="a-phrase'+(it.en.length>16?' long':'')+'">'+(w.length?x(w.join(" "))+" ":"")+'<span class="hl">'+x(last)+'</span></p><p class="a-mean">'+x(it.ko)+'</p><p class="a-desc">'+x(it.desc||"")+'</p><div class="hs-btns">'+(k?'':'<a class="btn hs-rt" href="/notes/#routine">5분 루틴으로 내 것 만들기</a>')+'<a class="btn ghost" href="'+it.url+'">글 읽고 퀴즈 풀기</a></div></div><a class="hs-art" href="'+it.url+'" tabindex="-1" aria-hidden="true">'+it.vis+'</a></article>'}).join("")}
 var dots=document.getElementById("hs-dots");dots.innerHTML=Array.from({length:n},function(){return"<i></i>"}).join("");
 var cur=function(){return Math.round(tr.scrollLeft/tr.clientWidth)},paint=function(){var c=cur();[].forEach.call(dots.children,function(d,j){d.className=j===c?"on":""});document.getElementById("hs-prev").disabled=c<=0;document.getElementById("hs-next").disabled=c>=n-1};
 var go=function(d){tr.scrollTo({left:(cur()+d)*tr.clientWidth,behavior:"smooth"})};
@@ -1163,7 +1163,6 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
   <section><h2 class="home-h">전체 아티클</h2><div class="cards list" id="all-arts">{arts}</div>{pager}</section>
   <aside class="pop"><h2 class="pop-h">인기 있는 글</h2><ol>{pop_html}</ol></aside>
 </div>
-{TODAY_CTA}
 <section class="series"><h2 class="home-h">아티클 시리즈</h2><div class="sr-grid">{series_html}</div></section>
 """
     vp = None
@@ -1179,12 +1178,12 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
     return layout(SITE["name"], SITE.get("description") or SITE["tagline"], "/", body, wide=True, ld=ld, data={"type": "home", "daily": daily}, preload=pre)
 
 
-TODAY_CTA = ('<a class="today-cta no-print" href="/today/"><span class="tc-ic">5</span><span><b>오늘의 5분 시작하기</b>'
-             '<small>듣고 · 말하고 · 다시 꺼내기. 매일 도장 찍는 영어 루틴</small></span><span class="tc-go">›</span></a>')
+TODAY_CTA = ('<div class="acts rt-cta no-print"><a class="act" href="/notes/#routine"><span class="act-ic"><img src="/assets/icons/hot-beverage.webp" alt="" width="22" height="22"></span>'
+             '<span class="act-t"><b>오늘의 한 잔 5분 루틴</b><small>듣고 · 말하고 · 다시 꺼내고, 내 공부방에서 도장 찍기</small></span><span class="act-r"><i class="chev">›</i></span></a></div>')
 TODAY_GOALS = [
-    {"id": "travel", "name": "곧 해외여행 가요", "desc": "공항·호텔·식당에서 바로 쓰는 말", "icon": "✈", "bg": "#E8F0FB", "series": "travel"},
-    {"id": "work", "name": "회사에서 영어 써요", "desc": "메일·회의·메신저 한마디", "icon": "✉", "bg": "#EEF3DE", "series": "work"},
-    {"id": "life", "name": "미국 생활을 준비해요", "desc": "은행·병원·길·가게에서 나누는 말", "icon": "⌂", "bg": "#F6E7DA",
+    {"id": "travel", "short": "여행", "name": "해외여행 영어", "desc": "공항·호텔·식당에서 바로 쓰는 말", "icon": "✈", "bg": "#E8F0FB", "series": "travel"},
+    {"id": "work", "short": "회사", "name": "회사 영어", "desc": "메일·회의·메신저 한마디", "icon": "✉", "bg": "#EEF3DE", "series": "work"},
+    {"id": "life", "short": "미국 생활", "name": "미국 생활 영어", "desc": "은행·병원·길·가게에서 나누는 말", "icon": "⌂", "bg": "#F6E7DA",
      "posts": ["id-like-to", "doctor", "ask-to-repeat", "excuse-me-sorry", "how-are-you", "asking-directions", "shopping-checkout",
                "im-good", "would-you-mind", "what-do-you-call", "sorry-to-hear", "this-vs-next", "negative-question", "cafe-order", "restaurant", "travel-trouble"]},
 ]
@@ -1217,29 +1216,36 @@ def today_pool():
 
 
 def page_today():
-    pool = today_pool()
-    goals = [{k: g[k] for k in ("id", "name", "desc", "icon", "bg")} for g in TODAY_GOALS if pool.get(g["id"])]
-    body = ('<div class="chips"><span class="chip">카페인영어 앱</span></div><h1>오늘의 5분</h1>'
-            '<p class="lead">하루 5분, 내 상황에서 말할 수 있는 문장을 하나씩 늘려요. 원어민 발음으로 듣고, 소리 내어 말해 보고, 며칠 뒤 다시 꺼내 봐요.</p>'
-            '<div id="today-app" class="td"><p class="td-ko">불러오는 중…</p></div>'
-            '<noscript><p>오늘의 5분은 자바스크립트가 켜져 있어야 동작해요.</p></noscript>'
-            '<section class="td-how"><h2>이렇게 공부해요</h2><ol>'
-            '<li><b>듣기 1분</b> · 오늘의 문장을 원어민 음성으로 세 번 들어요. 느리게도 들을 수 있어요.</li>'
-            '<li><b>말하기 2분</b> · 한국어만 보고 영어로 소리 내어 말해요. 녹음해서 원어민 발음과 번갈아 들어 봐요.</li>'
-            '<li><b>다시 꺼내기 2분</b> · 3일 전, 7일 전에 배운 문장을 퀴즈로 다시 떠올려요. 잊을 때쯤 다시 보면 오래 남아요.</li>'
-            '</ol><p>세 단계를 마치면 오늘 도장이 찍히고, \'내 기록\'에 이번 주 도장과 말해 본 문장이 쌓여요. 가입 없이 쓰고, 기록은 이 기기의 브라우저에만 저장돼요.</p></section>'
-            f'<script src="/assets/today.js?v={ASSET_V}" defer></script>')
-    return layout("오늘의 5분 - 매일 도장 찍는 영어 루틴", "하루 5분, 원어민 발음 듣기와 따라 말하기, 며칠 뒤 다시 꺼내는 퀴즈로 여행·회사·미국 생활 영어 문장을 매일 하나씩 내 것으로 만드는 카페인영어 루틴이에요.",
-                  "/today/", body, "", {"type": "today", "pool": pool, "goals": goals}, wide=False, seo_title="오늘의 5분 - 매일 5분 영어 루틴")
+    """예전 주소 /today/ → 내 공부방 루틴으로 이동"""
+    return ('<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex">'
+            f'<link rel="canonical" href="{DOMAIN}/notes/"><meta http-equiv="refresh" content="0;url=/notes/#routine">'
+            '<title>내 공부방 | 카페인영어</title></head><body><a href="/notes/#routine">내 공부방으로 이동</a></body></html>')
+
+
+def daily_routine():
+    """오늘의 한 잔 목록 (홈과 같은 순서) + 음성"""
+    out = []
+    if (CONTENT / "daily.json").exists():
+        for d in json.loads((CONTENT / "daily.json").read_text("utf-8")):
+            p = POST_BY_ID.get(d["post"])
+            if p and d["en"] in AUDIO:
+                out.append({"en": d["en"], "ko": d["ko"], "a": "/audio/" + AUDIO[d["en"]], "p": post_url(p)})
+    return out
 
 
 def page_notes():
-    body = ('<h1>내 공부방</h1><p class="lead">틀린 문제와 필사한 문장이 여기에 모여요. '
+    pool = today_pool()
+    goals = [{k: g[k] for k in ("id", "name", "short")} for g in TODAY_GOALS if pool.get(g["id"])]
+    body = ('<h1>내 공부방</h1><p class="lead">오늘의 한 잔부터 오답노트까지, 내 공부가 여기 다 모여요. '
             '기록은 이 기기의 브라우저에만 저장돼요.</p>'
+            '<div id="today-app"></div>'
             '<h2 id="wrong">오답노트</h2><p class="lead" style="font-size:15px">다시 풀어서 맞히면 \'졸업\'해요.</p><div id="notes-root"></div>'
-            '<h2 id="copy">필사 노트 (<span id="copy-count">0</span>)</h2><div id="copy-notes"></div>')
-    return layout("내 공부방", "퀴즈 오답노트와 필사 노트를 모아 다시 복습하는 나만의 공부방", "/notes/", body, "notes",
-                  {"type": "notes", "kakao": SITE.get("kakao", "")}, wide=True, robots="noindex,follow")
+            '<h2 id="copy">필사 노트 (<span id="copy-count">0</span>)</h2><div id="copy-notes"></div>'
+            f'<script src="/assets/today.js?v={ASSET_V}" defer></script>')
+    data = {"type": "notes", "kakao": SITE.get("kakao", ""), "daily": daily_routine(), "pool": pool, "goals": goals,
+            "cup": f"/assets/icons/hot-beverage.webp?v={ASSET_V}", "phone": f"/assets/icons/mobile-phone.webp?v={ASSET_V}"}
+    return layout("내 공부방", "오늘의 한 잔 5분 루틴과 이번 주 도장, 말해 본 문장, 퀴즈 오답노트와 필사 노트를 모아 복습하는 나만의 공부방",
+                  "/notes/", body, "notes", data, wide=True, robots="noindex,follow")
 
 
 def page_static(slug, title, desc, inner):
@@ -1522,9 +1528,9 @@ def build():
     for sr in SERIES:
         write(f"/series/{sr['id']}/", page_series(sr)); pages.append(f"/series/{sr['id']}/")
     write("/notes/", page_notes())
-    write("/today/", page_today()); pages.append("/today/")
+    write("/today/", page_today())
     (OUT / "manifest.webmanifest").write_text(json.dumps({
-        "name": "카페인영어 - 오늘의 5분", "short_name": "카페인영어", "lang": "ko", "start_url": "/today/?src=app", "scope": "/",
+        "name": "카페인영어 - 오늘의 5분", "short_name": "카페인영어", "lang": "ko", "start_url": "/notes/?src=app", "scope": "/",
         "display": "standalone", "background_color": "#FAF8F5", "theme_color": "#FAF8F5",
         "description": "하루 5분, 듣고 말하고 다시 꺼내는 영어 루틴",
         "icons": [{"src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png"},

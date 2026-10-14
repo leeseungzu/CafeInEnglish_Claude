@@ -27,7 +27,7 @@ def spoken(text):
         a, b = [x.strip() for x in text.split("→", 1)]
         a = re.sub(r"[()]", "", a)
         return f"{a} ... {b}"
-    return text
+    return text.replace("~", "...")
 
 
 def sentences():
@@ -39,6 +39,10 @@ def sentences():
         for x in p.get("expressions", []):
             if x.get("ex"):
                 out.add(norm(x["ex"]))
+    daily = ROOT / "content" / "daily.json"  # 오늘의 한 잔(루틴에서 듣기)도 음성으로
+    if daily.exists():
+        for d in json.loads(daily.read_text("utf-8")):
+            out.add(norm(d["en"]))
     return sorted(t for t in out if re.search(r"[A-Za-z]", t))
 
 

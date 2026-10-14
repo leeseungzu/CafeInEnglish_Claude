@@ -29,6 +29,17 @@
     if (!t) { t = document.createElement("div"); t.id = "toast"; t.className = "toast"; document.body.appendChild(t); }
     t.textContent = msg; t.classList.add("show"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 1800);
   }
+  function routineDot() {
+    let r = null;
+    try { const s = JSON.parse(localStorage.getItem("ky_today_v1")) || {}; r = (s.days || {})[new Date((Math.floor((Date.now() / 1000 + 9 * 3600) / 86400)) * 864e5).toISOString().slice(0, 10)]; } catch (e) {}
+    const room = $(".room"); if (!room) return;
+    let d = $(".rt-dot", room);
+    const need = !(r && r.l && r.s && r.r);
+    if (need && !d) { d = document.createElement("span"); d.className = "rt-dot"; d.title = "오늘의 한 잔 루틴이 남았어요"; room.appendChild(d); }
+    if (!need && d) d.remove();
+  }
+  document.addEventListener("ky-routine", routineDot);
+  setTimeout(routineDot, 0);
   function updateBadge() {
     const n = Object.keys(wrong.all()).length;
     const b = $("#nav-badge"); if (b) { b.hidden = !n; b.textContent = n; }

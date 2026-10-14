@@ -2,7 +2,7 @@
  "name": "카페인영어 - 오늘의 5분",
  "short_name": "카페인영어",
  "lang": "ko",
- "start_url": "/today/?src=app",
+ "start_url": "/notes/?src=app",
  "scope": "/",
  "display": "standalone",
  "background_color": "#FAF8F5",
