@@ -1605,3 +1605,10 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 #today-app .rt-step.open{background:#F7F8FA}
 #today-app .ks-done{border-color:#2A1A12;color:#2A1A12}
 #today-app .ks-done:hover{background:#2A1A12;color:#fff}
+/* 말해 본 문장: 올리면 옅게, 누르면(재생 중) 연회색 줄 + ❚❚ */
+#today-app .rt-said .act{transition:background .15s}
+@media (hover:hover){#today-app .rt-said .act:hover{background:#F7F8FA}}
+#today-app .rt-said .act:active{background:#F2F4F6}
+#today-app .rt-said .act.playing{background:#F2F4F6}
+#today-app .rt-said .act.playing .act-ic{box-shadow:0 0 0 4px rgba(42,26,18,.12)}
+#today-app .rt-said .act.playing .act-t small::after{content:" · 재생 중";color:#2A1A12;font-weight:700}

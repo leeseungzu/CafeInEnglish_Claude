@@ -156,7 +156,16 @@ ${installCard()}`;
     }
     if (b.dataset.src) { if (b.dataset.src !== "daily") S.lastGoal = b.dataset.src; if (S.src !== b.dataset.src) { S.src = b.dataset.src; open = null; save(); ga("goal_pick", { goal: S.src, from: "notes" }); render(); } return; }
     if (b.dataset.step) { open = open === b.dataset.step ? "" : b.dataset.step; render(); return; }
-    if (b.dataset.play) { play(b.dataset.play); return; }
+    if (b.dataset.play) {
+      // 말해 본 문장: 누르면 ❚❚로 바뀌고 줄 색이 바뀌어 재생 중인 걸 알 수 있게, 다시 누르면 멈춤
+      const row = b.closest(".rt-said") ? b : null;
+      const reset = x => { x.classList.remove("playing"); const i = x.querySelector(".act-ic"); if (i) i.innerHTML = "▶"; x.setAttribute("aria-label", "재생"); };
+      if (row && row.classList.contains("playing")) { if (cur) cur.pause(); reset(row); return; }
+      root.querySelectorAll(".rt-said .act.playing").forEach(reset);
+      if (row) { row.classList.add("playing"); row.querySelector(".act-ic").innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>'; row.setAttribute("aria-label", "멈춤"); }
+      play(b.dataset.play, 1, 1, () => { if (row) reset(row); });
+      return;
+    }
     if (b.dataset.q !== undefined) {
       if (b.dataset.q === r.q.en) { b.classList.add("right"); r.r = 1; save(); play(r.q.a); open = null; setTimeout(render, 900); }
       else { b.classList.add("wrong"); b.disabled = true; }
