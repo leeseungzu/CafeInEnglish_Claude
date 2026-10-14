@@ -1543,3 +1543,8 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
   .kx-ans{margin:10px 0 0;font-family:var(--serif);font-size:24px}
   .kx-ans b{background:linear-gradient(transparent 62%,#CDEB5B 62%)}
 }
+/* 폰 홈: 진한 버튼·말풍선은 카영 에스프레소(로고 색), 글자·아이콘은 흰색 그대로 */
+@media (max-width:600px){
+  .mq-me,.mq.on .mq-a,.ks-mic,.kx-play,.kx-chips span.on{background:#2A1A12}
+  .ks.ok .ks-mic{background:#20B26B}.ks.rec .ks-mic{background:#E5484D}
+}
