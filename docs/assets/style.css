@@ -1491,3 +1491,16 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
   .mq.on .mq-qk{display:none!important}
 }
 @media (max-width:600px){.mq-me{display:inline-flex;align-items:center;gap:8px}.mq.on .mq-me{display:none}.mq-pl{flex:none}}
+
+/* 폰: 최근 일주일 한 잔 카드 넘겨 보기 */
+.mqs{display:none}
+@media (max-width:600px){
+  .mqs{display:block}
+  .mq-tr{display:flex;align-items:flex-start;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 16px;margin:0 -16px;padding:0 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .mq-tr::-webkit-scrollbar{display:none}
+  .mq-tr>.mq{flex:0 0 calc(100% - 14px);scroll-snap-align:start;scroll-snap-stop:always}
+  .mq-dots{display:flex;justify-content:center;gap:6px;margin-top:12px}
+  .mq-dots i{width:6px;height:6px;border-radius:3px;background:#C9CED4;transition:width .2s,background .2s}
+  .mq-dots i.on{width:18px;background:#2A1E17}
+}
+@media (max-width:600px){.mq-tr{overflow-y:hidden;transition:height .25s ease}}

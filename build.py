@@ -1104,7 +1104,7 @@ def page_home():
         return {"q": q, "qa": a, "qk": ako, "au": ("/audio/" + AUDIO[en]) if en in AUDIO else "", "ic": ic}
     slides_data = [{"en": d["en"], "ko": d["ko"], "desc": d.get("desc", ""), "cat": d["cat"], "url": d["url"],
                     "vis": vis(POST_BY_ID.get(d.get("post")), d, n), **mq_data(d)} for n, d in enumerate(daily)]
-    N_SLIDES = min(5, len(slides_data))
+    N_SLIDES = min(7, len(slides_data))
     def slide_html(it, label):
         w = it["en"].split(" ")
         ph = e(" ".join(w[:-1])) + (" " if len(w) > 1 else "") + f'<span class="hl">{e(w[-1])}</span>'
@@ -1129,41 +1129,57 @@ def page_home():
                         f'<small>{d}</small></a>' for g, icn, t, d in _gp)
               + '</div></section>')
     SPK = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>'
-    def mq_html(it, md):
+    PLAY = '<svg class="mq-pl" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>'
+    def mq_card(it, lab, md):
         q = f'<span class="mq-q">{e(it["q"])}</span>' if it["q"] else ""
-        qk = f'<span class="mq-qk">{e(it["qk"])}</span>' if it["qk"] else ""
+        qa = f'<span class="mq-a">{e(it["qa"])}</span>' if it["q"] else ""
         w = it["en"].split(" ")
         en_h = e(" ".join(w[:-1])) + (" " if len(w) > 1 else "") + f'<span class="hl">{e(w[-1])}</span>'
-        ic = f'<img class="mq-ic" src="{it["ic"]}" alt="" width="56" height="56">' if it["ic"] else '<img class="mq-ic" alt="" width="56" height="56" hidden>'
-        return (f'<section class="mq" id="mq" data-a="{it["au"]}" aria-label="오늘의 한 잔 퀴즈">{ic}<p class="mq-k"><span>오늘의 한 잔</span><span id="mq-d">{md}</span></p>'
+        ic = f'<img class="mq-ic" src="{it["ic"]}" alt="" width="56" height="56" loading="lazy">' if it["ic"] else ""
+        return (f'<article class="mq" data-a="{it["au"]}">{ic}<p class="mq-k"><span>{e(lab)}</span><span>{md}</span></p>'
                 f'<h2 class="mq-h">"{e(it["ko"])}"<br>영어로 하면?</h2>'
                 f'<div class="mq-ans"><span class="mq-en">{en_h}</span><button type="button" class="mq-sp" aria-label="발음 다시 듣기">{SPK}</button></div>'
-                f'<div class="mq-chat">{q}<button type="button" class="mq-me"><svg class="mq-pl" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>눌러서 정답 듣기</button><span class="mq-a">{e(it["qa"])}</span>{qk}</div>'
+                f'<div class="mq-chat">{q}<button type="button" class="mq-me">{PLAY}눌러서 정답 듣기</button>{qa}</div>'
                 f'<a class="mq-btn" href="/notes/#routine">5분 루틴으로 내 것 만들기</a>'
-                f'<a class="mq-link" href="{it["url"]}">왜 이렇게 말할까? 글 읽고 퀴즈 풀기 ›</a></section>')
-    mq = mq_html(slides_data[i0], f"{kst.tm_mon}월 {kst.tm_mday}일") if slides_data else ""
+                f'<a class="mq-link" href="{it["url"]}">왜 이렇게 말할까? 글 읽고 퀴즈 풀기 ›</a></article>')
+    def mq_md(k):
+        g = _t.gmtime(now_k - k * 86400)
+        return f"{g.tm_mon}월 {g.tm_mday}일"
+    mq = ('<section class="mqs" id="mqs" aria-label="최근 일주일 한 잔 퀴즈"><div class="mq-tr" id="mq-tr">'
+          + "".join(mq_card(slides_data[(i0 - k) % len(slides_data)], label(k, now_k), mq_md(k)) for k in range(N_SLIDES))
+          + '</div><div class="mq-dots" id="mq-dots"></div></section>') if slides_data else ""
     hero = '<div class="m-home">' + mq + picker + notice_html().replace('class="notice"', 'class="notice m-nt"', 1) + '</div>' + f"""<section class="hs" aria-label="오늘의 한 잔">
   <div class="hs-track" id="hs-track">{slides}</div>
   <div class="hs-ctl"><button type="button" class="hs-btn" id="hs-prev" aria-label="이전 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="hs-btn" id="hs-next" aria-label="다음 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button><span class="hs-dots" id="hs-dots"></span></div>
 </section>"""
     slides_js = json.dumps(slides_data, ensure_ascii=False).replace("</", "<\\/")
-    hero_js = """<script>(function(){var L=%s,n=Math.min(5,L.length);if(!n)return;var day=Math.floor((Date.now()/1000+9*3600)/86400),i0=day%%L.length,tr=document.getElementById("hs-track");
+    hero_js = """<script>(function(){var L=%s,n=Math.min(7,L.length);if(!n)return;var day=Math.floor((Date.now()/1000+9*3600)/86400),i0=day%%L.length,tr=document.getElementById("hs-track");
 if(i0!==%d){var x=function(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
 var lab=function(k){if(!k)return"오늘의 한 잔";if(k===1)return"어제의 한 잔";var d=new Date((day-k)*86400000);return(d.getUTCMonth()+1)+"월 "+d.getUTCDate()+"일의 한 잔"};
 tr.innerHTML=Array.from({length:n},function(_,k){var it=L[((i0-k)%%L.length+L.length)%%L.length],w=it.en.split(" "),last=w.pop();
 return '<article class="hs-slide"><div class="hs-txt"><div class="a-kicker">'+lab(k)+' · '+x(it.cat)+'</div><p class="a-phrase'+(it.en.length>16?' long':'')+'">'+(w.length?x(w.join(" "))+" ":"")+'<span class="hl">'+x(last)+'</span></p><p class="a-mean">'+x(it.ko)+'</p><p class="a-desc">'+x(it.desc||"")+'</p><div class="hs-btns">'+(k?'':'<a class="btn hs-rt" href="/notes/#routine">5분 루틴으로 내 것 만들기 →</a>')+'<a class="btn ghost" href="'+it.url+'">글 읽고 퀴즈 풀기 →</a></div></div><a class="hs-art" href="'+it.url+'" tabindex="-1" aria-hidden="true">'+it.vis+'</a></article>'}).join("")}
-var mq=document.getElementById("mq");if(mq){var T=L[i0],X=function(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
-if(i0!==%d){var dd=new Date(day*86400000);mq.setAttribute("data-a",T.au||"");document.getElementById("mq-d").textContent=(dd.getUTCMonth()+1)+"월 "+dd.getUTCDate()+"일";
-mq.querySelector(".mq-h").innerHTML='"'+X(T.ko)+'"<br>영어로 하면?';var ww=T.en.split(" "),wl=ww.pop();mq.querySelector(".mq-en").innerHTML=(ww.length?X(ww.join(" "))+" ":"")+'<span class="hl">'+X(wl)+'</span>';var mi=mq.querySelector(".mq-ic");if(mi){if(T.ic){mi.src=T.ic;mi.hidden=false}else mi.hidden=true}mq.querySelector(".mq-link").href=T.url;
-var ch=mq.querySelector(".mq-chat");ch.innerHTML=(T.q?'<span class="mq-q">'+X(T.q)+'</span>':'')+'<button type="button" class="mq-me"><svg class="mq-pl" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>눌러서 정답 듣기</button><span class="mq-a">'+X(T.qa)+'</span>'+(T.qk?'<span class="mq-qk">'+X(T.qk)+'</span>':'')}
-var au=null,say=function(){var a=mq.getAttribute("data-a");if(!a)return;try{au=au||new Audio(a);au.currentTime=0;au.play().catch(function(){})}catch(e){}};
-try{if(localStorage.getItem("ky_mq")==String(day))mq.classList.add("on")}catch(e){}
-mq.addEventListener("click",function(ev){if(ev.target.closest(".mq-me")){mq.classList.add("on");say();try{localStorage.setItem("ky_mq",String(day))}catch(e){}if(window.gtag)gtag("event","quiz_reveal")}else if(ev.target.closest(".mq-sp"))say()})}
+var mt=document.getElementById("mq-tr");if(mt){var X=function(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})},
+SPK=mt.querySelector(".mq-sp").innerHTML,PL=mt.querySelector(".mq-pl").outerHTML,
+lb=function(k){if(!k)return"오늘의 한 잔";if(k===1)return"어제의 한 잔";var d=new Date((day-k)*86400000);return(d.getUTCMonth()+1)+"월 "+d.getUTCDate()+"일의 한 잔"},
+md=function(k){var d=new Date((day-k)*86400000);return(d.getUTCMonth()+1)+"월 "+d.getUTCDate()+"일"},
+seen=[];try{seen=JSON.parse(localStorage.getItem("ky_mq_seen")||"[]")}catch(e){}
+mt.innerHTML=Array.from({length:n},function(_,k){var T=L[((i0-k)%%L.length+L.length)%%L.length],w=T.en.split(" "),wl=w.pop(),dk=day-k;
+return '<article class="mq'+(seen.indexOf(dk)>-1?' on':'')+'" data-a="'+(T.au||"")+'" data-d="'+dk+'" data-k="'+k+'">'+(T.ic?'<img class="mq-ic" src="'+T.ic+'" alt="" width="56" height="56"'+(k?' loading="lazy"':'')+'>':'')
++'<p class="mq-k"><span>'+lb(k)+'</span><span>'+md(k)+'</span></p><h2 class="mq-h">"'+X(T.ko)+'"<br>영어로 하면?</h2>'
++'<div class="mq-ans"><span class="mq-en">'+(w.length?X(w.join(" "))+" ":"")+'<span class="hl">'+X(wl)+'</span></span><button type="button" class="mq-sp" aria-label="발음 다시 듣기">'+SPK+'</button></div>'
++'<div class="mq-chat">'+(T.q?'<span class="mq-q">'+X(T.q)+'</span>':'')+'<button type="button" class="mq-me">'+PL+'눌러서 정답 듣기</button>'+(T.q?'<span class="mq-a">'+X(T.qa)+'</span>':'')+'</div>'
++'<a class="mq-btn" href="/notes/#routine">5분 루틴으로 내 것 만들기</a><a class="mq-link" href="'+T.url+'">왜 이렇게 말할까? 글 읽고 퀴즈 풀기 ›</a></article>'}).join("");
+var au=new Audio(),say=function(c){var a=c.getAttribute("data-a");if(!a)return;try{if(au.src.indexOf(a)<0)au.src=a;au.currentTime=0;au.play().catch(function(){})}catch(e){}};
+mt.addEventListener("click",function(ev){var c=ev.target.closest(".mq");if(!c)return;if(ev.target.closest(".mq-me")){c.classList.add("on");say(c);var dk=+c.getAttribute("data-d");if(seen.indexOf(dk)<0){seen.push(dk);seen=seen.slice(-14);try{localStorage.setItem("ky_mq_seen",JSON.stringify(seen))}catch(e){}}
+mp();if(window.gtag)gtag("event","quiz_reveal",{days_ago:+c.getAttribute("data-k")})}else if(ev.target.closest(".mq-sp"))say(c)});
+var md2=document.getElementById("mq-dots");md2.innerHTML=Array.from({length:n},function(){return"<i></i>"}).join("");
+var mp=function(){var w=mt.firstElementChild?mt.firstElementChild.offsetWidth+10:1,c=Math.round(mt.scrollLeft/w);[].forEach.call(md2.children,function(d,j){d.className=j===c?"on":""});var cc=mt.children[c];if(cc)mt.style.height=cc.offsetHeight+"px"};
+mt.addEventListener("scroll",function(){clearTimeout(mt._t);mt._t=setTimeout(mp,50)},{passive:true});mp();addEventListener("resize",mp)}
 var dots=document.getElementById("hs-dots");dots.innerHTML=Array.from({length:n},function(){return"<i></i>"}).join("");
 var cur=function(){return Math.round(tr.scrollLeft/tr.clientWidth)},paint=function(){var c=cur();[].forEach.call(dots.children,function(d,j){d.className=j===c?"on":""});document.getElementById("hs-prev").disabled=c<=0;document.getElementById("hs-next").disabled=c>=n-1};
 var go=function(d){tr.scrollTo({left:(cur()+d)*tr.clientWidth,behavior:"smooth"})};
 document.getElementById("hs-prev").onclick=function(){go(-1)};document.getElementById("hs-next").onclick=function(){go(1)};
-tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(paint,60)},{passive:true});paint()})();</script>""" % (slides_js, i0, i0)
+tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(paint,60)},{passive:true});paint()})();</script>""" % (slides_js, i0)
 
     # ── 2. 전체 아티클 (8개씩 페이지) + 인기 있는 글 ──
     PER = 8
