@@ -648,7 +648,7 @@
   function sayBox(target, okMsg) {
     return '<div class="ks" data-t="' + X(target) + '">' + (SR
       ? '<div class="ks-row"><button type="button" class="ks-mic" aria-label="말하기 시작">' + MIC + '</button><span class="ks-t"><b>이제 직접 말해 보세요</b><small>마이크를 누르고 따라 말하면 바로 알려줘요</small></span></div>'
-      : '<div class="ks-row"><span class="ks-t"><b>소리 내어 3번 따라 말해 보세요</b><small>이 브라우저는 음성 인식이 안 돼요. 크롬이나 사파리에서 열면 말한 걸 확인해 줘요</small></span><button type="button" class="ks-done">말해 봤어요</button></div>')
+      : '<div class="ks-row"><span class="ks-t"><b>소리 내어 3번 따라 말해 보세요</b><small>이 브라우저에선 음성 확인이 안 돼요. 다 말했으면 오른쪽 버튼을 눌러요</small></span><button type="button" class="ks-done">다 말했어요</button></div>')
       + '</div>';
   }
   function result(box, s, heard, onOk) {
@@ -667,6 +667,7 @@
     else row.innerHTML = "<b>조금 달라요</b><small>정답: " + X(t) + " · 듣고 다시 말해 보세요</small>";
   }
   function fit() { if (window.KY_W && KY_W.fit) KY_W.fit(); }
+  window.KY_SAY = { box: sayBox, listen: listen, result: result, spoke: spoke, sr: !!SR };
 
   // ① 퀴즈 카드: 정답을 들은 뒤 '말해 보기'
   const W = window.KY_W, tr = document.getElementById("mq-tr");
@@ -700,7 +701,7 @@
     '<section class="kx-card kx-cm"><div class="kx-row"><button type="button" class="kx-play" aria-label="출근길 듣기 재생">' + PLAY + '</button>'
     + '<span class="kx-t"><b>출근길 듣기 · 약 3분</b><small class="kx-now">이번 주 ' + week.length + '문장을 두 번씩 이어서 들려줘요</small></span></div>'
     + '<div class="kx-chips">' + week.map((x, i) => '<span data-i="' + i + '">' + X(x.ko) + '</span>').join("") + '</div></section>'
-    + (old ? '<section class="kx-card kx-rv"><p class="kx-k">3일 전에 배운 문장</p><p class="kx-ko">"' + X(old.ko) + '"<br>기억나요?</p>'
+    + (old ? '<section class="kx-card kx-rv"><p class="kx-k">복습 · 3일 전에 배운 문장</p><p class="kx-ko">"' + X(old.ko) + '"<br>기억나요?</p>'
       + sayBox(old.en) + '<button type="button" class="kx-show">정답 보기</button><p class="kx-ans" hidden><b>' + X(old.en) + '</b></p></section>' : "");
   (gp || home.firstChild).parentNode.insertBefore(wrap, gp || null);
 

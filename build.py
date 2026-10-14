@@ -1308,10 +1308,10 @@ def daily_routine():
 
 def page_notes():
     pool = today_pool()
-    goals = [{k: g[k] for k in ("id", "name", "short")} for g in TODAY_GOALS if pool.get(g["id"])]
+    goals = [{**{k: g[k] for k in ("id", "name", "short")}, "icon": f'/assets/icons/{g["icon"]}.webp?v={ASSET_V}'} for g in TODAY_GOALS if pool.get(g["id"])]
     body = ('<h1>내 공부방</h1><p class="lead">오늘의 한 잔부터 오답노트까지, 내 공부가 여기 다 모여요. '
             '기록은 이 기기의 브라우저에만 저장돼요.</p>'
-            '<div id="today-app"></div>'
+            '<div class="nb-band"><div id="today-app"></div></div>'
             '<h2 id="wrong">오답노트</h2><p class="lead" style="font-size:15px">다시 풀어서 맞히면 \'졸업\'해요.</p><div id="notes-root"></div>'
             '<h2 id="copy">필사 노트 (<span id="copy-count">0</span>)</h2><div id="copy-notes"></div>'
             f'<script src="/assets/today.js?v={ASSET_V}" defer></script>')

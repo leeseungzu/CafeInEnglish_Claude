@@ -72,10 +72,10 @@
     return `<button type="button" class="act rt-act${ok ? " rt-done" : ""}${isOpen ? " rt-open" : ""}" data-step="${k}"><span class="act-ic">${IC[k]}</span><span class="act-t"><b>${t}</b><small>${sub}</small></span><span class="act-r">${ok ? '<span class="rt-ok">✓</span>' : '<i class="chev">›</i>'}</span></button>${isOpen ? '<div class="rt-panel">' + panel(k, r) + "</div>" : ""}`;
   }
   function panel(k, r) {
-    if (k === "l") return `<div class="rt-btns"><button class="rt-b d" data-act="listen">▶ 3번 듣기</button><button class="rt-b" data-act="slow">천천히 듣기</button><a class="rt-b" href="${r.p}">글로 자세히 보기</a></div>`;
+    if (k === "l") return `<div class="rt-3"><button class="rt-pl d" data-act="listen">▶ 3번 듣기</button><button class="rt-pl" data-act="slow">천천히 듣기</button><a class="rt-pl" href="${r.p}">자세히 배우기</a></div>`;
     if (k === "s") {
-      const mic = !!(navigator.mediaDevices && window.MediaRecorder);
-      return `<p class="rt-q">“${esc(r.ko)}”</p><p class="rt-sub">한국어만 보고 3초 안에 소리 내어 말해 보세요.</p><div class="rt-btns">${mic ? '<button class="rt-b d" data-act="rec" id="rt-rec">● 녹음하고 비교하기</button>' : ""}<button class="rt-b" data-act="reveal">정답 보기</button><button class="rt-b" data-act="said">말해 봤어요</button></div><div class="rt-reveal" id="rt-reveal" hidden></div>`;
+      const box = window.KY_SAY ? KY_SAY.box(r.en) : '<div class="ks"><div class="ks-row"><span class="ks-t"><b>소리 내어 3번 말해 보세요</b><small>다 말했으면 오른쪽 버튼을 눌러요</small></span><button type="button" class="ks-done">다 말했어요</button></div></div>';
+      return `<p class="rt-q">“${esc(r.ko)}”</p><p class="rt-sub">한국어만 보고 영어로 말해 보세요.</p>${box}<div class="rt-reveal" id="rt-reveal" hidden></div><button type="button" class="rt-link" data-act="reveal">정답 먼저 보기</button>`;
     }
     const q = r.q;
     return `<p class="rt-q">“${esc(q.ko)}”를 영어로?</p><div class="rt-qz">${q.o.map(en => `<button data-q="${esc(en)}"${r.r && en === q.en ? ' class="right"' : ""}>${esc(en)}</button>`).join("")}</div>`;
@@ -99,13 +99,14 @@
     S.prog = { src: r.src, name: SRC_NAME[r.src] || "오늘의 한 잔", n: got, t: set.size, streak: st, day: TODAY, done: n === 3 };
     if (n === 3 && !r.ga) { r.ga = 1; ga("routine_done", { goal: r.src }); }
     save();
-    root.innerHTML = `<section class="rt-card" id="routine">
+    root.innerHTML = `<section class="rt-card${open === "s" && !r.s ? " hide-en" : ""}" id="routine">
 <div class="rt-top"><div class="a-kicker">${esc(SRC_NAME[r.src] || "오늘의 한 잔")} · 5분 루틴</div><span class="rt-prog${n === 3 ? " full" : ""}">${n === 3 ? "도장 완료" : n + " / 3"}</span></div>
-<div class="rt-src" role="group" aria-label="연습할 영어 고르기">${[["daily", "오늘의 한 잔"], ...SRCS.map(g => [g.id, g.short])].map(([id, t]) => `<button type="button" data-src="${id}" class="${S.src === id ? "on" : ""}">${esc(t)}</button>`).join("")}</div>
+<div class="rt-seg" role="tablist" aria-label="연습할 문장 고르기"><button type="button" role="tab" data-src="daily" class="${S.src === "daily" ? "on" : ""}">☕ 오늘의 한 잔</button><button type="button" role="tab" data-seg="sit" class="${S.src !== "daily" ? "on" : ""}">상황별 문장</button></div>
+${S.src !== "daily" ? `<div class="rt-goals">${SRCS.map(g => `<button type="button" data-src="${g.id}" class="${S.src === g.id ? "on" : ""}">${g.icon ? `<img src="${g.icon}" alt="" width="26" height="26">` : ""}<span>${esc(g.short)}</span></button>`).join("")}</div>` : ""}
 <div class="rt-bar"><i style="width:${pct}%"></i></div><div class="rt-bar-t"><span>${r.src === "daily" ? "오늘의 한 잔 " + set.size + "잔" : SRC_NAME[r.src] + " " + set.size + "문장"} 중 ${got}개 말해 봄</span><span>${pct}%</span></div>
-<p class="rt-phrase">${w.length ? esc(w.join(" ")) + " " : ""}<span class="hl">${esc(last)}</span></p><p class="rt-mean">${esc(r.ko)}</p>
-<div class="acts">${row("l", "듣기", "원어민 발음 3번 · 1분", r)}${row("s", "말하기", "한국어만 보고 말하고, 녹음해서 비교 · 2분", r)}${row("r", "다시 꺼내기", r.q.ago ? `${r.q.ago}일 전에 말해 본 문장, 기억나요? · 2분` : "방금 배운 문장 한 번 더 · 2분", r)}</div>
-<p class="rt-hint">${n === 3 ? `<b class="lbl">쾅!</b> 오늘 도장을 찍었어요. ${st > 1 ? "연속 " + st + "일째예요." : "내일 또 만나요."}` : '<b class="lbl">도장</b> 세 가지를 다 하면 오늘의 한 잔 도장이 찍혀요'}</p>
+<div class="rt-pbox"><div><p class="rt-phrase">${w.length ? esc(w.join(" ")) + " " : ""}<span class="hl">${esc(last)}</span></p><p class="rt-mean">${esc(r.ko)}</p></div><button type="button" class="rt-spk" data-play="${r.a}" aria-label="발음 듣기"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></button></div>
+<div class="acts">${row("l", "듣기", "원어민 발음 3번 · 1분", r)}${row("s", "말하기", "한국어만 보고 말하면 바로 확인해 줘요 · 2분", r)}${row("r", "복습하기", r.q.ago ? `${r.q.ago}일 전에 말해 본 문장, 기억나요? · 2분` : "방금 배운 문장 한 번 더 · 2분", r)}</div>
+<p class="rt-hint">${n === 3 ? `<b class="lbl">쾅!</b> 오늘 도장을 찍었어요. ${st > 1 ? "연속 " + st + "일째예요." : "내일 또 만나요."}` : '<b class="lbl">도장</b> 듣기·말하기·복습을 다 하면 오늘 도장이 찍혀요'}</p>
 </section>
 <h2 class="rt-h">이번 주 한 잔 도장 <small>${st ? "연속 " + st + "일 · " : ""}이번 주 ${cnt}잔</small></h2><div class="rt-week">${wk}</div>
 <h2 class="rt-h">말해 본 문장 <small>${said.length}개</small></h2>
@@ -135,7 +136,16 @@ ${installCard()}`;
     const b = ev.target.closest("button"); if (!b) return;
     const r = S.days[TODAY];
     if (b.dataset.guide) { guide = b.dataset.guide; render(); return; }
-    if (b.dataset.src) { if (S.src !== b.dataset.src) { S.src = b.dataset.src; open = null; save(); ga("goal_pick", { goal: S.src, from: "notes" }); render(); } return; }
+    if (b.dataset.seg) { if (S.src === "daily") { S.src = S.lastGoal && POOL[S.lastGoal] ? S.lastGoal : (SRCS[0] || {}).id || "daily"; open = null; save(); render(); } return; }
+    if (b.classList.contains("ks-mic") || b.classList.contains("ks-done")) {
+      const box = b.closest(".ks"), win = () => { r.s = 1; learn(r); save(); if (window.KY_SAY) KY_SAY.spoke(); setTimeout(() => { open = null; render(); }, 1500); };
+      if (b.classList.contains("ks-done")) { box.classList.add("ok"); box.querySelector(".ks-t").innerHTML = "<b>잘했어요!</b><small>다음은 복습이에요</small>"; win(); return; }
+      if (!window.KY_SAY) return;
+      box.querySelector(".ks-t").innerHTML = '<b>듣고 있어요…</b><small>"' + esc(r.en) + '" 하고 말해 보세요</small>';
+      KY_SAY.listen(box, r.en, (sc, heard) => KY_SAY.result(box, sc, heard, win));
+      return;
+    }
+    if (b.dataset.src) { if (b.dataset.src !== "daily") S.lastGoal = b.dataset.src; if (S.src !== b.dataset.src) { S.src = b.dataset.src; open = null; save(); ga("goal_pick", { goal: S.src, from: "notes" }); render(); } return; }
     if (b.dataset.step) { open = open === b.dataset.step ? "" : b.dataset.step; render(); return; }
     if (b.dataset.play) { play(b.dataset.play); return; }
     if (b.dataset.q !== undefined) {
@@ -146,6 +156,7 @@ ${installCard()}`;
     const act = b.dataset.act;
     if (act === "listen") { b.textContent = "듣는 중…"; play(r.a, 1, 3, () => { r.l = 1; learn(r); save(); open = null; render(); }); }
     if (act === "slow") play(r.a, .75, 1);
+    if (act === "reveal") { const c = document.getElementById("routine"); if (c) c.classList.remove("hide-en"); }
     if (act === "reveal" || act === "said") {
       const box = document.getElementById("rt-reveal"); box.hidden = false;
       box.innerHTML = `<b>${esc(r.en)}</b><button class="rt-b" data-play="${r.a}">▶ 원어민 발음</button>`;
@@ -175,4 +186,6 @@ ${installCard()}`;
   if (location.hash === "#routine") setTimeout(() => document.getElementById("routine")?.scrollIntoView({ block: "start" }), 50);
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
   render();
+  // 말하기 도구(app.js)가 늦게 준비되면 한 번 더 그려서 마이크 버튼이 나오게
+  if (!window.KY_SAY) addEventListener("load", () => { if (window.KY_SAY) render(); });
 })();
