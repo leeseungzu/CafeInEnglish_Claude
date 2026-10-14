@@ -121,14 +121,14 @@ ${installCard()}`;
     if (matchMedia("(display-mode: standalone)").matches || navigator.standalone) return "";
     const ua = navigator.userAgent, ios = /iPhone|iPad|iPod/i.test(ua) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(ua));
     const inapp = /KAKAOTALK|Instagram|FBAN|FBAV|NAVER|Line\//i.test(ua);
-    const g = guide || (ios ? "ios" : "android");
+    const g = guide || (/Android/i.test(ua) ? "android" : "ios");
+    const mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(ua) || ios;
     const steps = {
       ios: [["Safari로 열기", "카톡·인스타 안이라면 오른쪽 아래 ⋯ → <b>Safari로 열기</b>"], ["공유 버튼 누르기", "화면 아래 가운데 " + SHARE + " 버튼 (주소창 옆에 있을 수도 있어요)"], ["홈 화면에 추가", "메뉴를 위로 올려 <b>홈 화면에 추가</b> → 오른쪽 위 <b>추가</b>"]],
       android: [["Chrome으로 열기", "카톡·인스타 안이라면 ⋮ → <b>다른 브라우저로 열기</b>"], ["⋮ 메뉴 누르기", "Chrome 오른쪽 위 <b>⋮</b> (삼성 인터넷은 아래 <b>☰</b>)"], ["홈 화면에 추가", "<b>홈 화면에 추가</b> 또는 <b>앱 설치</b> → <b>설치</b> (삼성 인터넷은 <b>현재 페이지 추가 → 홈 화면</b>)"]]
     }[g];
     return `<div class="rt-install"><div class="rt-in-top"><img src="${D.phone || ""}" alt="" width="40" height="40"><div><b>홈 화면에 추가하면 내 공부방이 앱처럼 열려요</b><p>${inapp ? "지금은 앱 안 브라우저라 추가가 안 돼요. 1번부터 따라 해 주세요." : "아이콘을 누르면 바로 오늘의 루틴으로 와요."}</p></div></div>
-${deferred && !inapp ? '<button class="rt-b d rt-in-go" data-act="install">홈 화면에 추가하기</button>' : ""}
-<div class="rt-in-tabs"><button data-guide="ios" class="${g === "ios" ? "on" : ""}">아이폰</button><button data-guide="android" class="${g === "android" ? "on" : ""}">안드로이드</button></div>
+<div class="rt-in-tabs"><button data-guide="ios" class="${g === "ios" ? "on" : ""}">아이폰</button><button data-guide="android" class="${g === "android" ? "on" : ""}">안드로이드</button>${deferred && !inapp ? `<button class="rt-in-go" data-act="install">${mobile ? "홈 화면에 추가하기" : "PC 홈 화면 추가"}</button>` : ""}</div>
 <ol class="rt-in-steps">${steps.map(([t, d]) => `<li><div><strong class="st-t">${t}</strong><span>${d}</span></div></li>`).join("")}</ol></div>`;
   }
   root.addEventListener("click", ev => {
