@@ -1291,3 +1291,7 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 .rt-b,.rt-b.d{color:var(--text)!important}
 .rt-in-tabs button.on,.rt-src button.on{color:var(--text)!important;font-weight:800}
 .rt-b:hover,.rt-b.d:hover,.rt-in-tabs button:hover,.rt-src button:hover{border-color:var(--text)!important;color:var(--text)!important;background:transparent!important}
+
+/* 글자도 모두 '아이폰' 탭과 같은 기본 모양 (연한 글자·같은 굵기), 커서를 올릴 때만 진하게 */
+.rt-b,.rt-b.d,.rt-in-tabs button,.rt-in-tabs button.on,.rt-src button,.rt-src button.on{color:var(--muted)!important;font-weight:700!important}
+.rt-b:hover,.rt-b.d:hover,.rt-in-tabs button:hover,.rt-src button:hover{color:var(--text)!important}
