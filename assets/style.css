@@ -506,9 +506,14 @@ h1{letter-spacing:-.03em}
 }
 @media (min-width:1024px){
   /* PC: 모바일처럼 본문 영상 크기 그대로 상단에 고정하고, 글만 아래로 스크롤 */
-  .video-embed.float{top:var(--hdr,68px);left:var(--vx,0);width:var(--vw,720px);right:auto;bottom:auto;height:auto;aspect-ratio:16/9;border-radius:0 0 14px 14px}
-  html.v-floating{scroll-padding-top:calc(var(--hdr,68px) + var(--vh,405px) + 16px)}
-  html.v-floating [id]{scroll-margin-top:calc(var(--hdr,68px) + var(--vh,405px) + 16px)}
+  /* 높이는 화면의 38%까지만 (노트북에서도 아래 글이 보이게). 본문 너비의 띠를 배경색으로 깔고 영상은 가운데 */
+  html{--fw:min(var(--vw,720px),calc(38vh * 16 / 9))}
+  .video-embed.float{top:var(--hdr,68px);left:var(--vx,0px);width:var(--vw,720px);right:auto;bottom:auto;height:calc(var(--fw) * 9 / 16);aspect-ratio:auto;
+    border-radius:0;background:var(--bg);box-shadow:0 8px 12px -10px rgba(42,26,18,.25);overflow:visible}
+  .video-embed.float>:not(.v-close){position:absolute;top:0;bottom:0;right:auto;left:calc((var(--vw,720px) - var(--fw)) / 2);width:var(--fw);height:100%;border-radius:0 0 14px 14px;overflow:hidden}
+  .video-embed.float .v-close{right:calc((var(--vw,720px) - var(--fw)) / 2 + 6px)}
+  html.v-floating{scroll-padding-top:calc(var(--hdr,68px) + var(--fw) * 9 / 16 + 24px)}
+  html.v-floating [id]{scroll-margin-top:calc(var(--hdr,68px) + var(--fw) * 9 / 16 + 24px)}
 }
 .vbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:0 0 14px}
 .vbar-k{font-weight:700;margin-right:2px}
