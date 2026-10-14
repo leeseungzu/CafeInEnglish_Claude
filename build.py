@@ -1218,7 +1218,7 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
         else:
             vids = [o for o in sp if o.get("video")]
             lazy = 'loading="lazy"'
-            cover = ('<div class="sr-cover yt">' + yt_img(vids[0]["video"], lazy) + '</div>') if vids else '<div class="sr-cover"></div>'
+            cover = ('<div class="sr-cover yt">' + yt_img(vids[0]["video"], lazy).replace("<img ", '<img aria-hidden="true" class="yt-bg" ', 1) + yt_img(vids[0]["video"], lazy).replace("<img ", '<img class="yt-fg" ', 1) + '</div>') if vids else '<div class="sr-cover"></div>'
         series_html += (f'<a class="sr-card" href="/series/{sr["id"]}/">{cover}<h3>{e(sr["title"])}</h3>'
                         f'<p>{e(sr["desc"])}</p><span class="sr-n">글 {len(sp) + len(sr.get("thinks", []))}개</span></a>')
 
@@ -1369,7 +1369,7 @@ def _about_series():
             cover = f'<div class="sr-cover ic-{sp[0]["cat"]}">' + "".join(f'<img src="/assets/icons/{ic}.webp?v={ASSET_V}" alt="" loading="lazy" width="96" height="96">' for ic in icons) + "</div>"
         else:
             vids = [o for o in sp if o.get("video")]
-            cover = ('<div class="sr-cover yt">' + yt_img(vids[0]["video"], 'loading="lazy"') + '</div>') if vids else '<div class="sr-cover"></div>'
+            cover = ('<div class="sr-cover yt">' + yt_img(vids[0]["video"], 'loading="lazy"').replace("<img ", '<img aria-hidden="true" class="yt-bg" ', 1) + yt_img(vids[0]["video"], 'loading="lazy"').replace("<img ", '<img class="yt-fg" ', 1) + '</div>') if vids else '<div class="sr-cover"></div>'
         html += (f'<a class="sr-card" href="/series/{sr["id"]}/">{cover}<h3>{e(sr["title"])}</h3>'
                  f'<p>{e(sr["desc"])}</p><span class="sr-n">글 {len(sp) + len(sr.get("thinks", []))}개</span></a>')
     return html
