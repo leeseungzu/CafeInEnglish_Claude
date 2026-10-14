@@ -691,6 +691,77 @@
     });
   }
 
+  // 말해 본 문장을 내 공부방 기록에 담기
+  function keep(it, src) {
+    try {
+      const s = JSON.parse(localStorage.getItem("ky_today_v1")) || {}, d = ymd(DAY);
+      s.learned = s.learned || [];
+      if (!s.learned.some(x => x.en === it.en && x.d === d)) s.learned.push({ en: it.en, ko: it.ko, a: it.a || it.au || "", d: d, src: src });
+      localStorage.setItem("ky_today_v1", JSON.stringify(s));
+    } catch (e) {}
+  }
+  const PLAY1 = '<svg class="mq-pl" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>';
+
+  // ④ PC 홈: 오늘의 한 잔도 '맞혀 보기 → 정답 듣기 → 말해 보기'
+  const hsTr = document.getElementById("hs-track");
+  if (hsTr && W && W.L && W.L.length) {
+    const at0 = k => W.L[((W.i0 - k) % W.L.length + W.L.length) % W.L.length];
+    const pcAu = new Audio();
+    [].forEach.call(hsTr.querySelectorAll(".hs-slide"), (sl, k) => {
+      const T = at0(k), txt = sl.querySelector(".hs-txt"); if (!T || !txt) return;
+      sl.classList.add("pq"); sl.setAttribute("data-k", k);
+      const kick = txt.querySelector(".a-kicker");
+      const box = '<div class="pq-box"><h2 class="pq-h">"' + X(T.ko) + '"<br>영어로 하면?</h2>' + (T.q ? '<span class="pq-q">' + X(T.q) + '</span>' : "")
+        + '<div><button type="button" class="pq-me">' + PLAY1 + '눌러서 정답 듣기</button></div><p class="pq-hint">정답을 들으면 직접 말해 볼 수 있어요</p></div>';
+      if (kick) kick.insertAdjacentHTML("afterend", box); else txt.insertAdjacentHTML("afterbegin", box);
+      const btns = txt.querySelector(".hs-btns");
+      if (btns) btns.insertAdjacentHTML("beforebegin", sayBox(T.en));
+      sl.setAttribute("data-a", T.au || "");
+    });
+    hsTr.addEventListener("click", e => {
+      const sl = e.target.closest(".hs-slide"); if (!sl) return;
+      const say = () => { const a = sl.getAttribute("data-a"); if (!a) return; try { if (pcAu.src.indexOf(a) < 0) pcAu.src = a; pcAu.currentTime = 0; pcAu.play().catch(() => {}); } catch (x) {} };
+      if (e.target.closest(".pq-me")) { sl.classList.remove("pq"); say(); ga("quiz_reveal", { days_ago: +sl.getAttribute("data-k"), from: "pc" }); return; }
+      const box = e.target.closest(".ks"); if (!box) return;
+      const T = at0(+sl.getAttribute("data-k"));
+      const ok = () => { spoke(); keep(T, "daily"); ga("quiz_speak_ok", { days_ago: +sl.getAttribute("data-k"), from: "pc" }); };
+      if (e.target.closest(".ks-done")) { box.classList.add("ok"); box.querySelector(".ks-t").innerHTML = "<b>잘했어요! 오늘 한 문장 말했어요</b><small>내일도 한 잔 하러 와요</small>"; ok(); return; }
+      if (!e.target.closest(".ks-mic")) return;
+      ga("quiz_speak_try", { from: "pc" });
+      box.querySelector(".ks-t").innerHTML = '<b>듣고 있어요…</b><small>"' + X(box.getAttribute("data-t")) + '" 하고 말해 보세요</small>';
+      listen(box, box.getAttribute("data-t"), (s, heard) => result(box, s, heard, ok));
+    });
+  }
+
+  // ⑤ 글 끝 '입으로 마무리하기'
+  const ps = document.getElementById("say-end");
+  if (ps) {
+    let L5 = []; try { L5 = JSON.parse(ps.querySelector(".ps-data").textContent); } catch (e) {}
+    const body = ps.querySelector(".ps-body"), au5 = new Audio(); let i5 = 0;
+    const draw = () => {
+      const it = L5[i5];
+      body.innerHTML = '<div class="ps-card"><p class="ps-ko">"' + X(it.ko) + '"</p><p class="ps-sub">한국어만 보고 영어로 말해 보세요 · ' + (i5 + 1) + " / " + L5.length + "</p>"
+        + sayBox(it.en).replace('<div class="ks"', '<div class="ks ps-ks"') + '<div class="ps-ans" hidden><b>' + X(it.en) + '</b><button type="button" class="ps-play" aria-label="원어민 발음">' + PLAY1 + '</button></div>'
+        + '<div class="ps-nav"><button type="button" class="ps-show">정답 보기</button>' + (i5 < L5.length - 1 ? '<button type="button" class="ps-next">다음 문장 ›</button>' : "") + "</div></div>"
+        + '<div class="ps-dots">' + L5.map((_, j) => "<i" + (j === i5 ? ' class="on"' : "") + "></i>").join("") + "</div>";
+    };
+    const reveal = () => { const a = body.querySelector(".ps-ans"); if (a) a.hidden = false; const sh = body.querySelector(".ps-show"); if (sh) sh.hidden = true; };
+    const hear = () => { const a = L5[i5].a; if (!a) return; try { au5.src = a; au5.play().catch(() => {}); } catch (e) {} };
+    if (L5.length) draw();
+    ps.addEventListener("click", e => {
+      if (e.target.closest(".ps-show")) { reveal(); hear(); return; }
+      if (e.target.closest(".ps-play")) { hear(); return; }
+      if (e.target.closest(".ps-next")) { i5 = Math.min(L5.length - 1, i5 + 1); draw(); return; }
+      const box = e.target.closest(".ks"); if (!box) return;
+      const it = L5[i5], ok = () => { spoke(); keep(it, "post"); reveal(); ga("post_speak_ok", { n: i5 + 1 }); };
+      if (e.target.closest(".ks-done")) { box.classList.add("ok"); box.querySelector(".ks-t").innerHTML = "<b>잘했어요!</b><small>내 공부방 '말해 본 문장'에 담았어요</small>"; ok(); return; }
+      if (!e.target.closest(".ks-mic")) return;
+      ga("post_speak_try");
+      box.querySelector(".ks-t").innerHTML = "<b>듣고 있어요…</b><small>기억나는 대로 영어로 말해 보세요</small>";
+      listen(box, it.en, (sc, heard) => { result(box, sc, heard, ok); if (sc >= .75) { const t = box.querySelector(".ks-t small"); if (t) t.textContent = "내 공부방 '말해 본 문장'에 담았어요"; } });
+    });
+  }
+
   // ②③ 출근길 듣기 · 다시 꺼내기 (폰 홈, 상황별 고르기 위)
   const home = document.querySelector(".m-home"), gp = document.getElementById("gp") || (home && home.querySelector(".gp-me"));
   if (!home || !W || !W.L || !W.L.length) return;

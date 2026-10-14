@@ -865,6 +865,7 @@ def page_post(p):
 </div>""")
     if p.get("think") in THINK_BY_ID:
         parts.append(f'<div class="think-box"><b>이 영상 속 마음에 남는 문장</b>은 <a href="{think_url(THINK_BY_ID[p["think"]])}">사유의 문장</a>에서 필사하고 복기할 수 있어요.</div>')
+    parts.append(post_say_block(p))
     parts.append('<h2 class="quiz-h" id="quiz-sec">오늘 배운 거 확인하기</h2><div id="quiz"></div>')
     parts.append(share_block("같이 공부할 친구에게 이 글 보내기"))
     tv_ids = [pid for _, _, pid in TRAVEL_SITUATIONS if pid in POST_BY_ID]
@@ -1256,6 +1257,60 @@ TODAY_GOALS = [
      "posts": ["ask-to-repeat", "what-do-you-call", "id-like-to", "asking-directions", "shopping-checkout", "doctor", "this-vs-next",
                "email-phrases", "would-you-mind", "travel-trouble", "video-call"]},
 ]
+
+
+def _say_clean(t):
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", t))).strip()
+
+
+def post_say_items(p, limit=None):
+    """글 속 내가 말할 문장(원어민 음성 있는 짧은 문장)을 글 순서대로"""
+    body = p.get("body_html", "")
+    pairs = []
+    for m in re.finditer(r'<ul class="ex( ans| talk)?">(.*?)</ul>', body, re.S):
+        ul, talk = m.group(2), m.group(1) == " talk"
+        for li in re.finditer(r'<li( class="[^"]*")?>(.*?)</li>', ul, re.S):
+            if talk and li.group(1) != ' class="me"':
+                continue
+            k = re.search(r'<span class="en">(.*?)</span><span class="ko">(.*?)</span>', li.group(2), re.S)
+            if k:
+                pairs.append((m.start() + li.start(), k.group(1), k.group(2)))
+    for m in re.finditer(r'<div class="rep-a"><span class="en">(.*?)</span><span class="ko">(.*?)</span>', body, re.S):
+        pairs.append((m.start(), m.group(1), m.group(2)))
+    n = len(body)
+    for i, x in enumerate(p.get("expressions", [])):
+        for en, ko in ((x.get("orig", ""), x.get("origKo", "")), (x.get("ex", ""), x.get("exKo", ""))):
+            if en and ko:
+                pairs.append((n + i * 2, e(en), e(ko)))
+    items, seen = [], set()
+    for _, en, ko in sorted(pairs, key=lambda t: t[0]):
+        en, ko = _say_clean(en), _say_clean(ko)
+        ko = re.sub(r"\s*\([^)]*\)\s*$", "", ko).strip()
+        if en in seen or en not in AUDIO or not ko or not 8 <= len(en) <= 60 or any(c in en for c in "→/…") or "..." in en:
+            continue
+        seen.add(en)
+        items.append({"en": en, "ko": ko, "a": "/audio/" + AUDIO[en], "p": post_url(p)})
+    return items[:limit] if limit else items
+
+
+def post_say_block(p):
+    """글 끝 '입으로 마무리하기': 핵심 문장 3개를 한국어만 보고 말해 보기"""
+    items = post_say_items(p)
+    if not items:
+        return ""
+    # 오늘의 한 잔에 쓰인 대표 문장이 있으면 맨 앞으로
+    top = [d["en"] for d in json.loads((CONTENT / "daily.json").read_text("utf-8")) if d.get("post") == p["id"]] if (CONTENT / "daily.json").exists() else []
+    items.sort(key=lambda x: 0 if x["en"] in top else 1)
+    picks, step = [], max(1, len(items) // 3)
+    for i in range(0, len(items), step):
+        picks.append(items[i])
+        if len(picks) == 3:
+            break
+    data = json.dumps(picks, ensure_ascii=False).replace("</", "<\\/")
+    return (f'<section class="ps no-print" id="say-end" aria-label="입으로 마무리하기"><p class="ps-k">입으로 마무리하기</p>'
+            f'<h3>방금 배운 문장, 소리 내어 말해 볼까요?</h3><div class="ps-body"></div>'
+            f'<a class="ps-go" href="/notes/#routine"><span>내일도 잊지 않게 루틴에 담기<small>말해 본 문장은 내 공부방에 쌓이고, 며칠 뒤 다시 복습해 줘요</small></span><span aria-hidden="true">›</span></a>'
+            f'<script type="application/json" class="ps-data">{data}</script></section>')
 
 
 def today_pool():
