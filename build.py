@@ -1106,10 +1106,10 @@ def page_home():
     now_k = _t.time() + 9 * 3600
     slides = "".join(slide_html(slides_data[(i0 - k) % len(slides_data)], label(k, now_k)) for k in range(N_SLIDES))
     _pool = today_pool()
-    _gp = [("travel", "airplane", "여행"), ("work", "laptop", "회사"), ("life", "world-map", "미국 생활"), ("daily", "hot-beverage", "매일 한 잔")]
+    _gp = [(g["id"], g["icon"], g["short"], g["desc"]) for g in TODAY_GOALS]
     picker = ('<section class="gp" id="gp" aria-label="지금 필요한 영어 고르기"><p class="gp-q">지금 어떤 영어가 필요하세요? <small>가입 없이 · 무료 · 하루 5분</small></p><div class="gp-row">'
               + "".join(f'<a class="gp-c" href="/notes/?goal={g}#routine" data-goal="{g}"><img src="/assets/icons/{icn}.webp?v={ASSET_V}" alt="" width="40" height="40"><b>{t}</b>'
-                        f'<small>{(str(len(_pool[g])) + "문장") if g in _pool else "오늘의 한 잔"}</small></a>' for g, icn, t in _gp)
+                        f'<small>{d}</small></a>' for g, icn, t, d in _gp)
               + '</div></section>')
     hero = picker + f"""<section class="hs" aria-label="오늘의 한 잔">
   <div class="hs-track" id="hs-track">{slides}</div>
@@ -1187,11 +1187,14 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
 TODAY_CTA = ('<div class="acts rt-cta no-print"><a class="act" href="/notes/#routine"><span class="act-ic"><img src="/assets/icons/hot-beverage.webp" alt="" width="22" height="22"></span>'
              '<span class="act-t"><b>오늘의 한 잔 5분 루틴</b><small>듣고 · 말하고 · 다시 꺼내고, 내 공부방에서 도장 찍기</small></span><span class="act-r"><i class="chev">›</i></span></a></div>')
 TODAY_GOALS = [
-    {"id": "travel", "short": "여행", "name": "해외여행 영어", "desc": "공항·호텔·식당에서 바로 쓰는 말", "icon": "✈", "bg": "#E8F0FB", "series": "travel"},
-    {"id": "work", "short": "회사", "name": "회사 영어", "desc": "메일·회의·메신저 한마디", "icon": "✉", "bg": "#EEF3DE", "series": "work"},
-    {"id": "life", "short": "미국 생활", "name": "미국 생활 영어", "desc": "은행·병원·길·가게에서 나누는 말", "icon": "⌂", "bg": "#F6E7DA",
-     "posts": ["how-are-you", "excuse-me-sorry", "ask-to-repeat", "what-do-you-call", "id-like-to", "asking-directions", "shopping-checkout",
-               "im-good", "doctor", "would-you-mind", "negative-question", "this-vs-next", "sorry-to-hear", "travel-trouble"]},
+    {"id": "talk", "short": "일상 대화", "name": "일상 대화 영어", "desc": "인사·스몰톡", "icon": "speech-balloon",
+     "posts": ["how-are-you", "excuse-me-sorry", "ask-to-repeat", "sounds-good", "im-down", "im-good", "craving", "its-on-me", "my-bad",
+               "looking-forward-to", "sorry-to-hear", "negative-question", "would-you-mind", "what-do-you-call", "in-vs-after", "konglish", "make-sense"]},
+    {"id": "travel", "short": "여행", "name": "해외여행 영어", "desc": "공항·호텔", "icon": "airplane", "series": "travel"},
+    {"id": "work", "short": "회사", "name": "회사 영어", "desc": "메일·회의", "icon": "laptop", "series": "work"},
+    {"id": "life", "short": "해외 생활", "name": "해외 생활 영어", "desc": "이민·유학", "icon": "world-map",
+     "posts": ["ask-to-repeat", "what-do-you-call", "id-like-to", "asking-directions", "shopping-checkout", "doctor", "this-vs-next",
+               "email-phrases", "would-you-mind", "travel-trouble", "video-call"]},
 ]
 
 

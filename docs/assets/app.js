@@ -46,7 +46,7 @@
     gp.addEventListener("click", e => { const a = e.target.closest("[data-goal]"); if (a && window.gtag) gtag("event", "goal_pick", { goal: a.dataset.goal, from: "home" }); });
     let s = null; try { s = JSON.parse(localStorage.getItem("ky_today_v1")) || null; } catch (e) {}
     const p = s && s.prog; if (!p || !(s.learned || []).length) return;
-    const ICON = { travel: "airplane", work: "laptop", life: "world-map", daily: "hot-beverage" }[p.src] || "hot-beverage";
+    const ICON = { talk: "speech-balloon", travel: "airplane", work: "laptop", life: "world-map", daily: "hot-beverage" }[p.src] || "hot-beverage";
     const img = $(".gp-c img", gp).getAttribute("src").replace(/icons\/[a-z-]+\.webp/, "icons/" + ICON + ".webp");
     const pct = p.t ? Math.round(p.n / p.t * 100) : 0;
     const todayKey = new Date((Math.floor((Date.now() / 1000 + 9 * 3600) / 86400)) * 864e5).toISOString().slice(0, 10);
