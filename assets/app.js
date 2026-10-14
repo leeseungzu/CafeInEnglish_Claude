@@ -45,8 +45,11 @@
     let t;
     addEventListener("scroll", () => {
       const m = $(".fab-main", fab); if (m && m.getAttribute("aria-expanded") === "true") return;
-      fab.classList.add("fab-hide"); clearTimeout(t); t = setTimeout(() => fab.classList.remove("fab-hide"), 600);
+      fab.classList.add("fab-hide"); clearTimeout(t); t = setTimeout(() => fab.classList.toggle("fab-hide", top()), 600);
     }, { passive: true });
+    // 폰 첫 화면(맨 위)에서는 버튼을 가리지 않게 숨겨 두고, 조금이라도 내리면 나타나요
+    const top = () => innerWidth < 600 && scrollY < 120;
+    fab.classList.toggle("fab-hide", top());
   })();
   // 홈: 루틴을 해 본 사람은 '내 진도' 카드, 처음이면 목표 고르기
   (function homeGoal() {
