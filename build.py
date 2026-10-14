@@ -1100,7 +1100,8 @@ def page_home():
                 parts = re.split(r"(?<=[.!?])\s+", x["ex"].strip())
                 if len(parts) > 1:
                     q, a = " ".join(parts[:-1]), parts[-1]
-        return {"q": q, "qa": a, "qk": ako, "au": ("/audio/" + AUDIO[en]) if en in AUDIO else ""}
+        ic = f'/assets/icons/{p["icon"]}.webp?v={ASSET_V}' if p.get("icon") else ""
+        return {"q": q, "qa": a, "qk": ako, "au": ("/audio/" + AUDIO[en]) if en in AUDIO else "", "ic": ic}
     slides_data = [{"en": d["en"], "ko": d["ko"], "desc": d.get("desc", ""), "cat": d["cat"], "url": d["url"],
                     "vis": vis(POST_BY_ID.get(d.get("post")), d, n), **mq_data(d)} for n, d in enumerate(daily)]
     N_SLIDES = min(5, len(slides_data))
@@ -1131,9 +1132,12 @@ def page_home():
     def mq_html(it, md):
         q = f'<span class="mq-q">{e(it["q"])}</span>' if it["q"] else ""
         qk = f'<span class="mq-qk">{e(it["qk"])}</span>' if it["qk"] else ""
-        return (f'<section class="mq" id="mq" data-a="{it["au"]}" aria-label="오늘의 한 잔 퀴즈"><p class="mq-k"><span>오늘의 한 잔</span><span id="mq-d">{md}</span></p>'
+        w = it["en"].split(" ")
+        en_h = e(" ".join(w[:-1])) + (" " if len(w) > 1 else "") + f'<span class="hl">{e(w[-1])}</span>'
+        ic = f'<img class="mq-ic" src="{it["ic"]}" alt="" width="56" height="56">' if it["ic"] else '<img class="mq-ic" alt="" width="56" height="56" hidden>'
+        return (f'<section class="mq" id="mq" data-a="{it["au"]}" aria-label="오늘의 한 잔 퀴즈">{ic}<p class="mq-k"><span>오늘의 한 잔</span><span id="mq-d">{md}</span></p>'
                 f'<h2 class="mq-h">"{e(it["ko"])}"<br>영어로 하면?</h2>'
-                f'<div class="mq-ans"><span class="mq-en">{e(it["en"])}</span><button type="button" class="mq-sp" aria-label="발음 다시 듣기">{SPK}</button></div>'
+                f'<div class="mq-ans"><span class="mq-en">{en_h}</span><button type="button" class="mq-sp" aria-label="발음 다시 듣기">{SPK}</button></div>'
                 f'<div class="mq-chat">{q}<button type="button" class="mq-me">눌러서 정답 듣기</button><span class="mq-a">{e(it["qa"])}</span>{qk}</div>'
                 f'<a class="mq-btn" href="/notes/#routine">5분 루틴으로 내 것 만들기</a>'
                 f'<a class="mq-link" href="{it["url"]}">왜 이렇게 말할까? 글 읽고 퀴즈 풀기 ›</a></section>')
@@ -1150,7 +1154,7 @@ tr.innerHTML=Array.from({length:n},function(_,k){var it=L[((i0-k)%%L.length+L.le
 return '<article class="hs-slide"><div class="hs-txt"><div class="a-kicker">'+lab(k)+' · '+x(it.cat)+'</div><p class="a-phrase'+(it.en.length>16?' long':'')+'">'+(w.length?x(w.join(" "))+" ":"")+'<span class="hl">'+x(last)+'</span></p><p class="a-mean">'+x(it.ko)+'</p><p class="a-desc">'+x(it.desc||"")+'</p><div class="hs-btns">'+(k?'':'<a class="btn hs-rt" href="/notes/#routine">5분 루틴으로 내 것 만들기 →</a>')+'<a class="btn ghost" href="'+it.url+'">글 읽고 퀴즈 풀기 →</a></div></div><a class="hs-art" href="'+it.url+'" tabindex="-1" aria-hidden="true">'+it.vis+'</a></article>'}).join("")}
 var mq=document.getElementById("mq");if(mq){var T=L[i0],X=function(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
 if(i0!==%d){var dd=new Date(day*86400000);mq.setAttribute("data-a",T.au||"");document.getElementById("mq-d").textContent=(dd.getUTCMonth()+1)+"월 "+dd.getUTCDate()+"일";
-mq.querySelector(".mq-h").innerHTML='"'+X(T.ko)+'"<br>영어로 하면?';mq.querySelector(".mq-en").textContent=T.en;mq.querySelector(".mq-link").href=T.url;
+mq.querySelector(".mq-h").innerHTML='"'+X(T.ko)+'"<br>영어로 하면?';var ww=T.en.split(" "),wl=ww.pop();mq.querySelector(".mq-en").innerHTML=(ww.length?X(ww.join(" "))+" ":"")+'<span class="hl">'+X(wl)+'</span>';var mi=mq.querySelector(".mq-ic");if(mi){if(T.ic){mi.src=T.ic;mi.hidden=false}else mi.hidden=true}mq.querySelector(".mq-link").href=T.url;
 var ch=mq.querySelector(".mq-chat");ch.innerHTML=(T.q?'<span class="mq-q">'+X(T.q)+'</span>':'')+'<button type="button" class="mq-me">눌러서 정답 듣기</button><span class="mq-a">'+X(T.qa)+'</span>'+(T.qk?'<span class="mq-qk">'+X(T.qk)+'</span>':'')}
 var au=null,say=function(){var a=mq.getAttribute("data-a");if(!a)return;try{au=au||new Audio(a);au.currentTime=0;au.play().catch(function(){})}catch(e){}};
 try{if(localStorage.getItem("ky_mq")==String(day))mq.classList.add("on")}catch(e){}

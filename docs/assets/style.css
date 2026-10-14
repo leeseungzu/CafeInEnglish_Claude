@@ -1478,3 +1478,15 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 }
 @media (min-width:601px) and (max-width:900px){.pc-band{margin:-6px 0 0;padding:20px 18px}}
 @media (max-width:600px){.pc-band+.home-grid{margin-top:26px}}
+
+/* 폰 퀴즈 카드: 커피 브라운 + 3D 아이콘 + 라임 밑줄 */
+@media (max-width:600px){
+  .mq{position:relative}
+  .mq-ic{position:absolute;right:16px;top:44px;width:56px;height:56px}
+  .mq-h{padding-right:64px}
+  .mq-me{background:#2A1E17;color:#fff}
+  .mq-ans{background:#FBF7F0}
+  .mq-en .hl{background:linear-gradient(transparent 62%,#CDEB5B 62%)}
+  .mq.on .mq-a{background:#F4EFE8;color:#2A1E17;font-size:15px}
+  .mq.on .mq-qk{display:none!important}
+}
