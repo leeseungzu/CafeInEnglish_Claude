@@ -699,7 +699,7 @@
   wrap.innerHTML =
     '<section class="kx-card kx-cm"><div class="kx-row"><button type="button" class="kx-play" aria-label="출근길 듣기 재생">' + PLAY + '</button>'
     + '<span class="kx-t"><b>출근길 듣기 · 약 3분</b><small class="kx-now">이번 주 ' + week.length + '문장을 두 번씩 이어서 들려줘요</small></span></div>'
-    + '<div class="kx-chips">' + week.map((x, i) => '<span data-i="' + i + '">' + X(x.en) + '</span>').join("") + '</div></section>'
+    + '<div class="kx-chips">' + week.map((x, i) => '<span data-i="' + i + '">' + X(x.ko) + '</span>').join("") + '</div></section>'
     + (old ? '<section class="kx-card kx-rv"><p class="kx-k">3일 전에 배운 문장</p><p class="kx-ko">"' + X(old.ko) + '"<br>기억나요?</p>'
       + sayBox(old.en) + '<button type="button" class="kx-show">정답 보기</button><p class="kx-ans" hidden><b>' + X(old.en) + '</b></p></section>' : "");
   (gp || home.firstChild).parentNode.insertBefore(wrap, gp || null);

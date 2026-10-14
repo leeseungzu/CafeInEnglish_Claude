@@ -1164,7 +1164,7 @@ lb=function(k){if(!k)return"오늘의 한 잔";if(k===1)return"어제의 한 잔
 md=function(k){var d=new Date((day-k)*86400000);return(d.getUTCMonth()+1)+"월 "+d.getUTCDate()+"일"},
 seen=[];try{seen=JSON.parse(localStorage.getItem("ky_mq_seen")||"[]")}catch(e){}
 mt.innerHTML=Array.from({length:n},function(_,k){var T=L[((i0-k)%%L.length+L.length)%%L.length],w=T.en.split(" "),wl=w.pop(),dk=day-k;
-return '<article class="mq'+(seen.indexOf(dk)>-1?' on':'')+'" data-a="'+(T.au||"")+'" data-d="'+dk+'" data-k="'+k+'">'+(T.ic?'<img class="mq-ic" src="'+T.ic+'" alt="" width="56" height="56"'+(k?' loading="lazy"':'')+'>':'')
+return '<article class="mq'+(seen.indexOf(dk)>-1?' seen':'')+'" data-a="'+(T.au||"")+'" data-d="'+dk+'" data-k="'+k+'">'+(T.ic?'<img class="mq-ic" src="'+T.ic+'" alt="" width="56" height="56"'+(k?' loading="lazy"':'')+'>':'')
 +'<p class="mq-k"><span>'+lb(k)+'</span><span>'+md(k)+'</span></p><h2 class="mq-h">"'+X(T.ko)+'"<br>영어로 하면?</h2>'
 +'<div class="mq-ans"><span class="mq-en">'+(w.length?X(w.join(" "))+" ":"")+'<span class="hl">'+X(wl)+'</span></span><button type="button" class="mq-sp" aria-label="발음 다시 듣기">'+SPK+'</button></div>'
 +'<div class="mq-chat">'+(T.q?'<span class="mq-q">'+X(T.q)+'</span>':'')+'<button type="button" class="mq-me">'+PL+'눌러서 정답 듣기</button>'+(T.q?'<span class="mq-a">'+X(T.qa)+'</span>':'')+'</div>'

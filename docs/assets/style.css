@@ -1557,3 +1557,6 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
   .pc-band .gp:has(.gp-me) .gp-me{flex:1;border:0}
   .pc-band .gp-sw{margin:0!important;white-space:nowrap;font-size:13px}
 }
+/* 폰 퀴즈: 다시 들어와도 늘 '맞혀 보기'부터. 이미 본 날은 날짜 옆에 작은 체크 */
+@media (max-width:600px){.mq.seen .mq-k span:last-child::before{content:"✓ ";color:#20B26B;font-weight:800}}
+@media (max-width:600px){.kx-chips span{max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
