@@ -1197,8 +1197,8 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
                         f'<p>{e(sr["desc"])}</p><span class="sr-n">글 {len(sp) + len(sr.get("thinks", []))}개</span></a>')
 
     body = f"""<h1 class="sr-only">카페인영어 CafeInEnglish - 매일 조금씩, 깊게 스며드는 영어 공부</h1>
-{hero}{hero_js}
-{notice_html()}
+<div class="pc-band">{hero}{hero_js}
+{notice_html()}</div>
 <div class="home-grid">
   <section><h2 class="home-h">전체 아티클</h2><div class="cards list" id="all-arts">{arts}</div>{pager}</section>
   <aside class="pop"><h2 class="pop-h">인기 있는 글</h2><ol>{pop_html}</ol></aside>

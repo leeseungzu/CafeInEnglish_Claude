@@ -1462,3 +1462,19 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
   .m-home{padding-bottom:22px}
   .m-home+.hs+script+*, .m-home~.home-grid{margin-top:26px}
 }
+/* ── PC 홈: 윗부분(목표 고르기·오늘의 한 잔·무료 자료)을 둥근 연회색 판 하나로 ── */
+@media (min-width:601px){
+  .pc-band{background:#F4F5F7;border-radius:32px;margin:-6px -28px 0;padding:24px 28px 24px}
+  .pc-band .gp{background:none;border:0;padding:0;margin:0 0 24px}
+  .pc-band .gp-c{background:#fff;border:0;box-shadow:none}
+  .pc-band .gp-c:hover{box-shadow:0 0 0 1.5px #191F28}
+  .pc-band .gp-me{background:#fff;border:0}
+  .pc-band .hs{background:none;padding:0}
+  .pc-band .hs-btn{background:#fff}
+  .pc-band .notice{background:#fff;margin:22px 0 0!important;border-radius:20px;padding:18px 24px}
+  .pc-band .notice:hover{background:#fff;box-shadow:0 0 0 1.5px #191F28}
+  .pc-band + *{margin-top:40px}
+  .pop{background:#fff!important;border:1px solid #E5E8EB}
+}
+@media (min-width:601px) and (max-width:900px){.pc-band{margin:-6px 0 0;padding:20px 18px}}
+@media (max-width:600px){.pc-band+.home-grid{margin-top:26px}}
