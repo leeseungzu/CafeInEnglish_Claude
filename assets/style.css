@@ -1213,8 +1213,10 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 .author-box .ab-links{display:flex;gap:16px;flex-wrap:wrap}
 
 /* ---------- 내 공부방: 오늘의 한 잔 5분 루틴 ---------- */
-.hs-btns{display:flex;flex-wrap:wrap;gap:8px}.hs-btns .btn{margin-top:0}
-.btn.hs-rt{background:var(--text);color:#fff;border:1.5px solid var(--text);border-radius:999px}
+.hs-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.hs-btns .btn{margin:0;width:auto;padding:12px 20px;font-size:15px;line-height:1.2;border-radius:999px;border:1.5px solid var(--text)}
+.hs-btns .btn.hs-rt{background:var(--text);color:#fff}
+.hs-btns .btn.ghost{background:transparent;color:var(--text)}
 .rt-cta{margin:26px 0 6px}
 .room .rt-dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 1.5px var(--text);display:inline-block}
 .rt-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px 18px 14px;margin:18px 0 8px}
@@ -1243,5 +1245,13 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 .rt-dy i{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;margin:0 auto 6px;border:1.5px dashed #D9D0C5;font-style:normal}
 .rt-dy.on i{border:0;background:var(--accent-soft)}.rt-dy.td i{border:2px solid var(--text)}.rt-dy.on.td i{border:0}
 .rt-said .act-ic{font-size:12px}
-.rt-install{display:flex;gap:14px;align-items:center;background:var(--accent-soft);border-radius:20px;padding:14px 16px;margin:30px 0 10px}
-.rt-install b{font-size:15px}.rt-install p{margin:3px 0 0;font-size:13.5px;color:var(--muted)}
+.rt-install{background:var(--accent-soft);border-radius:20px;padding:16px;margin:30px 0 10px}
+.rt-in-top{display:flex;gap:12px;align-items:center}.rt-in-top b{font-size:15px}.rt-in-top p{margin:3px 0 0;font-size:13.5px;color:var(--muted)}
+.rt-in-go{margin-top:12px}
+.rt-in-tabs{display:flex;gap:6px;margin:14px 0 8px}
+.rt-in-tabs button{all:unset;cursor:pointer;font-size:13px;font-weight:800;padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--muted)}
+.rt-in-tabs button.on{border-color:var(--text);color:var(--text)}
+.rt-in-steps{list-style:none;counter-reset:s;margin:0;padding:0}
+.rt-in-steps li{counter-increment:s;display:flex;gap:10px;align-items:flex-start;background:var(--card);border-radius:14px;padding:11px 12px;margin-top:6px}
+.rt-in-steps li:before{content:counter(s);flex:none;width:22px;height:22px;border-radius:50%;background:var(--lime);font-weight:900;font-size:12.5px;display:grid;place-items:center}
+.rt-in-steps .st-t{display:block;font-size:14.5px;margin-bottom:2px}.rt-in-steps span{display:block;font-size:13.5px;color:var(--muted);line-height:1.6}.rt-in-steps span b{color:var(--text)}.rt-in-steps svg{vertical-align:-3px}
