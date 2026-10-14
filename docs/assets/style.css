@@ -1210,3 +1210,4 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 .author-box p{margin:0 0 6px;font-size:14.5px;line-height:1.65;color:#5E5249}
 .author-box a{font-size:13.5px;font-weight:700;color:#2A1A12;text-decoration:underline;text-underline-offset:3px}
 .study-note{margin:28px 0 0;padding:16px 18px;background:#F4EEE4;border-radius:16px;font-size:15px;line-height:1.7;color:#2A1A12}
+.author-box .ab-links{display:flex;gap:16px;flex-wrap:wrap}

@@ -340,7 +340,7 @@ def thumb_num(p):
 
 
 AUTHOR_NAME = "카영 스터디언"
-AUTHOR_BIO = "미국 이민을 앞두고 온 가족이 함께 영어를 공부하고 있어요. 공부하며 알게 된 걸 정리해 나누고, 여러분과 같이 성장하고 싶어요."
+AUTHOR_BIO = "미국 이민을 앞두고 온 가족이 함께 영어를 공부하고 있어요. 공부하며 알게 된 걸 정리해 나누고 있어요. 글에서 고칠 점이나 더 궁금한 게 보이면 언제든 알려 주세요. 적극 반영할게요. 같이 빡공하며 만들어 가요!"
 ORG = {"@type": "Organization", "name": "카페인영어 CafeInEnglish", "url": DOMAIN + "/",
        "logo": {"@type": "ImageObject", "url": DOMAIN + "/assets/icon-512.png"}}
 
@@ -872,7 +872,7 @@ def page_post(p):
     if p.get("note"):
         parts.append(f'<div class="study-note"><b class="lbl">스터디 노트</b> {p["note"]}</div>')
     parts.append(f'<div class="author-box no-print"><img src="/assets/logo-mark.png" alt="" width="44" height="44" loading="lazy">'
-                 f'<div><b>{AUTHOR_NAME}</b><p>{AUTHOR_BIO}</p><a href="/about/">카페인영어 소개 보기</a></div></div>')
+                 f'<div><b>{AUTHOR_NAME}</b><p>{AUTHOR_BIO}</p><span class="ab-links"><a href="/contact/">의견 남기기</a><a href="/about/">카페인영어 소개</a></span></div></div>')
     parts.append('<h2 class="rel-h no-print">같이 보면 좋은 글</h2><div class="cards rel list no-print">'
                  + "".join(post_card(o) for o in similar_posts(p, 4)) + "</div>")
     parts.insert(toc_slot, f'<details class="toc-m no-print"><summary>목차 · 퀴즈 바로가기</summary>{toc_html(toc)}</details>')
