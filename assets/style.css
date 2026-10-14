@@ -1284,3 +1284,10 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 .hs-btns .btn.hs-rt,.rt-b.d,.gp-go{background:transparent!important;color:var(--text)!important;border:1.5px solid var(--text)!important}
 .hs-btns .btn.hs-rt:hover,.rt-b.d:hover,.gp-me:hover .gp-go,.gp-go:hover{background:var(--text)!important;color:var(--bg)!important;border-color:var(--text)!important}
 .rt-b{transition:background .15s,color .15s,border-color .15s}
+
+/* 내 공부방 버튼·탭: 평소엔 연한 테두리(아이폰 탭과 같은 모양), 커서를 올릴 때만 진한 테두리.
+   고른 탭은 글자만 진하게 표시 */
+.rt-b,.rt-b.d,.rt-in-tabs button,.rt-in-tabs button.on,.rt-src button,.rt-src button.on{background:transparent!important;border:1.5px solid var(--line)!important;color:var(--muted)!important;box-shadow:none!important}
+.rt-b,.rt-b.d{color:var(--text)!important}
+.rt-in-tabs button.on,.rt-src button.on{color:var(--text)!important;font-weight:800}
+.rt-b:hover,.rt-b.d:hover,.rt-in-tabs button:hover,.rt-src button:hover{border-color:var(--text)!important;color:var(--text)!important;background:transparent!important}
