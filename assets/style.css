@@ -505,8 +505,10 @@ h1{letter-spacing:-.03em}
   html.v-floating [id]{scroll-margin-top:calc(var(--hdr,96px) + 56.25vw + 12px)}
 }
 @media (min-width:1024px){
-  /* PC: 따라오는 영상은 항상 왼쪽 위 (좁은 화면은 조금 작게, 넓은 화면은 본문 왼쪽 빈 공간에 맞춰) */
-  .video-embed.float{top:calc(var(--hdr,68px) + 16px);left:16px;right:auto;bottom:auto;width:320px;height:auto;aspect-ratio:16/9;border-radius:14px}
+  /* PC: 모바일처럼 본문 영상 크기 그대로 상단에 고정하고, 글만 아래로 스크롤 */
+  .video-embed.float{top:var(--hdr,68px);left:var(--vx,0);width:var(--vw,720px);right:auto;bottom:auto;height:auto;aspect-ratio:16/9;border-radius:0 0 14px 14px}
+  html.v-floating{scroll-padding-top:calc(var(--hdr,68px) + var(--vh,405px) + 16px)}
+  html.v-floating [id]{scroll-margin-top:calc(var(--hdr,68px) + var(--vh,405px) + 16px)}
 }
 .vbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:0 0 14px}
 .vbar-k{font-weight:700;margin-right:2px}
@@ -1166,11 +1168,7 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 @media(max-width:560px){.tv-pr{margin:0;padding:12px 4px;gap:12px}.tv-pr+.tv-pr::before{left:4px;right:4px}.tv-pic{gap:4px;padding-right:2px}}
 .btn.retry{margin-bottom:16px}
 
-/* PC 넓은 화면: 따라오는 영상을 왼쪽 위(본문 왼쪽 빈 공간)에 고정 */
-@media (min-width:1600px){
-  .video-embed.float{top:calc(var(--hdr,68px) + 20px);left:20px;right:auto;bottom:auto;
-    width:clamp(280px,calc((100vw - 1076px)/2 - 40px),440px);height:auto;aspect-ratio:16/9}
-}
+
 
 /* 소개 페이지 */
 .feat p a{color:var(--text);font-weight:700;text-decoration:underline;text-underline-offset:3px}

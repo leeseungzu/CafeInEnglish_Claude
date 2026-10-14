@@ -339,7 +339,10 @@
       const on = past && started && !dismissed;
       box.classList.toggle("float", on);
       document.documentElement.style.setProperty("--hdr", headerH() + "px");
-      document.documentElement.classList.toggle("v-floating", on && innerWidth < 1024);
+      // PC: 본문 영상 자리 크기 그대로 상단에 고정 (위치·너비를 영상 자리에서 가져와요)
+      const r = slot.getBoundingClientRect(), st = document.documentElement.style;
+      st.setProperty("--vx", r.left + "px"); st.setProperty("--vw", r.width + "px"); st.setProperty("--vh", r.width * 9 / 16 + "px");
+      document.documentElement.classList.toggle("v-floating", on);
     }
     const io = new IntersectionObserver(([en]) => {
       past = !en.isIntersecting && en.boundingClientRect.top < 0;
@@ -348,6 +351,7 @@
     }, { rootMargin: `-${Math.round(headerH())}px 0px 0px 0px` });
     io.observe(slot);
     $(".v-close").onclick = () => { dismissed = true; updateFloat(); };
+    addEventListener("resize", updateFloat);
     addEventListener("resize", updateFloat);
   }
 
