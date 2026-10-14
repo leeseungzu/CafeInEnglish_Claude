@@ -1270,3 +1270,13 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 .rt-bar{height:8px;border-radius:8px;background:var(--accent-soft);overflow:hidden;margin:12px 0 5px}.rt-bar i{display:block;height:100%;background:var(--text);border-radius:8px;min-width:3px}
 .rt-bar-t{display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;color:var(--muted)}
 @media (min-width:900px){.gp-row{grid-template-columns:repeat(4,minmax(0,170px))}}
+
+/* 새 버튼들: 평소엔 그림자 없이, 커서를 올릴 때만 반응 (사이트 버튼과 같은 흐름) */
+.hs-btns .btn,.hs-btns .btn.ghost,.rt-b,.rt-src button,.rt-in-tabs button,.gp-c,.gp-me,.rt-qz button{box-shadow:none!important}
+.hs-btns .btn{transition:background .15s,color .15s}
+.hs-btns .btn.ghost{background:transparent;border:1.5px solid var(--text)}
+.hs-btns .btn.ghost:hover{background:var(--text);color:var(--bg)}
+.hs-btns .btn.hs-rt:hover,.rt-b.d:hover,.gp-me:hover .gp-go{background:#4A3226;border-color:#4A3226}
+.rt-b:not(.d):hover,.rt-src button:hover,.rt-in-tabs button:hover{border-color:var(--text);color:var(--text)}
+.rt-qz button:not(.right):not(.wrong):hover{border-color:var(--text)}
+.gp-c,.gp-me{transition:border-color .15s,transform .15s}.gp-c:hover,.gp-me:hover{border-color:var(--text);transform:translateY(-2px)}
