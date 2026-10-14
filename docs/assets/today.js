@@ -8,6 +8,7 @@
   let S;
   try { S = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { S = {}; }
   S.days = S.days || {}; S.learned = S.learned || []; S.ptr = S.ptr || {}; S.src = S.src || "daily";
+  const ga = (n, o) => { try { window.gtag && gtag("event", n, o || {}); } catch (e) {} };
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   // 날짜는 한국 시간 기준 (홈 '오늘의 한 잔'과 같은 날 바뀜)
@@ -19,6 +20,9 @@
   const SRC_NAME = { daily: "오늘의 한 잔" };
   SRCS.forEach(g => SRC_NAME[g.id] = g.name);
   let open = null;
+  // 홈에서 목표를 고르고 들어온 경우 (?goal=travel)
+  const gq = new URLSearchParams(location.search).get("goal");
+  if (gq && (gq === "daily" || POOL[gq])) { S.src = gq; save(); history.replaceState(null, "", location.pathname + "#routine"); }
 
   function pickItem(src) {
     if (src === "daily" || !POOL[src] || !POOL[src].length) return DAILY.length ? DAILY[DAY % DAILY.length] : null;
@@ -44,7 +48,7 @@
     return r;
   }
   function learn(r) {
-    if (r.l && r.s && !S.learned.some(x => x.d === TODAY && x.en === r.en)) { S.learned.push({ en: r.en, ko: r.ko, a: r.a, d: TODAY }); }
+    if (r.l && r.s && !S.learned.some(x => x.d === TODAY && x.en === r.en)) { S.learned.push({ en: r.en, ko: r.ko, a: r.a, d: TODAY, src: r.src }); }
   }
   function streak() {
     let n = 0, d = DAY - (done(S.days[TODAY]) ? 0 : 1);
@@ -90,9 +94,15 @@
     }
     const said = S.learned.slice().reverse();
     const st = streak();
+    const set = new Set((r.src === "daily" ? DAILY : POOL[r.src] || []).map(x => x.en));
+    const got = new Set(S.learned.filter(x => set.has(x.en)).map(x => x.en)).size, pct = set.size ? Math.round(got / set.size * 100) : 0;
+    S.prog = { src: r.src, name: SRC_NAME[r.src] || "오늘의 한 잔", n: got, t: set.size, streak: st, day: TODAY, done: n === 3 };
+    if (n === 3 && !r.ga) { r.ga = 1; ga("routine_done", { goal: r.src }); }
+    save();
     root.innerHTML = `<section class="rt-card" id="routine">
 <div class="rt-top"><div class="a-kicker">${esc(SRC_NAME[r.src] || "오늘의 한 잔")} · 5분 루틴</div><span class="rt-prog${n === 3 ? " full" : ""}">${n === 3 ? "도장 완료" : n + " / 3"}</span></div>
 <div class="rt-src" role="group" aria-label="연습할 영어 고르기">${[["daily", "오늘의 한 잔"], ...SRCS.map(g => [g.id, g.short])].map(([id, t]) => `<button type="button" data-src="${id}" class="${S.src === id ? "on" : ""}">${esc(t)}</button>`).join("")}</div>
+<div class="rt-bar"><i style="width:${pct}%"></i></div><div class="rt-bar-t"><span>${r.src === "daily" ? "오늘의 한 잔 " + set.size + "잔" : SRC_NAME[r.src] + " " + set.size + "문장"} 중 ${got}개 말해 봄</span><span>${pct}%</span></div>
 <p class="rt-phrase">${w.length ? esc(w.join(" ")) + " " : ""}<span class="hl">${esc(last)}</span></p><p class="rt-mean">${esc(r.ko)}</p>
 <div class="acts">${row("l", "듣기", "원어민 발음 3번 · 1분", r)}${row("s", "말하기", "한국어만 보고 말하고, 녹음해서 비교 · 2분", r)}${row("r", "다시 꺼내기", r.q.ago ? `${r.q.ago}일 전에 말해 본 문장, 기억나요? · 2분` : "방금 배운 문장 한 번 더 · 2분", r)}</div>
 <p class="rt-hint">${n === 3 ? `<b class="lbl">쾅!</b> 오늘 도장을 찍었어요. ${st > 1 ? "연속 " + st + "일째예요." : "내일 또 만나요."}` : '<b class="lbl">도장</b> 세 가지를 다 하면 오늘의 한 잔 도장이 찍혀요'}</p>
@@ -125,7 +135,7 @@ ${deferred && !inapp ? '<button class="rt-b d rt-in-go" data-act="install">홈 �
     const b = ev.target.closest("button"); if (!b) return;
     const r = S.days[TODAY];
     if (b.dataset.guide) { guide = b.dataset.guide; render(); return; }
-    if (b.dataset.src) { if (S.src !== b.dataset.src) { S.src = b.dataset.src; open = null; save(); render(); } return; }
+    if (b.dataset.src) { if (S.src !== b.dataset.src) { S.src = b.dataset.src; open = null; save(); ga("goal_pick", { goal: S.src, from: "notes" }); render(); } return; }
     if (b.dataset.step) { open = open === b.dataset.step ? "" : b.dataset.step; render(); return; }
     if (b.dataset.play) { play(b.dataset.play); return; }
     if (b.dataset.q !== undefined) {

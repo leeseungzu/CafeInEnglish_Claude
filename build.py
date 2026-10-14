@@ -1105,7 +1105,13 @@ def page_home():
     i0 = daily_index(len(slides_data)) if slides_data else 0
     now_k = _t.time() + 9 * 3600
     slides = "".join(slide_html(slides_data[(i0 - k) % len(slides_data)], label(k, now_k)) for k in range(N_SLIDES))
-    hero = f"""<section class="hs" aria-label="오늘의 한 잔">
+    _pool = today_pool()
+    _gp = [("travel", "airplane", "여행"), ("work", "laptop", "회사"), ("life", "world-map", "미국 생활"), ("daily", "hot-beverage", "매일 한 잔")]
+    picker = ('<section class="gp" id="gp" aria-label="지금 필요한 영어 고르기"><p class="gp-q">지금 어떤 영어가 필요하세요? <small>가입 없이 · 무료 · 하루 5분</small></p><div class="gp-row">'
+              + "".join(f'<a class="gp-c" href="/notes/?goal={g}#routine" data-goal="{g}"><img src="/assets/icons/{icn}.webp?v={ASSET_V}" alt="" width="40" height="40"><b>{t}</b>'
+                        f'<small>{(str(len(_pool[g])) + "문장") if g in _pool else "오늘의 한 잔"}</small></a>' for g, icn, t in _gp)
+              + '</div></section>')
+    hero = picker + f"""<section class="hs" aria-label="오늘의 한 잔">
   <div class="hs-track" id="hs-track">{slides}</div>
   <div class="hs-ctl"><button type="button" class="hs-btn" id="hs-prev" aria-label="이전 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="hs-btn" id="hs-next" aria-label="다음 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button><span class="hs-dots" id="hs-dots"></span></div>
 </section>"""
@@ -1184,8 +1190,8 @@ TODAY_GOALS = [
     {"id": "travel", "short": "여행", "name": "해외여행 영어", "desc": "공항·호텔·식당에서 바로 쓰는 말", "icon": "✈", "bg": "#E8F0FB", "series": "travel"},
     {"id": "work", "short": "회사", "name": "회사 영어", "desc": "메일·회의·메신저 한마디", "icon": "✉", "bg": "#EEF3DE", "series": "work"},
     {"id": "life", "short": "미국 생활", "name": "미국 생활 영어", "desc": "은행·병원·길·가게에서 나누는 말", "icon": "⌂", "bg": "#F6E7DA",
-     "posts": ["id-like-to", "doctor", "ask-to-repeat", "excuse-me-sorry", "how-are-you", "asking-directions", "shopping-checkout",
-               "im-good", "would-you-mind", "what-do-you-call", "sorry-to-hear", "this-vs-next", "negative-question", "cafe-order", "restaurant", "travel-trouble"]},
+     "posts": ["how-are-you", "excuse-me-sorry", "ask-to-repeat", "what-do-you-call", "id-like-to", "asking-directions", "shopping-checkout",
+               "im-good", "doctor", "would-you-mind", "negative-question", "this-vs-next", "sorry-to-hear", "travel-trouble"]},
 ]
 
 
@@ -1200,8 +1206,19 @@ def today_pool():
             p = POST_BY_ID.get(pid)
             if not p:
                 continue
-            for ul in re.findall(r'<ul class="ex">(.*?)</ul>', p.get("body_html", ""), re.S):
-                for en, ko in re.findall(r'<span class="en">(.*?)</span><span class="ko">(.*?)</span>', ul, re.S):
+            body = p.get("body_html", "")
+            pairs = []  # (위치, en, ko) — 내가 말할 문장만: 일반 예문, '이렇게 대답해요', 대화 속 '나', 바로 쓰는 문장
+            for m in re.finditer(r'<ul class="ex( ans| talk)?">(.*?)</ul>', body, re.S):
+                ul, talk = m.group(2), m.group(1) == " talk"
+                for li in re.finditer(r'<li( class="[^"]*")?>(.*?)</li>', ul, re.S):
+                    if talk and li.group(1) != ' class="me"':
+                        continue
+                    k = re.search(r'<span class="en">(.*?)</span><span class="ko">(.*?)</span>', li.group(2), re.S)
+                    if k:
+                        pairs.append((m.start() + li.start(), k.group(1), k.group(2)))
+            for m in re.finditer(r'<div class="rep-a"><span class="en">(.*?)</span><span class="ko">(.*?)</span>', body, re.S):
+                pairs.append((m.start(), m.group(1), m.group(2)))
+            for _, en, ko in sorted(pairs):
                     en = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", en))).strip()
                     ko = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", ko))).strip()
                     ko = re.sub(r"\s*\([^)]*\)\s*$", "", ko).strip()  # 끝의 (정중)·(격식 있는 메일) 같은 메모는 빼고
@@ -1209,8 +1226,7 @@ def today_pool():
                         continue
                     seen.add(en)
                     items.append({"en": en, "ko": ko, "a": "/audio/" + AUDIO[en], "p": post_url(p)})
-        # 글 순서대로 몰리지 않게 섞되, 빌드마다 같은 순서 (날짜별 진도가 바뀌지 않도록)
-        items.sort(key=lambda x: hashlib.md5(x["en"].encode()).hexdigest())
+        # 시리즈 글 순서 = 실제 상황 순서 (여행: 기내 → 입국 → 이동 → 호텔 → 카페·식당 → 쇼핑 → 문제 상황)
         pool[g["id"]] = items
     return pool
 

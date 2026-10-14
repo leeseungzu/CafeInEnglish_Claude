@@ -39,6 +39,22 @@
     if (!need && d) d.remove();
   }
   document.addEventListener("ky-routine", routineDot);
+  // 홈: 루틴을 해 본 사람은 '내 진도' 카드, 처음이면 목표 고르기
+  (function homeGoal() {
+    const gp = $("#gp"); if (!gp) return;
+    window.__gpOrig = gp.outerHTML;
+    gp.addEventListener("click", e => { const a = e.target.closest("[data-goal]"); if (a && window.gtag) gtag("event", "goal_pick", { goal: a.dataset.goal, from: "home" }); });
+    let s = null; try { s = JSON.parse(localStorage.getItem("ky_today_v1")) || null; } catch (e) {}
+    const p = s && s.prog; if (!p || !(s.learned || []).length) return;
+    const ICON = { travel: "airplane", work: "laptop", life: "world-map", daily: "hot-beverage" }[p.src] || "hot-beverage";
+    const img = $(".gp-c img", gp).getAttribute("src").replace(/icons\/[a-z-]+\.webp/, "icons/" + ICON + ".webp");
+    const pct = p.t ? Math.round(p.n / p.t * 100) : 0;
+    const todayKey = new Date((Math.floor((Date.now() / 1000 + 9 * 3600) / 86400)) * 864e5).toISOString().slice(0, 10);
+    const doneToday = p.day === todayKey && p.done;
+    gp.innerHTML = `<a class="gp-me" href="/notes/#routine"><img src="${img}" alt=""><span class="gp-t"><b>${esc(p.name)}${p.streak ? " · 연속 " + p.streak + "일" : ""}</b><small>${p.t}개 중 ${p.n}개 말해 봄 · ${pct}%</small><span class="rt-bar"><i style="width:${pct}%"></i></span></span><span class="gp-go">${doneToday ? "기록 보기" : "오늘 5분"}</span></a><button type="button" class="gp-sw">다른 목표 고르기</button>`;
+    const html0 = gp.dataset.orig;
+    $(".gp-sw", gp).onclick = () => { location.href = "/#gp"; gp.outerHTML = window.__gpOrig; };
+  })();
   setTimeout(routineDot, 0);
   function updateBadge() {
     const n = Object.keys(wrong.all()).length;
