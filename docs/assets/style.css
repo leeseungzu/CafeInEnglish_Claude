@@ -1565,8 +1565,8 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 @media (min-width:601px){#today-app:empty{min-height:600px}}
 
 /* ── 메시지·누르는 버튼은 글 페이지처럼 파란색으로 통일 (홈·내 공부방) ── */
-.mq-me,.mq.on .mq-a,.ks-mic,.kx-play,.kx-chips span.on,#today-app .ks-mic,#today-app .rt-said .act-ic{background:#3182F6!important;color:#fff!important}
-.mq-me:hover,.ks-mic:hover,.kx-play:hover{background:#1B64DA!important}
+.mq-me,.mq.on .mq-a{background:#3182F6!important;color:#fff!important}
+.mq-me:hover{background:#1B64DA!important}
 .ks.ok .ks-mic,#today-app .ks.ok .ks-mic{background:#20B26B!important}
 .ks.rec .ks-mic,#today-app .ks.rec .ks-mic{background:#E5484D!important}
 .pc-band .hs .chatv .cv-a span{background:#3182F6;color:#fff}
@@ -1586,3 +1586,22 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 
 /* 예문 상자 바로 뒤에 오는 설명 줄: 상자와 붙지 않게 */
 .ex+.h-sub,.ex+p{margin-top:12px}
+
+/* ── 대화 말풍선만 파란색, 아이콘·번호·기호는 에스프레소 바탕에 흰 글자 ── */
+.ks-mic,.kx-play,.kx-chips span.on,#today-app .ks-mic,#today-app .rt-said .act-ic,.steps3 span,.tv-tile.on .tv-go{background:#2A1A12!important;color:#fff!important}
+.ks-mic:hover,.kx-play:hover{background:#4A3226!important}
+.ks.ok .ks-mic,#today-app .ks.ok .ks-mic{background:#20B26B!important}
+.ks.rec .ks-mic,#today-app .ks.rec .ks-mic{background:#E5484D!important}
+.ex.hear .hn,.ex.ans .hn,.tv-n,.tv-stats b{color:#2A1A12!important}
+#today-app .act.rt-act .act-ic{color:#2A1A12}
+#today-app .rt-bar i,.mq-dots i.on{background:#2A1A12}
+.rt-pl.d{border-color:#2A1A12;color:#2A1A12}
+.rt-pl:hover{background:#2A1A12;border-color:#2A1A12;color:#fff}
+@media (hover:none){.rt-pl.d:hover{background:#fff;border-color:#2A1A12;color:#2A1A12}}
+/* 선택 표시(탭·상황 칩·펼친 단계)도 에스프레소로: 파란색은 '대화'에만 */
+.rt-seg button.on{color:#2A1A12}
+.rt-goals button.on{border-color:#2A1A12;background:#FAFAFA}
+#today-app .act.rt-act.rt-open,#today-app .rt-step.open{box-shadow:inset 0 0 0 1.5px #2A1A12}
+#today-app .rt-step.open{background:#F7F8FA}
+#today-app .ks-done{border-color:#2A1A12;color:#2A1A12}
+#today-app .ks-done:hover{background:#2A1A12;color:#fff}
