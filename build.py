@@ -1138,7 +1138,7 @@ def page_home():
                 f'<a class="mq-btn" href="/notes/#routine">5분 루틴으로 내 것 만들기</a>'
                 f'<a class="mq-link" href="{it["url"]}">왜 이렇게 말할까? 글 읽고 퀴즈 풀기 ›</a></section>')
     mq = mq_html(slides_data[i0], f"{kst.tm_mon}월 {kst.tm_mday}일") if slides_data else ""
-    hero = '<div class="m-home">' + mq + picker + '</div>' + f"""<section class="hs" aria-label="오늘의 한 잔">
+    hero = '<div class="m-home">' + mq + picker + notice_html().replace('class="notice"', 'class="notice m-nt"', 1) + '</div>' + f"""<section class="hs" aria-label="오늘의 한 잔">
   <div class="hs-track" id="hs-track">{slides}</div>
   <div class="hs-ctl"><button type="button" class="hs-btn" id="hs-prev" aria-label="이전 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="hs-btn" id="hs-next" aria-label="다음 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button><span class="hs-dots" id="hs-dots"></span></div>
 </section>"""
