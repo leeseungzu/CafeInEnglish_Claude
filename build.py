@@ -339,6 +339,8 @@ def thumb_num(p):
     return f"No.{order.index(p['id']) + 1:02d}"
 
 
+AUTHOR_NAME = "카영 스터디언"
+AUTHOR_BIO = "미국 이민을 앞두고 온 가족이 함께 영어를 공부하고 있어요. 공부하며 알게 된 걸 정리해 나누고, 여러분과 같이 성장하고 싶어요."
 ORG = {"@type": "Organization", "name": "카페인영어 CafeInEnglish", "url": DOMAIN + "/",
        "logo": {"@type": "ImageObject", "url": DOMAIN + "/assets/icon-512.png"}}
 
@@ -354,7 +356,7 @@ def ld_html(objs):
 def ld_article(title, desc, url, img, date, mod, section, crumbs):
     art = {"@type": "Article", "headline": title[:110], "description": desc, "image": DOMAIN + img,
            "datePublished": date, "dateModified": mod, "inLanguage": "ko", "articleSection": section,
-           "author": ORG, "publisher": ORG, "mainEntityOfPage": DOMAIN + url}
+           "author": {"@type": "Person", "name": AUTHOR_NAME, "url": DOMAIN + "/about/"}, "publisher": ORG, "mainEntityOfPage": DOMAIN + url}
     bc = {"@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": i + 1, "name": n, "item": DOMAIN + u} for i, (n, u) in enumerate(crumbs)]}
     return [art, bc]
@@ -867,6 +869,10 @@ def page_post(p):
 <div class="ws-line"></div><div class="ws-line"></div><div class="ws-line"></div><div class="ws-line"></div>
 <div class="ws-key"><b>정답과 연상법</b><ol>{key}</ol></div>
 <p style="font-size:12px;color:#555">{DOMAIN.replace("https://", "")} · 매일 표현 하나, 같이 공부해요</p></div>""")
+    if p.get("note"):
+        parts.append(f'<div class="study-note"><b class="lbl">스터디 노트</b> {p["note"]}</div>')
+    parts.append(f'<div class="author-box no-print"><img src="/assets/logo-mark.png" alt="" width="44" height="44" loading="lazy">'
+                 f'<div><b>{AUTHOR_NAME}</b><p>{AUTHOR_BIO}</p><a href="/about/">카페인영어 소개 보기</a></div></div>')
     parts.append('<h2 class="rel-h no-print">같이 보면 좋은 글</h2><div class="cards rel list no-print">'
                  + "".join(post_card(o) for o in similar_posts(p, 4)) + "</div>")
     parts.insert(toc_slot, f'<details class="toc-m no-print"><summary>목차 · 퀴즈 바로가기</summary>{toc_html(toc)}</details>')
