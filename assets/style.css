@@ -1504,3 +1504,42 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
   .mq-dots i.on{width:18px;background:#2A1E17}
 }
 @media (max-width:600px){.mq-tr{overflow-y:hidden;transition:height .25s ease}}
+
+/* ── 폰 홈: 말해 보기 · 🔥 연속 기록 · 출근길 듣기 · 다시 꺼내기, 크림톤 대신 깔끔한 무채색 ── */
+.kx{display:none}
+.room .fire{font-weight:800;font-size:13px;color:#E8590C;margin-left:4px}
+@media (max-width:600px){
+  .mq-me{background:#191F28}
+  .mq-ans{background:#F2F4F6}
+  .mq.on .mq-a{background:#191F28;color:#fff;font-size:15px}
+  .ks{display:none;margin-top:12px;border-radius:16px;background:#F2F4F6;padding:12px 14px}
+  .mq.on .ks,.kx-rv .ks{display:block}
+  .ks-row{display:flex;align-items:center;gap:12px}
+  .ks-mic{all:unset;cursor:pointer;flex:none;width:44px;height:44px;border-radius:50%;background:#191F28;color:#fff;display:grid;place-items:center}
+  .ks.rec .ks-mic{background:#E5484D;box-shadow:0 0 0 6px rgba(229,72,77,.18);animation:ksP 1.2s infinite}
+  @keyframes ksP{50%{box-shadow:0 0 0 10px rgba(229,72,77,.08)}}
+  .ks.ok .ks-mic{background:#20B26B}
+  .ks-t{min-width:0;flex:1}
+  .ks-t b{display:block;font-size:14.5px;color:#191F28}
+  .ks-t small{display:block;font-size:12.5px;color:#8B95A1;margin-top:1px}
+  .ks.ok .ks-t b{color:#178A53}.ks.near .ks-t b{color:#C2410C}
+  .ks-done{all:unset;cursor:pointer;flex:none;border:1.5px solid #191F28;border-radius:12px;padding:8px 12px;font-weight:700;font-size:13.5px;color:#191F28}
+  .ks-heard{margin-top:8px;font-size:13px;color:#4E5968;background:#fff;border-radius:10px;padding:7px 10px}
+  .ks-heard em{font-style:normal;font-weight:700;color:#191F28}
+  .kx{display:block}
+  .kx-card{background:#fff;border-radius:24px;padding:18px;margin-top:12px}
+  .kx-row{display:flex;align-items:center;gap:14px}
+  .kx-play{all:unset;cursor:pointer;flex:none;width:52px;height:52px;border-radius:50%;background:#191F28;color:#fff;display:grid;place-items:center}
+  .kx-t{min-width:0;flex:1}
+  .kx-t b{display:block;font-size:16.5px;font-weight:800;color:#191F28}
+  .kx-t small{display:block;font-size:13px;color:#8B95A1;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .kx-chips{display:flex;gap:6px;margin:12px -18px 0;padding:0 18px;overflow-x:auto;scrollbar-width:none}
+  .kx-chips::-webkit-scrollbar{display:none}
+  .kx-chips span{flex:none;cursor:pointer;font-size:12.5px;font-weight:700;background:#F2F4F6;border-radius:999px;padding:6px 11px;color:#4E5968}
+  .kx-chips span.on{background:#191F28;color:#fff}
+  .kx-k{font-size:13px;color:#8B95A1;font-weight:700;margin:0}
+  .kx-ko{font-size:19px;font-weight:800;color:#191F28;margin:6px 0 2px;line-height:1.4;word-break:keep-all}
+  .kx-show{all:unset;cursor:pointer;display:block;margin:12px auto 0;font-size:13.5px;color:#8B95A1;font-weight:600}
+  .kx-ans{margin:10px 0 0;font-family:var(--serif);font-size:24px}
+  .kx-ans b{background:linear-gradient(transparent 62%,#CDEB5B 62%)}
+}

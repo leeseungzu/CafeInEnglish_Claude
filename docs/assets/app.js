@@ -584,3 +584,155 @@
   if (DATA.type === "notes") renderNotes($("#notes-root"));
   if ($("#copy-notes")) renderCopyNotes($("#copy-notes"));
 })();
+
+/* ── 말해 보기 · 🔥 연속 기록 · 출근길 듣기 · 다시 꺼내기 (홈 폰 화면) ── */
+(function () {
+  "use strict";
+  const DAY = Math.floor((Date.now() / 1000 + 9 * 3600) / 86400);
+  const ymd = d => new Date(d * 864e5).toISOString().slice(0, 10);
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const MIC = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>';
+  const PLAY = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>';
+  const PAUSE = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>';
+  const X = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const get = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } };
+  const put = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+  const ga = (n, p) => { if (window.gtag) gtag("event", n, p || {}); };
+
+  // 🔥 연속 기록: 루틴을 끝낸 날 + 홈에서 한 문장이라도 말해 본 날
+  function activeDays() {
+    const set = new Set(get("ky_spoke", []));
+    const s = get("ky_today_v1", {}), days = s.days || {};
+    Object.keys(days).forEach(k => { const r = days[k]; if (r && r.l && r.s && r.r) set.add(Math.round(Date.parse(k) / 864e5)); });
+    return set;
+  }
+  function streak() {
+    const a = activeDays(); let d = a.has(DAY) ? DAY : DAY - 1, n = 0;
+    while (a.has(d)) { n++; d--; }
+    return n;
+  }
+  function fire() {
+    const room = document.querySelector(".room"); if (!room) return;
+    let f = room.querySelector(".fire"); const n = streak();
+    if (!n) { if (f) f.remove(); return; }
+    if (!f) { f = document.createElement("span"); f.className = "fire"; room.insertBefore(f, room.querySelector(".badge")); }
+    f.textContent = "🔥" + n; f.title = n + "일 연속 공부 중";
+  }
+  function spoke() {
+    const a = get("ky_spoke", []); if (a.indexOf(DAY) < 0) { a.push(DAY); put("ky_spoke", a.slice(-60)); }
+    fire(); document.dispatchEvent(new Event("ky-routine"));
+  }
+  document.addEventListener("ky-routine", () => setTimeout(fire, 0));
+  fire();
+
+  // 들린 말과 정답 비교: 단어가 얼마나 겹치나
+  const words = t => String(t).toLowerCase().replace(/[’']/g, "").replace(/~/g, " ").replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(Boolean);
+  function score(target, heard) {
+    const t = words(target); if (!t.length) return 0;
+    let best = 0;
+    heard.forEach(h => { const hw = words(h); const hit = t.filter(w => hw.indexOf(w) > -1).length; best = Math.max(best, hit / t.length); });
+    return best;
+  }
+  let rec = null;
+  function listen(box, target, onDone) {
+    if (rec) { try { rec.abort(); } catch (e) {} rec = null; }
+    const r = new SR(); rec = r;
+    r.lang = "en-US"; r.interimResults = false; r.maxAlternatives = 4;
+    let got = false;
+    box.classList.add("rec");
+    r.onresult = e => { got = true; const alts = [].map.call(e.results[0], a => a.transcript); onDone(score(target, alts), alts[0] || ""); };
+    r.onerror = e => { if (!got) onDone(-1, e.error || ""); got = true; };
+    r.onend = () => { box.classList.remove("rec"); if (!got) onDone(-1, "no-speech"); rec = null; };
+    try { r.start(); } catch (e) { box.classList.remove("rec"); onDone(-1, "start"); }
+  }
+  function sayBox(target, okMsg) {
+    return '<div class="ks" data-t="' + X(target) + '">' + (SR
+      ? '<div class="ks-row"><button type="button" class="ks-mic" aria-label="말하기 시작">' + MIC + '</button><span class="ks-t"><b>이제 직접 말해 보세요</b><small>마이크를 누르고 따라 말하면 바로 알려줘요</small></span></div>'
+      : '<div class="ks-row"><span class="ks-t"><b>소리 내어 3번 따라 말해 보세요</b><small>이 브라우저는 음성 인식이 안 돼요. 크롬이나 사파리에서 열면 말한 걸 확인해 줘요</small></span><button type="button" class="ks-done">말해 봤어요</button></div>')
+      + '</div>';
+  }
+  function result(box, s, heard, onOk) {
+    const t = box.getAttribute("data-t"), row = box.querySelector(".ks-t");
+    let h = box.querySelector(".ks-heard");
+    if (s < 0) {
+      const msg = heard === "not-allowed" || heard === "service-not-allowed" ? "마이크 사용을 허용해 주세요" : "잘 안 들렸어요. 한 번 더 눌러 말해 보세요";
+      row.innerHTML = "<b>" + msg + "</b><small>조용한 곳에서 또박또박 말하면 더 잘 알아들어요</small>";
+      if (h) h.remove(); return;
+    }
+    if (!h) { h = document.createElement("div"); h.className = "ks-heard"; box.appendChild(h); }
+    h.innerHTML = "들린 말: <em>" + X(heard) + "</em>";
+    box.classList.remove("ok", "near");
+    if (s >= .75) { box.classList.add("ok"); row.innerHTML = "<b>정확해요! 오늘 한 문장 말했어요</b><small>다시 말하려면 마이크를 눌러요</small>"; onOk && onOk(); }
+    else if (s >= .4) { box.classList.add("near"); row.innerHTML = "<b>거의 맞았어요!</b><small>정답: " + X(t) + " · 한 번 더 해 볼까요?</small>"; }
+    else row.innerHTML = "<b>조금 달라요</b><small>정답: " + X(t) + " · 듣고 다시 말해 보세요</small>";
+  }
+  function fit() { if (window.KY_W && KY_W.fit) KY_W.fit(); }
+
+  // ① 퀴즈 카드: 정답을 들은 뒤 '말해 보기'
+  const W = window.KY_W, tr = document.getElementById("mq-tr");
+  if (tr && W) {
+    [].forEach.call(tr.querySelectorAll(".mq"), c => {
+      const en = (c.querySelector(".mq-en") || {}).textContent || "";
+      const btn = c.querySelector(".mq-btn");
+      if (btn && en) btn.insertAdjacentHTML("beforebegin", sayBox(en.trim()));
+    });
+    tr.addEventListener("click", e => {
+      const box = e.target.closest(".ks"); if (!box) return;
+      const card = e.target.closest(".mq");
+      const ok = () => { spoke(); ga("quiz_speak_ok", { days_ago: +(card && card.getAttribute("data-k")) || 0 }); };
+      if (e.target.closest(".ks-done")) { box.classList.add("ok"); box.querySelector(".ks-t").innerHTML = "<b>잘했어요! 오늘 한 문장 말했어요</b><small>내일도 한 잔 하러 와요</small>"; ok(); fit(); return; }
+      if (!e.target.closest(".ks-mic")) return;
+      ga("quiz_speak_try");
+      box.querySelector(".ks-t").innerHTML = '<b>듣고 있어요…</b><small>"' + X(box.getAttribute("data-t")) + '" 하고 말해 보세요</small>';
+      listen(box, box.getAttribute("data-t"), (s, heard) => { result(box, s, heard, ok); fit(); });
+    });
+  }
+
+  // ②③ 출근길 듣기 · 다시 꺼내기 (폰 홈, 상황별 고르기 위)
+  const home = document.querySelector(".m-home"), gp = document.getElementById("gp") || (home && home.querySelector(".gp-me"));
+  if (!home || !W || !W.L || !W.L.length) return;
+  const L = W.L, at = k => L[((W.i0 - k) % L.length + L.length) % L.length];
+  const week = Array.from({ length: Math.min(7, L.length) }, (_, k) => at(k)).filter(x => x.au);
+  const old = at(3);
+  const wrap = document.createElement("div"); wrap.className = "kx";
+  wrap.innerHTML =
+    '<section class="kx-card kx-cm"><div class="kx-row"><button type="button" class="kx-play" aria-label="출근길 듣기 재생">' + PLAY + '</button>'
+    + '<span class="kx-t"><b>출근길 듣기 · 약 3분</b><small class="kx-now">이번 주 ' + week.length + '문장을 두 번씩 이어서 들려줘요</small></span></div>'
+    + '<div class="kx-chips">' + week.map((x, i) => '<span data-i="' + i + '">' + X(x.en) + '</span>').join("") + '</div></section>'
+    + (old ? '<section class="kx-card kx-rv"><p class="kx-k">3일 전에 배운 문장</p><p class="kx-ko">"' + X(old.ko) + '"<br>기억나요?</p>'
+      + sayBox(old.en) + '<button type="button" class="kx-show">정답 보기</button><p class="kx-ans" hidden><b>' + X(old.en) + '</b></p></section>' : "");
+  (gp || home.firstChild).parentNode.insertBefore(wrap, gp || null);
+
+  // 출근길 듣기 재생기
+  const cm = wrap.querySelector(".kx-cm"), pb = cm.querySelector(".kx-play"), now = cm.querySelector(".kx-now");
+  const au = new Audio(); let idx = 0, rep = 0, on = false, timer = null;
+  const chips = cm.querySelectorAll(".kx-chips span");
+  function mark() { [].forEach.call(chips, (c, i) => c.className = on && i === idx ? "on" : ""); const c = chips[idx]; if (on && c) c.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" }); }
+  function step() {
+    if (!on) return;
+    if (idx >= week.length) { stop(); now.textContent = "다 들었어요! 내일 또 들어요"; ga("commute_done"); return; }
+    const x = week[idx]; now.textContent = (idx + 1) + "/" + week.length + " · " + x.ko; mark();
+    au.src = x.au; au.play().catch(stop);
+  }
+  au.onended = () => { if (!on) return; rep++; if (rep < 2) timer = setTimeout(() => { au.currentTime = 0; au.play().catch(stop); }, 1500); else { rep = 0; idx++; timer = setTimeout(step, 2200); } };
+  function stop() { on = false; clearTimeout(timer); au.pause(); pb.innerHTML = PLAY; pb.setAttribute("aria-label", "출근길 듣기 재생"); mark(); }
+  pb.addEventListener("click", () => {
+    if (on) { stop(); return; }
+    if (idx >= week.length) idx = 0;
+    on = true; rep = 0; pb.innerHTML = PAUSE; pb.setAttribute("aria-label", "일시정지"); ga("commute_play"); step();
+  });
+  cm.querySelector(".kx-chips").addEventListener("click", e => { const c = e.target.closest("span"); if (!c) return; idx = +c.getAttribute("data-i"); rep = 0; clearTimeout(timer); if (!on) { on = true; pb.innerHTML = PAUSE; } step(); });
+
+  // 다시 꺼내기
+  const rv = wrap.querySelector(".kx-rv");
+  if (rv) rv.addEventListener("click", e => {
+    const ans = rv.querySelector(".kx-ans");
+    if (e.target.closest(".kx-show")) { ans.hidden = false; e.target.closest(".kx-show").hidden = true; if (old.au) { au.src = old.au; au.play().catch(() => {}); } return; }
+    const box = e.target.closest(".ks"); if (!box) return;
+    const ok = () => { spoke(); ans.hidden = false; rv.querySelector(".kx-show").hidden = true; ga("review_speak_ok"); };
+    if (e.target.closest(".ks-done")) { box.classList.add("ok"); box.querySelector(".ks-t").innerHTML = "<b>잘했어요!</b><small>정답을 확인해 보세요</small>"; ok(); return; }
+    if (!e.target.closest(".ks-mic")) return;
+    box.querySelector(".ks-t").innerHTML = "<b>듣고 있어요…</b><small>기억나는 대로 영어로 말해 보세요</small>";
+    listen(box, old.en, (s, heard) => result(box, s, heard, ok));
+  });
+})();
