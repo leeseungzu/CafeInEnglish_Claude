@@ -580,6 +580,22 @@ def mmss(t):
 
 
 # ------------------------------------------------------------------ layout
+SW_JS = """// 카페인영어 홈 화면 앱: 페이지는 항상 새로 받고(없으면 저장본), 글꼴·음성·이미지는 저장해 빠르게
+const C = "ky-v1";
+self.addEventListener("install", e => self.skipWaiting());
+self.addEventListener("activate", e => e.waitUntil(self.clients.claim()));
+self.addEventListener("fetch", e => {
+  const u = new URL(e.request.url);
+  if (e.request.method !== "GET" || u.origin !== location.origin) return;
+  if (u.pathname.startsWith("/assets/") || u.pathname.startsWith("/audio/")) {
+    e.respondWith(caches.open(C).then(c => c.match(e.request).then(r => r || fetch(e.request).then(n => { if (n.ok) c.put(e.request, n.clone()); return n; }))));
+  } else if (e.request.mode === "navigate") {
+    e.respondWith(fetch(e.request).then(n => { const cp = n.clone(); caches.open(C).then(c => c.put(e.request, cp)); return n; }).catch(() => caches.match(e.request)));
+  }
+});
+"""
+
+
 def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og.png", seo_title=None, ld=None, preload="", robots=""):
     full_title = f"{seo_title or title} | 카페인영어" if path != "/" else f"카페인영어 - {SITE['tagline']}"
     # 애드센스: 소유 확인은 meta 태그로, 광고 스크립트(약 200KB)는 첫 스크롤·터치 때(또는 로드 7초 뒤) 불러와요 → 첫 화면 속도 ↑
@@ -627,6 +643,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="icon" href="/assets/icon-192.png" sizes="192x192" type="image/png">
 <meta name="theme-color" content="#FFFFFF">
+<link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="카페인영어"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 {font_head}
 <style>{STYLE_CSS}</style>
 {ads}{ga}
@@ -871,6 +888,7 @@ def page_post(p):
 <p style="font-size:12px;color:#555">{DOMAIN.replace("https://", "")} · 매일 표현 하나, 같이 공부해요</p></div>""")
     if p.get("note"):
         parts.append(f'<div class="study-note"><b class="lbl">스터디 노트</b> {p["note"]}</div>')
+    parts.append(TODAY_CTA)
     parts.append(f'<div class="author-box no-print"><img src="/assets/logo-mark.png" alt="" width="44" height="44" loading="lazy">'
                  f'<div><b>{AUTHOR_NAME}</b><p>{AUTHOR_BIO}</p><span class="ab-links"><a href="/contact/">의견 남기기</a><a href="/about/">카페인영어 소개</a></span></div></div>')
     parts.append('<h2 class="rel-h no-print">같이 보면 좋은 글</h2><div class="cards rel list no-print">'
@@ -1145,6 +1163,7 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
   <section><h2 class="home-h">전체 아티클</h2><div class="cards list" id="all-arts">{arts}</div>{pager}</section>
   <aside class="pop"><h2 class="pop-h">인기 있는 글</h2><ol>{pop_html}</ol></aside>
 </div>
+{TODAY_CTA}
 <section class="series"><h2 class="home-h">아티클 시리즈</h2><div class="sr-grid">{series_html}</div></section>
 """
     vp = None
@@ -1158,6 +1177,60 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
         pre = (f'<link rel="preload" as="image" href="/images/yt/{v}-400.webp?v={yt_ver(v, "-400")}" imagesrcset="/images/yt/{v}-400.webp?v={yt_ver(v, "-400")} 400w, /images/yt/{v}.webp?v={yt_ver(v)} 640w" '
                'imagesizes="(max-width:600px) 92vw, 480px" fetchpriority="high">')
     return layout(SITE["name"], SITE.get("description") or SITE["tagline"], "/", body, wide=True, ld=ld, data={"type": "home", "daily": daily}, preload=pre)
+
+
+TODAY_CTA = ('<a class="today-cta no-print" href="/today/"><span class="tc-ic">5</span><span><b>오늘의 5분 시작하기</b>'
+             '<small>듣고 · 말하고 · 다시 꺼내기. 매일 도장 찍는 영어 루틴</small></span><span class="tc-go">›</span></a>')
+TODAY_GOALS = [
+    {"id": "travel", "name": "곧 해외여행 가요", "desc": "공항·호텔·식당에서 바로 쓰는 말", "icon": "✈", "bg": "#E8F0FB", "series": "travel"},
+    {"id": "work", "name": "회사에서 영어 써요", "desc": "메일·회의·메신저 한마디", "icon": "✉", "bg": "#EEF3DE", "series": "work"},
+    {"id": "life", "name": "미국 생활을 준비해요", "desc": "은행·병원·길·가게에서 나누는 말", "icon": "⌂", "bg": "#F6E7DA",
+     "posts": ["id-like-to", "doctor", "ask-to-repeat", "excuse-me-sorry", "how-are-you", "asking-directions", "shopping-checkout",
+               "im-good", "would-you-mind", "what-do-you-call", "sorry-to-hear", "this-vs-next", "negative-question", "cafe-order", "restaurant", "travel-trouble"]},
+]
+
+
+def today_pool():
+    """목표별 '오늘의 5분' 문장 목록: 시리즈 글 예문 중 원어민 음성이 있는 짧은 문장"""
+    pool = {}
+    sr_posts = {sr["id"]: sr["posts"] for sr in SERIES}
+    for g in TODAY_GOALS:
+        ids = g.get("posts") or sr_posts.get(g.get("series"), [])
+        items, seen = [], set()
+        for pid in ids:
+            p = POST_BY_ID.get(pid)
+            if not p:
+                continue
+            for ul in re.findall(r'<ul class="ex">(.*?)</ul>', p.get("body_html", ""), re.S):
+                for en, ko in re.findall(r'<span class="en">(.*?)</span><span class="ko">(.*?)</span>', ul, re.S):
+                    en = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", en))).strip()
+                    ko = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", ko))).strip()
+                    ko = re.sub(r"\s*\([^)]*\)\s*$", "", ko).strip()  # 끝의 (정중)·(격식 있는 메일) 같은 메모는 빼고
+                    if en in seen or en not in AUDIO or not ko or not 8 <= len(en) <= 60 or any(c in en for c in "→/…") or "..." in en:
+                        continue
+                    seen.add(en)
+                    items.append({"en": en, "ko": ko, "a": "/audio/" + AUDIO[en], "p": post_url(p)})
+        # 글 순서대로 몰리지 않게 섞되, 빌드마다 같은 순서 (날짜별 진도가 바뀌지 않도록)
+        items.sort(key=lambda x: hashlib.md5(x["en"].encode()).hexdigest())
+        pool[g["id"]] = items
+    return pool
+
+
+def page_today():
+    pool = today_pool()
+    goals = [{k: g[k] for k in ("id", "name", "desc", "icon", "bg")} for g in TODAY_GOALS if pool.get(g["id"])]
+    body = ('<div class="chips"><span class="chip">카페인영어 앱</span></div><h1>오늘의 5분</h1>'
+            '<p class="lead">하루 5분, 내 상황에서 말할 수 있는 문장을 하나씩 늘려요. 원어민 발음으로 듣고, 소리 내어 말해 보고, 며칠 뒤 다시 꺼내 봐요.</p>'
+            '<div id="today-app" class="td"><p class="td-ko">불러오는 중…</p></div>'
+            '<noscript><p>오늘의 5분은 자바스크립트가 켜져 있어야 동작해요.</p></noscript>'
+            '<section class="td-how"><h2>이렇게 공부해요</h2><ol>'
+            '<li><b>듣기 1분</b> · 오늘의 문장을 원어민 음성으로 세 번 들어요. 느리게도 들을 수 있어요.</li>'
+            '<li><b>말하기 2분</b> · 한국어만 보고 영어로 소리 내어 말해요. 녹음해서 원어민 발음과 번갈아 들어 봐요.</li>'
+            '<li><b>다시 꺼내기 2분</b> · 3일 전, 7일 전에 배운 문장을 퀴즈로 다시 떠올려요. 잊을 때쯤 다시 보면 오래 남아요.</li>'
+            '</ol><p>세 단계를 마치면 오늘 도장이 찍히고, \'내 기록\'에 이번 주 도장과 말해 본 문장이 쌓여요. 가입 없이 쓰고, 기록은 이 기기의 브라우저에만 저장돼요.</p></section>'
+            f'<script src="/assets/today.js?v={ASSET_V}" defer></script>')
+    return layout("오늘의 5분 - 매일 도장 찍는 영어 루틴", "하루 5분, 원어민 발음 듣기와 따라 말하기, 며칠 뒤 다시 꺼내는 퀴즈로 여행·회사·미국 생활 영어 문장을 매일 하나씩 내 것으로 만드는 카페인영어 루틴이에요.",
+                  "/today/", body, "", {"type": "today", "pool": pool, "goals": goals}, wide=False, seo_title="오늘의 5분 - 매일 5분 영어 루틴")
 
 
 def page_notes():
@@ -1449,6 +1522,14 @@ def build():
     for sr in SERIES:
         write(f"/series/{sr['id']}/", page_series(sr)); pages.append(f"/series/{sr['id']}/")
     write("/notes/", page_notes())
+    write("/today/", page_today()); pages.append("/today/")
+    (OUT / "manifest.webmanifest").write_text(json.dumps({
+        "name": "카페인영어 - 오늘의 5분", "short_name": "카페인영어", "lang": "ko", "start_url": "/today/?src=app", "scope": "/",
+        "display": "standalone", "background_color": "#FAF8F5", "theme_color": "#FAF8F5",
+        "description": "하루 5분, 듣고 말하고 다시 꺼내는 영어 루틴",
+        "icons": [{"src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png"},
+                  {"src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png"}]}, ensure_ascii=False, indent=1), "utf-8")
+    (OUT / "sw.js").write_text(SW_JS, "utf-8")
     if (ROOT / "images").exists():  # 빌드 중 새로 만든 유튜브 썸네일까지 다시 복사
         shutil.copytree(ROOT / "images", OUT / "images", dirs_exist_ok=True)
     write("/about/", page_static("about", "카페인영어 소개", "유튜브 카페인영어를 운영하는 제가 직접 공부하며 정리한 영어표현 사이트예요. 영상 복습, 원어민 발음 듣기, 퀴즈와 오답노트, 여행·회사 영어 시리즈를 소개해요.", ABOUT)); pages.append("/about/")
