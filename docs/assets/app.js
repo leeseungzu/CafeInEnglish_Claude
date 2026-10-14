@@ -676,6 +676,7 @@
       const btn = c.querySelector(".mq-btn");
       if (btn && en) btn.insertAdjacentHTML("beforebegin", sayBox(en.trim()));
     });
+    fit();
     tr.addEventListener("click", e => {
       const box = e.target.closest(".ks"); if (!box) return;
       const card = e.target.closest(".mq");
