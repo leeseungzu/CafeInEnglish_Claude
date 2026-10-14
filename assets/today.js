@@ -16,7 +16,12 @@
   const ymd = n => new Date(n * 864e5).toISOString().slice(0, 10);
   const TODAY = ymd(DAY);
   const ago = s => Math.round((new Date(TODAY) - new Date(s)) / 864e5);
-  const done = r => !!(r && r.l && r.s && r.r);
+  const done0 = r => !!(r && r.l && r.s && r.r);
+  S.stamps = S.stamps || []; S.runs = S.runs || {};
+  Object.keys(S.days).forEach(k => { if (done0(S.days[k]) && S.stamps.indexOf(k) < 0) S.stamps.push(k); });
+  Object.keys(S.runs).forEach(k => { if (k.slice(0, 10) !== new Date(Math.floor((Date.now() / 1000 + 9 * 3600) / 86400) * 864e5).toISOString().slice(0, 10)) delete S.runs[k]; });
+  // 날짜 문자열(s)이면 그날 도장이 있는지, 기록(r)이면 세 단계를 다 했는지
+  const done = x => typeof x === "string" ? S.stamps.indexOf(x) > -1 : done0(x);
   const SRC_NAME = { daily: "오늘의 한 잔" };
   SRCS.forEach(g => SRC_NAME[g.id] = g.name);
   let open = null;
@@ -32,6 +37,7 @@
   }
   function today() {
     let r = S.days[TODAY];
+    if (r && r.src !== S.src) { S.runs[TODAY + "|" + r.src] = r; const back = S.runs[TODAY + "|" + S.src]; if (back) { r = S.days[TODAY] = back; return r; } }
     if (!r || r.src !== S.src) {
       const it = pickItem(S.src);
       if (!it) return null;
@@ -51,8 +57,8 @@
     if (r.l && r.s && !S.learned.some(x => x.d === TODAY && x.en === r.en)) { S.learned.push({ en: r.en, ko: r.ko, a: r.a, d: TODAY, src: r.src }); }
   }
   function streak() {
-    let n = 0, d = DAY - (done(S.days[TODAY]) ? 0 : 1);
-    while (done(S.days[ymd(d)])) { n++; d--; }
+    let n = 0, d = DAY - (done(TODAY) ? 0 : 1);
+    while (done(ymd(d))) { n++; d--; }
     return n;
   }
   let cur = null;
@@ -69,7 +75,7 @@
   };
   function row(k, t, sub, r) {
     const ok = r[k], isOpen = open === k;
-    return `<button type="button" class="act rt-act${ok ? " rt-done" : ""}${isOpen ? " rt-open" : ""}" data-step="${k}"><span class="act-ic">${IC[k]}</span><span class="act-t"><b>${t}</b><small>${sub}</small></span><span class="act-r">${ok ? '<span class="rt-ok">✓</span>' : '<i class="chev">›</i>'}</span></button>${isOpen ? '<div class="rt-panel">' + panel(k, r) + "</div>" : ""}`;
+    return `<div class="rt-step${isOpen ? " open" : ""}"><button type="button" class="act rt-act${ok ? " rt-done" : ""}${isOpen ? " rt-open" : ""}" data-step="${k}"><span class="act-ic">${IC[k]}</span><span class="act-t"><b>${t}</b><small>${sub}</small></span><span class="act-r">${ok ? '<span class="rt-ok">✓</span>' : '<i class="chev">›</i>'}</span></button>${isOpen ? '<div class="rt-panel">' + panel(k, r) + "</div>" : ""}</div>`;
   }
   function panel(k, r) {
     if (k === "l") return `<div class="rt-3"><button class="rt-pl d" data-act="listen">▶ 3번 듣기</button><button class="rt-pl" data-act="slow">천천히 듣기</button><a class="rt-pl" href="${r.p}">자세히 배우기</a></div>`;
@@ -89,7 +95,7 @@
     const mon = DAY - ((new Date(TODAY).getUTCDay() + 6) % 7);
     let wk = "", cnt = 0;
     for (let k = 0; k < 7; k++) {
-      const s = ymd(mon + k), d = S.days[s], ok = done(d); if (ok) cnt++;
+      const s = ymd(mon + k), ok = done(s); if (ok) cnt++;
       wk += `<div class="rt-dy${ok ? " on" : ""}${s === TODAY ? " td" : ""}"><i>${ok ? `<img src="${CUP}" alt="도장" width="28" height="28">` : ""}</i>${"월화수목금토일"[k]}</div>`;
     }
     const said = S.learned.slice().reverse();
@@ -97,16 +103,19 @@
     const set = new Set((r.src === "daily" ? DAILY : POOL[r.src] || []).map(x => x.en));
     const got = new Set(S.learned.filter(x => set.has(x.en)).map(x => x.en)).size, pct = set.size ? Math.round(got / set.size * 100) : 0;
     S.prog = { src: r.src, name: SRC_NAME[r.src] || "오늘의 한 잔", n: got, t: set.size, streak: st, day: TODAY, done: n === 3 };
+    if (n === 3 && S.stamps.indexOf(TODAY) < 0) S.stamps.push(TODAY);
     if (n === 3 && !r.ga) { r.ga = 1; ga("routine_done", { goal: r.src }); }
+    const stamped = done(TODAY);
     save();
     root.innerHTML = `<section class="rt-card${open === "s" && !r.s ? " hide-en" : ""}" id="routine">
-<div class="rt-top"><div class="a-kicker">${esc(SRC_NAME[r.src] || "오늘의 한 잔")} · 5분 루틴</div><span class="rt-prog${n === 3 ? " full" : ""}">${n === 3 ? "도장 완료" : n + " / 3"}</span></div>
+<div class="rt-top"><div class="a-kicker">${esc(SRC_NAME[r.src] || "오늘의 한 잔")} · 5분 루틴</div><span class="rt-prog${n === 3 ? " full" : ""}">${n === 3 ? "도장 완료" : (stamped ? "☕ " : "") + n + " / 3"}</span></div>
 <div class="rt-seg" role="tablist" aria-label="연습할 문장 고르기"><button type="button" role="tab" data-src="daily" class="${S.src === "daily" ? "on" : ""}">☕ 오늘의 한 잔</button><button type="button" role="tab" data-seg="sit" class="${S.src !== "daily" ? "on" : ""}">상황별 문장</button></div>
 ${S.src !== "daily" ? `<div class="rt-goals">${SRCS.map(g => `<button type="button" data-src="${g.id}" class="${S.src === g.id ? "on" : ""}">${g.icon ? `<img src="${g.icon}" alt="" width="26" height="26">` : ""}<span>${esc(g.short)}</span></button>`).join("")}</div>` : ""}
 <div class="rt-bar"><i style="width:${pct}%"></i></div><div class="rt-bar-t"><span>${r.src === "daily" ? "오늘의 한 잔 " + set.size + "잔" : SRC_NAME[r.src] + " " + set.size + "문장"} 중 ${got}개 말해 봄</span><span>${pct}%</span></div>
 <div class="rt-pbox"><div><p class="rt-phrase">${w.length ? esc(w.join(" ")) + " " : ""}<span class="hl">${esc(last)}</span></p><p class="rt-mean">${esc(r.ko)}</p></div><button type="button" class="rt-spk" data-play="${r.a}" aria-label="발음 듣기"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></button></div>
 <div class="acts">${row("l", "듣기", "원어민 발음 3번 · 1분", r)}${row("s", "말하기", "한국어만 보고 말하면 바로 확인해 줘요 · 2분", r)}${row("r", "복습하기", r.q.ago ? `${r.q.ago}일 전에 말해 본 문장, 기억나요? · 2분` : "방금 배운 문장 한 번 더 · 2분", r)}</div>
-<p class="rt-hint">${n === 3 ? `<b class="lbl">쾅!</b> 오늘 도장을 찍었어요. ${st > 1 ? "연속 " + st + "일째예요." : "내일 또 만나요."}` : '<b class="lbl">도장</b> 듣기·말하기·복습을 다 하면 오늘 도장이 찍혀요'}</p>
+<p class="rt-hint">${n === 3 ? `<b class="lbl">쾅!</b> 오늘 도장을 찍었어요. ${st > 1 ? "연속 " + st + "일째예요." : "내일 또 만나요."}` : stamped ? '<b class="lbl">도장</b> 오늘 도장은 이미 찍혔어요. 편하게 한 번 더 연습해요' : '<b class="lbl">도장</b> 듣기·말하기·복습을 다 하면 오늘 도장이 찍혀요'}</p>
+${n ? '<button type="button" class="rt-again" data-act="again">↻ 처음부터 한 번 더 연습하기</button>' : ""}
 </section>
 <h2 class="rt-h">이번 주 한 잔 도장 <small>${st ? "연속 " + st + "일 · " : ""}이번 주 ${cnt}잔</small></h2><div class="rt-week">${wk}</div>
 <h2 class="rt-h">말해 본 문장 <small>${said.length}개</small></h2>
@@ -154,6 +163,7 @@ ${installCard()}`;
       return;
     }
     const act = b.dataset.act;
+    if (act === "again") { r.l = r.s = r.r = 0; if (r.q) r.q.done = 0; open = "l"; save(); render(); document.getElementById("routine")?.scrollIntoView({ block: "start", behavior: "smooth" }); return; }
     if (act === "listen") { b.textContent = "듣는 중…"; play(r.a, 1, 3, () => { r.l = 1; learn(r); save(); open = null; render(); }); }
     if (act === "slow") play(r.a, .75, 1);
     if (act === "reveal") { const c = document.getElementById("routine"); if (c) c.classList.remove("hide-en"); }

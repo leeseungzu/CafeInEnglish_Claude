@@ -1632,3 +1632,45 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 #notes-root .btn.primary{background:transparent;color:#2A1A12;border:1.5px solid #2A1A12;box-shadow:none}
 #notes-root .btn.primary:hover{background:#2A1A12;color:#fff}
 @media (hover:none){#notes-root .btn.primary:hover{background:transparent;color:#2A1A12}}
+
+/* ── 내 공부방 2: 펼친 단계를 한 묶음으로 · 한 번 더 연습 · 오답노트·필사도 같은 결 ── */
+#today-app .rt-step.open{background:#F7F8FA;border-radius:18px;box-shadow:inset 0 0 0 1.5px #2A1A12}
+#today-app .rt-step.open .act.rt-act{background:transparent;box-shadow:none}
+#today-app .rt-step.open .rt-panel{padding:0 14px 14px}
+#today-app .rt-step.open .ks{background:#fff}
+#today-app .rt-step.open .rt-pl{background:#fff}
+#today-app .rt-step.open .rt-pl:hover{background:#2A1A12}
+@media (hover:none){#today-app .rt-step.open .rt-pl:hover{background:#fff}}
+#today-app .rt-step.open .rt-q{margin-top:0}
+#today-app .rt-step.open .rt-qz button{background:#fff}
+.rt-again{all:unset;cursor:pointer;display:block;margin:10px auto 0;font-size:13.5px;font-weight:700;color:#4E5968;padding:6px 10px;border-radius:10px}
+.rt-again:hover{background:#F2F4F6;color:#191F28}
+.nb-h{font-size:19px;margin:30px 2px 12px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.nb-h small{font-size:13px;color:#8B95A1;font-weight:700}
+.nb-band .empty{background:#fff;border-radius:24px;padding:28px 18px;color:#8B95A1;font-size:14.5px;line-height:1.7}
+.nb-band #notes-root .btn.primary{display:block;text-align:center;width:100%;box-sizing:border-box;background:#fff;border:1.5px solid #2A1A12;color:#2A1A12;border-radius:16px;padding:14px;margin-top:10px;font-weight:800}
+.nb-band #notes-root .btn.primary:hover{background:#2A1A12;color:#fff}
+@media (hover:none){.nb-band #notes-root .btn.primary:hover{background:#fff;color:#2A1A12}}
+.nb-band .stats{gap:8px;margin:0 0 8px}
+.nb-band .stat{background:#fff;border:0;border-radius:20px;padding:16px 8px 14px}
+.nb-band .stat .n{font-size:26px;font-weight:850;color:#2A1A12;letter-spacing:-.02em}
+.nb-band .stat .l{font-size:12.5px;color:#8B95A1;font-weight:600;margin-top:2px}
+.nb-band .weak{background:#fff;border-radius:16px;padding:13px 16px;margin:0 0 10px;color:#4E5968;font-size:14px}
+.nb-band .weak b{color:#191F28}
+.nb-band .weak a{color:#2A1A12;text-decoration:underline;text-underline-offset:3px}
+.nb-band .note{background:#fff;border:0;border-radius:24px;padding:18px}
+.nb-band .note-list{margin-top:12px}
+.nb-band .note .chip{background:#F2F4F6!important;color:#4E5968!important;border:0}
+.nb-band .note-top span:last-child{font-weight:700;color:#E5484D}
+.nb-band .note h3{font-size:16.5px;line-height:1.5}
+.nb-band .ans .mine,.nb-band .ans .right{border-radius:12px}
+.nb-band .ans .mine{background:#FFF1F1}.nb-band .ans .mine b{color:#E5484D}
+.nb-band .ans .right{background:#EEF8E6}.nb-band .ans .right b{color:#178A53}
+.nb-band .note summary{color:#2A1A12}
+.nb-band .note .src{color:#8B95A1}
+.nb-band .btn.danger{display:block;margin:14px auto 0}
+.nb-band .quote{background:#fff;border:0;border-radius:24px}
+.nb-band .stats{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+.nb-band #notes-root .btn.primary{background:#fff!important;color:#2A1A12!important;border:1.5px solid #2A1A12!important}
+@media (hover:hover){.nb-band #notes-root .btn.primary:hover{background:#2A1A12!important;color:#fff!important}}
+.nb-band .stats{max-width:none!important}

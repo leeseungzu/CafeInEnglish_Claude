@@ -30,11 +30,11 @@
     t.textContent = msg; t.classList.add("show"); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 1800);
   }
   function routineDot() {
-    let r = null;
-    try { const s = JSON.parse(localStorage.getItem("ky_today_v1")) || {}; r = (s.days || {})[new Date((Math.floor((Date.now() / 1000 + 9 * 3600) / 86400)) * 864e5).toISOString().slice(0, 10)]; } catch (e) {}
+    let r = null, st = false;
+    try { const s = JSON.parse(localStorage.getItem("ky_today_v1")) || {}, k = new Date((Math.floor((Date.now() / 1000 + 9 * 3600) / 86400)) * 864e5).toISOString().slice(0, 10); r = (s.days || {})[k]; st = (s.stamps || []).indexOf(k) > -1; } catch (e) {}
     const room = $(".room"); if (!room) return;
     let d = $(".rt-dot", room);
-    const need = !(r && r.l && r.s && r.r);
+    const need = !st && !(r && r.l && r.s && r.r);
     if (need && !d) { d = document.createElement("span"); d.className = "rt-dot"; d.title = "오늘의 한 잔 루틴이 남았어요"; room.appendChild(d); }
     if (!need && d) d.remove();
   }
@@ -604,6 +604,7 @@
     const set = new Set(get("ky_spoke", []));
     const s = get("ky_today_v1", {}), days = s.days || {};
     Object.keys(days).forEach(k => { const r = days[k]; if (r && r.l && r.s && r.r) set.add(Math.round(Date.parse(k) / 864e5)); });
+    (s.stamps || []).forEach(k => set.add(Math.round(Date.parse(k) / 864e5)));
     return set;
   }
   function streak() {
