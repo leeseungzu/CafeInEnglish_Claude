@@ -1356,7 +1356,7 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
   .hs-art{display:block;order:4;margin:2px 0 14px}
   .hs-txt .a-desc{display:none}
   .hs-btns{order:5}
-  .hs-art .chatv,.hs-art .chatv.big{aspect-ratio:auto!important;height:auto;background:none!important;display:block;border-radius:0;overflow:visible}
+  .hs-art .chatv,.hs-art .chatv.big{aspect-ratio:auto!important;height:auto;display:block;border-radius:0;overflow:visible}
   .hs-art .cv-card,.hs-art .chatv.big .cv-card{width:auto;transform:none;background:none;box-shadow:none;backdrop-filter:none;padding:0;border-radius:0;gap:6px}
   .hs-art .cv-lbl,.hs-art .cv-ko,.hs-art .cv-ic,.hs-art .cv-yt{display:none}
   .hs-art .cv-q,.hs-art .chatv.big .cv-q{display:block;font-size:14px;padding:7px 12px;border-radius:14px 14px 14px 4px;max-width:85%}
@@ -1376,3 +1376,42 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
   .hs-art .cv-q,.hs-art .chatv.big .cv-q{font-size:13px;padding:6px 11px}
   .hs-art .cv-a span,.hs-art .chatv.big .cv-a span{font-size:14px;padding:7px 12px}
 }
+
+/* 폰(381px 이상): 원래 대화 카드 느낌 살리기 — 노란 그라데이션 배경 + 흰 카드 + 은은한 그림자 + 작은 3D 아이콘 */
+@media (max-width:600px){
+  .hs-art .chatv,.hs-art .chatv.big{position:relative;border-radius:20px;padding:12px}
+  .hs-art .cv-card,.hs-art .chatv.big .cv-card{background:rgba(255,255,255,.88);box-shadow:0 6px 18px rgba(30,40,70,.10);border-radius:16px;padding:10px 12px 11px;gap:5px;margin-left:22px}
+  .hs-art .cv-lbl{display:block;font-size:11.5px;font-weight:700;color:#8B95A1;margin:0 0 2px}
+  .hs-art .cv-ic{display:block;position:absolute;left:6px;bottom:6px;width:38px;height:38px}
+  .hs-art .cv-q,.hs-art .chatv.big .cv-q{font-size:13.5px;padding:6px 11px}
+  .hs-art .cv-a span,.hs-art .chatv.big .cv-a span{font-size:14.5px;padding:7px 12px}
+}
+
+
+@media (max-width:600px){
+  .hs-art .cv-ko{display:block;text-align:right;font-size:12px;color:#8B95A1;font-weight:600;margin-top:1px}
+  .hs-art .cv-yt{display:none}
+}
+
+/* 폰 첫 화면 한 장 맞추기: 목표 카드는 한 줄 칩형으로 낮게, 대화 카드는 촘촘하게 */
+@media (max-width:600px){
+  .gp{margin:0 0 12px;padding-bottom:12px}
+  .gp-q{font-size:16px;margin-bottom:8px}.gp-q small{font-size:11.5px}
+  .gp-row{gap:6px}
+  .gp-c{flex-direction:row;justify-content:center;gap:5px;padding:9px 4px;border-radius:14px}
+  .gp-c img{width:22px;height:22px}.gp-c b{font-size:13.5px}.gp-c small{display:none}
+  .hs-txt .a-phrase{font-size:42px;margin:4px 0 6px}
+  .hs-txt .a-mean{margin-bottom:8px}
+  .hs-art{margin:0 0 10px}
+  .hs-art .chatv,.hs-art .chatv.big{padding:9px}
+  .hs-art .cv-card,.hs-art .chatv.big .cv-card{padding:8px 10px 9px;gap:4px;margin-left:18px}
+  .hs-art .cv-lbl{font-size:11px;margin:0}
+  .hs-art .cv-ic{width:32px;height:32px;left:5px;bottom:5px}
+  .hs-art .cv-q,.hs-art .chatv.big .cv-q{font-size:13px;padding:5px 10px}
+  .hs-art .cv-a span,.hs-art .chatv.big .cv-a span{font-size:14px;padding:6px 11px}
+  .hs-art .cv-ko{font-size:11.5px;margin:0}
+}
+@media (max-width:380px){ .gp-c b{font-size:12.5px} .gp-c img{width:18px;height:18px} .gp-c{gap:3px;padding:8px 2px} .hs-txt .a-phrase{font-size:38px} }
+
+@media (max-width:600px){ .gp-c b{white-space:nowrap;font-size:13px} .gp-c img{width:20px;height:20px} .gp-c{gap:4px;padding:9px 2px} }
+@media (max-width:380px){ .gp-c b{font-size:12.5px} .gp-c img{width:18px;height:18px} }
