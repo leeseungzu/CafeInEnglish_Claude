@@ -39,6 +39,15 @@
     if (!need && d) d.remove();
   }
   document.addEventListener("ky-routine", routineDot);
+  // 오른쪽 아래 + 버튼: 스크롤하는 동안 숨기고, 멈추면 다시 보이기 (메뉴가 열려 있을 땐 그대로)
+  (function fabScroll() {
+    const fab = $("#fab"); if (!fab) return;
+    let t;
+    addEventListener("scroll", () => {
+      const m = $(".fab-main", fab); if (m && m.getAttribute("aria-expanded") === "true") return;
+      fab.classList.add("fab-hide"); clearTimeout(t); t = setTimeout(() => fab.classList.remove("fab-hide"), 600);
+    }, { passive: true });
+  })();
   // 홈: 루틴을 해 본 사람은 '내 진도' 카드, 처음이면 목표 고르기
   (function homeGoal() {
     const gp = $("#gp"); if (!gp) return;

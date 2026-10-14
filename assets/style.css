@@ -1315,3 +1315,23 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 }
 .gp-go{white-space:nowrap}
 @media (max-width:600px){.gp-me{flex-wrap:wrap;row-gap:12px}.gp-me .gp-t{flex:1 1 calc(100% - 56px)}.gp-me .gp-go{margin-left:52px;font-size:13.5px}}
+
+/* ---------- 홈 다듬기 (2026-10-14) ---------- */
+/* 4. 상단 '내 공부방' 옆엔 오늘 루틴 점만 (오답 수는 내 공부방 안에서) */
+.room .badge{display:none!important}
+/* 5·6. 목표 고르기: PC에서 본문 너비를 꽉 채우고, 질문을 키우고, 오늘의 한 잔과 확실히 구분 */
+.gp{margin:8px 0 34px;padding-bottom:30px;border-bottom:1px solid var(--line)}
+.gp-q{font-size:19px;margin-bottom:14px}
+@media (min-width:900px){.gp-row{grid-template-columns:repeat(4,minmax(0,1fr))}.gp-q{font-size:22px}.gp-c{padding:16px 6px 14px}.gp-c img{width:44px;height:44px}.gp-c b{font-size:15.5px}.gp-c small{font-size:12.5px}}
+/* 2. 모바일: 오늘의 표현(글·버튼)을 먼저, 대화 그림은 작게 아래로 */
+@media (max-width:859px){.hs-art{order:1}.hs-art .chatv{aspect-ratio:16/9}.hs-txt{padding-bottom:0}}
+/* 3. 오른쪽 아래 + 버튼: 스크롤하는 동안 숨겼다가 멈추면 다시 */
+.fab{transition:opacity .2s,transform .2s}
+.fab.fab-hide{opacity:0;transform:translateY(16px);pointer-events:none}
+/* 1. 폰(마우스 없는 기기)에서는 누른 뒤 '커서 올린 모양'이 남지 않게 */
+@media (hover:none){
+  .gp-c:hover,.gp-me:hover{border-color:var(--line);transform:none}
+  .gp-me:hover .gp-go,.gp-go:hover,.hs-btns .btn.hs-rt:hover,.hs-btns .btn.ghost:hover,.rt-b.d:hover{background:transparent!important;color:var(--text)!important;border-color:var(--text)!important}
+  .rt-b:hover,.rt-in-tabs button:not(.on):hover,.rt-src button:not(.on):hover,.rt-in-tabs .rt-in-go:hover{border-color:var(--line)!important;color:var(--muted)!important}
+  .rt-qz button:not(.right):not(.wrong):hover{border-color:var(--line)}
+}
