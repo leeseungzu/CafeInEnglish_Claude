@@ -1548,3 +1548,12 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
   .mq-me,.mq.on .mq-a,.ks-mic,.kx-play,.kx-chips span.on{background:#2A1A12}
   .ks.ok .ks-mic{background:#20B26B}.ks.rec .ks-mic{background:#E5484D}
 }
+/* PC 홈: 오늘의 한 잔을 흰 카드로 올려 글자를 또렷하게, 말풍선은 에스프레소, '다른 목표 고르기'는 진행 카드 오른쪽 */
+@media (min-width:601px){
+  .pc-band .hs{background:#fff!important;border-radius:24px;padding:30px 30px 22px!important}
+  .pc-band .hs .hs-btn{background:#F2F4F6}
+  .pc-band .hs .chatv .cv-a span{background:#2A1A12}
+  .pc-band .gp:has(.gp-me){display:flex;align-items:center;gap:14px}
+  .pc-band .gp:has(.gp-me) .gp-me{flex:1;border:0}
+  .pc-band .gp-sw{margin:0!important;white-space:nowrap;font-size:13px}
+}
