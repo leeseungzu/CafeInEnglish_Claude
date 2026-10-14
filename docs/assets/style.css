@@ -1415,3 +1415,41 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 
 @media (max-width:600px){ .gp-c b{white-space:nowrap;font-size:13px} .gp-c img{width:20px;height:20px} .gp-c{gap:4px;padding:9px 2px} }
 @media (max-width:380px){ .gp-c b{font-size:12.5px} .gp-c img{width:18px;height:18px} }
+
+/* ── 폰 홈: 토스 카드형 오늘의 한 잔 퀴즈 (PC는 기존 슬라이드 그대로) ── */
+.m-home{display:contents}
+.mq{display:none}
+@media (max-width:600px){
+  .m-home{display:block;margin:-16px calc(50% - 50vw) 0;padding:12px 16px 18px;background:#F2F4F6}
+  .hs{display:none}
+  .mq{display:block;background:#fff;border-radius:24px;padding:20px 18px 18px}
+  .mq-k{display:flex;justify-content:space-between;font-size:13.5px;font-weight:700;color:#8B95A1;margin:0}
+  .mq-h{font-size:24px;font-weight:850;letter-spacing:-.035em;line-height:1.38;margin:8px 0 16px;color:#191F28;word-break:keep-all}
+  .mq-ans{display:none;align-items:center;justify-content:space-between;gap:10px;background:#F9FAFB;border-radius:16px;padding:12px 14px 12px 16px;margin-bottom:12px}
+  .mq-en{font-family:var(--serif);font-size:32px;font-weight:700;letter-spacing:-.03em;line-height:1.1;color:#191F28}
+  .mq-sp{all:unset;flex:none;cursor:pointer;width:38px;height:38px;border-radius:50%;background:#fff;color:#191F28;display:grid;place-items:center;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  .mq-chat{display:flex;flex-direction:column;gap:8px}
+  .mq-q{align-self:flex-start;background:#F2F4F6;border-radius:18px 18px 18px 5px;padding:9px 13px;font-size:15px;max-width:86%;color:#191F28}
+  .mq-me{all:unset;cursor:pointer;align-self:flex-end;background:#E8F3FF;color:#1B64DA;border-radius:18px 18px 5px 18px;padding:10px 15px;font-size:15px;font-weight:700}
+  .mq-a{display:none;align-self:flex-end;background:#191F28;color:#fff;border-radius:18px 18px 5px 18px;padding:10px 15px;font-size:16px;font-weight:700;max-width:86%}
+  .mq-qk{display:none;align-self:flex-end;font-size:12.5px;color:#8B95A1;margin-top:-3px}
+  .mq-btn{display:none;text-align:center;margin-top:16px;border:1.5px solid #191F28;border-radius:14px;padding:14px;font-weight:700;font-size:15.5px;color:#191F28;background:transparent}
+  .mq-link{display:none;text-align:center;margin-top:12px;font-size:13.5px;color:#8B95A1}
+  .mq.on .mq-ans{display:flex}.mq.on .mq-a,.mq.on .mq-qk,.mq.on .mq-btn,.mq.on .mq-link{display:block}.mq.on .mq-me{display:none}
+  .mq.on .mq-ans{animation:mqIn .35s ease}
+  @keyframes mqIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  /* 상황별 고르기: 흰 카드 + 토스식 한 줄 목록 */
+  .m-home .gp{background:#fff;border-radius:24px;padding:18px 18px 8px;margin:12px 0 0;border:0}
+  .m-home .gp-q{font-size:17px;font-weight:800;margin:0 0 4px}.m-home .gp-q small{display:none}
+  .m-home .gp-row{display:block}
+  .m-home .gp-c{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:14px;padding:11px 0;border:0;border-radius:0;background:none;text-align:left;position:relative}
+  .m-home .gp-c img{width:30px;height:30px}
+  .m-home .gp-c b{font-size:15.5px;white-space:nowrap}
+  .m-home .gp-c small{display:block;font-size:13px;color:#8B95A1;margin:0 0 0 auto;padding-right:18px}
+  .m-home .gp-c::after{content:"›";position:absolute;right:0;top:50%;transform:translateY(-52%);color:#B0B8C1;font-size:20px}
+  .m-home .gp-c:hover{transform:none}
+  .m-home .gp-me{margin:12px 0 0;background:#fff;border-radius:24px}
+  .mq-btn:hover{background:#191F28;color:#fff}
+}
+@media (max-width:600px) and (hover:none){.mq-btn:hover{background:transparent;color:#191F28}}
+@media (max-width:600px){.mq-btn,.mq-link{text-decoration:none!important}}
