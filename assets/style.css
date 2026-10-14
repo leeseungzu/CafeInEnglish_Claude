@@ -1306,3 +1306,12 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 .rt-in-tabs .rt-in-go{all:unset;cursor:pointer;font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px;border:1.5px solid var(--line);color:var(--muted);transition:border-color .15s,color .15s}
 .rt-in-tabs .rt-in-go:hover{border-color:var(--text);color:var(--text)}
 .rt-install .rt-in-tabs button.on{border-color:var(--text)!important;color:var(--text)!important}
+
+/* 홈 오늘의 한 잔 버튼: 슬라이드 아래쪽에서 테두리가 잘리지 않게 여백, 모바일은 두 버튼이 한 줄에 맞게 */
+.hs-btns{padding:3px 3px 6px;margin-left:-3px}
+@media (max-width:600px){
+  .hs-btns{flex-wrap:nowrap;gap:8px}
+  .hs-btns .btn{flex:1 1 auto;padding:11px 12px;font-size:14px;text-align:center;white-space:nowrap}
+}
+.gp-go{white-space:nowrap}
+@media (max-width:600px){.gp-me{flex-wrap:wrap;row-gap:12px}.gp-me .gp-t{flex:1 1 calc(100% - 56px)}.gp-me .gp-go{margin-left:52px;font-size:13.5px}}

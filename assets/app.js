@@ -51,7 +51,7 @@
     const pct = p.t ? Math.round(p.n / p.t * 100) : 0;
     const todayKey = new Date((Math.floor((Date.now() / 1000 + 9 * 3600) / 86400)) * 864e5).toISOString().slice(0, 10);
     const doneToday = p.day === todayKey && p.done;
-    gp.innerHTML = `<a class="gp-me" href="/notes/#routine"><img src="${img}" alt=""><span class="gp-t"><b>${esc(p.name)}${p.streak ? " · 연속 " + p.streak + "일" : ""}</b><small>${p.t}개 중 ${p.n}개 말해 봄 · ${pct}%</small><span class="rt-bar"><i style="width:${pct}%"></i></span></span><span class="gp-go">${doneToday ? "기록 보기" : "오늘 5분"}</span></a><button type="button" class="gp-sw">다른 목표 고르기</button>`;
+    gp.innerHTML = `<a class="gp-me" href="/notes/#routine"><img src="${img}" alt=""><span class="gp-t"><b>${esc(p.name)}${p.streak ? " · 연속 " + p.streak + "일" : ""}</b><small>${doneToday ? "오늘 도장 완료 · " : "오늘 말할 문장이 기다려요 · "}${p.t}개 중 ${p.n}개 말해 봄</small><span class="rt-bar"><i style="width:${pct}%"></i></span></span><span class="gp-go">${doneToday ? "기록 보기 ✓" : p.n ? "이어서 말하기 →" : "첫 문장 시작 →"}</span></a><button type="button" class="gp-sw">다른 목표 고르기</button>`;
     const html0 = gp.dataset.orig;
     $(".gp-sw", gp).onclick = () => { location.href = "/#gp"; gp.outerHTML = window.__gpOrig; };
   })();
