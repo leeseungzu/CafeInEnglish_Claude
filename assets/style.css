@@ -1453,3 +1453,4 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 }
 @media (max-width:600px) and (hover:none){.mq-btn:hover{background:transparent;color:#191F28}}
 @media (max-width:600px){.mq-btn,.mq-link{text-decoration:none!important}}
+@media (max-width:600px){.m-home+.hs+script+.notice,.m-home~.notice{margin:18px 0 30px!important;background:#fff;border:1px solid #E5E8EB}.m-home~.notice:hover{background:#F9FAFB}}
