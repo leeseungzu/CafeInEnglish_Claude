@@ -505,7 +505,8 @@ h1{letter-spacing:-.03em}
   html.v-floating [id]{scroll-margin-top:calc(var(--hdr,96px) + 56.25vw + 12px)}
 }
 @media (min-width:1024px){
-  .video-embed.float{right:24px;bottom:96px;left:auto;top:auto;width:400px;height:225px;border-radius:14px}
+  /* PC: 따라오는 영상은 항상 왼쪽 위 (좁은 화면은 조금 작게, 넓은 화면은 본문 왼쪽 빈 공간에 맞춰) */
+  .video-embed.float{top:calc(var(--hdr,68px) + 16px);left:16px;right:auto;bottom:auto;width:320px;height:auto;aspect-ratio:16/9;border-radius:14px}
 }
 .vbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:0 0 14px}
 .vbar-k{font-weight:700;margin-right:2px}
