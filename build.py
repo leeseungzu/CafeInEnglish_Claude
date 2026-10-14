@@ -571,7 +571,13 @@ site_font()
 
 ASSET_V = hashlib.md5(b"".join(f.read_bytes() for f in sorted(ASSETS.rglob("*")) if f.is_file())).hexdigest()[:8]
 FONT_V = hashlib.md5(FONT_FILE.read_bytes()).hexdigest()[:8] if FONT_FILE.exists() else ""
-STYLE_CSS = (ASSETS / "style.css").read_text("utf-8")
+def _min_css(c):
+    """페이지에 넣을 때만 가볍게: 주석·줄바꿈·불필요한 빈칸 빼기 (원본 style.css는 그대로)"""
+    c = re.sub(r"/\*.*?\*/", "", c, flags=re.S)
+    c = re.sub(r"\s*\n\s*", "", c)
+    c = re.sub(r"\s*([{};])\s*", r"\1", c)
+    return c.replace(";}", "}")
+STYLE_CSS = _min_css((ASSETS / "style.css").read_text("utf-8"))
 
 
 def mmss(t):
@@ -1239,7 +1245,7 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
 
 
 TODAY_CTA = ('<div class="acts rt-cta no-print"><a class="act" href="/notes/#routine"><span class="act-ic"><img src="/assets/icons/hot-beverage.webp" alt="" width="22" height="22"></span>'
-             '<span class="act-t"><b>오늘의 한 잔 5분 루틴</b><small>듣고 · 말하고 · 다시 꺼내고, 내 공부방에서 도장 찍기</small></span><span class="act-r"><i class="chev">›</i></span></a></div>')
+             '<span class="act-t"><b>오늘의 한 잔 5분 루틴</b><small>듣기 · 말하기 · 복습하고, 내 공부방에서 도장 찍기</small></span><span class="act-r"><i class="chev">›</i></span></a></div>')
 TODAY_GOALS = [
     {"id": "talk", "short": "일상 대화", "name": "일상 대화 영어", "desc": "인사·스몰톡", "icon": "speech-balloon",
      "posts": ["how-are-you", "excuse-me-sorry", "ask-to-repeat", "sounds-good", "im-down", "im-good", "craving", "its-on-me", "my-bad",
@@ -1605,7 +1611,7 @@ def build():
     (OUT / "manifest.webmanifest").write_text(json.dumps({
         "name": "카페인영어 - 오늘의 5분", "short_name": "카페인영어", "lang": "ko", "start_url": "/notes/?src=app", "scope": "/",
         "display": "standalone", "background_color": "#FAF8F5", "theme_color": "#FAF8F5",
-        "description": "하루 5분, 듣고 말하고 다시 꺼내는 영어 루틴",
+        "description": "하루 5분, 듣고 말하고 복습하는 영어 루틴",
         "icons": [{"src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png"},
                   {"src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png"}]}, ensure_ascii=False, indent=1), "utf-8")
     (OUT / "sw.js").write_text(SW_JS, "utf-8")

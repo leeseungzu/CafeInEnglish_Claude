@@ -7,7 +7,7 @@
  "display": "standalone",
  "background_color": "#FAF8F5",
  "theme_color": "#FAF8F5",
- "description": "하루 5분, 듣고 말하고 다시 꺼내는 영어 루틴",
+ "description": "하루 5분, 듣고 말하고 복습하는 영어 루틴",
  "icons": [
   {
    "src": "/assets/icon-192.png",
