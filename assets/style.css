@@ -1338,7 +1338,6 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 
 /* 폰: 첫 화면 한 장에 '목표 고르기 + 오늘의 표현 + 버튼'이 다 들어오게 (어떤 폰이든 잘리는 그림 없이) */
 @media (max-width:600px){
-  .hs-art{display:none}
   .gp{margin:2px 0 18px;padding-bottom:18px}
   .gp-q{font-size:17px;margin-bottom:10px}
   .gp-c{padding:10px 2px 9px;border-radius:16px}.gp-c img{width:32px;height:32px}
@@ -1347,4 +1346,33 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
   .hs-txt .a-phrase{font-size:46px;margin:8px 0 10px}
   .hs-txt .a-desc{margin-bottom:14px}
   .hs-ctl{margin-top:12px}
+}
+
+/* 폰: 대화 화면을 작은 말풍선으로 살려서 '뜻' 바로 아래에 (설명 문장 대신 대화로 보여 줘요) */
+@media (max-width:600px){
+  .hs-slide{display:flex;flex-direction:column;align-items:stretch}
+  .hs-txt{display:contents}
+  .hs-txt .a-kicker{order:1}.hs-txt .a-phrase{order:2}.hs-txt .a-mean{order:3}
+  .hs-art{display:block;order:4;margin:2px 0 14px}
+  .hs-txt .a-desc{display:none}
+  .hs-btns{order:5}
+  .hs-art .chatv,.hs-art .chatv.big{aspect-ratio:auto!important;height:auto;background:none!important;display:block;border-radius:0;overflow:visible}
+  .hs-art .cv-card,.hs-art .chatv.big .cv-card{width:auto;transform:none;background:none;box-shadow:none;backdrop-filter:none;padding:0;border-radius:0;gap:6px}
+  .hs-art .cv-lbl,.hs-art .cv-ko,.hs-art .cv-ic,.hs-art .cv-yt{display:none}
+  .hs-art .cv-q,.hs-art .chatv.big .cv-q{display:block;font-size:14px;padding:7px 12px;border-radius:14px 14px 14px 4px;max-width:85%}
+  .hs-art .cv-a span,.hs-art .chatv.big .cv-a span{font-size:15px;padding:8px 13px;border-radius:14px 14px 4px 14px;max-width:85%}
+  .hs-txt .a-mean{margin-bottom:10px}
+}
+
+@media (max-width:600px){
+  .hs-art{padding:0 3px 0 1px;margin:0 0 12px}
+  .hs-art .cv-card,.hs-art .chatv.big .cv-card{gap:5px}
+}
+/* 아주 작은 폰(아이폰 SE 등): 카드 설명 줄 빼고 글씨를 조금 더 작게 */
+@media (max-width:380px){
+  .gp-c small{display:none}.gp-c{padding:9px 2px 8px}.gp-c img{width:28px;height:28px}
+  .gp{margin-bottom:14px;padding-bottom:14px}
+  .hs-txt .a-phrase{font-size:40px;margin:6px 0 8px}
+  .hs-art .cv-q,.hs-art .chatv.big .cv-q{font-size:13px;padding:6px 11px}
+  .hs-art .cv-a span,.hs-art .chatv.big .cv-a span{font-size:14px;padding:7px 12px}
 }
