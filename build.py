@@ -1138,7 +1138,7 @@ def page_home():
         return (f'<section class="mq" id="mq" data-a="{it["au"]}" aria-label="오늘의 한 잔 퀴즈">{ic}<p class="mq-k"><span>오늘의 한 잔</span><span id="mq-d">{md}</span></p>'
                 f'<h2 class="mq-h">"{e(it["ko"])}"<br>영어로 하면?</h2>'
                 f'<div class="mq-ans"><span class="mq-en">{en_h}</span><button type="button" class="mq-sp" aria-label="발음 다시 듣기">{SPK}</button></div>'
-                f'<div class="mq-chat">{q}<button type="button" class="mq-me">눌러서 정답 듣기</button><span class="mq-a">{e(it["qa"])}</span>{qk}</div>'
+                f'<div class="mq-chat">{q}<button type="button" class="mq-me"><svg class="mq-pl" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>눌러서 정답 듣기</button><span class="mq-a">{e(it["qa"])}</span>{qk}</div>'
                 f'<a class="mq-btn" href="/notes/#routine">5분 루틴으로 내 것 만들기</a>'
                 f'<a class="mq-link" href="{it["url"]}">왜 이렇게 말할까? 글 읽고 퀴즈 풀기 ›</a></section>')
     mq = mq_html(slides_data[i0], f"{kst.tm_mon}월 {kst.tm_mday}일") if slides_data else ""
@@ -1155,7 +1155,7 @@ return '<article class="hs-slide"><div class="hs-txt"><div class="a-kicker">'+la
 var mq=document.getElementById("mq");if(mq){var T=L[i0],X=function(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
 if(i0!==%d){var dd=new Date(day*86400000);mq.setAttribute("data-a",T.au||"");document.getElementById("mq-d").textContent=(dd.getUTCMonth()+1)+"월 "+dd.getUTCDate()+"일";
 mq.querySelector(".mq-h").innerHTML='"'+X(T.ko)+'"<br>영어로 하면?';var ww=T.en.split(" "),wl=ww.pop();mq.querySelector(".mq-en").innerHTML=(ww.length?X(ww.join(" "))+" ":"")+'<span class="hl">'+X(wl)+'</span>';var mi=mq.querySelector(".mq-ic");if(mi){if(T.ic){mi.src=T.ic;mi.hidden=false}else mi.hidden=true}mq.querySelector(".mq-link").href=T.url;
-var ch=mq.querySelector(".mq-chat");ch.innerHTML=(T.q?'<span class="mq-q">'+X(T.q)+'</span>':'')+'<button type="button" class="mq-me">눌러서 정답 듣기</button><span class="mq-a">'+X(T.qa)+'</span>'+(T.qk?'<span class="mq-qk">'+X(T.qk)+'</span>':'')}
+var ch=mq.querySelector(".mq-chat");ch.innerHTML=(T.q?'<span class="mq-q">'+X(T.q)+'</span>':'')+'<button type="button" class="mq-me"><svg class="mq-pl" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>눌러서 정답 듣기</button><span class="mq-a">'+X(T.qa)+'</span>'+(T.qk?'<span class="mq-qk">'+X(T.qk)+'</span>':'')}
 var au=null,say=function(){var a=mq.getAttribute("data-a");if(!a)return;try{au=au||new Audio(a);au.currentTime=0;au.play().catch(function(){})}catch(e){}};
 try{if(localStorage.getItem("ky_mq")==String(day))mq.classList.add("on")}catch(e){}
 mq.addEventListener("click",function(ev){if(ev.target.closest(".mq-me")){mq.classList.add("on");say();try{localStorage.setItem("ky_mq",String(day))}catch(e){}if(window.gtag)gtag("event","quiz_reveal")}else if(ev.target.closest(".mq-sp"))say()})}

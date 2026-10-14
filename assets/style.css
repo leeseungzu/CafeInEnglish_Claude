@@ -1490,3 +1490,4 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
   .mq.on .mq-a{background:#F4EFE8;color:#2A1E17;font-size:15px}
   .mq.on .mq-qk{display:none!important}
 }
+@media (max-width:600px){.mq-me{display:inline-flex;align-items:center;gap:8px}.mq.on .mq-me{display:none}.mq-pl{flex:none}}
