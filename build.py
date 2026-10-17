@@ -480,11 +480,11 @@ APP_ROW = ('<div class="app-cta js-appcta"><a class="act app-row" href="/app/"><
 NB_APP = ('<div class="app-cta js-appcta" data-k="nbAppX"><div class="nb-app"><img src="/assets/icon-192.png?v=3" alt="" width="52" height="52">'
           '<div class="t"><b>앱으로 쓰면 더 편해요</b><small class="js-appsub" data-and="홈 화면에서 바로 열고, 오늘의 5분부터 시작해요.">아이폰은 Safari와 앱 기록이 따로 저장돼요. 앱에서 시작하면 기록이 한곳에 모여요.</small></div>'
           '<a href="/app/">설치</a></div><button class="nb-app-x js-appx" type="button">다음에 할게요 ✕</button></div>')
-# 휴대폰 + 아직 앱이 아닐 때만 보여 줘요. 내 공부방 카드는 '다음에 할게요'를 누르면 2주 동안 숨김.
+# 휴대폰 + 아직 앱이 아닐 때만 보여 줘요. 내 공부방 카드는 '다음에 할게요'를 누르면 1주 동안 숨김.
 APP_CTA_JS = ("<script>(function(){var u=navigator.userAgent,s=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone,"
               "ios=/iPhone|iPad|iPod/i.test(u)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),mob=ios||/Android/i.test(u);"
               "document.querySelectorAll('.js-appcta').forEach(function(el){if(s||!mob)return;var k=el.dataset.k;"
-              "if(k){try{if(Date.now()-(+localStorage.getItem(k)||0)<12096e5)return}catch(e){}"
+              "if(k){try{if(Date.now()-(+localStorage.getItem(k)||0)<6048e5)return}catch(e){}"
               "var x=el.querySelector('.js-appx');x&&x.addEventListener('click',function(){try{localStorage.setItem(k,Date.now())}catch(e){}el.remove()})}"
               "var sb=el.querySelector('.js-appsub');if(sb&&!ios)sb.textContent=sb.dataset.and;el.classList.add('on')})})();</script>")
 
