@@ -1166,12 +1166,11 @@ def page_think(t):
 {video_block(t["video"], t["title"], "문장마다 <b>듣기</b>·<b>3번 반복</b>으로 소리까지 익혀요") if t.get("video") else ""}
 {f'<a class="btn ghost no-print" href="{post_url(post)}">이 영상의 영어표현 먼저 보기</a>' if post else ""}
 {"".join(cards)}
+<div class="end-cta no-print"><small>다 따라 썼다면, 마지막 한 걸음</small><b class="ec-t">오늘 쓴 문장, 내 필사 노트에 모여요</b>
+<span class="ec-s">필사한 문장과 나의 한 줄은 내 공부방에서 언제든 다시 볼 수 있어요</span><div class="ec-a"><a class="ec-l" href="/notes/#copy">필사 노트 보기 ›</a></div></div>
 {share_block("필사 노트 출력 · 공유", "필사 출력")}
-<div class="print-only ws">{ws_head("필사 노트 - " + t["title"], t["speaker"], t.get("video"), url)}{ws}</div>
-<div class="cq-cta no-print" style="margin-top:16px">
-  <a class="btn primary" href="/notes/#copy">내 공부방에서 필사 노트 보기</a>
-  {f'<a class="btn kakao" href="{e(SITE["kakao"])}" target="_blank" rel="noopener">매일 아침 문장 하나, 카톡으로 받기<img class="kk-ic" src="/assets/kakao-talk.png" alt="" width="24" height="22"></a>' if SITE.get("kakao") else ""}
-</div>"""
+{f'<a class="end-app end-kk no-print" href="{e(SITE["kakao"])}" target="_blank" rel="noopener"><img src="/assets/kakao-talk.png" alt="" width="26" height="24" loading="lazy"><span><b>매일 아침 문장 하나</b> · 카톡으로 받기</span><em>받기 ›</em></a>' if SITE.get("kakao") else ""}
+<div class="print-only ws">{ws_head("필사 노트 - " + t["title"], t["speaker"], t.get("video"), url)}{ws}</div>"""
     data = {"type": "think", "id": t["id"], "title": t["title"], "speaker": t["speaker"], "url": url,
             "quotes": [{"en": q["en"], "ko": q["ko"], "blanks": q["blanks"]} for q in t["quotes"]]}
     qlist = "".join(f'<li><a href="#q{i + 1}">{e(q["en"][:42] + ("…" if len(q["en"]) > 42 else ""))}</a></li>' for i, q in enumerate(t["quotes"]))

@@ -749,9 +749,17 @@
     Object.values(sr).forEach(v => { if (!v.en || seen.has(v.en)) return; seen.add(v.en); if (v.due <= DAY) due++; });
     (s.learned || []).forEach(x => { if (!x.en || seen.has(x.en)) return; seen.add(x.en); if (Math.round(Date.parse(x.d) / 864e5) + 1 <= DAY) due++; });
     if (!due) return;
-    const a = document.createElement("a"); a.className = "pc-rv"; a.href = "/notes/#review";
-    a.innerHTML = '<span class="pc-rv-n">' + due + '</span><span class="pc-rv-t"><b>오늘의 복습 ' + due + '개</b>가 기다려요 · 잊기 전에 꺼내 봐요</span><i>›</i>';
-    hi.after(a); a.addEventListener("click", () => ga("review_home_click", { n: due, from: "pc" }));
+    // 루틴 카드(.gp-me)와 같은 모양·같은 폭으로: 왼쪽 48px 원(크림+복습 아이콘) · 제목/설명 · 오른쪽 버튼
+    const a = document.createElement("a"); a.className = "gp-me pc-rv"; a.href = "/notes/#review";
+    a.innerHTML = '<span class="gp-ring gp-rvic" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></span>'
+      + '<span class="gp-t"><b>오늘의 복습 ' + due + '개</b><small>잊을 즈음 다시 꺼내면 오래 남아요 · 1일 → 3일 → 7일</small></span><span class="gp-go">복습하기 →</span>';
+    a.addEventListener("click", () => ga("review_home_click", { n: due, from: "pc" }));
+    const gpEl = document.querySelector(".pc-band #gp");
+    if (gpEl && gpEl.querySelector(".gp-me")) {
+      const w = document.createElement("div"); w.className = "pc-rv-w"; w.appendChild(a);
+      const sw = gpEl.querySelector(".gp-sw"); if (sw) { const sp = sw.cloneNode(true); sp.className = "gp-sw rv-sp"; sp.setAttribute("aria-hidden", "true"); sp.tabIndex = -1; w.appendChild(sp); }
+      gpEl.after(w);  // 루틴 카드 바로 아래, 같은 폭
+    } else hi.after(a);
   })();
 
   // ⑥ 글 끝 '복습에 담기': 이 글 핵심 문장을 바로 '오늘의 복습' 대기열(내일부터)에 넣어요
