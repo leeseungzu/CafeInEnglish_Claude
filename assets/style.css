@@ -1816,3 +1816,25 @@ html.srch-open{overflow:hidden}
 .rv-empty{font-size:15px;color:#4E5968;margin:0 0 6px;line-height:1.5}
 .rv-tip{font-size:12px;color:#B0B8C1;margin:12px 0 0}
 .sr-cover.ic-video{background:linear-gradient(145deg,#EEF2FB,#D9E3F6)}
+/* ===== 글 페이지 색·리듬 (2026-10-18) ===== */
+.post-hero{margin:18px 0 8px}
+.post-hero .chatv.big{border-radius:24px}
+.pb .box:not(.mean-hi){background:#F7F8FA;border:0;box-shadow:none}
+.pb .mean-hi{border:0;box-shadow:none;padding:20px 18px;border-radius:18px}
+.pb .mean-hi b{display:block;font-size:23px;line-height:1.3;color:#191F28;margin-bottom:4px;letter-spacing:-.02em}
+.pb .mean-hi .m{display:block;font-size:16px;font-weight:600;color:#333D4B}
+.pb h2.h-ic{display:flex;align-items:center;gap:8px}
+.pb h2.h-ic img{width:28px;height:28px;flex:none}
+.pb .ex.fix li{background:#fff;border-radius:14px;padding:14px!important;border:0!important;margin-bottom:8px}
+.pb .ex.fix li:last-child{margin-bottom:0}
+.pb .fix .no{display:block;width:fit-content;background:#FDECEC;color:#C8372D;border-radius:8px;padding:3px 9px;margin-bottom:6px}
+.pb .fix li>.en{display:block;width:fit-content;background:#E6F6EC;border-radius:8px;padding:3px 9px}
+.pb .fix .en::before{color:#1E8E4E}
+.pb .fix .why{background:#F7F8FA}
+/* 오른쪽 목차: 형광 대신 사이트 공통 방식(굵게 + 에스프레소 막대, 마우스 올리면 회색 바탕) */
+.toc a::after{display:none!important}
+.toc li{position:relative}
+.toc a{display:block;padding:3px 8px;margin-left:-8px;border-radius:8px;transition:background .15s}
+.toc a:hover{background:#F2F4F6;color:#191F28}
+.toc li.on a{font-weight:800;color:#191F28}
+.toc li.on::before{content:"";position:absolute;left:-26px;top:7px;bottom:7px;width:3px;border-radius:2px;background:#2A1A12}

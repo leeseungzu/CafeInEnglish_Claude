@@ -889,17 +889,37 @@ def side_common():
     return ""  # 사이드바 홍보 버튼(카톡·유튜브)은 쓰지 않음 — 너무 홍보 느낌이라 우측 하단 + 버튼으로만 안내
 
 
+# 글 본문 꾸미기: '뜻' 강조 카드(글마다 파스텔), 섹션 제목 앞 작은 3D 아이콘
+H2_ICON = [("뜻", "light-bulb"), ("예문", "speech-balloon"), ("실제로는", "waving-hand"), ("헷갈", "question-mark"),
+           ("비슷한 표현", "thumbs-up"), ("자주 하는 실수", "grimacing-face")]
+def post_dress(html, tint):
+    html = re.sub(r'(<h2[^>]*>뜻</h2>\s*)<div class="box"><b>(.*?)</b>\s*=\s*(.*?)</div>',
+                  lambda m: f'{m.group(1)}<div class="box mean-hi" style="background:{tint}"><b>{m.group(2)}</b><span class="m">{m.group(3)}</span></div>', html, count=1, flags=re.S)
+    def ic(m):
+        txt = re.sub(r"<[^>]+>", "", m.group(2)).strip()
+        name = next((n for k, n in H2_ICON if txt == k or txt.startswith(k)), None)
+        if not name:
+            return m.group(0)
+        return f'<h2{m.group(1)} class="h-ic"><img src="/assets/icons/{name}.webp?v={ASSET_V}" alt="" width="28" height="28" loading="lazy">{m.group(2)}</h2>'
+    return re.sub(r"<h2([^>]*)>(.*?)</h2>", ic, html)
+
+
 def page_post(p):
     url = post_url(p)
     video = p.get("video")
     _lv = level(p)
     parts = [f'<span class="chip {p["cat"]}">{CATS[p["cat"]]}</span><span class="chip {p["cat"]}">{e(p.get("sub", ""))}</span><span class="lv lv-{"pro" if _lv == "실전" else "base"}" title="{"일·뉴스·연설, 뉘앙스까지" if _lv == "실전" else "처음 봐도 바로 쓰는 생활 표현"}">{_lv}</span>',
              f'<h1>{e(p["title"])}</h1><p class="lead">{e(p.get("lead", ""))}</p><p class="date-line">{e(p.get("date", ""))}</p>']
+    tint = re.search(r"#[0-9A-Fa-f]{6}", chat_bg(p["id"])).group(0)
+    if not video and p.get("chat"):
+        c = p["chat"]
+        art = icon_img(p["icon"], lazy=False) if p.get("icon") else ""
+        parts.append('<div class="post-hero">' + chat_html(c["q"], c["a"], c.get("key", ""), c.get("ko", ""), art, chat_bg(p["id"]), big=True) + '</div>')
     toc_slot = len(parts)
     if video:
         parts.append(video_block(video, p["title"], "표현의 <b>듣기</b>·<b>3번 반복</b>으로 따라 말해 보세요"))
     toc = []
-    parts.append(add_heading_ids(alt_chips(p.get("body_html", "")), toc))
+    parts.append('<div class="pb">' + post_dress(add_heading_ids(alt_chips(p.get("body_html", "")), toc), tint) + '</div>')
     if p.get("expressions"):
         toc.append(("expr", p.get("expressions_heading", "오늘의 표현")))
         parts.append(f'<h2 id="expr">{e(p.get("expressions_heading", "오늘의 표현"))}</h2>')
