@@ -489,14 +489,24 @@ APP_CTA_JS = ("<script>(function(){var u=navigator.userAgent,s=(window.matchMedi
               "var sb=el.querySelector('.js-appsub');if(sb&&!ios)sb.textContent=sb.dataset.and;el.classList.add('on')})})();</script>")
 
 
-def share_block(label, print_title="출력해서 복습하기", print_sub="A4 복습지로 인쇄하거나 PDF로 저장해요"):
-    pr = act_row(SVG_PRINT, print_title, print_sub, cls="js-print") if print_title else ""
-    return ((f'<div class="end-print no-print">{pr}{APP_ROW}</div>' if pr else "") + '<div class="share no-print">' +
-            f'<div class="share-hd"><div class="share-t">{label}</div><div class="share-s">링크만 보내면 미리보기 카드로 보여요</div></div>'
-            '<div class="share-b"><button class="btn ghost js-share" type="button">'
-            '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>공유하기</button>'
-            '<button class="btn ghost js-copylink" type="button">'
-            '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>링크 복사</button></div></div>')
+END_CTA = ('<a class="end-cta no-print" href="/notes/#routine"><small>다 읽었다면, 마지막 한 걸음</small>'
+           '<b>오늘 배운 표현, 내일 다시 꺼내기</b><span>5분 루틴에 담으면 1일 · 3일 · 7일 뒤에 다시 복습해 줘요</span><i>루틴에 담기 ›</i></a>')
+SVG_SH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+END_APP = ('<div class="app-cta js-appcta no-print"><a class="end-app" href="/app/"><img src="/assets/icon-192.png?v=3" alt="" width="26" height="26" loading="lazy">'
+           '<span><b>앱으로 매일 5분</b> · 홈 화면에서 바로 열기</span><em>설치 ›</em></a></div>')
+
+
+def share_block(label, print_label="출력"):
+    """글 끝: 출력 · 공유 · 링크 복사를 작은 버튼 한 줄로 + (모바일 웹만) 앱 한 줄"""
+    return (f'<div class="end-row no-print" role="group" aria-label="{label}">'
+            f'<button class="js-print" type="button">{SVG_SH}<path d="M6 9V3h12v6"/><rect x="6" y="14" width="12" height="7" rx="1"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/></svg>{print_label}</button>'
+            f'<button class="js-share" type="button">{SVG_SH}<path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>공유</button>'
+            f'<button class="js-copylink" type="button">{SVG_SH}<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>링크 복사</button></div>'
+            + END_APP)
+
+
+AUTHOR_SIG = (f'<div class="au-s no-print"><img src="/assets/logo-mark.png?v=3" alt="" width="40" height="40" loading="lazy">'
+              f'<div><b>{AUTHOR_NAME}</b><span>직접 공부하며 정리한 영어를 나눠요 · <a href="/contact/">의견 남기기</a> · <a href="/about/">소개</a></span></div></div>')
 
 
 def alt_chips(html_text):
@@ -951,7 +961,10 @@ def page_post(p):
         parts.append(f'<div class="think-box"><b>이 영상 속 마음에 남는 문장</b>은 <a href="{think_url(THINK_BY_ID[p["think"]])}">사유의 문장</a>에서 필사하고 복기할 수 있어요.</div>')
     parts.append(post_say_block(p))
     parts.append('<h2 class="quiz-h" id="quiz-sec">오늘 배운 거 확인하기</h2><div id="quiz"></div>')
-    parts.append(share_block("같이 공부할 친구에게 이 글 보내기"))
+    if p.get("note"):
+        parts.append(f'<div class="study-note"><b class="lbl">스터디 노트</b> {p["note"]}</div>')
+    parts.append(END_CTA)
+    parts.append(share_block("이 글 출력 · 공유"))
     tv_ids = [pid for _, _, pid in TRAVEL_SITUATIONS if pid in POST_BY_ID]
     if p["id"] in tv_ids:
         k = tv_ids.index(p["id"])
@@ -977,13 +990,9 @@ def page_post(p):
 <div class="ws-line"></div><div class="ws-line"></div><div class="ws-line"></div><div class="ws-line"></div>
 <div class="ws-key"><b>정답과 연상법</b><ol>{key}</ol></div>
 <p style="font-size:12px;color:#555">{DOMAIN.replace("https://", "")} · 매일 표현 하나, 같이 공부해요</p></div>""")
-    if p.get("note"):
-        parts.append(f'<div class="study-note"><b class="lbl">스터디 노트</b> {p["note"]}</div>')
-    parts.append(TODAY_CTA)
-    parts.append(f'<div class="author-box no-print"><img src="/assets/logo-mark.png?v=3" alt="" width="44" height="44" loading="lazy">'
-                 f'<div><b>{AUTHOR_NAME}</b><p>{AUTHOR_BIO}</p><span class="ab-links"><a href="/contact/">의견 남기기</a><a href="/about/">카페인영어 소개</a></span></div></div>')
     parts.append('<h2 class="rel-h no-print">같이 보면 좋은 글</h2><div class="cards rel list no-print">'
                  + "".join(post_card(o) for o in similar_posts(p, 4)) + "</div>")
+    parts.append(AUTHOR_SIG)
     parts.insert(toc_slot, f'<details class="toc-m no-print"><summary>목차 · 퀴즈 바로가기</summary>{toc_html(toc)}</details>')
     links = related_links(p)
     link_items = "".join('<li><a href="%s">%s</a></li>' % (l["href"], e(l["label"])) for l in links)
@@ -1048,7 +1057,7 @@ def page_think(t):
 {video_block(t["video"], t["title"], "문장마다 <b>듣기</b>·<b>3번 반복</b>으로 소리까지 익혀요") if t.get("video") else ""}
 {f'<a class="btn ghost no-print" href="{post_url(post)}">이 영상의 영어표현 먼저 보기</a>' if post else ""}
 {"".join(cards)}
-{share_block("마음에 남는 문장, 친구와 같이 필사해요", "필사 노트 출력하기", "A4로 인쇄해서 손으로 따라 써요 · PDF 저장도 돼요")}
+{share_block("필사 노트 출력 · 공유", "필사 출력")}
 <div class="print-only ws">{ws_head("필사 노트 - " + t["title"], t["speaker"], t.get("video"), url)}{ws}</div>
 <div class="cq-cta no-print" style="margin-top:16px">
   <a class="btn primary" href="/notes/#copy">내 공부방에서 필사 노트 보기</a>
@@ -1398,7 +1407,6 @@ def post_say_block(p):
     data = json.dumps(picks, ensure_ascii=False).replace("</", "<\\/")
     return (f'<section class="ps no-print" id="say-end" aria-label="입으로 마무리하기"><p class="ps-k">입으로 마무리하기</p>'
             f'<h3>방금 배운 문장, 소리 내어 말해 볼까요?</h3><div class="ps-body"></div>'
-            f'<a class="ps-go" href="/notes/#routine"><span>내일도 잊지 않게 루틴에 담기<small>말해 본 문장은 내 공부방에 쌓이고, 며칠 뒤 다시 복습해 줘요</small></span><span aria-hidden="true">›</span></a>'
             f'<script type="application/json" class="ps-data">{data}</script></section>')
 
 
