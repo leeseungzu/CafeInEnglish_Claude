@@ -740,7 +740,7 @@ def card(href, chips, title, sub, thumb=None, play=False, alt="", hl=3, data_sub
     src_html = f'<span class="src">{e(src)}</span> · ' if src else ""
     th = ""
     if thumb:
-        badge = ('<span class="th-play"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="#2A1A12"/></svg></span>'
+        badge = ('<span class="th-play"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="#fff"/></svg></span>'
                  if play else "")
         if thumb.startswith("<"):
             th = f'<div class="thumb cthumb">{thumb}</div>'
