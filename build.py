@@ -1528,6 +1528,128 @@ def page_404():
                   '<a class="btn primary" href="/">홈으로 가기</a>')
 
 
+# ── 앱 설치 안내 (/app/) ──────────────────────────────────────────────
+# 리틀리·인스타의 '앱 설치' 버튼이 가리키는 주소. 들어온 곳(인스타·카톡 앱 안, 아이폰 Safari, 안드로이드, PC)에 따라 안내가 바뀌어요.
+# 사이트 다른 페이지는 인앱 브라우저에서도 그대로 보이게 두고, 이 페이지에서만 외부 브라우저로 안내해요.
+APP_CSS = """
+.ap{max-width:560px;margin:0 auto}
+.ap-hero{text-align:center;padding:8px 0 4px}
+.ap-hero img.ap-icon{width:96px;height:96px;border-radius:22px;box-shadow:0 10px 28px rgba(25,31,40,.18)}
+.ap-hero h1{font-size:28px;margin:18px 0 8px;line-height:1.35}
+.ap-hero p{color:#4E5968;margin:0;font-size:16px}
+.ap-ben{display:grid;gap:10px;margin:26px 0 22px}
+.ap-ben div{display:flex;gap:14px;align-items:center;background:#F2F4F6;border-radius:18px;padding:14px 16px}
+.ap-ben img{width:44px;height:44px;flex:none}
+.ap-ben b{display:block;font-size:16px;color:#191F28}
+.ap-ben small{display:block;color:#6B7684;font-size:14px;margin-top:2px}
+.ap-box{border:1px solid #E5E8EB;border-radius:22px;padding:22px 20px;background:#fff}
+.ap-box h2{font-size:20px;margin:0 0 6px}
+.ap-box>p{color:#4E5968;margin:0 0 16px;font-size:15px}
+.ap-steps{list-style:none;padding:0;margin:0 0 16px;display:grid;gap:10px}
+.ap-steps li{display:flex;gap:12px;align-items:flex-start;font-size:16px;color:#191F28;line-height:1.5}
+.ap-steps li i{flex:none;width:26px;height:26px;border-radius:50%;background:#191F28;color:#fff;font-style:normal;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.ap-steps .k{display:inline-flex;align-items:center;gap:4px;background:#F2F4F6;border-radius:8px;padding:1px 8px;font-weight:700;white-space:nowrap}
+.ap-btn{display:flex;width:100%;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:16px;font-size:17px;font-weight:700;cursor:pointer;text-decoration:none;font-family:inherit}
+.ap-btn.pri{background:#3182F6;color:#fff}
+.ap-btn.sub{background:#fff;color:#191F28;border:1px solid #E5E8EB;margin-top:10px}
+.ap-note{font-size:13px;color:#8B95A1;margin:14px 0 0;line-height:1.6}
+.ap-qr{display:flex;gap:20px;align-items:center}
+.ap-qr .q{flex:none;width:150px;height:150px;border:1px solid #E5E8EB;border-radius:16px;padding:8px;background:#fff}
+.ap-qr .q svg{width:100%;height:100%;display:block}
+.ap-pane{display:none}.ap-pane.on{display:block}
+.ap-toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%);background:#191F28;color:#fff;padding:12px 18px;border-radius:12px;font-size:15px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:99}
+.ap-toast.on{opacity:1}
+.ap-more{text-align:center;margin:22px 0 0;font-size:15px}
+.ap-more a{color:#4E5968}
+@media (max-width:599px){.ap-qr{flex-direction:column;text-align:center}}
+"""
+
+SHARE_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>'
+PLUS_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>'
+
+
+def page_app():
+    url = DOMAIN + "/app/"
+    ben = [("hot-beverage", "앱을 열면 바로 오늘의 5분", "오늘의 한 잔 · 이번 주 도장이 첫 화면"),
+           ("check", "오답노트 · 필사가 한곳에", "틀린 문제와 따라 쓴 문장이 차곡차곡"),
+           ("rocket", "앱스토어 없이 1초 설치", "가입 없이 무료 · 휴대폰 용량도 거의 안 써요")]
+    bh = "".join(f'<div>{icon_img(i, "", False)}<span><b>{e(t)}</b><small>{e(s)}</small></span></div>' for i, t, s in ben)
+    copy_btn = '<button class="ap-btn sub js-ap-copy" type="button">주소 복사하기</button>'
+    body = f"""<style>{APP_CSS}</style>
+<div class="ap">
+<div class="ap-hero"><img class="ap-icon" src="/assets/icon-192.png?v=2" alt="카페인영어 앱 아이콘" width="96" height="96">
+<h1>카페인영어를 앱으로</h1><p>홈 화면에서 한 번에, 매일 5분 영어</p></div>
+<div class="ap-ben">{bh}</div>
+
+<div class="ap-box ap-pane" id="ap-inapp-ios"><h2>Safari에서 열어 주세요</h2>
+<p>인스타·스레드 같은 앱 안에서는 홈 화면에 추가할 수 없어요. 딱 한 번만 Safari로 열면 돼요.</p>
+<ol class="ap-steps"><li><i>1</i><span>화면의 <span class="k">···</span> 버튼을 눌러요</span></li>
+<li><i>2</i><span><span class="k">외부 브라우저에서 열기</span>를 눌러요</span></li>
+<li><i>3</i><span>Safari에서 이 페이지가 다시 열리면 안내대로 추가해요</span></li></ol>
+{copy_btn}<p class="ap-note">메뉴가 안 보이면 주소를 복사해 Safari 주소창에 붙여 넣어 주세요.</p></div>
+
+<div class="ap-box ap-pane" id="ap-inapp-and"><h2>크롬에서 열어 주세요</h2>
+<p>앱 안의 브라우저에서는 설치가 안 돼요. 버튼을 누르면 크롬으로 열려요.</p>
+<a class="ap-btn pri js-ap-chrome" href="#">크롬으로 열기</a>{copy_btn}
+<p class="ap-note">안 열리면 오른쪽 위 ⋮ 메뉴에서 '다른 브라우저로 열기'를 눌러 주세요.</p></div>
+
+<div class="ap-box ap-pane" id="ap-kakao"><h2>브라우저로 여는 중이에요</h2>
+<p>카카오톡 안에서는 설치가 안 돼서, 외부 브라우저로 바로 넘겨 드릴게요.</p>
+<a class="ap-btn pri js-ap-kakao" href="#">브라우저로 열기</a>{copy_btn}</div>
+
+<div class="ap-box ap-pane" id="ap-ios"><h2>홈 화면에 추가하기</h2>
+<p>세 번만 누르면 끝나요.</p>
+<ol class="ap-steps"><li><i>1</i><span>아래쪽 <span class="k">{SHARE_SVG} 공유</span> 버튼을 눌러요 <small style="color:#8B95A1">(안 보이면 ··· 버튼 안에 있어요)</small></span></li>
+<li><i>2</i><span>목록을 올려 <span class="k">{PLUS_SVG} 홈 화면에 추가</span>를 눌러요</span></li>
+<li><i>3</i><span>오른쪽 위 <span class="k">추가</span>를 누르면 끝!</span></li></ol>
+<p class="ap-note">아이폰은 Safari와 홈 화면 앱이 기록을 따로 저장해요. 오답노트·필사는 앱에서 시작하는 걸 추천해요.</p></div>
+
+<div class="ap-box ap-pane" id="ap-and"><h2>앱 설치하기</h2>
+<p>버튼 한 번이면 홈 화면에 카페인영어가 생겨요.</p>
+<button class="ap-btn pri js-ap-install" type="button">카페인영어 앱 설치</button>
+<ol class="ap-steps js-ap-manual" style="display:none;margin-top:16px"><li><i>1</i><span>오른쪽 위 <span class="k">⋮</span> 메뉴를 눌러요</span></li>
+<li><i>2</i><span><span class="k">홈 화면에 추가</span> 또는 <span class="k">앱 설치</span>를 눌러요</span></li></ol></div>
+
+<div class="ap-box ap-pane" id="ap-pc"><h2>휴대폰으로 설치하기</h2>
+<div class="ap-qr"><div class="q">{qr_svg(url)}</div>
+<div><p style="margin:0 0 8px;color:#4E5968">휴대폰 카메라로 QR을 비추면 이 페이지가 열려요. 안내대로 홈 화면에 추가하면 끝이에요.</p>
+<button class="ap-btn sub js-ap-install" type="button" style="display:none">이 PC에 앱으로 설치</button></div></div></div>
+
+<div class="ap-box ap-pane" id="ap-done"><h2>이미 앱으로 보고 있어요</h2>
+<p>오늘의 5분부터 시작해 볼까요?</p><a class="ap-btn pri" href="/notes/?src=app">오늘의 한 잔 열기</a></div>
+
+<p class="ap-more"><a href="/">앱 없이 사이트로 둘러보기 ›</a></p>
+</div>
+<div class="ap-toast" id="ap-toast">주소를 복사했어요</div>
+<script>
+(function(){{
+var U="{url}",ua=navigator.userAgent||"",$=function(s){{return document.querySelector(s)}},$$=function(s){{return document.querySelectorAll(s)}};
+var ios=/iPhone|iPad|iPod/i.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1),and=/Android/i.test(ua);
+var kakao=/KAKAOTALK/i.test(ua),inapp=kakao||/Instagram|FBAN|FBAV|FB_IAB|Barcelona|Threads|NAVER|Line\\/|DaumApps|everytimeApp|BAND|wv\\)/i.test(ua);
+var standalone=(window.matchMedia&&matchMedia("(display-mode: standalone)").matches)||navigator.standalone;
+function show(id){{var p=$("#"+id);if(p)p.classList.add("on")}}
+function toast(t){{var el=$("#ap-toast");el.textContent=t;el.classList.add("on");setTimeout(function(){{el.classList.remove("on")}},1800)}}
+function copy(){{(navigator.clipboard?navigator.clipboard.writeText(U):Promise.reject()).then(function(){{toast("주소를 복사했어요")}},function(){{var t=document.createElement("textarea");t.value=U;document.body.appendChild(t);t.select();try{{document.execCommand("copy");toast("주소를 복사했어요")}}catch(e){{prompt("주소를 복사해 주세요",U)}}t.remove()}})}}
+$$(".js-ap-copy").forEach(function(b){{b.addEventListener("click",copy)}});
+var kk="kakaotalk://web/openExternal?url="+encodeURIComponent(U),ch="intent://"+U.replace(/^https?:\\/\\//,"")+"#Intent;scheme=https;package=com.android.chrome;end";
+var a1=$(".js-ap-kakao");if(a1)a1.href=kk;var a2=$(".js-ap-chrome");if(a2)a2.href=ch;
+var dp=null;
+window.addEventListener("beforeinstallprompt",function(ev){{ev.preventDefault();dp=ev;$$(".js-ap-install").forEach(function(b){{b.style.display=""}})}});
+window.addEventListener("appinstalled",function(){{toast("설치됐어요! 홈 화면을 확인해 보세요")}});
+$$(".js-ap-install").forEach(function(b){{b.addEventListener("click",function(){{if(dp){{dp.prompt();dp.userChoice.then(function(){{dp=null}})}}else{{var m=$(".js-ap-manual");if(m)m.style.display="";b.style.display="none"}}}})}});
+if(standalone)show("ap-done");
+else if(kakao){{show("ap-kakao");setTimeout(function(){{location.href=kk}},400)}}
+else if(inapp&&ios)show("ap-inapp-ios");
+else if(inapp&&and)show("ap-inapp-and");
+else if(ios)show("ap-ios");
+else if(and){{show("ap-and");setTimeout(function(){{if(!dp){{var m=$(".js-ap-manual");if(m)m.style.display=""}}}},2500)}}
+else show("ap-pc");
+}})();
+</script>"""
+    return layout("카페인영어 앱 설치", "카페인영어를 홈 화면 앱으로 설치하세요. 앱을 열면 오늘의 5분 루틴부터, 오답노트·필사도 한곳에. 가입 없이 무료.",
+                  "/app/", body, "", None, robots="noindex,follow")
+
+
 # ------------------------------------------------------------------ build
 def write(path, text):
     f = OUT / path.lstrip("/")
@@ -1678,6 +1800,7 @@ def build():
     if (ROOT / "files").exists():
         shutil.copytree(ROOT / "files", OUT / "files", dirs_exist_ok=True)
     write("/travel/", page_travel()); pages.append("/travel/")
+    write("/app/", page_app())
     (OUT / "404.html").write_text(page_404(), "utf-8")
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
