@@ -155,7 +155,7 @@
     const ids = Object.keys(data).sort((a, b) => data[b].count - data[a].count || data[b].at - data[a].at);
     if (!ids.length) {
       root.innerHTML = `<div class="empty"><p>오답노트가 비어 있어요.<br>퀴즈에서 틀린 문제가 여기에 자동으로 모여요.</p></div>
-        <a class="btn primary" href="/">퀴즈 풀러 가기</a>`;
+        <a class="btn primary" href="/category/expr/">글 읽고 퀴즈 풀러 가기</a>`;
       return;
     }
     const tagCount = {}, tagUrl = {};
@@ -733,6 +733,31 @@
     });
   }
 
+  // ⑥ 글 끝 '복습에 담기': 이 글 핵심 문장을 바로 '오늘의 복습' 대기열(내일부터)에 넣어요
+  const kc = document.querySelector(".js-keep");
+  if (kc) {
+    let KL = []; try { KL = JSON.parse(document.querySelector("#say-end .ps-data").textContent); } catch (e) {}
+    KL = KL.filter(x => x && x.en && x.ko);
+    if (KL.length) {
+      const st = () => get("ky_today_v1", {});
+      const isIn = () => { const s = st(), sr = s.srs || {}, ln = new Set((s.learned || []).map(x => x.en)); return KL.every(x => sr[x.en] || ln.has(x.en)); };
+      const doneUI = (fresh) => {
+        kc.classList.add("kept");
+        kc.querySelector(".ec-t").textContent = fresh ? "담았어요 ✓ 내일 '오늘의 복습'에 나와요" : "이 글 문장은 복습에 담겨 있어요 ✓";
+        kc.querySelector(".ec-s").textContent = KL.map(x => x.en).join(" · ");
+        kc.querySelector(".ec-b").hidden = true; kc.querySelector(".ec-l").hidden = false;
+      };
+      kc.querySelector(".ec-s").textContent = "이 글의 핵심 문장 " + KL.length + "개를 담으면 1일 · 3일 · 7일 뒤에 다시 꺼내 줘요";
+      kc.hidden = false;
+      if (isIn()) doneUI(false);
+      kc.querySelector(".ec-b").addEventListener("click", () => {
+        const s = st(); s.srs = s.srs || {}; let n = 0;
+        KL.forEach(x => { if (!s.srs[x.en]) { s.srs[x.en] = { st: 0, due: DAY + 1, en: x.en, ko: x.ko, a: x.a || "", p: location.pathname }; n++; } });
+        put("ky_today_v1", s); ga("review_keep", { n: n }); doneUI(true);
+      });
+    }
+  }
+
   // ⑤ 글 끝 '입으로 마무리하기'
   const ps = document.getElementById("say-end");
   if (ps) {
@@ -780,6 +805,7 @@
   try {
     const st = JSON.parse(localStorage.getItem("ky_today_v1")) || {}, sr = st.srs || {}, seen = new Set(); let due = 0;
     (st.learned || []).forEach(x => { if (!x.en || seen.has(x.en)) return; seen.add(x.en); const v = sr[x.en]; const dd = v ? v.due : Math.round(Date.parse(x.d) / 864e5) + 1; if (dd <= DAY) due++; });
+    Object.values(sr).forEach(v => { if (!v.en || seen.has(v.en)) return; seen.add(v.en); if (v.due <= DAY) due++; });  // 글 끝 '복습에 담기'로 담은 문장
     if (due) { const rvEl = wrap.querySelector(".kx-rv"); if (rvEl) rvEl.innerHTML = '<a class="kx-rvt" href="/notes/#review"><span>오늘의 복습 <b>' + due + '개</b> · 잊기 전에 꺼내 봐요</span><i>›</i></a>'; }
   } catch (e) {}
   // 출근길 카드는 '오늘의 한 잔' 바로 아래에 (복습은 카드 안 한 줄, 누르면 펼침)

@@ -1857,8 +1857,13 @@ ol.toc>li>a::before{content:counter(tc) ". ";display:inline-block;min-width:1.4e
 .end-cta small{display:block;font-size:12.5px;font-weight:700;color:#CDBFAF;margin-bottom:6px}
 .end-cta b{display:block;font-size:19px;line-height:1.35;letter-spacing:-.02em;color:#fff}
 .end-cta span{display:block;font-size:13.5px;color:#D9CFC2;margin-top:6px;line-height:1.5}
-.end-cta i{display:inline-flex;margin-top:14px;font-style:normal;background:#fff;color:#2A1A12;font-weight:800;font-size:15px;padding:11px 16px;border-radius:12px}
-@media (hover:hover){.end-cta:hover i{background:#CDEB5B}}
+.end-cta[hidden]{display:none}
+.ec-a{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+.ec-b{all:unset;cursor:pointer;background:#fff;color:#2A1A12;font-weight:800;font-size:15px;padding:11px 16px;border-radius:12px}
+.ec-b[hidden],.ec-l[hidden]{display:none}
+@media (hover:hover){.ec-b:hover{background:#CDEB5B}}
+.ec-l{background:#fff;color:#2A1A12;font-weight:800;font-size:15px;padding:11px 16px;border-radius:12px;text-decoration:none}
+.end-cta.kept .ec-s{font-family:inherit;color:#CDEB5B;font-weight:600}
 .end-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 6px}
 .end-row button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;background:#F7F8FA;border-radius:16px;padding:14px 0 12px;font-size:13.5px;font-weight:700;color:#333D4B;text-align:center}
 .end-row svg{width:20px;height:20px}

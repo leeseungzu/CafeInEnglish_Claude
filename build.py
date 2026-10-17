@@ -489,8 +489,9 @@ APP_CTA_JS = ("<script>(function(){var u=navigator.userAgent,s=(window.matchMedi
               "var sb=el.querySelector('.js-appsub');if(sb&&!ios)sb.textContent=sb.dataset.and;el.classList.add('on')})})();</script>")
 
 
-END_CTA = ('<a class="end-cta no-print" href="/notes/#routine"><small>다 읽었다면, 마지막 한 걸음</small>'
-           '<b>오늘 배운 표현, 내일 다시 꺼내기</b><span>5분 루틴에 담으면 1일 · 3일 · 7일 뒤에 다시 복습해 줘요</span><i>루틴에 담기 ›</i></a>')
+END_CTA = ('<div class="end-cta no-print js-keep" hidden><small>다 읽었다면, 마지막 한 걸음</small>'
+           '<b class="ec-t">오늘 배운 표현, 내일 다시 꺼내기</b><span class="ec-s">이 글의 핵심 문장을 복습에 담으면 1일 · 3일 · 7일 뒤에 다시 꺼내 줘요</span>'
+           '<div class="ec-a"><button class="ec-b" type="button">복습에 담기</button><a class="ec-l" href="/notes/#review" hidden>내 공부방에서 보기 ›</a></div></div>')
 SVG_SH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
 END_APP = ('<div class="app-cta js-appcta no-print"><a class="end-app" href="/app/"><img src="/assets/icon-192.png?v=3" alt="" width="26" height="26" loading="lazy">'
            '<span><b>앱으로 매일 5분</b> · 홈 화면에서 바로 열기</span><em>설치 ›</em></a></div>')
@@ -999,7 +1000,7 @@ def page_post(p):
     aside = (f'<div class="side-box"><h4>이 글의 목차</h4>{toc_html(toc)}</div>'
              f'<div class="side-box"><h4>복습하기</h4><div class="acts">'
              + act_row(SVG_QUIZ, "퀴즈 풀기", f"{len(p['quiz'])}문제 · 1분", href="#quiz-sec")
-             + act_row(SVG_BOOK, "내 공부방", "틀린 문제 다시 보기", href="/notes/", right='<span class="n-pill js-notes-count"></span>')
+             + act_row(SVG_BOOK, "내 공부방", "틀린 문제 다시 보기", href="/notes/#wrong", right='<span class="n-pill js-notes-count"></span>')
              + act_row(SVG_PRINT, "출력 · PDF 저장", "A4 복습지", cls="js-print") + '</div></div>'
              + (f'<div class="side-box"><h4>이어서 보기</h4><ul class="side-links">{link_items}</ul></div>' if links else "")
              + side_common())

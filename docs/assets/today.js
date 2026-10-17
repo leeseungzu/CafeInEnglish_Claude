@@ -69,7 +69,7 @@
     const due = dueList(), v = due[0];
     if (!v) {
       const nx = all.reduce((m, x) => Math.min(m, x.due), 1e9), nn = all.filter(x => x.due === nx).length;
-      return `<section class="rv" id="review"><div class="rv-top"><b>오늘의 복습</b><span class="rv-n done">완료</span></div><p class="rv-empty">오늘 꺼낼 문장은 다 꺼냈어요. ${nx - DAY <= 1 ? "내일" : (nx - DAY) + "일 뒤"} ${nn}개가 다시 찾아와요.</p><p class="rv-tip">잊을 즈음 다시 보면 오래 남아요 · 1일 → 3일 → 7일 → 14일 → 30일</p></section>`;
+      return `<section class="rv" id="review"><div class="rv-top"><b>오늘의 복습</b><span class="rv-n done">${all.length}개 담김</span></div><p class="rv-empty">지금 꺼낼 문장은 없어요. ${nx - DAY <= 1 ? "내일" : (nx - DAY) + "일 뒤"} ${nn}개가 찾아와요.</p><p class="rv-tip">잊을 즈음 다시 보면 오래 남아요 · 1일 → 3일 → 7일 → 14일 → 30일</p></section>`;
     }
     const stg = ["첫", "두 번째", "세 번째", "네 번째", "다섯 번째", "여섯 번째"][v.st] || "다시";
     return `<section class="rv" id="review"><div class="rv-top"><b>오늘의 복습</b><span class="rv-n">${due.length}개 남음</span></div>
@@ -238,7 +238,7 @@ ${installCard()}`;
     setTimeout(() => b.addEventListener("click", stop), 0);
     setTimeout(stop, 8000);
   }
-  if (location.hash === "#routine" || location.hash === "#review") setTimeout(() => document.getElementById(location.hash.slice(1))?.scrollIntoView({ block: "start" }), 50);
+  if (/^#(routine|review|wrong|copy|backup)$/.test(location.hash)) setTimeout(() => document.getElementById(location.hash.slice(1))?.scrollIntoView({ block: "start" }), 50);
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
   render();
   // 말하기 도구(app.js)가 늦게 준비되면 한 번 더 그려서 마이크 버튼이 나오게
