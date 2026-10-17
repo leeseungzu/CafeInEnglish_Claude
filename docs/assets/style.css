@@ -1704,4 +1704,4 @@ html.is-app .fab{bottom:calc(84px + env(safe-area-inset-bottom))}
 
 /* 위쪽 메뉴: PC는 긴 이름, 휴대폰은 짧은 이름 (영상 · 표현 · 꿀팁 · 문장) */
 .nav .nl-s{display:none}
-@media (max-width:599px){.nav .nl-l{display:none}.nav .nl-s{display:inline}}
+@media (max-width:599px){.nav .nl-l{display:none}.nav .nl-s{display:inline}.top .nav{justify-content:flex-start!important;gap:4px!important;width:auto!important;margin:6px 0 0 -10px!important}.top .nav a{padding:6px 12px}.top .nav a::after{left:12px;right:12px}}
