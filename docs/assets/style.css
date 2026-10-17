@@ -1704,7 +1704,7 @@ html.is-app .fab{bottom:calc(84px + env(safe-area-inset-bottom))}
 
 /* 위쪽 메뉴: PC는 긴 이름, 휴대폰은 짧은 이름 (영상 · 표현 · 꿀팁 · 문장) */
 .nav .nl-s{display:none}
-@media (max-width:599px){.nav .nl-l{display:none}.nav .nl-s{display:inline}.top .nav{display:grid!important;grid-template-columns:repeat(5,1fr);width:100%!important;max-width:none;margin:10px 0 2px!important;gap:4px!important;background:#F2F4F6;border-radius:14px;padding:4px!important;overflow:visible;-webkit-mask-image:none;mask-image:none}.top .nav a{text-align:center;padding:8px 0!important;color:#6B7684!important;font-weight:600;font-size:15px!important;border-radius:10px!important;background:none!important}.top .nav a::after{display:none!important}.top .nav a.on{background:#fff!important;color:#191F28!important;font-weight:800;box-shadow:0 1px 3px rgba(0,0,0,.08)}}
+@media (max-width:599px){.nav .nl-l{display:none}.nav .nl-s{display:inline}.top .nav{display:grid!important;grid-template-columns:repeat(5,1fr);width:calc(100% + 32px)!important;max-width:none;margin:6px -16px 0!important;gap:0!important;padding:0!important;background:none;border-radius:0;border-bottom:1px solid #EEF0F2;overflow:visible;-webkit-mask-image:none;mask-image:none}.top .nav a{position:relative;text-align:center;padding:11px 0 12px!important;color:#8B95A1!important;font-weight:600;font-size:15.5px!important;border-radius:0!important;background:none!important;box-shadow:none!important}.top .nav a::after{display:none!important}.top .nav a.on{color:#191F28!important;font-weight:800;background:none!important;box-shadow:none!important}.top .nav a.on::before{content:"";position:absolute;left:24%;right:24%;bottom:-1px;height:2.5px;background:#2A1A12;border-radius:2px}}
 
 /* ===== 2026-10-17 홈 정리 ===== */
 /* 홈 소개 카드 (흰 바탕) */
@@ -1750,3 +1750,6 @@ html.is-app .fab{bottom:calc(84px + env(safe-area-inset-bottom))}
   .top .nav a:hover{color:#191F28}
 }
 .gp-q small{display:none!important} /* 소개 카드와 문구 중복 */
+
+/* 홈 화면 앱: 아래 탭 바만 (위쪽 메뉴 줄은 항상 숨김) */
+html.is-app .top .nav{display:none!important}
