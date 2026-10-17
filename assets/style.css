@@ -1701,3 +1701,7 @@ html.is-app .top .nav{display:none}
 html.is-app .fab{bottom:calc(84px + env(safe-area-inset-bottom))}
 @media (min-width:900px){html.is-app .tabbar{left:50%;right:auto;transform:translateX(-50%);width:560px;border:1px solid #EEF0F2;border-radius:22px 22px 0 0}}
 @media print{.tabbar{display:none!important}}
+
+/* 위쪽 메뉴: PC는 긴 이름, 휴대폰은 짧은 이름 (영상 · 표현 · 꿀팁 · 문장) */
+.nav .nl-s{display:none}
+@media (max-width:599px){.nav .nl-l{display:none}.nav .nl-s{display:inline}}

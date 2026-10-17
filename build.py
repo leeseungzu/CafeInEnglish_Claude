@@ -636,6 +636,9 @@ def tabbar(nav):
         f'<a href="{h}"{on if nav == k else ""}>{ic}<span>{t}</span></a>' for k, h, t, ic in TABS) + '</nav>')
 
 
+NAV_SHORT = {"video": "영상", "expr": "표현", "tip": "꿀팁", "think": "문장"}  # 휴대폰 위쪽 메뉴는 짧은 이름 (앱 탭과 같게)
+
+
 def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og-home-2.png", seo_title=None, ld=None, preload="", robots=""):
     full_title = f"{seo_title or title} | 카페인영어" if path != "/" else f"카페인영어 | {SITE.get('home_title') or SITE['tagline']}"
     full_title = full_title.replace(" - ", " | ")  # 브라우저 탭·검색 제목 구분은 하이픈 대신 세로 바로 통일
@@ -656,7 +659,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
                  f"src:url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2-variations'),url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2')}}</style>"
                  if FONT_V else '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">')
     navlinks = f'<a href="/"{" class=on" if path == "/" else ""}>홈</a>' + "".join(
-        f'<a href="/category/{k}/"{" class=on" if nav == k else ""}>{v}</a>' for k, v in CATS.items())
+        f'<a href="/category/{k}/"{" class=on" if nav == k else ""}><span class="nl-l">{v}</span><span class="nl-s">{NAV_SHORT[k]}</span></a>' for k, v in CATS.items())
     room = f'<a class="room{" on" if nav == "notes" else ""}" href="/notes/">내 공부방<span class="badge" id="nav-badge" hidden></span></a>'
     pjson = json.dumps(data or {}, ensure_ascii=False).replace("</", "<\\/")
     pdata = '<script id="page-data" type="application/json">' + pjson + '</script>'
@@ -1576,6 +1579,9 @@ APP_CSS = """
 .ap-hero h1{font-size:28px;margin:18px 0 8px;line-height:1.35}
 .ap-hero p{color:#4E5968;margin:0;font-size:16px}
 .ap-ben{display:grid;gap:10px;margin:26px 0 22px}
+.ap-cmp{margin:0 0 22px;background:#F7F8FA;border-radius:22px;padding:14px 10px 12px;text-align:center}
+.ap-cmp img{width:100%;height:auto;display:block}
+.ap-cmp figcaption{font-size:14px;color:#6B7684;margin-top:6px}
 .ap-ben div{display:flex;gap:14px;align-items:center;background:#F2F4F6;border-radius:18px;padding:14px 16px}
 .ap-ben img{width:44px;height:44px;flex:none}
 .ap-ben b{display:block;font-size:16px;color:#191F28}
@@ -1616,6 +1622,7 @@ PLUS_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="
 def page_app():
     url = DOMAIN + "/app/"
     ben = [("hot-beverage", "앱을 열면 바로 오늘의 5분", "오늘의 한 잔 · 이번 주 도장이 첫 화면"),
+           ("mobile-phone", "주소창 없이 넓게, 아래 탭으로 이동", "영상 · 표현 · 꿀팁 · 내 공부방이 손가락 하나로"),
            ("check", "오답노트 · 필사가 한곳에", "틀린 문제와 따라 쓴 문장이 차곡차곡"),
            ("rocket", "앱스토어 없이 1초 설치", "가입 없이 무료 · 휴대폰 용량도 거의 안 써요")]
     bh = "".join(f'<div>{icon_img(i, "", False)}<span><b>{e(t)}</b><small>{e(s)}</small></span></div>' for i, t, s in ben)
@@ -1625,6 +1632,7 @@ def page_app():
 <div class="ap-hero"><img class="ap-icon" src="/assets/icon-192.png?v=3" alt="카페인영어 앱 아이콘" width="96" height="96">
 <h1>카페인영어를 앱으로</h1><p>홈 화면에서 한 번에, 매일 5분 영어</p></div>
 <div class="ap-ben">{bh}</div>
+<figure class="ap-cmp"><img src="/assets/app-compare.webp?v={ASSET_V}" alt="웹 브라우저 화면과 카영 앱 화면 비교: 앱은 주소창 없이 전체 화면이고 아래 탭으로 이동해요" width="1064" height="1186" loading="lazy"><figcaption>같은 카영이라도, 앱으로 열면 이렇게 달라요</figcaption></figure>
 
 <div class="ap-box ap-pane" id="ap-inapp-ios"><h2>Safari에서 열어 주세요</h2>
 <p>인스타·스레드 같은 앱 안에서는 홈 화면에 추가할 수 없어요. 딱 한 번만 Safari로 열면 돼요.</p>
