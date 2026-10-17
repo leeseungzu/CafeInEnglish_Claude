@@ -644,9 +644,9 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <meta name="twitter:image" content="{DOMAIN}{og_img}">
 {f'<meta name="google-site-verification" content="{e(SITE["google_verify"])}">' if SITE.get("google_verify") else ""}{f'<meta name="naver-site-verification" content="{e(SITE["naver_verify"])}">' if SITE.get("naver_verify") else ""}
 {ld_html(ld)}
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png?v=2" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=2">
 <link rel="icon" href="/assets/icon-192.png" sizes="192x192" type="image/png">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="카페인영어"><meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -656,7 +656,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 </head>
 <body>
 <header class="top"><div class="top-in">
-  <a class="logo" href="/"><img class="logo-mark" src="/assets/logo-mark.png" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
+  <a class="logo" href="/"><img class="logo-mark" src="/assets/logo-mark.png?v=2" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
   <nav class="nav">{navlinks}</nav>
   {room}
 </div></header>
@@ -896,7 +896,7 @@ def page_post(p):
     if p.get("note"):
         parts.append(f'<div class="study-note"><b class="lbl">스터디 노트</b> {p["note"]}</div>')
     parts.append(TODAY_CTA)
-    parts.append(f'<div class="author-box no-print"><img src="/assets/logo-mark.png" alt="" width="44" height="44" loading="lazy">'
+    parts.append(f'<div class="author-box no-print"><img src="/assets/logo-mark.png?v=2" alt="" width="44" height="44" loading="lazy">'
                  f'<div><b>{AUTHOR_NAME}</b><p>{AUTHOR_BIO}</p><span class="ab-links"><a href="/contact/">의견 남기기</a><a href="/about/">카페인영어 소개</a></span></div></div>')
     parts.append('<h2 class="rel-h no-print">같이 보면 좋은 글</h2><div class="cards rel list no-print">'
                  + "".join(post_card(o) for o in similar_posts(p, 4)) + "</div>")
@@ -1665,10 +1665,10 @@ def build():
     write("/today/", page_today())
     (OUT / "manifest.webmanifest").write_text(json.dumps({
         "name": "카페인영어 - 오늘의 5분", "short_name": "카페인영어", "lang": "ko", "start_url": "/notes/?src=app", "scope": "/",
-        "display": "standalone", "background_color": "#FAF8F5", "theme_color": "#FAF8F5",
+        "display": "standalone", "background_color": "#FFFFFF", "theme_color": "#FFFFFF",
         "description": "하루 5분, 듣고 말하고 복습하는 영어 루틴",
-        "icons": [{"src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png"},
-                  {"src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png"}]}, ensure_ascii=False, indent=1), "utf-8")
+        "icons": [{"src": "/assets/icon-192.png?v=2", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
+                  {"src": "/assets/icon-512.png?v=2", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}]}, ensure_ascii=False, indent=1), "utf-8")
     (OUT / "sw.js").write_text(SW_JS, "utf-8")
     if (ROOT / "images").exists():  # 빌드 중 새로 만든 유튜브 썸네일까지 다시 복사
         shutil.copytree(ROOT / "images", OUT / "images", dirs_exist_ok=True)
