@@ -754,7 +754,9 @@ def card(href, chips, title, sub, thumb=None, play=False, alt="", hl=3, data_sub
         else:
             img = f'<img src="{thumb.replace(".png?", ".webp?")}" alt="{e(alt)}" loading="lazy" width="960" height="504">'
         if not thumb.startswith(("icon:", "<")):
-            th = f'<div class="thumb">{img}{badge}</div>'
+            vt = thumb.startswith("/images/yt/")
+            bg = img.replace("<img ", '<img aria-hidden="true" class="th-bg" ', 1).replace(f'alt="{e(alt)}"', 'alt=""') if vt else ""
+            th = f'<div class="thumb{" vthumb" if vt else ""}">{bg}{img}{badge}</div>'
     ds = f' data-sub="{e(data_sub)}"' if data_sub else ""
     return f'<a class="card{" has-th" if thumb else ""}" href="{href}"{ds}>{th}<div class="chips">{chip_html}</div><h{hl}>{e(title)}</h{hl}><p>{src_html}{e(sub)}</p></a>'
 
