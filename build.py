@@ -719,7 +719,9 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 
 
 def card(href, chips, title, sub, thumb=None, play=False, alt="", hl=3, data_sub=""):
-    chip_html = "".join('<span class="chip %s">%s</span>' % (c, e(t)) for c, t in chips)
+    chip_html = "".join('<span class="chip %s">%s</span>' % (c, e(t)) for c, t in chips[:1])
+    src = " · ".join(t for c, t in chips[1:] if t and t != (chips[0][1] if chips else ""))
+    src_html = f'<span class="src">{e(src)}</span> · ' if src else ""
     th = ""
     if thumb:
         badge = ('<span class="th-play"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="#2A1A12"/></svg></span>'
@@ -738,7 +740,7 @@ def card(href, chips, title, sub, thumb=None, play=False, alt="", hl=3, data_sub
         if not thumb.startswith(("icon:", "<")):
             th = f'<div class="thumb">{img}{badge}</div>'
     ds = f' data-sub="{e(data_sub)}"' if data_sub else ""
-    return f'<a class="card{" has-th" if thumb else ""}" href="{href}"{ds}>{th}<div class="chips">{chip_html}</div><h{hl}>{e(title)}</h{hl}><p>{e(sub)}</p></a>'
+    return f'<a class="card{" has-th" if thumb else ""}" href="{href}"{ds}>{th}<div class="chips">{chip_html}</div><h{hl}>{e(title)}</h{hl}><p>{src_html}{e(sub)}</p></a>'
 
 
 def thumb_ver(th, theme):
@@ -1195,7 +1197,12 @@ def page_home():
     mq = ('<section class="mqs" id="mqs" aria-label="최근 일주일 한 잔 퀴즈"><div class="mq-tr" id="mq-tr">'
           + "".join(mq_card(slides_data[(i0 - k) % len(slides_data)], label(k, now_k), mq_md(k)) for k in range(N_SLIDES))
           + '</div><div class="mq-dots" id="mq-dots"></div></section>') if slides_data else ""
-    hero = '<div class="m-home">' + mq + picker + notice_html().replace('class="notice"', 'class="notice m-nt"', 1) + '</div>' + f"""<section class="hs" aria-label="오늘의 한 잔">
+    kk = SITE.get("kakao", "")
+    intro = ('<section class="hi" aria-label="카페인영어 소개"><div class="hi-t"><span class="hi-k">CafeInEnglish</span>'
+             '<p class="hi-h">영상으로 배우는 <em>진짜 영어표현</em></p><span class="hi-s">하루 5분 · 가입 없이 무료</span></div>'
+             + (f'<a class="hi-btn" href="{e(kk)}" target="_blank" rel="noopener"><img src="/assets/kakao-talk.png" alt="" width="24" height="22">매일 아침 1일 1영 받기<i>›</i></a>' if kk else "")
+             + '</section>')
+    hero = '<div class="m-home">' + intro + picker + mq + notice_html().replace('class="notice"', 'class="notice m-nt"', 1) + '</div>' + f"""<section class="hs" aria-label="오늘의 한 잔">
   <div class="hs-track" id="hs-track">{slides}</div>
   <div class="hs-ctl"><button type="button" class="hs-btn" id="hs-prev" aria-label="이전 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="hs-btn" id="hs-next" aria-label="다음 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button><span class="hs-dots" id="hs-dots"></span></div>
 </section>"""

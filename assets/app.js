@@ -772,10 +772,13 @@
   wrap.innerHTML =
     '<section class="kx-card kx-cm"><div class="kx-row"><button type="button" class="kx-play" aria-label="출근길 듣기 재생">' + PLAY + '</button>'
     + '<span class="kx-t"><b>출근길 듣기 · 약 3분</b><small class="kx-now">이번 주 ' + week.length + '문장을 두 번씩 이어서 들려줘요</small></span></div>'
-    + '<div class="kx-chips">' + week.map((x, i) => '<span data-i="' + i + '">' + X(x.ko) + '</span>').join("") + '</div></section>'
-    + (old ? '<section class="kx-card kx-rv"><p class="kx-k">복습 · 3일 전에 배운 문장</p><p class="kx-ko">"' + X(old.ko) + '"<br>기억나요?</p>'
-      + sayBox(old.en) + '<button type="button" class="kx-show">정답 보기</button><p class="kx-ans" hidden><b>' + X(old.en) + '</b></p></section>' : "");
-  (gp || home.firstChild).parentNode.insertBefore(wrap, gp || null);
+    + '<div class="kx-chips">' + week.map((x, i) => '<span data-i="' + i + '">' + X(x.ko) + '</span>').join("") + '</div>'
+    + (old ? '<div class="kx-rv"><button type="button" class="kx-rvt" aria-expanded="false"><span>복습 · <b>"' + X(old.ko) + '"</b> 기억나요?</span><i>›</i></button>'
+      + '<div class="kx-rvb" hidden>' + sayBox(old.en) + '<button type="button" class="kx-show">정답 보기</button><p class="kx-ans" hidden><b>' + X(old.en) + '</b></p></div></div>' : "")
+    + '</section>';
+  // 출근길 카드는 '오늘의 한 잔' 바로 아래에 (복습은 카드 안 한 줄, 누르면 펼침)
+  const mqs = document.getElementById("mqs");
+  if (mqs && mqs.parentNode === home) home.insertBefore(wrap, mqs.nextSibling); else (gp || home.firstChild).parentNode.insertBefore(wrap, gp || null);
 
   // 출근길 듣기 재생기
   const cm = wrap.querySelector(".kx-cm"), pb = cm.querySelector(".kx-play"), now = cm.querySelector(".kx-now");
@@ -801,6 +804,8 @@
   const rv = wrap.querySelector(".kx-rv");
   if (rv) rv.addEventListener("click", e => {
     const ans = rv.querySelector(".kx-ans");
+    const tg = e.target.closest(".kx-rvt");
+    if (tg) { const b = rv.querySelector(".kx-rvb"); b.hidden = !b.hidden; tg.setAttribute("aria-expanded", String(!b.hidden)); rv.classList.toggle("open", !b.hidden); return; }
     if (e.target.closest(".kx-show")) { ans.hidden = false; e.target.closest(".kx-show").hidden = true; if (old.au) { au.src = old.au; au.play().catch(() => {}); } return; }
     const box = e.target.closest(".ks"); if (!box) return;
     const ok = () => { spoke(); ans.hidden = false; rv.querySelector(".kx-show").hidden = true; ga("review_speak_ok"); };

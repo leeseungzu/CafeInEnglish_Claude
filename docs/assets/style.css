@@ -1705,3 +1705,48 @@ html.is-app .fab{bottom:calc(84px + env(safe-area-inset-bottom))}
 /* 위쪽 메뉴: PC는 긴 이름, 휴대폰은 짧은 이름 (영상 · 표현 · 꿀팁 · 문장) */
 .nav .nl-s{display:none}
 @media (max-width:599px){.nav .nl-l{display:none}.nav .nl-s{display:inline}.top .nav{display:grid!important;grid-template-columns:repeat(5,1fr);width:100%!important;max-width:none;margin:10px 0 2px!important;gap:4px!important;background:#F2F4F6;border-radius:14px;padding:4px!important;overflow:visible;-webkit-mask-image:none;mask-image:none}.top .nav a{text-align:center;padding:8px 0!important;color:#6B7684!important;font-weight:600;font-size:15px!important;border-radius:10px!important;background:none!important}.top .nav a::after{display:none!important}.top .nav a.on{background:#fff!important;color:#191F28!important;font-weight:800;box-shadow:0 1px 3px rgba(0,0,0,.08)}}
+
+/* ===== 2026-10-17 홈 정리 ===== */
+/* 홈 소개 카드 (흰 바탕) */
+.hi{display:flex;align-items:center;justify-content:space-between;gap:16px;background:#fff;border-radius:22px;padding:22px 26px;margin:0 0 16px;box-shadow:0 1px 0 rgba(0,0,0,.02),0 6px 24px rgba(25,31,40,.05)}
+.hi-t{min-width:0}
+.hi-k{display:block;font-family:"Plus Jakarta Sans",Pretendard,sans-serif;font-size:13px;font-weight:700;letter-spacing:-.01em;color:#8B95A1;margin-bottom:6px}
+.hi-h{margin:0;font-size:24px;line-height:1.3;font-weight:800;letter-spacing:-.04em;color:#191F28}
+.hi-h em{font-style:normal;background:linear-gradient(transparent 62%,#CDEB5B 62%,#CDEB5B 92%,transparent 92%)}
+.hi-s{display:block;margin-top:6px;font-size:14px;color:#6B7684;font-weight:600}
+.hi-btn{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#2A1A12;color:#F4EEE4;text-decoration:none;font-weight:700;font-size:15px;padding:12px 18px 12px 12px;border-radius:999px;box-shadow:0 6px 16px rgba(42,26,18,.16)}
+.hi-btn img{width:26px;height:26px;border-radius:50%;background:#FEE500;padding:5px;box-sizing:border-box;object-fit:contain}
+.hi-btn i{font-style:normal;opacity:.6;margin-left:2px}
+@media (max-width:599px){
+  .hi{flex-direction:column;align-items:stretch;gap:14px;padding:18px;margin:4px 0 0;border-radius:24px;box-shadow:none}
+  .hi-h{font-size:21px}.hi-s{font-size:13.5px}
+  .hi-btn{padding:13px 14px;font-size:15px}
+  /* 고르기: 아이콘 4칸 */
+  .m-home .gp{margin:12px 0 0;padding:16px 14px 14px}
+  .m-home .gp-q{font-size:16px;margin:0 2px 12px}
+  .m-home .gp-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .m-home .gp-c{flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:12px 0 11px;background:#F7F8FA;border-radius:16px;text-align:center}
+  .m-home .gp-c img{width:34px;height:34px}
+  .m-home .gp-c b{font-size:14px}
+  .m-home .gp-c small,.m-home .gp-c::after{display:none!important}
+  .m-home .mqs{margin-top:12px}
+}
+/* 출근길 카드 안 복습 한 줄 */
+.kx-rv{margin-top:14px;border-top:1px solid #EEF0F2;padding-top:4px}
+.kx-rvt{all:unset;box-sizing:border-box;cursor:pointer;display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;padding:10px 0 2px;font-size:14px;color:#4E5968}
+.kx-rvt b{color:#191F28}
+.kx-rvt i{font-style:normal;color:#B0B8C1;font-size:18px;transition:transform .2s}
+.kx-rv.open .kx-rvt i{transform:rotate(90deg)}
+.kx-rvb{padding-top:10px}
+/* 글 목록 칩: 회색 하나로 통일, 출처는 설명 앞 회색 글자 */
+.cards .card .chips .chip,.card .chips .chip{background:#F2F4F6!important;color:#4E5968!important;border:0!important}
+.card p .src{color:#8B95A1;font-weight:600}
+/* PC 위쪽 메뉴: 밑줄 탭 (A안) */
+@media (min-width:600px){
+  .top .nav a{position:relative;color:#8B95A1;font-weight:600;background:none!important}
+  .top .nav a::after{display:none!important}
+  .top .nav a.on{color:#191F28;font-weight:800}
+  .top .nav a.on::before{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:2.5px;background:#2A1A12;border-radius:2px}
+  .top .nav a:hover{color:#191F28}
+}
+.gp-q small{display:none!important} /* 소개 카드와 문구 중복 */
