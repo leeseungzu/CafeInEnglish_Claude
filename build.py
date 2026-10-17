@@ -474,9 +474,24 @@ def act_row(icon, title, sub="", href=None, cls="", right=""):
     return f'<button class="act {cls}" type="button">{inner}</button>'
 
 
+APP_ROW = ('<div class="app-cta js-appcta"><a class="act app-row" href="/app/"><span class="act-ic"><img src="/assets/icon-192.png?v=3" alt="" width="40" height="40" loading="lazy"></span>'
+           '<span class="act-t"><b>앱으로 매일 5분</b><small>홈 화면에 추가하면 오늘의 한 잔부터 바로 열려요 · 무료</small></span>'
+           '<span class="act-r"><span class="app-btn">설치</span></span></a></div>')
+NB_APP = ('<div class="app-cta js-appcta" data-k="nbAppX"><div class="nb-app"><img src="/assets/icon-192.png?v=3" alt="" width="52" height="52">'
+          '<div class="t"><b>앱으로 쓰면 더 편해요</b><small class="js-appsub" data-and="홈 화면에서 바로 열고, 오늘의 5분부터 시작해요.">아이폰은 Safari와 앱 기록이 따로 저장돼요. 앱에서 시작하면 기록이 한곳에 모여요.</small></div>'
+          '<a href="/app/">설치</a></div><button class="nb-app-x js-appx" type="button">다음에 할게요 ✕</button></div>')
+# 휴대폰 + 아직 앱이 아닐 때만 보여 줘요. 내 공부방 카드는 '다음에 할게요'를 누르면 2주 동안 숨김.
+APP_CTA_JS = ("<script>(function(){var u=navigator.userAgent,s=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone,"
+              "ios=/iPhone|iPad|iPod/i.test(u)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),mob=ios||/Android/i.test(u);"
+              "document.querySelectorAll('.js-appcta').forEach(function(el){if(s||!mob)return;var k=el.dataset.k;"
+              "if(k){try{if(Date.now()-(+localStorage.getItem(k)||0)<12096e5)return}catch(e){}"
+              "var x=el.querySelector('.js-appx');x&&x.addEventListener('click',function(){try{localStorage.setItem(k,Date.now())}catch(e){}el.remove()})}"
+              "var sb=el.querySelector('.js-appsub');if(sb&&!ios)sb.textContent=sb.dataset.and;el.classList.add('on')})})();</script>")
+
+
 def share_block(label, print_title="출력해서 복습하기", print_sub="A4 복습지로 인쇄하거나 PDF로 저장해요"):
     pr = act_row(SVG_PRINT, print_title, print_sub, cls="js-print") if print_title else ""
-    return ((f'<div class="end-print no-print">{pr}</div>' if pr else "") + '<div class="share no-print">' +
+    return ((f'<div class="end-print no-print">{pr}{APP_ROW}</div>' if pr else "") + '<div class="share no-print">' +
             f'<div class="share-hd"><div class="share-t">{label}</div><div class="share-s">링크만 보내면 미리보기 카드로 보여요</div></div>'
             '<div class="share-b"><button class="btn ghost js-share" type="button">'
             '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>공유하기</button>'
@@ -674,6 +689,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 {sns_fab()}
 {pdata}
 <script src="/assets/app.js?v={ASSET_V}" defer></script>
+{APP_CTA_JS if 'js-appcta' in body else ''}
 </body>
 </html>
 """
@@ -1373,6 +1389,7 @@ def page_notes():
     goals = [{**{k: g[k] for k in ("id", "name", "short")}, "icon": f'/assets/icons/{g["icon"]}.webp?v={ASSET_V}'} for g in TODAY_GOALS if pool.get(g["id"])]
     body = ('<h1>내 공부방</h1><p class="lead">오늘의 한 잔부터 오답노트까지, 내 공부가 여기 다 모여요. '
             '기록은 이 기기의 브라우저에만 저장돼요.</p>'
+            + NB_APP +
             '<div class="nb-band"><div id="today-app"></div>'
             '<h2 id="wrong" class="nb-h">오답노트 <small>다시 풀어서 맞히면 \'졸업\'해요</small></h2><div id="notes-root"></div>'
             '<h2 id="copy" class="nb-h">필사 노트 <small><span id="copy-count">0</span>개</small></h2><div id="copy-notes"></div></div>'
