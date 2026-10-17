@@ -733,6 +733,18 @@
     });
   }
 
+  // ⑦ PC 홈: 복습할 문장이 기다리면 소개 카드 아래 한 줄 (모바일은 출근길 카드 안에 있음)
+  (() => {
+    const hi = document.querySelector(".pc-band .hi"); if (!hi || !hi.offsetParent || matchMedia("(max-width:600px)").matches) return;
+    const s = get("ky_today_v1", {}), sr = s.srs || {}, seen = new Set(); let due = 0;
+    Object.values(sr).forEach(v => { if (!v.en || seen.has(v.en)) return; seen.add(v.en); if (v.due <= DAY) due++; });
+    (s.learned || []).forEach(x => { if (!x.en || seen.has(x.en)) return; seen.add(x.en); if (Math.round(Date.parse(x.d) / 864e5) + 1 <= DAY) due++; });
+    if (!due) return;
+    const a = document.createElement("a"); a.className = "pc-rv"; a.href = "/notes/#review";
+    a.innerHTML = '<span class="pc-rv-n">' + due + '</span><span class="pc-rv-t"><b>오늘의 복습 ' + due + '개</b>가 기다려요 · 잊기 전에 꺼내 봐요</span><i>›</i>';
+    hi.after(a); a.addEventListener("click", () => ga("review_home_click", { n: due, from: "pc" }));
+  })();
+
   // ⑥ 글 끝 '복습에 담기': 이 글 핵심 문장을 바로 '오늘의 복습' 대기열(내일부터)에 넣어요
   const kc = document.querySelector(".js-keep");
   if (kc) {
