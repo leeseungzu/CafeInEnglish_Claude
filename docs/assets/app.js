@@ -863,9 +863,28 @@ if ("serviceWorker" in navigator) addEventListener("load", () => navigator.servi
         localStorage.setItem(k, JSON.stringify(merge(A, B)));
       });
       file.value = "";
+      try { window.gtag && gtag("event", "backup_import", { added: added }); } catch (e) {}
       toast(added ? "기록을 가져왔어요 · " + added + "개 추가" : "이미 같은 기록이 있어요");
       if (added) setTimeout(() => location.reload(), 1200);
     };
     r.readAsText(f);
   });
+})();
+
+/* ── 핵심 행동 측정 (GA): 1일 1영 클릭 · 앱 설치 안내 · 설치 완료 · 기록 백업 ── */
+(function () {
+  const ev = (n, p) => { try { window.gtag && gtag("event", n, p || {}); } catch (e) {} };
+  const place = el => { const s = el.closest("section,aside,header,footer,.share,.nb-app,.hi,.fab"); return s ? (s.id || s.className.split(" ")[0] || s.tagName.toLowerCase()) : "page"; };
+  const mode = () => ((window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone) ? "app" : "web";
+  document.addEventListener("click", e => {
+    const a = e.target.closest("a,button"); if (!a) return;
+    const h = a.getAttribute("href") || "";
+    if (/open\.kakao\.com/.test(h)) ev("kakao_click", { place: place(a), page: location.pathname, mode: mode() });
+    else if (/^\/app\/?(\?|#|$)/.test(h)) ev("app_cta_click", { place: place(a), page: location.pathname });
+    else if (a.classList.contains("js-ap-install")) ev("app_install_click", { page: location.pathname });
+    else if (a.classList.contains("js-bk-out")) ev("backup_export");
+    else if (a.classList.contains("js-bk-in")) ev("backup_import_open");
+  }, true);
+  addEventListener("appinstalled", () => ev("app_installed", { page: location.pathname }));
+  if (mode() === "app") { try { if (!sessionStorage.getItem("kyAppOpen")) { sessionStorage.setItem("kyAppOpen", "1"); ev("app_open", { page: location.pathname }); } } catch (e) {} }
 })();

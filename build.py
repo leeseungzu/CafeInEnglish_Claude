@@ -1727,10 +1727,11 @@ var a1=$(".js-ap-kakao");if(a1)a1.href=kk;var a2=$(".js-ap-chrome");if(a2)a2.hre
 var dp=null;
 window.addEventListener("beforeinstallprompt",function(ev){{ev.preventDefault();dp=ev;$$(".js-ap-install").forEach(function(b){{b.style.display=""}})}});
 window.addEventListener("appinstalled",function(){{toast("설치됐어요! 홈 화면을 확인해 보세요")}});
-$$(".js-ap-install").forEach(function(b){{b.addEventListener("click",function(){{if(dp){{dp.prompt();dp.userChoice.then(function(){{dp=null}})}}else{{var m=$(".js-ap-manual");if(m)m.style.display="";b.style.display="none"}}}})}});
+$$(".js-ap-install").forEach(function(b){{b.addEventListener("click",function(){{if(dp){{dp.prompt();dp.userChoice.then(function(c){{try{{window.gtag&&gtag("event","app_install_choice",{{outcome:c&&c.outcome}})}}catch(e){{}}dp=null}})}}else{{var m=$(".js-ap-manual");if(m)m.style.display="";b.style.display="none"}}}})}});
 function tab(t){{$$(".ap-tabs button").forEach(function(b){{b.classList.toggle("on",b.dataset.t===t)}});$$(".ap-tp").forEach(function(p){{p.classList.toggle("on",p.dataset.t===t)}})}}
 $$(".ap-tabs button").forEach(function(b){{b.addEventListener("click",function(){{tab(b.dataset.t)}})}});
 tab(and?"and":"ios");
+try{{window.gtag&&gtag("event","app_page_view",{{env:standalone?"app":kakao?"kakao":(inapp&&ios)?"inapp_ios":(inapp&&and)?"inapp_and":ios?"ios":and?"android":"pc"}})}}catch(e){{}}
 if(standalone){{show("ap-done");var g=$("#ap-guide");if(g)g.style.display="none"}}
 else if(kakao){{show("ap-kakao");setTimeout(function(){{location.href=kk}},400)}}
 else if(inapp&&ios)show("ap-inapp-ios");
