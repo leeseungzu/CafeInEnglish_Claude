@@ -43,7 +43,9 @@
       if (!it) return null;
       r = S.days[TODAY] = { src: S.src, en: it.en, ko: it.ko, a: it.a, p: it.p, l: 0, s: 0, r: 0 };
       const old = S.learned.filter(x => x.d !== TODAY);
-      const pk = old.find(x => ago(x.d) === 3) || old.find(x => ago(x.d) === 7) || old[Math.floor(Math.random() * old.length)];
+      srsSync();
+      const dv = dueList().find(v => v.en !== it.en);
+      const pk = (dv && old.find(x => x.en === dv.en)) || old.find(x => ago(x.d) === 3) || old.find(x => ago(x.d) === 7) || old[Math.floor(Math.random() * old.length)];
       const q = pk ? { en: pk.en, ko: pk.ko, a: pk.a, ago: ago(pk.d) } : { en: it.en, ko: it.ko, a: it.a, ago: 0 };
       const bank = [...new Set([...DAILY, ...Object.values(POOL).flat()].map(x => x.en))].filter(e => e !== q.en);
       const o = [q.en];
@@ -52,6 +54,30 @@
       r.q = q; save();
     }
     return r;
+  }
+  // ── 간격 반복: 말해 본 문장을 1·3·7·14·30·60일 뒤에 다시 꺼내요 ──
+  const IV = [1, 3, 7, 14, 30, 60];
+  const dnum = d => Math.round(Date.parse(d) / 864e5);
+  function srsSync() {
+    S.srs = S.srs || {};
+    S.learned.forEach(x => { if (x.en && !S.srs[x.en]) S.srs[x.en] = { st: 0, due: dnum(x.d) + IV[0], en: x.en, ko: x.ko, a: x.a, p: x.p || "" }; });
+  }
+  const dueList = () => Object.values(S.srs || {}).filter(v => v.due <= DAY).sort((a, b) => a.due - b.due || a.st - b.st);
+  let rvShow = false;
+  function rvBlock() {
+    const all = Object.values(S.srs || {}); if (!all.length) return "";
+    const due = dueList(), v = due[0];
+    if (!v) {
+      const nx = all.reduce((m, x) => Math.min(m, x.due), 1e9), nn = all.filter(x => x.due === nx).length;
+      return `<section class="rv" id="review"><div class="rv-top"><b>오늘의 복습</b><span class="rv-n done">완료</span></div><p class="rv-empty">오늘 꺼낼 문장은 다 꺼냈어요. ${nx - DAY <= 1 ? "내일" : (nx - DAY) + "일 뒤"} ${nn}개가 다시 찾아와요.</p><p class="rv-tip">잊을 즈음 다시 보면 오래 남아요 · 1일 → 3일 → 7일 → 14일 → 30일</p></section>`;
+    }
+    const stg = ["첫", "두 번째", "세 번째", "네 번째", "다섯 번째", "여섯 번째"][v.st] || "다시";
+    return `<section class="rv" id="review"><div class="rv-top"><b>오늘의 복습</b><span class="rv-n">${due.length}개 남음</span></div>
+<p class="rv-k">${stg} 복습 · 한국어만 보고 영어로 말해 보세요</p><p class="rv-q">“${esc(v.ko)}”</p>
+${rvShow ? `<div class="rv-a"><b>${esc(v.en)}</b>${v.a ? `<button type="button" class="rt-b" data-play="${v.a}">▶ 원어민 발음</button>` : ""}</div>
+<div class="rv-btns"><button type="button" class="rv-b" data-rv="again">헷갈려요<small>내일 다시</small></button><button type="button" class="rv-b ok" data-rv="ok">기억났어요<small>${IV[Math.min(v.st + 1, IV.length - 1)]}일 뒤에</small></button></div>`
+      : `<button type="button" class="rv-show" data-rv="show">정답 보기</button>`}
+<p class="rv-tip">잊을 즈음 다시 보면 오래 남아요 · 1일 → 3일 → 7일 → 14일 → 30일</p></section>`;
   }
   function learn(r) {
     if (r.l && r.s && !S.learned.some(x => x.d === TODAY && x.en === r.en)) { S.learned.push({ en: r.en, ko: r.ko, a: r.a, d: TODAY, src: r.src }); }
@@ -87,6 +113,7 @@
     return `<p class="rt-q">“${esc(q.ko)}”를 영어로?</p><div class="rt-qz">${q.o.map(en => `<button data-q="${esc(en)}"${r.r && en === q.en ? ' class="right"' : ""}>${esc(en)}</button>`).join("")}</div>`;
   }
   function render() {
+    srsSync();
     const r = today();
     if (!r) { root.innerHTML = ""; return; }
     if (open === null) open = !r.l ? "l" : !r.s ? "s" : !r.r ? "r" : "";
@@ -117,6 +144,7 @@ ${S.src !== "daily" ? `<div class="rt-goals">${SRCS.map(g => `<button type="butt
 <p class="rt-hint">${n === 3 ? `<b class="lbl">쾅!</b> 오늘 도장을 찍었어요. ${st > 1 ? "연속 " + st + "일째예요." : "내일 또 만나요."}` : stamped ? '<b class="lbl">도장</b> 오늘 도장은 이미 찍혔어요. 편하게 한 번 더 연습해요' : '<b class="lbl">도장</b> 듣기·말하기·복습을 다 하면 오늘 도장이 찍혀요'}</p>
 ${n ? '<button type="button" class="rt-again" data-act="again">↻ 처음부터 한 번 더 연습하기</button>' : ""}
 </section>
+${rvBlock()}
 <h2 class="rt-h">이번 주 한 잔 도장 <small>${st ? "연속 " + st + "일 · " : ""}이번 주 ${cnt}잔</small></h2><div class="rt-week">${wk}</div>
 <h2 class="rt-h">말해 본 문장 <small>${said.length}개</small></h2>
 ${said.length ? '<div class="acts rt-said">' + said.slice(0, 8).map(x => `<button type="button" class="act" data-play="${x.a}"><span class="act-ic">▶</span><span class="act-t"><b>${esc(x.en)}</b><small>${esc(x.ko)} · ${ago(x.d) ? ago(x.d) + "일 전" : "오늘"}</small></span></button>`).join("") + "</div>" : '<p class="rt-sub">루틴에서 듣고 말해 본 문장이 여기에 모여요.</p>'}
@@ -146,6 +174,13 @@ ${installCard()}`;
     const b = ev.target.closest("button"); if (!b) return;
     const r = S.days[TODAY];
     if (b.dataset.guide) { guide = b.dataset.guide; render(); return; }
+    if (b.dataset.rv) {
+      const v = dueList()[0]; if (!v) return;
+      if (b.dataset.rv === "show") { rvShow = true; render(); if (v.a) play(v.a); ga("review_show"); return; }
+      if (b.dataset.rv === "ok") { v.st = Math.min(v.st + 1, IV.length - 1); v.due = DAY + IV[v.st]; ga("review_ok", { st: v.st }); }
+      if (b.dataset.rv === "again") { v.st = 0; v.due = DAY + 1; ga("review_again"); }
+      rvShow = false; save(); render(); return;
+    }
     if (b.dataset.seg) { if (S.src === "daily") { S.src = S.lastGoal && POOL[S.lastGoal] ? S.lastGoal : (SRCS[0] || {}).id || "daily"; open = null; save(); render(); } return; }
     if (b.classList.contains("ks-mic") || b.classList.contains("ks-done")) {
       const box = b.closest(".ks"), win = () => { r.s = 1; learn(r); save(); if (window.KY_SAY) KY_SAY.spoke(); setTimeout(() => { open = null; render(); }, 1500); };
@@ -203,7 +238,7 @@ ${installCard()}`;
     setTimeout(() => b.addEventListener("click", stop), 0);
     setTimeout(stop, 8000);
   }
-  if (location.hash === "#routine") setTimeout(() => document.getElementById("routine")?.scrollIntoView({ block: "start" }), 50);
+  if (location.hash === "#routine" || location.hash === "#review") setTimeout(() => document.getElementById(location.hash.slice(1))?.scrollIntoView({ block: "start" }), 50);
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
   render();
   // 말하기 도구(app.js)가 늦게 준비되면 한 번 더 그려서 마이크 버튼이 나오게

@@ -776,6 +776,12 @@
     + (old ? '<div class="kx-rv"><button type="button" class="kx-rvt" aria-expanded="false"><span>복습 · <b>"' + X(old.ko) + '"</b> 기억나요?</span><i>›</i></button>'
       + '<div class="kx-rvb" hidden>' + sayBox(old.en) + '<button type="button" class="kx-show">정답 보기</button><p class="kx-ans" hidden><b>' + X(old.en) + '</b></p></div></div>' : "")
     + '</section>';
+  // 간격 반복 복습이 기다리면 그 개수로 안내 (내 공부방 '오늘의 복습'으로)
+  try {
+    const st = JSON.parse(localStorage.getItem("ky_today_v1")) || {}, sr = st.srs || {}, seen = new Set(); let due = 0;
+    (st.learned || []).forEach(x => { if (!x.en || seen.has(x.en)) return; seen.add(x.en); const v = sr[x.en]; const dd = v ? v.due : Math.round(Date.parse(x.d) / 864e5) + 1; if (dd <= DAY) due++; });
+    if (due) { const rvEl = wrap.querySelector(".kx-rv"); if (rvEl) rvEl.innerHTML = '<a class="kx-rvt" href="/notes/#review"><span>오늘의 복습 <b>' + due + '개</b> · 잊기 전에 꺼내 봐요</span><i>›</i></a>'; }
+  } catch (e) {}
   // 출근길 카드는 '오늘의 한 잔' 바로 아래에 (복습은 카드 안 한 줄, 누르면 펼침)
   const mqs = document.getElementById("mqs");
   if (mqs && mqs.parentNode === home) home.insertBefore(wrap, mqs.nextSibling); else (gp || home.firstChild).parentNode.insertBefore(wrap, gp || null);
@@ -805,6 +811,7 @@
   if (rv) rv.addEventListener("click", e => {
     const ans = rv.querySelector(".kx-ans");
     const tg = e.target.closest(".kx-rvt");
+    if (tg && tg.tagName === "A") return;
     if (tg) { const b = rv.querySelector(".kx-rvb"); b.hidden = !b.hidden; tg.setAttribute("aria-expanded", String(!b.hidden)); rv.classList.toggle("open", !b.hidden); return; }
     if (e.target.closest(".kx-show")) { ans.hidden = false; e.target.closest(".kx-show").hidden = true; if (old.au) { au.src = old.au; au.play().catch(() => {}); } return; }
     const box = e.target.closest(".ks"); if (!box) return;
