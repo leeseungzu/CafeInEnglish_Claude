@@ -63,7 +63,7 @@
     S.learned.forEach(x => { if (x.en && !S.srs[x.en]) S.srs[x.en] = { st: 0, due: dnum(x.d) + IV[0], en: x.en, ko: x.ko, a: x.a, p: x.p || "" }; });
   }
   const dueList = () => Object.values(S.srs || {}).filter(v => v.due <= DAY).sort((a, b) => a.due - b.due || a.st - b.st);
-  let rvShow = false;
+  let rvShow = false, saidAll = false;
   function rvBlock() {
     const all = Object.values(S.srs || {}); if (!all.length) return "";
     const due = dueList(), v = due[0];
@@ -123,9 +123,9 @@ ${rvShow ? `<div class="rv-a"><b>${esc(v.en)}</b>${v.a ? `<button type="button" 
     let wk = "", cnt = 0;
     for (let k = 0; k < 7; k++) {
       const s = ymd(mon + k), ok = done(s); if (ok) cnt++;
-      wk += `<div class="rt-dy${ok ? " on" : ""}${s === TODAY ? " td" : ""}"><i>${ok ? `<img src="${CUP}" alt="도장" width="28" height="28">` : ""}</i>${"월화수목금토일"[k]}</div>`;
+      wk += `<div class="rt-dy${ok ? " on" : ""}${s === TODAY ? " td" : ""}"><i>${ok ? `<svg viewBox="0 0 24 24" width="18" height="18" aria-label="완료"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>` : ""}</i>${"월화수목금토일"[k]}</div>`;
     }
-    const said = S.learned.slice().reverse();
+    const said = []; { const sn = new Set(); S.learned.slice().reverse().forEach(x => { if (x.en && !sn.has(x.en)) { sn.add(x.en); said.push(x); } }); }
     const st = streak();
     const set = new Set((r.src === "daily" ? DAILY : POOL[r.src] || []).map(x => x.en));
     const got = new Set(S.learned.filter(x => set.has(x.en)).map(x => x.en)).size, pct = set.size ? Math.round(got / set.size * 100) : 0;
@@ -147,7 +147,7 @@ ${n ? '<button type="button" class="rt-again" data-act="again">↻ 처음부터 
 ${rvBlock()}
 <h2 class="rt-h">이번 주 한 잔 도장 <small>${st ? "연속 " + st + "일 · " : ""}이번 주 ${cnt}잔</small></h2><div class="rt-week">${wk}</div>
 <h2 class="rt-h">말해 본 문장 <small>${said.length}개</small></h2>
-${said.length ? '<div class="acts rt-said">' + said.slice(0, 8).map(x => `<button type="button" class="act" data-play="${x.a}"><span class="act-ic">▶</span><span class="act-t"><b>${esc(x.en)}</b><small>${esc(x.ko)} · ${ago(x.d) ? ago(x.d) + "일 전" : "오늘"}</small></span></button>`).join("") + "</div>" : '<p class="rt-sub">루틴에서 듣고 말해 본 문장이 여기에 모여요.</p>'}
+${said.length ? '<div class="acts rt-said">' + said.slice(0, saidAll ? 30 : 3).map(x => `<button type="button" class="act" data-play="${x.a}"><span class="act-ic">▶</span><span class="act-t"><b>${esc(x.en)}</b><small>${esc(x.ko)} · ${ago(x.d) ? ago(x.d) + "일 전" : "오늘"}</small></span></button>`).join("") + (said.length > 3 ? `<button type="button" class="rt-more" data-said="1">${saidAll ? "접기" : "전체 보기 · " + said.length + "개"}</button>` : "") + "</div>" : '<p class="rt-sub">루틴에서 듣고 말해 본 문장이 여기에 모여요.</p>'}
 ${installCard()}`;
     document.dispatchEvent(new Event("ky-routine"));
   }
@@ -174,6 +174,7 @@ ${installCard()}`;
     const b = ev.target.closest("button"); if (!b) return;
     const r = S.days[TODAY];
     if (b.dataset.guide) { guide = b.dataset.guide; render(); return; }
+    if (b.dataset.said) { saidAll = !saidAll; render(); return; }
     if (b.dataset.rv) {
       const v = dueList()[0]; if (!v) return;
       if (b.dataset.rv === "show") { rvShow = true; render(); if (v.a) play(v.a); ga("review_show"); return; }

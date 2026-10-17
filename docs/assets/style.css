@@ -1886,3 +1886,8 @@ ol.toc>li>a::before{content:counter(tc) ". ";display:inline-block;min-width:1.4e
 .pc-rv i{margin-left:auto;font-style:normal;color:#8B95A1;font-size:18px}
 @media (hover:hover){.pc-rv:hover{box-shadow:0 0 0 1.5px #2A1A12}}
 @media (max-width:600px){.pc-rv{display:none}}
+/* 이번 주 도장: 심플 체크 / 말해 본 문장: 최근 3개 + 전체 보기 */
+#today-app .rt-dy.on i,.rt-dy.on i{background:#2A1A12;color:#fff;border:0}
+#today-app .rt-dy.on.td i{box-shadow:0 0 0 3px #CDEB5B}
+#today-app .rt-more,.rt-more{all:unset;box-sizing:border-box;cursor:pointer;display:block;width:100%;text-align:center;padding:13px 0 11px;margin-top:2px;border-top:1px solid #F2F4F6;font-size:14px;font-weight:700;color:#4E5968}
+@media (hover:hover){.rt-more:hover{color:#191F28}}
