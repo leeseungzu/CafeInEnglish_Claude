@@ -617,6 +617,25 @@ self.addEventListener("fetch", e => {
 """
 
 
+# ── 홈 화면 앱으로 열었을 때만 보이는 아래쪽 탭 바 ─────────────────────
+# 웹 브라우저에서는 숨김(검색·광고 영향 없음). 주소 끝에 ?app=1 을 붙이면 웹에서도 미리 볼 수 있어요.
+_TI = lambda d: f'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{d}</svg>'
+TABS = [("home", "/", "홈", _TI('<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>')),
+        ("video", "/category/video/", "영상", _TI('<rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/>')),
+        ("expr", "/category/expr/", "표현", _TI('<path d="M21 12a8 8 0 0 1-11.5 7.2L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/>')),
+        ("tip", "/category/tip/", "꿀팁", _TI('<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/>')),
+        ("notes", "/notes/", "내 공부방", _TI('<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/>'))]
+APP_HEAD_JS = ("<script>(function(){try{var q=/[?&]app=1/.test(location.search);if(q)sessionStorage.setItem('appPreview','1');"
+               "if(q||sessionStorage.getItem('appPreview')||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone)"
+               "document.documentElement.classList.add('is-app')}catch(e){}})();</script>")
+
+
+def tabbar(nav):
+    on = ' class="on" aria-current="page"'
+    return ('<nav class="tabbar no-print" aria-label="앱 메뉴">' + "".join(
+        f'<a href="{h}"{on if nav == k else ""}>{ic}<span>{t}</span></a>' for k, h, t, ic in TABS) + '</nav>')
+
+
 def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og-home-2.png", seo_title=None, ld=None, preload="", robots=""):
     full_title = f"{seo_title or title} | 카페인영어" if path != "/" else f"카페인영어 | {SITE.get('home_title') or SITE['tagline']}"
     full_title = full_title.replace(" - ", " | ")  # 브라우저 탭·검색 제목 구분은 하이픈 대신 세로 바로 통일
@@ -645,7 +664,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">{APP_HEAD_JS}
 <title>{e(full_title)}</title>
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{DOMAIN}{path}">{f'<meta name="robots" content="{robots}">' if robots else ""}
@@ -687,6 +706,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
   <div style="margin-top:8px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/contact/">문의</a>{f'<a href="{e(SITE["youtube"])}" target="_blank" rel="noopener">유튜브</a>' if SITE.get("youtube") else ""}{f'<a href="{e(SITE["instagram"])}" target="_blank" rel="noopener">인스타그램</a>' if SITE.get("instagram") else ""}</div>
 </footer>
 {sns_fab()}
+{tabbar("home" if path == "/" else nav)}
 {pdata}
 <script src="/assets/app.js?v={ASSET_V}" defer></script>
 {APP_CTA_JS if 'js-appcta' in body else ''}
