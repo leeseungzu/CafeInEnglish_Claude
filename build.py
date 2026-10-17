@@ -603,7 +603,7 @@ self.addEventListener("fetch", e => {
 
 
 def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og-home-2.png", seo_title=None, ld=None, preload="", robots=""):
-    full_title = f"{seo_title or title} | 카페인영어" if path != "/" else f"카페인영어 - {SITE['tagline']}"
+    full_title = f"{seo_title or title} | 카페인영어" if path != "/" else f"카페인영어 | {SITE.get('home_title') or SITE['tagline']}"
     # 애드센스: 소유 확인은 meta 태그로, 광고 스크립트(약 200KB)는 첫 스크롤·터치 때(또는 로드 7초 뒤) 불러와요 → 첫 화면 속도 ↑
     ads = (f'<meta name="google-adsense-account" content="{e(SITE["adsense_client"])}">'
            f"<script>(function(){{var d=0;function L(){{if(d)return;d=1;var s=document.createElement('script');s.async=1;s.crossOrigin='anonymous';"
