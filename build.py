@@ -1275,9 +1275,9 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
     series_html = ""
     for sr in SERIES:
         sp = [POST_BY_ID[i] for i in sr["posts"] if i in POST_BY_ID]
-        icons = [o["icon"] for o in sp if o.get("icon")][:3]
+        icons = sr.get("icons") or [o["icon"] for o in sp if o.get("icon")][:3]
         if icons:
-            cover = f'<div class="sr-cover ic-{sp[0]["cat"]}">' + "".join(f'<img src="/assets/icons/{ic}.webp?v={ASSET_V}" alt="" loading="lazy" width="96" height="96">' for ic in icons) + "</div>"
+            cover = f'<div class="sr-cover ic-{sr.get("bg") or sp[0]["cat"]}">' + "".join(f'<img src="/assets/icons/{ic}.webp?v={ASSET_V}" alt="" loading="lazy" width="96" height="96">' for ic in icons) + "</div>"
         else:
             vids = [o for o in sp if o.get("video")]
             lazy = 'loading="lazy"'
@@ -1492,9 +1492,9 @@ def _about_series():
     html = ""
     for sr in SERIES:
         sp = [POST_BY_ID[i] for i in sr["posts"] if i in POST_BY_ID]
-        icons = [o["icon"] for o in sp if o.get("icon")][:3]
+        icons = sr.get("icons") or [o["icon"] for o in sp if o.get("icon")][:3]
         if icons:
-            cover = f'<div class="sr-cover ic-{sp[0]["cat"]}">' + "".join(f'<img src="/assets/icons/{ic}.webp?v={ASSET_V}" alt="" loading="lazy" width="96" height="96">' for ic in icons) + "</div>"
+            cover = f'<div class="sr-cover ic-{sr.get("bg") or sp[0]["cat"]}">' + "".join(f'<img src="/assets/icons/{ic}.webp?v={ASSET_V}" alt="" loading="lazy" width="96" height="96">' for ic in icons) + "</div>"
         else:
             vids = [o for o in sp if o.get("video")]
             cover = ('<div class="sr-cover yt">' + yt_img(vids[0]["video"], 'loading="lazy"').replace("<img ", '<img aria-hidden="true" class="yt-bg" ', 1) + yt_img(vids[0]["video"], 'loading="lazy"').replace("<img ", '<img class="yt-fg" ', 1) + '</div>') if vids else '<div class="sr-cover"></div>'
