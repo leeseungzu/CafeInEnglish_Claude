@@ -1968,3 +1968,16 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
 .gp-me small .gp-sw{display:inline;margin:0 0 0 8px!important;padding:0;font-size:12.5px;color:#8B95A1;text-decoration:underline;text-underline-offset:3px;cursor:pointer;white-space:nowrap}
 @media (hover:hover){.gp-me small .gp-sw:hover{color:#191F28}}
 .pc-band .pc-rv-w{margin:-14px 0 24px}
+/* 모바일 홈 루틴 카드 = 목록형 한 줄(링 + 제목/설명 + ›), '다른 목표 고르기'는 제목 줄 오른쪽 */
+.gp-top{display:flex;align-items:baseline;gap:8px}
+.gp-top b{min-width:0}
+.gp-sw-m{display:none!important}
+@media (max-width:600px){
+  .gp-me{border:0!important;background:transparent!important;padding:2px 0!important;margin:0!important;flex-wrap:nowrap!important;gap:14px!important;box-shadow:none!important}
+  .gp-me .gp-t{flex:1 1 auto!important}
+  .gp-me .gp-go{display:none!important}
+  .gp-me::after{content:"›";font-size:26px;color:#B0B8C1;margin-left:2px;line-height:1;flex:none}
+  .gp-me small .gp-sw{display:none!important}
+  .gp-sw-m{display:inline!important;margin-left:auto;font-size:12.5px;color:#8B95A1;text-decoration:underline;text-underline-offset:3px;white-space:nowrap;font-weight:500}
+}
+@media (max-width:600px){.gp-me .gp-pre{display:none}}
