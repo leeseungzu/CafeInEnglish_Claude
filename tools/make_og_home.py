@@ -27,8 +27,8 @@ im = Image.alpha_composite(im, glow.filter(ImageFilter.GaussianBlur(90)))
 d = ImageDraw.Draw(im)
 
 # 로고 + 브랜드
-d.rounded_rectangle((PAD, 60, PAD + 56, 116), 15, fill=INK)
-d.text((PAD + 13, 88), "C", font=F(39, 800), fill="#FFFFFF", anchor="lm")
+d.rounded_rectangle((PAD, 60, PAD + 56, 116), 15, fill="#2A1A12")
+d.text((PAD + 13, 88), "C", font=F(39, 800), fill="#F4EEE4", anchor="lm")
 d.ellipse((PAD + 38, 95, PAD + 47, 104), fill=LIME)
 d.text((PAD + 72, 88), "카페인영어 CafeInEnglish", font=F(28, 700), fill=INK, anchor="lm")
 
@@ -78,6 +78,6 @@ d.rounded_rectangle((bx, by - 26, bx + bw, by + 22), 24, fill=INK)
 d.ellipse((bx + 22, by - 6, bx + 32, by + 4), fill=LIME)
 d.text((bx + 44, by - 2), txt, font=bf, fill="#FFFFFF", anchor="lm")
 
-out = ROOT / "assets" / "og-home.png"
+out = ROOT / "assets" / "og-home-2.png"
 im.convert("RGB").save(out, optimize=True)
 print("saved", out)

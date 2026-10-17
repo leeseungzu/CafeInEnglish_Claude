@@ -75,7 +75,7 @@ OG_BG = [("#FFF3EC", "#FFE0CF"), ("#EEF5FF", "#D6E6FF"), ("#F4F0FF", "#E2D8FF"),
 def og_chat(name, chip, en, ko, chat, icon, key_id):
     """C안 공유 이미지(1200×630): 왼쪽 표현 + 오른쪽 실제 대화 카드 + 3D 아이콘. 카톡·SNS 미리보기용."""
     if not (Image and FONT.exists()):
-        return "/assets/og-home.png"
+        return "/assets/og-home-2.png"
     from PIL import ImageFilter
     W, H, PAD = 1200, 630, 72
     INK, BODY, MUTED, LIME = "#191F28", "#333D4B", "#6B7684", "#CDEB5B"
@@ -89,8 +89,8 @@ def og_chat(name, chip, en, ko, chat, icon, key_id):
     d = ImageDraw.Draw(im)
     enf = lambda sz: ImageFont.truetype(str(EN_FONT), sz) if EN_FONT.exists() else _font(sz, 800)
     # 브랜드 + 칩
-    d.rounded_rectangle((PAD, 56, PAD + 52, 108), 14, fill=INK)
-    d.text((PAD + 12, 82), "C", font=_font(36, 800), fill="#FFFFFF", anchor="lm")
+    d.rounded_rectangle((PAD, 56, PAD + 52, 108), 14, fill="#2A1A12")
+    d.text((PAD + 12, 82), "C", font=_font(36, 800), fill="#F4EEE4", anchor="lm")
     d.ellipse((PAD + 35, 88, PAD + 43, 96), fill=LIME)
     d.text((PAD + 68, 82), "카페인영어 CafeInEnglish", font=_font(26, 700), fill=INK, anchor="lm")
     cf = _font(22, 700); cw = d.textlength(chip, font=cf)
@@ -180,7 +180,7 @@ def og_chat(name, chip, en, ko, chat, icon, key_id):
 def og_image(name, chip, big, small, foot="읽고 · 듣고 · 퀴즈로 확인"):
     """글마다 카톡·SNS 미리보기 이미지(1200×630)를 만들고 주소를 돌려줍니다."""
     if not (Image and FONT.exists()):
-        return "/assets/og-home.png"
+        return "/assets/og-home-2.png"
     W, H, PAD = 1200, 630, 80
     BG, INK, LIME, MUTED = "#F4EEE4", "#2A1A12", "#CDEB5B", "#7A6A5E"
     im = Image.new("RGB", (W, H), BG)
@@ -602,7 +602,7 @@ self.addEventListener("fetch", e => {
 """
 
 
-def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og-home.png", seo_title=None, ld=None, preload="", robots=""):
+def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og-home-2.png", seo_title=None, ld=None, preload="", robots=""):
     full_title = f"{seo_title or title} | 카페인영어" if path != "/" else f"카페인영어 - {SITE['tagline']}"
     # 애드센스: 소유 확인은 meta 태그로, 광고 스크립트(약 200KB)는 첫 스크롤·터치 때(또는 로드 7초 뒤) 불러와요 → 첫 화면 속도 ↑
     ads = (f'<meta name="google-adsense-account" content="{e(SITE["adsense_client"])}">'
@@ -644,9 +644,9 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <meta name="twitter:image" content="{DOMAIN}{og_img}">
 {f'<meta name="google-site-verification" content="{e(SITE["google_verify"])}">' if SITE.get("google_verify") else ""}{f'<meta name="naver-site-verification" content="{e(SITE["naver_verify"])}">' if SITE.get("naver_verify") else ""}
 {ld_html(ld)}
-<link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml">
-<link rel="icon" href="/assets/favicon-32.png?v=2" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=2">
+<link rel="icon" href="/assets/favicon.svg?v=3" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png?v=3" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=3">
 <link rel="icon" href="/assets/icon-192.png" sizes="192x192" type="image/png">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="카페인영어"><meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -656,7 +656,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 </head>
 <body>
 <header class="top"><div class="top-in">
-  <a class="logo" href="/"><img class="logo-mark" src="/assets/logo-mark.png?v=2" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
+  <a class="logo" href="/"><img class="logo-mark" src="/assets/logo-mark.png?v=3" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
   <nav class="nav">{navlinks}</nav>
   {room}
 </div></header>
@@ -896,7 +896,7 @@ def page_post(p):
     if p.get("note"):
         parts.append(f'<div class="study-note"><b class="lbl">스터디 노트</b> {p["note"]}</div>')
     parts.append(TODAY_CTA)
-    parts.append(f'<div class="author-box no-print"><img src="/assets/logo-mark.png?v=2" alt="" width="44" height="44" loading="lazy">'
+    parts.append(f'<div class="author-box no-print"><img src="/assets/logo-mark.png?v=3" alt="" width="44" height="44" loading="lazy">'
                  f'<div><b>{AUTHOR_NAME}</b><p>{AUTHOR_BIO}</p><span class="ab-links"><a href="/contact/">의견 남기기</a><a href="/about/">카페인영어 소개</a></span></div></div>')
     parts.append('<h2 class="rel-h no-print">같이 보면 좋은 글</h2><div class="cards rel list no-print">'
                  + "".join(post_card(o) for o in similar_posts(p, 4)) + "</div>")
@@ -1577,7 +1577,7 @@ def page_app():
     copy_btn = '<button class="ap-btn sub js-ap-copy" type="button">주소 복사하기</button>'
     body = f"""<style>{APP_CSS}</style>
 <div class="ap">
-<div class="ap-hero"><img class="ap-icon" src="/assets/icon-192.png?v=2" alt="카페인영어 앱 아이콘" width="96" height="96">
+<div class="ap-hero"><img class="ap-icon" src="/assets/icon-192.png?v=3" alt="카페인영어 앱 아이콘" width="96" height="96">
 <h1>카페인영어를 앱으로</h1><p>홈 화면에서 한 번에, 매일 5분 영어</p></div>
 <div class="ap-ben">{bh}</div>
 
@@ -1789,8 +1789,8 @@ def build():
         "name": "카페인영어 - 오늘의 5분", "short_name": "카페인영어", "lang": "ko", "start_url": "/notes/?src=app", "scope": "/",
         "display": "standalone", "background_color": "#FFFFFF", "theme_color": "#FFFFFF",
         "description": "하루 5분, 듣고 말하고 복습하는 영어 루틴",
-        "icons": [{"src": "/assets/icon-192.png?v=2", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
-                  {"src": "/assets/icon-512.png?v=2", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}]}, ensure_ascii=False, indent=1), "utf-8")
+        "icons": [{"src": "/assets/icon-192.png?v=3", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
+                  {"src": "/assets/icon-512.png?v=3", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}]}, ensure_ascii=False, indent=1), "utf-8")
     (OUT / "sw.js").write_text(SW_JS, "utf-8")
     if (ROOT / "images").exists():  # 빌드 중 새로 만든 유튜브 썸네일까지 다시 복사
         shutil.copytree(ROOT / "images", OUT / "images", dirs_exist_ok=True)
