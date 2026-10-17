@@ -922,6 +922,71 @@ def post_dress(html, tint):
     return re.sub(r"<h2([^>]*)>(.*?)</h2>", ic, html)
 
 
+# 영상 글: 본문 인용 상자를 '장면 카드'로 (SCENE 번호 + 아는 구간이면 '이 장면 듣기' + 핵심 표현 라임 밑줄)
+IRREG = {"take": "took|taken|takes|taking", "have": "has|had|having", "be": "is|are|was|were|been|being|am", "go": "went|gone|goes|going",
+         "get": "got|gotten|gets|getting", "make": "made|makes|making", "come": "came|comes|coming", "give": "gave|given|gives|giving",
+         "find": "found|finds|finding", "run": "ran|runs|running", "put": "puts|putting", "let": "lets|letting", "end": "ended|ends|ending",
+         "jump": "jumped|jumps|jumping", "figure": "figured|figures|figuring", "break": "broke|broken|breaks|breaking", "keep": "kept|keeps|keeping"}
+POSS = "my|your|his|her|our|their|its"
+
+
+def expr_regex(en):
+    """표현 목록의 'take my breath away', 'I have to admit ~' → 본문에서 찾을 정규식 (가장 긴 조각, 동사 변화·소유격 허용)"""
+    frags = [f.strip(" .?!,") for f in re.split(r"~|…|\.\.\.|\+|\(|\)", en)]
+    frags = [f for f in frags if len(f) >= 6 and not re.search(r"[가-힣]", f)]
+    if not frags:
+        return None
+    words = max(frags, key=len).split()
+    pats = []
+    for k, w in enumerate(words):
+        lw = w.lower()
+        if lw in ("one's", "my") and k > 0:
+            pats.append(f"(?:{POSS}|one's)")
+        elif k == 0 and lw in IRREG:
+            pats.append(f"(?:{re.escape(w)}|{IRREG[lw]})")
+        else:
+            pats.append(re.escape(w))
+    return re.compile(r"(?<![A-Za-z])" + r"\s+".join(pats) + r"(?![A-Za-z])", re.I)
+
+
+def scene_dress(body, p):
+    timed = {}
+    for x in p.get("expressions", []):
+        if x.get("orig") and x.get("t") is not None:
+            timed[html.unescape(x["orig"]).strip()] = (x["t"], x.get("end") or round(x["t"] + 4, 1))
+    th = THINK_BY_ID.get(p.get("think"))
+    for q in (th or {}).get("quotes", []):
+        if q.get("t") is not None:
+            timed.setdefault(html.unescape(q["en"]).strip(), (q["t"], q_end(q)))
+    rx = [r for r in (expr_regex(x.get("en", "")) for x in p.get("expressions", [])) if r]
+    n = [0]
+
+    def line(m):
+        txt = m.group(1)
+        for r in rx:
+            mm = r.search(txt)
+            if mm and "<mark" not in txt:
+                txt = txt[:mm.start()] + '<mark class="xhl">' + mm.group(0) + "</mark>" + txt[mm.end():]
+        return f'<span class="en">{txt}</span>'
+
+    def box(m):
+        n[0] += 1
+        inner = m.group(1)
+        hit = next((timed[k] for k in (html.unescape(re.sub(r"<[^>]+>", "", t)).strip() for t in re.findall(r'<span class="en">(.*?)</span>', inner)) if k in timed), None)
+        btn = (f'<button class="sh-play sc-play" type="button" data-t="{hit[0]}" data-end="{hit[1]}" data-n="1">{ICON_PLAY}{mmss(hit[0])} 이 장면 듣기</button>' if hit else "")
+        inner = re.sub(r'<span class="en">(.*?)</span>', line, inner)
+        return f'<div class="box scene"><div class="sc-h"><span class="sc-n">SCENE {n[0]:02d}</span>{btn}</div><ul class="ex">{inner}</ul></div>'
+    return re.sub(r'<div class="box"><ul class="ex">(.*?)</ul></div>', box, body, flags=re.S)
+
+
+def expr_strip(p):
+    xs = p.get("expressions") or []
+    if not xs:
+        return ""
+    return (f'<nav class="xstrip no-print" aria-label="이 영상에서 건질 표현"><b>이 영상에서 건질 표현 {len(xs)}개</b><div>'
+            + "".join(f'<a href="#x{i + 1}">{e(x["en"])}</a>' for i, x in enumerate(xs)) + "</div></nav>")
+
+
 def page_post(p):
     url = post_url(p)
     video = p.get("video")
@@ -936,8 +1001,12 @@ def page_post(p):
     toc_slot = len(parts)
     if video:
         parts.append(video_block(video, p["title"], "표현의 <b>듣기</b>·<b>3번 반복</b>으로 따라 말해 보세요"))
+        parts.append(expr_strip(p))
     toc = []
-    parts.append('<div class="pb">' + post_dress(add_heading_ids(alt_chips(p.get("body_html", "")), toc), tint) + '</div>')
+    _body = post_dress(add_heading_ids(alt_chips(p.get("body_html", "")), toc), tint)
+    if video:
+        _body = scene_dress(_body, p)
+    parts.append('<div class="pb">' + _body + '</div>')
     if p.get("expressions"):
         toc.append(("expr", p.get("expressions_heading", "오늘의 표현")))
         parts.append(f'<h2 id="expr">{e(p.get("expressions_heading", "오늘의 표현"))}</h2>')
@@ -1035,16 +1104,19 @@ def page_think(t):
     url = think_url(t)
     cards = []
     for i, q in enumerate(t["quotes"]):
-        cards.append(f"""<div class="quote no-print" id="q{i + 1}" data-id="{t['id']}:{i}" data-i="{i}">
-  <div class="meta"><span>문장 {i + 1} / {len(t['quotes'])}</span></div>
+        cards.append(f"""<div class="quote qc no-print" id="q{i + 1}" data-id="{t['id']}:{i}" data-i="{i}">
+  <div class="qtop"><span class="qn">SENTENCE {i + 1:02d} / {len(t['quotes']):02d}</span><span class="qm" aria-hidden="true">”</span>
   <p class="en">{e(q['en'])}</p><p class="ko">{e(q['ko'])}</p>
-  {seg_buttons(q['t'], q_end(q)) if t.get('video') else ''}
-  <div class="think-box"><b class="lbl">생각해 보기</b> {e(q['think'])}<span class="ask">{e(q['ask'])}</span></div>
+  {seg_buttons(q['t'], q_end(q)) if t.get('video') else ''}</div>
+  <div class="qbot"><div class="think-box"><b class="lbl">생각해 보기</b> {e(q['think'])}<span class="ask">{e(q['ask'])}</span></div>
+  <button type="button" class="qwr" aria-expanded="false"><span>✍️ 직접 써 보기<small>필사 · 빈칸 복기 · 나의 한 줄</small></span><i>›</i></button>
+  <div class="qwr-b" hidden>
   <div class="tabs"><button class="on" data-mode="copy">필사하기</button><button data-mode="blank">빈칸 복기</button></div>
   <div class="pane"></div>
   <div style="margin-top:14px;font-size:14px;font-weight:700">나의 한 줄</div>
   <textarea class="note" placeholder="이 문장이 나에게 주는 의미를 한 줄로 남겨 보세요" style="min-height:60px;margin-top:6px"></textarea>
   <div class="row"><button class="btn ghost save-note">저장</button></div>
+  </div></div>
 </div>""")
     ws = "".join(f"""<div class="ws-quote"><p class="en">{i + 1}. {e(q['en'])}</p><p class="ko">{e(q['ko'])}</p>
 <div class="ws-label">따라 쓰기</div><div class="ws-line"></div><div class="ws-line"></div>

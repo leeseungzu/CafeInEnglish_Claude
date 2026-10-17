@@ -63,7 +63,9 @@
     const pct = p.t ? Math.round(p.n / p.t * 100) : 0;
     const todayKey = new Date((Math.floor((Date.now() / 1000 + 9 * 3600) / 86400)) * 864e5).toISOString().slice(0, 10);
     const doneToday = p.day === todayKey && p.done;
-    gp.innerHTML = `<a class="gp-me" href="/notes/#routine"><img src="${img}" alt=""><span class="gp-t"><b>${esc(p.name)}${p.streak ? " · 연속 " + p.streak + "일" : ""}</b><small>${doneToday ? "오늘 도장 완료 · " : "오늘 말할 문장이 기다려요 · "}${p.t}개 중 ${p.n}개 말해 봄</small><span class="rt-bar"><i style="width:${pct}%"></i></span></span><span class="gp-go">${doneToday ? "기록 보기 ✓" : p.n ? "이어서 말하기 →" : "첫 문장 시작 →"}</span></a><button type="button" class="gp-sw">다른 목표 고르기</button>`;
+    const C2 = 2 * Math.PI * 19, arc = Math.max(pct, p.n ? 4 : 0) / 100 * C2;
+    const ring = `<span class="gp-ring${doneToday ? " done" : ""}" aria-hidden="true"><svg viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="19" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="4"/><circle cx="22" cy="22" r="19" fill="none" stroke="#CDEB5B" stroke-width="4" stroke-linecap="round" stroke-dasharray="${arc.toFixed(1)} ${C2.toFixed(1)}" transform="rotate(-90 22 22)"/></svg>${doneToday ? '<svg class="ck" viewBox="0 0 24 24" width="18" height="18"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>' : "<b>" + p.n + "</b>"}</span>`;
+    gp.innerHTML = `<a class="gp-me" href="/notes/#routine">${ring}<span class="gp-t"><b>${esc(p.name)}${p.streak ? " · 연속 " + p.streak + "일" : ""}</b><small>${doneToday ? "오늘 도장 완료 · " : "오늘 말할 문장이 기다려요 · "}${p.t}개 중 ${p.n}개 말해 봄</small></span><span class="gp-go">${doneToday ? "기록 보기 ✓" : p.n ? "이어서 말하기 →" : "첫 문장 시작 →"}</span></a><button type="button" class="gp-sw">다른 목표 고르기</button>`;
     const html0 = gp.dataset.orig;
     $(".gp-sw", gp).onclick = () => { location.href = "/#gp"; gp.outerHTML = window.__gpOrig; };
   })();
@@ -252,6 +254,12 @@
       if (rec[id] && rec[id].note) note.value = rec[id].note;
       $(".save-note", card).onclick = () => { copy.rec(id, snap, () => ({ note: note.value.trim() })); toast("나의 한 줄을 저장했어요"); };
       modes.copy();
+      const wb = $(".qwr", card), wr = $(".qwr-b", card);
+      if (wb && wr) {
+        const tog = o => { wr.hidden = !o; wb.setAttribute("aria-expanded", String(o)); wb.classList.toggle("open", o); };
+        wb.onclick = () => tog(wr.hidden);
+        if (rec[id] && (rec[id].note || rec[id].count)) tog(true);  // 써 둔 기록이 있으면 펼쳐서 보여 줘요
+      }
     });
   }
 

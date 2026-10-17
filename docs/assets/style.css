@@ -1891,3 +1891,42 @@ ol.toc>li>a::before{content:counter(tc) ". ";display:inline-block;min-width:1.4e
 #today-app .rt-dy.on.td i{box-shadow:0 0 0 3px #CDEB5B}
 #today-app .rt-more,.rt-more{all:unset;box-sizing:border-box;cursor:pointer;display:block;width:100%;text-align:center;padding:13px 0 11px;margin-top:2px;border-top:1px solid #F2F4F6;font-size:14px;font-weight:700;color:#4E5968}
 @media (hover:hover){.rt-more:hover{color:#191F28}}
+
+/* 영상 글: 건질 표현 칩 + 장면 카드 */
+.xstrip{margin:14px 0 4px}.xstrip b{display:block;font-size:13px;color:#8B95A1;margin-bottom:8px;font-weight:700}
+.xstrip div{display:flex;flex-wrap:wrap;gap:6px}
+.xstrip a{background:#F2F4F6;border-radius:999px;padding:7px 12px;font-size:13.5px;font-weight:700;color:#191F28;text-decoration:none}
+@media (hover:hover){.xstrip a:hover{background:#2A1A12;color:#fff}}
+.pb .box.scene{background:#FBF7F2!important;border:0!important;border-radius:22px;padding:16px 18px 6px}
+.sc-h{display:flex;align-items:center;gap:10px;margin-bottom:4px;min-height:32px}
+.sc-n{font-size:11.5px;font-weight:800;letter-spacing:.08em;color:#2A1A12;background:#fff;border-radius:999px;padding:5px 10px}
+.pb .sc-play{margin-left:auto;display:inline-flex;align-items:center;gap:6px;background:#2A1A12;color:#fff;border:0;font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px;cursor:pointer;font-family:inherit}
+.pb .sc-play svg{width:12px;height:12px}
+.box.scene .ex li{border-color:#EFE6DA!important}
+mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;padding:0 1px}
+@media print{mark.xhl{background:none;text-decoration:underline}.sc-play{display:none!important}}
+
+/* 사유의 문장: 문장은 에스프레소 인용 카드, 쓰기 도구는 접어 두기 */
+.quote.qc{padding:0!important;overflow:hidden;border:0!important;background:#fff;box-shadow:0 0 0 1px #EEF0F2}
+.qc .qtop{background:#2A1A12;color:#F4EEE4;padding:22px 22px 18px;position:relative}
+.qc .qn{font-size:12px;font-weight:800;letter-spacing:.08em;color:#CDEB5B}
+.qc .qm{position:absolute;right:18px;top:4px;font-size:84px;line-height:1;color:rgba(244,238,228,.12);font-family:Georgia,serif}
+.qc .qtop .en{color:#fff;font-size:21px;line-height:1.45;margin:10px 0 8px;font-weight:800}
+.qc .qtop .ko{color:#D9CFC2;font-size:14.5px;margin:0}
+.qc .qtop .sh-btns{margin:14px 0 0}
+.qc .qtop .sh-play{background:rgba(255,255,255,.1)!important;color:#fff!important;border:0!important}
+.qc .qtop .sh-play.on{background:#CDEB5B!important;color:#2A1A12!important}
+.qc .qbot{padding:16px 18px 18px}
+.qc .qbot .think-box{background:#FBF7F2;border:0;border-radius:16px;margin:0}
+.qc .qbot .think-box .lbl{background:#2A1A12!important;color:#fff!important}
+.qwr{all:unset;box-sizing:border-box;cursor:pointer;display:flex;justify-content:space-between;align-items:center;width:100%;margin-top:12px;padding:14px 16px;border-radius:14px;background:#F7F8FA;font-weight:700;font-size:15px;color:#191F28}
+.qwr small{color:#8B95A1;font-weight:500;margin-left:6px;font-size:12.5px}
+.qwr i{font-style:normal;transition:transform .2s}.qwr.open i{transform:rotate(90deg)}
+.qwr-b{padding-top:12px}.qwr-b[hidden]{display:none}
+@media (min-width:1024px){.qc .qtop{padding:28px 30px 24px}.qc .qtop .en{font-size:25px}.qc .qbot{padding:18px 30px 24px}}
+/* 홈 '오늘의 한 잔' 진행: 컵 이모지 대신 에스프레소 진행 링 (가운데 = 말해 본 문장 수, 오늘 완료면 체크) */
+.gp-ring{position:relative;flex:none;width:48px;height:48px;border-radius:50%;background:#2A1A12;display:grid;place-items:center;color:#fff}
+.gp-ring svg:first-child{position:absolute;inset:2px}
+.gp-ring b{font-size:15px;font-weight:800;color:#fff;margin:0!important;display:inline!important}
+.gp-ring.done{background:#CDEB5B;color:#2A1A12}.gp-ring.done svg:first-child{display:none}
+@media (max-width:600px){.gp-me .gp-t{flex:1 1 calc(100% - 64px)!important}.gp-me .gp-go{margin-left:60px!important}}
