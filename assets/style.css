@@ -1946,3 +1946,19 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
 /* 목표 고르기(타일)로 바뀌면 복습 카드도 전체 폭으로 */
 .pc-band #gp:not(:has(.gp-me)) + .pc-rv-w{margin-top:12px}
 .pc-band #gp:not(:has(.gp-me)) + .pc-rv-w .rv-sp{display:none}
+/* 카테고리: 난이도 + 분류 필터 */
+.subfilter .sf-g+.sf-g{margin-top:16px;padding-top:14px;border-top:1px solid rgba(0,0,0,.06)}
+.sf-empty{margin:12px 6px 0;font-size:13px;color:var(--faint)}
+@media (max-width:899px){
+  .subfilter{flex-direction:column;gap:8px;overflow:visible}
+  .subfilter .sf-g{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0!important;padding:0!important;border:0!important}
+  .subfilter .sf-g::-webkit-scrollbar{display:none}
+  .subfilter .sf-g .sf-lv{border-radius:12px}
+}
+@media (max-width:899px){
+  /* 난이도는 세그먼트(한 줄 3칸), 분류는 칩 — 두 줄이 서로 달라 보이게 */
+  .subfilter .sf-g:first-child{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:#F2F4F6;border-radius:14px!important;padding:4px!important;overflow:visible}
+  .subfilter .sf-g .sf-lv{border:0;border-radius:10px!important;background:none;justify-content:center;padding:8px 0;color:#6B7684}
+  .subfilter .sf-g .sf-lv.on{background:#fff;color:#191F28;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  .subfilter .sf-g .sf-lv.on em{color:#8B95A1}
+}

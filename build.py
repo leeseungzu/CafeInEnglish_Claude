@@ -820,7 +820,7 @@ def post_card(p, hl=3):
     lv = level(p)
     return card(post_url(p), [(p["cat"], CATS[p["cat"]]), (p["cat"], p.get("sub", ""))], p["title"],
                 f"{p.get('lead', '')} · 퀴즈 {len(p['quiz'])}문제", th, play, thumb_alt(p.get("thumb")), hl, p.get("sub", "")).replace(
-                    '</div><h', f'<span class="lv lv-{"pro" if lv == "실전" else "base"}">{lv}</span></div><h', 1)
+                    '</div><h', f'<span class="lv lv-{"pro" if lv == "실전" else "base"}">{lv}</span></div><h', 1).replace(' href=', f' data-lv="{lv}" href=', 1)
 
 
 def think_card(t, hl=3):
@@ -1203,11 +1203,15 @@ def page_category(cat):
         cards = "".join(post_card(p, 2) for p in items) or '<div class="empty"><p>곧 첫 글이 올라와요.</p></div>'
         subs = [x for x in dict.fromkeys(p.get("sub", "") for p in items) if x]
         filt = ""
-        if cat != "video" and len(subs) > 1:
+        if cat != "video" and items:
             btn = lambda v, n, lbl, on="": f'<button type="button" class="sf-b{on}" data-sub="{e(v)}"><span>{e(lbl)}</span><em>{n}</em></button>'
-            filt = ('<aside class="subfilter" aria-label="분류"><div class="sf-h">분류</div>'
-                    + btn("", len(items), "전체", " on")
-                    + "".join(btn(x, sum(1 for p in items if p.get("sub") == x), x) for x in subs) + "</aside>")
+            lvb = lambda v, n, lbl, on="": f'<button type="button" class="sf-b sf-lv{on}" data-lv="{v}"><span>{lbl}</span><em>{n}</em></button>'
+            lvs = [level(p) for p in items]
+            g_lv = ('<div class="sf-g" role="group" aria-label="난이도"><div class="sf-h">난이도</div>' + lvb("", len(items), "전체", " on")
+                    + lvb("기초", lvs.count("기초"), "기초") + lvb("실전", lvs.count("실전"), "실전") + "</div>")
+            g_sub = ('<div class="sf-g" role="group" aria-label="분류"><div class="sf-h">분류</div>' + btn("", len(items), "전체", " on")
+                     + "".join(btn(x, sum(1 for p in items if p.get("sub") == x), x) for x in subs) + "</div>") if len(subs) > 1 else ""
+            filt = f'<aside class="subfilter" aria-label="글 고르기">{g_lv}{g_sub}<p class="sf-empty" hidden>이 조합의 글은 아직 없어요</p></aside>'
         body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>'
                 f'<div class="cat-grid{" has-filter" if filt else ""}"><div class="cards list">{cards}</div>{filt}</div>')
     seo_t, seo_d = CAT_SEO[cat]

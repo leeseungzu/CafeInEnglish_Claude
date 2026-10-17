@@ -552,11 +552,27 @@
   const topbar = $(".top");
   if (topbar) { const f = () => topbar.classList.toggle("scrolled", scrollY > 4); f(); addEventListener("scroll", f, { passive: true }); }
   // 카테고리 분류 필터
-  $$(".subfilter .sf-b").forEach(b => b.onclick = () => {
-    $$(".subfilter .sf-b").forEach(x => x.classList.toggle("on", x === b));
-    const v = b.dataset.sub;
-    $$(".cat-grid .card").forEach(c => c.classList.toggle("sf-hide", !!v && c.dataset.sub !== v));
-  });
+  // 난이도(기초·실전) × 분류, 고른 난이도는 기억해요
+  (() => {
+    const sf = $(".subfilter"); if (!sf) return;
+    let lv = "", sub = "";
+    try { lv = localStorage.getItem("ky_lv") || ""; } catch (e) {}
+    const apply = () => {
+      $$(".sf-b.sf-lv", sf).forEach(x => x.classList.toggle("on", x.dataset.lv === lv));
+      $$(".sf-b:not(.sf-lv)", sf).forEach(x => x.classList.toggle("on", x.dataset.sub === sub));
+      let n = 0;
+      $$(".cat-grid .card").forEach(c => { const hide = (!!lv && c.dataset.lv !== lv) || (!!sub && c.dataset.sub !== sub); c.classList.toggle("sf-hide", hide); if (!hide) n++; });
+      const em = $(".sf-empty", sf); if (em) em.hidden = n > 0;
+    };
+    if (!$$(".sf-b.sf-lv", sf).some(x => x.dataset.lv === lv)) lv = "";
+    sf.addEventListener("click", e => {
+      const b = e.target.closest(".sf-b"); if (!b) return;
+      if (b.classList.contains("sf-lv")) { lv = b.dataset.lv; try { localStorage.setItem("ky_lv", lv); } catch (x) {} if (window.gtag) gtag("event", "level_filter", { level: lv || "all" }); }
+      else sub = b.dataset.sub;
+      apply();
+    });
+    apply();
+  })();
   // 홈 전체 아티클 페이지 넘기기
   $$("#pager button").forEach(b => b.onclick = () => {
     $$("#pager button").forEach(x => x.classList.toggle("on", x === b));
