@@ -665,6 +665,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
     navlinks = f'<a href="/"{" class=on" if path == "/" else ""}>홈</a>' + "".join(
         f'<a href="/category/{k}/"{" class=on" if nav == k else ""}><span class="nl-l">{v}</span><span class="nl-s">{NAV_SHORT[k]}</span></a>' for k, v in CATS.items())
     room = f'<a class="room{" on" if nav == "notes" else ""}" href="/notes/">내 공부방<span class="badge" id="nav-badge" hidden></span></a>'
+    room = ('<button class="srch-btn" type="button" aria-label="표현 검색" title="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>' + room)
     pjson = json.dumps(data or {}, ensure_ascii=False).replace("</", "<\\/")
     pdata = '<script id="page-data" type="application/json">' + pjson + '</script>'
     return f"""<!doctype html>
@@ -699,7 +700,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <body>
 <header class="top"><div class="top-in">
   <a class="logo" href="/"><img class="logo-mark" src="/assets/logo-mark.png?v=3" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
-  <nav class="nav">{navlinks}</nav>
+  <nav class="nav">{navlinks}<button class="srch-btn nav-srch" type="button" aria-label="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button></nav>
   {room}
 </div></header>
 <div class="wrap{" has-side" if aside else ""}{" wide" if wide else ""}">
@@ -1746,6 +1747,34 @@ else show("ap-pc");
                   "/app/", body, "", None, robots="noindex,follow")
 
 
+
+def search_index():
+    """사이트 안 검색용 색인 (/search.json) — 제목·설명·표현(영어/한국어)·예문"""
+    def strip(h):
+        return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", h or "")).strip()
+    out = []
+    for p in POSTS:
+        terms = []
+        for x in p.get("expressions") or []:
+            terms.append([x.get("en", ""), x.get("ko", "")])
+        for en, ko in re.findall(r'<span class="en">(.*?)</span>\s*<span class="ko">(.*?)</span>', p.get("body_html", ""), re.S)[:14]:
+            terms.append([strip(en), strip(ko)])
+        ch = p.get("chat") or {}
+        if ch.get("a"):
+            terms.append([ch["a"], ch.get("ko", "")])
+        seen, tt = set(), []
+        for en, ko in terms:
+            k = en.lower()
+            if en and k not in seen:
+                seen.add(k); tt.append([en, ko])
+        out.append({"u": post_url(p), "t": p["title"], "c": CATS.get(p["cat"], ""), "s": p.get("sub", ""),
+                    "d": p.get("description") or p.get("lead", ""), "x": tt[:16]})
+    for t in THINKS:
+        out.append({"u": think_url(t), "t": t["title"], "c": "사유의 문장", "s": t.get("speaker", ""),
+                    "d": t.get("description", ""), "x": [[q["en"], q["ko"]] for q in t.get("quotes", [])]})
+    return json.dumps(out, ensure_ascii=False, separators=(",", ":"))
+
+
 # ------------------------------------------------------------------ build
 def write(path, text):
     f = OUT / path.lstrip("/")
@@ -1858,6 +1887,7 @@ def build():
     OUT.mkdir(exist_ok=True)
     shutil.copytree(ASSETS, OUT / "assets", dirs_exist_ok=True)
     (OUT / "assets" / "site.css").write_text(STYLE_CSS, "utf-8")
+    (OUT / "search.json").write_text(search_index(), "utf-8")
     if (ROOT / "images").exists():
         shutil.copytree(ROOT / "images", OUT / "images", dirs_exist_ok=True)
     if AUDIO_DIR.exists():

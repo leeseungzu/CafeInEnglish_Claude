@@ -888,3 +888,47 @@ if ("serviceWorker" in navigator) addEventListener("load", () => navigator.servi
   addEventListener("appinstalled", () => ev("app_installed", { page: location.pathname }));
   if (mode() === "app") { try { if (!sessionStorage.getItem("kyAppOpen")) { sessionStorage.setItem("kyAppOpen", "1"); ev("app_open", { page: location.pathname }); } } catch (e) {} }
 })();
+
+/* ── 사이트 안 검색: 위쪽 돋보기 → 표현·뜻·제목으로 찾기 (/search.json, 처음 열 때 한 번 받음) ── */
+(function () {
+  const btns = document.querySelectorAll(".srch-btn"); if (!btns.length) return;
+  const X = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const N = s => String(s || "").toLowerCase().replace(/[’‘`´]/g, "'").replace(/[\s.,!?"“”~·:;()\-–—]/g, "");
+  const SUG = ["I'm down", "swamped", "공항", "회의", "괜찮아", "젠슨 황"];
+  let idx = null, box = null, inp = null, list = null, t = null;
+  function load() { if (idx) return Promise.resolve(idx); return fetch("/search.json?v=" + (document.querySelector('link[href*="site.css"]') || { href: "" }).href.split("v=")[1]).then(r => r.json()).then(j => (idx = j.map(o => ({ ...o, nt: N(o.t), nd: N(o.d + " " + o.s), nx: o.x.map(([e, k]) => [N(e), N(k)]) })))).catch(() => (idx = [])); }
+  function build() {
+    box = document.createElement("div"); box.className = "srch"; box.setAttribute("role", "dialog"); box.setAttribute("aria-label", "표현 검색");
+    box.innerHTML = '<div class="srch-in"><div class="srch-bar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>'
+      + '<input type="search" placeholder="영어 표현이나 뜻으로 찾기 (예: swamped, 괜찮아)" autocomplete="off" enterkeyhint="search"><button type="button" class="srch-x">닫기</button></div><div class="srch-list"></div></div>';
+    document.body.appendChild(box);
+    inp = box.querySelector("input"); list = box.querySelector(".srch-list");
+    box.addEventListener("click", e => { if (e.target === box || e.target.closest(".srch-x")) close(); const s = e.target.closest("[data-q]"); if (s) { inp.value = s.dataset.q; run(); inp.focus(); } });
+    inp.addEventListener("input", () => { clearTimeout(t); t = setTimeout(run, 120); });
+    inp.addEventListener("keydown", e => { if (e.key === "Escape") close(); if (e.key === "Enter") { const a = list.querySelector("a"); if (a) location.href = a.href; } });
+  }
+  function empty() { list.innerHTML = '<p class="srch-h">이렇게 찾아보세요</p><div class="srch-sug">' + SUG.map(q => '<button type="button" data-q="' + X(q) + '">' + X(q) + "</button>").join("") + "</div>"; }
+  function run() {
+    const q = N(inp.value); if (!q) { empty(); return; }
+    load().then(() => {
+      const r = [];
+      idx.forEach(o => {
+        let sc = 0, hit = null;
+        if (o.nt.includes(q)) sc += 10;
+        o.nx.forEach(([e, k], i) => { if (e.includes(q) || k.includes(q)) { const v = (e === q || k === q) ? 9 : (e.startsWith(q) || k.startsWith(q)) ? 7 : 5; if (v > (hit ? hit[0] : 0)) hit = [v, i]; } });
+        if (hit) sc += hit[0];
+        if (!sc && o.nd.includes(q)) sc += 2;
+        if (sc) r.push([sc, o, hit ? o.x[hit[1]] : null]);
+      });
+      r.sort((a, b) => b[0] - a[0]);
+      try { window.gtag && gtag("event", "site_search", { q: inp.value.slice(0, 40), n: r.length }); } catch (e) {}
+      list.innerHTML = r.length ? r.slice(0, 20).map(([, o, h]) => '<a class="srch-r" href="' + o.u + '"><span class="srch-c">' + X(o.c) + (o.s ? " · " + X(o.s) : "") + "</span><b>" + X(o.t) + "</b>"
+        + (h ? '<span class="srch-m"><em>' + X(h[0]) + "</em> " + X(h[1]) + "</span>" : '<span class="srch-m">' + X(o.d).slice(0, 70) + "</span>") + "</a>").join("")
+        : '<p class="srch-none">"' + X(inp.value) + '"에 맞는 글이 아직 없어요.<br>다른 말로 찾아보거나, <a href="/contact/">이 표현을 요청</a>해 주세요.</p>';
+    });
+  }
+  function open() { if (!box) build(); box.classList.add("on"); document.documentElement.classList.add("srch-open"); empty(); if (inp.value) run(); setTimeout(() => inp.focus(), 30); load(); }
+  function close() { box.classList.remove("on"); document.documentElement.classList.remove("srch-open"); }
+  btns.forEach(b => b.addEventListener("click", open));
+  addEventListener("keydown", e => { if ((e.key === "/" && !/input|textarea/i.test(document.activeElement.tagName)) || (e.key === "k" && (e.metaKey || e.ctrlKey))) { e.preventDefault(); open(); } });
+})();

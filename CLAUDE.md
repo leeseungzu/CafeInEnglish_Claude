@@ -185,3 +185,6 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 - 내 공부방 맨 아래 '기록 백업': 내보내기(이 사이트 localStorage 전체를 JSON 파일로, 휴대폰은 공유 시트) / 가져오기(합치기: 배열은 없는 것만 추가, 객체는 키별, 숫자는 큰 값). 로그인 생기면 계정으로 옮기기에 재사용. 모든 페이지에서 navigator.storage.persist() 요청(파이어폭스 제외).
 - 휴대폰 내 공부방의 '홈 화면에 추가' 안내(today.js installCard)는 숨김 — 맨 위 '앱으로 쓰면 더 편해요' 카드와 중복. PC는 그대로.
 - 디자인 CSS는 assets/style.css → 빌드 때 줄여서 docs/assets/site.css?v=<해시> 로 링크 (페이지마다 넣지 않음, 2026-10-17). 홈 227→118KB, 글 139→30KB.
+
+## 사이트 안 검색 (2026-10-17)
+- build.py search_index() → docs/search.json (제목·설명·표현 en/ko·예문 최대 16개, 사유의 문장 포함). app.js 검색 창: 돋보기(.srch-btn) 클릭 또는 / · Ctrl/Cmd+K. 위치: PC 메뉴 오른쪽, 휴대폰 웹 메뉴 줄 끝, 앱은 위쪽(앱에선 내 공부방 버튼 숨김 → 아래 탭에 있음). GA site_search.
