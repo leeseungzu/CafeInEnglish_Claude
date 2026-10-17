@@ -106,7 +106,14 @@ def split_sents(t):
                 else: cur = (cur + ', ' + x) if cur else x
             out.append(cur)
         else: out.append(p)
-    return [o for o in out if o]
+    out = [o for o in out if o]
+    # 너무 짧은 조각(예: '이재용,')은 다음 문장과 합침
+    merged = []
+    for o in out:
+        if merged and len(merged[-1]) < 9: merged[-1] = merged[-1] + ' ' + o
+        else: merged.append(o)
+    if len(merged) > 1 and len(merged[-1]) < 9: merged[-2] += ' ' + merged.pop()
+    return merged
 
 
 def speech_spans(mp3):
@@ -150,7 +157,16 @@ def narr_cues(text, mp3, offset=0.0):
         end = bounds[i][0] if i < len(bounds) else (spans[-1][1] if spans else D)
         cues.append((offset + max(0, start - 0.08), offset + end + 0.18, s))
         if i < len(bounds): start = bounds[i][1]
-    return cues
+    # 자막끼리 절대 겹치지 않게: 시간 순서를 강제하고, 길이가 없는 자막은 앞 자막에 합침
+    fixed = []
+    for a, b, t in cues:
+        if fixed:
+            pa, pb, pt = fixed[-1]
+            a = max(a, pb + 0.03)
+            if b - a < 0.4:
+                fixed[-1] = (pa, max(pb, b), pt + ' ' + t); continue
+        fixed.append((a, b, t))
+    return fixed
 
 
 # ---------- 학습 화면 (토스 톤) ----------
