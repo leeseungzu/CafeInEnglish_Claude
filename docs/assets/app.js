@@ -416,6 +416,7 @@
     if (hasTTS) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
 
     $$(".ex li .en").forEach(el => {
+      if (el.querySelector(".say-v")) return;  // 장면 카드 줄은 원본 영상으로 들어요
       const full = el.textContent.replace(/\s+/g, " ").trim();
       const text = full.replace(/→.*$/, "").trim();
       const file = files[full];

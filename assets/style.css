@@ -1930,3 +1930,11 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
 .gp-ring b{font-size:15px;font-weight:800;color:#fff;margin:0!important;display:inline!important}
 .gp-ring.done{background:#CDEB5B;color:#2A1A12}.gp-ring.done svg:first-child{display:none}
 @media (max-width:600px){.gp-me .gp-t{flex:1 1 calc(100% - 64px)!important}.gp-me .gp-go{margin-left:60px!important}}
+/* 장면 카드 줄: 원본 영상으로 듣기 (TTS 대신) */
+.say-v{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;margin-left:8px;vertical-align:-6px;border-radius:50%;border:1.5px solid #E5DACB;background:#fff;color:#2A1A12;cursor:pointer;padding:0}
+.say-v.on,.say-v:hover{background:#2A1A12;color:#CDEB5B;border-color:#2A1A12}
+.say-v .cnt{display:none}
+@media print{.say-v{display:none!important}}
+.xp-from{display:inline-flex;align-items:center;gap:8px;margin:10px 0 4px;font-size:13.5px;font-weight:700;color:#4E5968;text-decoration:none}
+.xp-from span{font-size:11px;font-weight:800;letter-spacing:.08em;color:#2A1A12;background:#FBF7F2;border-radius:999px;padding:4px 9px}
+@media (hover:hover){.xp-from:hover{color:#191F28}}

@@ -949,33 +949,63 @@ def expr_regex(en):
     return re.compile(r"(?<![A-Za-z])" + r"\s+".join(pats) + r"(?![A-Za-z])", re.I)
 
 
+def _nz(t):
+    return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9' ]", " ", html.unescape(re.sub(r"<[^>]+>", "", t)).lower().replace("’", "'"))).strip()
+
+
+SAY_V = ('<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'
+         '<path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>')
+
+
 def scene_dress(body, p):
-    timed = {}
+    """본문 인용 상자 중 '영상 속 실제 장면'만 장면 카드로. 시간 출처: line_times(롱폼 클립) · 표현 orig · 사유의 문장 (지어내지 않음)"""
+    timed = [(_nz(t), a, b) for t, a, b in p.get("line_times", [])]
     for x in p.get("expressions", []):
         if x.get("orig") and x.get("t") is not None:
-            timed[html.unescape(x["orig"]).strip()] = (x["t"], x.get("end") or round(x["t"] + 4, 1))
+            timed.append((_nz(x["orig"]), x["t"], x.get("end") or round(x["t"] + 4, 1)))
     th = THINK_BY_ID.get(p.get("think"))
     for q in (th or {}).get("quotes", []):
         if q.get("t") is not None:
-            timed.setdefault(html.unescape(q["en"]).strip(), (q["t"], q_end(q)))
+            timed.append((_nz(q["en"]), q["t"], q_end(q)))
+
+    def when(txt):
+        n = re.sub(r"^(and|well|so) ", "", _nz(txt))
+        if len(n) < 12:
+            return None
+        strip = lambda k: re.sub(r"^(and|well|so) ", "", k)
+        inside = [(len(k), a, b) for k, a, b in timed if n in strip(k)]
+        if inside:  # 이 줄을 통째로 담은 구간 중 가장 짧은 것
+            _, a, b = min(inside)
+            return (a, b)
+        parts = [(a, b) for k, a, b in timed if len(strip(k)) >= 12 and strip(k) in n]
+        return (min(x[0] for x in parts), max(x[1] for x in parts)) if parts else None  # 여러 구간에 걸친 줄
     rx = [r for r in (expr_regex(x.get("en", "")) for x in p.get("expressions", [])) if r]
     n = [0]
 
-    def line(m):
-        txt = m.group(1)
-        for r in rx:
-            mm = r.search(txt)
-            if mm and "<mark" not in txt:
-                txt = txt[:mm.start()] + '<mark class="xhl">' + mm.group(0) + "</mark>" + txt[mm.end():]
-        return f'<span class="en">{txt}</span>'
-
     def box(m):
-        n[0] += 1
         inner = m.group(1)
-        hit = next((timed[k] for k in (html.unescape(re.sub(r"<[^>]+>", "", t)).strip() for t in re.findall(r'<span class="en">(.*?)</span>', inner)) if k in timed), None)
-        btn = (f'<button class="sh-play sc-play" type="button" data-t="{hit[0]}" data-end="{hit[1]}" data-n="1">{ICON_PLAY}{mmss(hit[0])} 이 장면 듣기</button>' if hit else "")
+        spans = re.findall(r'<span class="en">(.*?)</span>', inner)
+        hits = [when(t) for t in spans]
+        if not any(hits):
+            return m.group(0)  # 영상 속 장면이 아니면(예문·공식 등) 그대로
+        n[0] += 1
+        for t in spans:
+            p.setdefault("_scene_of", {})[re.sub(r"^(and|well|so) ", "", _nz(t))] = n[0]
+        st = min(h[0] for h in hits if h); en = max(h[1] for h in hits if h)
+        btn = f'<button class="sh-play sc-play" type="button" data-t="{st}" data-end="{en}" data-n="1">{ICON_PLAY}{mmss(st)} 이 장면 듣기</button>'
+        it = iter(hits)
+
+        def line(mm):
+            txt, h = mm.group(1), next(it)
+            for r in rx:
+                f = r.search(txt)
+                if f and "<mark" not in txt:
+                    txt = txt[:f.start()] + '<mark class="xhl">' + f.group(0) + "</mark>" + txt[f.end():]
+            if h:  # 이 줄도 원본 영상으로 듣기
+                txt += f'<button class="sh-play say-v" type="button" data-t="{h[0]}" data-end="{h[1]}" data-n="1" aria-label="영상에서 듣기">{SAY_V}</button>'
+            return f'<span class="en">{txt}</span>'
         inner = re.sub(r'<span class="en">(.*?)</span>', line, inner)
-        return f'<div class="box scene"><div class="sc-h"><span class="sc-n">SCENE {n[0]:02d}</span>{btn}</div><ul class="ex">{inner}</ul></div>'
+        return f'<div class="box scene" id="sc{n[0]}"><div class="sc-h"><span class="sc-n">SCENE {n[0]:02d}</span>{btn}</div><ul class="ex">{inner}</ul></div>'
     return re.sub(r'<div class="box"><ul class="ex">(.*?)</ul></div>', box, body, flags=re.S)
 
 
@@ -1020,9 +1050,15 @@ def page_post(p):
                 shadow = (f'<div class="shadow">{seg_buttons(x["t"], end)}'
                           f'{say}{f"<ul class=sh-tips>{tips}</ul>" if tips else ""}</div>')
             toc.append((f"x{xi + 1}", x["en"]))
+            orig_html = f'<div class="orig">{e(x["orig"])}' + (f'<span class="orig-ko">{e(x["origKo"])}</span>' if x.get("origKo") else "") + '</div>'
+            on = re.sub(r"^(and|well|so) ", "", _nz(x.get("orig", "")))
+            scn = next((v for k, v in p.get("_scene_of", {}).items() if on and len(k) >= 12 and (k in on or on in k)), None)
+            if scn:  # 원문은 위 장면 카드에 이미 있으니, 여기선 장면으로 돌아가는 링크만 (중복 없이)
+                orig_html = f'<a class="xp-from" href="#sc{scn}"><span>SCENE {scn:02d}</span>에서 나온 표현 · 장면 다시 보기 ↑</a>'
+
             parts.append(f"""<div class="box xp" id="x{xi + 1}">
   <h3>{e(x['en'])}{ts}</h3><div>{e(x['ko'])}</div>
-  <div class="orig">{e(x['orig'])}{f'<span class="orig-ko">{e(x["origKo"])}</span>' if x.get("origKo") else ""}</div>
+  {orig_html}
   {shadow}
   <ul class="ex"><li><span class="en">{e(x['ex'])}</span><span class="ko">{e(x['exKo'])}</span></li></ul>
   <div class="memo" style="margin-bottom:0"><b class="lbl">연상법</b> {e(x['memo'])}</div>
