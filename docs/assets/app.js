@@ -815,3 +815,6 @@
     listen(box, old.en, (s, heard) => result(box, s, heard, ok));
   });
 })();
+
+/* 서비스워커: 페이지를 늘 새로 확인(no-cache), 글꼴·음성은 저장 */
+if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
