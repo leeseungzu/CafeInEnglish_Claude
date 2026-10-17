@@ -593,6 +593,7 @@ def _min_css(c):
     c = re.sub(r"\s*([{};])\s*", r"\1", c)
     return c.replace(";}", "}")
 STYLE_CSS = _min_css((ASSETS / "style.css").read_text("utf-8"))
+CSS_V = hashlib.md5(STYLE_CSS.encode()).hexdigest()[:8]  # 디자인 파일은 /assets/site.css 로 따로 (페이지마다 넣지 않아 가볍고, 한 번 받으면 저장)
 
 
 def mmss(t):
@@ -692,7 +693,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <meta name="theme-color" content="#FFFFFF">
 <link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="카페인영어"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 {font_head}
-<style>{STYLE_CSS}</style>
+<link rel="stylesheet" href="/assets/site.css?v={CSS_V}">
 {ads}{ga}
 </head>
 <body>
@@ -1856,6 +1857,7 @@ def build():
     before = {f for f in OUT.rglob("*") if f.is_file()} if OUT.exists() else set()
     OUT.mkdir(exist_ok=True)
     shutil.copytree(ASSETS, OUT / "assets", dirs_exist_ok=True)
+    (OUT / "assets" / "site.css").write_text(STYLE_CSS, "utf-8")
     if (ROOT / "images").exists():
         shutil.copytree(ROOT / "images", OUT / "images", dirs_exist_ok=True)
     if AUDIO_DIR.exists():
