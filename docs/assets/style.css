@@ -1984,8 +1984,6 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
 /* 영상 썸네일 재생 표시: 라임 원 대신 오른쪽 아래 작은 반투명 배지 (썸네일 글자 가리지 않게) */
 .th-play{left:auto!important;top:auto!important;right:10px;bottom:10px;margin:0!important;width:34px!important;height:34px!important;background:rgba(20,14,10,.62)!important;box-shadow:none!important;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding-left:2px!important}
 .th-play svg{width:14px;height:14px}
-.card.has-th .th-play{transform:none!important;right:8px;bottom:8px;width:28px!important;height:28px!important}
-.card.has-th .th-play svg{width:12px;height:12px}
 /* 모바일 루틴 카드: '다른 목표 고르기'는 설명 줄 '말해 봄' 옆 */
 @media (max-width:600px){
   .gp-sw-m{display:none!important}
@@ -1993,7 +1991,6 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
   .gp-me small .gp-sw::before{content:"·";display:inline-block;margin:0 6px;color:#C9CFD6;text-decoration:none}
 }
 /* 재생 배지: 다시 가운데. PC는 원래 크기(42), 목록·모바일은 작게 */
-.th-play{left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;width:42px!important;height:42px!important;margin:-21px 0 0 -21px!important;transform:none!important}
 .th-play svg{width:16px;height:16px}
 .card.has-th .th-play{right:auto!important;bottom:auto!important}
 @media (max-width:899px){.card.has-th .th-play{width:30px!important;height:30px!important;margin:-15px 0 0 -15px!important}.card.has-th .th-play svg{width:12px;height:12px}}
@@ -2004,3 +2001,10 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
   .cards.list .card .thumb.vthumb img:not(.th-bg){object-fit:contain}
   .card:hover .thumb.vthumb img{transform:none}
 }
+/* 재생 배지 최종: 정중앙(크기와 무관하게 translate), PC 48px · 모바일 목록 30px */
+.th-play{left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;width:48px!important;height:48px!important;margin:0!important;transform:translate(-50%,-50%)!important;padding:0 0 0 3px!important;box-sizing:border-box}
+.th-play svg{width:18px!important;height:18px!important}
+@media (max-width:899px){.card.has-th .th-play{width:30px!important;height:30px!important;margin:0!important;padding-left:2px!important}.card.has-th .th-play svg{width:12px!important;height:12px!important}}
+/* 글 속 영상 재생 버튼도 같은 배지: 반투명 에스프레소 + 흰 삼각형 (라임 금지) */
+.v-play{background:rgba(20,14,10,.62)!important;color:#fff!important;box-shadow:none!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);margin:0!important;transform:translate(-50%,-50%)!important;padding-left:4px!important}
+.v-facade:hover .v-play{background:rgba(20,14,10,.8)!important;color:#fff!important;transform:translate(-50%,-50%) scale(1.06)!important}
