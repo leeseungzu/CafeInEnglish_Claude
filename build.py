@@ -892,9 +892,16 @@ def side_common():
 # 글 본문 꾸미기: '뜻' 강조 카드(글마다 파스텔), 섹션 제목 앞 작은 3D 아이콘
 H2_ICON = [("뜻", "light-bulb"), ("예문", "speech-balloon"), ("실제로는", "waving-hand"), ("헷갈", "question-mark"),
            ("비슷한 표현", "thumbs-up"), ("자주 하는 실수", "grimacing-face")]
+def mean_card(m, tint):
+    """'뜻' 카드: 대표 표현을 크게, 뜻, 같은 뜻의 다른 표현은 작은 칩으로"""
+    exprs = [x.strip() for x in re.split(r"</b>\s*/\s*<b>", m.group(2)) if x.strip()]
+    alt = ('<span class="alt"><i>같은 뜻</i>' + "".join(f"<em>{x}</em>" for x in exprs[1:]) + "</span>") if len(exprs) > 1 else ""
+    return f'{m.group(1)}<div class="box mean-hi" style="background:{tint}"><b>{exprs[0]}</b><span class="m">{m.group(3)}</span>{alt}</div>'
+
+
 def post_dress(html, tint):
     html = re.sub(r'(<h2[^>]*>뜻</h2>\s*)<div class="box"><b>(.*?)</b>\s*=\s*(.*?)</div>',
-                  lambda m: f'{m.group(1)}<div class="box mean-hi" style="background:{tint}"><b>{m.group(2)}</b><span class="m">{m.group(3)}</span></div>', html, count=1, flags=re.S)
+                  lambda m: mean_card(m, tint), html, count=1, flags=re.S)
     def ic(m):
         txt = re.sub(r"<[^>]+>", "", m.group(2)).strip()
         name = next((n for k, n in H2_ICON if txt == k or txt.startswith(k)), None)

@@ -1838,3 +1838,16 @@ html.srch-open{overflow:hidden}
 .toc a:hover{background:#F2F4F6;color:#191F28}
 .toc li.on a{font-weight:800;color:#191F28}
 .toc li.on::before{content:"";position:absolute;left:-26px;top:7px;bottom:7px;width:3px;border-radius:2px;background:#2A1A12}
+/* 글 맨 위 대화 카드: 흰 카드가 잘리지 않게 여백을 두고 가운데 정렬 */
+.post-hero .chatv{height:auto;aspect-ratio:auto;padding:30px 20px 32px;border-radius:24px}
+.post-hero .cv-card{transform:none}
+@media (max-width:599px){.post-hero .chatv{padding:22px 14px 24px}.post-hero .chatv.big .cv-card{width:82%}}
+/* 목차 번호도 글자와 함께 굵어지고, 회색 바탕 안에 들어가게 */
+ol.toc{list-style:none;padding-left:0;counter-reset:tc}
+ol.toc>li{counter-increment:tc}
+ol.toc>li>a{margin-left:0}
+ol.toc>li>a::before{content:counter(tc) ". ";display:inline-block;min-width:1.4em;color:inherit;font-weight:inherit}
+.toc li.on::before{left:-8px}
+.pb .mean-hi .alt{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:12px}
+.pb .mean-hi .alt i{font-style:normal;font-size:12.5px;font-weight:700;color:#6B7684;margin-right:2px}
+.pb .mean-hi .alt em{font-style:normal;font-size:14.5px;font-weight:700;color:#191F28;background:rgba(255,255,255,.75);padding:5px 11px;border-radius:999px}
