@@ -1938,8 +1938,11 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
 .xp-from{display:inline-flex;align-items:center;gap:8px;margin:10px 0 4px;font-size:13.5px;font-weight:700;color:#4E5968;text-decoration:none}
 .xp-from span{font-size:11px;font-weight:800;letter-spacing:.08em;color:#2A1A12;background:#FBF7F2;border-radius:999px;padding:4px 9px}
 @media (hover:hover){.xp-from:hover{color:#191F28}}
-.gp-ring.gp-rvic svg:first-child{position:static;inset:auto}
+.gp-ring.gp-rvic .ic{position:relative}
 .pc-band .pc-rv-w{margin:-14px 0 24px}
 .pc-band > .pc-rv{margin:12px 0 14px}
 .end-app.end-kk img{width:26px;height:24px;border-radius:0}
 .end-app+.end-kk,.app-cta+.end-kk{border-top:1px solid #F2F4F6}
+/* 목표 고르기(타일)로 바뀌면 복습 카드도 전체 폭으로 */
+.pc-band #gp:not(:has(.gp-me)) + .pc-rv-w{margin-top:12px}
+.pc-band #gp:not(:has(.gp-me)) + .pc-rv-w .rv-sp{display:none}
