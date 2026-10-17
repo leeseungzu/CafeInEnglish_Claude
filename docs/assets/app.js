@@ -818,3 +818,54 @@
 
 /* 서비스워커: 페이지를 늘 새로 확인(no-cache), 글꼴·음성은 저장 */
 if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
+
+/* ── 기록 백업 (내 공부방) · 기록 오래 보관 요청 ── */
+(function () {
+  try { if (navigator.storage && navigator.storage.persist && !/Firefox/i.test(navigator.userAgent)) navigator.storage.persisted().then(p => { if (!p) navigator.storage.persist(); }); } catch (e) {}
+  const out = document.querySelector(".js-bk-out"), inp = document.querySelector(".js-bk-in"), file = document.querySelector(".js-bk-file");
+  if (!out || !inp || !file) return;
+  const SKIP = /^(appPreview)$/;
+  function toast(t) { let el = document.getElementById("bk-toast"); if (!el) { el = document.createElement("div"); el.id = "bk-toast"; el.className = "bk-toast"; document.body.appendChild(el); } el.textContent = t; el.classList.add("on"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("on"), 2600); }
+  function dump() { const d = {}; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (!SKIP.test(k)) d[k] = localStorage.getItem(k); } return d; }
+  out.addEventListener("click", async () => {
+    const d = dump(); if (!Object.keys(d).length) { toast("아직 저장된 기록이 없어요"); return; }
+    const day = new Date(), ymd = day.getFullYear() + String(day.getMonth() + 1).padStart(2, "0") + String(day.getDate()).padStart(2, "0");
+    const name = "cafeinenglish-backup-" + ymd + ".json";
+    const blob = new Blob([JSON.stringify({ app: "cafeinenglish", v: 1, at: day.toISOString(), data: d })], { type: "application/json" });
+    try {
+      const f = new File([blob], name, { type: "application/json" });
+      if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f], title: "카페인영어 기록 백업" }); return; }
+    } catch (e) { if (e && e.name === "AbortError") return; }
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+    toast("기록 파일을 저장했어요");
+  });
+  inp.addEventListener("click", () => file.click());
+  // 합치기: 배열은 없는 것만 더하고, 객체는 키별로 합치고, 숫자는 큰 값, 그 밖엔 지금 기록 유지
+  let added = 0;
+  function merge(a, b) {
+    if (Array.isArray(a) && Array.isArray(b)) { const seen = new Set(a.map(x => JSON.stringify(x))); b.forEach(x => { const s = JSON.stringify(x); if (!seen.has(s)) { a.push(x); seen.add(s); added++; } }); return a; }
+    if (a && b && typeof a === "object" && typeof b === "object") { Object.keys(b).forEach(k => { if (!(k in a)) { a[k] = b[k]; added++; } else a[k] = merge(a[k], b[k]); }); return a; }
+    if (typeof a === "number" && typeof b === "number") return Math.max(a, b);
+    return a;
+  }
+  file.addEventListener("change", () => {
+    const f = file.files && file.files[0]; if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      let j; try { j = JSON.parse(r.result); } catch (e) { toast("카페인영어 기록 파일이 아니에요"); return; }
+      if (!j || j.app !== "cafeinenglish" || !j.data) { toast("카페인영어 기록 파일이 아니에요"); return; }
+      added = 0;
+      Object.keys(j.data).forEach(k => {
+        if (SKIP.test(k)) return;
+        const nv = j.data[k], cur = localStorage.getItem(k);
+        if (cur === null) { localStorage.setItem(k, nv); added++; return; }
+        let A, B; try { A = JSON.parse(cur); B = JSON.parse(nv); } catch (e) { return; }
+        localStorage.setItem(k, JSON.stringify(merge(A, B)));
+      });
+      file.value = "";
+      toast(added ? "기록을 가져왔어요 · " + added + "개 추가" : "이미 같은 기록이 있어요");
+      if (added) setTimeout(() => location.reload(), 1200);
+    };
+    r.readAsText(f);
+  });
+})();

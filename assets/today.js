@@ -133,6 +133,7 @@ ${installCard()}`;
     const inapp = /KAKAOTALK|Instagram|FBAN|FBAV|NAVER|Line\//i.test(ua);
     const g = guide || (/Android/i.test(ua) ? "android" : "ios");
     const mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(ua) || ios;
+    if (mobile) return "";  // 휴대폰은 내 공부방 맨 위 '앱으로 쓰면 더 편해요' 카드가 같은 역할 (중복 방지)
     const steps = {
       ios: [["Safari로 열기", "카톡·인스타 안이라면 오른쪽 아래 ⋯ → <b>Safari로 열기</b>"], ["공유 버튼 누르기", "화면 아래 가운데 " + SHARE + " 버튼 (주소창 옆에 있을 수도 있어요)"], ["홈 화면에 추가", "메뉴를 위로 올려 <b>홈 화면에 추가</b> → 오른쪽 위 <b>추가</b>"]],
       android: [["Chrome으로 열기", "카톡·인스타 안이라면 ⋮ → <b>다른 브라우저로 열기</b>"], ["⋮ 메뉴 누르기", "Chrome 오른쪽 위 <b>⋮</b> (삼성 인터넷은 아래 <b>☰</b>)"], ["홈 화면에 추가", "<b>홈 화면에 추가</b> 또는 <b>앱 설치</b> → <b>설치</b> (삼성 인터넷은 <b>현재 페이지 추가 → 홈 화면</b>)"]]

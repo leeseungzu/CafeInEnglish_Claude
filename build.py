@@ -1417,6 +1417,15 @@ def daily_routine():
     return out
 
 
+SVG_DL = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 19h16"/></svg>'
+SVG_UL = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M7 8l5-5 5 5"/><path d="M4 19h16"/></svg>'
+BACKUP_HTML = ('<section class="bk no-print" id="backup"><h2 class="nb-h">기록 백업 <small>폰을 바꾸거나 앱으로 옮길 때</small></h2><div class="acts bk-acts">'
+               + act_row(SVG_DL, "내 기록 내보내기", "오답노트 · 필사 · 연속 기록을 파일 하나로 저장", cls="js-bk-out")
+               + act_row(SVG_UL, "기록 가져오기", "저장한 파일을 불러와 지금 기록에 합쳐요", cls="js-bk-in")
+               + '</div><input type="file" accept="application/json,.json" class="js-bk-file" hidden>'
+               '<p class="bk-note">아이폰은 Safari와 홈 화면 앱의 기록이 따로예요. Safari에서 내보내고 앱에서 가져오면 그대로 이어서 쓸 수 있어요.</p></section>')
+
+
 def page_notes():
     pool = today_pool()
     goals = [{**{k: g[k] for k in ("id", "name", "short")}, "icon": f'/assets/icons/{g["icon"]}.webp?v={ASSET_V}'} for g in TODAY_GOALS if pool.get(g["id"])]
@@ -1425,7 +1434,8 @@ def page_notes():
             + NB_APP +
             '<div class="nb-band"><div id="today-app"></div>'
             '<h2 id="wrong" class="nb-h">오답노트 <small>다시 풀어서 맞히면 \'졸업\'해요</small></h2><div id="notes-root"></div>'
-            '<h2 id="copy" class="nb-h">필사 노트 <small><span id="copy-count">0</span>개</small></h2><div id="copy-notes"></div></div>'
+            '<h2 id="copy" class="nb-h">필사 노트 <small><span id="copy-count">0</span>개</small></h2><div id="copy-notes"></div>'
+            + BACKUP_HTML + '</div>'
             f'<script src="/assets/today.js?v={ASSET_V}" defer></script>')
     data = {"type": "notes", "kakao": SITE.get("kakao", ""), "daily": daily_routine(), "pool": pool, "goals": goals,
             "cup": f"/assets/icons/hot-beverage.webp?v={ASSET_V}", "phone": f"/assets/icons/mobile-phone.webp?v={ASSET_V}"}
