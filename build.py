@@ -75,7 +75,7 @@ OG_BG = [("#FFF3EC", "#FFE0CF"), ("#EEF5FF", "#D6E6FF"), ("#F4F0FF", "#E2D8FF"),
 def og_chat(name, chip, en, ko, chat, icon, key_id):
     """C안 공유 이미지(1200×630): 왼쪽 표현 + 오른쪽 실제 대화 카드 + 3D 아이콘. 카톡·SNS 미리보기용."""
     if not (Image and FONT.exists()):
-        return "/assets/og.png"
+        return "/assets/og-home.png"
     from PIL import ImageFilter
     W, H, PAD = 1200, 630, 72
     INK, BODY, MUTED, LIME = "#191F28", "#333D4B", "#6B7684", "#CDEB5B"
@@ -180,7 +180,7 @@ def og_chat(name, chip, en, ko, chat, icon, key_id):
 def og_image(name, chip, big, small, foot="읽고 · 듣고 · 퀴즈로 확인"):
     """글마다 카톡·SNS 미리보기 이미지(1200×630)를 만들고 주소를 돌려줍니다."""
     if not (Image and FONT.exists()):
-        return "/assets/og.png"
+        return "/assets/og-home.png"
     W, H, PAD = 1200, 630, 80
     BG, INK, LIME, MUTED = "#F4EEE4", "#2A1A12", "#CDEB5B", "#7A6A5E"
     im = Image.new("RGB", (W, H), BG)
@@ -602,7 +602,7 @@ self.addEventListener("fetch", e => {
 """
 
 
-def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og.png", seo_title=None, ld=None, preload="", robots=""):
+def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og-home.png", seo_title=None, ld=None, preload="", robots=""):
     full_title = f"{seo_title or title} | 카페인영어" if path != "/" else f"카페인영어 - {SITE['tagline']}"
     # 애드센스: 소유 확인은 meta 태그로, 광고 스크립트(약 200KB)는 첫 스크롤·터치 때(또는 로드 7초 뒤) 불러와요 → 첫 화면 속도 ↑
     ads = (f'<meta name="google-adsense-account" content="{e(SITE["adsense_client"])}">'
