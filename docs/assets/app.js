@@ -65,9 +65,11 @@
     const doneToday = p.day === todayKey && p.done;
     const C2 = 2 * Math.PI * 19, arc = Math.max(pct, p.n ? 4 : 0) / 100 * C2;
     const ring = `<span class="gp-ring${doneToday ? " done" : ""}" aria-hidden="true"><svg viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="19" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="4"/><circle cx="22" cy="22" r="19" fill="none" stroke="#CDEB5B" stroke-width="4" stroke-linecap="round" stroke-dasharray="${arc.toFixed(1)} ${C2.toFixed(1)}" transform="rotate(-90 22 22)"/></svg>${doneToday ? '<svg class="ck" viewBox="0 0 24 24" width="18" height="18"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>' : "<b>" + p.n + "</b>"}</span>`;
-    gp.innerHTML = `<a class="gp-me" href="/notes/#routine">${ring}<span class="gp-t"><b>${esc(p.name)}${p.streak ? " · 연속 " + p.streak + "일" : ""}</b><small>${doneToday ? "오늘 도장 완료 · " : "오늘 말할 문장이 기다려요 · "}${p.t}개 중 ${p.n}개 말해 봄</small></span><span class="gp-go">${doneToday ? "기록 보기 ✓" : p.n ? "이어서 말하기 →" : "첫 문장 시작 →"}</span></a><button type="button" class="gp-sw">다른 목표 고르기</button>`;
+    gp.innerHTML = `<a class="gp-me" href="/notes/#routine">${ring}<span class="gp-t"><b>${esc(p.name)}${p.streak ? " · 연속 " + p.streak + "일" : ""}</b><small>${doneToday ? "오늘 도장 완료 · " : "오늘 말할 문장이 기다려요 · "}${p.t}개 중 ${p.n}개 말해 봄<span class="gp-sw" role="button" tabindex="0">다른 목표 고르기</span></small></span><span class="gp-go">${doneToday ? "기록 보기 ✓" : p.n ? "이어서 말하기 →" : "첫 문장 시작 →"}</span></a>`;
     const html0 = gp.dataset.orig;
-    $(".gp-sw", gp).onclick = () => { location.href = "/#gp"; gp.outerHTML = window.__gpOrig; };
+    const swGo = e => { e.preventDefault(); e.stopPropagation(); location.href = "/#gp"; gp.outerHTML = window.__gpOrig; };
+    $(".gp-sw", gp).onclick = swGo;  // 카드(링크) 안에 있어도 이동 대신 목표 고르기로
+    $(".gp-sw", gp).onkeydown = e => { if (e.key === "Enter" || e.key === " ") swGo(e); };
   })();
   setTimeout(routineDot, 0);
   function updateBadge() {
@@ -773,7 +775,6 @@
     const gpEl = document.querySelector(".pc-band #gp");
     if (gpEl && gpEl.querySelector(".gp-me")) {
       const w = document.createElement("div"); w.className = "pc-rv-w"; w.appendChild(a);
-      const sw = gpEl.querySelector(".gp-sw"); if (sw) { const sp = sw.cloneNode(true); sp.className = "gp-sw rv-sp"; sp.setAttribute("aria-hidden", "true"); sp.tabIndex = -1; w.appendChild(sp); }
       gpEl.after(w);  // 루틴 카드 바로 아래, 같은 폭
     } else hi.after(a);
   })();

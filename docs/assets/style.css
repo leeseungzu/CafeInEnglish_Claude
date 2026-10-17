@@ -1962,3 +1962,9 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
   .subfilter .sf-g .sf-lv.on{background:#fff;color:#191F28;box-shadow:0 1px 3px rgba(0,0,0,.08)}
   .subfilter .sf-g .sf-lv.on em{color:#8B95A1}
 }
+/* 홈 루틴·복습 카드 버튼: 크림 채움 + 같은 폭, '다른 목표 고르기'는 설명 줄 끝 작은 링크 */
+.gp-me .gp-go,.pc-band .gp-me .gp-go,.m-home .gp-me .gp-go{background:#F4EEE4!important;color:#2A1A12!important;border:0!important;min-width:132px;box-sizing:border-box;text-align:center;padding:11px 16px!important}
+@media (hover:hover){.gp-me:hover .gp-go,.pc-band .gp-me:hover .gp-go{background:#2A1A12!important;color:#fff!important}}
+.gp-me small .gp-sw{display:inline;margin:0 0 0 8px!important;padding:0;font-size:12.5px;color:#8B95A1;text-decoration:underline;text-underline-offset:3px;cursor:pointer;white-space:nowrap}
+@media (hover:hover){.gp-me small .gp-sw:hover{color:#191F28}}
+.pc-band .pc-rv-w{margin:-14px 0 24px}
