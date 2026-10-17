@@ -532,7 +532,7 @@ def load(kind):
     for f in sorted((CONTENT / kind).glob("*.json")):
         it = json.loads(f.read_text("utf-8"))
         mod = datetime.date.fromtimestamp(f.stat().st_mtime).isoformat()
-        it["_mod"] = max(mod, it.get("date", mod))   # 수정일 (사이트맵 · 구조화 데이터용)
+        it["_mod"] = max(mod, it.get("date", mod), it.get("updated", ""))   # 수정일 (사이트맵 · 구조화 데이터용)
         items.append(it)
     return sorted(items, key=lambda x: (x.get("date", ""), x["id"]), reverse=True)
 
@@ -1024,7 +1024,7 @@ def page_post(p):
     video = p.get("video")
     _lv = level(p)
     parts = [f'<span class="chip {p["cat"]}">{CATS[p["cat"]]}</span><span class="chip {p["cat"]}">{e(p.get("sub", ""))}</span><span class="lv lv-{"pro" if _lv == "실전" else "base"}" title="{"일·뉴스·연설, 뉘앙스까지" if _lv == "실전" else "처음 봐도 바로 쓰는 생활 표현"}">{_lv}</span>',
-             f'<h1>{e(p["title"])}</h1><p class="lead">{e(p.get("lead", ""))}</p><p class="date-line">{e(p.get("date", ""))}</p>']
+             f'<h1>{e(p["title"])}</h1><p class="lead">{e(p.get("lead", ""))}</p><p class="date-line">{e(p.get("date", ""))}{(" · " + e(p["updated"]) + " 수정") if p.get("updated") and p["updated"] != p.get("date") else ""}</p>']
     tint = re.search(r"#[0-9A-Fa-f]{6}", chat_bg(p["id"])).group(0)
     if not video and p.get("chat"):
         c = p["chat"]
