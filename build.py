@@ -1562,6 +1562,13 @@ APP_CSS = """
 .ap-more{text-align:center;margin:22px 0 0;font-size:15px}
 .ap-more a{color:#4E5968}
 @media (max-width:599px){.ap-qr{flex-direction:column;text-align:center}}
+.ap-guide{margin-top:16px}
+.ap-tabs{display:flex;gap:6px;background:#F2F4F6;border-radius:14px;padding:4px;margin:0 0 16px}
+.ap-tabs button{flex:1;border:0;background:transparent;border-radius:11px;padding:10px;font-size:15px;font-weight:700;color:#6B7684;cursor:pointer;font-family:inherit}
+.ap-tabs button.on{background:#fff;color:#191F28;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.ap-tp{display:none}.ap-tp.on{display:block}
+.ap-tp h3{font-size:16px;margin:14px 0 8px;color:#191F28}
+.ap-tp h3:first-child{margin-top:0}
 """
 
 SHARE_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>'
@@ -1618,6 +1625,24 @@ def page_app():
 <div class="ap-box ap-pane" id="ap-done"><h2>이미 앱으로 보고 있어요</h2>
 <p>오늘의 5분부터 시작해 볼까요?</p><a class="ap-btn pri" href="/notes/?src=app">오늘의 한 잔 열기</a></div>
 
+<div class="ap-box ap-guide" id="ap-guide"><h2>휴대폰별 설치 방법</h2>
+<p>쓰는 휴대폰을 골라 보세요.</p>
+<div class="ap-tabs"><button type="button" data-t="ios">아이폰</button><button type="button" data-t="and">안드로이드</button></div>
+<div class="ap-tp" data-t="ios"><h3>Safari에서</h3>
+<ol class="ap-steps"><li><i>1</i><span>Safari로 cafeinenglish.com/app 을 열어요</span></li>
+<li><i>2</i><span>아래쪽 <span class="k">{SHARE_SVG} 공유</span> 버튼을 눌러요 <small style="color:#8B95A1">(안 보이면 ··· 버튼 안)</small></span></li>
+<li><i>3</i><span><span class="k">{PLUS_SVG} 홈 화면에 추가</span> → 오른쪽 위 <span class="k">추가</span></span></li></ol>
+<p class="ap-note" style="margin-top:0">인스타·카톡 안에서 열었다면 먼저 Safari로 열어 주세요.</p></div>
+<div class="ap-tp" data-t="and"><h3>크롬에서</h3>
+<ol class="ap-steps"><li><i>1</i><span>크롬으로 cafeinenglish.com/app 을 열어요</span></li>
+<li><i>2</i><span><span class="k">카페인영어 앱 설치</span> 버튼을 눌러요. 버튼이 없으면 오른쪽 위 <span class="k">⋮</span> 메뉴를 눌러요</span></li>
+<li><i>3</i><span><span class="k">홈 화면에 추가</span> 또는 <span class="k">앱 설치</span> → <span class="k">설치</span></span></li></ol>
+<h3>삼성 인터넷에서</h3>
+<ol class="ap-steps"><li><i>1</i><span>아래쪽 <span class="k">≡</span> 메뉴를 눌러요</span></li>
+<li><i>2</i><span><span class="k">현재 페이지 추가</span> → <span class="k">홈 화면</span>을 눌러요</span></li></ol>
+<p class="ap-note" style="margin-top:0">인스타·카톡 안에서 열었다면 먼저 크롬이나 삼성 인터넷으로 열어 주세요.</p></div>
+</div>
+
 <p class="ap-more"><a href="/">앱 없이 사이트로 둘러보기 ›</a></p>
 </div>
 <div class="ap-toast" id="ap-toast">주소를 복사했어요</div>
@@ -1637,7 +1662,10 @@ var dp=null;
 window.addEventListener("beforeinstallprompt",function(ev){{ev.preventDefault();dp=ev;$$(".js-ap-install").forEach(function(b){{b.style.display=""}})}});
 window.addEventListener("appinstalled",function(){{toast("설치됐어요! 홈 화면을 확인해 보세요")}});
 $$(".js-ap-install").forEach(function(b){{b.addEventListener("click",function(){{if(dp){{dp.prompt();dp.userChoice.then(function(){{dp=null}})}}else{{var m=$(".js-ap-manual");if(m)m.style.display="";b.style.display="none"}}}})}});
-if(standalone)show("ap-done");
+function tab(t){{$$(".ap-tabs button").forEach(function(b){{b.classList.toggle("on",b.dataset.t===t)}});$$(".ap-tp").forEach(function(p){{p.classList.toggle("on",p.dataset.t===t)}})}}
+$$(".ap-tabs button").forEach(function(b){{b.addEventListener("click",function(){{tab(b.dataset.t)}})}});
+tab(and?"and":"ios");
+if(standalone){{show("ap-done");var g=$("#ap-guide");if(g)g.style.display="none"}}
 else if(kakao){{show("ap-kakao");setTimeout(function(){{location.href=kk}},400)}}
 else if(inapp&&ios)show("ap-inapp-ios");
 else if(inapp&&and)show("ap-inapp-and");
