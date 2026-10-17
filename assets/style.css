@@ -1793,3 +1793,8 @@ html.srch-open{overflow:hidden}
   html.is-app .top-in>.srch-btn{display:inline-flex}
   html.is-app .top .room{display:none}
 }
+/* 난이도 표시 */
+.lv{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:#6B7684;margin-left:6px;vertical-align:middle}
+.lv::before{content:"";width:6px;height:6px;border-radius:50%;background:#B0B8C1}
+.lv.lv-base::before{background:#9BC53D}
+.lv.lv-pro::before{background:#2A1A12}

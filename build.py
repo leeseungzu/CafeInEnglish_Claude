@@ -797,10 +797,19 @@ def thumb_alt(th):
     return f"{th.get('text', '')} - {th.get('ko', '')}".strip(" -") if th else ""
 
 
+# 난이도: 기초(처음 보는 사람도 바로 쓰는 생활 표현) / 실전(일·뉴스·연설, 뉘앙스까지). 글 JSON "level"이 있으면 그걸 씀.
+LEVEL_PRO = {"email-phrases", "video-call", "keep-me-posted", "walk-me-through", "swamped", "im-on-it", "linking",
+             "negative-question", "would-you-mind", "make-sense", "this-vs-next"}
+def level(p):
+    return p.get("level") or ("실전" if p["cat"] == "video" or p["id"] in LEVEL_PRO else "기초")
+
+
 def post_card(p, hl=3):
     th, play = post_thumb(p)
+    lv = level(p)
     return card(post_url(p), [(p["cat"], CATS[p["cat"]]), (p["cat"], p.get("sub", ""))], p["title"],
-                f"{p.get('lead', '')} · 퀴즈 {len(p['quiz'])}문제", th, play, thumb_alt(p.get("thumb")), hl, p.get("sub", ""))
+                f"{p.get('lead', '')} · 퀴즈 {len(p['quiz'])}문제", th, play, thumb_alt(p.get("thumb")), hl, p.get("sub", "")).replace(
+                    '</div><h', f'<span class="lv lv-{"pro" if lv == "실전" else "base"}">{lv}</span></div><h', 1)
 
 
 def think_card(t, hl=3):
@@ -883,7 +892,8 @@ def side_common():
 def page_post(p):
     url = post_url(p)
     video = p.get("video")
-    parts = [f'<span class="chip {p["cat"]}">{CATS[p["cat"]]}</span><span class="chip {p["cat"]}">{e(p.get("sub", ""))}</span>',
+    _lv = level(p)
+    parts = [f'<span class="chip {p["cat"]}">{CATS[p["cat"]]}</span><span class="chip {p["cat"]}">{e(p.get("sub", ""))}</span><span class="lv lv-{"pro" if _lv == "실전" else "base"}" title="{"일·뉴스·연설, 뉘앙스까지" if _lv == "실전" else "처음 봐도 바로 쓰는 생활 표현"}">{_lv}</span>',
              f'<h1>{e(p["title"])}</h1><p class="lead">{e(p.get("lead", ""))}</p><p class="date-line">{e(p.get("date", ""))}</p>']
     toc_slot = len(parts)
     if video:

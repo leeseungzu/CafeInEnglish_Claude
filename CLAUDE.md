@@ -188,3 +188,4 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 
 ## 사이트 안 검색 (2026-10-17)
 - build.py search_index() → docs/search.json (제목·설명·표현 en/ko·예문 최대 16개, 사유의 문장 포함). app.js 검색 창: 돋보기(.srch-btn) 클릭 또는 / · Ctrl/Cmd+K. 위치: PC 메뉴 오른쪽, 휴대폰 웹 메뉴 줄 끝, 앱은 위쪽(앱에선 내 공부방 버튼 숨김 → 아래 탭에 있음). GA site_search.
+- 난이도: 글 JSON "level"(기초/실전). 없으면 영상 글·LEVEL_PRO 목록=실전, 나머지 기초. 목록 카드 칩 옆, 글 머리 칩 옆에 점 + 글자.
