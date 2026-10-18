@@ -1193,13 +1193,59 @@ def page_think(t):
                   seo_title=t.get("seo_title"), ld=ld)
 
 
+
+# 목록 페이지 소개글 (페이지마다 다르게 — 같은 문장 복사 금지)
+def _about_box(title, paras, items):
+    return ('<section class="cat-about"><h2>' + title + '</h2>' + "".join(f"<p>{x}</p>" for x in paras)
+            + ("<ul>" + "".join(f"<li><b>{a}</b>{b}</li>" for a, b in items) + "</ul>" if items else "") + "</section>")
+CAT_ABOUT = {
+    "expr": _about_box("영어표현은 이렇게 정리해요", [
+        "교과서에는 잘 안 나오지만, 원어민이 하루에도 몇 번씩 쓰는 짧은 표현을 모았어요. Sounds good, I'm on it, My bad처럼 한두 마디로 대화의 분위기를 바꾸는 말들이에요.",
+        "글마다 뜻만 적지 않고, 언제 쓰면 자연스럽고 언제 쓰면 어색한지 뉘앙스를 함께 설명해요. 비슷한 표현과 나란히 비교하고, 한국인이 자주 틀리는 문장을 바로잡은 뒤, 퀴즈로 확인하는 순서예요."],
+        [("처음이라면", "'기초'부터. 일상 대화에서 바로 쓰는 표현이에요."), ("회사·메일이 급하다면", "'실전'을 골라 보세요."),
+         ("복습은", "틀린 문제가 내 공부방에 모이고, '복습에 담기'로 1·3·7일 뒤 다시 꺼내요.")]),
+    "tip": _about_box("영어꿀팁에서는 이런 걸 다뤄요", [
+        "표현 하나보다 조금 넓은 이야기를 모았어요. 식당과 공항에서 바로 쓰는 문장, 원어민이 빨리 말할 때 소리가 이어지는 규칙, 한국에서만 통하는 콩글리시, 그리고 단어 뒤에 숨은 재미있는 역사까지요.",
+        "모든 글은 '왜 그런지'를 먼저 설명하고, 그다음 바로 써먹을 문장을 보여 줘요. 규칙을 이해하면 처음 보는 상황에서도 응용할 수 있기 때문이에요."],
+        [("여행 전이라면", "여행 시리즈 10편과 무료 PDF로 공항부터 호텔까지 준비해요."), ("듣기가 막힌다면", "연음과 발음 글부터 읽어 보세요."),
+         ("가볍게 읽고 싶다면", "'영어 이야기'에서 OK와 nice의 숨은 역사를 만나 보세요.")]),
+    "video": _about_box("영상으로 배우기는 이렇게 봐요", [
+        "인터뷰와 연설처럼 실제 상황에서 나온 영어를 장면 단위로 나눠 해설해요. 영상 속 문장은 필요한 만큼만 짧게 인용하고, 왜 그 표현을 썼는지, 내가 비슷한 상황에서 어떻게 쓸 수 있는지를 중심으로 풀어요.",
+        "장면 카드의 '이 장면 듣기'를 누르면 영상의 해당 구간만 바로 재생돼요. 먼저 자막 없이 듣고, 해설을 읽은 뒤 다시 들으면 처음보다 훨씬 많이 들려요."],
+        [("추천 순서", "영상 듣기 → 장면 해설 → 표현 5개 → 퀴즈"), ("느리게 듣고 싶다면", "재생 속도 0.75x로 바꿔 보세요."),
+         ("마음에 남는 문장은", "사유의 문장에서 따라 쓰고 복기할 수 있어요.")]),
+    "think": _about_box("사유의 문장은 이렇게 써요", [
+        "영상 속에서 오래 곱씹을 만한 문장을 골라, 영어로 따라 쓰고(필사) 빈칸으로 다시 떠올리는(복기) 공간이에요. 눈으로만 읽는 것보다 손으로 쓰고 다시 꺼낼 때 문장이 훨씬 오래 남아요.",
+        "문장마다 '생각해 보기' 질문이 붙어 있어요. 나의 한 줄을 남기면 영어 문장이 내 생각과 연결돼, 비슷한 순간에 자연스럽게 떠오르게 돼요."],
+        [("한 문장씩", "필사 → 빈칸 복기 → 나의 한 줄 순서로 해 보세요."), ("모아 보기", "써 둔 문장은 내 공부방 필사 노트에 쌓여요."),
+         ("손으로 쓰고 싶다면", "필사 노트를 A4로 출력할 수 있어요.")]),
+}
+SERIES_ABOUT = {
+    "travel": _about_box("이 시리즈를 이렇게 활용하세요", [
+        "해외에서 영어가 가장 급한 순간은 대부분 정해져 있어요. 기내, 입국 심사, 짐 찾기, 교통, 호텔, 카페, 식당, 쇼핑, 길 찾기, 그리고 문제가 생겼을 때예요. 이 10가지 상황을 여행 순서대로 묶고, 병원이나 말을 다시 물어볼 때처럼 자주 마주치는 장면도 더했어요.",
+        "각 글은 직원이 실제로 하는 말을 먼저 보여 주고, 내가 할 대답을 짧게 정리해요. 상대의 질문이 들려야 대답도 할 수 있기 때문이에요."],
+        [("출발 일주일 전", "하루 1~2편씩 읽고 퀴즈로 확인해요."), ("공항 가는 길에", "무료 PDF와 QR 발음 듣기로 마지막 복습을 해요.")]),
+    "work": _about_box("이 시리즈를 이렇게 활용하세요", [
+        "회의, 메일, 메신저에서 원어민 동료가 매일 쓰는 짧은 표현을 모았어요. 길고 격식 있는 문장보다, 짧지만 센스 있게 일이 굴러가게 만드는 말들이에요.",
+        "글마다 상사, 동료, 고객처럼 상대에 따라 어떻게 말투를 바꾸면 좋은지 함께 설명해요. 같은 뜻이라도 상대에 따라 온도를 맞추는 게 일하는 영어의 핵심이에요."],
+        [("메일 쓰기 전에", "email-phrases와 keep me posted부터 보세요."), ("회의 중에는", "walk me through, I'm on it이 가장 자주 쓰여요.")]),
+    "mistakes": _about_box("이 시리즈를 이렇게 활용하세요", [
+        "문법은 맞는데 뜻이 정반대로 전해지는 영어가 있어요. 부정 의문문에 Yes와 No를 거꾸로 대답하거나, would you mind에 Yes라고 해서 거절이 되는 경우처럼요.",
+        "글마다 왜 한국어 습관 때문에 틀리게 되는지를 먼저 짚고, 원어민이 실제로 알아듣는 방식으로 바로잡아요. 원리를 알면 같은 실수가 다시 나오지 않아요."],
+        [("가장 많이 틀리는 것", "부정 의문문 대답, would you mind, in과 after"), ("말하기 전에", "콩글리시 정리 글로 한 번 점검해 보세요.")]),
+    "leaders": _about_box("이 시리즈를 이렇게 활용하세요", [
+        "젠슨 황, 순다르 피차이, 손흥민, 이재용·최태원 회장처럼 세계 무대에 선 사람들의 실제 연설과 인터뷰를 다뤄요. 원어민이 아니어도 자기 생각을 분명하게 전하는 영어라, 따라 하기 좋은 문장이 많아요.",
+        "연설 원문은 짧게 인용하고, 어떤 구조로 말했는지, 어떤 표현이 청중을 웃기고 움직였는지를 해설해요. 발표나 건배사처럼 내가 앞에 서야 하는 순간에 그대로 응용할 수 있어요."],
+        [("듣기 연습", "장면 카드의 '이 장면 듣기'로 원본 목소리를 들어요."), ("말하기 연습", "사유의 문장에서 핵심 문장을 따라 써 보세요.")]),
+}
+
 def page_category(cat):
     url = f"/category/{cat}/"
     if cat == "think":
         items = THINKS
         cards = "".join(think_card(t, 2) for t in THINKS)
         body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p><div class="cards list">{cards}</div>'
-                '<p class="a-intro">필사한 문장은 <a href="/notes/#copy">내 공부방</a>에 모여요.</p>')
+                + CAT_ABOUT.get(cat, ""))
     else:
         items = [p for p in POSTS if p["cat"] == cat]
         cards = "".join(post_card(p, 2) for p in items) or '<div class="empty"><p>곧 첫 글이 올라와요.</p></div>'
@@ -1215,7 +1261,7 @@ def page_category(cat):
                      + "".join(btn(x, sum(1 for p in items if p.get("sub") == x), x) for x in subs) + "</div>") if len(subs) > 1 else ""
             filt = f'<aside class="subfilter" aria-label="글 고르기">{g_lv}{g_sub}<p class="sf-empty" hidden>이 조합의 글은 아직 없어요</p></aside>'
         body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>'
-                f'<div class="cat-grid{" has-filter" if filt else ""}"><div class="cards list">{cards}</div>{filt}</div>')
+                f'<div class="cat-grid{" has-filter" if filt else ""}"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     seo_t, seo_d = CAT_SEO[cat]
     links = [think_url(t) for t in items] if cat == "think" else [post_url(p) for p in items]
     ld = [{"@type": "CollectionPage", "name": CATS[cat], "description": seo_d, "url": DOMAIN + url, "inLanguage": "ko",
@@ -1239,7 +1285,7 @@ def page_series(sr):
     sn = sr.get("notice") or (TRAVEL_NOTICE if sr["id"] == "travel" else None)
     body = (f'<div class="chips"><span class="chip">아티클 시리즈</span></div><h1>{e(sr["title"])}</h1><p class="lead">{e(sr["desc"])}</p>'
             + (notice_html(sn) if sn else "") +
-            f'<div class="cat-grid"><div class="cards list">{cards}</div></div>')
+            f'<div class="cat-grid"><div class="cards list">{cards}</div></div>' + SERIES_ABOUT.get(sr["id"], ""))
     ld = [{"@type": "CollectionPage", "name": sr["title"], "description": sr["desc"], "url": DOMAIN + url, "inLanguage": "ko"},
           {"@type": "BreadcrumbList", "itemListElement": [
               {"@type": "ListItem", "position": 1, "name": "홈", "item": DOMAIN + "/"},
@@ -1668,9 +1714,16 @@ ABOUT = f"""
 <p>안녕하세요, 유튜브 <b>카페인영어 CafeInEnglish</b>예요.</p>
 <p>저도 한국에서 영어를 배운 평범한 학생이었어요. 외우고, 시험 보고, 취업을 위해 점수를 만들고. 그렇게 오랫동안 영어를 '공부'해 왔는데, 어느 날 돌아보니 제게 남은 건 점수였지 언어가 아니더라고요.</p>
 <p>그때부터 진짜 영어를 하고 싶어졌어요. 문법 문제가 아니라, 사람들이 실제로 쓰는 말로 생각하고 이야기하는 영어요.</p>
-<p>저는 지금 영주권을 받고 미국 이민을 앞두고 있어요. 낯선 곳에서의 새로운 도전을 준비하면서 느끼는 건, 영어는 결국 <b>생각을 넓혀주는 도구</b>라는 거예요. 새로운 언어로 세상을 보면, 보이는 것도 달라지니까요.</p>
+<p>저는 지금 낯선 곳에서의 새로운 도전을 준비하고 있어요. 그 과정에서 느끼는 건, 영어는 결국 <b>생각을 넓혀주는 도구</b>라는 거예요. 새로운 언어로 세상을 보면, 보이는 것도 달라지니까요.</p>
 <p>카페인영어는 그 여정을 기록하고 나누는 공간이에요. 셀럽 인터뷰와 연설 속 살아있는 표현으로 매일 조금씩, 하지만 깊게. 영어라는 언어로 생각을 넓히면서 같이 성장해요. <b>재미있게, 그리고 쉽게!</b></p>
 <div class="brand-c"><img src="/assets/icon-192.png" alt="" width="64" height="64"><div><b>C.</b> 매일 한 잔의 커피처럼, 대화 속 진짜 영어를 꾸준히.<br><span>오늘의 한 문장에 마침표를 찍는 곳, CafeInEnglish.</span></div></div>
+<h2>콘텐츠는 이렇게 만들어요</h2>
+<div class="ab-prin">
+<div><b>1. 실제로 쓰이는 표현만</b><span>영상·인터뷰·사전의 실제 용례로 확인한 표현만 골라요. 시험용 문장보다 대화에서 들리는 말을 우선해요.</span></div>
+<div><b>2. 인용은 짧게, 해설은 길게</b><span>영상 속 문장은 필요한 만큼만 짧게 인용하고, 왜 그 표현을 썼는지와 내가 쓸 때의 팁을 직접 풀어 써요. 출처는 글 끝에 밝혀요.</span></div>
+<div><b>3. 예문과 음성</b><span>예문은 직접 작성하고, 듣기 음성은 원어민 억양의 AI 음성 합성으로 만들었어요. 실제 장면은 영상 구간 듣기로 원본 목소리를 들을 수 있어요.</span></div>
+<div><b>4. 틀리면 고쳐요</b><span>잘못된 설명이나 어색한 예문을 발견하면 <a href="/contact/">문의</a>로 알려 주세요. 확인 후 고치고, 고친 글에는 수정일을 표시해요.</span></div>
+</div>
 <h2>이런 걸 할 수 있어요</h2>
 <div class="about-acts">{_about_acts()}</div>
 <h2>아티클 시리즈</h2>

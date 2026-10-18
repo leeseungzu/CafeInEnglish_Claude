@@ -2008,3 +2008,16 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
 /* 글 속 영상 재생 버튼도 같은 배지: 반투명 에스프레소 + 흰 삼각형 (라임 금지) */
 .v-play{background:rgba(20,14,10,.62)!important;color:#fff!important;box-shadow:none!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);margin:0!important;transform:translate(-50%,-50%)!important;padding-left:4px!important}
 .v-facade:hover .v-play{background:rgba(20,14,10,.8)!important;color:#fff!important;transform:translate(-50%,-50%) scale(1.06)!important}
+/* 목록 페이지 소개글 · 소개 페이지 콘텐츠 원칙 */
+.cat-about{margin:40px 0 8px;padding:24px 22px;background:#FBF7F2;border-radius:22px}
+.cat-about h2{font-size:19px;margin:0 0 12px;letter-spacing:-.02em}
+.cat-about p{font-size:15px;line-height:1.75;color:#4E5968;margin:0 0 10px}
+.cat-about ul{margin:6px 0 0;padding:0;list-style:none}
+.cat-about li{font-size:14.5px;line-height:1.6;color:#333D4B;padding:9px 0;border-top:1px solid #EFE6DA}
+.cat-about li b{color:#2A1A12;margin-right:6px}
+@media (min-width:900px){.cat-about{padding:28px 32px}.cat-grid+.cat-about{max-width:100%}}
+.ab-prin{display:grid;gap:10px;margin:14px 0 6px}
+@media (min-width:700px){.ab-prin{grid-template-columns:1fr 1fr}}
+.ab-prin div{background:#FBF7F2;border-radius:18px;padding:16px 18px}
+.ab-prin b{display:block;font-size:15.5px;color:#2A1A12;margin-bottom:4px}
+.ab-prin span{font-size:14.5px;line-height:1.65;color:#4E5968}
