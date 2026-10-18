@@ -2074,3 +2074,11 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
   .cat-about ul{grid-template-columns:repeat(3,1fr);gap:24px;margin-top:18px!important}
   .cat-about li{border-top:0!important;padding:0!important;line-height:1.6}
 }
+/* 목록 소개글 팁: 회색 아이콘 카드 3개(길이 맞춤) */
+.cat-about p{margin-bottom:0!important}
+.cat-about ul.ca-tips{display:grid!important;grid-template-columns:repeat(3,1fr);gap:10px!important;margin:18px 0 0!important}
+.ca-tips li{display:flex!important;align-items:center;gap:12px;background:#F7F8FA;border:0!important;border-radius:16px;padding:14px 16px!important;line-height:1.45!important}
+.ca-tips img{width:28px;height:28px;flex:none}
+.ca-tips li b{display:block;font-size:12.5px!important;color:#8B95A1!important;font-weight:700;margin:0 0 2px!important}
+.ca-tips li span{font-size:14.5px;color:#191F28;font-weight:600}
+@media (max-width:899px){.cat-about ul.ca-tips{grid-template-columns:1fr}}
