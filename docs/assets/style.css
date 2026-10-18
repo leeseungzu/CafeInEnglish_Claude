@@ -2227,3 +2227,5 @@ html.is-app .app-seg{border-radius:14px;margin:28px 0 0}
 html.is-app .app-seg a{padding:0;height:40px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:400;border-radius:10px}
 html.is-app .app-seg a.on{font-weight:700}
 html.is-app .app-seg+.cat-grid{margin-top:8px!important}
+html.is-app main [data-app]>.wt{display:none}
+html.is-app main [data-app]::after{content:attr(data-app)}

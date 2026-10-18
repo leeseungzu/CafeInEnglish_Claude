@@ -654,6 +654,9 @@ def tabbar(nav):
 # 앱 아래 탭 '영상·문장' 안에서 두 카테고리를 오가는 전환 (앱에서만 보임)
 APP_SEG = lambda cat: ('<div class="app-seg no-print" role="tablist" aria-label="영상·문장">'
                        + "".join(f'<a role="tab" href="/category/{k}/"{" class=on aria-selected=true" if k == cat else ""}>{CATS[k]}</a>' for k in ("video", "think")) + '</div>')
+# 앱에서는 두 카테고리가 '영상·문장' 탭 하나이므로 제목·설명도 묶음 이름으로 (웹·검색엔진에는 원래 제목 그대로)
+APP_HEAD = lambda cat: (f'<h1 data-app="영상·문장"><span class="wt">{CATS[cat]}</span></h1>'
+                        f'<p class="lead" data-app="영상 속 표현과 곱씹을 문장을 한곳에"><span class="wt">{CAT_LEAD[cat]}</span></p>')
 NAV_SHORT = {"video": "영상", "expr": "표현", "tip": "꿀팁", "think": "문장"}  # 휴대폰 위쪽 메뉴는 짧은 이름 (앱 탭과 같게)
 
 
@@ -1242,7 +1245,7 @@ def page_category(cat):
         who = [t.get("theme") or "기타" for t in THINKS]  # 주제(겸손·관계·흔들릴 때 …) — 새 글마다 content/think/*.json 의 "theme"
         cards = "".join(think_card(t, 2).replace(' href=', f' data-sub="{e(w)}" href=', 1) for t, w in zip(THINKS, who))
         filt = one_filter("주제", sorted(who, key=["겸손", "관계", "흔들릴 때"].index if all(w in ["겸손", "관계", "흔들릴 때"] for w in who) else None))
-        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>' + APP_SEG(cat) +
+        body = (APP_HEAD(cat) + APP_SEG(cat) +
                 f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     elif cat == "video":
         items = [p for p in POSTS if p["cat"] == cat]
@@ -1251,7 +1254,7 @@ def page_category(cat):
         cards = "".join(re.sub(r' data-sub="[^"]*"', "", post_card(p, 2), 1).replace(' href=', f' data-sub="{k}" href=', 1) for p, k in zip(items, kinds))
         order = [k for k in ["연설", "인터뷰", "대담", "강의"] if k in kinds]
         filt = one_filter("종류", sorted(kinds, key=order.index))
-        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>' + APP_SEG(cat) +
+        body = (APP_HEAD(cat) + APP_SEG(cat) +
                 f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     else:
         items = [p for p in POSTS if p["cat"] == cat]
