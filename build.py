@@ -1242,7 +1242,7 @@ def page_category(cat):
         who = [t.get("theme") or "기타" for t in THINKS]  # 주제(겸손·관계·흔들릴 때 …) — 새 글마다 content/think/*.json 의 "theme"
         cards = "".join(think_card(t, 2).replace(' href=', f' data-sub="{e(w)}" href=', 1) for t, w in zip(THINKS, who))
         filt = one_filter("주제", sorted(who, key=["겸손", "관계", "흔들릴 때"].index if all(w in ["겸손", "관계", "흔들릴 때"] for w in who) else None))
-        body = (APP_SEG(cat) + f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>'
+        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>' + APP_SEG(cat) +
                 f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     elif cat == "video":
         items = [p for p in POSTS if p["cat"] == cat]
@@ -1251,7 +1251,7 @@ def page_category(cat):
         cards = "".join(re.sub(r' data-sub="[^"]*"', "", post_card(p, 2), 1).replace(' href=', f' data-sub="{k}" href=', 1) for p, k in zip(items, kinds))
         order = [k for k in ["연설", "인터뷰", "대담", "강의"] if k in kinds]
         filt = one_filter("종류", sorted(kinds, key=order.index))
-        body = (APP_SEG(cat) + f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>'
+        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>' + APP_SEG(cat) +
                 f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     else:
         items = [p for p in POSTS if p["cat"] == cat]

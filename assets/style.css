@@ -2222,3 +2222,8 @@ html.is-app .app-seg a.on{background:#fff;color:#191F28;box-shadow:0 1px 3px rgb
 .rv-a .rt-spk,.rt-reveal .rt-spk{background:#fff}
 .rt-reveal{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .rt-reveal:has(>.rt-spk){flex-wrap:nowrap;justify-content:space-between}.rt-reveal:has(>.rt-spk) b{width:auto;flex:1;min-width:0}
+/* 앱 '영상·문장' 전환: 영어표현의 난이도 전환과 같은 자리·크기·굵기 (제목·설명 아래, 칩 위) */
+html.is-app .app-seg{border-radius:14px;margin:28px 0 0}
+html.is-app .app-seg a{padding:0;height:40px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:400;border-radius:10px}
+html.is-app .app-seg a.on{font-weight:700}
+html.is-app .app-seg+.cat-grid{margin-top:8px!important}

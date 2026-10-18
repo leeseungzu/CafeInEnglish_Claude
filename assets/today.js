@@ -189,7 +189,7 @@ ${S.src !== "daily" ? `<div class="rt-goals">${SRCS.map(g => `<button type="butt
 ${n ? '<button type="button" class="rt-again" data-act="again">↻ 처음부터 한 번 더 연습하기</button>' : ""}
 </section>
 ${rvBlock()}</div>`;
-    if (logRoot) logRoot.innerHTML = `<div class="lg-sum"><div><b>${S.stamps.length}</b><span>찍은 도장</span></div><div><b>${st}<em>일</em></b><span>연속 공부</span></div><div><b>${said.length}</b><span>말해 본 문장</span></div></div>
+    if (logRoot) logRoot.innerHTML = `<div class="lg-sum"><div><b>${S.stamps.length}<em>개</em></b><span>찍은 도장</span></div><div><b>${st}<em>일</em></b><span>연속 공부</span></div><div><b>${said.length}<em>개</em></b><span>말해 본 문장</span></div></div>
 <h2 class="rt-h">말해 본 문장 <small>${said.length}개</small></h2>
 ${said.length ? '<div class="acts rt-said">' + said.slice(0, saidAll ? 30 : 3).map(x => `<button type="button" class="act" data-play="${x.a}"><span class="act-ic">▶</span><span class="act-t"><b>${esc(x.en)}</b><small>${esc(x.ko)} · ${ago(x.d) ? ago(x.d) + "일 전" : "오늘"}</small></span></button>`).join("") + (said.length > 3 ? `<button type="button" class="rt-more" data-said="1">${saidAll ? "접기" : "전체 보기 · " + said.length + "개"}</button>` : "") + "</div>" : '<p class="rt-sub">루틴에서 듣고 말해 본 문장이 여기에 모여요.</p>'}
 ${installCard()}`;
