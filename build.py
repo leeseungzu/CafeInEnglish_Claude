@@ -1673,9 +1673,7 @@ def _about_acts():
     items = [("headphone", "영상으로 배우기", "셀럽 인터뷰·연설 장면을 구간별로 듣고 3번 반복", "/category/video/"),
              ("speech-balloon", "영어표현 · 영어꿀팁", "새 표현, 헷갈리는 표현, 생활 회화 요령", "/category/expr/"),
              ("world-map", "여행영어 무료 PDF", "공항부터 호텔까지 10가지 상황 · 7일 플랜", "/travel/"),
-             ("check", "퀴즈와 내 공부방", "틀린 문제는 모였다가, 다시 맞히면 졸업", "/notes/"),
-             ("light-bulb", "사유의 문장", "마음에 남는 문장을 따라 쓰고 빈칸으로 떠올리기", "/category/think/"),
-             ("page", "출력해서 복습하기", "글마다 A4 복습지, QR로 발음 다시 듣기", None)]
+             ("check", "퀴즈와 내 공부방", "틀린 문제는 모였다가, 다시 맞히면 졸업", "/notes/")]
     out = ""
     for ic, t, sub, href in items:
         out += act_row(icon_img(ic, "act-img"), e(t), e(sub), href=href, cls="about-act") if href else (
@@ -1709,14 +1707,20 @@ def _about_kakao():
             '<div class="tv-kk-bub">오늘의 한 잔<b>I\'m on it.</b>바로 할게요</div></div></div>')
 
 ABOUT_CARD = _about_card()
+def _audio_n():
+    try:
+        return len(json.loads((Path(__file__).resolve().parent / "audio" / "index.json").read_text("utf-8")))
+    except Exception:
+        return 0
+_ig = SITE.get("instagram"); _yt = SITE.get("youtube")
 ABOUT = f"""
-<p class="about-tag">매일 조금씩, 깊게 스며드는 CafeInEnglish</p>
-<p>안녕하세요, 유튜브 <b>카페인영어 CafeInEnglish</b>예요.</p>
-<p>저도 한국에서 영어를 배운 평범한 학생이었어요. 외우고, 시험 보고, 취업을 위해 점수를 만들고. 그렇게 오랫동안 영어를 '공부'해 왔는데, 어느 날 돌아보니 제게 남은 건 점수였지 언어가 아니더라고요.</p>
-<p>그때부터 진짜 영어를 하고 싶어졌어요. 문법 문제가 아니라, 사람들이 실제로 쓰는 말로 생각하고 이야기하는 영어요.</p>
-<p>저는 지금 낯선 곳에서의 새로운 도전을 준비하고 있어요. 그 과정에서 느끼는 건, 영어는 결국 <b>생각을 넓혀주는 도구</b>라는 거예요. 새로운 언어로 세상을 보면, 보이는 것도 달라지니까요.</p>
-<p>카페인영어는 그 여정을 기록하고 나누는 공간이에요. 셀럽 인터뷰와 연설 속 살아있는 표현으로 매일 조금씩, 하지만 깊게. 영어라는 언어로 생각을 넓히면서 같이 성장해요. <b>재미있게, 그리고 쉽게!</b></p>
-<div class="brand-c"><img src="/assets/icon-192.png" alt="" width="64" height="64"><div><b>C.</b> 매일 한 잔의 커피처럼, 대화 속 진짜 영어를 꾸준히.<br><span>오늘의 한 문장에 마침표를 찍는 곳, CafeInEnglish.</span></div></div>
+<div class="abh"><span class="k">ABOUT CAFEINENGLISH</span><h2>영상으로 배우는 <em>진짜 영어표현</em>,<br>하루 5분</h2>
+<p>인터뷰와 연설 속 원어민의 말을 장면으로 듣고, 뜻과 뉘앙스를 해설하고, 퀴즈와 복습으로 내 것으로 만드는 곳이에요. 가입 없이 무료예요.</p>
+<div class="abs"><div><b>1만+</b><span>유튜브 구독자</span></div><div><b>{len(POSTS)}편</b><span>해설 글</span></div><div><b>{_audio_n()}개</b><span>예문 음성</span></div></div></div>
+<h2>카페인영어를 만든 이유</h2>
+<p>저도 한국에서 영어를 배운 평범한 학생이었어요. 외우고, 시험 보고, 점수를 만들면서 오랫동안 영어를 '공부'해 왔는데, 돌아보니 남은 건 점수였지 언어가 아니더라고요.</p>
+<p>그래서 사람들이 실제로 쓰는 말로 생각하고 이야기하는 영어를 하고 싶어졌어요. 카페인영어는 그 여정을 기록하고 나누는 공간이에요. 매일 조금씩, 하지만 깊게. <b>재미있게, 그리고 쉽게!</b></p>
+<div class="abq"><img src="/assets/icon-192.png" alt="" width="52" height="52"><div><b>매일 한 잔의 커피처럼, 대화 속 진짜 영어를 꾸준히.</b><span>오늘의 한 문장에 마침표를 찍는 곳, CafeInEnglish.</span></div></div>
 <h2>이런 걸 할 수 있어요</h2>
 <div class="about-acts">{_about_acts()}</div>
 <h2>아티클 시리즈</h2>
@@ -1725,11 +1729,14 @@ ABOUT = f"""
 <h2>콘텐츠는 이렇게 만들어요</h2>
 <p class="about-sub">믿고 공부할 수 있도록, 글을 만들 때 지키는 원칙이에요.</p>
 <div class="ab-prin">
-<div><b>실제로 쓰이는 표현만</b><span>영상·인터뷰·사전의 실제 용례로 확인한 표현만 골라요. 시험용 문장보다 대화에서 들리는 말을 우선해요.</span></div>
-<div><b>인용은 짧게, 해설은 길게</b><span>영상 속 문장은 필요한 만큼만 짧게 인용하고, 왜 그 표현을 썼는지와 내가 쓸 때의 팁을 직접 풀어 써요. 출처는 글 끝에 밝혀요.</span></div>
-<div><b>예문과 음성</b><span>예문은 직접 작성하고, 듣기 음성은 원어민 억양의 AI 음성 합성으로 만들었어요. 실제 장면은 영상 구간 듣기로 원본 목소리를 들을 수 있어요.</span></div>
-<div><b>틀리면 고쳐요</b><span>잘못된 설명이나 어색한 예문을 발견하면 <a href="/contact/">문의</a>로 알려 주세요. 확인 후 고치고, 고친 글에는 수정일을 표시해요.</span></div>
+<div><b>실제로 쓰이는 표현만</b><span>영상·인터뷰·사전에서 실제로 쓰인 표현만 골라요.</span></div>
+<div><b>인용은 짧게, 해설은 길게</b><span>원문은 짧게 인용하고, 쓰임과 팁은 직접 풀어 써요.</span></div>
+<div><b>예문과 음성</b><span>예문은 직접 쓰고, 음성은 원어민 억양의 AI 음성이에요.</span></div>
+<div><b>틀리면 고쳐요</b><span>오류는 <a href="/contact/">문의</a>로 알려 주세요. 고친 글엔 수정일을 남겨요.</span></div>
 </div>
+<h2>운영자</h2>
+<div class="abo"><img src="/assets/icon-192.png" alt="" width="56" height="56"><div><b>카영 스터디언</b><small>유튜브 카페인영어 운영 · 2026년 9월부터 사이트 운영<br>오류 제보와 제안은 언제든 환영해요.</small>
+<div class="lk"><a href="/contact/">문의하기</a>{f'<a href="{e(_yt)}" target="_blank" rel="noopener">유튜브</a>' if _yt else ""}{f'<a href="{e(_ig)}" target="_blank" rel="noopener">인스타그램</a>' if _ig else ""}</div></div></div>
 {_about_kakao()}
 """
 PRIVACY = f"""
