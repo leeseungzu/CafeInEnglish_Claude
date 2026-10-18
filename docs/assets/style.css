@@ -2128,3 +2128,12 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
   .sf-b[data-sub=""],.sf-b[data-lv=""]{margin-bottom:6px;position:relative}
   .sf-b[data-sub=""]::after,.sf-b[data-lv=""]::after{content:"";position:absolute;left:6px;right:6px;bottom:-4px;height:1px;background:rgba(0,0,0,.07)}
 }
+/* 필터: 개수는 다른 조건 반영해 갱신, 0개는 흐리게 / PC는 그룹마다 따로 카드 + 작은 회색 머리글 */
+.sf-b.zero{opacity:.35}
+@media (min-width:900px){
+  .subfilter{background:none!important;padding:0!important;display:flex;flex-direction:column;gap:12px}
+  .subfilter .sf-g{background:var(--soft);border-radius:20px;padding:18px 16px 12px!important;margin:0!important;border:0!important}
+  .subfilter .sf-g+.sf-g{margin-top:0!important;padding-top:18px!important;border-top:0!important}
+  .subfilter .sf-h{font-size:12.5px!important;font-weight:800;letter-spacing:.04em;color:#8B95A1!important;margin:0 6px 8px!important}
+  .subfilter .sf-empty{margin:0 6px}
+}

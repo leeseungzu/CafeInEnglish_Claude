@@ -564,6 +564,15 @@
       let n = 0;
       $$(".cat-grid .card").forEach(c => { const hide = (!!lv && c.dataset.lv !== lv) || (!!sub && c.dataset.sub !== sub); c.classList.toggle("sf-hide", hide); if (!hide) n++; });
       const em = $(".sf-empty", sf); if (em) em.hidden = n > 0;
+      // 다른 그룹에서 고른 조건을 반영해 개수를 다시 세요 (0개면 흐리게)
+      const cards = $$(".cat-grid .card");
+      $$(".sf-b", sf).forEach(x => {
+        const isLv = x.classList.contains("sf-lv");
+        const c = cards.filter(cd => isLv ? ((!x.dataset.lv || cd.dataset.lv === x.dataset.lv) && (!sub || cd.dataset.sub === sub))
+                                          : ((!x.dataset.sub || cd.dataset.sub === x.dataset.sub) && (!lv || cd.dataset.lv === lv))).length;
+        const e2 = x.querySelector("em"); if (e2) e2.textContent = c;
+        x.classList.toggle("zero", c === 0);
+      });
     };
     if (!$$(".sf-b.sf-lv", sf).some(x => x.dataset.lv === lv)) lv = "";
     sf.addEventListener("click", e => {
