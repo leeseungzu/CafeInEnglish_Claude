@@ -28,11 +28,11 @@ CAT_SEO = {  # 카테고리 페이지 검색용 제목 · 설명
     "think": ("영어 명언 필사 - 사유의 문장, 연설과 인터뷰 속 영어 문장",
               "손흥민, 젠슨 황, 순다르 피차이의 영어 연설과 인터뷰 속 곱씹을 문장을 영상으로 듣고, 따라 쓰고, 빈칸으로 다시 떠올려 보세요."),
 }
-CAT_LEAD = {
-    "video": "카페인영어 영상 한 편에서 표현을 뽑아 정리하고, 퀴즈로 확인해요",
-    "expr": "새 표현 · 비슷한 표현 · 헷갈리는 표현을 연상법과 퀴즈로",
-    "tip": "여행 · 회화 · 단어 · 듣기 · 발음, 바로 써먹는 영어 꿀팁",
-    "think": "영상 속 곱씹을 문장을 필사하고, 빈칸으로 다시 떠올려 보세요",
+CAT_LEAD = {  # 휴대폰(360px)에서도 한 줄에 들어가게 짧게
+    "video": "영상 속 표현을 장면과 함께 배워요",
+    "expr": "원어민이 매일 쓰는 표현, 뉘앙스까지",
+    "tip": "여행·발음·듣기, 바로 써먹는 영어 팁",
+    "think": "곱씹을 문장을 듣고, 쓰고, 떠올려요",
 }
 e = lambda s: html.escape(str(s), quote=True)
 
@@ -1287,7 +1287,7 @@ def page_series(sr):
     items = [POST_BY_ID[i] for i in sr["posts"] if i in POST_BY_ID]
     cards = "".join(post_card(p, 2) for p in items) + "".join(think_card(THINK_BY_ID[i], 2) for i in sr.get("thinks", []) if i in THINK_BY_ID)
     sn = sr.get("notice") or (TRAVEL_NOTICE if sr["id"] == "travel" else None)
-    body = (f'<div class="chips"><span class="chip">아티클 시리즈</span></div><h1>{e(sr["title"])}</h1><p class="lead">{e(sr["desc"])}</p>'
+    body = (f'<div class="chips"><span class="chip">아티클 시리즈</span></div><h1>{e(sr["title"])}</h1><p class="lead">{e(sr.get("lead") or sr["desc"])}</p>'
             + (notice_html(sn) if sn else "") +
             f'<div class="cat-grid"><div class="cards list">{cards}</div></div>' + SERIES_ABOUT.get(sr["id"], ""))
     ld = [{"@type": "CollectionPage", "name": sr["title"], "description": sr["desc"], "url": DOMAIN + url, "inLanguage": "ko"},
