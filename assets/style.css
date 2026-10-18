@@ -2082,3 +2082,31 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
 .ca-tips li b{display:block;font-size:12.5px!important;color:#8B95A1!important;font-weight:700;margin:0 0 2px!important}
 .ca-tips li span{font-size:14.5px;color:#191F28;font-weight:600}
 @media (max-width:899px){.cat-about ul.ca-tips{grid-template-columns:1fr}}
+/* 홈 '오늘의 한 잔 · 복습' 카드 (PC: 나란히 흰 카드 2개, 에스프레소는 진행 링·막대에만) */
+.gp-me .gp-sw2,.gp-me .gp-bar,.gp-me .gp-cnt{display:none}
+.gp-me .gp-cm{display:none}
+@media (max-width:600px){
+  .gp-me .gp-cm{display:inline}
+  .gp-me small .gp-sw::before{content:"·"}
+}
+@media (min-width:601px){
+  .pc-band .hm2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 24px}
+  .pc-band .hm2.one{grid-template-columns:1fr}
+  .pc-band .hm2 #gp{margin:0!important;display:block!important}
+  .pc-band .gp-me{display:grid!important;grid-template-columns:48px minmax(0,1fr) auto;grid-template-areas:"ring t sw" "bar bar bar" "cnt cnt go";column-gap:14px;row-gap:16px;align-items:center;background:#fff!important;border:0!important;border-radius:22px!important;padding:22px 24px!important;height:100%;box-sizing:border-box}
+  .pc-band .gp-me .gp-ring{grid-area:ring}
+  .pc-band .gp-me .gp-t{grid-area:t}
+  .pc-band .gp-me .gp-t b{font-size:17px}
+  .pc-band .gp-me small .gp-sw{display:none!important}
+  .pc-band .gp-me .gp-sw2{display:inline-flex!important;grid-area:sw;align-self:start;margin:0!important;font-size:13px;font-weight:600;color:#4E5968;background:#F7F8FA;border-radius:999px;padding:6px 12px;text-decoration:none;white-space:nowrap}
+  .pc-band .gp-me .gp-sw2::before{content:none!important}
+  @media (hover:hover){.pc-band .gp-me .gp-sw2:hover{background:#EEF0F2;color:#191F28}}
+  .pc-band .gp-me .gp-bar{display:block;grid-area:bar;height:6px;border-radius:3px;background:#F2F4F6;overflow:hidden}
+  .pc-band .gp-me .gp-bar i{display:block;height:100%;background:#2A1A12;border-radius:3px}
+  .pc-band .gp-me .gp-bar.gp-bar-rv{height:1px;background:#F2F4F6;margin:2px 0}
+  .pc-band .gp-me .gp-cnt{display:block;grid-area:cnt;font-size:12.5px;color:#8B95A1}
+  .pc-band .gp-me .gp-go{grid-area:go;margin:0!important;min-width:0!important;background:#F2F4F6!important;color:#191F28!important}
+  .pc-band .gp-me:hover .gp-go{background:#2A1A12!important;color:#fff!important}
+  .pc-band .gp-rvic{background:#F2F4F6!important;color:#2A1A12!important}
+  .pc-band .gp-rvic .trk circle{stroke:#E5E8EB}
+}

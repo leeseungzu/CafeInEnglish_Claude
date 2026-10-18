@@ -65,9 +65,9 @@
     const doneToday = p.day === todayKey && p.done;
     const C2 = 2 * Math.PI * 19, arc = Math.max(pct, p.n ? 4 : 0) / 100 * C2;
     const ring = `<span class="gp-ring${doneToday ? " done" : ""}" aria-hidden="true"><svg viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="19" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="4"/><circle cx="22" cy="22" r="19" fill="none" stroke="#CDEB5B" stroke-width="4" stroke-linecap="round" stroke-dasharray="${arc.toFixed(1)} ${C2.toFixed(1)}" transform="rotate(-90 22 22)"/></svg>${doneToday ? '<svg class="ck" viewBox="0 0 24 24" width="18" height="18"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>' : "<b>" + p.n + "</b>"}</span>`;
-    gp.innerHTML = `<a class="gp-me" href="/notes/#routine">${ring}<span class="gp-t"><span class="gp-top"><b>${esc(p.name)}${p.streak ? " · 연속 " + p.streak + "일" : ""}</b></span><small><span class="gp-pre">${doneToday ? "오늘 도장 완료 · " : "오늘 말할 문장이 기다려요 · "}</span>${p.t}개 중 ${p.n}개 말해 봄<span class="gp-sw" role="button" tabindex="0">다른 목표 고르기</span></small></span><span class="gp-go">${doneToday ? "기록 보기 ✓" : p.n ? "이어서 말하기 →" : "첫 문장 시작 →"}</span></a>`;
+    gp.innerHTML = `<a class="gp-me" href="/notes/#routine">${ring}<span class="gp-t"><span class="gp-top"><b>${esc(p.name)}${p.streak ? " · 연속 " + p.streak + "일" : ""}</b></span><small><span class="gp-pre">${doneToday ? "오늘 도장 완료" : "오늘 말할 문장이 기다려요"}</span><span class="gp-cm">${p.t}개 중 ${p.n}개 말해 봄</span><span class="gp-sw" role="button" tabindex="0">다른 목표 고르기</span></small></span><span class="gp-sw gp-sw2" role="button" tabindex="0">목표 바꾸기 ⇄</span><span class="gp-bar"><i style="width:${Math.max(pct, p.n ? 3 : 0)}%"></i></span><span class="gp-cnt">${p.t}개 중 ${p.n}개 말해 봄</span><span class="gp-go">${doneToday ? "기록 보기 ✓" : p.n ? "이어서 말하기 →" : "첫 문장 시작 →"}</span></a>`;
     const html0 = gp.dataset.orig;
-    const swGo = e => { e.preventDefault(); e.stopPropagation(); location.href = "/#gp"; gp.outerHTML = window.__gpOrig; };
+    const swGo = e => { e.preventDefault(); e.stopPropagation(); const w = gp.closest(".hm2"); if (w) w.classList.add("one"); location.href = "/#gp"; gp.outerHTML = window.__gpOrig; };
     $$(".gp-sw", gp).forEach(s => { s.onclick = swGo; s.onkeydown = e => { if (e.key === "Enter" || e.key === " ") swGo(e); }; });  // 카드(링크) 안에 있어도 이동 대신 목표 고르기로
   })();
   setTimeout(routineDot, 0);
@@ -769,12 +769,11 @@
     // 루틴 카드(.gp-me)와 같은 모양·같은 폭으로: 왼쪽 48px 원(크림+복습 아이콘) · 제목/설명 · 오른쪽 버튼
     const a = document.createElement("a"); a.className = "gp-me pc-rv"; a.href = "/notes/#review";
     a.innerHTML = '<span class="gp-ring gp-rvic" aria-hidden="true"><svg class="trk" viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="19" fill="none" stroke="#E6DCCD" stroke-width="4"/></svg><svg class="ic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></span>'
-      + '<span class="gp-t"><b>오늘의 복습 ' + due + '개</b><small>잊을 즈음 다시 꺼내면 오래 남아요 · 1일 → 3일 → 7일</small></span><span class="gp-go">복습하기 →</span>';
+      + '<span class="gp-t"><b>오늘의 복습 ' + due + '개</b><small>잊을 즈음 다시 꺼내면 오래 남아요</small></span><span class="gp-bar gp-bar-rv"></span><span class="gp-cnt">1일 → 3일 → 7일 간격</span><span class="gp-go">복습하기 →</span>';
     a.addEventListener("click", () => ga("review_home_click", { n: due, from: "pc" }));
     const gpEl = document.querySelector(".pc-band #gp");
     if (gpEl && gpEl.querySelector(".gp-me")) {
-      const w = document.createElement("div"); w.className = "pc-rv-w"; w.appendChild(a);
-      gpEl.after(w);  // 루틴 카드 바로 아래, 같은 폭
+      const w = document.createElement("div"); w.className = "hm2"; gpEl.before(w); w.append(gpEl, a);  // 루틴 · 복습 나란히 두 카드
     } else hi.after(a);
   })();
 
