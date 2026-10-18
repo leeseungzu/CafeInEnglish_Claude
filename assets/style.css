@@ -2021,3 +2021,22 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
 .ab-prin div{background:#FBF7F2;border-radius:18px;padding:16px 18px}
 .ab-prin b{display:block;font-size:15.5px;color:#2A1A12;margin-bottom:4px}
 .ab-prin span{font-size:14.5px;line-height:1.65;color:#4E5968}
+/* 소개 페이지 원칙: 무거운 크림 상자 대신 번호 목록 (앞뒤 카드들과 충돌 없이) */
+.ab-prin{display:block!important;margin:6px 0 36px;counter-reset:abp}
+.ab-prin div{background:none!important;border-radius:0!important;padding:16px 0 16px 46px!important;border-top:1px solid #EEF0F2;position:relative}
+.ab-prin div:last-child{border-bottom:1px solid #EEF0F2}
+.ab-prin b{font-size:16px!important;color:#191F28!important}
+.ab-prin b{counter-increment:abp}
+.ab-prin div::before{counter-increment:none;content:"";position:absolute;left:0;top:16px;width:30px;height:30px;border-radius:50%;background:#2A1A12}
+.ab-prin div:nth-child(1)::after,.ab-prin div:nth-child(2)::after,.ab-prin div:nth-child(3)::after,.ab-prin div:nth-child(4)::after{position:absolute;left:0;top:16px;width:30px;height:30px;line-height:30px;text-align:center;color:#CDEB5B;font-weight:800;font-size:14px}
+.ab-prin div:nth-child(1)::after{content:"1"}.ab-prin div:nth-child(2)::after{content:"2"}.ab-prin div:nth-child(3)::after{content:"3"}.ab-prin div:nth-child(4)::after{content:"4"}
+/* 목록 소개글: 팁은 '라벨 위 · 설명 아래'로 정렬, PC는 왼쪽 설명 + 오른쪽 팁 2단 */
+.cat-about li b{display:block;font-size:13px;color:#8B6F5A;margin:0 0 2px!important;letter-spacing:.01em}
+.cat-about li{padding:11px 0!important}
+@media (min-width:900px){
+  .cat-about{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);column-gap:48px;align-items:start;padding:32px 36px!important}
+  .cat-about h2,.cat-about p{grid-column:1}
+  .cat-about p:last-of-type{margin-bottom:0}
+  .cat-about ul{grid-column:2;grid-row:1/span 4;margin:0;background:#fff;border-radius:16px;padding:6px 20px}
+  .cat-about li:first-child{border-top:0}
+}
