@@ -2110,3 +2110,8 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
   .pc-band .gp-rvic{background:#F2F4F6!important;color:#2A1A12!important}
   .pc-band .gp-rvic .trk circle{stroke:#E5E8EB}
 }
+/* 본문 속 글 링크: 굵은 에스프레소 글씨 + 라임 밑줄 + 화살표 → 링크인지 한눈에 */
+.pb p a[href^="/p/"],.pb li a[href^="/p/"],.pb td a[href^="/p/"]{font-weight:700;color:#2A1A12;text-decoration:underline;text-decoration-color:#CDEB5B;text-decoration-thickness:3px;text-underline-offset:3px;text-decoration-skip-ink:none;border-radius:4px;transition:background .15s}
+.pb p a[href^="/p/"]::after,.pb li a[href^="/p/"]::after,.pb td a[href^="/p/"]::after{content:" ↗";font-size:.82em;font-weight:800;color:#8B6F5A}
+@media (hover:hover){.pb p a[href^="/p/"]:hover,.pb li a[href^="/p/"]:hover,.pb td a[href^="/p/"]:hover{background:#F3FADB}}
+@media print{.pb a[href^="/p/"]::after{content:none}}
