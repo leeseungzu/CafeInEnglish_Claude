@@ -187,14 +187,19 @@
             <div class="why">${esc(d.explain)}</div>
             <div class="memo"><b class="lbl">연상법</b> ${esc(d.mnemonic)}</div>
           </details>
-          <a class="src" href="${d.postUrl}">원래 글 다시 보기 · ${esc(d.postTitle)}</a>
+          <a class="src" href="${d.postUrl}">원래 글 다시 보기${d.postTitle || d.title ? " · " + esc(d.postTitle || d.title) : ""}</a>
         </div>`; }).join("")}</div>
       <button class="btn danger clear">오답노트 전체 비우기</button>`;
     $(".retry", root).onclick = () => {
       $(".retry", root).hidden = true; $(".note-list", root).hidden = true;
       runQuiz($(".review", root), ids.map(id => ({ id, ...data[id] })), { mode: "review" });
     };
-    $(".clear", root).onclick = () => { wrong.clear(); updateBadge(); renderNotes(root); toast("오답노트를 비웠어요"); };
+    // 실수로 다 지우지 않게: 한 번 누르면 확인 문구로 바뀌고, 3초 안에 한 번 더 눌러야 비워져요
+    const clr = $(".clear", root); let armed = 0;
+    clr.onclick = () => {
+      if (!armed) { armed = setTimeout(() => { armed = 0; clr.classList.remove("armed"); clr.textContent = "오답노트 전체 비우기"; }, 3000); clr.classList.add("armed"); clr.textContent = `정말 ${ids.length}문제를 다 지울까요? 한 번 더 누르면 비워져요`; return; }
+      clearTimeout(armed); wrong.clear(); updateBadge(); renderNotes(root); toast("오답노트를 비웠어요");
+    };
   }
 
   /* ---------- 사유의 문장: 필사 · 빈칸 복기 · 나의 한 줄 ---------- */
@@ -805,7 +810,7 @@
       if (isIn()) doneUI(false);
       kc.querySelector(".ec-b").addEventListener("click", () => {
         const s = st(); s.srs = s.srs || {}; let n = 0;
-        KL.forEach(x => { if (!s.srs[x.en]) { s.srs[x.en] = { st: 0, due: DAY + 1, en: x.en, ko: x.ko, a: x.a || "", p: location.pathname }; n++; } });
+        KL.forEach(x => { if (!s.srs[x.en]) { s.srs[x.en] = { st: 0, due: DAY + 1, en: x.en, ko: x.ko, a: x.a || "", p: location.pathname, t: (document.querySelector("h1")?.textContent || "").trim().slice(0, 40), at: DAY }; n++; } });
         put("ky_today_v1", s); ga("review_keep", { n: n }); doneUI(true);
       });
     }

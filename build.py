@@ -1640,13 +1640,17 @@ BACKUP_HTML = ('<section class="bk no-print" id="backup"><h2 class="nb-h">기록
 def page_notes():
     pool = today_pool()
     goals = [{**{k: g[k] for k in ("id", "name", "short")}, "icon": f'/assets/icons/{g["icon"]}.webp?v={ASSET_V}'} for g in TODAY_GOALS if pool.get(g["id"])]
-    body = ('<h1>내 공부방</h1><p class="lead">오늘의 한 잔부터 오답노트까지, 내 공부가 여기 다 모여요. '
-            '기록은 이 기기의 브라우저에만 저장돼요.</p>'
-            + NB_APP +
-            '<div class="nb-band"><div id="today-app"></div>'
-            '<h2 id="wrong" class="nb-h">오답노트 <small>다시 풀어서 맞히면 \'졸업\'해요</small></h2><div id="notes-root"></div>'
-            '<h2 id="copy" class="nb-h">필사 노트 <small><span id="copy-count">0</span>개</small></h2><div id="copy-notes"></div>'
-            + BACKUP_HTML + '</div>'
+    ON = ' class="on"'
+    tabs = [("today", "오늘", ""), ("wrong", "오답노트", '<i class="js-tn-w"></i>'), ("copy", "필사 노트", '<i class="js-tn-c"></i>'), ("log", "기록", "")]
+    body = ('<h1>내 공부방</h1>'
+            '<div class="nb-band"><div class="nbt no-print" role="tablist" aria-label="내 공부방">'
+            + "".join(f'<button type="button" role="tab" data-tab="{k}" aria-selected="{"true" if k == "today" else "false"}"{ON if k == "today" else ""}>{t}{c}</button>' for k, t, c in tabs)
+            + '</div>'
+            '<div class="nbp" data-p="today"><div id="today-app"></div></div>'
+            '<div class="nbp" data-p="wrong" id="wrong" hidden><div id="notes-root"></div></div>'
+            '<div class="nbp" data-p="copy" id="copy" hidden><span id="copy-count" hidden>0</span><div id="copy-notes"></div></div>'
+            '<div class="nbp" data-p="log" id="log" hidden>' + NB_APP + '<div id="log-app"></div>'
+            + BACKUP_HTML + '<p class="nb-local">기록은 이 기기의 브라우저에만 저장돼요. 폰을 바꿀 때는 위 백업을 써 주세요.</p></div></div>'
             f'<script src="/assets/today.js?v={ASSET_V}" defer></script>')
     data = {"type": "notes", "kakao": SITE.get("kakao", ""), "daily": daily_routine(), "pool": pool, "goals": goals,
             "cup": f"/assets/icons/hot-beverage.webp?v={ASSET_V}", "phone": f"/assets/icons/mobile-phone.webp?v={ASSET_V}"}

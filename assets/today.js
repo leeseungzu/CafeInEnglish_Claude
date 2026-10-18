@@ -2,6 +2,29 @@
 (function () {
   const root = document.getElementById("today-app");
   if (!root) return;
+  const logRoot = document.getElementById("log-app");
+  // ── 탭: 오늘 · 오답노트 · 필사 노트 · 기록 (주소 #wrong 등으로 바로 열려요) ──
+  const TAB_OF = { routine: "today", review: "today", today: "today", wrong: "wrong", copy: "copy", log: "log", backup: "log" };
+  function tabCounts() {
+    const n = k => { try { return Object.keys(JSON.parse(localStorage.getItem(k)) || {}).length; } catch (e) { return 0; } };
+    const w = n("cafein_wrong_v1"), c = n("cafein_copy_v1");
+    document.querySelectorAll(".js-tn-w").forEach(x => x.textContent = w || "");
+    document.querySelectorAll(".js-tn-c").forEach(x => x.textContent = c || "");
+  }
+  function showTab(t, push) {
+    document.querySelectorAll(".nbt [data-tab]").forEach(b => { const on = b.dataset.tab === t; b.classList.toggle("on", on); b.setAttribute("aria-selected", String(on)); });
+    document.querySelectorAll(".nbp").forEach(p => p.hidden = p.dataset.p !== t);
+    if (push) history.replaceState(null, "", location.pathname + location.search + (t === "today" ? "" : "#" + t));
+    tabCounts();
+  }
+  document.querySelector(".nbt")?.addEventListener("click", ev => {
+    const b = ev.target.closest("[data-tab]"); if (!b) return;
+    showTab(b.dataset.tab, true);
+    const band = document.querySelector(".nb-band"); if (band && band.getBoundingClientRect().top < 0) band.scrollIntoView({ block: "start" });
+    ga("notes_tab", { tab: b.dataset.tab });
+  });
+  document.querySelector(".nb-band")?.addEventListener("click", () => setTimeout(tabCounts, 300));
+  addEventListener("hashchange", () => { const t = TAB_OF[location.hash.slice(1)]; if (t) showTab(t); });
   const D = JSON.parse(document.getElementById("page-data").textContent || "{}");
   const DAILY = D.daily || [], POOL = D.pool || {}, SRCS = D.goals || [], CUP = D.cup || "";
   const KEY = "ky_today_v1";
@@ -60,24 +83,32 @@
   const dnum = d => Math.round(Date.parse(d) / 864e5);
   function srsSync() {
     S.srs = S.srs || {};
-    S.learned.forEach(x => { if (x.en && !S.srs[x.en]) S.srs[x.en] = { st: 0, due: dnum(x.d) + IV[0], en: x.en, ko: x.ko, a: x.a, p: x.p || "" }; });
+    S.learned.forEach(x => { if (x.en && !S.srs[x.en]) S.srs[x.en] = { st: 0, due: dnum(x.d) + IV[0], en: x.en, ko: x.ko, a: x.a, p: x.p || "", from: SRC_NAME[x.src] || "오늘의 한 잔", at: dnum(x.d) }; });
   }
   const dueList = () => Object.values(S.srs || {}).filter(v => v.due <= DAY).sort((a, b) => a.due - b.due || a.st - b.st);
   let rvShow = false, saidAll = false;
+  // 이 문장이 어디서 왔는지: 'I'm down 글에서 · 2일 전에 담았어요'
+  function rvSrc(v) {
+    const from = v.t ? `${esc(v.t)} 글에서` : v.from ? `${esc(v.from)}에서` : "";
+    const d = typeof v.at === "number" ? DAY - v.at : -1;
+    const when = d < 0 ? "" : d === 0 ? "오늘 담았어요" : `${d}일 전에 담았어요`;
+    if (!from && !when) return "";
+    return `<p class="rv-src">${v.t && v.p ? `<a href="${esc(v.p)}">${from}</a>` : from}${from && when ? " · " : ""}${when}</p>`;
+  }
   function rvBlock() {
     const all = Object.values(S.srs || {}); if (!all.length) return "";
     const due = dueList(), v = due[0];
     if (!v) {
       const nx = all.reduce((m, x) => Math.min(m, x.due), 1e9), nn = all.filter(x => x.due === nx).length;
-      return `<section class="rv" id="review"><div class="rv-top"><b>오늘의 복습</b><span class="rv-n done">${all.length}개 담김</span></div><p class="rv-empty">지금 꺼낼 문장은 없어요. ${nx - DAY <= 1 ? "내일" : (nx - DAY) + "일 뒤"} ${nn}개가 찾아와요.</p><p class="rv-tip">잊을 즈음 다시 보면 오래 남아요 · 1일 → 3일 → 7일 → 14일 → 30일</p></section>`;
+      return `<section class="rv" id="review"><div class="rv-top"><b>오늘의 복습</b><span class="rv-n done">${all.length}개 담김</span></div><p class="rv-empty">지금 꺼낼 문장은 없어요. ${nx - DAY <= 1 ? "내일" : (nx - DAY) + "일 뒤"} ${nn}개가 찾아와요.</p><p class="rv-tip">잊을 즈음 다시 보면 오래 남아요 · 1 → 3 → 7 → 14 → 30일 뒤</p></section>`;
     }
     const stg = ["첫", "두 번째", "세 번째", "네 번째", "다섯 번째", "여섯 번째"][v.st] || "다시";
     return `<section class="rv" id="review"><div class="rv-top"><b>오늘의 복습</b><span class="rv-n">${due.length}개 남음</span></div>
-<p class="rv-k">${stg} 복습 · 한국어만 보고 영어로 말해 보세요</p><p class="rv-q">“${esc(v.ko)}”</p>
+<p class="rv-k">${stg} 복습 · 한국어만 보고 영어로 말해 보세요</p><p class="rv-q">“${esc(v.ko)}”</p>${rvSrc(v)}
 ${rvShow ? `<div class="rv-a"><b>${esc(v.en)}</b>${v.a ? `<button type="button" class="rt-b" data-play="${v.a}">▶ 원어민 발음</button>` : ""}</div>
 <div class="rv-btns"><button type="button" class="rv-b" data-rv="again">헷갈려요<small>내일 다시</small></button><button type="button" class="rv-b ok" data-rv="ok">기억났어요<small>${IV[Math.min(v.st + 1, IV.length - 1)]}일 뒤에</small></button></div>`
       : `<button type="button" class="rv-show" data-rv="show">정답 보기</button>`}
-<p class="rv-tip">잊을 즈음 다시 보면 오래 남아요 · 1일 → 3일 → 7일 → 14일 → 30일</p></section>`;
+<p class="rv-tip">잊을 즈음 다시 보면 오래 남아요 · 1 → 3 → 7 → 14 → 30일 뒤</p></section>`;
   }
   function learn(r) {
     if (r.l && r.s && !S.learned.some(x => x.d === TODAY && x.en === r.en)) { S.learned.push({ en: r.en, ko: r.ko, a: r.a, d: TODAY, src: r.src }); }
@@ -123,7 +154,7 @@ ${rvShow ? `<div class="rv-a"><b>${esc(v.en)}</b>${v.a ? `<button type="button" 
     let wk = "", cnt = 0;
     for (let k = 0; k < 7; k++) {
       const s = ymd(mon + k), ok = done(s); if (ok) cnt++;
-      wk += `<div class="rt-dy${ok ? " on" : ""}${s === TODAY ? " td" : ""}"><i>${ok ? `<svg viewBox="0 0 24 24" width="18" height="18" aria-label="완료"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>` : ""}</i>${"월화수목금토일"[k]}</div>`;
+      wk += `<div class="rt-dy${ok ? " on" : ""}${s === TODAY ? " td" : ""}"><i>${ok ? `<svg viewBox="0 0 24 24" width="18" height="18" aria-label="완료"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>` : ""}</i>${s === TODAY ? "오늘" : "월화수목금토일"[k]}</div>`;
     }
     const said = []; { const sn = new Set(); S.learned.slice().reverse().forEach(x => { if (x.en && !sn.has(x.en)) { sn.add(x.en); said.push(x); } }); }
     const st = streak();
@@ -133,8 +164,19 @@ ${rvShow ? `<div class="rv-a"><b>${esc(v.en)}</b>${v.a ? `<button type="button" 
     if (n === 3 && S.stamps.indexOf(TODAY) < 0) S.stamps.push(TODAY);
     if (n === 3 && !r.ga) { r.ga = 1; ga("routine_done", { goal: r.src }); }
     const stamped = done(TODAY);
+    // 이번 주 목표 3잔: 처음 채운 날 한 번 축하
+    const GOAL = 3, met = cnt >= GOAL, cel = met && S.wkCel !== mon;
+    if (cel) { S.wkCel = mon; ga("week_goal", { cups: cnt }); }
     save();
-    root.innerHTML = `<section class="rt-card${open === "s" && !r.s ? " hide-en" : ""}" id="routine">
+    const due = dueList(), srsN = Object.keys(S.srs || {}).length;
+    const left = 3 - n;
+    const heroSub = met ? (cel ? "이번 주 목표를 채웠어요. 정말 꾸준했어요!" : `목표 달성 · 이번 주 ${cnt}잔째 마셨어요`)
+      : stamped ? `오늘 도장 완료 · ${GOAL - cnt}잔 더 마시면 이번 주 목표예요`
+      : `오늘 ${left}가지만 하면 ${cnt + 1}잔째예요`;
+    const hero = `<section class="hx${met ? " met" : ""}${cel ? " cel" : ""}" id="week"><div class="hx-t"><b>${met ? "이번 주 목표 달성" : `이번 주 ${GOAL}잔 중 ${cnt}잔`}</b>${st ? `<span class="hx-f">🔥 ${st}일 연속</span>` : ""}</div>
+<p class="hx-s">${heroSub}</p><div class="hx-ds">${wk}</div>
+<div class="hx-todo"><button type="button" data-go="routine"${n === 3 ? ' class="ok"' : ""}>오늘의 한 잔<span>${n === 3 ? "완료" : `<b>${n}</b>/3`}</span></button><button type="button" data-go="review"${srsN && !due.length ? ' class="ok"' : ""}>오늘의 복습<span>${!srsN ? "아직 없음" : due.length ? `<b>${due.length}</b>개` : "완료"}</span></button></div></section>`;
+    root.innerHTML = `<div class="tdg${rvBlock() ? "" : " norv"}">${hero}<section class="rt-card${open === "s" && !r.s ? " hide-en" : ""}" id="routine">
 <div class="rt-top"><div class="a-kicker">${esc(SRC_NAME[r.src] || "오늘의 한 잔")} · 5분 루틴</div><span class="rt-prog${n === 3 ? " full" : ""}">${n === 3 ? "도장 완료" : (stamped ? "☕ " : "") + n + " / 3"}</span></div>
 <div class="rt-seg" role="tablist" aria-label="연습할 문장 고르기"><button type="button" role="tab" data-src="daily" class="${S.src === "daily" ? "on" : ""}">☕ 오늘의 한 잔</button><button type="button" role="tab" data-seg="sit" class="${S.src !== "daily" ? "on" : ""}">상황별 문장</button></div>
 ${S.src !== "daily" ? `<div class="rt-goals">${SRCS.map(g => `<button type="button" data-src="${g.id}" class="${S.src === g.id ? "on" : ""}">${g.icon ? `<img src="${g.icon}" alt="" width="26" height="26">` : ""}<span>${esc(g.short)}</span></button>`).join("")}</div>` : ""}
@@ -144,11 +186,12 @@ ${S.src !== "daily" ? `<div class="rt-goals">${SRCS.map(g => `<button type="butt
 <p class="rt-hint">${n === 3 ? `<b class="lbl">쾅!</b> 오늘 도장을 찍었어요. ${st > 1 ? "연속 " + st + "일째예요." : "내일 또 만나요."}` : stamped ? '<b class="lbl">도장</b> 오늘 도장은 이미 찍혔어요. 편하게 한 번 더 연습해요' : '<b class="lbl">도장</b> 듣기·말하기·복습을 다 하면 오늘 도장이 찍혀요'}</p>
 ${n ? '<button type="button" class="rt-again" data-act="again">↻ 처음부터 한 번 더 연습하기</button>' : ""}
 </section>
-${rvBlock()}
-<h2 class="rt-h">이번 주 한 잔 도장 <small>${st ? "연속 " + st + "일 · " : ""}이번 주 ${cnt}잔</small></h2><div class="rt-week">${wk}</div>
+${rvBlock()}</div>`;
+    if (logRoot) logRoot.innerHTML = `<div class="lg-sum"><div><b>${S.stamps.length}</b><span>찍은 도장</span></div><div><b>${st}<em>일</em></b><span>연속 공부</span></div><div><b>${said.length}</b><span>말해 본 문장</span></div></div>
 <h2 class="rt-h">말해 본 문장 <small>${said.length}개</small></h2>
 ${said.length ? '<div class="acts rt-said">' + said.slice(0, saidAll ? 30 : 3).map(x => `<button type="button" class="act" data-play="${x.a}"><span class="act-ic">▶</span><span class="act-t"><b>${esc(x.en)}</b><small>${esc(x.ko)} · ${ago(x.d) ? ago(x.d) + "일 전" : "오늘"}</small></span></button>`).join("") + (said.length > 3 ? `<button type="button" class="rt-more" data-said="1">${saidAll ? "접기" : "전체 보기 · " + said.length + "개"}</button>` : "") + "</div>" : '<p class="rt-sub">루틴에서 듣고 말해 본 문장이 여기에 모여요.</p>'}
 ${installCard()}`;
+    tabCounts();
     document.dispatchEvent(new Event("ky-routine"));
   }
   let deferred = null;
@@ -170,9 +213,10 @@ ${installCard()}`;
 <div class="rt-in-tabs"><button data-guide="ios" class="${g === "ios" ? "on" : ""}">아이폰</button><button data-guide="android" class="${g === "android" ? "on" : ""}">안드로이드</button>${deferred && !inapp ? `<button class="rt-in-go" data-act="install">${mobile ? "홈 화면에 추가하기" : "PC 홈 화면 추가"}</button>` : ""}</div>
 <ol class="rt-in-steps">${steps.map(([t, d]) => `<li><div><strong class="st-t">${t}</strong><span>${d}</span></div></li>`).join("")}</ol></div>`;
   }
-  root.addEventListener("click", ev => {
+  const onClick = ev => {
     const b = ev.target.closest("button"); if (!b) return;
     const r = S.days[TODAY];
+    if (b.dataset.go) { document.getElementById(b.dataset.go)?.scrollIntoView({ block: "start", behavior: "smooth" }); return; }
     if (b.dataset.guide) { guide = b.dataset.guide; render(); return; }
     if (b.dataset.said) { saidAll = !saidAll; render(); return; }
     if (b.dataset.rv) {
@@ -198,7 +242,7 @@ ${installCard()}`;
       const row = b.closest(".rt-said") ? b : null;
       const reset = x => { x.classList.remove("playing"); const i = x.querySelector(".act-ic"); if (i) i.innerHTML = "▶"; x.setAttribute("aria-label", "재생"); };
       if (row && row.classList.contains("playing")) { if (cur) cur.pause(); reset(row); return; }
-      root.querySelectorAll(".rt-said .act.playing").forEach(reset);
+      document.querySelectorAll(".rt-said .act.playing").forEach(reset);
       if (row) { row.classList.add("playing"); row.querySelector(".act-ic").innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>'; row.setAttribute("aria-label", "멈춤"); }
       play(b.dataset.play, 1, 1, () => { if (row) reset(row); });
       return;
@@ -220,7 +264,9 @@ ${installCard()}`;
     }
     if (act === "rec") record(b, r);
     if (act === "install" && deferred) { deferred.prompt(); deferred.userChoice.finally(() => { deferred = null; render(); }); }
-  });
+  };
+  root.addEventListener("click", onClick);
+  if (logRoot) logRoot.addEventListener("click", onClick);
   async function record(b, r) {
     let stream;
     try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); } catch (e) { b.textContent = "마이크를 쓸 수 없어요"; b.disabled = true; return; }
@@ -239,7 +285,8 @@ ${installCard()}`;
     setTimeout(() => b.addEventListener("click", stop), 0);
     setTimeout(stop, 8000);
   }
-  if (/^#(routine|review|wrong|copy|backup)$/.test(location.hash)) setTimeout(() => document.getElementById(location.hash.slice(1))?.scrollIntoView({ block: "start" }), 50);
+  { const h = location.hash.slice(1), t = TAB_OF[h]; if (t && t !== "today") showTab(t);
+    if (/^(routine|review|backup)$/.test(h)) setTimeout(() => document.getElementById(h)?.scrollIntoView({ block: "start" }), 50); }
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
   render();
   // 말하기 도구(app.js)가 늦게 준비되면 한 번 더 그려서 마이크 버튼이 나오게
