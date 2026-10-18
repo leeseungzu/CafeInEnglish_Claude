@@ -2229,3 +2229,11 @@ html.is-app .app-seg a.on{font-weight:700}
 html.is-app .app-seg+.cat-grid{margin-top:8px!important}
 html.is-app main [data-app]>.wt{display:none}
 html.is-app main [data-app]::after{content:attr(data-app)}
+/* 오답노트 숫자 칸 = 기록 탭 요약 칸과 같은 크기·굵기·단위 */
+.nb-band .stat{padding:16px 8px 14px!important;border-radius:20px}
+.nb-band .stat .n{font-size:20px;font-weight:700;color:#191F28;letter-spacing:-.02em;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nb-band .stat .n em{font-style:normal;font-size:14px;color:#8B95A1;margin-left:1px;font-weight:700}
+.nb-band .stat .l{font-size:12px;color:#6B7684;font-weight:400;margin-top:0}
+.lg-sum b{font-weight:700;line-height:1.35}
+.lg-sum b em{font-weight:700}
+.nb-band .stat,.lg-sum div{padding:16px 8px 14px!important;border-radius:20px}.nb-band .stat .n,.lg-sum b{display:block;font-size:20px!important;line-height:27px!important;margin:0!important}.nb-band .stat .l,.lg-sum span{display:block;font-size:12px!important;line-height:18px!important;margin:2px 0 0!important;color:#6B7684}

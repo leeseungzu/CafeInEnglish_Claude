@@ -167,9 +167,9 @@
     const total = ids.reduce((s, id) => s + data[id].count, 0);
     root.innerHTML = `
       <div class="stats">
-        <div class="stat"><div class="n">${ids.length}</div><div class="l">남은 오답</div></div>
-        <div class="stat"><div class="n">${total}</div><div class="l">누적 틀린 횟수</div></div>
-        <div class="stat"><div class="n">${esc(weak)}</div><div class="l">약한 유형</div></div>
+        <div class="stat"><div class="n">${ids.length}<em>개</em></div><div class="l">남은 오답</div></div>
+        <div class="stat"><div class="n">${total}<em>번</em></div><div class="l">누적 틀린 횟수</div></div>
+        <div class="stat"><div class="n n-t">${esc(weak)}</div><div class="l">약한 유형</div></div>
       </div>
       <div class="weak"><b>'${esc(weak)}'</b> 문제를 가장 자주 틀렸어요. ${tagUrl[weak] ? `<a href="${tagUrl[weak]}">관련 글 다시 보기 →</a>` : ""}</div>
       <button class="btn primary retry">오답만 다시 풀기 (${ids.length}문제)</button>
