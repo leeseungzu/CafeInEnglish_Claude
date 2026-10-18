@@ -2121,3 +2121,10 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
   .subfilter.sf-one .sf-g .sf-b{border:1px solid var(--line);border-radius:999px!important;background:#fff;padding:7px 14px;white-space:nowrap;flex:none}
   .subfilter.sf-one .sf-g .sf-b.on{background:#191F28;border-color:#191F28;color:#fff}
 }
+/* 필터는 하나만 고르는 방식 → 체크박스 대신 라디오(동그라미), '전체' 아래 구분선 */
+@media (min-width:900px){
+  .sf-b::before{border-radius:50%!important}
+  .sf-b.on::before{background:#fff!important;border:5px solid #191F28!important;box-sizing:border-box}
+  .sf-b[data-sub=""],.sf-b[data-lv=""]{margin-bottom:6px;position:relative}
+  .sf-b[data-sub=""]::after,.sf-b[data-lv=""]::after{content:"";position:absolute;left:6px;right:6px;bottom:-4px;height:1px;background:rgba(0,0,0,.07)}
+}

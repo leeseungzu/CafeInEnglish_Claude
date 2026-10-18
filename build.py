@@ -1236,9 +1236,9 @@ def page_category(cat):
                 + b("", len(keys), "전체", " on") + "".join(b(k, keys.count(k), k) for k in ks) + '</div><p class="sf-empty" hidden>이 조합의 글은 아직 없어요</p></aside>')
     if cat == "think":
         items = THINKS
-        who = [t["speaker"].split(" · ")[0] for t in THINKS]
+        who = [t.get("theme") or "기타" for t in THINKS]  # 주제(겸손·관계·흔들릴 때 …) — 새 글마다 content/think/*.json 의 "theme"
         cards = "".join(think_card(t, 2).replace(' href=', f' data-sub="{e(w)}" href=', 1) for t, w in zip(THINKS, who))
-        filt = one_filter("인물", who)
+        filt = one_filter("주제", sorted(who, key=["겸손", "관계", "흔들릴 때"].index if all(w in ["겸손", "관계", "흔들릴 때"] for w in who) else None))
         body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>'
                 f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     elif cat == "video":
