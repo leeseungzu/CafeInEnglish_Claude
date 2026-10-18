@@ -222,6 +222,7 @@
       while (i < a.length && j < b.length) { if (a[i] === b[j]) { hit.add(i); i++; j++; } else if (dp[i + 1][j] >= dp[i][j + 1]) i++; else j++; }
       const acc = Math.round(hit.size / a.length * 100), extra = Math.max(0, b.length - hit.size);
       copy.rec(id, snap, c => ({ count: c.count + 1, best: Math.max(c.best, acc) }));
+      try { window.gtag && gtag("event", "copy_done", { acc }); } catch (e) {}
       $(".res", pane).innerHTML = `
         <div class="diff">${src.map((w, k) => `<span class="w ${hit.has(k) ? "hit" : "miss"}">${esc(w)}</span>`).join(" ")}</div>
         <div class="acc">${acc === 100 ? "완벽해요! 필사 노트에 담았어요." : `정확도 ${acc}% · 빨간 단어를 다시 확인해 보세요${extra ? ` (불필요한 단어 ${extra}개)` : ""}`}</div>`;
@@ -244,6 +245,7 @@
     $(".check", pane).onclick = () => {
       let ok = 0;
       inputs.forEach(n => { const g = norm(n.value) === n.dataset.a; n.classList.toggle("ok", g); n.classList.toggle("bad", !g); if (g) ok++; });
+      try { window.gtag && gtag("event", "blank_done", { ok, n: inputs.length }); } catch (e) {}
       $(".res", pane).innerHTML = `<div class="acc">${ok === inputs.length ? "전부 떠올렸어요! 이제 이 문장은 내 거예요." :
         `${inputs.length}개 중 ${ok}개 · 빨간 칸을 다시 떠올려 보세요 (정답: ${inputs.filter(n => !n.classList.contains("ok")).map(n => n.dataset.a).join(", ")})`}</div>`;
     };
@@ -258,7 +260,7 @@
       $$(".tabs button", card).forEach(b => b.onclick = () => { $$(".tabs button", card).forEach(x => x.classList.toggle("on", x === b)); modes[b.dataset.mode](); });
       const note = $("textarea.note", card);
       if (rec[id] && rec[id].note) note.value = rec[id].note;
-      $(".save-note", card).onclick = () => { copy.rec(id, snap, () => ({ note: note.value.trim() })); toast("나의 한 줄을 저장했어요"); };
+      $(".save-note", card).onclick = () => { copy.rec(id, snap, () => ({ note: note.value.trim() })); try { window.gtag && gtag("event", "note_save", { from: "think" }); } catch (e) {} toast("나의 한 줄을 저장했어요"); };
       modes.copy();
       const wb = $(".qwr", card), wr = $(".qwr-b", card);
       if (wb && wr) {
@@ -269,17 +271,64 @@
     });
   }
 
+  // 필사 노트: 한국어 보고 떠올리기 → 눌러서 영어 확인·듣기 → 나의 한 줄 → 복습에 담기 (카드 하나에서)
+  const gaE = (n, p) => { try { window.gtag && gtag("event", n, p || {}); } catch (e) {} };
+  const SPK = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+  const KDAY = () => Math.floor((Date.now() / 1000 + 9 * 3600) / 86400);
+  const tdLoad = () => { try { return JSON.parse(localStorage.getItem("ky_today_v1")) || {}; } catch (e) { return {}; } };
+  const tdSave = v => { try { localStorage.setItem("ky_today_v1", JSON.stringify(v)); } catch (e) {} };
+  let cnOpen = {}, cnEdit = null, cnAudio = null;
   function renderCopyNotes(root) {
     const d = copy.all(), ids = Object.keys(d).sort((a, b) => d[b].at - d[a].at);
     $("#copy-count") && ($("#copy-count").textContent = ids.length);
-    root.innerHTML = ids.length ? ids.map(id => { const r = d[id]; return `
-      <div class="quote">
-        <div class="meta"><span>${esc(r.speaker || "")}</span><span>필사 ${r.count || 0}회 · 최고 ${r.best || 0}%</span></div>
-        <p class="en">${esc(r.en)}</p><p class="ko">${esc(r.ko)}</p>
-        ${r.note ? `<div class="think-box"><b class="lbl">나의 한 줄</b> ${esc(r.note)}</div>` : ""}
-        <a class="src" style="font-size:13px;color:var(--muted)" href="${r.url}">다시 필사하기 →</a>
-      </div>`; }).join("") :
-      `<div class="empty"><p>아직 필사한 문장이 없어요.<br>문장을 따라 쓰면 여기에 나만의 문장집이 쌓여요.</p></div>`;
+    if (!ids.length) {
+      root.innerHTML = `<div class="empty"><p>아직 필사한 문장이 없어요.<br>사유의 문장을 따라 쓰면 여기에 나만의 문장집이 쌓여요.</p></div><a class="btn primary cn-go" href="/category/think/">사유의 문장 보러 가기</a>`;
+      $(".cn-top", root.parentNode)?.remove();
+      return;
+    }
+    const QA = DATA.qa || {}, srs = tdLoad().srs || {};
+    const kept = ids.filter(id => srs[d[id].en]).length;
+    const md = t => { const x = new Date(t + 9 * 3600e3); return `${x.getUTCMonth() + 1}월 ${x.getUTCDate()}일`; };
+    let top = $(".cn-top", root.parentNode);
+    if (!top) { top = document.createElement("div"); top.className = "cn-top"; root.before(top); }
+    const allOpen = ids.every(id => cnOpen[id]);
+    top.innerHTML = `<span>문장 <b>${ids.length}개</b>${kept ? ` · 복습에 담긴 문장 <b>${kept}개</b>` : ""}</span><button type="button" class="cn-all">${allOpen ? "전체 가리기" : "전체 보기"}</button>`;
+    root.innerHTML = ids.map(id => {
+      const r = d[id], open = !!cnOpen[id], a = QA[r.en], k = !!srs[r.en];
+      const meta = [r.count ? `필사 ${r.count}회` : "", r.at ? md(r.at) : ""].filter(Boolean).join(" · ");
+      const my = cnEdit === id
+        ? `<div class="cn-my ed"><b class="lbl">나의 한 줄</b><textarea rows="2" maxlength="200" placeholder="떠오른 생각을 한 줄 남겨 보세요">${esc(r.note || "")}</textarea><button type="button" data-cn="save">저장</button></div>`
+        : `<div class="cn-my${r.note ? "" : " none"}"><b class="lbl">나의 한 줄</b><span>${r.note ? esc(r.note) : "떠오른 생각을 한 줄 남겨 보세요"}</span><button type="button" data-cn="edit">${r.note ? "수정" : "쓰기"}</button></div>`;
+      return `<div class="cn" data-id="${esc(id)}"><div class="cn-m"><b>${esc(r.speaker || r.title || "")}</b><span>${meta}</span></div>
+<p class="cn-k">한국어를 보고 영어로 떠올려 보세요</p><p class="cn-ko">${esc(r.ko)}</p>
+${open ? `<div class="cn-en"><p>${esc(r.en)}</p>${a ? `<button type="button" class="rt-spk" data-cn="play" data-a="${a}" aria-label="원어민 발음 듣기">${SPK}</button>` : ""}</div>`
+        : `<button type="button" class="cn-en hid" data-cn="open"><span class="ph"><i>?</i>눌러서 영어 문장 확인하기</span></button>`}
+${my}
+<div class="cn-a"><button type="button" class="k${k ? " on" : ""}" data-cn="keep"${k ? " disabled" : ""}>${k ? "✓ 복습에 담김" : "복습에 담기"}</button><a class="g" href="${esc(r.url || "/category/think/")}">다시 필사하기</a></div></div>`;
+    }).join("");
+    if (!root.dataset.bound) {
+      root.dataset.bound = 1;
+      root.addEventListener("click", ev => {
+        const b = ev.target.closest("[data-cn]"); if (!b) return;
+        const card = b.closest(".cn"), id = card.dataset.id, r = copy.all()[id]; if (!r) return;
+        const act = b.dataset.cn;
+        if (act === "open") { cnOpen[id] = 1; gaE("copy_reveal"); renderCopyNotes(root); const a = (DATA.qa || {})[r.en]; if (a) { cnAudio && cnAudio.pause(); cnAudio = new Audio(a); cnAudio.play().catch(() => {}); } return; }
+        if (act === "play") { cnAudio && cnAudio.pause(); cnAudio = new Audio(b.dataset.a); cnAudio.play().catch(() => {}); gaE("copy_listen"); return; }
+        if (act === "edit") { cnEdit = id; renderCopyNotes(root); const t = $(`.cn[data-id="${CSS.escape(id)}"] textarea`, root); if (t) { t.focus(); t.setSelectionRange(t.value.length, t.value.length); } return; }
+        if (act === "save") { const t = $("textarea", card); copy.rec(id, {}, () => ({ note: t.value.trim(), at: r.at })); cnEdit = null; gaE("note_save", { from: "notes" }); toast("나의 한 줄을 저장했어요"); renderCopyNotes(root); return; }
+        if (act === "keep") {
+          const S = tdLoad(); S.srs = S.srs || {};
+          if (!S.srs[r.en]) S.srs[r.en] = { st: 0, due: KDAY() + 1, en: r.en, ko: r.ko, a: (DATA.qa || {})[r.en] || "", p: r.url || "", t: (r.title || "").slice(0, 40), at: KDAY() };
+          tdSave(S); gaE("copy_keep"); toast("내일 오늘의 복습에서 다시 만나요"); renderCopyNotes(root); return;
+        }
+      });
+      root.parentNode.addEventListener("click", ev => {
+        if (!ev.target.closest(".cn-all")) return;
+        const all = Object.keys(copy.all()), open = all.every(i => cnOpen[i]);
+        cnOpen = {}; if (!open) all.forEach(i => cnOpen[i] = 1);
+        renderCopyNotes(root);
+      });
+    }
   }
 
   /* ---------- 영상: 썸네일 먼저 · 구간 듣기 · 반복 · 속도 · 따라오는 영상 ---------- */

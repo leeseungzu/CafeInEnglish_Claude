@@ -39,6 +39,10 @@ def sentences():
         for x in p.get("expressions", []):
             if x.get("ex"):
                 out.add(norm(x["ex"]))
+    for f in sorted((ROOT / "content" / "think").glob("*.json")):  # 사유의 문장(필사 노트에서 듣기)
+        for q in json.loads(f.read_text("utf-8")).get("quotes", []):
+            if q.get("en"):
+                out.add(norm(q["en"]))
     daily = ROOT / "content" / "daily.json"  # 오늘의 한 잔(루틴에서 듣기)도 음성으로
     if daily.exists():
         for d in json.loads(daily.read_text("utf-8")):

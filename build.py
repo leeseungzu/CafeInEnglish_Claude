@@ -1658,7 +1658,9 @@ def page_notes():
             '<div class="nbp" data-p="log" id="log" hidden>' + NB_APP + '<div id="log-app"></div>'
             + BACKUP_HTML + '</div></div>'
             f'<script src="/assets/today.js?v={ASSET_V}" defer></script>')
-    data = {"type": "notes", "kakao": SITE.get("kakao", ""), "daily": daily_routine(), "pool": pool, "goals": goals,
+    norm_t = lambda t: re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", t))).strip()
+    qa = {norm_t(q["en"]): "/audio/" + AUDIO[norm_t(q["en"])] for t in THINKS for q in t.get("quotes", []) if norm_t(q.get("en", "")) in AUDIO}
+    data = {"type": "notes", "kakao": SITE.get("kakao", ""), "daily": daily_routine(), "pool": pool, "goals": goals, "qa": qa,
             "cup": f"/assets/icons/hot-beverage.webp?v={ASSET_V}", "phone": f"/assets/icons/mobile-phone.webp?v={ASSET_V}"}
     return layout("내 공부방", "오늘의 한 잔 5분 루틴과 이번 주 도장, 말해 본 문장, 퀴즈 오답노트와 필사 노트를 모아 복습하는 나만의 공부방",
                   "/notes/", body, "notes", data, wide=True, robots="noindex,follow")

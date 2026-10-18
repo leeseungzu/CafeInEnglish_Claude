@@ -245,3 +245,5 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 - 숫자를 이름 옆에 그냥 붙이지 않기(이름의 일부처럼 보임). '확인할 게 있다'는 뜻이면 배지(.nbt-n), 모아 두는 곳(필사 노트 등)은 숫자 생략.
 - 설명글은 짧게: 모바일에서 한 줄, 넘치면 text-wrap:balance로 두 줄 길이를 맞춤.
 - 앱에서 영상·사유의 문장 목록은 제목·설명이 묶음 이름('영상·문장')으로 바뀜(h1/lead의 data-app + ::after). 웹·검색엔진에는 원래 제목 그대로.
+- 필사 노트(.cn 카드): 한국어 보고 떠올리기 → 눌러서 영어+스피커(사유의 문장도 Kokoro 원어민 음성, make_audio.py가 content/think quotes 포함) → 나의 한 줄 카드 안에서 쓰기/수정 → '복습에 담기'(ky_today_v1.srs, t/p/at 포함). 정확도 %는 안 보여 줌. 노트 페이지 data.qa = {문장: 음성 주소}.
+- GA 이벤트: copy_done, blank_done, note_save(from), copy_reveal, copy_listen, copy_keep, notes_tab, week_goal.
