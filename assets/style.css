@@ -2215,3 +2215,10 @@ html.is-app .app-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;backgrou
 html.is-app .app-seg a{text-align:center;padding:9px 0;border-radius:9px;font-size:14px;font-weight:700;color:#6B7684;text-decoration:none}
 html.is-app .app-seg a.on{background:#fff;color:#191F28;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .bk-note{text-wrap:balance;margin:12px 4px 0!important}
+/* 오답노트 탭 배지: 이름 옆 숫자가 아니라 '확인할 것 있음' 표시 */
+.nbt button .nbt-n{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 5px;box-sizing:border-box;border-radius:9px;background:#2A1A12;color:#fff!important;font-size:11px;font-weight:800;font-style:normal;margin-left:5px;vertical-align:1px;line-height:1}
+.nbt button .nbt-n[hidden]{display:none}
+/* 복습 정답·말하기 정답 줄: 문장 + 동그란 스피커 */
+.rv-a .rt-spk,.rt-reveal .rt-spk{background:#fff}
+.rt-reveal{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rt-reveal:has(>.rt-spk){flex-wrap:nowrap;justify-content:space-between}.rt-reveal:has(>.rt-spk) b{width:auto;flex:1;min-width:0}

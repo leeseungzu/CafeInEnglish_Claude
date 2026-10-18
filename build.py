@@ -1644,7 +1644,7 @@ def page_notes():
     pool = today_pool()
     goals = [{**{k: g[k] for k in ("id", "name", "short")}, "icon": f'/assets/icons/{g["icon"]}.webp?v={ASSET_V}'} for g in TODAY_GOALS if pool.get(g["id"])]
     ON = ' class="on"'
-    tabs = [("today", "오늘", ""), ("wrong", "오답노트", '<i class="js-tn-w"></i>'), ("copy", "필사 노트", '<i class="js-tn-c"></i>'), ("log", "기록", "")]
+    tabs = [("today", "오늘", ""), ("wrong", "오답노트", '<i class="nbt-n js-tn-w" hidden></i>'), ("copy", "필사 노트", ""), ("log", "기록", "")]
     body = ('<h1>내 공부방</h1>'
             '<div class="nb-band"><div class="nbt no-print" role="tablist" aria-label="내 공부방">'
             + "".join(f'<button type="button" role="tab" data-tab="{k}" aria-selected="{"true" if k == "today" else "false"}"{ON if k == "today" else ""}>{t}{c}</button>' for k, t, c in tabs)

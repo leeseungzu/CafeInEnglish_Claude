@@ -7,9 +7,9 @@
   const TAB_OF = { routine: "today", review: "today", today: "today", wrong: "wrong", copy: "copy", log: "log", backup: "log" };
   function tabCounts() {
     const n = k => { try { return Object.keys(JSON.parse(localStorage.getItem(k)) || {}).length; } catch (e) { return 0; } };
-    const w = n("cafein_wrong_v1"), c = n("cafein_copy_v1");
-    document.querySelectorAll(".js-tn-w").forEach(x => x.textContent = w || "");
-    document.querySelectorAll(".js-tn-c").forEach(x => x.textContent = c || "");
+    const w = n("cafein_wrong_v1");
+    // 오답노트만 '다시 볼 것'이 있다는 배지로 (필사 노트는 모아 두는 곳이라 숫자 없음)
+    document.querySelectorAll(".js-tn-w").forEach(x => { x.textContent = w > 99 ? "99+" : w || ""; x.hidden = !w; x.setAttribute("aria-label", w ? `다시 볼 문제 ${w}개` : ""); });
   }
   function showTab(t, push) {
     document.querySelectorAll(".nbt [data-tab]").forEach(b => { const on = b.dataset.tab === t; b.classList.toggle("on", on); b.setAttribute("aria-selected", String(on)); });
@@ -86,6 +86,8 @@
     S.learned.forEach(x => { if (x.en && !S.srs[x.en]) S.srs[x.en] = { st: 0, due: dnum(x.d) + IV[0], en: x.en, ko: x.ko, a: x.a, p: x.p || "", from: SRC_NAME[x.src] || "오늘의 한 잔", at: dnum(x.d) }; });
   }
   const dueList = () => Object.values(S.srs || {}).filter(v => v.due <= DAY).sort((a, b) => a.due - b.due || a.st - b.st);
+  // 발음 듣기 버튼은 어디서나 같은 동그란 스피커 아이콘 (글자 버튼은 줄바꿈되며 균형이 깨져요)
+  const SPK = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
   let rvShow = false, saidAll = false;
   // 이 문장이 어디서 왔는지: 'I'm down 글에서 · 2일 전에 담았어요'
   function rvSrc(v) {
@@ -105,7 +107,7 @@
     const stg = ["첫", "두 번째", "세 번째", "네 번째", "다섯 번째", "여섯 번째"][v.st] || "다시";
     return `<section class="rv" id="review"><div class="rv-top"><b>오늘의 복습</b><span class="rv-n">${due.length}개 남음</span></div>
 <p class="rv-k">${stg} 복습 · 한국어만 보고 영어로 말해 보세요</p><p class="rv-q">“${esc(v.ko)}”</p>${rvSrc(v)}
-${rvShow ? `<div class="rv-a"><b>${esc(v.en)}</b>${v.a ? `<button type="button" class="rt-b" data-play="${v.a}">▶ 원어민 발음</button>` : ""}</div>
+${rvShow ? `<div class="rv-a"><b>${esc(v.en)}</b>${v.a ? `<button type="button" class="rt-spk" data-play="${v.a}" aria-label="원어민 발음 듣기">${SPK}</button>` : ""}</div>
 <div class="rv-btns"><button type="button" class="rv-b" data-rv="again">헷갈려요<small>내일 다시</small></button><button type="button" class="rv-b ok" data-rv="ok">기억났어요<small>${IV[Math.min(v.st + 1, IV.length - 1)]}일 뒤에</small></button></div>`
       : `<button type="button" class="rv-show" data-rv="show">정답 보기</button>`}
 <p class="rv-tip">잊을 즈음 다시 보면 오래 남아요 · 1 → 3 → 7 → 14 → 30일 뒤</p></section>`;
@@ -259,7 +261,7 @@ ${installCard()}`;
     if (act === "reveal") { const c = document.getElementById("routine"); if (c) c.classList.remove("hide-en"); }
     if (act === "reveal" || act === "said") {
       const box = document.getElementById("rt-reveal"); box.hidden = false;
-      box.innerHTML = `<b>${esc(r.en)}</b><button class="rt-b" data-play="${r.a}">▶ 원어민 발음</button>`;
+      box.innerHTML = `<b>${esc(r.en)}</b><button type="button" class="rt-spk" data-play="${r.a}" aria-label="원어민 발음 듣기">${SPK}</button>`;
       if (act === "said") { r.s = 1; learn(r); save(); open = null; setTimeout(render, 1300); }
     }
     if (act === "rec") record(b, r);
