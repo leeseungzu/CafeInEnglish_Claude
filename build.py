@@ -903,7 +903,7 @@ def side_common():
 
 
 # 글 본문 꾸미기: '뜻' 강조 카드(글마다 파스텔), 섹션 제목 앞 작은 3D 아이콘
-H2_ICON = [("뜻", "light-bulb"), ("예문", "speech-balloon"), ("실제로는", "waving-hand"), ("헷갈", "question-mark"),
+H2_ICON = [("뜻", "light-bulb"), ("예문", "speech-balloon"), ("실제로는", "waving-hand"), ("실제 대화", "waving-hand"), ("헷갈", "question-mark"),
            ("비슷한 표현", "thumbs-up"), ("자주 하는 실수", "grimacing-face")]
 def mean_card(m, tint):
     """'뜻' 카드: 대표 표현을 크게, 뜻, 같은 뜻의 다른 표현은 작은 칩으로"""
