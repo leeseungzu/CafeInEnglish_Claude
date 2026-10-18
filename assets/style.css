@@ -2115,3 +2115,9 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
 .pb p a[href^="/p/"]::after,.pb li a[href^="/p/"]::after,.pb td a[href^="/p/"]::after{content:" ↗";font-size:.82em;font-weight:800;color:#8B6F5A}
 @media (hover:hover){.pb p a[href^="/p/"]:hover,.pb li a[href^="/p/"]:hover,.pb td a[href^="/p/"]:hover{background:#F3FADB}}
 @media print{.pb a[href^="/p/"]::after{content:none}}
+/* 한 그룹 필터(영상 종류·사유의 문장 인물): 모바일은 가로 스크롤 칩 */
+@media (max-width:899px){
+  .subfilter.sf-one .sf-g:first-child{display:flex!important;grid-template-columns:none;background:none!important;padding:0!important;border-radius:0!important;overflow-x:auto;gap:8px}
+  .subfilter.sf-one .sf-g .sf-b{border:1px solid var(--line);border-radius:999px!important;background:#fff;padding:7px 14px;white-space:nowrap;flex:none}
+  .subfilter.sf-one .sf-g .sf-b.on{background:#191F28;border-color:#191F28;color:#fff}
+}

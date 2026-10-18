@@ -1229,11 +1229,27 @@ SERIES_ABOUT = {
 
 def page_category(cat):
     url = f"/category/{cat}/"
+    def one_filter(title, keys):  # 한 그룹 필터 (영상: 종류, 사유의 문장: 인물)
+        ks = [k for k in dict.fromkeys(keys) if k]
+        b = lambda v, n, lbl, on="": f'<button type="button" class="sf-b{on}" data-sub="{e(v)}"><span>{e(lbl)}</span><em>{n}</em></button>'
+        return (f'<aside class="subfilter sf-one" aria-label="{title}"><div class="sf-g" role="group" aria-label="{title}"><div class="sf-h">{title}</div>'
+                + b("", len(keys), "전체", " on") + "".join(b(k, keys.count(k), k) for k in ks) + '</div><p class="sf-empty" hidden>이 조합의 글은 아직 없어요</p></aside>')
     if cat == "think":
         items = THINKS
-        cards = "".join(think_card(t, 2) for t in THINKS)
-        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p><div class="cards list">{cards}</div>'
-                + CAT_ABOUT.get(cat, ""))
+        who = [t["speaker"].split(" · ")[0] for t in THINKS]
+        cards = "".join(think_card(t, 2).replace(' href=', f' data-sub="{e(w)}" href=', 1) for t, w in zip(THINKS, who))
+        filt = one_filter("인물", who)
+        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>'
+                f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
+    elif cat == "video":
+        items = [p for p in POSTS if p["cat"] == cat]
+        kind = lambda sub: "강의" if "강의" in sub else "인터뷰" if "인터뷰" in sub else "대담" if "대담" in sub else "연설"
+        kinds = [kind(p.get("sub", "")) for p in items]
+        cards = "".join(re.sub(r' data-sub="[^"]*"', "", post_card(p, 2), 1).replace(' href=', f' data-sub="{k}" href=', 1) for p, k in zip(items, kinds))
+        order = [k for k in ["연설", "인터뷰", "대담", "강의"] if k in kinds]
+        filt = one_filter("종류", sorted(kinds, key=order.index))
+        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>'
+                f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     else:
         items = [p for p in POSTS if p["cat"] == cat]
         cards = "".join(post_card(p, 2) for p in items) or '<div class="empty"><p>곧 첫 글이 올라와요.</p></div>'
