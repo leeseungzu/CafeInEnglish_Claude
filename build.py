@@ -636,7 +636,7 @@ self.addEventListener("fetch", e => {
 # 웹 브라우저에서는 숨김(검색·광고 영향 없음). 주소 끝에 ?app=1 을 붙이면 웹에서도 미리 볼 수 있어요.
 _TI = lambda d: f'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{d}</svg>'
 TABS = [("home", "/", "홈", _TI('<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>')),
-        ("video", "/category/video/", "영상", _TI('<rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/>')),
+        ("video", "/category/video/", "영상·문장", _TI('<rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/>')),
         ("expr", "/category/expr/", "표현", _TI('<path d="M21 12a8 8 0 0 1-11.5 7.2L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/>')),
         ("tip", "/category/tip/", "꿀팁", _TI('<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/>')),
         ("notes", "/notes/", "내 공부방", _TI('<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/>'))]
@@ -648,9 +648,12 @@ APP_HEAD_JS = ("<script>(function(){try{var q=/[?&]app=1/.test(location.search);
 def tabbar(nav):
     on = ' class="on" aria-current="page"'
     return ('<nav class="tabbar no-print" aria-label="앱 메뉴">' + "".join(
-        f'<a href="{h}"{on if nav == k else ""}>{ic}<span>{t}</span></a>' for k, h, t, ic in TABS) + '</nav>')
+        f'<a href="{h}"{on if nav == k or (k == "video" and nav == "think") else ""}>{ic}<span>{t}</span></a>' for k, h, t, ic in TABS) + '</nav>')
 
 
+# 앱 아래 탭 '영상·문장' 안에서 두 카테고리를 오가는 전환 (앱에서만 보임)
+APP_SEG = lambda cat: ('<div class="app-seg no-print" role="tablist" aria-label="영상·문장">'
+                       + "".join(f'<a role="tab" href="/category/{k}/"{" class=on aria-selected=true" if k == cat else ""}>{CATS[k]}</a>' for k in ("video", "think")) + '</div>')
 NAV_SHORT = {"video": "영상", "expr": "표현", "tip": "꿀팁", "think": "문장"}  # 휴대폰 위쪽 메뉴는 짧은 이름 (앱 탭과 같게)
 
 
@@ -1239,7 +1242,7 @@ def page_category(cat):
         who = [t.get("theme") or "기타" for t in THINKS]  # 주제(겸손·관계·흔들릴 때 …) — 새 글마다 content/think/*.json 의 "theme"
         cards = "".join(think_card(t, 2).replace(' href=', f' data-sub="{e(w)}" href=', 1) for t, w in zip(THINKS, who))
         filt = one_filter("주제", sorted(who, key=["겸손", "관계", "흔들릴 때"].index if all(w in ["겸손", "관계", "흔들릴 때"] for w in who) else None))
-        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>'
+        body = (APP_SEG(cat) + f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>'
                 f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     elif cat == "video":
         items = [p for p in POSTS if p["cat"] == cat]
@@ -1248,7 +1251,7 @@ def page_category(cat):
         cards = "".join(re.sub(r' data-sub="[^"]*"', "", post_card(p, 2), 1).replace(' href=', f' data-sub="{k}" href=', 1) for p, k in zip(items, kinds))
         order = [k for k in ["연설", "인터뷰", "대담", "강의"] if k in kinds]
         filt = one_filter("종류", sorted(kinds, key=order.index))
-        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>'
+        body = (APP_SEG(cat) + f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>'
                 f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     else:
         items = [p for p in POSTS if p["cat"] == cat]
@@ -1634,7 +1637,7 @@ BACKUP_HTML = ('<section class="bk no-print" id="backup"><h2 class="nb-h">기록
                + act_row(SVG_DL, "내 기록 내보내기", "오답노트 · 필사 · 연속 기록을 파일 하나로 저장", cls="js-bk-out")
                + act_row(SVG_UL, "기록 가져오기", "저장한 파일을 불러와 지금 기록에 합쳐요", cls="js-bk-in")
                + '</div><input type="file" accept="application/json,.json" class="js-bk-file" hidden>'
-               '<p class="bk-note">아이폰은 Safari와 홈 화면 앱의 기록이 따로예요. Safari에서 내보내고 앱에서 가져오면 그대로 이어서 쓸 수 있어요.</p></section>')
+               '<p class="bk-note">기록은 이 기기에만 저장돼요. 내보낸 파일을 새 폰이나 앱에서 가져오면 그대로 이어져요.</p></section>')
 
 
 def page_notes():
@@ -1650,7 +1653,7 @@ def page_notes():
             '<div class="nbp" data-p="wrong" id="wrong" hidden><div id="notes-root"></div></div>'
             '<div class="nbp" data-p="copy" id="copy" hidden><span id="copy-count" hidden>0</span><div id="copy-notes"></div></div>'
             '<div class="nbp" data-p="log" id="log" hidden>' + NB_APP + '<div id="log-app"></div>'
-            + BACKUP_HTML + '<p class="nb-local">기록은 이 기기의 브라우저에만 저장돼요. 폰을 바꿀 때는 위 백업을 써 주세요.</p></div></div>'
+            + BACKUP_HTML + '</div></div>'
             f'<script src="/assets/today.js?v={ASSET_V}" defer></script>')
     data = {"type": "notes", "kakao": SITE.get("kakao", ""), "daily": daily_routine(), "pool": pool, "goals": goals,
             "cup": f"/assets/icons/hot-beverage.webp?v={ASSET_V}", "phone": f"/assets/icons/mobile-phone.webp?v={ASSET_V}"}

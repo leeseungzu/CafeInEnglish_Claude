@@ -2209,3 +2209,9 @@ mark.xhl{background:linear-gradient(transparent 58%,#CDEB5B 58%);color:inherit;p
 #today-app .rv-src{font-size:12.5px;color:#8B95A1;margin:-4px 0 12px}
 #today-app .rv-src a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 @media (min-width:900px){#today-app .tdg #review .rv-k{margin-top:auto}}
+/* 앱 '영상·문장' 탭 안 전환 (웹에서는 숨김) */
+.app-seg{display:none}
+html.is-app .app-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:#F2F4F6;border-radius:12px;padding:4px;margin:4px 0 18px}
+html.is-app .app-seg a{text-align:center;padding:9px 0;border-radius:9px;font-size:14px;font-weight:700;color:#6B7684;text-decoration:none}
+html.is-app .app-seg a.on{background:#fff;color:#191F28;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.bk-note{text-wrap:balance;margin:12px 4px 0!important}
