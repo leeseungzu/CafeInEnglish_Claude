@@ -168,6 +168,8 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 ## 롱폼 나레이션 발음 규칙 (2026-10-17, 시청자 지적: 이재용·최태원 롱폼 2:51 faster, 5:53 raise)
 - 한국어 나레이션 목소리(ElevenLabs 코난맘)에게 영어 단어·문장을 읽히지 않는다. 한국어 부분만 한국어 목소리로 만들고, 영어 부분은 원어민 영어 목소리(사이트와 같은 Kokoro af_heart 또는 ElevenLabs 영어 원어민 목소리)로 따로 만들어 이어 붙인다.
 - 나레이션 대본에서 영어는 [EN]...[/EN] 처럼 표시해 두고 구간별로 목소리를 나눈다. 영어 구간 앞뒤 0.15초 쉼.
+- (2026-10-19 결정) 롱폼 영어 목소리 = Azure `en-US-CoraMultilingualNeural`, prosody rate -6% (코난맘의 차분한 중저음과 가장 잘 어울림, 사용자 선택). Kokoro는 롱폼에 더 안 씀(기계 느낌). 한국어 = 일레븐랩스 코난맘 그대로. 인물의 실제 말은 원본 영상 소리.
+- Azure 음성: 키는 secrets/azure_tts.txt (1줄 키, 2줄 지역 koreacentral, 깃 제외). 주소 https://koreacentral.tts.speech.microsoft.com/cognitiveservices/v1 , Free F0(월 50만 자). 한국어·영어 음량은 loudnorm I=-16 으로 맞춰 이어 붙인다.
 - 렌더 후 영어가 들어간 구간은 전부 다시 들어 보고 발음을 확인한다.
 
 ## 앱 전용 아래쪽 탭 바 (2026-10-17)
