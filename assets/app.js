@@ -153,6 +153,12 @@
   }
 
   /* ---------- 오답노트 페이지 ---------- */
+  // 오답노트: 문제부터 떠올리기 → 눌러서 정답·해설·발음 → 이 문제 다시 풀기 / 복습에 담기
+  let wnOpen = {}, AMAP = null;
+  const amapLoad = () => AMAP ? Promise.resolve(AMAP) : fetch("/assets/amap.json").then(r => r.json()).then(m => (AMAP = m)).catch(() => (AMAP = {}));
+  const agoTxt = t => { const d = Math.floor((Date.now() - t) / 864e5); return d <= 0 ? "오늘" : d === 1 ? "어제" : d + "일 전"; };
+  const hasEn = t => /[A-Za-z]{2,}/.test(t || "");
+  const WSPK = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
   function renderNotes(root) {
     const data = wrong.all();
     const ids = Object.keys(data).sort((a, b) => data[b].count - data[a].count || data[b].at - data[a].at);
@@ -164,35 +170,45 @@
     const tagCount = {}, tagUrl = {};
     ids.forEach(id => { const t = data[id].tag || "기타"; tagCount[t] = (tagCount[t] || 0) + data[id].count; tagUrl[t] = data[id].postUrl; });
     const weak = Object.entries(tagCount).sort((a, b) => b[1] - a[1])[0][0];
-    const total = ids.reduce((s, id) => s + data[id].count, 0);
-    root.innerHTML = `
-      <div class="stats">
-        <div class="stat"><div class="n">${ids.length}<em>개</em></div><div class="l">남은 오답</div></div>
-        <div class="stat"><div class="n">${total}<em>번</em></div><div class="l">누적 틀린 횟수</div></div>
-        <div class="stat"><div class="n n-t">${esc(weak)}</div><div class="l">약한 유형</div></div>
-      </div>
-      <div class="weak"><b>'${esc(weak)}'</b> 문제를 가장 자주 틀렸어요. ${tagUrl[weak] ? `<a href="${tagUrl[weak]}">관련 글 다시 보기 →</a>` : ""}</div>
-      <button class="btn primary retry">오답만 다시 풀기 (${ids.length}문제)</button>
+    const S = (() => { try { return JSON.parse(localStorage.getItem("ky_today_v1")) || {}; } catch (e) { return {}; } })(), srs = S.srs || {};
+    const card = id => {
+      const d = data[id], open = !!wnOpen[id], ans = (d.options || [])[d.answer] || "", mine = (d.options || [])[d.picked] || "";
+      const keepable = hasEn(ans), kept = keepable && !!srs[ans];
+      const au = AMAP && AMAP[ans];
+      return `<div class="wc" data-id="${esc(id)}"><div class="wc-m"><div class="tg">${d.catName ? `<span>${esc(d.catName)}</span>` : ""}${d.tag ? `<span>${esc(d.tag)}</span>` : ""}</div><span><em>${d.count}번 틀림</em> · ${agoTxt(d.at || Date.now())}</span></div>
+<p class="wc-k">먼저 떠올려 보세요</p><p class="wc-q">${esc(d.q)}${d.sub && d.sub.includes("___") ? `<br><span class="wc-sub">${esc(d.sub)}</span>` : ""}</p>
+${open ? `<div class="wc-a"><div class="mine"><b>내가 고른 답</b><span>${esc(mine)}</span></div><div class="right"><b>정답</b><span>${esc(ans)}</span>${au ? `<button type="button" class="rt-spk" data-wn="play" data-a="${au}" aria-label="정답 발음 듣기">${WSPK}</button>` : ""}</div></div>
+<div class="wc-why">${d.explain ? `<p>${esc(d.explain)}</p>` : ""}${d.mnemonic ? `<p><b class="lbl">연상법</b>${esc(d.mnemonic)}</p>` : ""}</div>`
+        : `<button type="button" class="wc-open" data-wn="open"><i>?</i>눌러서 정답 확인하기</button>`}
+<div class="wc-b${keepable ? "" : " one"}"><button type="button" class="k" data-wn="retry">이 문제 다시 풀기</button>${keepable ? `<button type="button" data-wn="keep"${kept ? " disabled class=\"on\"" : ""}>${kept ? "✓ 복습에 담김" : "복습에 담기"}</button>` : ""}</div>
+<a class="wc-src" href="${esc(d.postUrl || "/category/expr/")}">원래 글 다시 보기${d.postTitle || d.title ? " · " + esc(d.postTitle || d.title) : ""}</a></div>`;
+    };
+    root.innerHTML = `<div class="ws"><p class="ws-t">다시 풀 문제 <b>${ids.length}개</b> · 자주 틀린 유형 <b>${esc(weak)}</b>${tagUrl[weak] ? ` · <a href="${tagUrl[weak]}">관련 글</a>` : ""}</p><button type="button" class="ws-go retry">${ids.length}문제 다시 풀기</button></div>
       <div class="review"></div>
-      <div class="note-list">${ids.map(id => {
-        const d = data[id];
-        return `<div class="note">
-          <div class="note-top"><span><span class="chip ${esc(d.cat || "expr")}">${esc(d.catName || "")}</span><span class="chip ${esc(d.cat || "expr")}">${esc(d.tag || "")}</span></span><span>${d.count}번 틀림</span></div>
-          <h3>${esc(d.q)}${d.sub && d.sub.includes("___") ? `<br><span style="font-weight:400">${esc(d.sub)}</span>` : ""}</h3>
-          <div class="ans">
-            <div class="mine"><b>내가 고른 답</b> ${esc(d.options[d.picked])}</div>
-            <div class="right"><b>정답</b> ${esc(d.options[d.answer])}</div>
-          </div>
-          <details><summary>왜 틀렸을까? 복기하기</summary>
-            <div class="why">${esc(d.explain)}</div>
-            <div class="memo"><b class="lbl">연상법</b> ${esc(d.mnemonic)}</div>
-          </details>
-          <a class="src" href="${d.postUrl}">원래 글 다시 보기${d.postTitle || d.title ? " · " + esc(d.postTitle || d.title) : ""}</a>
-        </div>`; }).join("")}</div>
+      <div class="note-list wl${ids.length > 1 ? " two" : ""}">${ids.map(card).join("")}</div>
       <button class="btn danger clear">오답노트 전체 비우기</button>`;
-    $(".retry", root).onclick = () => {
-      $(".retry", root).hidden = true; $(".note-list", root).hidden = true;
-      runQuiz($(".review", root), ids.map(id => ({ id, ...data[id] })), { mode: "review" });
+    if (!AMAP) amapLoad().then(() => { if (root.isConnected && $(".wl", root)) renderNotes(root); });
+    const startQuiz = list => {
+      $(".ws", root).hidden = true; $(".note-list", root).hidden = true; $(".clear", root).hidden = true;
+      runQuiz($(".review", root), list.map(id => ({ id, ...data[id] })), { mode: "review" });
+      $(".review", root).scrollIntoView({ block: "start", behavior: "smooth" });
+    };
+    $(".retry", root).onclick = () => startQuiz(ids);
+    $(".note-list", root).onclick = ev => {
+      const b = ev.target.closest("[data-wn]"); if (!b) return;
+      const id = b.closest(".wc").dataset.id, d = data[id], act = b.dataset.wn;
+      if (act === "open") { wnOpen[id] = 1; try { window.gtag && gtag("event", "wrong_reveal"); } catch (e) {} renderNotes(root); return; }
+      if (act === "play") { new Audio(b.dataset.a).play().catch(() => {}); return; }
+      if (act === "retry") { startQuiz([id]); return; }
+      if (act === "keep") {
+        const ans = d.options[d.answer], DAY = Math.floor((Date.now() / 1000 + 9 * 3600) / 86400);
+        let T; try { T = JSON.parse(localStorage.getItem("ky_today_v1")) || {}; } catch (e) { T = {}; }
+        T.srs = T.srs || {};
+        if (!T.srs[ans]) T.srs[ans] = { st: 0, due: DAY + 1, en: ans, ko: d.q, a: (AMAP && AMAP[ans]) || "", p: d.postUrl || "", t: (d.postTitle || d.title || "").slice(0, 40), at: DAY };
+        try { localStorage.setItem("ky_today_v1", JSON.stringify(T)); } catch (e) {}
+        try { window.gtag && gtag("event", "wrong_keep"); } catch (e) {}
+        toast("내일 오늘의 복습에서 다시 만나요"); renderNotes(root);
+      }
     };
     // 실수로 다 지우지 않게: 한 번 누르면 확인 문구로 바뀌고, 3초 안에 한 번 더 눌러야 비워져요
     const clr = $(".clear", root); let armed = 0;

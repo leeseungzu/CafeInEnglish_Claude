@@ -2130,6 +2130,9 @@ def build():
         shutil.copytree(ROOT / "images", OUT / "images", dirs_exist_ok=True)
     if AUDIO_DIR.exists():
         shutil.copytree(AUDIO_DIR, OUT / "audio", dirs_exist_ok=True, ignore=shutil.ignore_patterns("index.json"))
+        # 오답노트 정답 문장 듣기용: {문장: 음성 주소} (내 공부방에서 필요할 때만 불러와요)
+        (OUT / "assets").mkdir(exist_ok=True)
+        (OUT / "assets" / "amap.json").write_text(json.dumps({t: "/audio/" + f for t, f in AUDIO.items()}, ensure_ascii=False, separators=(",", ":")), "utf-8")
     global LASTMOD
     LASTMOD = {post_url(p): p["_mod"] for p in POSTS}
     LASTMOD.update({think_url(t): t["_mod"] for t in THINKS})
