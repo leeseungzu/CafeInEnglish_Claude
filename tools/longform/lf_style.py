@@ -29,15 +29,59 @@ def dur(p): return float(subprocess.check_output(['ffprobe', '-v', 'error', '-sh
 
 
 def wrap(d, text, font, maxw):
-    words = text.split(' '); lines = []; cur = ''
+    """자막 줄바꿈 (2026-10-21 규칙): 한 줄에 들어가면 한 줄. 넘치면 같은 줄 수 안에서
+    줄 길이를 최대한 고르게 나누고, 쉼표·마침표 뒤와 의미 단위(접속사·전치사 앞)에서 끊는다.
+    한두 단어만 다음 줄로 넘어가는 어정쩡한 줄바꿈은 만들지 않는다."""
+    words = text.split(' ')
+    if d.textlength(text, font=font) <= maxw: return [text]
+    greedy = []; cur = ''
     for w_ in words:
         t = (cur + ' ' + w_).strip()
-        if d.textlength(t, font=font) <= maxw: cur = t
-        else:
-            if cur: lines.append(cur)
-            cur = w_
-    if cur: lines.append(cur)
-    return lines
+        if d.textlength(t, font=font) <= maxw or not cur: cur = t
+        else: greedy.append(cur); cur = w_
+    if cur: greedy.append(cur)
+    n = len(greedy); N = len(words)
+    BREAK_BEFORE = {'and', 'but', 'or', 'so', 'because', 'that', 'which', 'who', 'to', 'in', 'on', 'at', 'for', 'with',
+                    'about', 'from', 'of', 'like', 'when', 'if', 'than', 'as', '그리고', '하지만'}
+    import functools
+    @functools.lru_cache(None)
+    def best(i, k):  # words[i:] 를 k줄로 → (비용, 끊는 위치들)
+        if k == 1:
+            ln = ' '.join(words[i:]); w = d.textlength(ln, font=font)
+            return (float('inf'), ()) if w > maxw else (0.0, ())
+        res = (float('inf'), ())
+        for j in range(i + 1, N - k + 2):
+            ln = ' '.join(words[i:j]); w = d.textlength(ln, font=font)
+            if w > maxw: break
+            rest = best(j, k - 1)
+            if rest[0] == float('inf'): continue
+            pen = 0.0
+            if words[j - 1][-1:] in ',.;:?!': pen -= 0.12 * maxw
+            elif words[j].lower().strip('"(') in BREAK_BEFORE: pen -= 0.05 * maxw
+            res = min(res, (rest[0] + pen, (j,) + rest[1]), key=lambda r: r[0])
+        return res
+    # 줄 길이 차이를 줄이는 쪽으로: 가장 긴 줄 기준 비용
+    cands = []
+    for k in (n,):
+        @functools.lru_cache(None)
+        def go(i, k):
+            if k == 1:
+                w = d.textlength(' '.join(words[i:]), font=font)
+                return (w, ()) if w <= maxw else (float('inf'), ())
+            out = (float('inf'), ())
+            for j in range(i + 1, N - k + 2):
+                w = d.textlength(' '.join(words[i:j]), font=font)
+                if w > maxw: break
+                r = go(j, k - 1)
+                bonus = 0.25 * maxw if words[j - 1][-1:] in ',.;:?!' else (0.05 * maxw if words[j].lower().strip('"(') in BREAK_BEFORE else 0)
+                c = max(w, r[0]) - bonus + abs(w - r[0]) * 0.1
+                if c < out[0]: out = (c, (j,) + r[1])
+            return out
+        c, cuts = go(0, k)
+        if c != float('inf'): cands.append(cuts)
+    if not cands: return greedy
+    cuts = (0,) + cands[0] + (N,)
+    return [' '.join(words[a:b]) for a, b in zip(cuts, cuts[1:])]
 
 
 def vcenter(d, x, ytop, h, text, font, fill, anchor_x='l'):
