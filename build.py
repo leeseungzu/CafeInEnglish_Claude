@@ -15,9 +15,10 @@ CONTENT, ASSETS, OUT = ROOT / "content", ROOT / "assets", ROOT / "docs"
 
 SITE = json.loads((CONTENT / "site.json").read_text("utf-8"))
 DOMAIN = SITE["domain"].rstrip("/")
-CATS = {"video": "영상으로 배우기", "expr": "영어표현", "tip": "영어꿀팁", "think": "사유의 문장"}
+CATS = {"video": "영상으로 배우기", "expr": "영어표현", "tip": "영어꿀팁", "story": "영어 이야기", "think": "사유의 문장"}
+NAV_CATS = ("video", "expr", "tip", "story")  # 위쪽 메뉴 (사유의 문장은 '영상' 칸 안 전환으로)
 TILE_SUB = {"video": "카영 영상 속 표현을 장면과 함께", "expr": "새 표현 · 비슷한 표현 · 헷갈리는 표현",
-            "tip": "여행 · 회화 · 단어 · 듣기 · 발음", "think": "필사하고 빈칸으로 복기"}
+            "tip": "여행 · 회화 · 단어 · 듣기 · 발음", "story": "매일 쓰는 단어에 숨은 역사", "think": "필사하고 빈칸으로 복기"}
 CAT_SEO = {  # 카테고리 페이지 검색용 제목 · 설명
     "video": ("영상으로 배우는 영어 - 카페인영어 영상 속 표현 정리와 퀴즈",
               "카페인영어 유튜브 영상 한 편에서 실제로 쓰는 영어 표현을 뽑아 뜻, 예문, 발음과 함께 정리하고 퀴즈로 확인해요."),
@@ -25,6 +26,8 @@ CAT_SEO = {  # 카테고리 페이지 검색용 제목 · 설명
              "Sounds good, My bad, I'm on it처럼 원어민이 매일 쓰는 영어표현을 뜻, 예문, 비슷한 표현, 자주 하는 실수와 연상법, 퀴즈로 정리했어요."),
     "tip": ("영어꿀팁 - 회화, 발음, 듣기, 콩글리시까지 바로 써먹는 영어 팁",
             "한국인이 자주 틀리는 영어 회화, 발음, 듣기, 콩글리시를 쉽게 풀어 정리했어요. 식당, 카페, 병원, 화상회의에서 바로 쓰는 문장과 퀴즈까지."),
+    "story": ("영어 이야기 - 영어 단어 어원과 유래, 실제 기록과 사진으로 보는 영어의 역사",
+              "hello, OK, deadline, bug처럼 매일 쓰는 영어 단어가 어디서 왔는지 실제 기록과 사진으로 따라가고, 지금 쓰는 법과 퀴즈까지 정리했어요."),
     "think": ("영어 명언 필사 - 사유의 문장, 연설과 인터뷰 속 영어 문장",
               "손흥민, 젠슨 황, 순다르 피차이의 영어 연설과 인터뷰 속 곱씹을 문장을 영상으로 듣고, 따라 쓰고, 빈칸으로 다시 떠올려 보세요."),
 }
@@ -32,6 +35,7 @@ CAT_LEAD = {  # 휴대폰(360px)에서도 한 줄에 들어가게 짧게
     "video": "영상 속 표현을 장면과 함께 배워요",
     "expr": "원어민이 매일 쓰는 표현, 뉘앙스까지",
     "tip": "여행·발음·듣기, 바로 써먹는 영어 팁",
+    "story": "매일 쓰는 단어에 숨은 역사",
     "think": "곱씹을 문장을 듣고, 쓰고, 떠올려요",
 }
 e = lambda s: html.escape(str(s), quote=True)
@@ -651,13 +655,13 @@ def tabbar(nav):
         f'<a href="{h}"{on if nav == k or (k == "video" and nav == "think") else ""}>{ic}<span>{t}</span></a>' for k, h, t, ic in TABS) + '</nav>')
 
 
-# 앱 아래 탭 '영상·문장' 안에서 두 카테고리를 오가는 전환 (앱에서만 보임)
+# '영상' 칸 안에서 영상으로 배우기 ↔ 사유의 문장 전환 (웹·앱 모두)
 APP_SEG = lambda cat: ('<div class="app-seg no-print" role="tablist" aria-label="영상·문장">'
                        + "".join(f'<a role="tab" href="/category/{k}/"{" class=on aria-selected=true" if k == cat else ""}>{CATS[k]}</a>' for k in ("video", "think")) + '</div>')
 # 앱에서는 두 카테고리가 '영상·문장' 탭 하나이므로 제목·설명도 묶음 이름으로 (웹·검색엔진에는 원래 제목 그대로)
 APP_HEAD = lambda cat: (f'<h1 data-app="영상·문장"><span class="wt">{CATS[cat]}</span></h1>'
                         f'<p class="lead" data-app="영상 속 표현과 곱씹을 문장을 한곳에"><span class="wt">{CAT_LEAD[cat]}</span></p>')
-NAV_SHORT = {"video": "영상", "expr": "표현", "tip": "꿀팁", "think": "문장"}  # 휴대폰 위쪽 메뉴는 짧은 이름 (앱 탭과 같게)
+NAV_SHORT = {"video": "영상", "expr": "표현", "tip": "꿀팁", "story": "이야기", "think": "문장"}  # 휴대폰 위쪽 메뉴는 짧은 이름 (앱 탭과 같게)
 
 
 def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og-home-2.png", seo_title=None, ld=None, preload="", robots=""):
@@ -680,7 +684,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
                  f"src:url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2-variations'),url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2')}}</style>"
                  if FONT_V else '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">')
     navlinks = f'<a href="/"{" class=on" if path == "/" else ""}>홈</a>' + "".join(
-        f'<a href="/category/{k}/"{" class=on" if nav == k else ""}><span class="nl-l">{v}</span><span class="nl-s">{NAV_SHORT[k]}</span></a>' for k, v in CATS.items())
+        f'<a href="/category/{k}/"{" class=on" if nav == k or (k == "video" and nav == "think") else ""}><span class="nl-l">{CATS[k]}</span><span class="nl-s">{NAV_SHORT[k]}</span></a>' for k in NAV_CATS)
     room = f'<a class="room{" on" if nav == "notes" else ""}" href="/notes/">내 공부방<span class="badge" id="nav-badge" hidden></span></a>'
     room = ('<button class="srch-btn" type="button" aria-label="표현 검색" title="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>' + room)
     pjson = json.dumps(data or {}, ensure_ascii=False).replace("</", "<\\/")
@@ -1209,8 +1213,11 @@ CAT_ABOUT = {
         "원어민이 매일 쓰는 짧은 표현을 골라, 뉘앙스 → 비슷한 표현 비교 → 자주 하는 실수 → 퀴즈 순서로 정리해요.",
         [("speech-balloon", "처음이라면", "'기초'부터 보세요"), ("laptop", "회사·메일이라면", "'실전'을 골라요"), ("check", "복습은", "내 공부방에 모여요")]),
     "tip": _about_box("영어꿀팁에서는 이런 걸 다뤄요",
-        "여행 문장, 연음과 발음, 콩글리시, 단어의 숨은 역사까지. '왜 그런지'를 먼저 설명하고 바로 쓸 문장을 보여 줘요.",
-        [("airplane", "여행 전이라면", "여행 시리즈부터"), ("ear", "듣기가 막히면", "연음 글부터"), ("light-bulb", "가볍게 읽으려면", "'영어 이야기'로")]),
+        "여행 문장, 생활 회화, 연음과 발음, 콩글리시까지. '왜 그런지'를 먼저 설명하고 바로 쓸 문장을 보여 줘요.",
+        [("airplane", "여행 전이라면", "여행 시리즈부터"), ("ear", "듣기가 막히면", "연음 글부터"), ("mobile-phone", "말하기 전에", "콩글리시 점검")]),
+    "story": _about_box("영어 이야기는 이렇게 읽어요",
+        "매일 쓰는 단어가 어디서 왔는지 옛 신문, 편지, 사진 같은 실제 기록으로 따라가요. 출처가 확인된 이야기만 쓰고, 잘못 알려진 설은 따로 구분해요.",
+        [("light-bulb", "가볍게 읽고", "단어의 숨은 사연"), ("speech-balloon", "바로 써 보기", "지금 쓰는 예문"), ("check", "기억하기", "퀴즈 3문제")]),
     "video": _about_box("영상으로 배우기는 이렇게 봐요",
         "인터뷰와 연설을 장면 단위로 나눠, 짧게 인용하고 길게 해설해요. '이 장면 듣기'로 원본 목소리를 바로 들을 수 있어요.",
         [("headphone", "먼저", "자막 없이 듣기"), ("page", "그다음", "장면 해설 읽기"), ("check", "마지막", "표현 5개와 퀴즈")]),
@@ -1267,6 +1274,8 @@ def page_category(cat):
             lvs = [level(p) for p in items]
             g_lv = ('<div class="sf-g" role="group" aria-label="난이도"><div class="sf-h">난이도</div>' + lvb("", len(items), "전체", " on")
                     + lvb("기초", lvs.count("기초"), "기초") + lvb("실전", lvs.count("실전"), "실전") + "</div>")
+            if cat == "story":  # 영어 이야기는 모두 읽을거리라 난이도 필터 없이 분류만
+                g_lv = ""
             g_sub = ('<div class="sf-g" role="group" aria-label="분류"><div class="sf-h">분류</div>' + btn("", len(items), "전체", " on")
                      + "".join(btn(x, sum(1 for p in items if p.get("sub") == x), x) for x in subs) + "</div>") if len(subs) > 1 else ""
             filt = f'<aside class="subfilter" aria-label="글 고르기">{g_lv}{g_sub}<p class="sf-empty" hidden>이 조합의 글은 아직 없어요</p></aside>'
