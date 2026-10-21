@@ -1,0 +1,73 @@
+{
+  "id": "hello-origin",
+  "cat": "tip",
+  "sub": "영어 이야기",
+  "level": "기초",
+  "date": "2026-10-21",
+  "title": "hello는 원래 전화 인사였다? 에디슨이 퍼뜨린 다섯 글자",
+  "seo_title": "hello 어원 - 에디슨이 전화 인사로 퍼뜨린 hello의 유래",
+  "lead": "벨은 Ahoy, 에디슨은 Hello. 전화가 정한 인사 이야기",
+  "description": "hello는 1877년 에디슨이 전화 첫마디로 제안하며 퍼진 말이에요. 벨이 밀던 Ahoy와의 경쟁, 원래 뜻, hi·hey와의 차이, 전화 영어 실수까지 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Hello! vs Ahoy!",
+    "ko": "전화가 정한 영어 인사 이야기"
+  },
+  "icon": "telephone",
+  "chat": {
+    "q": "Hello? Who's calling?",
+    "a": "Hi, this is Minji.",
+    "key": "this is",
+    "ko": "안녕하세요, 저 민지예요."
+  },
+  "thumb": {
+    "text": "Hello! vs Ahoy!",
+    "key": "Hello!",
+    "ko": "전화 첫마디는 뭐였을까?"
+  },
+  "quiz": [
+    {
+      "tag": "영어 이야기",
+      "q": "전화가 처음 생겼을 때 벨이 첫마디로 밀었던 말은?",
+      "sub": "",
+      "options": [
+        "Hello!",
+        "Ahoy!",
+        "Good day!",
+        "Hey there!"
+      ],
+      "answer": 1,
+      "explain": "벨은 뱃사람들이 서로 부르던 Ahoy(어이!)를 밀었어요. 에디슨이 제안한 Hello가 결국 이겼어요.",
+      "mnemonic": "벨은 배(ship)의 Ahoy, 에디슨은 Hello"
+    },
+    {
+      "tag": "영어 이야기",
+      "q": "에디슨이 편지에서 hello를 쓰면 필요 없다고 한 것은?",
+      "sub": "",
+      "options": [
+        "전화번호부",
+        "교환원",
+        "호출 벨",
+        "수화기"
+      ],
+      "answer": 2,
+      "explain": "Hello!라고 외치면 10~20피트 떨어져서도 들리니 호출 벨(call bell)이 필요 없다고 했어요.",
+      "mnemonic": "벨(bell) 대신 hello"
+    },
+    {
+      "tag": "전화 영어",
+      "q": "전화를 걸어 '저 민지예요'라고 할 때 가장 자연스러운 말은?",
+      "sub": "",
+      "options": [
+        "I am Minji.",
+        "Here is Minji.",
+        "This is Minji.",
+        "My name is call Minji."
+      ],
+      "answer": 2,
+      "explain": "전화에서는 This is ~로 나를 밝혀요. 상대를 확인할 땐 Is this ~?로 물어요.",
+      "mnemonic": "얼굴이 안 보이니 '이쪽(this)은 민지'"
+    }
+  ],
+  "body_html": "<p>영어를 배우면 제일 먼저 만나는 단어, <b>hello</b>. 너무 기본이라 아주 옛날부터 쓰던 인사 같지만, hello가 지금처럼 \"안녕하세요\"의 대표 선수가 된 건 150년쯤 전이에요. 계기는 바로 <b>전화</b>였어요.</p>\n<h2>전화기가 생기자 생긴 고민</h2>\n<p>1876년 알렉산더 그레이엄 벨이 전화 특허를 받았어요. 그런데 막상 전화가 생기자 엉뚱한 문제가 생겼어요. 얼굴이 안 보이는 상대에게 <b>첫마디를 뭐라고 해야 할지</b> 정해진 말이 없었던 거예요. 편지에는 Dear가 있고 만나면 악수가 있지만, 전화에는 아무 규칙이 없었어요.</p>\n<p>벨이 밀었던 말은 <b>Ahoy!</b>였어요. 뱃사람들이 멀리 있는 배를 부를 때 외치던 \"어이!\" 같은 말이에요. 벨은 실제로 전화를 받을 때 Ahoy나 Hoy hoy를 썼다고 전해져요. 미국 애니메이션 심슨 가족에서 번스 사장이 전화를 받으며 <b>\"Ahoy-hoy?\"</b>라고 하는 장면도 이 이야기를 비튼 농담이에요.</p>\n<h2>에디슨의 편지 한 줄</h2>\n<p>여기에 다른 답을 내놓은 사람이 <b>토머스 에디슨</b>이에요. 1877년 8월, 에디슨은 피츠버그에서 전화 사업을 준비하던 전신 회사 대표 T.B.A. 데이비드에게 이런 편지를 보냈어요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Friend David, I do not think we shall need a call bell as Hello! can be heard 10 to 20 feet away.</span><span class=\"ko\">데이비드에게, 호출 벨은 필요 없을 것 같아요. \"Hello!\"라고 하면 10~20피트(3~6m) 떨어져서도 들리니까요.</span></li>\n</ul></div>\n<p>에디슨에게 hello는 인사라기보다 <b>\"여보세요, 거기 누구 있어요?\"</b> 하고 상대를 부르는 소리였어요. 벨을 울리는 대신 크게 hello를 외치면 된다는 거죠.</p>\n<figure class=\"fig\"><img src=\"/images/story-hello-edison.webp\" alt=\"1878년 무렵 자신이 만든 축음기 옆에 앉아 있는 토머스 에디슨의 흑백 사진\" width=\"794\" height=\"1000\" loading=\"lazy\"><figcaption>1878년 무렵, 축음기와 함께 사진을 찍은 에디슨 (미국 의회도서관 소장, 퍼블릭 도메인)</figcaption></figure>\n<h2>hello는 원래 인사가 아니었다</h2>\n<p>hello라는 소리 자체는 그전에도 있었어요. hallo, hullo, halloo처럼 철자도 제각각이었고, 주로 <b>멀리 있는 사람을 부르거나 놀랐을 때</b> 내는 소리였어요. 우리말로 치면 \"어이!\", \"어머!\"에 가까웠죠. 정중하게 인사할 땐 Good day나 How do you do 같은 말을 썼어요.</p>\n<p>그런데 에디슨이 전화 시스템을 만들면서 hello가 전화의 첫마디로 자리를 잡았어요. 전화 교환원과 이용자들이 매일 hello를 쓰자 Ahoy는 밀려났고, 1880년 무렵에는 hello가 전화 인사로 널리 퍼졌다고 해요. 전화로 매일 쓰던 말이 얼굴을 보고 하는 인사로까지 넓어지면서, 지금의 <b>\"안녕하세요\"</b>가 됐어요.</p>\n<h2>지금은 이렇게 써요</h2>\n<p>hello는 지금도 상황에 따라 뉘앙스가 꽤 달라져요. 억양까지 같이 기억하면 좋아요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Hello?</span><span class=\"ko\">여보세요? (전화 받을 때, 끝을 올려서)</span></li>\n<li><span class=\"en\">Hello, is anyone there?</span><span class=\"ko\">저기요, 누구 계세요? (아무도 없어 보일 때)</span></li>\n<li><span class=\"en\">Hello? Are you even listening?</span><span class=\"ko\">저기요? 듣고는 있는 거야? (짜증 섞인 hello)</span></li>\n<li><span class=\"en\">Say hello to your mom for me.</span><span class=\"ko\">어머님께 안부 전해 줘.</span></li>\n<li><span class=\"en\">I just wanted to say hello.</span><span class=\"ko\">그냥 인사하고 싶어서 연락했어.</span></li>\n</ul></div>\n<p>특히 세 번째처럼 <b>끝을 길게 끌며 Hello?</b>라고 하면 \"정신 차려, 내 말 좀 들어\"라는 뜻이 돼요. 에디슨 시절의 \"거기 누구 있어요?\" 느낌이 그대로 남아 있는 셈이에요.</p>\n<h2>hello, hi, hey의 온도</h2>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>인사</th><th>느낌</th><th>언제</th></tr></thead><tbody><tr><td>Hello</td><td>기본, 깔끔한 인사</td><td>처음 보는 사람, 전화, 이메일</td></tr><tr><td>Hi</td><td>가볍고 밝은 인사</td><td>동료, 지인, 대부분의 일상</td></tr><tr><td>Hey</td><td>친한 사이의 인사</td><td>친구, 가족, 아주 편한 동료</td></tr><tr><td>Good morning</td><td>시간이 들어간 정중한 인사</td><td>아침 회의, 가게, 이웃</td></tr></tbody></table></div>\n<p>헷갈리면 <b>Hi</b>를 쓰면 거의 실패하지 않아요. Hello는 조금 더 또박또박한 느낌이라 처음 인사나 전화에 잘 어울려요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 에디슨이 벨(bell) 대신 hello! 호출 벨을 울리지 말고 \"hello!\" 하고 부르면 된다는 아이디어에서 지금의 인사가 됐어요.</div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">전화를 걸어 내가 누구인지 밝힐 때</span><span class=\"no\">Hello, I am Minji.</span><span class=\"en\">Hi, this is Minji.</span><span class=\"ko\">안녕하세요, 저 민지예요.</span><span class=\"why\"><b>왜?</b>전화에서는 얼굴이 안 보이니 \"이쪽은 민지예요\"라는 느낌으로 <b>This is ~</b>를 써요. I am도 틀린 건 아니지만 전화에서는 This is가 훨씬 자연스러워요. 받는 사람에게 확인할 땐 Is this Tom?처럼 물어요.</span></li>\n</ul></div>\n<p>참고로 OK도 hello처럼 19세기 미국에서 퍼진 말이에요. 두 글자의 출신이 궁금하다면 <a href=\"/p/ok-origin/\">OK는 어디서 왔을까</a>도 같이 읽어 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: 에디슨이 T.B.A. 데이비드에게 보낸 편지(1877년 8월, 수집가 앨런 쾨니히스버그가 AT&amp;T 자료실에서 발굴), Futility Closet와 Newsgram의 정리 기사.</p>",
+  "related": []
+}

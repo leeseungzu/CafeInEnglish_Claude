@@ -85,5 +85,25 @@
       "chung-euisun-put-down-roots"
     ],
     "lead": "리더들의 연설과 인터뷰 속 영어"
+  },
+  {
+    "id": "story",
+    "title": "단어 속에 숨은 이야기",
+    "icons": [
+      "telephone",
+      "alarm-clock",
+      "lady-beetle"
+    ],
+    "bg": "tip",
+    "desc": "hello, OK, deadline, bug처럼 매일 쓰는 영어 단어가 어디서 왔는지, 실제 기록과 사진으로 따라가 보는 이야기",
+    "posts": [
+      "hello-origin",
+      "ok-origin",
+      "deadline-origin",
+      "bug-origin",
+      "words-changed-meaning"
+    ],
+    "thinks": [],
+    "lead": "매일 쓰는 단어의 숨은 역사"
   }
 ]

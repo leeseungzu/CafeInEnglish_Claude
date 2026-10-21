@@ -1,0 +1,73 @@
+{
+  "id": "do-you-speak-english",
+  "cat": "tip",
+  "sub": "회화",
+  "level": "기초",
+  "date": "2026-10-21",
+  "title": "\"Can you speak English?\" 말고 \"Do you speak English?\"",
+  "seo_title": "Can you speak English 실례? - Do you speak English와 차이",
+  "lead": "상대에게 영어 하는지 물을 때 한 단어 차이",
+  "description": "Can you speak English?는 능력을 묻는 느낌이라 어색할 수 있어요. Do you speak English?와의 차이, can이 맞는 경우, 영어 하냐고 물을 때와 대답할 때 쓰는 문장을 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Do you speak English?",
+    "ko": "Can 대신 Do로 물어요"
+  },
+  "icon": "speech-balloon",
+  "chat": {
+    "q": "Excuse me, do you speak English?",
+    "a": "A little. How can I help you?",
+    "key": "A little",
+    "ko": "조금요. 뭘 도와드릴까요?"
+  },
+  "thumb": {
+    "text": "Do you speak English?",
+    "key": "Do",
+    "ko": "Can? Do?"
+  },
+  "quiz": [
+    {
+      "tag": "회화",
+      "q": "처음 보는 사람에게 영어를 하는지 물을 때 가장 자연스러운 말은?",
+      "sub": "",
+      "options": [
+        "You can speak English?",
+        "Can you English?",
+        "Excuse me, do you speak English?",
+        "Are you speak English?"
+      ],
+      "answer": 2,
+      "explain": "Excuse me로 말을 걸고 Do you speak ~?로 사실을 묻는 게 가장 무난하고 정중해요.",
+      "mnemonic": "Can = 실력 검사, Do = 그냥 확인"
+    },
+    {
+      "tag": "회화",
+      "q": "상대가 말이 너무 빨라요. '조금만 천천히 말씀해 주시겠어요?'는?",
+      "sub": "",
+      "options": [
+        "Do you speak slower?",
+        "Can you speak a little slower, please?",
+        "Do you slow?",
+        "Are you speak slowly?"
+      ],
+      "answer": 1,
+      "explain": "부탁할 때는 can이 맞아요. Can you ~, please?는 정중한 부탁의 기본 틀이에요.",
+      "mnemonic": "부탁은 Can you ~, please?"
+    },
+    {
+      "tag": "표현",
+      "q": "\"I'm still learning, so please bear with me.\"에서 bear with me의 뜻은?",
+      "sub": "",
+      "options": [
+        "곰처럼 힘을 내 주세요",
+        "조금만 참고 이해해 주세요",
+        "저와 같이 공부해요",
+        "저를 데려가 주세요"
+      ],
+      "answer": 1,
+      "explain": "bear with me는 '조금만 참고 기다려 주세요, 이해해 주세요'라는 뜻이에요.",
+      "mnemonic": "bear(견디다) + with me = 나와 함께 조금만 견뎌 줘요"
+    }
+  ],
+  "body_html": "<p>해외에서 길을 묻거나 도움을 청하기 전에, 상대가 영어를 하는지 먼저 확인하고 싶을 때가 있어요. 이때 많이 떠올리는 문장이 <b>Can you speak English?</b>예요. 문법은 맞아요. 그런데 원어민이나 영어를 잘하는 사람에게는 살짝 어색하게 들릴 수 있어요. 이유는 can이라는 단어에 있어요.</p>\n<h2>can은 '능력'을 묻는 말</h2>\n<p>can은 \"~할 수 있어?\"라는 <b>능력</b>을 물어요. 그래서 Can you speak English?는 듣는 사람에 따라 \"당신 영어 할 줄은 알아요?\"처럼 실력을 시험하는 느낌이 날 수 있어요. 반면 <b>Do you speak English?</b>는 \"영어 쓰세요?\"라는 <b>사실</b>을 묻는 말이라 훨씬 담담하고 정중하게 들려요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>질문</th><th>무엇을 묻나</th><th>느낌</th></tr></thead><tbody><tr><td>Do you speak English?</td><td>영어를 쓰는지 (사실)</td><td>무난하고 정중함</td></tr><tr><td>Can you speak English?</td><td>영어를 할 줄 아는지 (능력)</td><td>상황에 따라 실력을 의심하는 듯</td></tr><tr><td>Excuse me, do you speak English?</td><td>말 걸기 + 사실 확인</td><td>처음 말 걸 때 가장 자연스러움</td></tr></tbody></table></div>\n<p>물론 Can you speak English?라고 했다고 화내는 사람은 거의 없어요. 영어가 모국어가 아닌 나라에서는 오히려 흔하게 쓰이기도 해요. 다만 한 단어만 바꿔도 더 매끄럽게 들린다면, Do you를 습관으로 만드는 게 좋아요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> Can = 실력 검사, Do = 그냥 확인. 처음 보는 사람에게 실력 검사부터 하지 않기!</div>\n<h2>왜 우리는 can부터 떠올릴까</h2>\n<p>한국어로는 \"영어 할 줄 아세요?\", \"영어 하실 수 있어요?\"처럼 '할 수 있다'를 넣어 묻는 게 자연스러워요. 이 말을 그대로 옮기면 can이 먼저 나와요. 학교에서 can을 '~할 수 있다'로 처음 배운 것도 한몫해요. 하지만 영어에서 언어는 '능력'이기 전에 그 사람이 '쓰는 것'으로 생각해요. 그래서 \"영어 쓰세요?\"를 그대로 옮긴 <b>Do you speak English?</b>가 기본 질문이 된 거예요.</p>\n<h2>다른 언어도 똑같아요</h2>\n<p>이 규칙은 영어에만 해당하지 않아요. 상대에게 어떤 언어를 쓰는지 물을 땐 늘 <b>Do you speak ~?</b>로 물어요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Excuse me, do you speak English?</span><span class=\"ko\">실례지만, 영어 하세요?</span></li>\n<li><span class=\"en\">Do you speak Korean by any chance?</span><span class=\"ko\">혹시 한국어 하세요?</span></li>\n<li><span class=\"en\">Does anyone here speak English?</span><span class=\"ko\">여기 영어 하시는 분 있나요?</span></li>\n<li><span class=\"en\">Which languages do you speak?</span><span class=\"ko\">어떤 언어들을 하세요?</span></li>\n</ul></div>\n<p>두 번째 문장의 <b>by any chance</b>는 '혹시'라는 뜻이에요. 질문 끝에 붙이면 기대하지 않고 조심스럽게 묻는 느낌이 생겨서 처음 보는 사람에게 말 걸 때 아주 유용해요.</p>\n<h2>can이 자연스러운 경우</h2>\n<p>그렇다고 can을 쓰면 안 되는 건 아니에요. <b>정말 능력을 물을 때</b>는 can이 맞아요. 예를 들어 얼마나 잘하는지, 특정 상황에서 할 수 있는지를 물을 때예요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Can you speak English well enough to give a presentation?</span><span class=\"ko\">발표할 수 있을 만큼 영어를 잘하세요?</span></li>\n<li><span class=\"en\">Can you speak a little slower, please?</span><span class=\"ko\">조금만 천천히 말씀해 주시겠어요?</span></li>\n</ul></div>\n<p>두 번째 문장은 부탁이라서 can이 딱 맞아요. 상대 말이 빨라서 못 알아들었다면 이 문장을 꼭 기억해 두세요. 되묻는 문장을 더 알고 싶다면 <a href=\"/p/ask-to-repeat/\">못 알아들었을 때 되묻는 영어</a>에 모아 두었어요.</p>\n<h2>실제 대화 · 해외 기차역에서</h2>\n<ul class=\"ex talk\">\n<li class=\"me\"><span class=\"en\">Excuse me, do you speak English?</span><span class=\"ko\">실례지만, 영어 하세요?</span></li>\n<li class=\"them\"><span class=\"en\">A little. How can I help you?</span><span class=\"ko\">조금요. 뭘 도와드릴까요?</span></li>\n<li class=\"me\"><span class=\"en\">Which platform is the train to the airport?</span><span class=\"ko\">공항 가는 기차는 몇 번 승강장이에요?</span></li>\n<li class=\"them\"><span class=\"en\">Platform four. It leaves in ten minutes.</span><span class=\"ko\">4번 승강장이요. 10분 뒤에 떠나요.</span></li>\n<li class=\"me\"><span class=\"en\">Thank you so much!</span><span class=\"ko\">정말 감사합니다!</span></li>\n</ul>\n<h2>내가 영어를 하는지 대답할 때</h2>\n<p>반대로 누군가 Do you speak English?라고 물으면 어떻게 대답할까요? 실력에 따라 이렇게 말하면 돼요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Yes, I do.</span><span class=\"ko\">네, 해요.</span></li>\n<li><span class=\"en\">A little.</span><span class=\"ko\">조금 해요.</span></li>\n<li><span class=\"en\">I'm still learning, so please bear with me.</span><span class=\"ko\">아직 배우는 중이라 조금만 이해해 주세요.</span></li>\n</ul></div>\n<p>마지막 문장의 <b>bear with me</b>는 '조금만 참고 기다려 주세요'라는 뜻이에요. 실력이 부족하다고 사과하는 대신 이렇게 말하면 상대도 천천히, 쉬운 말로 이야기해 줘요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">식당 직원에게 영어 메뉴가 있는지 물어보기 전에</span><span class=\"no\">You can speak English?</span><span class=\"en\">Excuse me, do you speak English?</span><span class=\"ko\">실례지만, 영어 하세요?</span><span class=\"why\"><b>왜?</b>평서문 끝만 올려서 묻는 You can speak English?는 \"영어 할 줄 안다고?\" 하고 놀라거나 의심하는 말처럼 들릴 수 있어요. Excuse me로 먼저 말을 걸고 Do you로 물으면 가장 공손해요.</span></li>\n</ul></div>",
+  "related": []
+}

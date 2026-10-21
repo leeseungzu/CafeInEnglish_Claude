@@ -1,0 +1,73 @@
+{
+  "id": "on-the-fence",
+  "cat": "expr",
+  "sub": "새 표현",
+  "level": "기초",
+  "date": "2026-10-21",
+  "title": "\"I'm on the fence\", '아직 고민 중이야'를 한마디로",
+  "seo_title": "on the fence 뜻 - '아직 고민 중이야, 결정 못 했어' 영어로",
+  "lead": "울타리 위에 앉아 어느 쪽으로도 못 내려간 마음",
+  "description": "I'm on the fence는 '아직 결정 못 했어, 고민 중이야'라는 뜻이에요. on the fence about -ing 쓰는 법, sleep on it·mixed feelings와의 차이, 실제 대화와 퀴즈로 정리했어요.",
+  "og": {
+    "en": "I'm on the fence.",
+    "ko": "'아직 고민 중이야'를 한마디로"
+  },
+  "icon": "thinking-face",
+  "chat": {
+    "q": "Are you coming to the party?",
+    "a": "I'm still on the fence.",
+    "key": "on the fence",
+    "ko": "아직 고민 중이야."
+  },
+  "thumb": {
+    "text": "I'm on the fence.",
+    "key": "fence",
+    "ko": "아직 고민 중이야"
+  },
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "\"I'm on the fence about moving.\"은 무슨 뜻일까요?",
+      "sub": "",
+      "options": [
+        "이사를 이미 결정했어",
+        "이사 갈지 아직 고민 중이야",
+        "울타리를 옮기는 중이야",
+        "이사가 너무 싫어"
+      ],
+      "answer": 1,
+      "explain": "on the fence는 두 선택지 사이에서 아직 마음을 정하지 못한 상태예요.",
+      "mnemonic": "울타리 위에서 다리만 흔들흔들"
+    },
+    {
+      "tag": "문법",
+      "q": "빈칸에 알맞은 말은? I'm on the fence ___ the job offer.",
+      "sub": "",
+      "options": [
+        "to",
+        "about",
+        "for taking",
+        "with to"
+      ],
+      "answer": 1,
+      "explain": "고민하는 주제는 about으로 붙여요. 동사가 오면 about taking처럼 -ing를 써요.",
+      "mnemonic": "뭐에 대해(about) 고민 중?"
+    },
+    {
+      "tag": "비슷한 표현",
+      "q": "당장 대답하기 어려워 '하룻밤 생각해 볼게요'라고 할 때 알맞은 말은?",
+      "sub": "",
+      "options": [
+        "Let me sleep on it.",
+        "I'm down.",
+        "I made up my mind.",
+        "Count me in."
+      ],
+      "answer": 0,
+      "explain": "sleep on it은 하룻밤 자면서 생각해 보고 정하겠다는 뜻이에요. 나머지는 이미 결정했거나 찬성하는 말이에요.",
+      "mnemonic": "고민을 베개 삼아 자고 일어나서 결정"
+    }
+  ],
+  "body_html": "<h2>뜻</h2>\n<div class=\"box\"><b>I'm on the fence.</b> = 아직 결정을 못 했어, 고민 중이야</div>\n<p>울타리(fence) 위에 걸터앉은 모습을 떠올려 보세요. 이쪽으로 내려갈지 저쪽으로 내려갈지 아직 정하지 못한 상태죠. 그래서 <b>on the fence</b>는 두 선택지 사이에서 <b>마음을 정하지 못하고 망설이는 상태</b>를 말해요. 무엇을 고민하는지 붙이고 싶으면 <b>on the fence about + 명사/-ing</b>를 써요.</p>\n<p>\"I don't know\"보다 훨씬 자연스럽고, \"아직 생각 중이야\"라는 여지를 남기는 말이라 친구끼리도, 회사에서도 편하게 쓸 수 있어요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 울타리 위에 앉아 다리를 양쪽으로 흔들흔들. 어느 쪽으로도 아직 안 내려갔어요.</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I'm still on the fence about the trip.</span><span class=\"ko\">여행 갈지 아직 고민 중이야.</span></li>\n<li><span class=\"en\">I'm on the fence about buying a new laptop.</span><span class=\"ko\">새 노트북을 살지 말지 고민 중이에요.</span></li>\n<li><span class=\"en\">A lot of voters are still on the fence.</span><span class=\"ko\">아직 마음을 못 정한 유권자가 많아요.</span></li>\n<li><span class=\"en\">If you're on the fence, try the free trial first.</span><span class=\"ko\">고민 중이라면 무료 체험부터 해 보세요.</span></li>\n</ul></div>\n<p>마지막 문장처럼 광고나 안내문에서도 자주 보여요. \"아직 망설이는 분들\"을 콕 집어 부르는 말이에요.</p>\n<h2>고민의 정도에 따라</h2>\n<p>결정을 못 했다는 말에도 온도가 있어요. 내 마음이 어디쯤인지에 따라 골라 쓰면 훨씬 자연스러워요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>마음</th><th>표현</th><th>느낌</th></tr></thead><tbody><tr><td>반반이야</td><td>I'm on the fence.</td><td>둘 다 끌려서 못 정함</td></tr><tr><td>좀 더 생각해 볼게</td><td>Let me sleep on it.</td><td>하룻밤 자고 정할게</td></tr><tr><td>두 가지 마음이야</td><td>I have mixed feelings.</td><td>좋기도 하고 싫기도 해</td></tr><tr><td>완전 갈팡질팡</td><td>I keep going back and forth.</td><td>이랬다저랬다 해</td></tr><tr><td>이제 정했어</td><td>I've made up my mind.</td><td>마음 굳혔어</td></tr></tbody></table></div>\n<p>특히 <b>Let me sleep on it.</b>은 당장 답을 주기 어려울 때 정중하게 시간을 버는 말이에요. 물건을 살 때나 제안을 받았을 때 바로 쓸 수 있어요.</p>\n<h2>실제 대화 · 이직을 고민할 때</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">So, are you taking the new job offer?</span><span class=\"ko\">그래서, 그 회사 제안 받아들일 거야?</span></li>\n<li class=\"me\"><span class=\"en\">Honestly, I'm still on the fence.</span><span class=\"ko\">솔직히 아직 고민 중이야.</span></li>\n<li class=\"them\"><span class=\"en\">What's holding you back?</span><span class=\"ko\">뭐가 걸리는데?</span></li>\n<li class=\"me\"><span class=\"en\">The pay is better, but I'd have to move to another city.</span><span class=\"ko\">연봉은 더 좋은데, 다른 도시로 이사 가야 하거든.</span></li>\n<li class=\"them\"><span class=\"en\">Why don't you sleep on it and decide this weekend?</span><span class=\"ko\">하룻밤 더 생각해 보고 주말에 정하는 건 어때?</span></li>\n</ul>\n<h2>한국인이 헷갈리는 부분</h2>\n<p>fence를 '담장'으로만 외우면 on the fence가 '담장 위에 올라가 있다'처럼 진짜 위치로 들려요. 하지만 대화에서 사람에게 쓰면 거의 항상 <b>결정을 못 한 상태</b>예요. 또 sit on the fence라고 하면 조금 비판적인 느낌이 생겨요. 토론이나 논쟁에서 \"어느 편도 안 들고 눈치만 본다\"는 뜻으로 쓰이거든요. 친구가 고민을 털어놓을 때는 on the fence, 누군가 입장을 피할 때는 sit on the fence라고 구분해서 기억해 두세요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">You can't sit on the fence forever.</span><span class=\"ko\">언제까지 중립만 지킬 순 없어.</span></li>\n</ul></div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">무엇을 고민하는지 같이 말할 때</span><span class=\"no\">I'm on the fence to buy it.</span><span class=\"en\">I'm on the fence about buying it.</span><span class=\"ko\">그거 살지 말지 고민 중이야.</span><span class=\"why\"><b>왜?</b>on the fence 뒤에는 to 부정사가 아니라 <b>about + -ing</b>가 와요. 고민하는 '주제'를 붙이는 구조라서 about을 써요.</span></li>\n</ul></div>\n<h2>발음과 억양</h2>\n<p>on the fence는 세 단어가 붙어서 <b>\"온더펜스\"</b>처럼 한 덩어리로 들려요. the는 아주 약하게 '더'보다 '(드)'에 가깝게 지나가고, 강세는 <b>fence</b>에 와요. fence의 f는 윗니를 아랫입술에 살짝 대고 바람을 내보내는 소리라서, 한국어 '펜스'의 ㅍ처럼 터뜨리면 pence처럼 들릴 수 있어요. still이 들어가면 I'm <b>still</b> on the <b>fence</b>처럼 still에도 힘을 줘서 \"아직도\"를 강조해요.</p>\n<h2>자주 묻는 질문</h2>\n<p><b>Q. 회사에서 써도 괜찮아요?</b><br>네, 캐주얼하지만 무례하지 않은 표현이라 동료나 상사에게도 쓸 수 있어요. 다만 공식 문서에서는 I haven't decided yet이나 We are still considering our options처럼 쓰는 게 더 단정해요.</p>\n<p><b>Q. 사람이 아니라 물건이나 일에도 써요?</b><br>주로 사람의 마음에 써요. 다만 \"결과가 아직 정해지지 않았다\"는 뜻으로 The decision is still up in the air(아직 미정이에요)를 함께 알아 두면 좋아요. 사람은 on the fence, 일은 up in the air로 기억하면 쉬워요.</p>\n<p>결정을 내렸다면 이제 대답할 차례예요. 친구의 제안에 \"콜!\"이라고 하고 싶다면 <a href=\"/p/im-down/\">I'm down</a>을, 정중하게 동의하고 싶다면 <a href=\"/p/sounds-good/\">Sounds good</a>을 써 보세요.</p>",
+  "related": []
+}

@@ -1,0 +1,73 @@
+{
+  "id": "deadline-origin",
+  "cat": "tip",
+  "sub": "영어 이야기",
+  "level": "기초",
+  "date": "2026-10-21",
+  "title": "deadline은 원래 넘으면 총에 맞는 선이었다",
+  "seo_title": "deadline 어원 - 남북전쟁 수용소의 '죽음의 선'에서 온 마감",
+  "lead": "1864년 수용소의 난간이 오늘의 마감이 되기까지",
+  "description": "deadline은 1864년 남북전쟁 앤더슨빌 수용소의 '넘으면 총에 맞는 선'에서 왔어요. 인쇄소를 거쳐 신문 마감이 된 과정과 meet·miss·extend the deadline 쓰는 법을 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "dead + line",
+    "ko": "deadline은 원래 '죽음의 선'이었어요"
+  },
+  "icon": "alarm-clock",
+  "chat": {
+    "q": "When do you need this by?",
+    "a": "The deadline is Friday.",
+    "key": "deadline",
+    "ko": "마감은 금요일이에요."
+  },
+  "thumb": {
+    "text": "dead + line",
+    "key": "dead",
+    "ko": "deadline의 원래 뜻은?"
+  },
+  "quiz": [
+    {
+      "tag": "영어 이야기",
+      "q": "앤더슨빌 수용소의 dead line은 무엇이었을까요?",
+      "sub": "",
+      "options": [
+        "포로 명단의 마지막 줄",
+        "넘으면 총에 맞는 난간",
+        "식량 배급 줄",
+        "탈출용 땅굴"
+      ],
+      "answer": 1,
+      "explain": "울타리 안쪽 약 20피트 떨어진 곳의 낮은 난간이었어요. 넘거나 건드리면 경비병이 총을 쏠 수 있었어요.",
+      "mnemonic": "dead + line = 넘으면 끝나는 선"
+    },
+    {
+      "tag": "영어 이야기",
+      "q": "deadline이 '마감 시각'이라는 뜻으로 쓰이기 시작한 곳은?",
+      "sub": "",
+      "options": [
+        "군대",
+        "신문 업계",
+        "은행",
+        "학교"
+      ],
+      "answer": 1,
+      "explain": "20세기 초 미국 신문 업계에서 원고를 넘겨야 하는 마지막 시각을 deadline이라고 부르기 시작했어요.",
+      "mnemonic": "기자들의 마감 = 넘으면 끝나는 선"
+    },
+    {
+      "tag": "표현",
+      "q": "'마감을 간신히 맞췄어요'를 영어로 하면?",
+      "sub": "",
+      "options": [
+        "We met the deadline barely.",
+        "We managed to meet the deadline.",
+        "We kept the deadline until.",
+        "We missed the deadline."
+      ],
+      "answer": 1,
+      "explain": "마감을 지키다는 meet the deadline, '간신히 해냈다'는 managed to를 붙여요. miss the deadline은 마감을 놓쳤다는 뜻이에요.",
+      "mnemonic": "마감과 만나면(meet) 성공, 놓치면(miss) 실패"
+    }
+  ],
+  "body_html": "<p>\"마감이 내일이야.\" 회사에서도 학교에서도 매일 듣는 말, <b>deadline</b>. 그런데 단어를 뜯어보면 조금 섬뜩해요. dead(죽은) + line(선), 말 그대로 <b>'죽음의 선'</b>이거든요. 이 이름은 비유가 아니었어요. 150여 년 전 미국에는 정말로 넘으면 목숨을 잃는 선이 있었어요.</p>\n<h2>1864년, 앤더슨빌 수용소</h2>\n<p>미국 남북전쟁이 한창이던 1864년, 남부군은 조지아주 앤더슨빌에 북부군 포로를 가두는 수용소를 만들었어요. 높은 나무 울타리 안에 수만 명이 갇혀 있었고, 환경이 너무 열악해 많은 포로가 목숨을 잃은 곳으로 기록돼 있어요.</p>\n<p>이 울타리 안쪽에는 <b>낮은 난간</b>이 하나 더 있었어요. 울타리에서 약 20피트(6m쯤) 떨어진 곳에 세운 선이었죠. 포로가 이 난간을 넘거나 건드리면 경비병이 경고 없이 총을 쏠 수 있었어요. 그래서 이름이 <b>dead line</b>이었어요. 1864년 8월 남부군 장교가 쓴 검열 보고서에도 이렇게 적혀 있어요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">A railing around the inside of the stockade and about 20 feet from it constitutes the \"dead-line.\"</span><span class=\"ko\">울타리 안쪽을 따라, 울타리에서 약 20피트 떨어진 난간이 '데드라인'이다.</span></li>\n</ul></div>\n<figure class=\"fig\"><img src=\"/images/story-deadline-andersonville.webp\" alt=\"1864년 8월 앤더슨빌 수용소의 남서쪽 모습. 높은 나무 울타리 안에 천막이 빽빽하고, 울타리 안쪽을 따라 낮은 난간이 보인다\" width=\"1200\" height=\"745\" loading=\"lazy\"><figcaption>1864년 8월 17일, 앤더슨빌 수용소. 사진 원제는 '데드라인이 보이는 울타리 남서쪽 모습'이에요 (A. J. 리들 촬영, 미국 의회도서관 소장, 퍼블릭 도메인).</figcaption></figure>\n<p>전쟁이 끝난 뒤 수용소장 헨리 위르츠(Henry Wirz)는 전범 재판을 받았고, 재판 기록에 dead line이 여러 번 등장하면서 이 말이 널리 알려졌어요.</p>\n<h2>죽음의 선이 어떻게 마감이 됐을까</h2>\n<p>사실 그 사이에 다리가 하나 더 있어요. 인쇄소에서는 인쇄기 판 위에 그어 둔 <b>기준선</b>을 dead line이라고 불렀어요. 이 선을 넘어간 글자는 제대로 찍히지 않았거든요. '넘으면 안 되는 선'이라는 뜻이 수용소와 인쇄소에서 이어진 셈이에요.</p>\n<p>그리고 20세기 초, 미국 신문 업계에서 deadline이 <b>\"원고를 넘겨야 하는 마지막 시각\"</b>이라는 뜻으로 쓰이기 시작했어요. 1920년 무렵의 기록부터 이 뜻이 보여요. 신문사 기자들에게 마감 시각은 정말 '넘으면 끝나는 선'이었으니까요. 지금은 무서운 뜻은 다 사라지고 '마감, 기한'만 남았어요.</p>\n<h2>지금은 이렇게 써요</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">What's the deadline for this?</span><span class=\"ko\">이거 마감이 언제예요?</span></li>\n<li><span class=\"en\">The deadline is Friday.</span><span class=\"ko\">마감은 금요일이에요.</span></li>\n<li><span class=\"en\">We managed to meet the deadline.</span><span class=\"ko\">간신히 마감을 맞췄어요.</span></li>\n<li><span class=\"en\">Can we extend the deadline by a week?</span><span class=\"ko\">마감을 일주일 미룰 수 있을까요?</span></li>\n<li><span class=\"en\">I'm on a tight deadline.</span><span class=\"ko\">마감이 빠듯해요.</span></li>\n</ul></div>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>말하고 싶은 것</th><th>영어</th></tr></thead><tbody><tr><td>마감을 지키다</td><td>meet the deadline</td></tr><tr><td>마감을 놓치다</td><td>miss the deadline</td></tr><tr><td>마감을 연장하다</td><td>extend the deadline</td></tr><tr><td>마감이 다가오다</td><td>The deadline is coming up.</td></tr><tr><td>~까지 내야 해요</td><td>It's due by ~.</td></tr></tbody></table></div>\n<p>deadline 말고 <b>due</b>도 많이 써요. The report is due Friday(보고서는 금요일까지예요)처럼 '제출해야 하는 날'을 말할 때 짧고 편해요.</p>\n<h2>마감 직전을 말하는 영어</h2>\n<p>마감이 코앞일 때 원어민이 자주 쓰는 표현도 같이 알아 두면 좋아요. 신문사에서 deadline이 생긴 것처럼, 이 표현들도 대부분 스포츠나 일터의 긴박한 순간에서 나왔어요. 회의나 메신저에서 바로 쓸 수 있어요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">It's crunch time.</span><span class=\"ko\">이제 진짜 막판이야. (가장 바쁘고 중요한 시기)</span></li>\n<li><span class=\"en\">It came down to the wire.</span><span class=\"ko\">마지막 순간까지 갔어. (끝까지 아슬아슬했다)</span></li>\n<li><span class=\"en\">Sorry for the last-minute request.</span><span class=\"ko\">급하게 부탁드려서 죄송해요.</span></li>\n</ul></div>\n<p>특히 마지막 문장은 업무 메일에서 정말 자주 보여요. 마감 직전에 부탁할 일이 생겼다면 이 한 줄을 먼저 붙이는 게 예의예요. 반대로 여유 있게 끝냈다면 <b>We finished ahead of schedule.</b>(일정보다 일찍 끝냈어요)라고 말할 수 있어요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 넘으면 끝나는 선(dead line). 지금은 총 대신 상사의 표정이 기다리고 있어요.</div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">마감이 금요일이라고 말할 때</span><span class=\"no\">The deadline is until Friday.</span><span class=\"en\">The deadline is Friday.</span><span class=\"ko\">마감은 금요일이에요.</span><span class=\"why\"><b>왜?</b>deadline 자체가 '마지막 시점'이라 until(~까지 계속)을 붙이면 어색해요. '금요일까지 내야 해요'라고 하고 싶다면 It's due by Friday.처럼 by를 써요.</span></li>\n</ul></div>\n<p>\"이번 주 금요일\"과 \"다음 주 금요일\"을 헷갈리면 마감 날짜가 일주일 틀어질 수도 있어요. <a href=\"/p/this-vs-next/\">next Friday는 언제일까</a>도 같이 확인해 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: D. T. 챈들러 중령의 앤더슨빌 검열 보고서(1864년 8월), 헨리 위르츠 재판 기록, Etymonline 'deadline', Grammarphobia(2011), 미국 의회도서관 사진 자료.</p>",
+  "related": []
+}
