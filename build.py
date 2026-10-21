@@ -640,10 +640,10 @@ self.addEventListener("fetch", e => {
 # 웹 브라우저에서는 숨김(검색·광고 영향 없음). 주소 끝에 ?app=1 을 붙이면 웹에서도 미리 볼 수 있어요.
 _TI = lambda d: f'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{d}</svg>'
 TABS = [("home", "/", "홈", _TI('<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>')),
-        ("video", "/category/video/", "영상·문장", _TI('<rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/>')),
+        ("video", "/category/video/", "영상", _TI('<rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/>')),
         ("expr", "/category/expr/", "표현", _TI('<path d="M21 12a8 8 0 0 1-11.5 7.2L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/>')),
         ("tip", "/category/tip/", "꿀팁", _TI('<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/>')),
-        ("notes", "/notes/", "내 공부방", _TI('<path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/>'))]
+        ("story", "/category/story/", "이야기", _TI('<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/>'))]
 APP_HEAD_JS = ("<script>(function(){try{var q=/[?&]app=1/.test(location.search);if(q)sessionStorage.setItem('appPreview','1');"
                "if(q||sessionStorage.getItem('appPreview')||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone)"
                "document.documentElement.classList.add('is-app')}catch(e){}})();</script>")
@@ -1245,8 +1245,13 @@ def page_category(cat):
     def one_filter(title, keys):  # 한 그룹 필터 (영상: 종류, 사유의 문장: 인물)
         ks = [k for k in dict.fromkeys(keys) if k]
         b = lambda v, n, lbl, on="": f'<button type="button" class="sf-b{on}" data-sub="{e(v)}"><span>{e(lbl)}</span><em>{n}</em></button>'
+        view = ""
+        if cat in ("video", "think"):  # PC 오른쪽: 영상으로 배우기 ↔ 사유의 문장 (휴대폰에서는 숨기고 위쪽 전환 사용)
+            n = {"video": sum(1 for p in POSTS if p["cat"] == "video"), "think": len(THINKS)}
+            view = ('<div class="sf-g sf-view" role="group" aria-label="보기"><div class="sf-h">보기</div>'
+                    + "".join(f'<a class="sf-a{" on" if k == cat else ""}" href="/category/{k}/"><span>{CATS[k]}</span><em>{n[k]}</em></a>' for k in ("video", "think")) + '</div>')
         return (f'<aside class="subfilter sf-one" aria-label="{title}"><div class="sf-g" role="group" aria-label="{title}"><div class="sf-h">{title}</div>'
-                + b("", len(keys), "전체", " on") + "".join(b(k, keys.count(k), k) for k in ks) + '</div><p class="sf-empty" hidden>이 조합의 글은 아직 없어요</p></aside>')
+                + b("", len(keys), "전체", " on") + "".join(b(k, keys.count(k), k) for k in ks) + f'</div>{view}<p class="sf-empty" hidden>이 조합의 글은 아직 없어요</p></aside>')
     if cat == "think":
         items = THINKS
         who = [t.get("theme") or "기타" for t in THINKS]  # 주제(겸손·관계·흔들릴 때 …) — 새 글마다 content/think/*.json 의 "theme"
@@ -1263,6 +1268,13 @@ def page_category(cat):
         filt = one_filter("종류", sorted(kinds, key=order.index))
         body = (APP_HEAD(cat) + APP_SEG(cat) +
                 f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
+    elif cat == "story":
+        items = [p for p in POSTS if p["cat"] == cat]
+        cards = "".join(post_card(p, 2) for p in items)
+        subs = [p.get("sub", "") for p in items]
+        filt = one_filter("분류", subs) if len(set(subs)) > 1 else ""
+        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>'
+                f'<div class="cat-grid{" has-filter" if filt else ""}"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     else:
         items = [p for p in POSTS if p["cat"] == cat]
         cards = "".join(post_card(p, 2) for p in items) or '<div class="empty"><p>곧 첫 글이 올라와요.</p></div>'
@@ -1274,8 +1286,6 @@ def page_category(cat):
             lvs = [level(p) for p in items]
             g_lv = ('<div class="sf-g" role="group" aria-label="난이도"><div class="sf-h">난이도</div>' + lvb("", len(items), "전체", " on")
                     + lvb("기초", lvs.count("기초"), "기초") + lvb("실전", lvs.count("실전"), "실전") + "</div>")
-            if cat == "story":  # 영어 이야기는 모두 읽을거리라 난이도 필터 없이 분류만
-                g_lv = ""
             g_sub = ('<div class="sf-g" role="group" aria-label="분류"><div class="sf-h">분류</div>' + btn("", len(items), "전체", " on")
                      + "".join(btn(x, sum(1 for p in items if p.get("sub") == x), x) for x in subs) + "</div>") if len(subs) > 1 else ""
             filt = f'<aside class="subfilter" aria-label="글 고르기">{g_lv}{g_sub}<p class="sf-empty" hidden>이 조합의 글은 아직 없어요</p></aside>'

@@ -1792,7 +1792,6 @@ html.srch-open{overflow:hidden}
   .top-in>.srch-btn{display:none}
   .top .nav .nav-srch{display:inline-flex;justify-self:center;align-self:center;width:36px;height:36px;margin:0;color:#8B95A1}
   html.is-app .top-in>.srch-btn{display:inline-flex}
-  html.is-app .top .room{display:none}
 }
 /* 난이도 표시 */
 .lv{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:#6B7684;margin-left:6px;vertical-align:middle}
@@ -2326,3 +2325,22 @@ button.cn-en:focus-visible{outline:2px solid #2A1A12}
 
 /* 카드 높이 맞춤: 펼친 카드가 없을 때는 같은 줄 카드 높이를 같게, 버튼은 맨 아래로 */
 @media (min-width:900px){#notes-root .wl.two:not(:has(.wc-a)){align-items:stretch}}
+
+/* 2026-10-21 카테고리 개편: 영상 칸 보기 전환 — PC는 오른쪽 '보기' 카드, 휴대폰은 위쪽 세그먼트 */
+.sf-a{display:flex;width:100%;align-items:center;gap:10px;font-size:15px;color:var(--sub);padding:9px 6px;border-radius:10px;text-decoration:none;box-sizing:border-box}
+.sf-a::before{content:"";width:18px;height:18px;border-radius:50%;border:1.5px solid #C9CFD6;background:#fff;flex:none;box-sizing:border-box}
+.sf-a.on{color:var(--text);font-weight:700}
+.sf-a.on::before{border:5px solid #191F28}
+.sf-a em{margin-left:auto;font-style:normal;font-size:13px;color:var(--faint)}
+.sf-a:hover{background:rgba(0,0,0,.03)}
+@media (min-width:900px){
+  .app-seg{display:none!important}
+  .subfilter .sf-view{order:-1}
+}
+@media (max-width:899px){.subfilter .sf-view{display:none!important}}
+/* 앱 위쪽 줄: 로고 · (검색) · 내 공부방 한 줄 (아래 탭에서 내 공부방이 빠지면서 위로 올라옴) */
+html.is-app .top-in{flex-wrap:nowrap!important}
+html.is-app .top-in>.srch-btn{margin-left:auto}
+html.is-app .top-in>.srch-btn+.room,html.is-app .top-in>.room{margin-left:4px}
+html.is-app .top-in>.brand,html.is-app .top-in>a:first-child{min-width:0}
+@media (max-width:599px){html.is-app .top .logo i{display:none}}
