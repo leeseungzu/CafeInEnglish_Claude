@@ -47,7 +47,7 @@ def sentences():
     if daily.exists():
         for d in json.loads(daily.read_text("utf-8")):
             out.add(norm(d["en"]))
-    return sorted(t for t in out if re.search(r"[A-Za-z]", t))
+    return sorted(t for t in out if re.search(r"[A-Za-z]", t) and not re.search(r"[가-힣]", t))  # 한글이 섞인 줄(소제목 등)은 영어 음성으로 읽지 않아요
 
 
 def main():

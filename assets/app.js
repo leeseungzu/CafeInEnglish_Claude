@@ -499,7 +499,7 @@ ${my}
       const full = el.textContent.replace(/\s+/g, " ").trim();
       const text = full.replace(/→.*$/, "").trim();
       const file = files[full];
-      if (!/[a-zA-Z]/.test(text) || (!file && !hasTTS)) return;
+      if (!/[a-zA-Z]/.test(text) || /[가-힣]/.test(text) || (!file && !hasTTS)) return;  // 한글이 섞인 줄(소제목 등)은 스피커 없음
       const b = document.createElement("button");
       b.className = "say-btn"; b.type = "button"; b.setAttribute("aria-label", "원어민 발음 듣기"); b.innerHTML = icon;
       let n = 0;
