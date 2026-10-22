@@ -298,5 +298,17 @@
     "en": "It's up to you.",
     "ko": "네가 정해",
     "desc": "Whatever만 툭 던지면 짜증처럼 들려요. 결정을 넘길 땐 이 말로."
+  },
+  {
+    "post": "kim-dongkwan-persuasive-english",
+    "en": "It is an honor to be here.",
+    "ko": "이 자리에 서게 되어 영광입니다",
+    "desc": "김동관 부회장이 P4G 정상회의 기조연설을 연 첫 문장. 발표·축사 첫인사로 가장 많이 써요."
+  },
+  {
+    "post": "kim-dongkwan-persuasive-english",
+    "en": "I've worked late three days running.",
+    "ko": "사흘 연속 야근했어요",
+    "desc": "숫자 + 기간 + running = '연속으로'. 김동관 부회장의 for 10 years running에서 건졌어요."
   }
 ]
