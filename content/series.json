@@ -52,7 +52,8 @@
       "im-good",
       "im-down",
       "looking-forward-to",
-      "what-do-you-call"
+      "what-do-you-call",
+      "plans-appointment-promise"
     ],
     "lead": "뜻이 반대로 전해지는 함정 표현 모음"
   },
@@ -97,6 +98,7 @@
     "bg": "tip",
     "desc": "hello, OK, deadline, bug처럼 매일 쓰는 영어 단어가 어디서 왔는지, 실제 기록과 사진으로 따라가 보는 이야기",
     "posts": [
+      "sandwich-origin",
       "hello-origin",
       "ok-origin",
       "deadline-origin",

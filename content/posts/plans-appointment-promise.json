@@ -1,0 +1,73 @@
+{
+  "id": "plans-appointment-promise",
+  "cat": "tip",
+  "sub": "단어",
+  "level": "기초",
+  "date": "2026-10-22",
+  "title": "\"I have a promise\"는 틀려요, '약속'을 영어로 말하는 3가지",
+  "seo_title": "약속 영어로 - plans, appointment, promise 차이",
+  "lead": "친구와의 약속, 병원 예약, 꼭 지킬 다짐은 단어가 달라요",
+  "description": "'약속 있어'를 I have a promise라고 하면 어색해요. 친구와의 약속 plans, 예약 appointment, 다짐 promise, 식당 reservation까지 차이를 표와 예문, 실제 대화, 퀴즈로 정리했어요.",
+  "og": {
+    "en": "I have plans tonight.",
+    "ko": "'약속 있어'는 promise가 아니에요"
+  },
+  "icon": "calendar",
+  "chat": {
+    "q": "Want to grab dinner on Friday?",
+    "a": "Sorry, I already have plans.",
+    "key": "have plans",
+    "ko": "미안, 이미 약속이 있어."
+  },
+  "thumb": {
+    "text": "I have plans.",
+    "key": "plans",
+    "ko": "'약속 있어'를 영어로?"
+  },
+  "quiz": [
+    {
+      "tag": "단어",
+      "q": "친구가 놀자고 했을 때 '나 약속 있어'로 가장 자연스러운 말은?",
+      "sub": "",
+      "options": [
+        "I have a promise.",
+        "I have plans.",
+        "I have an appointment with my friend.",
+        "I have a reservation."
+      ],
+      "answer": 1,
+      "explain": "친구·가족과 만나기로 한 약속은 plans예요. promise는 '다짐', appointment는 예약한 일정이에요.",
+      "mnemonic": "친구랑은 plans"
+    },
+    {
+      "tag": "단어",
+      "q": "'치과 예약이 있어'에 알맞은 단어는?",
+      "sub": "",
+      "options": [
+        "plan",
+        "promise",
+        "appointment",
+        "meeting"
+      ],
+      "answer": 2,
+      "explain": "병원, 치과, 미용실처럼 전문가에게 시간을 예약한 일정은 appointment예요.",
+      "mnemonic": "전문가랑은 appointment"
+    },
+    {
+      "tag": "표현",
+      "q": "'약속을 지켰네!'를 영어로 하면?",
+      "sub": "",
+      "options": [
+        "You kept your promise!",
+        "You kept your plans!",
+        "You made your appointment promise!",
+        "You held your reservation!"
+      ],
+      "answer": 0,
+      "explain": "다짐을 지키는 건 keep a promise예요. 반대로 어기면 break a promise.",
+      "mnemonic": "다짐은 keep / break"
+    }
+  ],
+  "body_html": "<p>\"오늘 저녁에 약속 있어.\" 영어로 하려는 순간 <b>promise</b>가 먼저 떠오른다면, 한국인 대부분이 거치는 함정에 들어온 거예요. 한국어 '약속'은 하나지만 영어에서는 <b>누구와, 무엇을 정했는지</b>에 따라 단어가 완전히 달라져요.</p>\n<h2>약속은 영어로 세 가지</h2>\n<figure class=\"fig\"><img src=\"/images/plans-appointment-promise.png\" alt=\"'약속'을 뜻하는 영어 세 가지: plans(친구와 만나기로 한 약속, I have plans tonight) · appointment(병원·미용실·상담 같은 예약 약속, I have a dentist appointment) · promise(꼭 그렇게 하겠다는 다짐, I promise I'll call you)\" width=\"1080\" height=\"1503\" loading=\"lazy\"><figcaption>'약속'은 상황에 따라 plans, appointment, promise로 나뉘어요</figcaption></figure>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>단어</th><th>뜻</th><th>예</th></tr></thead><tbody><tr><td>plans</td><td>친구·가족과 만나기로 한 일정</td><td>I have plans this weekend.</td></tr><tr><td>appointment</td><td>병원, 미용실, 은행, 상담처럼 시간을 정해 예약한 일</td><td>I have a doctor's appointment at 3.</td></tr><tr><td>promise</td><td>\"꼭 할게\"라는 다짐, 맹세</td><td>I promise I won't be late.</td></tr><tr><td>meeting</td><td>회사 회의, 업무상 만남</td><td>I have a meeting with a client.</td></tr></tbody></table></div>\n<h2>친구와의 약속은 plans</h2>\n<p>친구와 저녁을 먹기로 했다면 <b>I have plans.</b>가 가장 자연스러워요. 복수형 plans로 쓰는 게 포인트예요. \"다른 약속 있어서 못 가\"는 <b>I already have plans.</b>, \"약속 잡자\"는 <b>Let's make plans.</b>라고 해요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Sorry, I already have plans tonight.</span><span class=\"ko\">미안, 오늘 밤엔 이미 약속이 있어.</span></li>\n<li><span class=\"en\">Do you have any plans this weekend?</span><span class=\"ko\">이번 주말에 약속 있어?</span></li>\n<li><span class=\"en\">Let's make plans to get coffee next week.</span><span class=\"ko\">다음 주에 커피 한잔하자, 날 잡자.</span></li>\n</ul></div>\n<h2>예약한 약속은 appointment</h2>\n<p>appointment는 <b>전문가에게 시간을 예약한 일정</b>이에요. 병원, 치과, 미용실, 은행 상담, 관공서처럼요. 친구와의 만남에 appointment를 쓰면 '진료 예약'처럼 딱딱하게 들려요. 참고로 식당이나 호텔 자리는 appointment가 아니라 <b>reservation</b>이에요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I need to make an appointment with the dentist.</span><span class=\"ko\">치과 예약을 잡아야 해.</span></li>\n<li><span class=\"en\">I have a hair appointment at 2.</span><span class=\"ko\">2시에 미용실 예약 있어.</span></li>\n<li><span class=\"en\">I'd like to make a reservation for two at 7.</span><span class=\"ko\">7시에 두 명 예약하고 싶어요. (식당)</span></li>\n</ul></div>\n<h2>promise는 지킬 '다짐'</h2>\n<p>promise는 일정이 아니라 <b>\"꼭 그렇게 하겠다\"는 말 자체</b>예요. 그래서 I have a promise.(약속이 있어)는 어색하고, make a promise(약속하다), keep a promise(약속을 지키다), break a promise(약속을 어기다)처럼 써요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I promise I'll call you tomorrow.</span><span class=\"ko\">내일 꼭 전화할게, 약속해.</span></li>\n<li><span class=\"en\">You kept your promise!</span><span class=\"ko\">약속 지켰네!</span></li>\n<li><span class=\"en\">Don't make promises you can't keep.</span><span class=\"ko\">못 지킬 약속은 하지 마.</span></li>\n</ul></div>\n<h2>실제 대화 · 금요일 저녁 약속</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Want to grab dinner on Friday?</span><span class=\"ko\">금요일에 저녁 먹을래?</span></li>\n<li class=\"me\"><span class=\"en\">I'd love to, but I already have plans. How about Saturday?</span><span class=\"ko\">좋은데 이미 약속이 있어. 토요일은 어때?</span></li>\n<li class=\"them\"><span class=\"en\">Saturday works. Lunch?</span><span class=\"ko\">토요일 좋아. 점심?</span></li>\n<li class=\"me\"><span class=\"en\">I have a dentist appointment in the morning, so let's say 1:30.</span><span class=\"ko\">오전에 치과 예약이 있어서 1시 반으로 하자.</span></li>\n<li class=\"them\"><span class=\"en\">Deal. Don't be late this time!</span><span class=\"ko\">좋아. 이번엔 늦지 마!</span></li>\n<li class=\"me\"><span class=\"en\">I promise!</span><span class=\"ko\">약속할게!</span></li>\n</ul>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 친구랑은 계획(plans), 전문가랑은 예약(appointment), 마음으로는 다짐(promise)!</div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">친구가 저녁을 먹자고 했는데 다른 약속이 있을 때</span><span class=\"no\">Sorry, I have a promise.</span><span class=\"en\">Sorry, I already have plans.</span><span class=\"ko\">미안, 이미 약속이 있어.</span><span class=\"why\"><b>왜?</b>promise는 '다짐'이라 일정이 있다는 뜻으로 쓰지 않아요. 만나기로 한 약속은 plans예요.</span></li>\n</ul></div>\n<h2>왜 promise부터 떠오를까</h2>\n<p>학교에서 promise를 '약속'이라고 처음 배웠기 때문이에요. 그런데 한국어 '약속'은 쓰임이 아주 넓어요. \"내일 친구랑 약속 있어\"의 약속은 만날 일정이고, \"다음엔 안 늦는다고 약속해\"의 약속은 다짐이에요. 영어는 이 두 가지를 다른 단어로 나눠요. 일정은 plans나 appointment, 다짐은 promise예요. 그래서 한국어 문장에서 '약속'이 나오면, 먼저 <b>\"이게 만날 일정인가, 지킬 다짐인가?\"</b>를 한 번 물어보면 단어가 바로 정해져요.</p>\n<h2>자주 묻는 질문</h2>\n<p><b>Q. 회사에서 거래처와 만나는 약속은요?</b><br>업무상 만남은 meeting을 써요. I have a meeting with a client at 10.처럼요. 다만 거래처를 방문하려고 미리 시간을 잡았다면 appointment도 자연스러워요.</p>\n<p><b>Q. 약속을 취소하거나 미룰 때는요?</b><br>친구와의 약속은 cancel our plans(약속을 취소하다), 예약은 cancel my appointment, 날짜만 바꿀 때는 reschedule을 써요. Can we reschedule?(날짜 다시 잡을 수 있을까?) 한 문장이면 정중하게 일정을 옮길 수 있어요.</p>\n<p>시간 약속을 잡을 때 자주 헷갈리는 '이번 주 금요일'과 '다음 주 금요일'은 <a href=\"/p/this-vs-next/\">next Friday는 언제일까</a>에서, '10분 후에'는 <a href=\"/p/in-vs-after/\">in 10 minutes</a>에서 확인해 보세요.</p>",
+  "related": []
+}

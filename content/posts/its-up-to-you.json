@@ -1,0 +1,73 @@
+{
+  "id": "its-up-to-you",
+  "cat": "expr",
+  "sub": "비슷한 표현",
+  "level": "기초",
+  "date": "2026-10-22",
+  "title": "\"It's up to you\", '네가 정해'를 기분 좋게 말하는 법",
+  "seo_title": "It's up to you 뜻 - Your call, I'm easy, Whatever 차이",
+  "lead": "결정을 넘길 때, Whatever 대신 써야 하는 말",
+  "description": "It's up to you는 '네가 정해, 너한테 맡길게'예요. Your call, I'm easy, Whatever works for you와 느낌 비교, 혼자 쓰는 Whatever가 위험한 이유를 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "It's up to you.",
+    "ko": "'네가 정해'를 기분 좋게"
+  },
+  "icon": "raised-hand",
+  "chat": {
+    "q": "Pizza or pasta?",
+    "a": "Either is fine. It's up to you!",
+    "key": "up to you",
+    "ko": "둘 다 좋아. 네가 골라!"
+  },
+  "thumb": {
+    "text": "It's up to you.",
+    "key": "up to you",
+    "ko": "네가 정해"
+  },
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "\"It's up to you whether you come or not.\"의 뜻은?",
+      "sub": "",
+      "options": [
+        "너는 꼭 와야 해",
+        "올지 말지는 네 마음이야",
+        "너 지금 위로 올라와",
+        "네가 오면 내가 갈게"
+      ],
+      "answer": 1,
+      "explain": "be up to + 사람은 '그 사람에게 달려 있다'예요. whether ~ or not과 함께 '~할지 말지는 네 선택'이 돼요.",
+      "mnemonic": "결정 버튼이 네 손 위에"
+    },
+    {
+      "tag": "뉘앙스",
+      "q": "친구가 메뉴를 물을 때 짜증처럼 들릴 수 있는 대답은?",
+      "sub": "",
+      "options": [
+        "It's up to you.",
+        "I'm easy.",
+        "Whatever.",
+        "Either is fine."
+      ],
+      "answer": 2,
+      "explain": "혼자 쓰는 Whatever는 '맘대로 해'처럼 무관심하게 들릴 수 있어요. Whatever works for you처럼 뒤를 붙이면 괜찮아요.",
+      "mnemonic": "Whatever는 혼자 두지 말기"
+    },
+    {
+      "tag": "표현",
+      "q": "'최종 결정은 매니저에게 달려 있어요'를 영어로 하면?",
+      "sub": "",
+      "options": [
+        "The final decision is up to the manager.",
+        "The final decision is the manager's easy.",
+        "The manager is up the decision.",
+        "The final decision whatever the manager."
+      ],
+      "answer": 0,
+      "explain": "be up to + 사람 = 그 사람에게 달려 있다. 사람뿐 아니라 직책이나 팀에도 쓸 수 있어요.",
+      "mnemonic": "up to + 결정할 사람"
+    }
+  ],
+  "body_html": "<h2>뜻</h2>\n<div class=\"box\"><b>It's up to you.</b> = 네가 정해, 너한테 맡길게</div>\n<p>\"뭐 먹을래?\", \"몇 시에 볼까?\"처럼 상대가 내 의견을 물었는데 나는 아무래도 괜찮을 때, 결정을 상대에게 넘기는 말이에요. 줄여서 <b>Up to you.</b>라고만 해도 돼요.</p>\n<p>up to는 원래 '~까지'라는 뜻인데, be up to + 사람이 되면 <b>'그 사람에게 달려 있다, 그 사람 몫이다'</b>라는 뜻이 돼요. 그래서 It's up to you는 \"결정권은 너한테 있어\"예요. 반대로 It's up to me.라고 하면 \"내가 정할게, 내 몫이야\"가 돼요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 결정 버튼이 네 손(up to you) 위에 올라가 있어요. 누를지 말지는 네 마음!</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Pizza or pasta? It's up to you.</span><span class=\"ko\">피자 아니면 파스타? 네가 골라.</span></li>\n<li><span class=\"en\">Whatever you decide is fine. It's totally up to you.</span><span class=\"ko\">네가 뭘 정하든 괜찮아. 완전히 너한테 맡길게.</span></li>\n<li><span class=\"en\">It's up to you whether you join or not.</span><span class=\"ko\">참여할지 말지는 네 선택이야.</span></li>\n<li><span class=\"en\">The final decision is up to the manager.</span><span class=\"ko\">최종 결정은 매니저에게 달려 있어요.</span></li>\n</ul></div>\n<p>세 번째 문장처럼 뒤에 <b>whether ~ or not</b>을 붙이면 \"~할지 말지는 네 마음\"이 돼요. 상대에게 부담을 주지 않고 선택권을 줄 때 아주 좋은 문장이에요.</p>\n<h2>비슷한 표현, 느낌 비교</h2>\n<figure class=\"fig\"><img src=\"/images/up-to-you-scale.png\" alt=\"결정을 넘기는 말 비교: It's up to you(네가 정해, 무난) · Your call(네 판단에 맡길게, 짧고 쿨함) · I'm easy(난 아무거나 괜찮아, 편한 사이) · Whatever(알아서 해, 짜증으로 들릴 수 있음)\" width=\"1080\" height=\"1284\" loading=\"lazy\"><figcaption>같은 '네가 정해'도 고르는 말에 따라 느낌이 달라요</figcaption></figure>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>표현</th><th>느낌</th><th>이럴 때</th></tr></thead><tbody><tr><td>It's up to you.</td><td>기본, 누구에게나 무난</td><td>식당, 약속 시간 정할 때</td></tr><tr><td>Your call.</td><td>짧고 쿨함, 상대 판단 존중</td><td>동료가 어떤 안으로 갈지 물을 때</td></tr><tr><td>I'm easy.</td><td>난 아무래도 괜찮아 (영국에서 특히 자주)</td><td>친구와 메뉴 고를 때</td></tr><tr><td>I don't mind either way.</td><td>둘 다 좋아</td><td>두 가지 중 고를 때</td></tr><tr><td>Whatever works for you.</td><td>네가 편한 걸로</td><td>상대 일정에 맞춰 줄 때</td></tr></tbody></table></div>\n<h2>실제 대화 · 저녁 메뉴 정하기</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">What do you feel like for dinner? Korean or Thai?</span><span class=\"ko\">저녁 뭐 먹고 싶어? 한식 아니면 태국 음식?</span></li>\n<li class=\"me\"><span class=\"en\">Honestly, I'm easy. It's up to you.</span><span class=\"ko\">솔직히 난 아무거나 괜찮아. 네가 정해.</span></li>\n<li class=\"them\"><span class=\"en\">Okay, Thai it is!</span><span class=\"ko\">좋아, 태국 음식으로 가자!</span></li>\n<li class=\"me\"><span class=\"en\">Perfect. Whatever works for you.</span><span class=\"ko\">좋아. 네가 편한 대로.</span></li>\n</ul>\n<h2>Whatever 하나로 분위기가 바뀌어요</h2>\n<p>한국어로 \"아무거나\"를 그대로 옮겨 <b>Whatever.</b>라고만 하면 위험해요. 혼자 쓰는 Whatever는 대화에서 \"됐어, 맘대로 해\" 같은 짜증이나 무관심으로 들리기 쉬워요. 특히 끝을 내리며 짧게 말하면 상대가 기분 나빠할 수 있어요. 대신 <b>Whatever you want</b>나 <b>Whatever works for you</b>처럼 뒤를 붙이면 \"네가 원하는 걸로\"라는 배려가 담긴 말이 돼요.</p>\n<p>또 하나, 결정을 넘길 때는 정말 아무래도 괜찮은지 생각해 보세요. 매번 It's up to you라고만 하면 상대가 혼자 고민을 떠안는다고 느낄 수 있어요. 그럴 땐 I'm fine with either, but I'd lean toward Thai.(둘 다 좋은데 굳이 고르자면 태국 음식)처럼 살짝 내 쪽 의견을 보태 주면 대화가 훨씬 편해져요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">친구가 영화 두 편 중 뭘 볼지 물을 때</span><span class=\"no\">Whatever.</span><span class=\"en\">Either is fine. It's up to you!</span><span class=\"ko\">둘 다 좋아. 네가 골라!</span><span class=\"why\"><b>왜?</b>Whatever만 툭 던지면 \"아무래도 상관없어, 관심 없어\"처럼 들릴 수 있어요. 둘 다 좋다는 말(Either is fine)을 먼저 하면 배려로 전달돼요.</span></li>\n</ul></div>\n<h2>자주 묻는 질문</h2>\n<p><b>Q. What are you up to?와 같은 up to인가요?</b><br>모양은 같지만 뜻이 달라요. What are you up to?는 \"뭐 하고 지내?, 뭐 해?\"라는 인사예요. 이때 up to는 '~을 하고 있는'이라는 뜻이에요. 반면 It's up to you의 up to는 '~에게 달린'이라는 뜻이라, 주어가 결정이나 선택일 때 쓰여요.</p>\n<p><b>Q. 회사에서 상사에게 써도 되나요?</b><br>네, It's up to you는 정중한 편이라 괜찮아요. 더 공손하게 하고 싶다면 I'm happy to go with whatever you decide.(결정하시는 대로 따르겠습니다)라고 하면 좋아요. Your call은 짧고 캐주얼해서 친한 동료 사이에 더 어울려요.</p>\n<p>결정을 아직 못 내렸다면 <a href=\"/p/on-the-fence/\">I'm on the fence</a>로, 정해진 계획에 찬성할 땐 <a href=\"/p/im-down/\">I'm down</a>으로 대답해 보세요.</p>",
+  "related": []
+}

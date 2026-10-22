@@ -280,5 +280,23 @@
     "en": "Do you speak English?",
     "ko": "영어 하세요?",
     "desc": "Can you는 실력을 묻는 느낌. 처음 보는 사람에게는 Do you로 물어요."
+  },
+  {
+    "post": "fair-enough",
+    "en": "Fair enough.",
+    "ko": "인정, 그럴 만하네",
+    "desc": "상대 이유가 납득될 때 하는 말. 기쁜 소식에 쓰면 시큰둥하게 들려요."
+  },
+  {
+    "post": "plans-appointment-promise",
+    "en": "I already have plans.",
+    "ko": "이미 약속이 있어",
+    "desc": "친구와의 약속은 promise가 아니라 plans예요."
+  },
+  {
+    "post": "its-up-to-you",
+    "en": "It's up to you.",
+    "ko": "네가 정해",
+    "desc": "Whatever만 툭 던지면 짜증처럼 들려요. 결정을 넘길 땐 이 말로."
   }
 ]

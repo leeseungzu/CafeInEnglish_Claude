@@ -1,0 +1,73 @@
+{
+  "id": "sandwich-origin",
+  "cat": "story",
+  "sub": "단어의 유래",
+  "level": "기초",
+  "date": "2026-10-22",
+  "title": "샌드위치는 사람 이름이었다? 백작과 도박 이야기의 진실",
+  "seo_title": "sandwich 어원 - 샌드위치 백작과 도박 이야기, 진짜일까",
+  "lead": "마을 이름이 백작 작위가 되고, 백작 이름이 점심이 되기까지",
+  "description": "sandwich는 18세기 제4대 샌드위치 백작의 이름에서 왔어요. 유명한 도박 일화의 출처와 진위, 1762년 첫 기록, be sandwiched between 같은 지금 쓰는 표현을 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Sandwich = an Earl",
+    "ko": "샌드위치는 사람 이름이었어요"
+  },
+  "icon": "sandwich",
+  "chat": {
+    "q": "How was your commute?",
+    "a": "I was sandwiched between two people.",
+    "key": "sandwiched",
+    "ko": "두 사람 사이에 꽉 끼어 있었어."
+  },
+  "thumb": {
+    "text": "Sandwich = an Earl",
+    "key": "Earl",
+    "ko": "샌드위치의 정체는?"
+  },
+  "quiz": [
+    {
+      "tag": "영어 이야기",
+      "q": "sandwich라는 이름은 어디에서 왔을까요?",
+      "sub": "",
+      "options": [
+        "빵 이름",
+        "영국 백작의 작위 이름",
+        "프랑스 요리사 이름",
+        "미국 도시 이름"
+      ],
+      "answer": 1,
+      "explain": "영국 켄트의 마을 이름을 딴 '샌드위치 백작' 작위에서 왔어요. 제4대 백작 존 몬터규의 이야기와 함께 퍼졌어요.",
+      "mnemonic": "마을 → 백작 → 점심"
+    },
+    {
+      "tag": "영어 이야기",
+      "q": "'백작이 도박하다 샌드위치를 만들었다'는 이야기에 대해 맞는 설명은?",
+      "sub": "",
+      "options": [
+        "백작이 직접 쓴 일기에 나온다",
+        "프랑스 작가의 여행기에 이름 없이 나온 소문이다",
+        "왕실 공식 기록에 남아 있다",
+        "1990년대에 처음 생긴 이야기다"
+      ],
+      "answer": 1,
+      "explain": "그로슬리의 여행기에 '어느 장관'으로만 나와요. 전기 작가 로저는 책상에서 일하며 먹었을 거라고 봐요.",
+      "mnemonic": "출처는 프랑스 여행기, 이름은 없음"
+    },
+    {
+      "tag": "표현",
+      "q": "\"My meeting is sandwiched between two calls.\"의 뜻은?",
+      "sub": "",
+      "options": [
+        "회의 중에 샌드위치를 먹는다",
+        "회의가 통화 두 개 사이에 끼어 있다",
+        "회의가 취소됐다",
+        "통화 두 개를 합쳤다"
+      ],
+      "answer": 1,
+      "explain": "be sandwiched between A and B는 'A와 B 사이에 끼어 있다'예요. 일정이 빡빡할 때 자주 써요.",
+      "mnemonic": "빵 두 쪽 사이에 낀 내 회의"
+    }
+  ],
+  "body_html": "<p>점심으로 자주 먹는 <b>sandwich</b>. 사실 이 단어는 <b>사람 이름</b>에서 왔어요. 정확히는 18세기 영국 귀족의 작위 이름이에요. 여기까지는 꽤 알려진 이야기인데, \"도박을 하다가 손을 떼기 싫어서 만들었다\"는 유명한 일화는 조금 따져 볼 필요가 있어요.</p>\n<h2>샌드위치 백작은 누구일까</h2>\n<p>주인공은 <b>제4대 샌드위치 백작, 존 몬터규(John Montagu, 1718~1792)</b>예요. Sandwich는 원래 영국 남동부 켄트에 있는 작은 항구 마을 이름이고, 몬터규 가문이 이 지명을 딴 백작 작위를 받았어요. 그러니까 샌드위치는 '마을 이름 → 귀족 작위 → 음식 이름' 순서로 이어진 단어예요.</p>\n<p>몬터규는 영국 해군을 총괄하는 해군 장관(First Lord of the Admiralty)을 여러 번 지낸 정치인이었어요. 탐험가 제임스 쿡의 항해를 지원했고, 쿡은 그 보답으로 1778년 하와이 제도에 <b>샌드위치 제도(Sandwich Islands)</b>라는 이름을 붙였어요.</p>\n<figure class=\"fig\"><img src=\"/images/story-sandwich-earl.webp\" alt=\"토머스 게인즈버러가 1783년에 그린 제4대 샌드위치 백작 존 몬터규의 초상화. 붉은 정장을 입고 서 있다\" width=\"654\" height=\"1000\" loading=\"lazy\"><figcaption>제4대 샌드위치 백작 존 몬터규, 토머스 게인즈버러 그림(1783년, 퍼블릭 도메인)</figcaption></figure>\n<h2>도박 테이블 이야기, 진짜일까</h2>\n<p>가장 유명한 이야기는 이래요. 백작이 카드 게임에 빠져 자리를 뜨기 싫어서, 하인에게 <b>빵 두 쪽 사이에 고기를 끼워 오게 했다</b>는 거예요. 한 손으로 먹을 수 있고 카드에 기름도 묻지 않으니까요. 주변 사람들이 \"샌드위치랑 같은 걸로!\"라고 주문하면서 이름이 붙었다는 설명이에요.</p>\n<p>이 이야기의 출처는 프랑스 작가 <b>피에르장 그로슬리</b>가 1765년 런던에 다녀온 뒤 쓴 여행기 『런던(Londres)』이에요. 그런데 그로슬리는 \"어느 장관이 24시간 동안 도박장에 있으면서 구운 빵 사이에 소고기를 끼워 먹었다\"고만 썼고, <b>그 장관이 누구인지 이름은 밝히지 않았어요.</b> 당시 떠돌던 소문을 옮겨 적었을 가능성이 커요.</p>\n<h2>책상에서 일하다 먹었다는 설</h2>\n<p>백작의 전기를 쓴 역사학자 <b>N. A. M. 로저</b>는 다른 해석을 내놨어요. 몬터규는 소문만큼 도박꾼이 아니었고, 오히려 해군 행정 일에 매달린 <b>일 중독</b>에 가까웠다는 거예요. 그래서 샌드위치는 도박 테이블이 아니라 <b>책상에서 일하면서 먹던 음식</b>이었을 거라고 봐요. 어느 쪽이든 '바빠서 한 손으로 먹었다'는 점은 같네요.</p>\n<h2>기록으로 남은 가장 오래된 샌드위치</h2>\n<p>sandwich라는 음식 이름이 처음 기록된 건 역사가 <b>에드워드 기번</b>의 1762년 일기예요. 런던의 한 클럽에서 본 풍경을 이렇게 적었어요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">A bit of cold meat, or a Sandwich, and drinking a glass of punch.</span><span class=\"ko\">차가운 고기 한 조각이나 샌드위치 하나에 펀치 한 잔.</span></li>\n</ul></div>\n<p>대문자로 쓴 Sandwich가 이미 음식 이름으로 통하고 있었다는 뜻이에요. 물론 빵 사이에 무언가를 끼워 먹는 건 훨씬 오래전부터 여러 나라에 있던 방식이에요. 백작이 발명한 건 음식이 아니라, 그 음식의 <b>영어 이름</b>인 셈이에요.</p>\n<h2>지금은 이렇게 써요</h2>\n<p>sandwich는 음식 말고도 '사이에 끼다'라는 뜻으로 넓게 쓰여요. 특히 동사로 쓰는 표현을 알아 두면 좋아요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Can I get a turkey sandwich, please?</span><span class=\"ko\">칠면조 샌드위치 하나 주세요.</span></li>\n<li><span class=\"en\">I was sandwiched between two people on the subway.</span><span class=\"ko\">지하철에서 두 사람 사이에 꽉 끼어 있었어.</span></li>\n<li><span class=\"en\">My meeting is sandwiched between two calls.</span><span class=\"ko\">내 회의가 통화 두 개 사이에 끼어 있어.</span></li>\n<li><span class=\"en\">We're the sandwich generation.</span><span class=\"ko\">우리는 부모와 자녀를 함께 돌보는 샌드위치 세대예요.</span></li>\n</ul></div>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>표현</th><th>뜻</th></tr></thead><tbody><tr><td>be sandwiched between A and B</td><td>A와 B 사이에 끼어 있다</td></tr><tr><td>sandwich generation</td><td>부모 부양과 자녀 양육을 함께 하는 세대</td></tr><tr><td>feedback sandwich</td><td>칭찬 → 지적 → 칭찬 순서로 말하는 피드백 방식</td></tr><tr><td>open-faced sandwich</td><td>빵 한 쪽 위에만 재료를 올린 샌드위치</td></tr></tbody></table></div>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 카드 게임 테이블(또는 책상)에 앉은 백작이 빵 두 쪽 사이에 고기를 쏙. 사이에 끼면 다 sandwich!</div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">샌드위치를 영어로 쓸 때</span><span class=\"no\">sandwitch</span><span class=\"en\">sandwich</span><span class=\"ko\">샌드위치</span><span class=\"why\"><b>왜?</b>마녀(witch)가 아니에요. 철자는 sand + wich예요. 발음도 '샌드위치'보다 d가 거의 들리지 않는 <b>\"샌윗치\"</b>에 가까워요.</span></li>\n</ul></div>\n<p>사람 이름이나 지명에서 온 영어 단어는 생각보다 많아요. 우리가 매일 쓰는 <a href=\"/p/hello-origin/\">hello도 에디슨과 관련이 있어요.</a></p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: 에드워드 기번의 일기(1762), 피에르장 그로슬리 『런던』(1770), N. A. M. 로저 『The Insatiable Earl』(1993), Wordorigins.org·Grammarphobia 정리 글.</p>",
+  "related": []
+}

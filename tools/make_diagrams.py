@@ -335,6 +335,75 @@ def linking():
     c.save("gonna-wanna-gotta.png")
 
 
+def ed_sounds():
+    c = Canvas("-ed는 세 가지로 소리 나요", "앞 소리가 무엇인지에 따라 달라져요")
+    rows = [("[t]  트", "p, k, s, sh, ch, f 뒤", ["helped", "worked", "watched"]),
+            ("[d]  드", "그 밖의 소리(모음, b, g, l, m, n, v …) 뒤", ["played", "called", "loved"]),
+            ("[ɪd]  이드", "t, d 뒤 (한 음절 늘어남)", ["wanted", "needed", "decided"])]
+    for snd, when, exs in rows:
+        def body(x, r, snd=snd, when=when, exs=exs):
+            c.pill(x, c.y, snd, F(44, 800)); c.y += 90
+            c.text(x, when, F(40, 700), MUTED, 1.45)
+            xx = x
+            for w in exs:
+                xx += c.hl(xx, c.y, w, F(52, 800)) + 40
+            c.y += int(52 * 1.3)
+        c.card(body)
+    c.note("t·d로 끝나는 동사만 '이드'가 붙어요. worked는 '워크드'가 아니라 '웍트'!", 40)
+    c.save("ed-three-sounds.png")
+
+
+def appointment_promise():
+    c = Canvas("'약속'은 영어로 세 가지", "누구와, 무엇을 정했는지에 따라 달라요")
+    rows = [("plans", "친구와 만나기로 한 약속", "I have plans tonight."),
+            ("appointment", "병원·미용실·상담 같은 예약 약속", "I have a dentist appointment."),
+            ("promise", "'꼭 그렇게 할게'라는 다짐", "I promise I'll call you.")]
+    for w, ko, ex in rows:
+        def body(x, r, w=w, ko=ko, ex=ex):
+            c.hl(x, c.y, w, F(64, 800)); c.y += int(64 * 1.35)
+            c.text(x, ko, F(42, 700), MUTED, 1.5)
+            c.text(x, ex, F(44, 700), INK, 1.2)
+        c.card(body)
+    c.note("'I have a promise.'는 어색해요. 친구와 만날 약속은 plans!", 40)
+    c.save("plans-appointment-promise.png")
+
+
+def fair_enough():
+    c = Canvas("Fair enough의 온도", "상대 말을 받아들일 때, 얼마나 동의하는지")
+    rows = [("Totally!", "완전 동의해"), ("Makes sense.", "듣고 보니 이해돼"), ("Fair enough.", "인정, 그럴 만하네"), ("If you say so.", "네가 그렇다면야 (못 믿겠지만)")]
+    def body(x, r):
+        for i, (en, ko) in enumerate(rows):
+            if en == "Fair enough.":
+                c.hl(x, c.y, en, F(54, 800))
+            else:
+                c.d.text((x, c.y), en, font=F(54, 800), fill=INK)
+            c.y += int(54 * 1.3)
+            c.text(x, ko, F(40, 700), MUTED, 1.3)
+            if i < len(rows) - 1:
+                c.d.line((x, c.y + 4, r, c.y + 4), fill=LINE, width=3); c.y += 34
+    c.card(body)
+    c.note("위로 갈수록 적극 동의, 아래로 갈수록 시큰둥해요", 40)
+    c.save("fair-enough-scale.png")
+
+
+def up_to_you():
+    c = Canvas("결정을 상대에게 넘길 때", "같은 '네가 정해'도 느낌이 달라요")
+    rows = [("It's up to you.", "네가 정해 (가장 기본)", "무난"), ("Your call.", "네 판단에 맡길게", "짧고 쿨함"),
+            ("I'm easy.", "난 아무거나 괜찮아 (영국에서 특히)", "편한 사이"), ("Whatever.", "알아서 해 (짜증)", "주의")]
+    def body(x, r):
+        for i, (en, ko, tag) in enumerate(rows):
+            w = c.d.textlength(en, font=F(54, 800))
+            c.d.text((x, c.y), en, font=F(54, 800), fill=INK)
+            c.pill(x + w + 24, c.y + 4, tag, F(34, 700), bg=(LIME if tag != "주의" else "#F4D6D2"), fg=INK)
+            c.y += int(54 * 1.35)
+            c.text(x, ko, F(40, 700), MUTED, 1.3)
+            if i < len(rows) - 1:
+                c.d.line((x, c.y + 4, r, c.y + 4), fill=LINE, width=3); c.y += 34
+    c.card(body)
+    c.note("Whatever는 혼자 쓰면 '맘대로 해'처럼 들려요. 뒤에 works for me를 붙이면 OK!", 38)
+    c.save("up-to-you-scale.png")
+
+
 if __name__ == "__main__":
-    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking):
+    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you):
         fn()
