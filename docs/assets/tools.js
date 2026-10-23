@@ -31,6 +31,19 @@
     if (b) { copyText(b.dataset.copy, b); ga("tool_copy", { tool: DATA.tool || "", field: b.dataset.f || "" }); }
   });
 
+  /* ---------- 결과 공유 (카톡·인스타·링크) ---------- */
+  let SHARE = null;
+  const QS = new URLSearchParams(location.search);
+  function setShare(text, q) { SHARE = { text, q }; $$(".tl-share-row").forEach(r => { r.hidden = false; }); }
+  document.addEventListener("click", e => {
+    const b = e.target.closest(".tl-share-row .tl-share"); if (!b || !SHARE) return;
+    const url = location.origin + location.pathname + (SHARE.q ? "?" + SHARE.q : "");
+    ga("tool_share", { tool: DATA.tool || "" });
+    if (navigator.share) navigator.share({ title: document.title.split(" | ")[0], text: SHARE.text, url }).catch(() => {});
+    else copyText(SHARE.text + "\n" + url, b);
+  });
+  const SHARE_ROW = '<div class="tl-share-row"><button type="button" class="tl-share">결과 공유하기</button></div>';
+
   /* =========================================================
      1. 한글 이름 → 영문 (국어의 로마자 표기법, 인명은 음운 변화 미반영)
      ========================================================= */
@@ -116,7 +129,7 @@
       const altAll = st.syl.some(x => x.opts.length > 1);
       out.innerHTML =
         `<div class="tl-hero-res"><span class="tl-tag">${isStd && S === (SUR[st.sur] || [st.surRR])[0] ? "추천 표기" : "선택한 표기"}</span>` +
-        `<p class="tl-big">${esc(S)} ${esc(G)}</p>` +
+        `<p class="tl-big"><span>${esc(S)} ${esc(G)}</span></p>` +
         `<p class="tl-big-sub">${esc(st.sur + st.giv)} · 이름 ${esc(G)} · 성 ${esc(S)}</p></div>` +
         `<div class="tl-pick"><p class="tl-pick-h">글자를 누르면 다른 표기로 바뀌어요</p><div class="tl-syls">` +
         `<button type="button" class="tl-syl sur${st.surOpts.length > 1 ? " more" : ""}" data-s="sur"><small>${esc(st.sur)} · 성</small><b>${esc(S)}</b>${dots(st.surOpts.length, st.si)}</button>` +
@@ -128,8 +141,9 @@
         row("이름 (Given name)", G.toUpperCase(), "given") +
         row("해외 사이트·이메일", `${G} ${S}`, "western", "이름 먼저") +
         row("붙임표 넣은 이름", `${GH} ${S}`, "hyphen", "음절 구분이 필요할 때") +
-        `</div>`;
+        `</div>` + SHARE_ROW;
       out.hidden = false;
+      setShare(`${st.sur + st.giv} 영문 이름: ${S} ${G}`, "name=" + encodeURIComponent(st.sur + st.giv));
     }
     const dots = (n, i) => n > 1 ? `<span class="tl-dots">${Array.from({ length: n }, (_, k) => `<i${k === i ? ' class="on"' : ""}></i>`).join("")}</span>` : "";
 
@@ -311,10 +325,13 @@
       return [495, 495];
     };
     let used = false;
+    ["lc", "rc"].forEach(k => { const v = QS.get(k); if (v !== null && /^\d{1,3}$/.test(v) && +v <= 100) { $("#tc-" + k).value = v; $("#tc-" + k + "-n").value = v; } });
     const lc = pair("tc-lc", "tc-lc-n", run), rc = pair("tc-rc", "tc-rc-n", run);
     function run() {
       const L = est(lc()), R = est(rc()), lo = L[0] + R[0], hi = L[1] + R[1], mid = (lo + hi) / 2;
-      $("#tc-tot").textContent = lo === hi ? `${lo}점` : `${lo}~${hi}점`;
+      const tot = lo === hi ? `${lo}점` : `${lo}~${hi}점`;
+      $("#tc-tot").innerHTML = `<span>${tot}</span>`;
+      setShare(`토익 LC ${lc()}개 · RC ${rc()}개 맞히면 예상 점수 ${tot}`, `lc=${lc()}&rc=${rc()}`);
       $("#tc-part").textContent = `LC ${L[0] === L[1] ? L[0] : L[0] + "~" + L[1]} · RC ${R[0] === R[1] ? R[0] : R[0] + "~" + R[1]}`;
       $("#tc-bar").style.width = (mid / 990 * 100).toFixed(1) + "%";
       const d = Math.round(mid - AVG.total), lm = (L[0] + L[1]) / 2, rm = (R[0] + R[1]) / 2;
@@ -334,12 +351,15 @@
       $$(".tl-can", box).forEach(x => x.classList.toggle("on", x === b));
       const g = b.dataset.g, key = g === "IM" ? "IM2" : g, info = G[key] || {};
       const label = g === "IM" ? "IM1~IM3" : g;
-      $("#oq-out").innerHTML = `<div class="tl-hero-res"><span class="tl-tag">예상 등급 (참고용)</span><p class="tl-big">${esc(label)}</p>` +
+      $("#oq-out").innerHTML = `<div class="tl-hero-res"><span class="tl-tag">예상 등급 (참고용)</span><p class="tl-big"><span>${esc(label)}</span></p>` +
         `<p class="tl-big-sub">${esc(g === "IM" ? "Intermediate Mid · 말하는 양과 자연스러움에 따라 IM1, IM2, IM3로 나뉘어요" : info.name + " · " + info.line)}</p></div>` +
         `<div class="tl-note"><b>다음 등급으로 가려면</b>${esc(info.tip || "")}</div>` +
-        `<a class="tl-cp wide" href="#g-${esc(key.toLowerCase())}">등급표에서 자세히 보기</a>`;
+        SHARE_ROW + `<a class="tl-more2" href="#g-${esc(key.toLowerCase())}">등급표에서 자세히 보기 ›</a>`;
       $("#oq-out").hidden = false; ga("tool_use", { tool: "opic_level" });
+      setShare(`내 오픽 예상 등급은 ${label}`, "g=" + g);
     });
+    const g0 = QS.get("g"), b0 = g0 && $(`.tl-can[data-g="${g0.replace(/[^A-Z]/g, "")}"]`, box);
+    if (b0) b0.click();
   }
 
   const TOS = [[200, "AH", "Advanced High"], [180, "AM", "Advanced Mid"], [160, "AL", "Advanced Low"], [140, "IH", "Intermediate High"],
@@ -348,10 +368,12 @@
   function initTos() {
     if (!$("#ts")) return;
     let used = false;
+    const s0 = QS.get("s"); if (s0 && /^\d{1,3}$/.test(s0) && +s0 <= 200) { $("#ts").value = s0; $("#ts-n").value = s0; }
     const v = pair("ts", "ts-n", run);
     function run() {
       const s = v(), i = TOS.findIndex(t => s >= t[0]), t = TOS[i], next = TOS[i - 1];
-      $("#ts-g").textContent = t[1]; $("#ts-s").textContent = `${s}점 · ${t[2]}`;
+      $("#ts-g").innerHTML = `<span>${esc(t[1])}</span>`; $("#ts-s").textContent = `${s}점 · ${t[2]}`;
+      setShare(`토익스피킹 ${s}점은 ${t[1]} 등급`, "s=" + s);
       $("#ts-bar").style.width = (s / 200 * 100) + "%";
       $("#ts-p").innerHTML = (next ? pill(`다음 등급 ${next[1]}까지 ${next[0] - s}점`, "l") : pill("가장 높은 등급이에요", "l")) +
         (/^IM/.test(t[1]) ? pill("IM1~3 점수는 채용 공고에서 흔히 쓰는 기준") : "");
@@ -364,7 +386,8 @@
     const L = $("#cp-l"); if (!L) return;
     const rows = DATA.ladder || [];
     const COL = { opic: 1, tos: 2, toeic: 3 }, NAME = { opic: "오픽", tos: "토익스피킹", toeic: "토익" };
-    let t = "opic", i = 4;
+    let t = ["opic", "tos", "toeic"].indexOf(QS.get("t")) > -1 ? QS.get("t") : "opic", i = /^\d$/.test(QS.get("i") || "") ? +QS.get("i") : 4;
+    $$("#cp-t button").forEach(x => x.classList.toggle("on", x.dataset.t === t));
     const opts = () => rows.map((r, k) => [k, r[COL[t]]]).filter(x => x[1] !== "-");
     function draw() {
       const o = opts(); if (!o.some(x => x[0] === i)) i = o[Math.floor(o.length / 2)][0];
@@ -375,6 +398,7 @@
       const val = x => esc(x.replace(/ \(.*\)/, "")) + (t === "toeic" ? "점" : "");
       $("#cp-y").innerHTML = `${NAME[t]} <b>${val(me[COL[t]])}</b> · <b>${esc(me[0])}</b> 수준` + (up && up[COL[t]] !== "-"
         ? `<br>다음 목표 <b>${val(up[COL[t]])}</b> (점선 칸)` : `<br>이 시험의 가장 높은 단계예요.`);
+      setShare(`${NAME[t]} ${me[COL[t]].replace(/ \(.*\)/, "")}${t === "toeic" ? "점" : ""}은 영어 시험 사다리에서 ${me[0]} 수준`, `t=${t}&i=${i}`);
     }
     $("#cp-t").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; t = b.dataset.t; $$("#cp-t button").forEach(x => x.classList.toggle("on", x === b)); draw(); });
     $("#cp-p").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; i = +b.dataset.i; draw(); ga("tool_use", { tool: "score_compare" }); });
@@ -385,4 +409,109 @@
   initOpic();
   initTos();
   initCompare();
+  /* =========================================================
+     4. 영어 단어 수 세기 — 글은 브라우저 안에서만 세요 (저장·전송 없음)
+     ========================================================= */
+  function initWordCount() {
+    const ta = $("#wc-in"); if (!ta) return;
+    const STOP = new Set(("the a an and or but of to in on at for with is are was were be been being it its this that these those i you he she we they my your his our their me him her us them as by from so if not no do does did have has had will would can could should may might must just also there here what which who whom when where why how than then about into over under very really more most some any all each other such only own same too s t can't don't i'm it's").split(" "));
+    const EX = "I have always believed that the best way to learn a language is to use it every day. When I started my first job, I had to write emails in English, and I was really nervous about every sentence. I read my emails again and again before I sent them.\n\nOver time, I noticed that my colleagues used short, clear sentences. I started to copy their style, and my emails became much easier to write. Today, English is not a wall for me anymore. It is a window to a bigger world.";
+    const fmtT = sec => { sec = Math.round(sec); if (sec < 60) return sec + "초"; const m = Math.floor(sec / 60), r = sec % 60; return r ? `${m}분 ${r}초` : `${m}분`; };
+    const N = n => n.toLocaleString("ko-KR");
+    const lim = $("#wc-lim");
+    let used = false;
+    function run() {
+      const t = ta.value;
+      const words = t.match(/[A-Za-z0-9À-ɏ가-힣]+(?:['’.\-][A-Za-z0-9À-ɏ가-힣]+)*/g) || [];
+      const w = words.length;
+      const sents = t.split(/[.!?]+(?=\s|$)|\n+/).filter(x => /[A-Za-z0-9가-힣]/.test(x)).length;
+      const paras = t.split(/\n+/).filter(x => x.trim()).length;
+      $("#wc-w").textContent = N(w);
+      $("#wc-c").textContent = N(t.replace(/\n/g, "").length);
+      $("#wc-c2").textContent = N(t.replace(/\s/g, "").length);
+      $("#wc-s").textContent = N(sents);
+      $("#wc-p").textContent = N(paras);
+      $("#wc-r").textContent = fmtT(w / 238 * 60);
+      $("#wc-sp").textContent = fmtT(w / 150 * 60);
+      $("#wc-avg").textContent = sents ? (w / sents).toFixed(1) : "0";
+      const L = +lim.value || 0, bar = $("#wc-bar"), lt = $("#wc-lt");
+      if (L > 0) {
+        bar.style.width = Math.min(100, w / L * 100) + "%"; bar.classList.toggle("over", w > L);
+        lt.innerHTML = w > L ? `<b class="bad">${N(w - L)}단어 넘었어요</b> · 제한 ${N(L)}단어` : `<b>${N(L - w)}단어 남았어요</b> · 제한 ${N(L)}단어`;
+      } else { bar.style.width = "0"; lt.textContent = "제한을 넣으면 남은 단어 수를 알려 드려요."; }
+      const cnt = {};
+      words.forEach(x => { const k = x.toLowerCase().replace(/['’].*$/, ""); if (k.length > 2 && /^[a-z]+$/.test(k) && !STOP.has(k)) cnt[k] = (cnt[k] || 0) + 1; });
+      const top = Object.entries(cnt).filter(x => x[1] >= 3).sort((a, b) => b[1] - a[1]).slice(0, 6);
+      $("#wc-topbox").hidden = !top.length;
+      $("#wc-top").innerHTML = top.map(([k, n]) => `<span>${esc(k)} <b>${n}번</b></span>`).join("");
+      if (w && !used) { used = true; ga("tool_use", { tool: "word_count" }); }
+    }
+    ta.addEventListener("input", run); lim.addEventListener("input", run);
+    $("#wc-clear").addEventListener("click", () => { ta.value = ""; run(); ta.focus(); });
+    $("#wc-ex").addEventListener("click", () => { ta.value = EX; run(); });
+    run();
+  }
+
+  /* =========================================================
+     5. 영어 필기체 — 유니코드 필기체(복사) · 손글씨 글꼴(이미지) · 알파벳 연습지
+     ========================================================= */
+  function scriptOf(str, bold) {
+    const UP = { B: 0x212C, E: 0x2130, F: 0x2131, H: 0x210B, I: 0x2110, L: 0x2112, M: 0x2133, R: 0x211B }, LO = { e: 0x212F, g: 0x210A, o: 0x2134 };
+    return Array.from(str).map(c => {
+      const u = c.charCodeAt(0);
+      if (c >= "A" && c <= "Z") return String.fromCodePoint(bold ? 0x1D4D0 + u - 65 : (UP[c] || 0x1D49C + u - 65));
+      if (c >= "a" && c <= "z") return String.fromCodePoint(bold ? 0x1D4EA + u - 97 : (LO[c] || 0x1D4B6 + u - 97));
+      return c;
+    }).join("");
+  }
+  function initCursive() {
+    const inp = $("#cv-in"); if (!inp) return;
+    const FONTS = DATA.fonts || [];
+    let font = FONTS[0] ? FONTS[0][0] : "cursive", used = false;
+    const val = () => inp.value.trim() || "Cafe in English";
+    function copyTab() {
+      const v = val(), a = scriptOf(v, false), b = scriptOf(v, true);
+      $("#cv-copy").innerHTML = [[a, "필기체"], [b, "굵은 필기체"]].map(([x, n], k) =>
+        `<div class="tl-cvrow"><p><span class="tl-cvtxt">${esc(x)}</span><small>${n}</small></p><button type="button" class="tl-cp" data-copy="${esc(x)}" data-f="script${k}">복사</button></div>`).join("") +
+        '<p class="tl-note2">인스타그램·카톡 프로필에 그대로 붙여 넣을 수 있어요. 한글과 숫자는 그대로 남아요.</p>';
+    }
+    function imgTab() {
+      $("#cv-fonts").innerHTML = FONTS.map(([f, n]) => `<button type="button" class="tl-font${f === font ? " on" : ""}" data-f="${esc(f)}"><span style="font-family:'${esc(f)}',cursive">${esc(val())}</span><small>${esc(n)}</small></button>`).join("");
+    }
+    function abcTab() {
+      $("#cv-abcf").innerHTML = FONTS.map(([f, n]) => `<button type="button" class="${f === font ? "on" : ""}" data-f="${esc(f)}">${esc(n)}</button>`).join("");
+      $("#cv-abcg").style.setProperty("--cf", `'${font}',cursive`);
+    }
+    const all = () => { copyTab(); imgTab(); abcTab(); };
+    inp.addEventListener("input", () => { all(); if (!used) { used = true; ga("tool_use", { tool: "cursive" }); } });
+    $("#cv-tab").addEventListener("click", e => {
+      const b = e.target.closest("button"); if (!b) return;
+      $$("#cv-tab button").forEach(x => x.classList.toggle("on", x === b));
+      ["copy", "img", "abc"].forEach(k => { $("#cv-" + k).hidden = k !== b.dataset.v; });
+    });
+    $("#cv-fonts").addEventListener("click", e => { const b = e.target.closest(".tl-font"); if (!b) return; font = b.dataset.f; imgTab(); abcTab(); });
+    $("#cv-abcf").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; font = b.dataset.f; imgTab(); abcTab(); });
+    $("#cv-save").addEventListener("click", async () => {
+      const text = val(), W = 1600, H = 800, cv = document.createElement("canvas"); cv.width = W; cv.height = H;
+      const c = cv.getContext("2d");
+      try { await document.fonts.load(`120px "${font}"`, text); } catch (e) {}
+      c.fillStyle = "#fff"; c.fillRect(0, 0, W, H);
+      let size = 220; c.font = `${size}px "${font}", cursive`;
+      while (c.measureText(text).width > W - 160 && size > 40) { size -= 6; c.font = `${size}px "${font}", cursive`; }
+      c.fillStyle = "#191F28"; c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(text, W / 2, H / 2);
+      c.font = "600 28px Pretendard, sans-serif"; c.fillStyle = "#B0B8C1"; c.fillText("cafeinenglish.com", W / 2, H - 50);
+      const a = document.createElement("a"); a.download = "cursive-" + text.replace(/[^A-Za-z0-9]+/g, "-").slice(0, 30) + ".png";
+      a.href = cv.toDataURL("image/png"); document.body.appendChild(a); a.click(); a.remove();
+      ga("tool_use", { tool: "cursive_image" }); toast("이미지를 저장했어요");
+    });
+    $("#cv-print").addEventListener("click", () => {
+      document.body.classList.add("print-abc");
+      const off = () => { document.body.classList.remove("print-abc"); removeEventListener("afterprint", off); };
+      addEventListener("afterprint", off); window.print(); setTimeout(off, 1500);
+    });
+    all();
+  }
+
+  initWordCount();
+  initCursive();
 })();

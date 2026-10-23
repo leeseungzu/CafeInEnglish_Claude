@@ -191,6 +191,94 @@ def og_chat(name, chip, en, ko, chat, icon, key_id):
     return f"/og/{name}.png"
 
 
+def _cursive_font(size):
+    """필기체 공유 이미지용: assets/fonts 의 woff2 → TTF (fontTools)"""
+    try:
+        from fontTools.ttLib import TTFont
+        if not hasattr(_cursive_font, "buf"):
+            f = TTFont(ASSETS / "fonts" / "dancing-script-600.woff2"); f.flavor = None
+            bio = io.BytesIO(); f.save(bio); _cursive_font.buf = bio.getvalue()
+        return ImageFont.truetype(io.BytesIO(_cursive_font.buf), size)
+    except Exception:
+        return None
+
+
+def og_tool(name, chip, title, sub, label, big, small, icon, key_id, bg=None, cursive=False):
+    """영어 도구 공유 이미지(1200×630): 글 공유 이미지와 같은 그라데이션 + 왼쪽 도구 이름 + 오른쪽 결과 미리보기 카드 + 3D 아이콘"""
+    if not (Image and FONT.exists()):
+        return "/assets/og-home-2.png"
+    from PIL import ImageFilter
+    W, H, PAD = 1200, 630, 72
+    INK, BODY, MUTED, LIME = "#191F28", "#333D4B", "#6B7684", "#CDEB5B"
+    c1, c2 = OG_BG[bg if bg is not None else int(hashlib.md5(key_id.encode()).hexdigest(), 16) % len(OG_BG)]
+    hx = lambda c: tuple(int(c[i:i + 2], 16) for i in (1, 3, 5))
+    g = Image.new("RGB", (2, 2)); g.putdata([hx(c1), hx(c1), hx(c1), hx(c2)])
+    im = g.resize((W, H), Image.BILINEAR).convert("RGBA")
+    glow = Image.new("RGBA", (W, H), (255, 255, 255, 0))
+    ImageDraw.Draw(glow).ellipse((560, -220, 1260, 380), fill=(255, 255, 255, 170))
+    im = Image.alpha_composite(im, glow.filter(ImageFilter.GaussianBlur(90)))
+    d = ImageDraw.Draw(im)
+    enf = lambda sz: (_cursive_font(sz) if cursive else None) or (ImageFont.truetype(str(EN_FONT), sz) if EN_FONT.exists() else _font(sz, 800))
+    d.rounded_rectangle((PAD, 56, PAD + 52, 108), 14, fill="#2A1A12")
+    d.text((PAD + 12, 82), "C", font=_font(36, 800), fill="#F4EEE4", anchor="lm")
+    d.ellipse((PAD + 35, 88, PAD + 43, 96), fill=LIME)
+    d.text((PAD + 68, 82), "카페인영어 CafeInEnglish", font=_font(26, 700), fill=INK, anchor="lm")
+    cf = _font(22, 700); cw = d.textlength(chip, font=cf)
+    d.rounded_rectangle((PAD, 150, PAD + cw + 32, 190), 20, fill=(255, 255, 255, 210))
+    d.text((PAD + 16, 170), chip, font=cf, fill=BODY, anchor="lm")
+    # 도구 이름 (최대 2줄, 마지막 줄 라임 형광펜)
+    maxw = 480
+    for size in range(84, 44, -4):
+        bf = _font(size, 800); lines = _wrap(d, title, bf, maxw)
+        if len(lines) <= 2 and all(d.textlength(l, font=bf) <= maxw for l in lines):
+            break
+    lh = int(size * 1.2); y = 228 + (230 - len(lines) * lh) // 2
+    for i, l in enumerate(lines):
+        lw = d.textlength(l, font=bf)
+        if i == len(lines) - 1:
+            d.rectangle((PAD - 4, y + int(size * .72), PAD + lw + 4, y + int(size * 1.0)), fill=LIME)
+        d.text((PAD, y), l, font=bf, fill=INK)
+        y += lh
+    kf = _font(30, 700)
+    while d.textlength(sub, font=kf) > maxw and len(sub) > 4:
+        sub = sub[:-2].rstrip() + "…"
+    d.text((PAD, 492), sub, font=kf, fill=BODY)
+    d.text((PAD, 560), "cafeinenglish.com · 무료 영어 도구", font=_font(24, 600), fill=MUTED)
+    # 오른쪽 결과 미리보기 카드
+    cx0, cx1, cy0, cy1 = 620, 1128, 150, 452
+    sh = Image.new("RGBA", (W, H), (30, 40, 70, 0))
+    ImageDraw.Draw(sh).rounded_rectangle((cx0 + 24, cy0 + 40, cx1 - 24, cy1 + 24), 36, fill=(30, 40, 70, 30))
+    im = Image.alpha_composite(im, sh.filter(ImageFilter.GaussianBlur(22)))
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((cx0, cy0, cx1, cy1), 36, fill=(255, 255, 255, 240))
+    d.text((cx0 + 40, cy0 + 44), label, font=_font(24, 700), fill="#8B95A1")
+    bw = cx1 - cx0 - 80
+    for sz in range(92, 36, -4):
+        f = enf(sz) if big.isascii() else _font(sz, 800)
+        if d.textlength(big, font=f) <= bw:
+            break
+    by = cy0 + 96
+    tw = d.textlength(big, font=f)
+    d.rectangle((cx0 + 36, by + int(sz * .74), cx0 + 44 + tw, by + int(sz * 1.04)), fill=LIME)
+    d.text((cx0 + 40, by), big, font=f, fill=INK)
+    sf = _font(26, 600)
+    while d.textlength(small, font=sf) > bw and len(small) > 4:
+        small = small[:-2].rstrip() + "…"
+    d.text((cx0 + 40, cy1 - 70), small, font=sf, fill=BODY)
+    ip = ASSETS / "icons" / f"{icon}.webp"
+    if icon and ip.exists():
+        ic = Image.open(ip).convert("RGBA").resize((150, 150), Image.LANCZOS)
+        shd = Image.new("RGBA", (W, H), (30, 40, 60, 0))
+        alpha = ic.split()[3].point(lambda v: v * .28)
+        shd.paste((30, 40, 60, 255), (cx1 - 120, cy1 - 96 + 14), alpha)
+        im = Image.alpha_composite(im, shd.filter(ImageFilter.GaussianBlur(10)))
+        im.alpha_composite(ic, (cx1 - 126, cy1 - 96))
+    out = OUT / "og" / f"{name}.png"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    im.convert("RGB").save(out, optimize=True)
+    return f"/og/{name}.png"
+
+
 def og_image(name, chip, big, small, foot="읽고 · 듣고 · 퀴즈로 확인"):
     """글마다 카톡·SNS 미리보기 이미지(1200×630)를 만들고 주소를 돌려줍니다."""
     if not (Image and FONT.exists()):
@@ -1093,6 +1181,7 @@ def page_post(p):
     if p.get("note"):
         parts.append(f'<div class="study-note"><b class="lbl">스터디 노트</b> {p["note"]}</div>')
     parts.append(END_CTA)
+    parts.append(post_tools(p))
     parts.append(share_block("이 글 출력 · 공유"))
     tv_ids = [pid for _, _, pid in TRAVEL_SITUATIONS if pid in POST_BY_ID]
     if p["id"] in tv_ids:
@@ -1821,6 +1910,7 @@ PRIVACY = f"""
 <p>위 경우 외에는 이용자의 정보를 제3자에게 제공하지 않습니다.</p>
 <h2>4. 브라우저에만 저장되는 기록</h2>
 <p>오답노트, 필사 기록, '나의 한 줄', 학습 진도는 이용자 기기의 브라우저(localStorage)에만 저장되며 사이트 서버로 전송되지 않습니다. 브라우저의 사이트 데이터를 삭제하면 기록도 함께 삭제됩니다.</p>
+<p>영어 도구(영문 이름 변환, 단어 수 세기, 점수 계산, 필기체 변환 등)에 입력한 내용도 이용자 브라우저 안에서만 계산하며 서버로 보내거나 저장하지 않습니다. 단, 영문 주소 변환기의 검색어는 주소를 찾기 위해 행정안전부 도로명주소 API로 전송됩니다.</p>
 <h2>5. 쿠키와 광고</h2>
 <p>사이트는 방문 통계와 광고를 위해 쿠키를 사용합니다. Google을 포함한 제3자 공급업체는 쿠키를 사용해 이용자의 이전 방문 기록을 바탕으로 광고를 게재할 수 있습니다.</p>
 <ul>
@@ -2051,6 +2141,8 @@ def search_index():
     for t in THINKS:
         out.append({"u": think_url(t), "t": t["title"], "c": "사유의 문장", "s": t.get("speaker", ""),
                     "d": t.get("description", ""), "x": [[q["en"], q["ko"]] for q in t.get("quotes", [])]})
+    for t in live_tools():  # 영어 도구도 사이트 검색에 (예: '토익' → 토익 점수 계산기)
+        out.append({"u": t["url"], "t": t["title"], "c": "영어 도구", "s": t["group"], "d": t["desc"], "x": [[t["title"], t["group"]]]})
     return json.dumps(out, ensure_ascii=False, separators=(",", ":"))
 
 
@@ -2251,8 +2343,7 @@ def page_tool_name():
          "남궁, 황보처럼 두 글자 성은 자동으로 알아봐요. 자동으로 안 될 때는 입력창 아래 '성이 두 글자예요'를 켜 주세요. 두 글자 성은 붙여서 한 단어로 써요(Namgung)."),
     ]
     body = f"""<div class="tl">
-<div class="tl-head"><span class="lbl">영어 도구</span><h1>한글 이름 영문 변환기</h1>
-<p>이름을 넣으면 로마자 표기법에 맞는 영문 이름과 자주 쓰는 표기를 함께 보여 드려요. 여권, 항공권, 해외 사이트 가입에 바로 쓰세요.</p></div>
+<span class="chip tool">영어 도구</span><span class="chip tool">생활 영어</span><h1>한글 이름 영문 변환기</h1><p class="lead">이름을 넣으면 로마자 표기법에 맞는 영문 이름과 자주 쓰는 표기를 함께 보여 드려요. 여권, 항공권, 해외 사이트 가입에 바로 쓰세요.</p>
 <div class="tl-card">
 <form class="tl-form" id="nm-form" autocomplete="off"><input id="nm-in" type="text" inputmode="text" placeholder="예) 홍길동" aria-label="한글 이름" maxlength="8" enterkeyhint="go"><button type="submit">변환</button></form>
 <div class="tl-opt"><div class="tl-ex">예시 <button type="button" data-ex="이승주">이승주</button><button type="button" data-ex="김지현">김지현</button><button type="button" data-ex="남궁민">남궁민</button></div>
@@ -2297,7 +2388,7 @@ def page_tool_name():
 </div></div>{TOOL_JS()}"""
     desc = "한글 이름을 입력하면 로마자 표기법에 맞는 영문 이름과 자주 쓰는 표기를 함께 보여 줘요. 여권 영문 이름 형식, 성씨별 영문 표기(김 Kim, 이 Lee, 박 Park)까지 한 번에 확인하세요."
     data = {"tool": "english_name", "surnames": [[s, v] for s, v in SURNAMES], "compound": COMPOUND_SUR}
-    return layout("한글 이름 영문 변환기", desc, url, body, nav="tools", data=data,
+    return layout("한글 이름 영문 변환기", desc, url, body, nav="tools", og_img=tool_og(url), data=data,
                   seo_title="영문 이름 변환기 - 한글 이름 영어로, 여권 영문 이름 표기법",
                   ld=tool_ld("한글 이름 영문 변환기", desc, url, faq))
 
@@ -2317,8 +2408,7 @@ def page_tool_address():
          "해외직구로 물건을 받으려면 개인통관고유부호가 필요해요. 관세청 개인통관고유부호 사이트에서 무료로 바로 발급받을 수 있어요."),
     ]
     body = f"""<div class="tl">
-<div class="tl-head"><span class="lbl">영어 도구</span><h1>영문 주소 변환기</h1>
-<p>도로명주소를 검색하면 영문 주소와 우편번호를 알려 드려요. 해외직구 사이트 칸에 맞게 나눠서 바로 복사할 수 있어요.</p></div>
+<span class="chip tool">영어 도구</span><span class="chip tool">생활 영어</span><h1>영문 주소 변환기</h1><p class="lead">도로명주소를 검색하면 영문 주소와 우편번호를 알려 드려요. 해외직구 사이트 칸에 맞게 나눠서 바로 복사할 수 있어요.</p>
 <div class="tl-card">
 <form class="tl-form" id="ad-form" autocomplete="off"><input id="ad-in" type="search" placeholder="도로명, 건물 이름, 지번" aria-label="한글 주소" maxlength="80" enterkeyhint="search"><button type="submit">검색</button></form>
 <div class="tl-opt"><div class="tl-ex">예시 <button type="button" data-ex="테헤란로 152">테헤란로 152</button><button type="button" data-ex="세종대로 175">세종대로 175</button></div></div>
@@ -2370,7 +2460,7 @@ def page_tool_address():
 {tool_kakao()}
 </div></div>{TOOL_JS()}"""
     desc = "한글 도로명주소를 검색하면 영문 주소와 우편번호를 바로 알려 줘요. 아파트 동·호수 영문 표기, 해외직구 사이트 칸별(Address Line 1, City, State, ZIP) 입력법까지 정리했어요."
-    return layout("영문 주소 변환기", desc, url, body, nav="tools", data={"tool": "english_address", "jusoKey": JUSO_KEY},
+    return layout("영문 주소 변환기", desc, url, body, nav="tools", og_img=tool_og(url), data={"tool": "english_address", "jusoKey": JUSO_KEY},
                   seo_title="영문 주소 변환기 - 도로명주소 영어로, 동 호수 영문 표기, 해외직구 주소",
                   ld=tool_ld("영문 주소 변환기", desc, url, faq), robots="" if JUSO_KEY else "noindex")
 
@@ -2380,23 +2470,6 @@ def page_tool_address():
 # 근거(네이버 월간 검색량): 토익점수 12,950 · 오픽등급 6,950 · 토익만점점수 5,590 · 오픽등급표 5,320 · 토익점수환산기 4,030
 # 출처: 한국토익위원회 토익스토리(2025 정기시험 성적 분석 /2556, 토익스피킹 안내 /2567), OPIc 공식 사이트 등급체계,
 #       인크루트 어학변환기(lab.incruit.com/editor/score), 링커리어(토익 점수 환산표·채용 예시, 2025)
-TOOL_LIST = [  # (key, 주소, 아이콘, 이름, 설명, 묶음)
-    ("toeic", "/tools/toeic-score/", "990", "토익 점수 계산기", "맞힌 개수로 예상 점수, 평균과 비교", "score"),
-    ("opic", "/tools/opic-level/", "IH", "오픽 등급표", "등급별 수준과 자가 진단", "score"),
-    ("tos", "/tools/toeic-speaking-level/", "200", "토익스피킹 레벨표", "점수별 등급과 시험 구성", "score"),
-    ("compare", "/tools/english-score-compare/", "⇄", "영어 시험 점수 비교", "토익·오픽·토익스피킹을 한눈에", "score"),
-    ("name", "/tools/english-name/", "Aa", "영문 이름 변환기", "여권·해외 사이트용 영문 이름", "life"),
-    ("address", "/tools/english-address/", "#", "영문 주소 변환기", "해외직구용 영문 주소, 칸별 복사", "life"),
-]
-
-
-def tool_cards(skip="", group=None):
-    items = [t for t in TOOL_LIST if t[0] != skip and (group is None or t[5] == group) and (t[0] != "address" or JUSO_KEY)]
-    return '<div class="tl-more-tools">' + "".join(
-        f'<a class="tl-tool" href="{h}"><span class="ic">{e(ic)}</span><span><b>{e(t)}</b><span>{e(d)}</span></span><i>›</i></a>'
-        for k, h, ic, t, d, g in items) + "</div>"
-
-
 def tool_reads(title, picks):
     """도구 끝 '카영 글' 연결: picks = [(뱃지, 글 id 또는 None, 대체 조건 함수)]"""
     seen, rows = set(), []
@@ -2500,15 +2573,14 @@ def page_tool_toeic():
          "흔한 일이에요. 2025년 정기시험 평균도 LC 378.7점, RC 307.5점으로 RC가 70점 넘게 낮았어요. RC는 시간이 부족해서 점수가 깎이는 경우가 많아요."),
     ]
     body = f"""<div class="tl">
-<div class="tl-head"><span class="lbl">점수 도구</span><h1>토익 점수 계산기</h1>
-<p>LC와 RC에서 맞힌 개수를 넣으면 예상 점수를 범위로 알려 드려요. 2025년 평균 점수와도 바로 비교해요.</p></div>
+<span class="chip tool">영어 도구</span><span class="chip tool">점수·시험</span><h1>토익 점수 계산기</h1><p class="lead">LC와 RC에서 맞힌 개수를 넣으면 예상 점수를 범위로 알려 드려요. 2025년 평균 점수와도 바로 비교해요.</p>
 <div class="tl-card" id="tc">
 <div class="tl-sl"><label for="tc-lc"><b>LC 맞힌 개수</b><small>듣기 100문항</small></label><div class="tl-sl-v"><input type="number" id="tc-lc-n" min="0" max="100" value="80" inputmode="numeric" aria-label="LC 맞힌 개수"><span>/ 100</span></div><input type="range" id="tc-lc" min="0" max="100" value="80"></div>
 <div class="tl-sl"><label for="tc-rc"><b>RC 맞힌 개수</b><small>읽기 100문항</small></label><div class="tl-sl-v"><input type="number" id="tc-rc-n" min="0" max="100" value="70" inputmode="numeric" aria-label="RC 맞힌 개수"><span>/ 100</span></div><input type="range" id="tc-rc" min="0" max="100" value="70"></div>
 <div class="tl-hero-res" aria-live="polite"><span class="tl-tag">예상 점수</span>
 <p class="tl-big" id="tc-tot">—</p><p class="tl-big-sub" id="tc-part"></p>
 <div class="tl-scale"><i id="tc-bar"></i><em style="left:{TOEIC_AVG['total'] / 990 * 100:.1f}%"><span>2025 평균 {TOEIC_AVG['total']}</span></em></div>
-<div class="tl-pills" id="tc-pills"></div></div>
+<div class="tl-pills" id="tc-pills"></div></div>{SHARE_ROW}
 <p class="tl-note2">공식 환산표가 없어서 공개된 추정치를 범위로 보여 드려요. 실제 점수는 회차 난이도에 따라 달라져요.</p>
 </div>
 <div class="tl-doc">
@@ -2531,13 +2603,13 @@ def page_tool_toeic():
 {tool_faq(faq)}
 {tool_reads("점수 올리는 데 도움 되는 카영 글", [("LC", None, lambda p: p.get("sub") == "듣기"), ("LC", None, lambda p: p.get("sub") == "발음"), ("LC", None, lambda p: p.get("sub") == "듣기"), ("RC", None, lambda p: p["id"] in next((s["posts"] for s in SERIES if s["id"] == "work"), []))])}
 {tool_src([SRC_TOEICSTORY, SRC_LINK])}
-<h2>다른 점수 도구</h2>
-{tool_cards("toeic", "score")}
+<h2>다른 영어 도구</h2>
+{tool_cards("toeic", "점수·시험")}
 {tool_kakao()}
 </div></div>{TOOL_JS()}"""
     desc = "토익 LC, RC 맞힌 개수를 넣으면 예상 점수를 범위로 알려 줘요. 맞힌 개수별 토익 점수 환산표, 2025년 평균 686점과 비교, 성적 발표일과 유효기간까지 정리했어요."
     data = {"tool": "toeic_score", "est": TOEIC_EST, "avg": TOEIC_AVG}
-    return layout("토익 점수 계산기", desc, url, body, nav="tools", data=data,
+    return layout("토익 점수 계산기", desc, url, body, nav="tools", og_img=tool_og(url), data=data,
                   seo_title="토익 점수 계산기 - 맞힌 개수로 예상 점수, 토익 점수 환산표",
                   ld=tool_ld("토익 점수 계산기", desc, url, faq))
 
@@ -2554,8 +2626,7 @@ def page_tool_opic():
         ("오픽과 토익스피킹 중 뭘 봐야 하나요?", "회사가 인정하는 시험이 먼저예요. 둘 다 인정하면, 내 경험을 자유롭게 말하는 게 편하면 오픽, 정해진 유형을 연습하는 게 편하면 토익스피킹이 잘 맞는 편이에요."),
     ]
     body = f"""<div class="tl">
-<div class="tl-head"><span class="lbl">점수 도구</span><h1>오픽 등급표</h1>
-<p>NL부터 AL까지, 오픽 등급마다 어느 정도로 말하는지 공식 기준을 쉬운 말로 정리했어요. 내 등급도 간단히 짐작해 보세요.</p></div>
+<span class="chip tool">영어 도구</span><span class="chip tool">점수·시험</span><h1>오픽 등급표</h1><p class="lead">NL부터 AL까지, 오픽 등급마다 어느 정도로 말하는지 공식 기준을 쉬운 말로 정리했어요. 내 등급도 간단히 짐작해 보세요.</p>
 <div class="tl-card">
 <p class="tl-sec" style="margin-top:0">나는 어느 등급쯤일까? <span class="tl-sec-s">할 수 있는 것 중 가장 높은 것을 골라요</span></p>
 <div class="tl-cans" id="oq">{quiz}</div>
@@ -2580,13 +2651,13 @@ def page_tool_opic():
 {tool_faq(faq)}
 {tool_reads("말하기 등급 올리는 카영 글", [("말", None, lambda p: p.get("sub") == "회화"), ("말", None, lambda p: p.get("sub") == "회화"), ("말", None, lambda p: p.get("sub") == "발음")])}
 {tool_src([SRC_OPIC])}
-<h2>다른 점수 도구</h2>
-{tool_cards("opic", "score")}
+<h2>다른 영어 도구</h2>
+{tool_cards("opic", "점수·시험")}
 {tool_kakao()}
 </div></div>{TOOL_JS()}"""
     desc = "오픽 등급표를 NL, NM, NH, IL, IM1, IM2, IM3, IH, AL 순서로 정리하고 등급별로 어느 정도 말하는지 쉬운 말로 풀었어요. IM2와 IH 차이, 다음 등급으로 가는 방법, 내 등급 자가 진단까지."
     data = {"tool": "opic_level", "opic": [[g, n, s, t] for g, n, s, d, t in OPIC]}
-    return layout("오픽 등급표", desc, url, body, nav="tools", data=data,
+    return layout("오픽 등급표", desc, url, body, nav="tools", og_img=tool_og(url), data=data,
                   seo_title="오픽 등급표 - NL부터 AL까지 등급별 수준, IM2 IH 차이",
                   ld=tool_ld("오픽 등급표", desc, url, faq))
 
@@ -2604,12 +2675,11 @@ def page_tool_tos():
         ("토익스피킹 등급과 오픽 등급은 같은가요?", "둘 다 ACTFL 등급 이름을 쓰지만 시험 방식이 달라서 똑같다고 볼 수는 없어요. 두 시험을 공식으로 바꿔 주는 환산표도 없어요. 비교가 필요하면 영어 시험 점수 비교표를 참고하세요."),
     ]
     body = f"""<div class="tl">
-<div class="tl-head"><span class="lbl">점수 도구</span><h1>토익스피킹 레벨표</h1>
-<p>토익스피킹 점수를 넣으면 등급을 바로 알려 드려요. 점수별 등급표와 시험 구성도 함께 정리했어요.</p></div>
+<span class="chip tool">영어 도구</span><span class="chip tool">점수·시험</span><h1>토익스피킹 레벨표</h1><p class="lead">토익스피킹 점수를 넣으면 등급을 바로 알려 드려요. 점수별 등급표와 시험 구성도 함께 정리했어요.</p>
 <div class="tl-card">
 <div class="tl-sl"><label for="ts"><b>토익스피킹 점수</b><small>0~200점, 10점 단위</small></label><div class="tl-sl-v"><input type="number" id="ts-n" min="0" max="200" step="10" value="130" inputmode="numeric" aria-label="토익스피킹 점수"><span>/ 200</span></div><input type="range" id="ts" min="0" max="200" step="10" value="130"></div>
 <div class="tl-hero-res" aria-live="polite"><span class="tl-tag">내 등급</span><p class="tl-big" id="ts-g">—</p><p class="tl-big-sub" id="ts-s"></p>
-<div class="tl-scale"><i id="ts-bar"></i></div><div class="tl-pills" id="ts-p"></div></div>
+<div class="tl-scale"><i id="ts-bar"></i></div><div class="tl-pills" id="ts-p"></div></div>{SHARE_ROW}
 </div>
 <div class="tl-doc">
 <h2>토익스피킹 점수별 등급표</h2>
@@ -2625,13 +2695,13 @@ def page_tool_tos():
 {tool_faq(faq)}
 {tool_reads("말하기 점수 올리는 카영 글", [("말", None, lambda p: p.get("sub") == "회화"), ("말", None, lambda p: p.get("sub") == "발음"), ("말", None, lambda p: p.get("sub") == "회화")])}
 {tool_src([SRC_TOS, SRC_LINK])}
-<h2>다른 점수 도구</h2>
-{tool_cards("tos", "score")}
+<h2>다른 영어 도구</h2>
+{tool_cards("tos", "점수·시험")}
 {tool_kakao()}
 </div></div>{TOOL_JS()}"""
     desc = "토익스피킹 점수를 넣으면 등급(AH, AM, AL, IH, IM, IL, NH)을 바로 알려 줘요. 점수별 레벨표, IM1·IM2·IM3 점수, 11문항 시험 구성, 채용 기준 예시까지 정리했어요."
     data = {"tool": "toeic_speaking"}
-    return layout("토익스피킹 레벨표", desc, url, body, nav="tools", data=data,
+    return layout("토익스피킹 레벨표", desc, url, body, nav="tools", og_img=tool_og(url), data=data,
                   seo_title="토익스피킹 레벨 점수표 - 점수별 등급 AL IH IM3, 시험 구성",
                   ld=tool_ld("토익스피킹 레벨표", desc, url, faq))
 
@@ -2646,13 +2716,12 @@ def page_tool_compare():
         ("다른 사이트와 숫자가 달라요.", "기관마다 기준이 달라서 그래요. 예를 들어 인크루트는 예전 토익스피킹 레벨(Lv1~Lv8) 기준으로 비교해서 이 표의 토익스피킹 칸과 다를 수 있어요."),
     ]
     body = f"""<div class="tl">
-<div class="tl-head"><span class="lbl">점수 도구</span><h1>영어 시험 점수 비교</h1>
-<p>토익, 오픽, 토익스피킹 점수를 하나의 사다리에 놓고 비교해요. 내 점수가 어디쯤인지, 다음 목표는 무엇인지 확인하세요.</p></div>
+<span class="chip tool">영어 도구</span><span class="chip tool">점수·시험</span><h1>영어 시험 점수 비교</h1><p class="lead">토익, 오픽, 토익스피킹 점수를 하나의 사다리에 놓고 비교해요. 내 점수가 어디쯤인지, 다음 목표는 무엇인지 확인하세요.</p>
 <div class="tl-card">
 <div class="tl-seg" id="cp-t" role="group" aria-label="시험 선택"><button type="button" class="on" data-t="opic">오픽</button><button type="button" data-t="tos">토익스피킹</button><button type="button" data-t="toeic">토익</button></div>
 <div class="tl-picks" id="cp-p"></div>
 <div class="tl-lad" id="cp-l"></div>
-<p class="tl-you" id="cp-y" aria-live="polite"></p>
+<p class="tl-you" id="cp-y" aria-live="polite"></p>{SHARE_ROW}
 <p class="tl-note2">시험끼리의 공식 환산표는 없어요. 아래 기준으로 만든 참고용 비교예요.</p>
 </div>
 <div class="tl-doc">
@@ -2668,37 +2737,220 @@ def page_tool_compare():
 <h2>자주 묻는 질문</h2>
 {tool_faq(faq)}
 {tool_src([SRC_OPIC, SRC_TOS, SRC_INCRUIT, SRC_LINK])}
-<h2>다른 점수 도구</h2>
-{tool_cards("compare", "score")}
+<h2>다른 영어 도구</h2>
+{tool_cards("compare", "점수·시험")}
 {tool_kakao()}
 </div></div>{TOOL_JS()}"""
     desc = "토익, 오픽, 토익스피킹 점수를 한 표에서 비교해요. 오픽 IH는 토익 몇 점, 토익스피킹 IM3는 오픽 어느 등급인지 참고용 기준과 출처를 함께 정리했어요."
     data = {"tool": "score_compare", "ladder": LADDER}
-    return layout("영어 시험 점수 비교", desc, url, body, nav="tools", data=data,
+    return layout("영어 시험 점수 비교", desc, url, body, nav="tools", og_img=tool_og(url), data=data,
                   seo_title="토익 오픽 토익스피킹 점수 비교표 - 영어 시험 점수 환산, 내 등급 위치",
                   ld=tool_ld("영어 시험 점수 비교", desc, url, faq))
 
 
+
+# ── 영어 도구 v2 (2026-10-24): 사이트 흐름에 맞춘 목록·카드·공유 이미지 ─────────────
+# 도구 = 영어 도구 카테고리 안의 '글'처럼: 같은 카드 목록, 같은 칩, 같은 분류 필터(전체 · 점수·시험 · 글쓰기 · 생활 영어)
+TOOL_GROUPS = ["점수·시험", "글쓰기", "생활 영어"]
+TOOLS = [  # key, 주소, 이름, 설명, 분류, 3D 아이콘, 목록 썸네일(q, a, 강조), 공유 이미지(라벨, 큰 글씨, 작은 글씨)
+    dict(key="toeic", url="/tools/toeic-score/", title="토익 점수 계산기", desc="맞힌 개수로 예상 점수를 범위로, 2025 평균과 비교", group="점수·시험",
+         icon="trophy", th=("LC 80개 · RC 70개", "700~750점", "700~750점"), og=("예상 점수", "700~750점", "LC 80개 · RC 70개 맞혔다면")),
+    dict(key="opic", url="/tools/opic-level/", title="오픽 등급표", desc="NL부터 AL까지 등급별 수준, 내 등급 자가 진단", group="점수·시험",
+         icon="studio-microphone", th=("지금 IM2, 다음은?", "IM2 → IH", "IH"), og=("오픽 등급", "IM2 → IH", "다음 등급으로 가려면")),
+    dict(key="tos", url="/tools/toeic-speaking-level/", title="토익스피킹 레벨표", desc="점수를 넣으면 등급, 11문항 시험 구성까지", group="점수·시험",
+         icon="telephone", th=("토익스피킹 130점", "IM3", "IM3"), og=("토익스피킹", "130점 = IM3", "점수별 등급 바로 확인")),
+    dict(key="compare", url="/tools/english-score-compare/", title="영어 시험 점수 비교", desc="토익·오픽·토익스피킹을 한 사다리에서", group="점수·시험",
+         icon="clipboard", th=("오픽 IH는 토익 몇 점?", "900~945점", "900~945점"), og=("오픽 IH는 토익", "900~945점", "토익·오픽·토익스피킹 한눈에")),
+    dict(key="wordcount", url="/tools/english-word-count/", title="영어 단어 수 세기", desc="에세이·자소서 단어 수, 글자 수, 읽는 시간", group="글쓰기",
+         icon="page", th=("My essay is about…", "186 words", "186"), og=("Word count", "186 words", "글자 수 · 문장 수 · 읽는 시간")),
+    dict(key="cursive", url="/tools/english-cursive/", title="영어 필기체 변환", desc="복사해서 쓰는 필기체, 이미지 저장, 알파벳 연습", group="글쓰기",
+         icon="raised-hand", th=("Cafe in English", "𝒞𝒶𝒻𝑒 𝒾𝓃 ℰ𝓃𝑔𝓁𝒾𝓈𝒽", ""), og=("필기체 변환", "Cafe in English", "복사 · 이미지 저장 · 알파벳 연습")),
+    dict(key="name", url="/tools/english-name/", title="영문 이름 변환기", desc="여권·해외 사이트용 영문 이름, 성씨별 표기", group="생활 영어",
+         icon="passport-control", th=("이승주", "Lee Seungju", "Seungju"), og=("이승주", "Lee Seungju", "여권 영문 이름 형식까지")),
+    dict(key="address", url="/tools/english-address/", title="영문 주소 변환기", desc="도로명주소를 영어로, 해외직구 칸별 복사", group="생활 영어",
+         icon="world-map", th=("테헤란로 152", "152 Teheran-ro", "Teheran-ro"), og=("영문 주소", "152 Teheran-ro", "해외직구 칸별로 복사")),
+]
+TOOL_BY_URL = {t["url"]: t for t in TOOLS}
+TOOL_BY_KEY = {t["key"]: t for t in TOOLS}
+live_tools = lambda: [t for t in TOOLS if t["key"] != "address" or JUSO_KEY]
+
+
+# 공유 이미지: 글 공유 이미지와 같은 파스텔 그라데이션(OG_BG 0 복숭아 · 1 하늘 · 2 라벤더 · 3 민트 · 4 레몬)과 왼쪽 한 줄
+OG_TOOL = {"toeic": (1, "맞힌 개수로 예상 점수 바로 확인"), "opic": (2, "NL부터 AL까지, 나는 어느 등급일까"), "tos": (0, "점수를 넣으면 등급이 바로"),
+           "compare": (3, "토익·오픽·토익스피킹 한눈에"), "wordcount": (3, "에세이·자소서 분량 맞추기"), "cursive": (0, "복사·이미지 저장·알파벳 연습"),
+           "name": (4, "여권·해외 사이트용 영문 이름"), "address": (1, "해외직구 영문 주소, 칸별로")}
+
+
+def tool_og(url):
+    t = TOOL_BY_URL.get(url)
+    if not t:
+        return og_tool("tools-hub", "무료 · 가입 없이", "영어 도구", "점수 계산부터 영문 이름까지", "영어 도구", "990 · IH · Aa", "토익 · 오픽 · 영문 이름 · 필기체", "trophy", "tools", bg=2)
+    lab, big, small = t["og"]
+    bg, sub = OG_TOOL.get(t["key"], (None, t["desc"]))
+    return og_tool("tool-" + t["key"], "영어 도구 · " + t["group"], t["title"], sub, lab, big, small, t["icon"], t["key"], bg=bg, cursive=t["key"] == "cursive")
+
+
+def tool_card(t):
+    q, a, k = t["th"]
+    art = icon_img(t["icon"])
+    return card(t["url"], [("tool", t["group"])], t["title"], t["desc"],
+                chat_html(q, a, k, "", art, chat_bg("tool-" + t["key"])), hl=2, data_sub=t["group"])
+
+
+def tool_cards(skip="", group=None):
+    items = [t for t in live_tools() if t["key"] != skip and (group is None or t["group"] == group)]
+    if len(items) < 3:  # 같은 분류가 적으면 다른 도구로 채워요
+        items += [t for t in live_tools() if t["key"] != skip and t not in items][:3 - len(items)]
+    return '<div class="cards list tl-cards">' + "".join(tool_card(t) for t in items) + "</div>"
+
+
+def tool_head(group, title, lead):
+    return (f'<span class="chip tool">영어 도구</span><span class="chip tool">{e(group)}</span>'
+            f'<h1>{e(title)}</h1><p class="lead">{e(lead)}</p>')
+
+
 def page_tools():
+    tools = live_tools()
+    cards = "".join(tool_card(t) for t in tools)
+    groups = [g for g in TOOL_GROUPS if any(t["group"] == g for t in tools)]
+    b = lambda v, n, lbl, on="": f'<button type="button" class="sf-b{on}" data-sub="{e(v)}"><span>{e(lbl)}</span><em>{n}</em></button>'
+    filt = ('<aside class="subfilter sf-one" aria-label="분류"><div class="sf-g" role="group" aria-label="분류"><div class="sf-h">분류</div>'
+            + b("", len(tools), "전체", " on") + "".join(b(g, sum(1 for t in tools if t["group"] == g), g) for g in groups)
+            + '</div><p class="sf-empty" hidden>이 분류의 도구는 아직 없어요</p></aside>')
+    about = ('<section class="cat-about"><h2>영어 도구는 이렇게 써요</h2><p>가입 없이 무료로 쓰는 도구예요. 입력한 내용은 브라우저 안에서만 계산하고 저장하지 않아요.</p>'
+             '<ul class="ca-tips"><li><b>토익 시험을 본 날</b> 맞힌 개수로 예상 점수를 확인하세요.</li>'
+             '<li><b>취업 준비할 때</b> 오픽, 토익스피킹, 토익 점수를 한 표에서 비교하세요.</li>'
+             '<li><b>영어로 글을 쓸 때</b> 에세이·자소서 단어 수를 세고, 같은 단어 반복을 줄이세요.</li>'
+             '<li><b>여권을 처음 만들 때</b> 영문 이름 철자를 미리 정해 두세요.</li></ul></section>')
+    body = (f'<h1>영어 도구</h1><p class="lead">점수 계산부터 영문 이름까지, 바로 쓰는 무료 도구</p>'
+            f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>{about}')
+    desc = "토익 점수 계산기, 오픽 등급표, 토익스피킹 레벨표, 영어 시험 점수 비교, 영어 단어 수 세기, 영어 필기체 변환, 영문 이름 변환기를 가입 없이 무료로 쓸 수 있어요."
+    ld = [{"@type": "CollectionPage", "name": "영어 도구", "description": desc, "url": DOMAIN + "/tools/", "inLanguage": "ko",
+           "mainEntity": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": DOMAIN + t["url"], "name": t["title"]} for i, t in enumerate(tools)]}},
+          {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": DOMAIN + "/"},
+                                                         {"@type": "ListItem", "position": 2, "name": "영어 도구", "item": DOMAIN + "/tools/"}]}]
+    return layout("영어 도구", desc, "/tools/", body, nav="tools", wide=True, og_img=tool_og("/tools/"), ld=ld,
+                  seo_title="영어 도구 - 토익 점수 계산기, 오픽 등급표, 영어 단어 수 세기, 영문 이름 변환기")
+
+
+SHARE_ROW = '<div class="tl-share-row" hidden><button type="button" class="tl-share">결과 공유하기</button></div>'
+CURSIVE_FONTS = [("Dancing Script", "또박또박 필기체"), ("Great Vibes", "우아한 필기체"), ("Sacramento", "가는 필기체"), ("Cedarville Cursive", "손글씨 필기체")]
+CURSIVE_FILES = {"Dancing Script": "dancing-script-600", "Great Vibes": "great-vibes-400", "Sacramento": "sacramento-400", "Cedarville Cursive": "cedarville-cursive-400"}  # assets/fonts (SIL OFL, 사이트에 직접 올림)
+
+
+def page_tool_wordcount():
+    url = "/tools/english-word-count/"
+    t = TOOL_BY_URL[url]
+    faq = [
+        ("단어 수는 어떤 기준으로 세나요?", "띄어쓰기로 나뉜 덩어리를 한 단어로 세요. well-known처럼 하이픈으로 이어진 말과 don't 같은 축약형은 한 단어, 2026 같은 숫자도 한 단어예요. 워드 프로그램이 세는 방식과 거의 같아요."),
+        ("글자 수(characters)는 공백을 포함하나요?", "둘 다 보여 드려요. 해외 지원서나 SNS에서 'characters'라고 하면 보통 공백을 포함한 글자 수예요. 정확한 기준은 제출하는 곳의 안내를 확인하세요."),
+        ("읽는 시간은 어떻게 계산하나요?", "영어 원어민 성인이 소리 내지 않고 읽는 평균 속도인 1분에 약 238단어(2019년 Brysbaert 연구)로 계산해요. 말하는 시간은 발표 속도인 1분에 약 150단어로 계산해요."),
+        ("입력한 글이 저장되나요?", "아니요. 글은 이 브라우저 안에서만 세고, 어디에도 보내거나 저장하지 않아요."),
+        ("미국 대학 에세이는 몇 단어인가요?", "많이 쓰는 Common App 자기소개 에세이는 650단어가 최대예요. 학교별 추가 에세이는 학교마다 다르니 지원 요강을 확인하세요."),
+    ]
     body = f"""<div class="tl">
-<div class="tl-head"><span class="lbl">무료</span><h1>영어 도구</h1>
-<p>시험 점수 확인부터 여권 영문 이름까지, 영어로 확인하고 바꿔야 할 때 바로 쓰는 도구예요. 가입 없이 무료예요.</p></div>
-<h2 class="tl-gh">점수·시험</h2>
-{tool_cards(group="score")}
-<h2 class="tl-gh">생활 영어</h2>
-{tool_cards(group="life")}
+{tool_head(t["group"], "영어 단어 수 세기", "영어 글을 붙여 넣으면 단어 수, 글자 수, 문장 수, 읽는 시간을 바로 세어 드려요. 에세이·자소서 분량을 맞출 때 쓰세요.")}
+<div class="tl-card" id="wc">
+<div class="tl-box"><label class="sr-only" for="wc-in">영어 글</label><textarea id="wc-in" class="tl-ta" placeholder="여기에 영어 글을 붙여 넣으세요" spellcheck="true"></textarea>
+<div class="tl-ta-foot"><button type="button" class="tl-mini" id="wc-clear">지우기</button><button type="button" class="tl-mini" id="wc-ex">예시 넣기</button></div></div>
+<div class="tl-stats" aria-live="polite">
+<div class="m"><b id="wc-w">0</b><span>단어</span></div><div><b id="wc-c">0</b><span>글자</span></div><div><b id="wc-s">0</b><span>문장</span></div><div><b id="wc-r">0초</b><span>읽는 시간</span></div></div>
+<div class="tl-box tl-limit"><div class="tl-lim-h"><label for="wc-lim">단어 수 제한</label><span class="tl-lim-in"><input id="wc-lim" type="number" min="0" inputmode="numeric" placeholder="예) 300"><span>단어</span></span></div>
+<div class="tl-prog"><i id="wc-bar"></i></div><p class="tl-lim-t" id="wc-lt">제한을 넣으면 남은 단어 수를 알려 드려요.</p></div>
+<div class="tl-box"><p class="tl-box-h">자세히</p><div class="tl-rows tl-rows-plain">
+<div class="tl-row"><span class="tl-k">글자 (공백 제외)</span><b class="tl-v" id="wc-c2">0</b></div>
+<div class="tl-row"><span class="tl-k">문단</span><b class="tl-v" id="wc-p">0</b></div>
+<div class="tl-row"><span class="tl-k">말하는 시간<small>발표 속도 기준</small></span><b class="tl-v" id="wc-sp">0초</b></div>
+<div class="tl-row"><span class="tl-k">문장당 평균 단어</span><b class="tl-v" id="wc-avg">0</b></div></div></div>
+<div class="tl-box" id="wc-topbox" hidden><p class="tl-box-h">자주 쓴 단어</p><div class="tl-tags" id="wc-top"></div><p class="tl-note2">같은 단어가 자주 나오면 다른 표현으로 바꿔 보세요.</p></div>
+</div>
 <div class="tl-doc">
-<h2>이런 때 쓰세요</h2>
+<h2>영어 단어 수, 이렇게 세요</h2>
+<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>예</th><th>단어 수</th><th>이유</th></tr></thead><tbody>
+<tr><td>well-known</td><td><b>1</b></td><td>하이픈으로 이어진 말은 한 단어</td></tr>
+<tr><td>don't</td><td><b>1</b></td><td>축약형은 한 단어</td></tr>
+<tr><td>2026</td><td><b>1</b></td><td>숫자도 한 단어</td></tr>
+<tr><td>U.S.</td><td><b>1</b></td><td>띄어쓰기 없이 붙은 약어는 한 단어</td></tr>
+</tbody></table></div>
+<h2>단어 수와 글자 수는 달라요</h2>
+<p>영어 지원서는 <b>words</b>(단어 수)로 제한하는 경우가 많고, SNS나 일부 온라인 지원서는 <b>characters</b>(글자 수)로 제한해요. 같은 글이라도 기준에 따라 분량이 크게 달라서, 제출하는 곳의 기준을 먼저 확인하세요.</p>
+<h2>분량을 줄여야 할 때</h2>
 <ul>
-<li><b>토익 시험을 본 날</b> 맞힌 개수로 예상 점수를 확인하세요.</li>
-<li><b>취업 준비할 때</b> 오픽, 토익스피킹, 토익 점수를 한 표에서 비교하세요.</li>
-<li><b>여권을 처음 만들 때</b> 영문 이름 철자를 미리 정해 두세요.</li>
-{"<li><b>해외직구를 할 때</b> 영문 주소를 쇼핑몰 칸에 맞게 나눠서 복사하세요.</li>" if JUSO_KEY else ""}
+<li><b>very, really, quite</b> 같은 꾸밈말을 먼저 빼 보세요. 뜻은 거의 그대로이고 단어 수만 줄어요.</li>
+<li><b>in order to → to</b>, <b>due to the fact that → because</b>처럼 긴 표현을 짧게 바꿔요.</li>
+<li>같은 단어가 반복되면 위 '자주 쓴 단어'를 보고 다른 표현으로 바꿔요.</li>
 </ul>
+<h2>자주 묻는 질문</h2>
+{tool_faq(faq)}
+{tool_reads("영어 글쓰기에 도움 되는 카영 글", [("글", None, lambda p: p.get("sub") == "단어"), ("글", None, lambda p: p["id"] in next((s["posts"] for s in SERIES if s["id"] == "work"), [])), ("글", None, lambda p: p.get("sub") == "단어")])}
+<h2>다른 영어 도구</h2>
+{tool_cards("wordcount", t["group"])}
 {tool_kakao()}
-</div></div>"""
-    desc = "토익 점수 계산기, 오픽 등급표, 토익스피킹 레벨표, 영어 시험 점수 비교, 영문 이름 변환기까지 영어 공부와 생활에 필요한 도구를 무료로 쓸 수 있어요."
-    return layout("영어 도구", desc, "/tools/", body, nav="tools", seo_title="영어 도구 - 토익 점수 계산기, 오픽 등급표, 영문 이름 변환기")
+</div></div>{TOOL_JS()}"""
+    desc = "영어 글을 붙여 넣으면 단어 수, 글자 수(공백 포함·제외), 문장 수, 읽는 시간을 바로 세어 줘요. 에세이·자소서 단어 수 제한, 자주 쓴 단어 확인까지. 글은 저장하지 않아요."
+    return layout("영어 단어 수 세기", desc, url, body, nav="tools", og_img=tool_og(url), data={"tool": "word_count"},
+                  seo_title="영어 단어 수 세기 - 영어 글자수 세기, 에세이 단어 수 계산기",
+                  ld=tool_ld("영어 단어 수 세기", desc, url, faq))
+
+
+def page_tool_cursive():
+    url = "/tools/english-cursive/"
+    t = TOOL_BY_URL[url]
+    ff = "".join(f"@font-face{{font-family:'{n}';src:url('/assets/fonts/{CURSIVE_FILES[n]}.woff2?v={ASSET_V}') format('woff2');font-display:swap}}" for n, _ in CURSIVE_FONTS)
+    upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    alpha = "".join(f'<div class="tl-ab"><b>{c}{c.lower()}</b><span>{c}{c.lower()}</span></div>' for c in upper)
+    faq = [
+        ("복사한 필기체가 다른 곳에서 깨져요.", "'복사해서 쓰기'는 글꼴이 아니라 필기체 모양의 특수 문자(유니코드)라서, 일부 오래된 기기나 앱에서는 네모로 보일 수 있어요. 그럴 때는 '이미지로 저장'을 쓰세요."),
+        ("인스타그램 프로필에 써도 되나요?", "네, 복사해서 바로 붙여 넣을 수 있어요. 다만 특수 문자라서 검색에는 잘 잡히지 않고, 화면 읽기 프로그램은 제대로 읽지 못해요. 이름이나 중요한 정보는 일반 글자로 함께 써 두세요."),
+        ("필기체 이미지는 어디에 쓸 수 있나요?", "카드, 포스터, 노트 꾸미기에 쓰기 좋아요. 이미지에 쓴 글꼴은 누구나 무료로 쓸 수 있는 글꼴(SIL Open Font License)이에요."),
+        ("영어 필기체는 학교에서 배우나요?", "미국은 주마다 달라요. 필기체 교육을 다시 의무로 정한 주도 있고, 쓰지 않는 학교도 많아요. 읽을 줄 알면 손글씨 카드나 옛 문서를 읽을 때 도움이 돼요."),
+        ("입력한 글이 저장되나요?", "아니요. 글은 이 브라우저 안에서만 바꾸고, 어디에도 보내거나 저장하지 않아요."),
+    ]
+    body = f"""<style>{ff}</style>
+<div class="tl">
+{tool_head(t["group"], "영어 필기체 변환", "이름이나 문장을 넣으면 영어 필기체로 바꿔 드려요. 복사해서 인스타 프로필에 쓰거나, 이미지로 저장하거나, 알파벳 연습지로 출력하세요.")}
+<div class="tl-card" id="cv">
+<div class="tl-box"><label class="sr-only" for="cv-in">바꿀 영어</label><input id="cv-in" class="tl-in" type="text" value="Cafe in English" maxlength="60" autocomplete="off"></div>
+<div class="tl-seg" id="cv-tab" role="tablist" aria-label="보기"><button type="button" class="on" data-v="copy">복사해서 쓰기</button><button type="button" data-v="img">이미지로 저장</button><button type="button" data-v="abc">알파벳 연습</button></div>
+<div class="tl-box" id="cv-copy"></div>
+<div class="tl-box" id="cv-img" hidden><div class="tl-fonts" id="cv-fonts"></div><button type="button" class="tl-share" id="cv-save">이미지로 저장</button></div>
+<div class="tl-box" id="cv-abc" hidden><div class="tl-fontpick" id="cv-abcf"></div><div class="tl-abc" id="cv-abcg">{alpha}</div><button type="button" class="tl-share tl-ghost" id="cv-print">연습지 출력하기</button></div>
+</div>
+<div class="tl-doc">
+<h2>두 가지 필기체가 있어요</h2>
+<div class="tl-steps">
+<div class="tl-step"><i>1</i><div><b>복사해서 쓰는 필기체</b><span>필기체 모양의 특수 문자예요. 인스타그램, 카톡 프로필처럼 글꼴을 고를 수 없는 곳에 붙여 넣을 수 있어요.</span></div></div>
+<div class="tl-step"><i>2</i><div><b>이미지로 저장하는 필기체</b><span>손글씨 글꼴로 그린 그림이에요. 어디서나 똑같이 보이고, 카드나 포스터에 쓰기 좋아요.</span></div></div>
+</div>
+<h2>영어 필기체, 이렇게 연습해요</h2>
+<ul>
+<li><b>소문자부터</b> 연습하세요. 필기체는 글자끼리 이어 쓰기 때문에 소문자가 익숙해야 단어가 자연스러워요.</li>
+<li><b>a, c, d, g, o, q</b>처럼 동그라미로 시작하는 글자를 한 묶음으로 연습하면 빨리 손에 익어요.</li>
+<li>알파벳이 익숙해지면 <b>내 이름</b>, 그다음 짧은 문장을 이어 쓰세요.</li>
+</ul>
+<h2>자주 묻는 질문</h2>
+{tool_faq(faq)}
+<h2>다른 영어 도구</h2>
+{tool_cards("cursive", t["group"])}
+{tool_kakao()}
+</div></div>{TOOL_JS()}"""
+    desc = "영어 이름이나 문장을 필기체로 바꿔 줘요. 인스타 프로필에 복사해서 쓰는 필기체, 손글씨 필기체 이미지 저장, 영어 알파벳 필기체 대문자·소문자 연습지 출력까지 무료로."
+    return layout("영어 필기체 변환", desc, url, body, nav="tools", og_img=tool_og(url),
+                  data={"tool": "cursive", "fonts": [list(f) for f in CURSIVE_FONTS]},
+                  seo_title="영어 필기체 변환 - 이름·문장 필기체로 바꾸기, 복사·이미지 저장, 알파벳 연습",
+                  ld=tool_ld("영어 필기체 변환", desc, url, faq))
+
+
+def post_tools(p):
+    """글 끝 '함께 쓰면 좋은 도구' — 듣기·발음 글은 토익 계산기, 회화 글은 오픽 등급표, 단어 글은 단어 수 세기"""
+    sub = p.get("sub", "")
+    keys = ["toeic", "tos"] if sub in ("듣기", "발음") else ["opic", "tos"] if sub == "회화" else ["wordcount"] if sub == "단어" else []
+    if p["id"] in next((s["posts"] for s in SERIES if s["id"] == "work"), []):
+        keys = ["toeic", "compare"]
+    if not keys:
+        return ""
+    return ('<section class="post-tools no-print"><h2 class="pt-h">함께 쓰면 좋은 영어 도구</h2><div class="cards list tl-cards">'
+            + "".join(tool_card(TOOL_BY_KEY[k]) for k in keys) + "</div></section>")
 
 
 def build():
@@ -2758,7 +3010,8 @@ def build():
     write("/tools/", page_tools()); pages.append("/tools/")
     write("/tools/english-name/", page_tool_name()); pages.append("/tools/english-name/")
     for u, fn in (("/tools/toeic-score/", page_tool_toeic), ("/tools/opic-level/", page_tool_opic),
-                  ("/tools/toeic-speaking-level/", page_tool_tos), ("/tools/english-score-compare/", page_tool_compare)):
+                  ("/tools/toeic-speaking-level/", page_tool_tos), ("/tools/english-score-compare/", page_tool_compare),
+                  ("/tools/english-word-count/", page_tool_wordcount), ("/tools/english-cursive/", page_tool_cursive)):
         write(u, fn()); pages.append(u)
     write("/tools/english-address/", page_tool_address())
     if JUSO_KEY:

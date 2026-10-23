@@ -1,0 +1,6 @@
+Copyright (c) 2010, Kimberly Geswein (kimberlygeswein.com kimberlygeswein@gmail.com)
+Copyright 2016 The Dancing Script Project Authors (https://github.com/googlefonts/DancingScript), with Reserved Font Name 'Dancing Script'.
+Copyright 2010 The Great Vibes Pro Project Authors (https://github.com/googlefonts/great-vibes)
+Copyright (c) 2012 by Brian J. Bonislawsky DBA Astigmatic (AOETI) (astigma@astigmatic.com), with Reserved Font Name 'Sacramento'
+
+All four fonts are licensed under the SIL Open Font License, Version 1.1 (https://openfontlicense.org). Files from the @fontsource npm packages (latin subset).
