@@ -1388,8 +1388,7 @@ def page_category(cat):
         kind = lambda sub: "강의" if "강의" in sub else "인터뷰" if "인터뷰" in sub else "대담" if "대담" in sub else "연설"
         kinds = [kind(p.get("sub", "")) for p in items]
         cards = "".join(re.sub(r' data-sub="[^"]*"', "", post_card(p, 2), 1).replace(' href=', f' data-sub="{k}" href=', 1) for p, k in zip(items, kinds))
-        order = [k for k in ["연설", "인터뷰", "대담", "강의"] if k in kinds]
-        filt = one_filter("종류", sorted(kinds, key=order.index))
+        filt = f'<aside class="subfilter sf-one sf-viewonly" aria-label="보기">{view_card("video")}</aside>'  # 종류 필터는 2026-10-24에 뺌 (보기만)
         body = (APP_HEAD(cat) + APP_SEG(cat) +
                 f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     else:  # 영어표현 · 영어꿀팁 · 영어 이야기: 분류 하나만 (난이도 필터는 2026-10-24에 뺌, 카드의 점 표시로 충분)
