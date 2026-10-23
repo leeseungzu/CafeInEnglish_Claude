@@ -1252,11 +1252,11 @@ def page_category(cat):
     def one_filter(title, keys):  # 한 그룹 필터 (영상: 종류, 사유의 문장: 인물)
         ks = [k for k in dict.fromkeys(keys) if k]
         b = lambda v, n, lbl, on="": f'<button type="button" class="sf-b{on}" data-sub="{e(v)}"><span>{e(lbl)}</span><em>{n}</em></button>'
-        view = ""
-        if cat in ("video", "think"):  # PC 오른쪽: 영상으로 배우기 ↔ 사유의 문장 (휴대폰에서는 숨기고 위쪽 전환 사용)
-            n = {"video": sum(1 for p in POSTS if p["cat"] == "video"), "think": len(THINKS)}
-            view = ('<div class="sf-g sf-view" role="group" aria-label="보기"><div class="sf-h">보기</div>'
-                    + "".join(f'<a class="sf-a{" on" if k == cat else ""}" href="/category/{k}/"><span>{CATS[k]}</span><em>{n[k]}</em></a>' for k in ("video", "think")) + '</div>')
+        # PC 오른쪽 '보기' 카드: 같은 탭 안의 칸 전환 (휴대폰에서는 숨기고 제목 아래 세그먼트 사용)
+        group = ("video", "think") if cat in ("video", "think") else STUDY_CATS
+        n = {k: (len(THINKS) if k == "think" else sum(1 for p in POSTS if p["cat"] == k)) for k in group}
+        view = ('<div class="sf-g sf-view" role="group" aria-label="보기"><div class="sf-h">보기</div>'
+                + "".join(f'<a class="sf-a{" on" if k == cat else ""}" href="/category/{k}/"><span>{CATS[k]}</span><em>{n[k]}</em></a>' for k in group) + '</div>')
         return (f'<aside class="subfilter sf-one" aria-label="{title}"><div class="sf-g" role="group" aria-label="{title}"><div class="sf-h">{title}</div>'
                 + b("", len(keys), "전체", " on") + "".join(b(k, keys.count(k), k) for k in ks) + f'</div>{view}<p class="sf-empty" hidden>이 조합의 글은 아직 없어요</p></aside>')
     if cat == "think":
@@ -1275,27 +1275,14 @@ def page_category(cat):
         filt = one_filter("종류", sorted(kinds, key=order.index))
         body = (APP_HEAD(cat) + APP_SEG(cat) +
                 f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
-    elif cat == "story":
+    else:  # 영어표현 · 영어꿀팁 · 영어 이야기: 분류 하나만 (난이도 필터는 2026-10-24에 뺌, 카드의 점 표시로 충분)
         items = [p for p in POSTS if p["cat"] == cat]
-        cards = "".join(post_card(p, 2) for p in items)
-        subs = [p.get("sub", "") for p in items]
-        filt = one_filter("분류", subs) if len(set(subs)) > 1 else ""
-        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>' + STUDY_SEG(cat) +
-                f'<div class="cat-grid{" has-filter" if filt else ""}"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
-    else:
-        items = [p for p in POSTS if p["cat"] == cat]
-        cards = "".join(post_card(p, 2) for p in items) or '<div class="empty"><p>곧 첫 글이 올라와요.</p></div>'
-        subs = [x for x in dict.fromkeys(p.get("sub", "") for p in items) if x]
-        filt = ""
-        if cat != "video" and items:
-            btn = lambda v, n, lbl, on="": f'<button type="button" class="sf-b{on}" data-sub="{e(v)}"><span>{e(lbl)}</span><em>{n}</em></button>'
-            lvb = lambda v, n, lbl, on="": f'<button type="button" class="sf-b sf-lv{on}" data-lv="{v}"><span>{lbl}</span><em>{n}</em></button>'
-            lvs = [level(p) for p in items]
-            g_lv = ('<div class="sf-g" role="group" aria-label="난이도"><div class="sf-h">난이도</div>' + lvb("", len(items), "전체", " on")
-                    + lvb("기초", lvs.count("기초"), "기초") + lvb("실전", lvs.count("실전"), "실전") + "</div>")
-            g_sub = ('<div class="sf-g" role="group" aria-label="분류"><div class="sf-h">분류</div>' + btn("", len(items), "전체", " on")
-                     + "".join(btn(x, sum(1 for p in items if p.get("sub") == x), x) for x in subs) + "</div>") if len(subs) > 1 else ""
-            filt = f'<aside class="subfilter" aria-label="글 고르기">{g_lv}{g_sub}<p class="sf-empty" hidden>이 조합의 글은 아직 없어요</p></aside>'
+        merge = {"발음": "발음·듣기", "듣기": "발음·듣기"} if cat == "tip" else {}  # 꿀팁: 글이 적은 두 분류를 하나로
+        sub_of = lambda p: merge.get(p.get("sub", ""), p.get("sub", ""))
+        cards = "".join(re.sub(r' data-sub="[^"]*"', f' data-sub="{e(sub_of(p))}"', post_card(p, 2), 1) for p in items) or '<div class="empty"><p>곧 첫 글이 올라와요.</p></div>'
+        subs = [sub_of(p) for p in items]
+        ordered = sorted([x for x in subs if x], key=lambda x: (-subs.count(x), subs.index(x)))  # 글 많은 분류부터
+        filt = one_filter("분류", ordered) if len(set(ordered)) > 1 else ""
         body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>' + STUDY_SEG(cat) +
                 f'<div class="cat-grid{" has-filter" if filt else ""}"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     seo_t, seo_d = CAT_SEO[cat]

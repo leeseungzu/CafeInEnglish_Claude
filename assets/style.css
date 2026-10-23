@@ -2599,3 +2599,36 @@ html.is-app .tabbar{grid-template-columns:repeat(4,1fr)}
 .tl-seg button:not(.on):hover{color:#191F28}
 .tl-picks button:not(.on):hover{border-color:#191F28;color:#191F28}
 .tl-form button:hover{background:#000}
+
+/* ── 2026-10-24 정리: PC·휴대폰·앱 같은 구조 (보기 전환 → 분류 하나 → 목록) ── */
+/* PC: 보기·분류는 오른쪽 패널 하나로. 제목 아래 세그먼트는 휴대폰 전용 */
+@media (min-width:900px){
+  .app-seg.study-seg{display:none!important}
+}
+/* 휴대폰(웹·앱): 칩 한 줄, 숫자 없이 */
+@media (max-width:899px){
+  .subfilter .sf-b em{display:none!important}
+}
+/* 휴대폰 웹 위쪽 줄 = 앱과 같게: 로고 · 검색 · 내 공부방 / 메뉴 줄은 4칸 균등 */
+@media (max-width:599px){
+  .top .logo i{display:none}
+  .top-in>.srch-btn{display:inline-flex!important;margin-left:auto;margin-right:2px}
+  .top-in>.srch-btn+.room{margin-left:4px}
+  .top .nav .nav-srch{display:none!important}
+  .top .nav{grid-template-columns:repeat(4,1fr)!important}
+}
+/* PC: 오른쪽 패널 윗선 = 첫 글(썸네일) 윗선 */
+@media (min-width:900px){ .cat-grid.has-filter>.subfilter{margin-top:18px} }
+/* 휴대폰 웹·앱 간격 같게: 제목 설명 → 세그먼트 → 칩 → 목록 */
+@media (max-width:899px){
+  .app-seg,html.is-app .app-seg{margin:22px 0 0!important}
+  .app-seg+.cat-grid,html.is-app .app-seg+.cat-grid{margin-top:16px!important}
+}
+html.is-app .app-seg.study-seg{grid-template-columns:repeat(3,1fr)}
+/* 아주 좁은 화면(≤374px)에서도 칩이 한 화면에 들어가게 */
+@media (max-width:374px){
+  .subfilter.sf-one .sf-g:first-child{gap:6px}
+  .subfilter.sf-one .sf-g .sf-b{padding:7px 12px;font-size:14px}
+}
+/* 목록 제목: 한두 단어만 다음 줄로 넘어가지 않게 */
+.cards.list .card h2{text-wrap:balance}
