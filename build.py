@@ -938,9 +938,16 @@ def post_card(p, hl=3):
 
 
 def think_card(t, hl=3):
-    return card(think_url(t), [("think", "사유의 문장"), ("speaker", t["speaker"])], t["title"],
-                f"필사할 문장 {len(t['quotes'])}개", yt_thumb(t["video"]) if t.get("video") else f"/og/th-t-{t['id']}.png?v={thumb_ver(t.get('thumb'), 'olive')}",
-                alt=thumb_alt(t.get("thumb")), hl=hl)
+    """사유의 문장 카드 (2026-10-24 A안): 영상 장면을 어둡게 흐린 위에 대표 문장 → 같은 영상의 '영상으로 배우기' 카드와 구분. 카드 위 '• 필사'"""
+    c = card(think_url(t), [("think", "사유의 문장"), ("speaker", t["speaker"])], t["title"],
+             f"필사할 문장 {len(t['quotes'])}개", yt_thumb(t["video"]) if t.get("video") else f"/og/th-t-{t['id']}.png?v={thumb_ver(t.get('thumb'), 'olive')}",
+             alt=thumb_alt(t.get("thumb")), hl=hl)
+    if t.get("video") and t.get("quotes"):
+        q = min(t["quotes"], key=lambda x: len(x["en"]))["en"]
+        who = t["speaker"].split(" · ")[0]
+        c = c.replace('<div class="thumb vthumb">', '<div class="thumb vthumb tthumb">', 1).replace(
+            '</div><div class="chips">', f'<div class="tq" aria-hidden="true"><b>{e(q)}</b><span>사유의 문장 · {e(who)}</span></div></div><div class="chips">', 1)
+    return c.replace('</div><h', '<span class="lv lv-base">필사</span></div><h', 1)
 
 
 PRINT_BTN = """
@@ -1321,6 +1328,9 @@ CAT_ABOUT = {
     "story": _about_box("영어 이야기는 이렇게 읽어요",
         "매일 쓰는 단어가 어디서 왔는지 옛 신문, 편지, 사진 같은 실제 기록으로 따라가요. 출처가 확인된 이야기만 쓰고, 잘못 알려진 설은 따로 구분해요.",
         [("light-bulb", "가볍게 읽고", "단어의 숨은 사연"), ("speech-balloon", "바로 써 보기", "지금 쓰는 예문"), ("check", "기억하기", "퀴즈 3문제")]),
+    "study": _about_box("영어 공부는 이렇게 해요",
+        "원어민이 매일 쓰는 표현, 바로 써먹는 꿀팁, 단어에 숨은 이야기를 한곳에 모았어요. 짧게 읽고, 소리 내어 말해 보고, 퀴즈로 확인해요.",
+        [("speech-balloon", "처음이라면", "'기초' 글부터"), ("airplane", "여행 전이라면", "여행 시리즈부터"), ("check", "복습은", "내 공부방에 모여요")]),
     "video": _about_box("영상으로 배우기는 이렇게 봐요",
         "인터뷰와 연설을 장면 단위로 나눠, 짧게 인용하고 길게 해설해요. '이 장면 듣기'로 원본 목소리를 바로 들을 수 있어요.",
         [("headphone", "먼저", "자막 없이 듣기"), ("page", "그다음", "장면 해설 읽기"), ("check", "마지막", "표현 5개와 퀴즈")]),
@@ -1358,7 +1368,7 @@ def page_study():  # 영어 공부 전체: 표현·꿀팁·이야기를 한 목�
     cards = "".join(re.sub(r'(<span class="chip [a-z]+">)[^<]*(</span>)', lambda m: m.group(1) + NAV_SHORT[p["cat"]] + m.group(2), post_card(p, 2), 1) for p in items)
     filt = f'<aside class="subfilter sf-one sf-viewonly" aria-label="보기">{view_card("study")}</aside>'
     body = (f'<h1>영어 공부</h1><p class="lead">{CAT_LEAD["study"]}</p>' + STUDY_SEG("study") +
-            f'<div class="cat-grid has-filter all-cat"><div class="cards list">{cards}</div>{filt}</div>')
+            f'<div class="cat-grid has-filter all-cat"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT["study"])
     seo_t, seo_d = CAT_SEO["study"]
     ld = [{"@type": "CollectionPage", "name": "영어 공부", "description": seo_d, "url": DOMAIN + url, "inLanguage": "ko",
            "isPartOf": {"@type": "WebSite", "name": SITE["name"], "url": DOMAIN + "/"},
@@ -2886,15 +2896,12 @@ def page_tools():
     filt = ('<aside class="subfilter sf-one tl-filter" aria-label="보기"><div class="sf-g" role="group" aria-label="보기"><div class="sf-h">보기</div>'
             + b("", len(tools), "전체", " on") + "".join(b(g, sum(1 for t in tools if t["group"] == g), g) for g in groups)
             + '</div><p class="sf-empty" hidden>이 분류의 도구는 아직 없어요</p></aside>')
-    uses = [("toeic", "토익 시험 본 날", "맞힌 개수로 예상 점수 확인"), ("compare", "취업 준비할 때", "오픽·토스·토익 점수 한 번에 비교"),
-            ("wordcount", "영어로 글 쓸 때", "에세이·자소서 단어 수 맞추기"), ("name", "여권 만들 때", "영문 이름 철자 미리 정하기")]
-    use_cards = "".join(
-        f'<a class="tl-use" href="{TOOL_BY_KEY[k]["url"]}" style="--bg:{chat_bg("tool-" + k)}"><span class="when">{e(w)}</span>'
-        f'<b>{e(d)}</b><span class="go">{e(TOOL_BY_KEY[k]["title"])}<i>›</i></span>{icon_img(TOOL_BY_KEY[k]["icon"], "tl-use-ic")}</a>'
-        for k, w, d in uses if k in {t["key"] for t in tools})
-    about = (f'<section class="tl-uses"><h2>이럴 때 쓰세요</h2>'
-             '<div class="tl-badges"><span>가입 없이</span><span>무료</span><span>입력한 내용은 저장하지 않아요</span></div>'
-             f'<div class="tl-use-grid">{use_cards}</div></section>')
+    uses = [("toeic", "토익 시험 본 날", "예상 점수 확인"), ("compare", "취업 준비할 때", "시험 점수 한 번에 비교"),
+            ("wordcount", "영어로 글 쓸 때", "에세이 단어 수 맞추기")]  # 다른 카테고리와 같은 3칸
+    tips = "".join(f'<li><a href="{TOOL_BY_KEY[k]["url"]}"><img src="/assets/icons/{TOOL_BY_KEY[k]["icon"]}.webp?v={ASSET_V}" alt="" width="28" height="28" loading="lazy">'
+                   f'<span><b>{e(w)}</b>{e(d)}</span><i aria-hidden="true">›</i></a></li>' for k, w, d in uses if k in {t["key"] for t in tools})
+    about = ('<section class="cat-about"><h2>영어 도구는 이렇게 써요</h2><p>가입 없이 무료로 쓰는 도구예요. 입력한 내용은 브라우저 안에서만 계산하고 저장하지 않아요.</p>'
+             f'<ul class="ca-tips ca-links">{tips}</ul></section>')
     seg = ('<div class="app-seg tool-seg no-print" role="tablist" aria-label="영어 도구">'
            + "".join(f'<button type="button" role="tab" data-sub="{e(v)}"{" class=on aria-selected=true" if not v else ""}>{e(l)}</button>'
                      for v, l in [("", "전체")] + [(g, g) for g in groups]) + '</div>')
