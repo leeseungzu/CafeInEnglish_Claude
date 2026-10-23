@@ -282,3 +282,5 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 - 코드: `build.py`의 `page_tools` · `page_tool_name` · `page_tool_address`, 동작은 `assets/tools.js`, 디자인은 `assets/style.css` 끝의 `.tl-` 블록.
 - 영문 이름: 국어의 로마자 표기법(인명은 음운 변화 미반영). 성씨별 자주 쓰는 표기는 `SURNAMES` 목록.
 - 영문 주소: 행정안전부 도로명주소 '영문주소 검색 API'(JSONP). 승인키를 `content/site.json`의 `juso_eng_key`에 넣으면 메뉴·사이트맵·검색 노출이 켜진다. 키 없이 화면만 볼 때는 주소 뒤에 `?test=1`(고정 예시 데이터).
+- 점수 도구(2026-10-23): 토익 점수 계산기 `/tools/toeic-score/`, 오픽 등급표 `/tools/opic-level/`, 토익스피킹 레벨표 `/tools/toeic-speaking-level/`, 영어 시험 점수 비교 `/tools/english-score-compare/`. 데이터는 `build.py`의 `TOEIC_EST`·`TOEIC_AVG`·`OPIC`·`TOS`·`LADDER`·`HIRE`, 출처는 `SRC_*`.
+- 토익 평균·연령별 평균(2025 정기시험)은 해마다 토익스토리 성적 분석이 나오면 고친다. 토익 환산표와 시험 간 비교는 공식 자료가 없으므로 항상 '추정·참고용'으로 표시한다.

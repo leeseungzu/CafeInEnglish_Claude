@@ -119,7 +119,7 @@
         `<div class="tl-pick"><p class="tl-pick-h">글자를 누르면 다른 표기로 바뀌어요</p><div class="tl-syls">` +
         `<button type="button" class="tl-syl sur${st.surOpts.length > 1 ? " more" : ""}" data-s="sur"><small>${esc(st.sur)} · 성</small><b>${esc(S)}</b>${dots(st.surOpts.length, st.si)}</button>` +
         st.syl.map((x, k) => `<button type="button" class="tl-syl${x.opts.length > 1 ? " more" : ""}" data-s="${k}"><small>${esc(x.ch)}</small><b>${esc(x.opts[x.i])}</b>${dots(x.opts.length, x.i)}</button>`).join("") +
-        `</div>${altAll || st.surOpts.length > 1 ? `<p class="tl-pick-n"><span class="tl-dot on"></span> 점이 있는 글자는 다른 표기도 있어요. 이름은 로마자 표기법 기준이 먼저, 성은 가장 많이 쓰는 표기가 먼저 나와요.</p>` : ""}</div>` +
+        `</div>${altAll || st.surOpts.length > 1 ? `<p class="tl-pick-n"><span class="tl-dot on"></span> 표시가 있는 글자는 다른 표기도 있어요. 첫 번째가 로마자 표기법 기준이에요.</p>` : ""}</div>` +
         `<div class="tl-rows">` +
         row("여권 형식", `${S.toUpperCase()} ${G.toUpperCase()}`, "passport", "성 · 이름 순, 대문자") +
         row("성 (Surname)", S.toUpperCase(), "surname") +
@@ -283,4 +283,104 @@
 
   initName();
   initAddr();
+
+  /* =========================================================
+     3. 점수 도구 — 토익 계산기 · 오픽 자가 진단 · 토익스피킹 등급 · 시험 비교 사다리
+     ========================================================= */
+  // 슬라이더 + 숫자 칸을 서로 맞춰 주는 도우미
+  function pair(rangeId, numId, onChange) {
+    const r = $("#" + rangeId), n = $("#" + numId); if (!r || !n) return null;
+    const clamp = v => Math.max(+r.min, Math.min(+r.max, Math.round((+v || 0) / (+r.step || 1)) * (+r.step || 1)));
+    r.addEventListener("input", () => { n.value = r.value; onChange(); });
+    n.addEventListener("input", () => { if (n.value === "") return; r.value = clamp(n.value); onChange(); });
+    n.addEventListener("blur", () => { n.value = clamp(n.value); r.value = n.value; onChange(); });
+    return () => +r.value;
+  }
+  const pill = (t, cls) => `<span class="tl-pill${cls ? " " + cls : ""}">${esc(t)}</span>`;
+
+  function initToeic() {
+    if (!$("#tc")) return;
+    const T = DATA.est || [], AVG = DATA.avg || { total: 686, lc: 378.7, rc: 307.5 };
+    const est = n => {
+      for (let i = 1; i < T.length; i++) if (n <= T[i][0]) {
+        const [a, l1, h1] = T[i - 1], [b, l2, h2] = T[i], r = (n - a) / (b - a);
+        return [Math.max(5, Math.round((l1 + (l2 - l1) * r) / 5) * 5), Math.max(5, Math.round((h1 + (h2 - h1) * r) / 5) * 5)];
+      }
+      return [495, 495];
+    };
+    let used = false;
+    const lc = pair("tc-lc", "tc-lc-n", run), rc = pair("tc-rc", "tc-rc-n", run);
+    function run() {
+      const L = est(lc()), R = est(rc()), lo = L[0] + R[0], hi = L[1] + R[1], mid = (lo + hi) / 2;
+      $("#tc-tot").textContent = lo === hi ? `${lo}점` : `${lo}~${hi}점`;
+      $("#tc-part").textContent = `LC ${L[0] === L[1] ? L[0] : L[0] + "~" + L[1]} · RC ${R[0] === R[1] ? R[0] : R[0] + "~" + R[1]}`;
+      $("#tc-bar").style.width = (mid / 990 * 100).toFixed(1) + "%";
+      const d = Math.round(mid - AVG.total), lm = (L[0] + L[1]) / 2, rm = (R[0] + R[1]) / 2;
+      $("#tc-pills").innerHTML =
+        pill(d >= 0 ? `2025 평균보다 약 ${d}점 높아요` : `2025 평균까지 약 ${-d}점`, "l") +
+        pill(lm >= AVG.lc ? "LC 평균 이상" : "LC 평균 아래") + pill(rm >= AVG.rc ? "RC 평균 이상" : "RC 평균 아래");
+      if (!used) { used = true; } else if (!run.g) { run.g = 1; ga("tool_use", { tool: "toeic_score" }); }
+    }
+    run();
+  }
+
+  function initOpic() {
+    const box = $("#oq"); if (!box) return;
+    const G = {}; (DATA.opic || []).forEach(r => { G[r[0]] = { name: r[1], line: r[2], tip: r[3] }; });
+    box.addEventListener("click", e => {
+      const b = e.target.closest(".tl-can"); if (!b) return;
+      $$(".tl-can", box).forEach(x => x.classList.toggle("on", x === b));
+      const g = b.dataset.g, key = g === "IM" ? "IM2" : g, info = G[key] || {};
+      const label = g === "IM" ? "IM1~IM3" : g;
+      $("#oq-out").innerHTML = `<div class="tl-hero-res"><span class="tl-tag">예상 등급 (참고용)</span><p class="tl-big">${esc(label)}</p>` +
+        `<p class="tl-big-sub">${esc(g === "IM" ? "Intermediate Mid · 말하는 양과 자연스러움에 따라 IM1, IM2, IM3로 나뉘어요" : info.name + " · " + info.line)}</p></div>` +
+        `<div class="tl-note"><b>다음 등급으로 가려면</b>${esc(info.tip || "")}</div>` +
+        `<a class="tl-cp wide" href="#g-${esc(key.toLowerCase())}">등급표에서 자세히 보기</a>`;
+      $("#oq-out").hidden = false; ga("tool_use", { tool: "opic_level" });
+    });
+  }
+
+  const TOS = [[200, "AH", "Advanced High"], [180, "AM", "Advanced Mid"], [160, "AL", "Advanced Low"], [140, "IH", "Intermediate High"],
+    [130, "IM3", "Intermediate Mid 3"], [120, "IM2", "Intermediate Mid 2"], [110, "IM1", "Intermediate Mid 1"], [90, "IL", "Intermediate Low"],
+    [60, "NH", "Novice High"], [0, "NM·NL", "Novice Mid / Low"]];
+  function initTos() {
+    if (!$("#ts")) return;
+    let used = false;
+    const v = pair("ts", "ts-n", run);
+    function run() {
+      const s = v(), i = TOS.findIndex(t => s >= t[0]), t = TOS[i], next = TOS[i - 1];
+      $("#ts-g").textContent = t[1]; $("#ts-s").textContent = `${s}점 · ${t[2]}`;
+      $("#ts-bar").style.width = (s / 200 * 100) + "%";
+      $("#ts-p").innerHTML = (next ? pill(`다음 등급 ${next[1]}까지 ${next[0] - s}점`, "l") : pill("가장 높은 등급이에요", "l")) +
+        (/^IM/.test(t[1]) ? pill("IM1~3 점수는 채용 공고에서 흔히 쓰는 기준") : "");
+      if (used && !run.g) { run.g = 1; ga("tool_use", { tool: "toeic_speaking" }); } used = true;
+    }
+    run();
+  }
+
+  function initCompare() {
+    const L = $("#cp-l"); if (!L) return;
+    const rows = DATA.ladder || [];
+    const COL = { opic: 1, tos: 2, toeic: 3 }, NAME = { opic: "오픽", tos: "토익스피킹", toeic: "토익" };
+    let t = "opic", i = 4;
+    const opts = () => rows.map((r, k) => [k, r[COL[t]]]).filter(x => x[1] !== "-");
+    function draw() {
+      const o = opts(); if (!o.some(x => x[0] === i)) i = o[Math.floor(o.length / 2)][0];
+      $("#cp-p").innerHTML = o.map(([k, v]) => `<button type="button" data-i="${k}" class="${k === i ? "on" : ""}">${esc(v.replace(/ \(.*\)/, ""))}</button>`).join("");
+      L.innerHTML = '<div class="hd"><span>수준</span><span>오픽</span><span>토스</span><span>토익</span></div>' +
+        rows.map((r, k) => `<div class="${k === i ? "on" : ""}${k === i - 1 ? " goal" : ""}"><b>${esc(r[0])}</b><span>${esc(r[1])}</span><span>${esc(r[2])}</span><span>${esc(r[3])}</span></div>`).join("");
+      const up = rows[i - 1], me = rows[i];
+      const val = x => esc(x.replace(/ \(.*\)/, "")) + (t === "toeic" ? "점" : "");
+      $("#cp-y").innerHTML = `${NAME[t]} <b>${val(me[COL[t]])}</b> · <b>${esc(me[0])}</b> 수준` + (up && up[COL[t]] !== "-"
+        ? `<br>다음 목표 <b>${val(up[COL[t]])}</b> (점선 칸)` : `<br>이 시험의 가장 높은 단계예요.`);
+    }
+    $("#cp-t").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; t = b.dataset.t; $$("#cp-t button").forEach(x => x.classList.toggle("on", x === b)); draw(); });
+    $("#cp-p").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; i = +b.dataset.i; draw(); ga("tool_use", { tool: "score_compare" }); });
+    draw();
+  }
+
+  initToeic();
+  initOpic();
+  initTos();
+  initCompare();
 })();

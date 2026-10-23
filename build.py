@@ -2203,15 +2203,6 @@ def tool_faq(faq):
     return '<div class="tl-faq">' + "".join(f"<details><summary>{e(q)}</summary><p>{a}</p></details>" for q, a in faq) + "</div>"
 
 
-def tool_cards(skip=""):
-    items = [("name", "/tools/english-name/", "Aa", "영문 이름 변환기", "한글 이름을 여권·해외 사이트용 영문 이름으로")]
-    if JUSO_KEY:
-        items.append(("address", "/tools/english-address/", "#", "영문 주소 변환기", "도로명주소를 영어로, 해외직구 칸별로 나눠서"))
-    return '<div class="tl-more-tools">' + "".join(
-        f'<a class="tl-tool" href="{h}"><span class="ic">{ic}</span><span><b>{e(t)}</b><span>{e(d)}</span></span><i>›</i></a>'
-        for k, h, ic, t, d in items if k != skip) + "</div>"
-
-
 def tool_kakao():
     k = SITE.get("kakao")
     return (f'<a class="tl-kk" href="{e(k)}" target="_blank" rel="noopener"><span><b>매일 아침 7시, 영어 표현 하나</b>'
@@ -2363,23 +2354,330 @@ def page_tool_address():
                   ld=tool_ld("영문 주소 변환기", desc, url, faq), robots="" if JUSO_KEY else "noindex")
 
 
+
+# ── 점수·시험 도구 (2026-10-23) ─────────────────────────────────────────────
+# 근거(네이버 월간 검색량): 토익점수 12,950 · 오픽등급 6,950 · 토익만점점수 5,590 · 오픽등급표 5,320 · 토익점수환산기 4,030
+# 출처: 한국토익위원회 토익스토리(2025 정기시험 성적 분석 /2556, 토익스피킹 안내 /2567), OPIc 공식 사이트 등급체계,
+#       인크루트 어학변환기(lab.incruit.com/editor/score), 링커리어(토익 점수 환산표·채용 예시, 2025)
+TOOL_LIST = [  # (key, 주소, 아이콘, 이름, 설명, 묶음)
+    ("toeic", "/tools/toeic-score/", "990", "토익 점수 계산기", "맞힌 개수로 예상 점수, 평균과 비교", "score"),
+    ("opic", "/tools/opic-level/", "IH", "오픽 등급표", "NL부터 AL까지 등급별 수준, 자가 진단", "score"),
+    ("tos", "/tools/toeic-speaking-level/", "200", "토익스피킹 레벨표", "점수별 등급과 시험 구성", "score"),
+    ("compare", "/tools/english-score-compare/", "⇄", "영어 시험 점수 비교", "토익·오픽·토익스피킹을 한눈에", "score"),
+    ("name", "/tools/english-name/", "Aa", "영문 이름 변환기", "한글 이름을 여권·해외 사이트용 영문 이름으로", "life"),
+    ("address", "/tools/english-address/", "#", "영문 주소 변환기", "도로명주소를 영어로, 해외직구 칸별로 나눠서", "life"),
+]
+
+
+def tool_cards(skip="", group=None):
+    items = [t for t in TOOL_LIST if t[0] != skip and (group is None or t[5] == group) and (t[0] != "address" or JUSO_KEY)]
+    return '<div class="tl-more-tools">' + "".join(
+        f'<a class="tl-tool" href="{h}"><span class="ic">{e(ic)}</span><span><b>{e(t)}</b><span>{e(d)}</span></span><i>›</i></a>'
+        for k, h, ic, t, d, g in items) + "</div>"
+
+
+def tool_reads(title, picks):
+    """도구 끝 '카영 글' 연결: picks = [(뱃지, 글 id 또는 None, 대체 조건 함수)]"""
+    seen, rows = set(), []
+    for badge, pid, cond in picks:
+        p = POST_BY_ID.get(pid) if pid else next((x for x in POSTS if cond(x) and x["id"] not in seen), None)
+        if p and p["id"] not in seen:
+            seen.add(p["id"])
+            rows.append(f'<a class="tl-read" href="{post_url(p)}"><i>{e(badge)}</i><span><b>{e(p["title"])}</b><span>{e(p.get("lead", ""))}</span></span></a>')
+    return f"<h2>{e(title)}</h2>" + "".join(rows) if rows else ""
+
+
+def tool_src(items):
+    out = []
+    for n, u in items:
+        link = f' · <a href="{e(u)}" target="_blank" rel="noopener nofollow">원문</a>' if u else ""
+        out.append(f"<span>{e(n)}{link}</span>")
+    return '<div class="tl-srcs"><b>출처</b>' + "".join(out) + "</div>"
+
+
+# 토익: 맞힌 개수 → 예상 점수 (공식 환산표는 없음. 링커리어 2025 추정표를 범위로 사용, LC·RC 같은 표)
+TOEIC_EST = [(0, 5, 5), (40, 150, 200), (50, 220, 250), (60, 270, 300), (70, 320, 350), (80, 380, 400), (85, 410, 430), (90, 440, 460), (95, 470, 480), (100, 495, 495)]
+TOEIC_AVG = {"total": 686, "lc": 378.7, "rc": 307.5}
+TOEIC_AGE = [("20세 이하", 598), ("21~25세", 670), ("26~30세", 711), ("31~35세", 728), ("36~40세", 714), ("41~45세", 685), ("46~50세", 664), ("51세 이상", 639)]
+HIRE = [("아시아나항공", "550점 이상", "IM1 이상"), ("현대건설", "700점 이상", "IM2 이상"), ("LS엠트론 (인문계)", "700점 이상", "IM2 이상"),
+        ("한국장학재단", "800점 이상", "IM3 이상"), ("GS글로벌", "800점 이상", "IH 이상")]
+SRC_TOEICSTORY = ("한국토익위원회 토익스토리, 2025년 토익 정기시험 성적 분석 (2026.03)", "https://www.toeicstory.co.kr/2556")
+SRC_TOS = ("한국토익위원회 토익스토리, 토익스피킹 시험 안내 (2026.03)", "https://www.toeicstory.co.kr/2567")
+SRC_OPIC = ("OPIc 공식 사이트, 시험소개·등급체계", "https://www.opic.or.kr")
+SRC_LINK = ("링커리어, 2025 토익 점수 환산표·채용 기준 예시", "https://community.linkareer.com/employment_data/4104106")
+SRC_INCRUIT = ("인크루트 어학변환기 (참고용 환산 기준)", "https://lab.incruit.com/editor/score/")
+
+# 오픽 등급 (OPIc 공식 등급체계 요약을 쉬운 말로) — (등급, 이름, 한 줄, 공식 요약, 다음 등급으로 가려면)
+OPIC = [
+    ("AL", "Advanced Low", "의견을 말하고, 복잡한 상황도 설명하고 해결해요",
+     "사건을 말할 때 시제를 일관되게 지키고, 접속사로 문장을 묶어 문단처럼 말해요. 익숙하지 않은 복잡한 상황에서도 문제를 설명하고 해결할 수 있어요.",
+     "오픽의 가장 높은 등급이에요. 이제는 말하기 시험보다 실제 회의·발표 영어로 넓혀 가세요."),
+    ("IH", "Intermediate High", "예상 못 한 질문에도 상황을 설명해요",
+     "익숙하지 않거나 예측하지 못한 상황에서도 대부분 사건을 설명하고 문제를 해결해요. 말하는 양이 많고 어휘가 다양해요.",
+     "AL은 '문단'이 갈려요. 처음-예시-정리 순서로 말하고, 과거·현재·미래 시제를 섞어도 흔들리지 않게 연습하세요."),
+    ("IM3", "Intermediate Mid 3", "문장을 길게 이어 말해요 (IM 중 가장 높음)",
+     "익숙한 상황에서 문장을 이어 가며 자연스럽게 말해요. 다양한 문장과 어휘를 시도해요.",
+     "IH는 '돌발 질문'이 갈려요. 처음 받는 질문에도 경험 하나를 떠올려 이야기로 풀어내는 연습을 하세요."),
+    ("IM2", "Intermediate Mid 2", "익숙한 주제는 문장을 이어 가며 말해요",
+     "일상적인 소재와 익숙한 상황에서 문장을 나열하며 자연스럽게 말해요. 상대가 조금 배려해 주면 오래 대화할 수 있어요.",
+     "말하는 양을 늘리세요. 한 질문에 문장 2~3개가 아니라, 이유와 예시를 붙여 1분 이상 말하는 연습이 좋아요."),
+    ("IM1", "Intermediate Mid 1", "일상 주제를 문장으로 이어 말하기 시작해요",
+     "일상적인 소재에서 문장을 이어 말해요. IM 등급 안에서는 가장 낮아요.",
+     "and, so, because로 문장을 이어 붙이세요. 짧은 문장 여러 개를 한 흐름으로 묶는 것부터 시작해요."),
+    ("IL", "Intermediate Low", "일상 주제는 문장으로 말해요",
+     "일상적인 소재에서는 문장으로 말할 수 있어요. 좋아하는 주제에서는 자신 있게 대화에 참여해요.",
+     "문장 하나로 끝내지 말고, 바로 뒤에 이유 한 문장을 붙이는 습관을 들이세요."),
+    ("NH", "Novice High", "자기소개와 개인 정보는 문장으로 말해요",
+     "일상적인 대부분의 소재를 문장으로 말하고, 개인 정보를 묻고 답할 수 있어요.",
+     "주어와 동사를 갖춘 문장으로 끝까지 말하는 연습을 하세요. 집, 하루, 취미처럼 자주 나오는 주제부터요."),
+    ("NM", "Novice Mid", "외운 단어와 문장으로 말해요",
+     "이미 외운 단어나 문장으로 말할 수 있어요.",
+     "자기소개 문장 10개를 소리 내어 외우고, 단어 대신 문장으로 답해 보세요."),
+    ("NL", "Novice Low", "영어 단어를 나열해 말해요",
+     "제한적이지만 영어 단어를 나열하며 말할 수 있어요.",
+     "매일 쓰는 짧은 문장(I'm ~, I like ~, I usually ~)을 소리 내어 따라 말하는 것부터 시작해요."),
+]
+# 오픽 자가 진단 문장 (낮은 것부터) — 공식 등급 요약을 바탕으로
+OPIC_QUIZ = [("NL", "영어 단어를 나열해서 말할 수 있어요"), ("NM", "외운 단어나 문장으로 말할 수 있어요"),
+             ("NH", "자기소개처럼 내 정보는 문장으로 말할 수 있어요"), ("IL", "익숙한 일상 주제는 문장으로 말할 수 있어요"),
+             ("IM", "익숙한 주제는 문장을 여러 개 이어서 말할 수 있어요"), ("IH", "처음 받는 질문에도 상황을 설명하고 풀어 갈 수 있어요"),
+             ("AL", "시제를 지키며 문단처럼 짜임새 있게 말하고, 복잡한 문제도 설명할 수 있어요")]
+# 토익스피킹 (토익스토리 공식 안내: 200점 만점, ACTFL 등급 매핑)
+TOS = [("AH", "Advanced High", "200"), ("AM", "Advanced Mid", "180~190"), ("AL", "Advanced Low", "160~170"),
+       ("IH", "Intermediate High", "140~150"), ("IM", "Intermediate Mid (IM1·IM2·IM3)", "110~130"),
+       ("IL", "Intermediate Low", "90~100"), ("NH", "Novice High", "60~80"), ("NM·NL", "Novice Mid / Low", "0~50")]
+TOS_PARTS = [("1~2", "문장 읽기 (Read a text aloud)", "45초", "45초"), ("3~4", "사진 묘사 (Describe a picture)", "45초", "30초"),
+             ("5~7", "질문에 답하기 (Respond to questions)", "3초", "15~30초"), ("8~10", "정보 보고 답하기 (Using information)", "지문 45초 + 3초", "15~30초"),
+             ("11", "의견 말하기 (Express an opinion)", "45초", "60초")]
+# 비교 사다리: 같은 ACTFL 등급 이름끼리 나란히 (토익 칸은 인크루트 어학변환기의 오픽 ↔ 토익 기준)
+LADDER = [("최상급", "-", "AM·AH 180~200", "-"),
+          ("상급", "AL", "AL 160~170", "950~990"),
+          ("중상급", "IH", "IH 140~150", "900~945"),
+          ("중급 상", "IM3", "IM3 (흔히 130)", "850~895"),
+          ("중급", "IM2", "IM2 (흔히 120)", "800~845"),
+          ("중급 하", "IM1", "IM1 (흔히 110)", "700~795"),
+          ("초중급", "IL", "IL 90~100", "600~695"),
+          ("초급 상", "NH", "NH 60~80", "500~595"),
+          ("초급", "NM · NL", "NM·NL 0~50", "400~495")]
+
+
+def page_tool_toeic():
+    url = "/tools/toeic-score/"
+    est = "".join(f"<tr><td>{n}개</td><td>{lo if lo == hi else f'{lo}~{hi}'}점</td></tr>" for n, lo, hi in reversed(TOEIC_EST) if n >= 40)
+    age = "".join(f"<tr><td>{a}</td><td><b>{s}점</b></td></tr>" for a, s in TOEIC_AGE)
+    hire = "".join(f"<tr><td>{c}</td><td>{t}</td><td>{s}</td></tr>" for c, t, s in HIRE)
+    faq = [
+        ("공식 토익 점수 환산표가 있나요?",
+         "없어요. ETS는 회차마다 문제 난이도를 반영해 점수를 정하기 때문에, 같은 개수를 맞혀도 회차에 따라 점수가 달라질 수 있어요. 그래서 이 계산기는 한 점수가 아니라 범위로 보여 드려요."),
+        ("토익 만점은 몇 점인가요?",
+         "990점이에요. LC(듣기) 495점, RC(읽기) 495점이고, 각 파트 최저 점수는 5점이라 전체 점수는 10~990점이에요."),
+        ("토익 성적은 언제 나오나요?",
+         "2025년 일정을 보면 일요일 시험 성적이 9일 뒤 화요일 정오에 발표됐어요. 정확한 발표일은 회차마다 토익 공식 사이트에서 확인하세요."),
+        ("토익 성적 유효기간은요?",
+         "시험일로부터 2년이에요. 기업이나 학교에 낼 때는 제출일 기준으로 2년이 지나지 않았는지 확인하세요."),
+        ("RC 점수가 LC보다 낮게 나와요.",
+         "흔한 일이에요. 2025년 정기시험 평균도 LC 378.7점, RC 307.5점으로 RC가 70점 넘게 낮았어요. RC는 시간이 부족해서 점수가 깎이는 경우가 많아요."),
+    ]
+    body = f"""<div class="tl">
+<div class="tl-head"><span class="lbl">점수 도구</span><h1>토익 점수 계산기</h1>
+<p>LC와 RC에서 맞힌 개수를 넣으면 예상 점수를 범위로 알려 드려요. 2025년 평균 점수와도 바로 비교해요.</p></div>
+<div class="tl-card" id="tc">
+<div class="tl-sl"><label for="tc-lc"><b>LC 맞힌 개수</b><small>듣기 100문항</small></label><div class="tl-sl-v"><input type="number" id="tc-lc-n" min="0" max="100" value="80" inputmode="numeric" aria-label="LC 맞힌 개수"><span>/ 100</span></div><input type="range" id="tc-lc" min="0" max="100" value="80"></div>
+<div class="tl-sl"><label for="tc-rc"><b>RC 맞힌 개수</b><small>읽기 100문항</small></label><div class="tl-sl-v"><input type="number" id="tc-rc-n" min="0" max="100" value="70" inputmode="numeric" aria-label="RC 맞힌 개수"><span>/ 100</span></div><input type="range" id="tc-rc" min="0" max="100" value="70"></div>
+<div class="tl-hero-res" aria-live="polite"><span class="tl-tag">예상 점수</span>
+<p class="tl-big" id="tc-tot">—</p><p class="tl-big-sub" id="tc-part"></p>
+<div class="tl-scale"><i id="tc-bar"></i><em style="left:{TOEIC_AVG['total'] / 990 * 100:.1f}%"><span>2025 평균 {TOEIC_AVG['total']}</span></em></div>
+<div class="tl-pills" id="tc-pills"></div></div>
+<p class="tl-note2">공식 환산표가 없어서 공개된 추정치를 범위로 보여 드려요. 실제 점수는 회차 난이도에 따라 달라져요.</p>
+</div>
+<div class="tl-doc">
+<h2>맞힌 개수별 예상 점수표</h2>
+<p>LC와 RC 모두 같은 기준으로 계산해요. 회차마다 점수가 달라질 수 있어서 범위로 정리했어요.</p>
+<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>맞힌 개수</th><th>예상 점수 (LC 또는 RC)</th></tr></thead><tbody>{est}<tr><td>40개 미만</td><td>150점 미만</td></tr></tbody></table></div>
+<h2>토익 점수, 이렇게 정해져요</h2>
+<div class="tl-steps">
+<div class="tl-step"><i>1</i><div><b>LC 100문항 + RC 100문항</b><span>듣기 45분, 읽기 75분 동안 모두 200문항을 풀어요.</span></div></div>
+<div class="tl-step"><i>2</i><div><b>파트마다 5~495점</b><span>맞힌 개수를 점수로 바꾸고 5점 단위로 매겨요. 두 점수를 더한 10~990점이 토익 점수예요.</span></div></div>
+<div class="tl-step"><i>3</i><div><b>회차마다 난이도를 반영</b><span>어려운 회차는 같은 개수를 맞혀도 점수가 조금 높게, 쉬운 회차는 조금 낮게 나올 수 있어요.</span></div></div>
+</div>
+<h2>2025년 토익 평균 점수</h2>
+<p>2025년 정기시험 평균은 <b>{TOEIC_AVG['total']}점</b>이에요. LC 평균은 {TOEIC_AVG['lc']}점, RC 평균은 {TOEIC_AVG['rc']}점이에요. 응시 목적은 취업이 41.9%로 가장 많았어요.</p>
+<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>나이</th><th>평균 점수</th></tr></thead><tbody>{age}</tbody></table></div>
+<h2>채용 공고에서 보는 토익 기준</h2>
+<p>회사마다 기준이 달라요. 공개된 채용 공고 예시를 보면 이렇게 요구했어요. 지원할 회사의 최신 공고를 꼭 확인하세요.</p>
+<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>기업</th><th>토익</th><th>토익스피킹</th></tr></thead><tbody>{hire}</tbody></table></div>
+<h2>자주 묻는 질문</h2>
+{tool_faq(faq)}
+{tool_reads("점수 올리는 데 도움 되는 카영 글", [("LC", None, lambda p: p.get("sub") == "듣기"), ("LC", None, lambda p: p.get("sub") == "발음"), ("LC", None, lambda p: p.get("sub") == "듣기"), ("RC", None, lambda p: p["id"] in next((s["posts"] for s in SERIES if s["id"] == "work"), []))])}
+{tool_src([SRC_TOEICSTORY, SRC_LINK])}
+<h2>다른 점수 도구</h2>
+{tool_cards("toeic", "score")}
+{tool_kakao()}
+</div></div>{TOOL_JS()}"""
+    desc = "토익 LC, RC 맞힌 개수를 넣으면 예상 점수를 범위로 알려 줘요. 맞힌 개수별 토익 점수 환산표, 2025년 평균 686점과 비교, 성적 발표일과 유효기간까지 정리했어요."
+    data = {"tool": "toeic_score", "est": TOEIC_EST, "avg": TOEIC_AVG}
+    return layout("토익 점수 계산기", desc, url, body, nav="tools", data=data,
+                  seo_title="토익 점수 계산기 - 맞힌 개수로 예상 점수, 토익 점수 환산표",
+                  ld=tool_ld("토익 점수 계산기", desc, url, faq))
+
+
+def page_tool_opic():
+    url = "/tools/opic-level/"
+    rows = "".join(f'<div class="tl-grade" id="g-{g.lower()}"><b>{g}</b><div><span class="en">{e(n)}</span><p>{e(d)}</p></div></div>' for g, n, s, d, t in OPIC)
+    quiz = "".join(f'<button type="button" class="tl-can" data-g="{g}"><span>{e(q)}</span><i>›</i></button>' for g, q in reversed(OPIC_QUIZ))
+    faq = [
+        ("오픽 등급은 몇 개인가요?", "NL, NM, NH, IL, IM1, IM2, IM3, IH, AL의 9개예요. Intermediate Mid는 IM1 < IM2 < IM3로 나눠서 줘요. 가장 높은 등급은 AL이에요."),
+        ("IM2와 IH는 무엇이 다른가요?", "IM2는 익숙한 주제에서 문장을 이어 말하는 수준이고, IH는 처음 받는 질문이나 예상 못 한 상황에서도 사건을 설명하고 문제를 풀어 가는 수준이에요. 말하는 양과 어휘의 폭도 차이가 나요."),
+        ("오픽은 상대평가인가요?", "아니에요. ACTFL 말하기 기준(ACTFL Proficiency Guidelines Speaking)에 따라 ACTFL 공인 평가자가 절대평가해요."),
+        ("시험은 어떻게 보나요?", "컴퓨터로 보는 말하기 시험이에요. 40분 동안 12~15문항에 답하고, 처음에 고른 관심사(Background Survey)에 맞춰 질문이 나와요."),
+        ("오픽과 토익스피킹 중 뭘 봐야 하나요?", "회사가 인정하는 시험이 먼저예요. 둘 다 인정하면, 내 경험을 자유롭게 말하는 게 편하면 오픽, 정해진 유형을 연습하는 게 편하면 토익스피킹이 잘 맞는 편이에요."),
+    ]
+    body = f"""<div class="tl">
+<div class="tl-head"><span class="lbl">점수 도구</span><h1>오픽 등급표</h1>
+<p>NL부터 AL까지, 오픽 등급마다 어느 정도로 말하는지 공식 기준을 쉬운 말로 정리했어요. 내 등급도 간단히 짐작해 보세요.</p></div>
+<div class="tl-card">
+<p class="tl-sec" style="margin-top:0">나는 어느 등급쯤일까? <span class="tl-sec-s">할 수 있는 것 중 가장 높은 것을 골라요</span></p>
+<div class="tl-cans" id="oq">{quiz}</div>
+<div class="tl-out" id="oq-out" hidden aria-live="polite"></div>
+</div>
+<div class="tl-doc">
+<h2>오픽 등급 한눈에 보기</h2>
+<div class="tl-ladder-s">{"".join(f'<span class="{ "hl" if g in ("IH", "IM2") else "" }">{g}</span>' for g, *_ in reversed(OPIC))}</div>
+<p>왼쪽부터 낮은 등급이에요. 취업에서 많이 요구하는 등급은 회사마다 다르지만, IM2와 IH가 자주 기준으로 쓰여요.</p>
+<h2>등급별로 이렇게 말해요</h2>
+<div class="tl-grades">{rows}</div>
+<h2>오픽 시험은 이렇게 봐요</h2>
+<div class="tl-tbl-w"><table class="tl-tbl"><tbody>
+<tr><td>시험 방식</td><td>컴퓨터로 보는 말하기 시험 (iBT)</td></tr>
+<tr><td>시험 시간</td><td>40분</td></tr>
+<tr><td>문항 수</td><td>12~15문항 (사람마다 다름)</td></tr>
+<tr><td>평가</td><td>ACTFL 공인 평가자가 절대평가</td></tr>
+<tr><td>등급</td><td>9개 (NL ~ AL)</td></tr>
+<tr><td>응시료</td><td>84,000원 (VAT 포함)</td></tr>
+</tbody></table></div>
+<h2>자주 묻는 질문</h2>
+{tool_faq(faq)}
+{tool_reads("말하기 등급 올리는 카영 글", [("말", None, lambda p: p.get("sub") == "회화"), ("말", None, lambda p: p.get("sub") == "회화"), ("말", None, lambda p: p.get("sub") == "발음")])}
+{tool_src([SRC_OPIC])}
+<h2>다른 점수 도구</h2>
+{tool_cards("opic", "score")}
+{tool_kakao()}
+</div></div>{TOOL_JS()}"""
+    desc = "오픽 등급표를 NL, NM, NH, IL, IM1, IM2, IM3, IH, AL 순서로 정리하고 등급별로 어느 정도 말하는지 쉬운 말로 풀었어요. IM2와 IH 차이, 다음 등급으로 가는 방법, 내 등급 자가 진단까지."
+    data = {"tool": "opic_level", "opic": [[g, n, s, t] for g, n, s, d, t in OPIC]}
+    return layout("오픽 등급표", desc, url, body, nav="tools", data=data,
+                  seo_title="오픽 등급표 - NL부터 AL까지 등급별 수준, IM2 IH 차이",
+                  ld=tool_ld("오픽 등급표", desc, url, faq))
+
+
+def page_tool_tos():
+    url = "/tools/toeic-speaking-level/"
+    lv = "".join(f'<tr><td>{g}</td><td>{e(n)}</td><td><b>{s}</b></td></tr>' for g, n, s in TOS)
+    parts = "".join(f"<tr><td>{a}</td><td>{e(b)}</td><td>{c}</td><td>{d}</td></tr>" for a, b, c, d in TOS_PARTS)
+    hire = "".join(f"<tr><td>{c}</td><td>{s}</td></tr>" for c, t, s in HIRE)
+    faq = [
+        ("토익스피킹 만점은 몇 점인가요?", "200점이에요. 200점이면 가장 높은 등급인 Advanced High(AH)예요."),
+        ("IM1, IM2, IM3는 몇 점인가요?", "공식 안내에서는 Intermediate Mid를 110~130점으로 묶고 Mid1 < Mid2 < Mid3로 나눠요. 채용 공고에서는 흔히 IM1을 110점, IM2를 120점, IM3를 130점으로 봐요."),
+        ("성적은 언제 나오나요?", "공식 안내 기준으로 응시일로부터 약 5일 뒤 낮 12시에 발표돼요."),
+        ("시험은 몇 문항, 몇 분인가요?", "11문항이고 약 20분 동안 봐요. 문장 읽기, 사진 묘사, 질문에 답하기, 정보 보고 답하기, 의견 말하기로 나뉘어요."),
+        ("토익스피킹 등급과 오픽 등급은 같은가요?", "둘 다 ACTFL 등급 이름을 쓰지만 시험 방식이 달라서 똑같다고 볼 수는 없어요. 두 시험을 공식으로 바꿔 주는 환산표도 없어요. 비교가 필요하면 영어 시험 점수 비교표를 참고하세요."),
+    ]
+    body = f"""<div class="tl">
+<div class="tl-head"><span class="lbl">점수 도구</span><h1>토익스피킹 레벨표</h1>
+<p>토익스피킹 점수를 넣으면 등급을 바로 알려 드려요. 점수별 등급표와 시험 구성도 함께 정리했어요.</p></div>
+<div class="tl-card">
+<div class="tl-sl"><label for="ts"><b>토익스피킹 점수</b><small>0~200점, 10점 단위</small></label><div class="tl-sl-v"><input type="number" id="ts-n" min="0" max="200" step="10" value="130" inputmode="numeric" aria-label="토익스피킹 점수"><span>/ 200</span></div><input type="range" id="ts" min="0" max="200" step="10" value="130"></div>
+<div class="tl-hero-res" aria-live="polite"><span class="tl-tag">내 등급</span><p class="tl-big" id="ts-g">—</p><p class="tl-big-sub" id="ts-s"></p>
+<div class="tl-scale"><i id="ts-bar"></i></div><div class="tl-pills" id="ts-p"></div></div>
+</div>
+<div class="tl-doc">
+<h2>토익스피킹 점수별 등급표</h2>
+<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>등급</th><th>ACTFL 등급</th><th>점수</th></tr></thead><tbody>{lv}</tbody></table></div>
+<p>Intermediate Mid(110~130점)는 IM1 &lt; IM2 &lt; IM3로 나눠요. 채용 공고에서는 흔히 IM1 110점, IM2 120점, IM3 130점으로 봐요.</p>
+<h2>시험 구성</h2>
+<p>11문항, 약 20분 동안 봐요. 컴퓨터로 녹음한 답변을 ETS 평가자가 채점해요.</p>
+<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>문항</th><th>유형</th><th>준비</th><th>답변</th></tr></thead><tbody>{parts}</tbody></table></div>
+<h2>채용 공고에서 보는 토익스피킹 기준</h2>
+<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>기업</th><th>토익스피킹</th></tr></thead><tbody>{hire}</tbody></table></div>
+<p>회사마다, 공고마다 기준이 달라요. 지원할 회사의 최신 공고를 꼭 확인하세요.</p>
+<h2>자주 묻는 질문</h2>
+{tool_faq(faq)}
+{tool_reads("말하기 점수 올리는 카영 글", [("말", None, lambda p: p.get("sub") == "회화"), ("말", None, lambda p: p.get("sub") == "발음"), ("말", None, lambda p: p.get("sub") == "회화")])}
+{tool_src([SRC_TOS, SRC_LINK])}
+<h2>다른 점수 도구</h2>
+{tool_cards("tos", "score")}
+{tool_kakao()}
+</div></div>{TOOL_JS()}"""
+    desc = "토익스피킹 점수를 넣으면 등급(AH, AM, AL, IH, IM, IL, NH)을 바로 알려 줘요. 점수별 레벨표, IM1·IM2·IM3 점수, 11문항 시험 구성, 채용 기준 예시까지 정리했어요."
+    data = {"tool": "toeic_speaking"}
+    return layout("토익스피킹 레벨표", desc, url, body, nav="tools", data=data,
+                  seo_title="토익스피킹 레벨 점수표 - 점수별 등급 AL IH IM3, 시험 구성",
+                  ld=tool_ld("토익스피킹 레벨표", desc, url, faq))
+
+
+def page_tool_compare():
+    url = "/tools/english-score-compare/"
+    rows = "".join(f"<tr><td>{a}</td><td><b>{b}</b></td><td>{c}</td><td>{d}</td></tr>" for a, b, c, d in LADDER)
+    faq = [
+        ("공식 환산표인가요?", "아니에요. ETS(토익·토익스피킹)와 ACTFL(오픽)은 시험끼리 바꿔 주는 공식 환산표를 내지 않아요. 이 표는 참고용이고, 회사가 인정하는 기준을 꼭 확인하세요."),
+        ("오픽과 토익스피킹은 어떻게 나란히 놓았나요?", "두 시험 모두 ACTFL 등급 이름(AL, IH, IM 등)으로 결과를 알려 줘요. 그래서 같은 등급 이름끼리 나란히 놓았어요. 시험 방식은 달라서 같은 등급이라도 체감 난이도는 다를 수 있어요."),
+        ("토익 점수는 어디서 가져왔나요?", "인크루트 어학변환기가 공개한 오픽 ↔ 토익 기준을 썼어요. 토익은 듣기·읽기 시험이라 말하기 실력과 바로 같다고 볼 수는 없어요."),
+        ("다른 사이트와 숫자가 달라요.", "기관마다 기준이 달라서 그래요. 예를 들어 인크루트는 예전 토익스피킹 레벨(Lv1~Lv8) 기준으로 비교해서 이 표의 토익스피킹 칸과 다를 수 있어요."),
+    ]
+    body = f"""<div class="tl">
+<div class="tl-head"><span class="lbl">점수 도구</span><h1>영어 시험 점수 비교</h1>
+<p>토익, 오픽, 토익스피킹 점수를 하나의 사다리에 놓고 비교해요. 내 점수가 어디쯤인지, 다음 목표는 무엇인지 확인하세요.</p></div>
+<div class="tl-card">
+<div class="tl-seg" id="cp-t" role="group" aria-label="시험 선택"><button type="button" class="on" data-t="opic">오픽</button><button type="button" data-t="tos">토익스피킹</button><button type="button" data-t="toeic">토익</button></div>
+<div class="tl-picks" id="cp-p"></div>
+<div class="tl-lad" id="cp-l"></div>
+<p class="tl-you" id="cp-y" aria-live="polite"></p>
+<p class="tl-note2">시험끼리의 공식 환산표는 없어요. 아래 기준으로 만든 참고용 비교예요.</p>
+</div>
+<div class="tl-doc">
+<h2>영어 시험 점수 비교표</h2>
+<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>수준</th><th>오픽</th><th>토익스피킹</th><th>토익</th></tr></thead><tbody>{rows}</tbody></table></div>
+<h2>이렇게 만들었어요</h2>
+<ul>
+<li><b>오픽과 토익스피킹</b>은 둘 다 ACTFL 등급 이름으로 결과를 줘서, 같은 이름끼리 나란히 놓았어요. 토익스피킹 점수 범위는 한국토익위원회 공식 안내를 따랐어요.</li>
+<li><b>토익</b>은 인크루트 어학변환기의 오픽 ↔ 토익 기준을 썼어요.</li>
+<li>오픽의 가장 높은 등급은 AL이라, 토익스피킹 AM·AH에 해당하는 오픽 등급은 없어요.</li>
+</ul>
+<div class="tl-note"><b>회사가 인정하는 기준이 먼저예요</b>채용 공고는 시험마다 기준을 따로 적는 경우가 많아요. 예를 들어 현대건설은 토익 700점 이상 또는 토익스피킹 IM2 이상, GS글로벌은 토익 800점 이상 또는 토익스피킹 IH 이상을 요구했어요.</div>
+<h2>자주 묻는 질문</h2>
+{tool_faq(faq)}
+{tool_src([SRC_OPIC, SRC_TOS, SRC_INCRUIT, SRC_LINK])}
+<h2>다른 점수 도구</h2>
+{tool_cards("compare", "score")}
+{tool_kakao()}
+</div></div>{TOOL_JS()}"""
+    desc = "토익, 오픽, 토익스피킹 점수를 한 표에서 비교해요. 오픽 IH는 토익 몇 점, 토익스피킹 IM3는 오픽 어느 등급인지 참고용 기준과 출처를 함께 정리했어요."
+    data = {"tool": "score_compare", "ladder": LADDER}
+    return layout("영어 시험 점수 비교", desc, url, body, nav="tools", data=data,
+                  seo_title="토익 오픽 토익스피킹 점수 비교표 - 영어 시험 점수 환산, 내 등급 위치",
+                  ld=tool_ld("영어 시험 점수 비교", desc, url, faq))
+
+
 def page_tools():
     body = f"""<div class="tl">
 <div class="tl-head"><span class="lbl">무료</span><h1>영어 도구</h1>
-<p>여권, 해외직구, 해외 사이트 가입처럼 영어로 바꿔 써야 할 때 바로 쓰는 도구예요. 가입 없이 무료로 쓸 수 있어요.</p></div>
-{tool_cards()}
+<p>시험 점수 확인부터 여권 영문 이름까지, 영어로 확인하고 바꿔야 할 때 바로 쓰는 도구예요. 가입 없이 무료예요.</p></div>
+<h2 class="tl-gh">점수·시험</h2>
+{tool_cards(group="score")}
+<h2 class="tl-gh">생활 영어</h2>
+{tool_cards(group="life")}
 <div class="tl-doc">
 <h2>이런 때 쓰세요</h2>
 <ul>
+<li><b>토익 시험을 본 날</b> 맞힌 개수로 예상 점수를 확인하세요.</li>
+<li><b>취업 준비할 때</b> 오픽, 토익스피킹, 토익 점수를 한 표에서 비교하세요.</li>
 <li><b>여권을 처음 만들 때</b> 영문 이름 철자를 미리 정해 두세요.</li>
-<li><b>항공권·해외 호텔을 예약할 때</b> 여권과 같은 영문 이름을 확인하세요.</li>
 {"<li><b>해외직구를 할 때</b> 영문 주소를 쇼핑몰 칸에 맞게 나눠서 복사하세요.</li>" if JUSO_KEY else ""}
 </ul>
 {tool_kakao()}
 </div></div>"""
-    desc = "한글 이름 영문 변환, 영문 주소 변환처럼 여권, 해외직구, 해외 사이트 가입에 필요한 영어 도구를 무료로 쓸 수 있어요."
-    return layout("영어 도구", desc, "/tools/", body, nav="tools", seo_title="영어 도구 - 영문 이름 변환기, 영문 주소 변환기")
-
+    desc = "토익 점수 계산기, 오픽 등급표, 토익스피킹 레벨표, 영어 시험 점수 비교, 영문 이름 변환기까지 영어 공부와 생활에 필요한 도구를 무료로 쓸 수 있어요."
+    return layout("영어 도구", desc, "/tools/", body, nav="tools", seo_title="영어 도구 - 토익 점수 계산기, 오픽 등급표, 영문 이름 변환기")
 
 
 def build():
@@ -2436,6 +2734,9 @@ def build():
     write("/travel/", page_travel()); pages.append("/travel/")
     write("/tools/", page_tools()); pages.append("/tools/")
     write("/tools/english-name/", page_tool_name()); pages.append("/tools/english-name/")
+    for u, fn in (("/tools/toeic-score/", page_tool_toeic), ("/tools/opic-level/", page_tool_opic),
+                  ("/tools/toeic-speaking-level/", page_tool_tos), ("/tools/english-score-compare/", page_tool_compare)):
+        write(u, fn()); pages.append(u)
     write("/tools/english-address/", page_tool_address())
     if JUSO_KEY:
         pages.append("/tools/english-address/")
