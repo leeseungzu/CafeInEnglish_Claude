@@ -310,5 +310,23 @@
     "en": "I've worked late three days running.",
     "ko": "사흘 연속 야근했어요",
     "desc": "숫자 + 기간 + running = '연속으로'. 김동관 부회장의 for 10 years running에서 건졌어요."
+  },
+  {
+    "post": "slipped-my-mind",
+    "en": "Sorry, it totally slipped my mind.",
+    "ko": "죄송해요, 완전히 깜빡했어요",
+    "desc": "I forgot보다 부드러운 사과. 잊힌 일이 주어라서 I slipped가 아니라 It slipped예요."
+  },
+  {
+    "post": "rain-check",
+    "en": "Can I take a rain check?",
+    "ko": "다음에 해도 될까?",
+    "desc": "초대를 거절하지만 다음엔 꼭 하고 싶을 때. 날짜를 같이 제안하면 진심이 전해져요."
+  },
+  {
+    "post": "borrow-vs-lend",
+    "en": "Can you lend me your pen?",
+    "ko": "펜 좀 빌려줄래?",
+    "desc": "borrow me는 틀려요. 상대가 빌려주는 거라면 lend me, 내가 빌리면 Can I borrow ~?"
   }
 ]

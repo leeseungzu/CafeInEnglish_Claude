@@ -36,7 +36,9 @@
       "make-sense",
       "sounds-good",
       "this-vs-next",
-      "email-phrases"
+      "email-phrases",
+      "slipped-my-mind",
+      "rain-check"
     ],
     "lead": "회의·메일에서 바로 쓰는 업무 영어"
   },
@@ -53,7 +55,9 @@
       "im-down",
       "looking-forward-to",
       "what-do-you-call",
-      "plans-appointment-promise"
+      "plans-appointment-promise",
+      "bored-vs-boring",
+      "borrow-vs-lend"
     ],
     "lead": "뜻이 반대로 전해지는 함정 표현 모음"
   },
@@ -105,7 +109,8 @@
       "ok-origin",
       "deadline-origin",
       "bug-origin",
-      "words-changed-meaning"
+      "words-changed-meaning",
+      "robot-origin"
     ],
     "thinks": [],
     "lead": "매일 쓰는 단어의 숨은 역사"

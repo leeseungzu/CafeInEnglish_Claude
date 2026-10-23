@@ -1,0 +1,73 @@
+{
+  "id": "robot-origin",
+  "cat": "story",
+  "sub": "단어의 유래",
+  "level": "기초",
+  "date": "2026-10-23",
+  "title": "robot은 원래 '강제 노동'이었다? 1920년 체코 희곡에서 태어난 단어",
+  "seo_title": "robot 어원 - 체코어 robota와 차페크의 희곡 R.U.R.에서 온 로봇",
+  "lead": "로봇청소기의 '로봇'은 100여 년 전 한 연극 무대에서 처음 불린 이름이에요",
+  "description": "robot은 1920년 카렐 차페크의 희곡 R.U.R.에서 처음 쓰였고, 체코어 robota(강제 노동)에서 왔어요. 이름을 지어 준 형 요제프 이야기와 robotic 쓰는 법까지 정리했어요.",
+  "og": {
+    "en": "robota → robot",
+    "ko": "robot은 원래 '강제 노동'이었어요"
+  },
+  "icon": "robot",
+  "chat": {
+    "q": "Who cleaned the floor?",
+    "a": "My robot vacuum did it.",
+    "key": "robot vacuum",
+    "ko": "로봇청소기가 했지."
+  },
+  "thumb": {
+    "text": "robota → robot",
+    "key": "robota",
+    "ko": "robot의 원래 뜻은?"
+  },
+  "quiz": [
+    {
+      "tag": "영어 이야기",
+      "q": "robot이라는 단어가 처음 쓰인 곳은?",
+      "sub": "",
+      "options": [
+        "미국의 과학 잡지",
+        "체코 작가 카렐 차페크의 희곡",
+        "영국의 공장 광고",
+        "독일의 발명 특허"
+      ],
+      "answer": 1,
+      "explain": "1920년에 나온 카렐 차페크의 희곡 R.U.R.(로숨의 유니버설 로봇)에서 처음 쓰였어요.",
+      "mnemonic": "로봇은 공장이 아니라 무대에서 태어났다"
+    },
+    {
+      "tag": "영어 이야기",
+      "q": "체코어 robota의 뜻에 가장 가까운 것은?",
+      "sub": "",
+      "options": [
+        "기계",
+        "강제 노동, 고된 일",
+        "금속",
+        "인공 지능"
+      ],
+      "answer": 1,
+      "explain": "robota는 농노가 영주에게 바쳐야 했던 의무 노동, 고된 일을 뜻하는 말이에요.",
+      "mnemonic": "robot = 쉬지 않고 일만 하는 존재"
+    },
+    {
+      "tag": "표현",
+      "q": "'그 사람 사과가 너무 기계적으로 들렸어'를 영어로 하면?",
+      "sub": "",
+      "options": [
+        "His apology sounded so robotic.",
+        "His apology sounded so robotics.",
+        "His apology was a robot person.",
+        "His apology robot sounded."
+      ],
+      "answer": 0,
+      "explain": "감정 없이 기계처럼 딱딱하다는 뜻의 형용사는 robotic이에요. robotics는 '로봇 공학'이라는 학문 이름이에요.",
+      "mnemonic": "-ic는 성질(딱딱한), -ics는 학문(공학)"
+    }
+  ],
+  "body_html": "<p>로봇청소기, 산업용 로봇, AI 로봇. 이제 <b>robot</b>은 매일 듣는 단어예요. 그런데 이 단어는 과학자가 아니라 <b>극작가</b>가 처음 세상에 내놓았어요. 1920년, 체코의 한 희곡에서요. 그리고 그 뿌리에는 꽤 무거운 뜻이 숨어 있어요.</p>\n<h2>1920년, 체코의 희곡 R.U.R.</h2>\n<p>체코 작가 <b>카렐 차페크(Karel Čapek)</b>는 1920년 희곡 <b>R.U.R.</b>을 발표했어요. 제목은 '로숨의 유니버설 로봇(Rossum's Universal Robots)'의 줄임말이에요. 인간 대신 일할 인공 노동자를 공장에서 대량으로 만들어 파는 회사 이야기예요. 인간을 위해 일하던 로봇들이 결국 인간에게 맞서게 되면서 이야기가 무거워져요.</p>\n<p>이 연극은 1921년 1월 체코에서 처음 무대에 올랐어요. 프라하 국민극장의 공식 초연은 1월 25일이었는데, 그보다 먼저 1월 2일 흐라데츠크랄로베의 아마추어 극단이 공연을 해서 이 날을 세계 초연으로 보기도 해요.</p>\n<figure class=\"fig\"><img src=\"/images/story-robot-rur.webp\" alt=\"연극 R.U.R.의 흑백 공연 사진. 실내 무대에 정장 차림의 배우들과, 가슴에 줄무늬가 있는 의상을 입은 로봇 역 배우들이 서 있다\" width=\"566\" height=\"316\" loading=\"lazy\"><figcaption>연극 R.U.R.의 한 장면. 원본 설명은 '로봇 세 명이 나오는 장면'이에요 (촬영자 미상, Wikimedia Commons, 퍼블릭 도메인).</figcaption></figure>\n<h2>이름은 화가인 형이 지어 줬다</h2>\n<p>재미있는 건 robot이라는 이름을 지은 사람이 카렐이 아니라는 점이에요. 카렐 차페크는 1933년 신문 리도베 노비니(Lidové noviny)에 직접 그 사연을 썼어요. 처음에는 라틴어 labor(노동)에서 따온 <b>laboři</b>라는 이름을 생각했는데, 너무 책에서 나온 말 같아 마음에 들지 않았대요. 그래서 그림을 그리고 있던 형 <b>요제프 차페크(Josef Čapek)</b>에게 물었더니, 형이 붓을 문 채 \"그럼 로보티(roboti)라고 해\"라고 했다고 해요.</p>\n<p>그래서 robot은 동생이 유명하게 만들었지만, 이름을 처음 떠올린 건 형이에요. 카렐은 1933년 글에서 이 이름이 형의 아이디어였다고 분명히 밝혔어요.</p>\n<h2>robota는 '강제 노동'이었다</h2>\n<p>요제프가 떠올린 말의 뿌리는 체코어 <b>robota</b>예요. 옛날 농노가 영주에게 바쳐야 했던 <b>의무 노동, 부역</b>, 그리고 고되고 지겨운 일을 뜻하는 말이에요. 더 거슬러 올라가면 고대 교회 슬라브어 rabota(예속), rab(노예)와 이어지고, 독일어 Arbeit(일)와도 먼 친척이라고 해요.</p>\n<p>그러니까 robot에는 처음부터 <b>'시키는 일만 하는 존재'</b>라는 뜻이 담겨 있었어요. 인간 대신 고된 일을 떠맡는 인공 노동자에게 딱 맞는 이름이었죠.</p>\n<h2>처음 로봇은 쇠붙이가 아니었다</h2>\n<p>우리가 떠올리는 로봇은 금속 몸에 전선이 달린 기계예요. 그런데 R.U.R.의 로봇은 달랐어요. 희곡 속 로봇은 살아 있는 물질처럼 움직이는 인공 재료로 만든, 사람과 거의 똑같이 생긴 존재였어요. 차페크는 1935년 6월 신문 글에서 자기 로봇은 '양철판과 톱니바퀴'로 만든 게 아니었다고 직접 말하기도 했어요. 지금으로 치면 기계보다는 '인조인간'에 더 가까웠던 셈이에요.</p>\n<h2>영어로 건너온 robot</h2>\n<p>R.U.R.은 1922년 10월 뉴욕의 시어터 길드가 영어로 무대에 올렸고, 1923년에는 런던에서도 공연됐어요. robot이라는 단어도 이 무렵 영어에 들어왔어요. (형 요제프가 그보다 먼저 단편에서 썼다는 설도 있지만, 근거가 엇갈려 여기서는 R.U.R.을 기준으로 이야기했어요.) 영어 첫 기록은 사전마다 1922년, 1923년으로 조금씩 달라요.</p>\n<p>그 뒤 SF 작가 아이작 아시모프가 1941년 단편 「Liar!」에서 <b>robotics</b>(로봇 공학)라는 말을 처음 썼어요. 연극 무대에서 태어난 이름이 20여 년 만에 '로봇 공학'이라는 말까지 낳은 거예요.</p>\n<h2>지금은 이렇게 써요</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I just got a robot vacuum.</span><span class=\"ko\">로봇청소기 하나 샀어.</span></li>\n<li><span class=\"en\">I feel like a robot at work these days.</span><span class=\"ko\">요즘 회사에서 기계처럼 일만 하는 기분이야.</span></li>\n<li><span class=\"en\">His apology sounded so robotic.</span><span class=\"ko\">그 사람 사과는 너무 기계적으로 들렸어.</span></li>\n<li><span class=\"en\">Some jobs will be done by robots.</span><span class=\"ko\">어떤 일들은 로봇이 하게 될 거예요.</span></li>\n</ul></div>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>단어</th><th>뜻</th></tr></thead><tbody><tr><td>robot</td><td>로봇, 기계처럼 움직이는 사람</td></tr><tr><td>robotic</td><td>로봇의, 감정 없이 딱딱한</td></tr><tr><td>robotics</td><td>로봇 공학</td></tr><tr><td>robot vacuum</td><td>로봇청소기</td></tr></tbody></table></div>\n<p>사람에게 쓰면 '감정 없이 기계처럼 움직인다'는 뜻이 돼요. 메리엄웹스터 사전에도 '자동으로 움직이는 것처럼 보이거나 감정이 없는 사람'이라는 뜻이 올라 있어요. 처음 이름에 담긴 '시키는 일만 하는 존재'라는 느낌이 아직 남아 있는 셈이에요. 덤으로, 남아프리카공화국 영어에서는 robot이 <b>신호등</b>이라는 뜻으로도 쓰여요. 그 나라에서 Turn left at the robot.이라고 하면 신호등에서 좌회전하라는 말이에요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> robota(고된 일) → robot(고된 일을 대신하는 존재). 로봇청소기도 우리 대신 '부역' 중이에요.</div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">감정 없이 일하는 사람을 말할 때</span><span class=\"no\">He is a robot person.</span><span class=\"en\">He's like a robot.</span><span class=\"ko\">그 사람은 꼭 로봇 같아.</span><span class=\"why\"><b>왜?</b>robot person이라는 말은 쓰지 않아요. like a robot이나 형용사 robotic(He's so robotic.)으로 말해요.</span></li>\n</ul></div>\n<p>발음도 한 가지 알아 두세요. 미국 영어에서는 '로봇'보다 <b>'로우밧'</b>에 가깝게, 첫 음절에 힘을 줘서 말해요.</p>\n<p>컴퓨터 용어에 숨은 이야기가 더 궁금하다면 <a href=\"/p/bug-origin/\">버그는 진짜 벌레였다</a>도 같이 읽어 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Etymonline 'robot', 'robotics', Merriam-Webster 'robot', 'robotics', Oxford Learner's Dictionaries 'robot', 브리태니커 'R.U.R.', 카렐 차페크 「O slově robot」(Lidové noviny, 1933), 체코 외교부·체코 공영방송(ČT24) R.U.R. 100주년 자료, 버지니아 커먼웰스 대학교 Blackbird 차페크 자료, Wikimedia Commons 'Capek play.jpg'.</p>",
+  "related": []
+}

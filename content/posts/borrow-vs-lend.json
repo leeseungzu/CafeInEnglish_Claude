@@ -1,0 +1,73 @@
+{
+  "id": "borrow-vs-lend",
+  "cat": "tip",
+  "sub": "단어",
+  "level": "기초",
+  "date": "2026-10-23",
+  "title": "\"Can you borrow me?\"는 틀려요, '빌리다'와 '빌려주다' 영어로",
+  "seo_title": "빌려주다 영어로 - borrow lend 차이, Can I borrow와 Can you lend me",
+  "lead": "borrow와 lend는 물건이 가는 방향이 정반대예요",
+  "description": "'펜 좀 빌려줄래?'를 Can you borrow me?라고 하면 틀려요. 빌려 오는 borrow와 빌려주는 lend의 방향, loan·rent·use와의 차이, 화장실을 빌릴 때 쓰는 말까지 정리했어요.",
+  "og": {
+    "en": "Can you lend me a pen?",
+    "ko": "'빌려줘'는 borrow가 아니라 lend"
+  },
+  "icon": "handshake",
+  "chat": {
+    "q": "Do you need anything?",
+    "a": "Can I borrow your charger?",
+    "key": "borrow",
+    "ko": "충전기 좀 빌려도 될까?"
+  },
+  "thumb": {
+    "text": "lend me",
+    "key": "lend",
+    "ko": "'빌려줘'를 영어로?"
+  },
+  "quiz": [
+    {
+      "tag": "단어",
+      "q": "'펜 좀 빌려줄래?'로 맞지 않는 문장은?",
+      "sub": "",
+      "options": [
+        "Can I borrow your pen?",
+        "Can you lend me your pen?",
+        "Can you borrow me your pen?",
+        "Could I borrow a pen?"
+      ],
+      "answer": 2,
+      "explain": "borrow는 내가 '빌려 오는' 것이라 borrow me라고 하지 않아요. 상대에게 부탁할 땐 lend me를 써요.",
+      "mnemonic": "내가 가져오면 borrow, 상대가 주면 lend"
+    },
+    {
+      "tag": "단어",
+      "q": "'언니가 지난주에 차를 빌려줬어'의 과거형으로 맞는 것은?",
+      "sub": "",
+      "options": [
+        "My sister lended me her car.",
+        "My sister lent me her car.",
+        "My sister borrowed me her car.",
+        "My sister lend me her car last week."
+      ],
+      "answer": 1,
+      "explain": "lend의 과거형은 lent예요. lended라고 하지 않아요.",
+      "mnemonic": "lend → lent (send → sent처럼)"
+    },
+    {
+      "tag": "표현",
+      "q": "친구 집에서 화장실을 써도 되는지 물을 때 가장 자연스러운 말은?",
+      "sub": "",
+      "options": [
+        "Can I borrow your bathroom?",
+        "Can I use your bathroom?",
+        "Can you lend me your bathroom?",
+        "Can I rent your bathroom?"
+      ],
+      "answer": 1,
+      "explain": "화장실은 가져갈 수 없으니 borrow 대신 use를 써요.",
+      "mnemonic": "들고 갈 수 없으면 use"
+    }
+  ],
+  "body_html": "<p>수업 중에 펜이 없어서 옆 사람에게 \"펜 좀 빌려줄래?\"라고 하고 싶을 때, 무심코 <b>Can you borrow me your pen?</b>이 튀어나오기 쉬워요. 한국어 '빌리다'와 '빌려주다'가 비슷하게 생겨서 생기는 실수예요. 영어에서 borrow와 lend는 <b>물건이 움직이는 방향이 정반대</b>인 다른 단어예요.</p>\n<h2>borrow는 가져오고, lend는 내준다</h2>\n<figure class=\"fig\"><img src=\"/images/borrow-lend.png\" alt=\"borrow와 lend의 방향: borrow는 빌리다(나에게 온다), Can I borrow your pen?, borrow + 물건 + from 사람 / lend는 빌려주다(나에게서 간다), Can you lend me your pen?, lend + 사람 + 물건\" width=\"1080\" height=\"1248\" loading=\"lazy\"><figcaption>물건이 나에게 오면 borrow, 나에게서 나가면 lend</figcaption></figure>\n<p>미국 VOA 영어 교육 방송의 설명이 간단해요. borrow는 돌려줄 생각으로 <b>남에게서 가져오는 것</b>, lend는 돌려받을 생각으로 <b>남에게 주는 것</b>이에요. 그래서 \"우리는 누군가에게서(from) borrow하고, 누군가에게(to) lend한다\"고 기억하면 돼요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>말하고 싶은 것</th><th>영어 형태</th></tr></thead><tbody><tr><td>(내가) ~를 빌리다</td><td>borrow 물건 (from 사람)</td></tr><tr><td>(남에게) ~를 빌려주다</td><td>lend 사람 물건 / lend 물건 to 사람</td></tr><tr><td>과거형</td><td>borrowed / lent</td></tr></tbody></table></div>\n<p>그래서 같은 부탁도 두 가지로 할 수 있어요. 내가 주어면 <b>Can I borrow your pen?</b>, 상대가 주어면 <b>Can you lend me your pen?</b>이에요. 둘 다 자연스러워요. borrow 바로 뒤에는 me, you 같은 사람이 오지 않는다는 것만 기억하세요.</p>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Can I borrow your charger for a minute?</span><span class=\"ko\">충전기 잠깐 빌려도 될까?</span></li>\n<li><span class=\"en\">Could you lend me ten dollars until Friday?</span><span class=\"ko\">금요일까지 10달러만 빌려줄 수 있어?</span></li>\n<li><span class=\"en\">My sister lent me her car last weekend.</span><span class=\"ko\">지난 주말에 언니가 차를 빌려줬어.</span></li>\n<li><span class=\"en\">I borrowed this book from the library.</span><span class=\"ko\">이 책은 도서관에서 빌렸어.</span></li>\n</ul></div>\n<h2>돈을 내면 rent, 화장실은 use</h2>\n<p>한국어 '빌리다'는 돈을 내고 빌리는 것까지 다 가리키지만, 영어는 또 나눠요. 렌터카나 집처럼 <b>돈을 내고 빌리면 rent</b>예요. We rented a car at the airport.(공항에서 차를 빌렸어요)처럼요. 영국에서는 차나 자전거를 짧게 빌릴 때 hire도 써요. 반대로 내 방을 세놓을 땐 rent out이에요.</p>\n<p>그리고 화장실이나 집 안의 공간처럼 <b>들고 갈 수 없는 것</b>은 use가 자연스러워요. 화장실은 가져갔다가 돌려줄 수 없으니까요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Could I use your bathroom?</span><span class=\"ko\">화장실 좀 써도 될까요?</span></li>\n<li><span class=\"en\">We rent out our spare room to students.</span><span class=\"ko\">우리는 남는 방을 학생들에게 세놓아요.</span></li>\n</ul></div>\n<h2>실제 대화 · 충전기 빌리기</h2>\n<ul class=\"ex talk\">\n<li class=\"me\"><span class=\"en\">Sorry, my phone's about to die. Can I borrow your charger?</span><span class=\"ko\">미안, 휴대폰이 곧 꺼질 것 같아. 충전기 좀 빌려도 될까?</span></li>\n<li class=\"them\"><span class=\"en\">Sure, here you go.</span><span class=\"ko\">그럼, 여기.</span></li>\n<li class=\"me\"><span class=\"en\">Thanks! I'll give it back before I leave.</span><span class=\"ko\">고마워! 가기 전에 돌려줄게.</span></li>\n<li class=\"them\"><span class=\"en\">No rush. I can lend you a power bank too if you need one.</span><span class=\"ko\">천천히 해. 필요하면 보조배터리도 빌려줄 수 있어.</span></li>\n</ul>\n<h2>'빌려'가 양쪽으로 쓰여서 헷갈려요</h2>\n<p>한국어에서는 \"펜 좀 빌려\"라는 말을 상황에 따라 '빌려 갈게'로도, '빌려줘'로도 써요. 같은 '빌리-'에서 나온 말이라 머릿속에서도 하나로 묶여 있어요. 그래서 '빌리다 = borrow'로만 외우면, '빌려주다'를 말해야 할 때도 borrow가 먼저 떠올라요. 해결법은 문장을 말하기 전에 <b>물건이 지금 누구 쪽으로 움직이는지</b>를 그려 보는 거예요. 나에게 오면 borrow, 나에게서 나가면 lend예요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">옆 사람에게 펜을 빌려 달라고 할 때</span><span class=\"no\">Can you borrow me your pen?</span><span class=\"en\">Can you lend me your pen?</span><span class=\"ko\">펜 좀 빌려줄래?</span><span class=\"why\"><b>왜?</b>borrow는 내가 빌려 오는 것이에요. 상대에게 빌려 달라고 할 땐 lend me, 아니면 주어를 바꿔 Can I borrow your pen?이라고 해요.</span></li>\n<li><span class=\"ctx\">친구 집에서 화장실을 쓰고 싶을 때</span><span class=\"no\">Can I borrow your bathroom?</span><span class=\"en\">Can I use your bathroom?</span><span class=\"ko\">화장실 좀 써도 될까?</span><span class=\"why\"><b>왜?</b>가져갔다가 돌려줄 수 없는 것은 borrow보다 use가 자연스러워요.</span></li>\n</ul></div>\n<h2>자주 묻는 질문</h2>\n<p><b>Q. Can you loan me $20?도 맞나요?</b><br>네, 특히 미국 영어에서는 loan을 '빌려주다'라는 동사로 써도 표준이에요(메리엄웹스터 사전 용법 설명). 다만 '도와주다'라는 뜻의 lend a hand는 loan으로 바꿀 수 없어요.</p>\n<p><b>Q. 도서관에서 책을 빌린다고 할 땐요?</b><br>borrow a book도 맞고, 특히 미국에서는 check out a book도 많이 써요. I checked out three books.(책 세 권 빌렸어)처럼요.</p>\n<p>부탁을 더 공손하게 하고 싶다면 <a href=\"/p/would-you-mind/\">Would you mind ~?</a>도 함께 익혀 두세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: VOA Learning English 'borrow and lend', Merriam-Webster 'lend', 'loan'(용법 설명), Grammarly 'borrow vs. lend', Oxford Learner's Dictionaries 'hire', 'rent', 'check out'.</p>",
+  "related": []
+}

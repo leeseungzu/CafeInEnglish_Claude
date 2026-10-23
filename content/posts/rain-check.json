@@ -1,0 +1,73 @@
+{
+  "id": "rain-check",
+  "cat": "expr",
+  "sub": "새 표현",
+  "level": "기초",
+  "date": "2026-10-23",
+  "title": "\"Can I take a rain check?\", '다음에 하자'를 기분 좋게 거절하기",
+  "seo_title": "rain check 뜻 - '다음에 하자' 영어로, take a rain check 쓰는 법",
+  "lead": "오늘은 안 되지만 다음엔 꼭, 초대를 미룰 때 쓰는 미국식 한마디",
+  "description": "rain check는 '오늘은 못 가지만 다음에 하자'는 뜻이에요. 야구 경기 우천 입장권에서 온 유래, take와 give 중 누가 무엇을 쓰는지, 회사에서 써도 되는지를 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Can I take a rain check?",
+    "ko": "'다음에 하자'를 기분 좋게"
+  },
+  "icon": "umbrella-rain",
+  "chat": {
+    "q": "Want to grab a drink after work?",
+    "a": "Can I take a rain check?",
+    "key": "rain check",
+    "ko": "다음에 해도 될까?"
+  },
+  "thumb": {
+    "text": "Rain check?",
+    "key": "Rain",
+    "ko": "'다음에 하자'를 영어로?"
+  },
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "친구가 저녁 초대에 \"Can I take a rain check?\"라고 했다면?",
+      "sub": "",
+      "options": [
+        "비가 오는지 확인해 볼게",
+        "오늘은 어렵고 다음에 하자",
+        "계산서 좀 줄래?",
+        "우산 좀 빌려줄래?"
+      ],
+      "answer": 1,
+      "explain": "take a rain check는 지금은 초대를 거절하지만 나중에 하고 싶다는 뜻이에요.",
+      "mnemonic": "비 와서 경기 취소, 표는 다음 경기로"
+    },
+    {
+      "tag": "표현",
+      "q": "내가 초대를 거절하면서 할 말로 맞는 것은?",
+      "sub": "",
+      "options": [
+        "I'll give you a rain check.",
+        "Can I take a rain check?",
+        "Can you take my rain check?",
+        "I rain checked you."
+      ],
+      "answer": 1,
+      "explain": "거절하는 사람이 rain check를 take(받다)해요. give는 초대한 사람이 \"다음에 하자\"며 미뤄 줄 때 써요.",
+      "mnemonic": "거절하는 쪽이 표를 받아(take) 간다"
+    },
+    {
+      "tag": "뉘앙스",
+      "q": "rain check를 쓰기 가장 조심스러운 상황은?",
+      "sub": "",
+      "options": [
+        "친구의 술자리 초대",
+        "동료의 점심 제안",
+        "처음 만나는 거래처와의 공식 미팅",
+        "가족의 주말 외식"
+      ],
+      "answer": 2,
+      "explain": "rain check는 구어 표현이라 격식 있는 자리에서는 Could we find another time?처럼 말하는 게 안전해요.",
+      "mnemonic": "편한 사이엔 Rain check, 격식엔 another time"
+    }
+  ],
+  "body_html": "<h2>뜻</h2>\n<div class=\"box\"><b>Can I take a rain check?</b> = 오늘은 어렵고, 다음에 해도 될까?</div>\n<p>누가 술자리나 저녁을 제안했는데 오늘은 사정이 있을 때 쓰는 말이에요. 옥스퍼드 학습자 사전은 '제안이나 초대를 거절하면서 나중에는 받아들일 수도 있다고 말하는 것'이라고 풀이하고, 롱맨 사전은 '지금은 아니지만 나중에 하겠다고 말할 때' 쓴다고 해요. 그냥 No보다 <b>\"너랑 하기 싫은 게 아니라 오늘만 안 되는 거야\"</b>라는 마음이 전해져요.</p>\n<h2>비 오는 날의 야구 입장권</h2>\n<p>rain check는 원래 진짜 '표'였어요. 메리엄웹스터 사전에 따르면 비 때문에 경기나 공연이 취소됐을 때 <b>다음 경기에 들어올 수 있게 해 주는 입장권</b>을 뜻했고, 기록상 1884년부터 쓰였어요. 1880년대 미국 야구장에서 널리 쓰이던 말이 '다음 기회로 미룬다'는 뜻으로 넓어진 거예요.</p>\n<p>지금도 미국 마트에서는 다른 뜻으로 쓰여요. 세일 상품이 다 팔렸을 때 나중에 세일 가격으로 살 수 있게 해 주는 교환권도 rain check라고 불러요. 그래서 마트 계산대에서 Can I get a rain check?라고 하면 \"품절된 세일 상품 교환권 받을 수 있을까요?\"라는 뜻이 돼요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 비 와서 오늘 경기는 취소, 대신 다음 경기 표를 받아(take) 간다!</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Can I take a rain check on dinner? Something came up.</span><span class=\"ko\">저녁은 다음에 해도 될까? 일이 좀 생겼어.</span></li>\n<li><span class=\"en\">I'll take a rain check, thanks. I'm wiped out tonight.</span><span class=\"ko\">고맙지만 다음에 할게. 오늘 너무 지쳤어.</span></li>\n<li><span class=\"en\">Rain check? Next week works better for me.</span><span class=\"ko\">다음에 할까? 나는 다음 주가 더 좋아.</span></li>\n<li><span class=\"en\">No worries, I'll give you a rain check.</span><span class=\"ko\">괜찮아, 다음에 하자.</span></li>\n</ul></div>\n<p>무엇을 미루는지 말하고 싶으면 <b>on</b>을 붙여요. take a rain check on dinner, on lunch처럼요. 문자로는 Rain check? 두 단어만 보내도 통해요.</p>\n<h2>take는 누가, give는 누가</h2>\n<figure class=\"fig\"><img src=\"/images/rain-check-take-give.png\" alt=\"rain check의 take와 give: 거절하는 사람은 Can I take a rain check?(다음에 해도 될까?), 초대한 사람은 Sure, I'll give you a rain check.(그래, 다음에 하자)\" width=\"1080\" height=\"1136\" loading=\"lazy\"><figcaption>표를 받는(take) 쪽이 거절하는 사람이에요</figcaption></figure>\n<p>입장권을 떠올리면 쉬워요. 오늘 못 오는 사람이 다음 표를 <b>받고(take)</b>, 초대한 사람이 표를 <b>주는(give)</b> 거예요. 그래서 내가 거절하면서 I'll give you a rain check.라고 하면 방향이 거꾸로 돼요.</p>\n<h2>실제 대화 · 퇴근 후 한잔</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Want to grab a drink after work?</span><span class=\"ko\">퇴근하고 한잔할래?</span></li>\n<li class=\"me\"><span class=\"en\">I'd love to, but I have to finish this report tonight. Can I take a rain check?</span><span class=\"ko\">좋은데 오늘 밤에 이 보고서를 끝내야 해. 다음에 해도 될까?</span></li>\n<li class=\"them\"><span class=\"en\">Sure. How about Friday?</span><span class=\"ko\">그래. 금요일은 어때?</span></li>\n<li class=\"me\"><span class=\"en\">Friday works. See you then!</span><span class=\"ko\">금요일 좋아. 그때 봐!</span></li>\n</ul>\n<p>rain check 뒤에 날짜를 바로 제안하면 진심으로 다음에 하고 싶다는 게 확실해져요. 반대로 말만 하고 날짜를 안 잡으면 그냥 정중한 거절로 받아들여질 수도 있어요.</p>\n<h2>회사에서 써도 될까</h2>\n<p>옥스퍼드 사전은 이 표현을 <b>구어(informal)이고 주로 북미 영어</b>로, 롱맨 사전은 구어이고 주로 미국 영어로 표시해요. 편한 동료나 상사와의 점심 약속 정도는 괜찮지만, 처음 만나는 거래처나 공식 미팅이라면 조금 더 격식 있게 말하는 게 좋아요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>상황</th><th>이렇게 말해요</th></tr></thead><tbody><tr><td>친구, 편한 동료</td><td>Can I take a rain check?</td></tr><tr><td>무난하게</td><td>Can we do it another time?</td></tr><tr><td>격식 있게</td><td>I'm afraid I can't make it. Could we find another time?</td></tr><tr><td>다음 약속 없이 거절</td><td>I'll have to pass this time.</td></tr></tbody></table></div>\n<h2>한국인이 놓치기 쉬운 것</h2>\n<p>한국어 \"다음에 하자\"는 하나지만, 영어로 옮기면 Next time.만 툭 던지기 쉬워요. Next time.도 틀린 말은 아니지만 혼자 쓰면 짧고 차갑게 들릴 수 있어요. rain check는 단어 자체에 '다음 기회를 맡겨 둔다'는 그림이 있어서 훨씬 따뜻하게 들려요. 그리고 rain이 들어 있다고 날씨 이야기로 착각하지 마세요. 맑은 날에도 얼마든지 써요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">친구의 초대를 내가 미룰 때</span><span class=\"no\">Sorry, I'll give you a rain check.</span><span class=\"en\">Sorry, can I take a rain check?</span><span class=\"ko\">미안, 다음에 해도 될까?</span><span class=\"why\"><b>왜?</b>거절하는 사람은 다음 표를 받는(take) 쪽이에요. give는 초대한 사람이 \"다음에 하자\"며 미뤄 줄 때 써요.</span></li>\n</ul></div>\n<p>바빠서 거절할 땐 <a href=\"/p/swamped/\">I'm swamped</a>와 함께 쓰면 자연스럽고, 이미 다른 약속이 있다면 <a href=\"/p/plans-appointment-promise/\">I already have plans</a>를 써 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Merriam-Webster 'rain check', Oxford Learner's Dictionaries 'rain check', Longman Dictionary 'take a rain check', Etymonline 'raincheck', Dictionary.com 'rain check'.</p>",
+  "related": []
+}

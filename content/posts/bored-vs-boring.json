@@ -1,0 +1,73 @@
+{
+  "id": "bored-vs-boring",
+  "cat": "tip",
+  "sub": "단어",
+  "level": "기초",
+  "date": "2026-10-23",
+  "title": "\"I'm boring\"은 '나 지루해'가 아니에요, bored와 boring 차이",
+  "seo_title": "bored boring 차이 - '지루해' 영어로, -ed와 -ing 형용사 구분법",
+  "lead": "I'm boring이라고 하면 '나는 재미없는 사람이야'가 돼요",
+  "description": "'지루해'를 I'm boring이라고 하면 '나는 재미없는 사람이야'가 돼요. 감정을 느끼는 -ed와 감정을 주는 -ing의 차이, excited·tired 같은 짝, 함께 쓰는 전치사까지 표와 퀴즈로 정리했어요.",
+  "og": {
+    "en": "I'm bored.",
+    "ko": "I'm boring은 '나 재미없는 사람이야'"
+  },
+  "icon": "yawning-face",
+  "chat": {
+    "q": "How's the movie?",
+    "a": "Honestly, I'm so bored.",
+    "key": "bored",
+    "ko": "솔직히 너무 지루해."
+  },
+  "thumb": {
+    "text": "I'm bored.",
+    "key": "bored",
+    "ko": "I'm boring과 뭐가 달라?"
+  },
+  "quiz": [
+    {
+      "tag": "단어",
+      "q": "긴 회의 중에 '나 너무 지루해'라고 말하려면?",
+      "sub": "",
+      "options": [
+        "I'm so boring.",
+        "I'm so bored.",
+        "I'm so bore.",
+        "I'm so boredom."
+      ],
+      "answer": 1,
+      "explain": "내가 느끼는 기분은 -ed예요. I'm boring은 '나는 남을 지루하게 하는 사람이야'라는 뜻이 돼요.",
+      "mnemonic": "내 기분은 -ed"
+    },
+    {
+      "tag": "단어",
+      "q": "빈칸에 알맞은 말은? \"The ending was really ____.\" (결말이 정말 실망스러웠어)",
+      "sub": "",
+      "options": [
+        "disappoint",
+        "disappointed",
+        "disappointing",
+        "disappointment"
+      ],
+      "answer": 2,
+      "explain": "결말이 실망을 '주는' 쪽이라 -ing를 써요. 내가 실망했다면 I was disappointed.",
+      "mnemonic": "감정을 주는 쪽은 -ing"
+    },
+    {
+      "tag": "표현",
+      "q": "'내일 여행 진짜 기대돼!'로 맞는 문장은?",
+      "sub": "",
+      "options": [
+        "I'm so exciting about the trip!",
+        "I'm so excited about the trip!",
+        "I'm so excite for trip!",
+        "The trip is so excited!"
+      ],
+      "answer": 1,
+      "explain": "설레는 건 내 기분이라 excited, 뒤에는 주로 about을 붙여요(미국에선 for도 흔해요). I'm exciting은 '나는 신나는 사람이야'가 돼요.",
+      "mnemonic": "설레는 나 = excited"
+    }
+  ],
+  "body_html": "<p>지루한 회의 도중 친구에게 \"I'm so boring.\"이라고 문자를 보냈다면, 친구는 \"갑자기 왜 자기가 재미없는 사람이래?\" 하고 걱정할지도 몰라요. <b>I'm boring</b>은 '나 지루해'가 아니라 <b>'나는 (남을) 지루하게 하는 사람이야'</b>라는 뜻이거든요. '나 지루해'는 <b>I'm bored.</b>예요.</p>\n<h2>-ed는 느끼는 쪽, -ing는 주는 쪽</h2>\n<p>영국문화원(British Council)의 문법 설명이 가장 깔끔해요. -ed로 끝나는 형용사는 대체로 <b>사람이 느끼는 감정</b>을, -ing로 끝나는 형용사는 <b>그 감정을 일으키는 것</b>을 말해요. 지루한 수업(a boring lesson)이 나를 지루하게(bored) 만드는 거예요.</p>\n<figure class=\"fig\"><img src=\"/images/bored-boring.png\" alt=\"bored와 boring 화살표 도식: The movie(boring, 지루하게 만드는 쪽) → me(bored, 지루함을 느끼는 쪽). I'm bored는 나 지루해, I'm boring은 나는 지루한 사람이야\" width=\"1080\" height=\"1227\" loading=\"lazy\"><figcaption>감정이 출발하는 쪽은 -ing, 도착하는 쪽은 -ed</figcaption></figure>\n<p>그래서 사람에게도 -ing를 쓸 수 있어요. She's so interesting.(그 사람 정말 흥미로워)이나 He's so annoying.(걔 진짜 짜증 나게 해)처럼, 그 사람이 남에게 감정을 '주는' 쪽일 때요.</p>\n<h2>같은 규칙으로 움직이는 짝</h2>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>느끼는 쪽 (-ed)</th><th>주는 쪽 (-ing)</th></tr></thead><tbody><tr><td><b>bored</b><br>지루해하는, 따분한</td><td><b>boring</b><br>지루하게 하는</td></tr><tr><td><b>interested</b><br>관심 있는</td><td><b>interesting</b><br>흥미로운</td></tr><tr><td><b>excited</b><br>신난, 설레는</td><td><b>exciting</b><br>신나는</td></tr><tr><td><b>tired</b><br>피곤한</td><td><b>tiring</b><br>피곤하게 하는</td></tr><tr><td><b>confused</b><br>혼란스러운, 헷갈려하는</td><td><b>confusing</b><br>헷갈리게 하는</td></tr><tr><td><b>disappointed</b><br>실망한</td><td><b>disappointing</b><br>실망스러운</td></tr><tr><td><b>surprised</b><br>놀란</td><td><b>surprising</b><br>놀라운</td></tr></tbody></table></div>\n<p>무서울 때는 짝이 조금 달라요. 내가 무서우면 scared, 무섭게 하는 영화는 <b>a scary movie</b>예요. scaring movie라고는 하지 않아요. frightened/frightening, terrified/terrifying은 규칙 그대로예요.</p>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I'm so bored. When does this end?</span><span class=\"ko\">너무 지루해. 이거 언제 끝나?</span></li>\n<li><span class=\"en\">This lecture is so boring.</span><span class=\"ko\">이 강의 너무 지루하다.</span></li>\n<li><span class=\"en\">I'm really excited about tonight!</span><span class=\"ko\">오늘 밤 진짜 기대돼!</span></li>\n<li><span class=\"en\">This job is tiring. I'm exhausted.</span><span class=\"ko\">이 일은 사람을 지치게 해. 나 완전 녹초야.</span></li>\n<li><span class=\"en\">The instructions are confusing.</span><span class=\"ko\">설명서가 헷갈리게 쓰여 있어.</span></li>\n</ul></div>\n<h2>실제 대화 · 비 오는 주말 오후</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">What are you up to?</span><span class=\"ko\">뭐 하고 있어?</span></li>\n<li class=\"me\"><span class=\"en\">Nothing. I'm bored out of my mind.</span><span class=\"ko\">아무것도. 지루해 죽겠어.</span></li>\n<li class=\"them\"><span class=\"en\">Want to watch a movie? I heard the new one is really good.</span><span class=\"ko\">영화 볼래? 새로 나온 거 진짜 재밌대.</span></li>\n<li class=\"me\"><span class=\"en\">Sure! Sounds interesting.</span><span class=\"ko\">좋아! 재밌겠다.</span></li>\n</ul>\n<p>bored out of my mind, bored to death는 '지루해 죽겠다'는 구어 표현이에요. 친구 사이에서 정말 자주 들려요.</p>\n<h2>한국어로는 둘 다 '지루하다'</h2>\n<p>한국인이 이 실수를 많이 하는 이유는 한국어가 둘을 구분하지 않기 때문이에요. \"영화가 지루해\"도 \"나 지루해\"도 똑같이 '지루하다'를 써요. \"재밌다\", \"피곤하다\", \"헷갈린다\"도 마찬가지예요. 그런데 영어는 감정이 <b>어디서 출발해서 어디에 도착하는지</b>를 꼭 나눠서 말해요. 그래서 문장을 만들기 전에 \"이건 내가 느끼는 기분인가, 아니면 무언가가 그렇게 만드는 건가?\"를 한 번 물어보면 돼요. 내 기분이면 -ed, 원인이면 -ing예요.</p>\n<h2>함께 쓰는 전치사</h2>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>말하고 싶은 것</th><th>영어</th></tr></thead><tbody><tr><td>~에 질렸어, 지루해</td><td><b>bored</b><br>with ~</td></tr><tr><td>~에 관심 있어</td><td><b>interested</b><br>in ~</td></tr><tr><td>~가 기대돼</td><td><b>excited</b><br>about ~</td></tr><tr><td>~가 지긋지긋해</td><td><b>tired</b><br>of ~</td></tr></tbody></table></div>\n<p>bored of도 말할 때는 흔히 들리지만, 글에서는 bored with가 더 안전해요. 지루하게 만든 원인을 말할 땐 bored by the lecture처럼 by도 써요. tired of는 '피곤하다'가 아니라 '질렸다, 지긋지긋하다'라는 뜻이라는 것도 함께 기억해 두세요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">회의가 길어서 지루할 때</span><span class=\"no\">I'm so boring.</span><span class=\"en\">I'm so bored.</span><span class=\"ko\">너무 지루해.</span><span class=\"why\"><b>왜?</b>내가 느끼는 기분은 -ed예요. boring을 쓰면 내가 남을 지루하게 하는 사람이라는 뜻이 돼요.</span></li>\n<li><span class=\"ctx\">여행을 앞두고 설렐 때</span><span class=\"no\">I'm so exciting!</span><span class=\"en\">I'm so excited!</span><span class=\"ko\">너무 설레!</span><span class=\"why\"><b>왜?</b>I'm exciting은 '나는 (남을) 신나게 하는 사람이야'예요. 설레는 기분은 excited.</span></li>\n</ul></div>\n<h2>자주 묻는 질문</h2>\n<p><b>Q. \"그 영화 재밌었어?\"에 I was interesting.이라고 하면요?</b><br>\"내가 흥미로운 사람이었어\"라는 엉뚱한 말이 돼요. 영화가 재밌었다면 It was interesting., 내가 관심이 갔다면 I was interested.라고 해요.</p>\n<p><b>Q. tired와 tiring은 어떻게 구분해요?</b><br>오늘 내가 피곤하면 I'm tired., 오늘 일이 사람을 지치게 했다면 Today was tiring.이에요. 둘 다 한 문장에 넣어 This job is tiring, so I'm always tired.라고 말할 수도 있어요.</p>\n<p>발음도 하나 짚고 갈게요. bored는 '보ㄹ드'처럼 한 음절로 짧게 말하고, 나무판을 뜻하는 board와 소리가 같아요. '보레드'처럼 늘이지 않아요. -ed 소리 규칙은 <a href=\"/p/ed-pronunciation/\">worked는 '웍트', -ed 발음 3가지</a>에서 더 볼 수 있어요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: British Council LearnEnglish 'Adjectives ending in -ed and -ing', Oxford Learner's Dictionaries 'bored', Merriam-Webster 'bored', 'tired of', Grammarphobia 'bored of'(2013).</p>",
+  "related": []
+}

@@ -404,6 +404,88 @@ def up_to_you():
     c.save("up-to-you-scale.png")
 
 
+def slipped_mind():
+    c = Canvas("'깜빡했다'도 영어로는 여러 가지", "무엇을, 어떻게 잊었는지에 따라 달라요")
+    rows = [("It slipped my mind.", "할 일·약속을 깜빡했어요 (사과할 때 부드럽게)"),
+            ("I forgot.", "잊어버렸어요 (가장 기본, 직설적)"),
+            ("His name escapes me.", "이름이 생각이 안 나요 (현재형으로)"),
+            ("It's on the tip of my tongue.", "혀끝에서 맴돌아요 (알긴 아는데)"),
+            ("My mind went blank.", "머릿속이 하얘졌어요 (긴장한 순간)")]
+    def body(x, r):
+        for i, (en, ko) in enumerate(rows):
+            if i == 0:
+                c.hl(x, c.y, en, F(52, 800))
+            else:
+                c.d.text((x, c.y), en, font=F(52, 800), fill=INK)
+            c.y += int(52 * 1.3)
+            c.text(x, ko, F(38, 700), MUTED, 1.3)
+            if i < len(rows) - 1:
+                c.d.line((x, c.y + 4, r, c.y + 4), fill=LINE, width=3); c.y += 34
+    c.card(body)
+    c.note("주어는 잊힌 것! It slipped my mind.", 40)
+    c.save("slipped-my-mind.png")
+
+
+def rain_check():
+    c = Canvas("rain check, take와 give", "거절하는 사람과 초대한 사람의 말이 달라요")
+    rows = [("거절하는 사람", "Can I take a rain check?", "다음에 해도 될까?"),
+            ("초대한 사람", "Sure, I'll give you a rain check.", "그래, 다음에 하자.")]
+    for who, en, ko in rows:
+        def body(x, r, who=who, en=en, ko=ko):
+            c.pill(x, c.y, who, F(38, 700)); c.y += 84
+            for ln in c.wrap(en, F(52, 800), r - x):
+                c.d.text((x, c.y), ln, font=F(52, 800), fill=INK); c.y += int(52 * 1.3)
+            c.text(x, ko, F(40, 700), MUTED, 1.2)
+        c.card(body)
+    c.note("원래는 우천 취소 경기의 다음 입장권", 40)
+    c.save("rain-check-take-give.png")
+
+
+def bored_boring():
+    c = Canvas("bored와 boring, 화살표로 보기", "-ing는 감정을 주는 쪽, -ed는 감정을 받는 쪽")
+    def body(x, r):
+        c.d.text((x, c.y), "The movie", font=F(54, 800), fill=INK)
+        c.d.text((r, c.y), "me", font=F(54, 800), fill=INK, anchor="ra")
+        y = c.y + 34
+        c.d.line((x + 300, y, r - 110, y), fill=INK, width=6)
+        c.d.polygon([(r - 110, y - 16), (r - 82, y), (r - 110, y + 16)], fill=INK)
+        c.y += int(54 * 1.6)
+        c.hl(x, c.y, "boring", F(54, 800))
+        w = c.d.textlength("bored", font=F(54, 800))
+        c.hl(r - w, c.y, "bored", F(54, 800))
+        c.y += int(54 * 1.35)
+        c.text(x, "지루하게 만드는 쪽", F(38, 700), MUTED, 1.2)
+        c.y -= int(38 * 1.2)
+        c.d.text((r, c.y), "지루함을 느끼는 쪽", font=F(38, 700), fill=MUTED, anchor="ra")
+        c.y += int(38 * 1.4)
+    c.card(body)
+    rows = [("I'm bored.", "나 지루해 (내 기분)"), ("I'm boring.", "나는 지루한 사람이야 (남을 지루하게 함)")]
+    def body2(x, r):
+        for i, (en, ko) in enumerate(rows):
+            c.d.text((x, c.y), en, font=F(54, 800), fill=INK); c.y += int(54 * 1.3)
+            c.text(x, ko, F(40, 700), MUTED, 1.3)
+            if i == 0:
+                c.d.line((x, c.y + 4, r, c.y + 4), fill=LINE, width=3); c.y += 34
+    c.card(body2)
+    c.note("내 기분은 -ed! I'm bored. I'm excited.", 40)
+    c.save("bored-boring.png")
+
+
+def borrow_lend():
+    c = Canvas("borrow와 lend는 방향이 반대예요", "물건이 어느 쪽으로 가는지만 보면 돼요")
+    rows = [("borrow", "빌리다 (나에게 온다)", "Can I borrow your pen?", "borrow + 물건 + from 사람"),
+            ("lend", "빌려주다 (나에게서 간다)", "Can you lend me your pen?", "lend + 사람 + 물건")]
+    for w, ko, ex, pat in rows:
+        def body(x, r, w=w, ko=ko, ex=ex, pat=pat):
+            c.hl(x, c.y, w, F(64, 800)); c.y += int(64 * 1.35)
+            c.text(x, ko, F(42, 700), MUTED, 1.45)
+            c.text(x, ex, F(46, 800), INK, 1.4)
+            c.text(x, pat, F(38, 700), MUTED, 1.2)
+        c.card(body)
+    c.note("빌려 달라고 할 땐 Can you lend me ~?", 40)
+    c.save("borrow-lend.png")
+
+
 if __name__ == "__main__":
-    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you):
+    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend):
         fn()
