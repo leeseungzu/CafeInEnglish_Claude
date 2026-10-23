@@ -2632,3 +2632,10 @@ html.is-app .app-seg.study-seg{grid-template-columns:repeat(3,1fr)}
 }
 /* 목록 제목: 한두 단어만 다음 줄로 넘어가지 않게 */
 .cards.list .card h2{text-wrap:balance}
+/* 영어 공부 '전체'(2026-10-24): 세그먼트 4칸, 카드 난이도 옆에 종류(표현·꿀팁·이야기) */
+.app-seg.study-seg,html.is-app .app-seg.study-seg{grid-template-columns:repeat(4,1fr)!important}
+.cat-grid.all-cat .card .chips{display:flex;align-items:center}
+.cat-grid.all-cat .card .chips .chip:first-child{display:inline-flex!important;order:2;align-items:center;background:none!important;padding:0!important;margin:0 0 0 6px;font-size:12px;font-weight:700;color:#6B7684!important;border-radius:0}
+.cat-grid.all-cat .card .chips .chip:first-child::before{content:"·";margin-right:6px;color:#B0B8C1}
+.cat-grid.all-cat .card .chips .lv{order:1}
+@media (max-width:899px){.subfilter.sf-viewonly{display:none!important}}
