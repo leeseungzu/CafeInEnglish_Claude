@@ -2568,3 +2568,34 @@ html.is-app .top-in>.brand,html.is-app .top-in>a:first-child{min-width:0}
   /* 예문 목록이 든 큰 상자는 통째로 넘기면 빈 공간이 커서, 안의 예문 단위로만 묶음 */
   .box:has(> ul.ex){break-inside:auto;page-break-inside:auto}
 }
+
+/* 2026-10-23 수정: 메뉴 4칸(홈·영상·공부·도구) · '영어 공부' 안 전환 · 도구 카드 높이/호버 · 카톡 버튼 */
+@media (max-width:599px){.top .nav{grid-template-columns:repeat(4,1fr) 40px}}
+html.is-app .tabbar{grid-template-columns:repeat(4,1fr)}
+.app-seg.study-seg{display:grid!important;grid-template-columns:repeat(3,1fr);max-width:420px;margin:14px 0 18px}
+@media (max-width:600px){.app-seg.study-seg{max-width:none}}
+.tl-more-tools{grid-auto-rows:1fr}
+.tl-tool{min-width:0;transition:border-color .15s,background .15s,box-shadow .2s,transform .15s}
+.tl-tool>span:nth-child(2){min-width:0}
+.tl-tool span span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl-tool .ic{transition:transform .2s,background .15s}
+.tl-tool i{transition:transform .2s,color .15s}
+.tl-tool:hover{border-color:#191F28;background:#F9FAFB;box-shadow:0 10px 24px -14px rgba(25,31,40,.35);transform:translateY(-2px)}
+.tl-tool:hover .ic{transform:scale(1.06) rotate(-3deg)}
+.tl-tool:hover b{background:linear-gradient(transparent 60%,var(--lime) 60%)}
+.tl-tool:hover i{transform:translateX(4px);color:#191F28}
+.tl-tool:active{transform:translateY(0)}
+.tl-tool:focus-visible{outline:2px solid #3182F6;outline-offset:2px}
+.tl-read{transition:border-color .15s,background .15s,transform .15s}
+.tl-read:hover{background:#F9FAFB;transform:translateY(-1px)}
+.tl-read:hover b{background:linear-gradient(transparent 60%,var(--lime) 60%)}
+.tl-kk{justify-content:space-between;flex-wrap:wrap;padding:18px}
+.tl-kk-btn{transition:transform .15s,box-shadow .2s}
+.tl-kk-btn i{transition:transform .2s}
+.tl-kk-btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(42,26,18,.28)}
+.tl-kk-btn:hover i{transform:translateX(3px)}
+@media (max-width:480px){.tl-kk{flex-direction:column;align-items:stretch}.tl-kk-btn{width:100%}}
+.tl-ex button,.tl-cp,.tl-more,.tl-picks button,.tl-seg button{transition:background .15s,border-color .15s,color .15s}
+.tl-seg button:not(.on):hover{color:#191F28}
+.tl-picks button:not(.on):hover{border-color:#191F28;color:#191F28}
+.tl-form button:hover{background:#000}

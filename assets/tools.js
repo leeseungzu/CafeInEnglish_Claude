@@ -77,16 +77,18 @@
   function initName() {
     const form = $("#nm-form"); if (!form) return;
     const inp = $("#nm-in"), out = $("#nm-out"), two = $("#nm-two");
-    let state = null, last = "";
+    let state = null, last = "", manual = null;
 
     function analyze(raw) {
       const s = (raw || "").replace(/\s+/g, "");
       if (!s) return { err: "이름을 한글로 입력해 주세요." };
       if (![...s].every(isHan)) return { err: "한글 이름만 입력할 수 있어요. 예) 홍길동" };
       if (s.length < 2 || s.length > 6) return { err: "성과 이름을 합쳐 2~6글자로 입력해 주세요." };
+      // 두 글자 성: 사용자가 직접 켜거나 끈 값이 있으면 그대로, 없으면 남궁·황보 등을 자동으로
       let sl = 1;
-      if (two.checked) sl = 2;
-      else if (s.length >= 3 && COMPOUND.indexOf(s.slice(0, 2)) > -1) { sl = 2; two.checked = true; }
+      if (manual !== null) sl = manual ? 2 : 1;
+      else if (s.length >= 3 && COMPOUND.indexOf(s.slice(0, 2)) > -1) sl = 2;
+      two.checked = sl === 2;
       if (s.length - sl < 1) return { err: "이름 글자가 없어요. 성이 두 글자라면 이름까지 함께 입력해 주세요." };
       const sur = s.slice(0, sl), giv = s.slice(sl);
       const surRR = cap(rrWord(sur));
@@ -139,13 +141,13 @@
     });
     form.addEventListener("submit", e => {
       e.preventDefault();
-      if (inp.value.trim() !== last) two.checked = false; // 새 이름이면 두 글자 성 여부를 다시 자동으로 판단
+      if (inp.value.trim() !== last) manual = null; // 새 이름이면 두 글자 성 여부를 다시 자동으로 판단
       last = inp.value.trim(); state = analyze(inp.value); render();
       if (!state.err) { ga("tool_use", { tool: "english_name" }); try { history.replaceState(null, "", "?name=" + encodeURIComponent(inp.value.trim())); } catch (er) {} }
     });
-    two.addEventListener("change", () => { if (inp.value.trim()) { state = analyze(inp.value); render(); } });
+    two.addEventListener("change", () => { manual = two.checked; if (inp.value.trim()) { last = inp.value.trim(); state = analyze(inp.value); render(); } });
     // 예시 버튼
-    $$("[data-ex]").forEach(b => b.addEventListener("click", () => { inp.value = b.dataset.ex; two.checked = false; form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event("submit")); }));
+    $$("[data-ex]").forEach(b => b.addEventListener("click", () => { inp.value = b.dataset.ex; form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event("submit")); }));
     const q = new URLSearchParams(location.search).get("name");
     if (q) { inp.value = q; last = q.trim(); state = analyze(q); render(); }
   }

@@ -16,7 +16,13 @@ CONTENT, ASSETS, OUT = ROOT / "content", ROOT / "assets", ROOT / "docs"
 SITE = json.loads((CONTENT / "site.json").read_text("utf-8"))
 DOMAIN = SITE["domain"].rstrip("/")
 CATS = {"video": "영상으로 배우기", "expr": "영어표현", "tip": "영어꿀팁", "story": "영어 이야기", "think": "사유의 문장"}
-NAV_CATS = ("video", "expr", "tip", "story")  # 위쪽 메뉴 (사유의 문장은 '영상' 칸 안 전환으로)
+NAV_CATS = ("video", "expr", "tip", "story")  # 카테고리 순서 (메뉴는 아래 NAV_GROUPS로 묶어서 보여 줘요)
+# 위쪽 메뉴 (2026-10-23 정리): 영상(영상으로 배우기·사유의 문장) · 영어 공부(표현·꿀팁·이야기) · 영어 도구
+NAV_GROUPS = [("video", "/category/video/", "영상으로 배우기", "영상", ("video", "think")),
+              ("study", "/category/expr/", "영어 공부", "공부", ("expr", "tip", "story")),
+              ("tools", "/tools/", "영어 도구", "도구", ("tools",))]
+STUDY_CATS = ("expr", "tip", "story")
+nav_group = lambda nav: next((g for g, h, l, s, ks in NAV_GROUPS if nav in ks), nav)
 TILE_SUB = {"video": "카영 영상 속 표현을 장면과 함께", "expr": "새 표현 · 비슷한 표현 · 헷갈리는 표현",
             "tip": "여행 · 회화 · 단어 · 듣기 · 발음", "story": "매일 쓰는 단어에 숨은 역사", "think": "필사하고 빈칸으로 복기"}
 CAT_SEO = {  # 카테고리 페이지 검색용 제목 · 설명
@@ -641,9 +647,8 @@ self.addEventListener("fetch", e => {
 _TI = lambda d: f'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{d}</svg>'
 TABS = [("home", "/", "홈", _TI('<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>')),
         ("video", "/category/video/", "영상", _TI('<rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/>')),
-        ("expr", "/category/expr/", "표현", _TI('<path d="M21 12a8 8 0 0 1-11.5 7.2L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/>')),
-        ("tip", "/category/tip/", "꿀팁", _TI('<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/>')),
-        ("story", "/category/story/", "이야기", _TI('<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/>'))]
+        ("study", "/category/expr/", "공부", _TI('<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/>')),
+        ("tools", "/tools/", "도구", _TI('<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>'))]
 APP_HEAD_JS = ("<script>(function(){try{var q=/[?&]app=1/.test(location.search);if(q)sessionStorage.setItem('appPreview','1');"
                "if(q||sessionStorage.getItem('appPreview')||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone)"
                "document.documentElement.classList.add('is-app')}catch(e){}})();</script>")
@@ -652,10 +657,12 @@ APP_HEAD_JS = ("<script>(function(){try{var q=/[?&]app=1/.test(location.search);
 def tabbar(nav):
     on = ' class="on" aria-current="page"'
     return ('<nav class="tabbar no-print" aria-label="앱 메뉴">' + "".join(
-        f'<a href="{h}"{on if nav == k or (k == "video" and nav == "think") else ""}>{ic}<span>{t}</span></a>' for k, h, t, ic in TABS) + '</nav>')
+        f'<a href="{h}"{on if k == nav_group(nav) else ""}>{ic}<span>{t}</span></a>' for k, h, t, ic in TABS) + '</nav>')
 
 
 # '영상' 칸 안에서 영상으로 배우기 ↔ 사유의 문장 전환 (웹·앱 모두)
+STUDY_SEG = lambda cat: ('<div class="app-seg study-seg no-print" role="tablist" aria-label="영어 공부">'
+                         + "".join(f'<a role="tab" href="/category/{k}/"{" class=on aria-selected=true" if k == cat else ""}>{NAV_SHORT[k]}</a>' for k in STUDY_CATS) + '</div>')
 APP_SEG = lambda cat: ('<div class="app-seg no-print" role="tablist" aria-label="영상·문장">'
                        + "".join(f'<a role="tab" href="/category/{k}/"{" class=on aria-selected=true" if k == cat else ""}>{CATS[k]}</a>' for k in ("video", "think")) + '</div>')
 # 앱에서는 두 카테고리가 '영상·문장' 탭 하나이므로 제목·설명도 묶음 이름으로 (웹·검색엔진에는 원래 제목 그대로)
@@ -684,8 +691,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
                  f"src:url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2-variations'),url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2')}}</style>"
                  if FONT_V else '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">')
     navlinks = f'<a href="/"{" class=on" if path == "/" else ""}>홈</a>' + "".join(
-        f'<a href="/category/{k}/"{" class=on" if nav == k or (k == "video" and nav == "think") else ""}><span class="nl-l">{CATS[k]}</span><span class="nl-s">{NAV_SHORT[k]}</span></a>' for k in NAV_CATS) + \
-        f'<a href="/tools/"{" class=on" if nav == "tools" else ""}><span class="nl-l">영어 도구</span><span class="nl-s">도구</span></a>'
+        f'<a href="{h}"{" class=on" if nav in ks else ""}><span class="nl-l">{l}</span><span class="nl-s">{s}</span></a>' for g, h, l, s, ks in NAV_GROUPS)
     room = f'<a class="room{" on" if nav == "notes" else ""}" href="/notes/">내 공부방<span class="badge" id="nav-badge" hidden></span></a>'
     room = ('<button class="srch-btn" type="button" aria-label="표현 검색" title="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>' + room)
     pjson = json.dumps(data or {}, ensure_ascii=False).replace("</", "<\\/")
@@ -1274,7 +1280,7 @@ def page_category(cat):
         cards = "".join(post_card(p, 2) for p in items)
         subs = [p.get("sub", "") for p in items]
         filt = one_filter("분류", subs) if len(set(subs)) > 1 else ""
-        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>'
+        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>' + STUDY_SEG(cat) +
                 f'<div class="cat-grid{" has-filter" if filt else ""}"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     else:
         items = [p for p in POSTS if p["cat"] == cat]
@@ -1290,7 +1296,7 @@ def page_category(cat):
             g_sub = ('<div class="sf-g" role="group" aria-label="분류"><div class="sf-h">분류</div>' + btn("", len(items), "전체", " on")
                      + "".join(btn(x, sum(1 for p in items if p.get("sub") == x), x) for x in subs) + "</div>") if len(subs) > 1 else ""
             filt = f'<aside class="subfilter" aria-label="글 고르기">{g_lv}{g_sub}<p class="sf-empty" hidden>이 조합의 글은 아직 없어요</p></aside>'
-        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>'
+        body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>' + STUDY_SEG(cat) +
                 f'<div class="cat-grid{" has-filter" if filt else ""}"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     seo_t, seo_d = CAT_SEO[cat]
     links = [think_url(t) for t in items] if cat == "think" else [post_url(p) for p in items]
@@ -2205,8 +2211,8 @@ def tool_faq(faq):
 
 def tool_kakao():
     k = SITE.get("kakao")
-    return (f'<a class="tl-kk" href="{e(k)}" target="_blank" rel="noopener"><span><b>매일 아침 7시, 영어 표현 하나</b>'
-            f'<span>카톡으로 받는 1일 1영, 무료예요</span></span><em>받아보기</em></a>') if k else ""
+    return (f'<div class="tl-kk"><span><b>매일 아침 7시, 영어 표현 하나</b><span>카톡으로 받는 1일 1영, 무료예요</span></span>'
+            f'<a class="hi-btn tl-kk-btn" href="{e(k)}" target="_blank" rel="noopener"><img src="/assets/kakao-talk.png" alt="" width="24" height="22">매일 아침 1일 1영 받기<i>›</i></a></div>') if k else ""
 
 
 TOOL_JS = lambda: f'<script src="/assets/tools.js?v={ASSET_V}" defer></script>'
@@ -2361,11 +2367,11 @@ def page_tool_address():
 #       인크루트 어학변환기(lab.incruit.com/editor/score), 링커리어(토익 점수 환산표·채용 예시, 2025)
 TOOL_LIST = [  # (key, 주소, 아이콘, 이름, 설명, 묶음)
     ("toeic", "/tools/toeic-score/", "990", "토익 점수 계산기", "맞힌 개수로 예상 점수, 평균과 비교", "score"),
-    ("opic", "/tools/opic-level/", "IH", "오픽 등급표", "NL부터 AL까지 등급별 수준, 자가 진단", "score"),
+    ("opic", "/tools/opic-level/", "IH", "오픽 등급표", "등급별 수준과 자가 진단", "score"),
     ("tos", "/tools/toeic-speaking-level/", "200", "토익스피킹 레벨표", "점수별 등급과 시험 구성", "score"),
     ("compare", "/tools/english-score-compare/", "⇄", "영어 시험 점수 비교", "토익·오픽·토익스피킹을 한눈에", "score"),
-    ("name", "/tools/english-name/", "Aa", "영문 이름 변환기", "한글 이름을 여권·해외 사이트용 영문 이름으로", "life"),
-    ("address", "/tools/english-address/", "#", "영문 주소 변환기", "도로명주소를 영어로, 해외직구 칸별로 나눠서", "life"),
+    ("name", "/tools/english-name/", "Aa", "영문 이름 변환기", "여권·해외 사이트용 영문 이름", "life"),
+    ("address", "/tools/english-address/", "#", "영문 주소 변환기", "해외직구용 영문 주소, 칸별 복사", "life"),
 ]
 
 
