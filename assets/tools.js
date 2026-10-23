@@ -1,0 +1,286 @@
+/* 카페인영어 영어 도구 (/tools/) — 영문 이름 변환기 · 영문 주소 변환기
+   데이터는 페이지의 <script id="page-data"> 에 들어 있어요 (build.py 가 넣어요). */
+(function () {
+  "use strict";
+  const $ = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  const DATA = (() => { try { return JSON.parse($("#page-data").textContent); } catch (e) { return {}; } })();
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const ga = (n, p) => { try { window.gtag && gtag("event", n, p || {}); } catch (e) {} };
+
+  /* ---------- 복사 ---------- */
+  function toast(msg) {
+    let t = $(".tl-toast");
+    if (!t) { t = document.createElement("div"); t.className = "tl-toast"; t.setAttribute("role", "status"); document.body.appendChild(t); }
+    t.textContent = msg; t.classList.add("show");
+    clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove("show"), 1600);
+  }
+  function copyText(text, btn) {
+    const done = () => {
+      toast("복사했어요");
+      if (btn) { btn.classList.add("ok"); const o = btn.dataset.l || btn.textContent; btn.dataset.l = o; btn.textContent = "복사됨"; setTimeout(() => { btn.textContent = o; btn.classList.remove("ok"); }, 1300); }
+    };
+    const fallback = () => {
+      const ta = document.createElement("textarea"); ta.value = text; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;top:-99px;opacity:0";
+      document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); done(); } catch (e) { toast("길게 눌러 복사해 주세요"); } ta.remove();
+    };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+  }
+  document.addEventListener("click", e => {
+    const b = e.target.closest("[data-copy]");
+    if (b) { copyText(b.dataset.copy, b); ga("tool_copy", { tool: DATA.tool || "", field: b.dataset.f || "" }); }
+  });
+
+  /* =========================================================
+     1. 한글 이름 → 영문 (국어의 로마자 표기법, 인명은 음운 변화 미반영)
+     ========================================================= */
+  const CHO = ["g", "kk", "n", "d", "tt", "r", "m", "b", "pp", "s", "ss", "", "j", "jj", "ch", "k", "t", "p", "h"];
+  const JUNG = ["a", "ae", "ya", "yae", "eo", "e", "yeo", "ye", "o", "wa", "wae", "oe", "yo", "u", "wo", "we", "wi", "yu", "eu", "ui", "i"];
+  const JONG = ["", "k", "k", "k", "n", "n", "n", "t", "l", "k", "m", "l", "l", "l", "p", "l", "m", "p", "p", "t", "t", "ng", "t", "t", "k", "t", "p", "t"];
+  const isHan = ch => { const c = ch.charCodeAt(0); return c >= 0xAC00 && c <= 0xD7A3; };
+  const parts = ch => { const c = ch.charCodeAt(0) - 0xAC00; return [Math.floor(c / 588), Math.floor((c % 588) / 28), c % 28]; };
+  const cap = s => s ? s[0].toUpperCase() + s.slice(1) : s;
+  // 한 음절 표기. prevL: 앞 음절 받침이 ㄹ이면 ㄹㄹ → ll
+  function rrSyl(ch, prevL) {
+    const [c, v, f] = parts(ch);
+    return (c === 5 && prevL ? "l" : CHO[c]) + JUNG[v] + JONG[f];
+  }
+  function rrWord(word) {
+    let out = "", prevL = false;
+    for (const ch of word) { out += rrSyl(ch, prevL); prevL = parts(ch)[2] === 8; }
+    return out;
+  }
+  // 이름 음절에서 자주 보이는 다른 표기 (첫 번째는 로마자 표기법 그대로)
+  const ALT = {
+    "영": ["Young"], "이": ["Yi", "Lee"], "의": ["Eui"], "희": ["Hee"], "우": ["Woo"], "운": ["Woon"], "욱": ["Wook"], "웅": ["Woong"],
+    "오": ["Oh"], "아": ["Ah"], "안": ["Ahn"], "어": ["Uh"], "여": ["Yuh"], "연": ["Yun"], "열": ["Yul"], "엽": ["Yup"], "억": ["Uk"], "언": ["Un"],
+    "지": ["Jee"], "리": ["Lee"], "린": ["Lin"], "시": ["Shi"], "신": ["Shin"], "식": ["Shik"], "실": ["Shil"], "심": ["Shim"], "섭": ["Sup"],
+    "선": ["Sun"], "설": ["Sul"], "성": ["Sung"], "서": ["Suh"], "석": ["Suk"], "정": ["Jung"], "준": ["Joon"], "주": ["Joo"], "수": ["Soo"],
+    "숙": ["Sook"], "순": ["Soon"], "훈": ["Hoon"], "후": ["Hoo"], "현": ["Hyun"], "형": ["Hyung"], "혁": ["Hyuk"], "경": ["Kyung"], "규": ["Kyu"],
+    "기": ["Ki"], "근": ["Keun"], "금": ["Keum"], "광": ["Kwang"], "건": ["Gun", "Kun"], "권": ["Kwon"], "국": ["Kook"], "길": ["Kil"], "강": ["Kang"],
+    "구": ["Koo"], "고": ["Ko"], "겸": ["Kyum"], "결": ["Kyul"], "균": ["Kyun"], "명": ["Myung"], "병": ["Byung"], "평": ["Pyung"], "철": ["Chul"],
+    "천": ["Chun"], "청": ["Chung"], "범": ["Bum"], "별": ["Byul"], "덕": ["Duk"], "두": ["Doo"], "부": ["Boo"], "무": ["Moo"], "문": ["Moon"],
+    "윤": ["Yoon"], "유": ["Yoo"], "전": ["Jun"], "조": ["Cho"], "추": ["Choo"], "헌": ["Hun"], "백": ["Baik"], "래": ["Lae"], "란": ["Lan"],
+    "라": ["La"], "루": ["Roo"], "용": [], "중": [], "은": [], "진": [], "민": [], "승": [], "재": [], "태": [], "혜": [], "예": []
+  };
+  const SUR = {}; (DATA.surnames || []).forEach(r => { SUR[r[0]] = r[1]; });
+  const COMPOUND = DATA.compound || [];
+
+  function sylOptions(ch, prevL) {
+    const rr = cap(rrSyl(ch, prevL));
+    const extra = (ALT[ch] || []).filter(x => x !== rr);
+    // 사전에 없는 음절: u로 끝나면 oo 표기를 함께 보여줘요 (예: 누 Nu → Noo)
+    if (!ALT[ch] && /[^aeiouy]u$/i.test(rr)) extra.push(rr.slice(0, -1) + "oo");
+    return [rr].concat(extra);
+  }
+
+  function initName() {
+    const form = $("#nm-form"); if (!form) return;
+    const inp = $("#nm-in"), out = $("#nm-out"), two = $("#nm-two");
+    let state = null, last = "";
+
+    function analyze(raw) {
+      const s = (raw || "").replace(/\s+/g, "");
+      if (!s) return { err: "이름을 한글로 입력해 주세요." };
+      if (![...s].every(isHan)) return { err: "한글 이름만 입력할 수 있어요. 예) 홍길동" };
+      if (s.length < 2 || s.length > 6) return { err: "성과 이름을 합쳐 2~6글자로 입력해 주세요." };
+      let sl = 1;
+      if (two.checked) sl = 2;
+      else if (s.length >= 3 && COMPOUND.indexOf(s.slice(0, 2)) > -1) { sl = 2; two.checked = true; }
+      if (s.length - sl < 1) return { err: "이름 글자가 없어요. 성이 두 글자라면 이름까지 함께 입력해 주세요." };
+      const sur = s.slice(0, sl), giv = s.slice(sl);
+      const surRR = cap(rrWord(sur));
+      const surOpts = [...new Set((SUR[sur] || []).concat([surRR]))];
+      const syl = []; let prevL = false;
+      for (const ch of giv) { syl.push({ ch, opts: sylOptions(ch, prevL), i: 0 }); prevL = parts(ch)[2] === 8; }
+      return { sur, giv, surRR, surOpts, si: 0, syl };
+    }
+
+    function joined(st, hy) {
+      const ps = st.syl.map(x => x.opts[x.i].toLowerCase());
+      return cap(ps.join(hy ? "-" : ""));
+    }
+
+    function row(label, val, f, sub) {
+      return `<div class="tl-row"><span class="tl-k">${esc(label)}${sub ? `<small>${esc(sub)}</small>` : ""}</span>` +
+        `<b class="tl-v">${esc(val)}</b><button type="button" class="tl-cp" data-copy="${esc(val)}" data-f="${esc(f)}">복사</button></div>`;
+    }
+
+    function render() {
+      const st = state;
+      if (st.err) { out.innerHTML = `<p class="tl-err">${esc(st.err)}</p>`; out.hidden = false; return; }
+      const S = st.surOpts[st.si], G = joined(st), GH = joined(st, true);
+      const isStd = st.syl.every(x => x.i === 0);
+      const altAll = st.syl.some(x => x.opts.length > 1);
+      out.innerHTML =
+        `<div class="tl-hero-res"><span class="tl-tag">${isStd && S === (SUR[st.sur] || [st.surRR])[0] ? "추천 표기" : "선택한 표기"}</span>` +
+        `<p class="tl-big">${esc(S)} ${esc(G)}</p>` +
+        `<p class="tl-big-sub">${esc(st.sur + st.giv)} · 이름 ${esc(G)} · 성 ${esc(S)}</p></div>` +
+        `<div class="tl-pick"><p class="tl-pick-h">글자를 누르면 다른 표기로 바뀌어요</p><div class="tl-syls">` +
+        `<button type="button" class="tl-syl sur${st.surOpts.length > 1 ? " more" : ""}" data-s="sur"><small>${esc(st.sur)} · 성</small><b>${esc(S)}</b>${dots(st.surOpts.length, st.si)}</button>` +
+        st.syl.map((x, k) => `<button type="button" class="tl-syl${x.opts.length > 1 ? " more" : ""}" data-s="${k}"><small>${esc(x.ch)}</small><b>${esc(x.opts[x.i])}</b>${dots(x.opts.length, x.i)}</button>`).join("") +
+        `</div>${altAll || st.surOpts.length > 1 ? `<p class="tl-pick-n"><span class="tl-dot on"></span> 점이 있는 글자는 다른 표기도 있어요. 이름은 로마자 표기법 기준이 먼저, 성은 가장 많이 쓰는 표기가 먼저 나와요.</p>` : ""}</div>` +
+        `<div class="tl-rows">` +
+        row("여권 형식", `${S.toUpperCase()} ${G.toUpperCase()}`, "passport", "성 · 이름 순, 대문자") +
+        row("성 (Surname)", S.toUpperCase(), "surname") +
+        row("이름 (Given name)", G.toUpperCase(), "given") +
+        row("해외 사이트·이메일", `${G} ${S}`, "western", "이름 먼저") +
+        row("붙임표 넣은 이름", `${GH} ${S}`, "hyphen", "음절 구분이 필요할 때") +
+        `</div>`;
+      out.hidden = false;
+    }
+    const dots = (n, i) => n > 1 ? `<span class="tl-dots">${Array.from({ length: n }, (_, k) => `<i${k === i ? ' class="on"' : ""}></i>`).join("")}</span>` : "";
+
+    out.addEventListener("click", e => {
+      const b = e.target.closest(".tl-syl"); if (!b || !state || state.err) return;
+      if (b.dataset.s === "sur") state.si = (state.si + 1) % state.surOpts.length;
+      else { const x = state.syl[+b.dataset.s]; x.i = (x.i + 1) % x.opts.length; }
+      render(); const nb = $(`.tl-syl[data-s="${b.dataset.s}"]`, out); nb && nb.focus();
+    });
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      if (inp.value.trim() !== last) two.checked = false; // 새 이름이면 두 글자 성 여부를 다시 자동으로 판단
+      last = inp.value.trim(); state = analyze(inp.value); render();
+      if (!state.err) { ga("tool_use", { tool: "english_name" }); try { history.replaceState(null, "", "?name=" + encodeURIComponent(inp.value.trim())); } catch (er) {} }
+    });
+    two.addEventListener("change", () => { if (inp.value.trim()) { state = analyze(inp.value); render(); } });
+    // 예시 버튼
+    $$("[data-ex]").forEach(b => b.addEventListener("click", () => { inp.value = b.dataset.ex; two.checked = false; form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event("submit")); }));
+    const q = new URLSearchParams(location.search).get("name");
+    if (q) { inp.value = q; last = q.trim(); state = analyze(q); render(); }
+  }
+
+  /* =========================================================
+     2. 영문 주소 (행정안전부 도로명주소 영문 검색 API, JSONP)
+     ========================================================= */
+  const METRO = ["Seoul", "Busan", "Daegu", "Incheon", "Gwangju", "Daejeon", "Ulsan", "Sejong-si"];
+  function jsonp(url) {
+    return new Promise((res, rej) => {
+      const cb = "__ky" + Date.now() + Math.floor(Math.random() * 1e5), s = document.createElement("script");
+      const t = setTimeout(() => { clean(); rej(new Error("timeout")); }, 9000);
+      function clean() { clearTimeout(t); try { delete window[cb]; } catch (e) { window[cb] = undefined; } s.remove(); }
+      window[cb] = d => { clean(); res(d); };
+      s.onerror = () => { clean(); rej(new Error("network")); };
+      s.src = url + "&callback=" + cb; document.head.appendChild(s);
+    });
+  }
+  // 검색어 정리: API가 막는 특수문자·SQL 예약어 제거, 동·호수·층은 따로 뽑기
+  function splitKeyword(raw) {
+    let k = (raw || "").replace(/[%=><\[\]]/g, " ");
+    const d = {};
+    let m = k.match(/(\d+)\s*동\s*(\d+)\s*호/);
+    if (m) { d.dong = m[1]; d.ho = m[2]; k = k.replace(m[0], " "); }
+    else {
+      m = k.match(/(\d+)\s*-\s*(\d+)\s*호?\s*$/); // 101-1004
+      if (m && /(로|길)\s*\d+/.test(k.replace(m[0], ""))) { d.dong = m[1]; d.ho = m[2]; k = k.replace(m[0], " "); }
+      m = k.match(/(\d+)\s*호/); if (m) { d.ho = m[1]; k = k.replace(m[0], " "); }
+      m = k.match(/(\d+)\s*동(?![가-힣])/); if (m) { d.dong = m[1]; k = k.replace(m[0], " "); }
+    }
+    m = k.match(/(지하\s*)?(\d+)\s*층/); if (m) { d.floor = (m[1] ? "B" : "") + m[2]; k = k.replace(m[0], " "); }
+    k = k.replace(/\b(OR|SELECT|INSERT|DELETE|UPDATE|CREATE|DROP|EXEC|UNION|FETCH|DECLARE|TRUNCATE)\b/gi, " ");
+    k = k.replace(/[,()]/g, " ").replace(/\s+/g, " ").trim();
+    return { k, d };
+  }
+  function split(j) {
+    const si = j.siNm || "", sgg = (j.sggNm || "").trim();
+    let parts = (j.roadAddr || "").split(",").map(x => x.trim()).filter(Boolean);
+    if (parts.length && parts[parts.length - 1] === si) parts.pop();
+    let city = si, line1;
+    if (METRO.indexOf(si) > -1 || !sgg) {
+      line1 = parts.join(", ");
+      if (si === "Sejong-si") city = "Sejong";
+    } else {
+      const toks = sgg.split(/[\s,]+/).filter(Boolean);
+      city = toks.find(t => /-si$/.test(t)) || toks.find(t => /-gun$/.test(t)) || toks[0];
+      parts = parts.filter(p => p !== city);
+      if (parts.length && parts[parts.length - 1] === sgg) { parts.pop(); toks.filter(t => t !== city).forEach(t => parts.push(t)); }
+      line1 = parts.join(", ");
+    }
+    return { line1, city, state: si === "Sejong-si" ? "Sejong" : si, zip: j.zipNo || "" };
+  }
+  function detailText(d, style) {
+    const dong = (d.dong || "").trim(), ho = (d.ho || "").trim(), f0 = (d.floor || "").trim().replace(/^b/i, "B"), fl = f0 ? (/^B/.test(f0) ? f0 : f0 + "F") : "";
+    if (style === "short") {
+      if (dong && ho) return `#${dong}-${ho}`;
+      if (ho) return `#${ho}`;
+      return fl;
+    }
+    const a = [];
+    if (dong) a.push(`${dong}-dong`);
+    if (fl && !ho) a.push(fl);
+    if (ho) a.push(`${ho}-ho`);
+    return a.join(" ");
+  }
+
+  function initAddr() {
+    const form = $("#ad-form"); if (!form) return;
+    const inp = $("#ad-in"), list = $("#ad-list"), out = $("#ad-out");
+    const key = /[?&]test=1/.test(location.search) ? "TESTJUSOGOKR" : (DATA.jusoKey || "");
+    let page = 1, kw = "", det = {}, items = [], pick = null, style = "long";
+
+    if (!key) { form.querySelector("button").disabled = true; list.innerHTML = '<p class="tl-err">주소 검색을 준비하고 있어요. 조금만 기다려 주세요.</p>'; list.hidden = false; return; }
+
+    async function search(more) {
+      if (!more) { page = 1; items = []; }
+      list.hidden = false;
+      if (!more) list.innerHTML = '<p class="tl-wait">찾는 중이에요…</p>';
+      const url = "https://business.juso.go.kr/addrlink/addrEngApiJsonp.do?confmKey=" + encodeURIComponent(key) +
+        "&currentPage=" + page + "&countPerPage=10&resultType=json&keyword=" + encodeURIComponent(kw);
+      try {
+        const r = await jsonp(url), res = r && r.results, c = res && res.common;
+        if (!c) throw new Error("bad");
+        if (c.errorCode !== "0") { list.innerHTML = `<p class="tl-err">${esc(errMsg(c.errorCode, c.errorMessage))}</p>`; return; }
+        items = items.concat(res.juso || []);
+        const total = +c.totalCount || 0;
+        if (!items.length) { list.innerHTML = '<p class="tl-err">검색 결과가 없어요. 도로명과 건물번호(예: 테헤란로 152)나 건물 이름으로 찾아 보세요.</p>'; return; }
+        list.innerHTML = `<p class="tl-cnt">검색 결과 <b>${total.toLocaleString()}</b>건 · 내 주소를 눌러 주세요</p>` +
+          items.map((j, i) => `<button type="button" class="tl-addr" data-i="${i}"><b>${esc(j.roadAddr)}</b><span>${esc(j.korAddr)}</span><em>${esc(j.zipNo)}</em></button>`).join("") +
+          (items.length < total ? '<button type="button" class="tl-more" id="ad-more">결과 더 보기</button>' : "");
+        ga("tool_use", { tool: "english_address" });
+      } catch (e) {
+        list.innerHTML = '<p class="tl-err">주소 서버에 연결하지 못했어요. 잠시 뒤 다시 검색해 주세요.</p>';
+      }
+    }
+    function errMsg(code, msg) {
+      return ({ E0005: "검색어를 입력해 주세요.", E0006: "시·도 이름만으로는 찾을 수 없어요. 도로명이나 건물 이름을 같이 입력해 주세요.", E0008: "한 글자로는 찾을 수 없어요.", E0009: "숫자만으로는 찾을 수 없어요.", E0010: "검색어가 너무 길어요.", E0015: "결과가 너무 많아요. 도로명과 건물번호까지 입력해 주세요." })[code] || ("주소 검색 오류: " + msg);
+    }
+    function renderOut() {
+      if (!pick) return;
+      const p = split(pick), l2 = detailText(det, style);
+      const one = [l2, p.line1, p.city === p.state ? p.city : `${p.city}, ${p.state}`].filter(Boolean).join(", ") + ` ${p.zip}, Republic of Korea`;
+      const r = (k, v, f, sub) => v ? `<div class="tl-row"><span class="tl-k">${esc(k)}${sub ? `<small>${esc(sub)}</small>` : ""}</span><b class="tl-v">${esc(v)}</b><button type="button" class="tl-cp" data-copy="${esc(v)}" data-f="${f}">복사</button></div>` : "";
+      $("#ad-res").innerHTML =
+        `<div class="tl-hero-res"><span class="tl-tag">영문 주소</span><p class="tl-addr-big">${esc(one)}</p>` +
+        `<button type="button" class="tl-cp wide" data-copy="${esc(one)}" data-f="full">한 줄 주소 복사</button></div>` +
+        `<p class="tl-sec">해외 쇼핑몰 칸별로 넣기</p><div class="tl-rows">` +
+        r("Address Line 1", p.line1, "line1", "도로명 주소") +
+        (l2 ? r("Address Line 2", l2, "line2", "동·호수") : `<div class="tl-row empty"><span class="tl-k">Address Line 2<small>동·호수</small></span><b class="tl-v">위에서 동·호수를 넣으면 채워져요</b></div>`) +
+        r("City", p.city, "city", "시·군") + r("State / Province", p.state, "state", "시·도") +
+        r("ZIP / Postal Code", p.zip, "zip", "우편번호") + r("Country", "Republic of Korea", "country", "South Korea로 골라도 돼요") +
+        `</div><p class="tl-src">한글 주소 · ${esc(pick.korAddr)}</p>`;
+    }
+
+    list.addEventListener("click", e => {
+      if (e.target.id === "ad-more") { page++; search(true); return; }
+      const b = e.target.closest(".tl-addr"); if (!b) return;
+      pick = items[+b.dataset.i];
+      $$(".tl-addr", list).forEach(x => x.classList.toggle("on", x === b));
+      out.hidden = false;
+      ["dong", "ho", "floor"].forEach(k => { $("#ad-" + k).value = det[k] || ""; });
+      renderOut();
+      setTimeout(() => out.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
+    });
+    ["dong", "ho", "floor"].forEach(k => $("#ad-" + k).addEventListener("input", e => { det[k] = e.target.value.replace(/[^0-9a-zA-Z]/g, ""); e.target.value = det[k]; renderOut(); }));
+    $$("#ad-style button").forEach(b => b.addEventListener("click", () => { style = b.dataset.v; $$("#ad-style button").forEach(x => x.classList.toggle("on", x === b)); renderOut(); }));
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const s = splitKeyword(inp.value);
+      if (s.k.length < 2) { list.hidden = false; list.innerHTML = '<p class="tl-err">도로명주소나 건물 이름을 입력해 주세요. 예) 테헤란로 152</p>'; return; }
+      kw = s.k; det = s.d; pick = null; out.hidden = true; search(false);
+    });
+    $$("[data-ex]").forEach(b => b.addEventListener("click", () => { inp.value = b.dataset.ex; form.requestSubmit ? form.requestSubmit() : form.dispatchEvent(new Event("submit")); }));
+  }
+
+  initName();
+  initAddr();
+})();

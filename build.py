@@ -568,7 +568,7 @@ def site_font():
     외부 CDN 글꼴(조각 파일 14개, 350KB)을 대신해서 첫 화면이 빨리 떠요.
     글자 목록이 바뀌었을 때만 다시 만들고, fontTools·brotli가 없으면 기존 파일을 그대로 써요."""
     chars = set()
-    for f in list(CONTENT.rglob("*.json")) + [ROOT / "build.py", ASSETS / "app.js"]:
+    for f in list(CONTENT.rglob("*.json")) + [ROOT / "build.py", ASSETS / "app.js", ASSETS / "tools.js"]:
         chars |= set(f.read_text("utf-8"))
     chars |= {chr(c) for c in range(0x20, 0x7F)}
     text = "".join(sorted(c for c in chars if ord(c) >= 0x20))
@@ -684,7 +684,8 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
                  f"src:url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2-variations'),url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2')}}</style>"
                  if FONT_V else '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">')
     navlinks = f'<a href="/"{" class=on" if path == "/" else ""}>홈</a>' + "".join(
-        f'<a href="/category/{k}/"{" class=on" if nav == k or (k == "video" and nav == "think") else ""}><span class="nl-l">{CATS[k]}</span><span class="nl-s">{NAV_SHORT[k]}</span></a>' for k in NAV_CATS)
+        f'<a href="/category/{k}/"{" class=on" if nav == k or (k == "video" and nav == "think") else ""}><span class="nl-l">{CATS[k]}</span><span class="nl-s">{NAV_SHORT[k]}</span></a>' for k in NAV_CATS) + \
+        f'<a href="/tools/"{" class=on" if nav == "tools" else ""}><span class="nl-l">영어 도구</span><span class="nl-s">도구</span></a>'
     room = f'<a class="room{" on" if nav == "notes" else ""}" href="/notes/">내 공부방<span class="badge" id="nav-badge" hidden></span></a>'
     room = ('<button class="srch-btn" type="button" aria-label="표현 검색" title="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>' + room)
     pjson = json.dumps(data or {}, ensure_ascii=False).replace("</", "<\\/")
@@ -732,7 +733,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 </div>
 <footer class="foot no-print">
   <div>{e(SITE['tagline'])}</div>
-  <div style="margin-top:8px"><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/contact/">문의</a>{f'<a href="{e(SITE["youtube"])}" target="_blank" rel="noopener">유튜브</a>' if SITE.get("youtube") else ""}{f'<a href="{e(SITE["instagram"])}" target="_blank" rel="noopener">인스타그램</a>' if SITE.get("instagram") else ""}</div>
+  <div style="margin-top:8px"><a href="/tools/">영어 도구</a><a href="/about/">소개</a><a href="/privacy/">개인정보처리방침</a><a href="/contact/">문의</a>{f'<a href="{e(SITE["youtube"])}" target="_blank" rel="noopener">유튜브</a>' if SITE.get("youtube") else ""}{f'<a href="{e(SITE["instagram"])}" target="_blank" rel="noopener">인스타그램</a>' if SITE.get("instagram") else ""}</div>
 </footer>
 {sns_fab()}
 {tabbar("home" if path == "/" else nav)}
@@ -2135,6 +2136,252 @@ def page_travel():
     return layout("여행영어 무료 PDF, 공항부터 호텔까지", "입국심사, 호텔, 카페, 식당에서 직원이 실제로 하는 말과 바로 쓰는 대답을 상황별로 정리한 여행영어 무료 자료예요. 원어민 발음 듣기와 출력용 PDF를 함께 드려요.",
                   "/travel/", body, seo_title="여행영어 무료 PDF - 공항부터 호텔까지, 현지에서 들리는 영어")
 
+# ── 영어 생활 도구 (/tools/) ──────────────────────────────────────────────
+# 근거: 네이버 월간 검색량 (2026-10-23 조회, 프로젝트 문서 claude/영어도구_검색량_근거.md)
+#   영어이름변환기 32,540 · 영어이름 15,470 · 영문이름 14,500 · 한글이름영문변환 12,090 · 여권이름영문변환 7,350
+#   영문주소변환 76,300 · 영문주소검색변환 6,210 · 한국주소영문변환 4,070 · 영문주소동호수 1,540
+# 영문 주소는 행정안전부 도로명주소 '영문주소 검색 API' 승인키가 있어야 켜져요 → site.json 의 "juso_eng_key"
+# 키가 없으면 주소 도구 페이지는 만들되 검색엔진에 안 보이게(noindex) 하고 메뉴·사이트맵에서 빼요.
+JUSO_KEY = SITE.get("juso_eng_key", "")
+_CHO = ["g", "kk", "n", "d", "tt", "r", "m", "b", "pp", "s", "ss", "", "j", "jj", "ch", "k", "t", "p", "h"]
+_JUNG = ["a", "ae", "ya", "yae", "eo", "e", "yeo", "ye", "o", "wa", "wae", "oe", "yo", "u", "wo", "we", "wi", "yu", "eu", "ui", "i"]
+_JONG = ["", "k", "k", "k", "n", "n", "n", "t", "l", "k", "m", "l", "l", "l", "p", "l", "m", "p", "p", "t", "t", "ng", "t", "t", "k", "t", "p", "t"]
+
+
+def rr_word(w):
+    """국어의 로마자 표기법 (인명: 음절마다, 음운 변화 미반영 · ㄹㄹ은 ll)"""
+    out, prev_l = "", False
+    for ch in w:
+        c = ord(ch) - 0xAC00
+        i, v, f = c // 588, (c % 588) // 28, c % 28
+        out += ("l" if i == 5 and prev_l else _CHO[i]) + _JUNG[v] + _JONG[f]
+        prev_l = f == 8
+    return out[:1].upper() + out[1:]
+
+
+# 성씨: 자주 보이는 표기 순서 (첫 번째가 추천). 표에는 앞쪽 40개만 보여 주고, 변환기는 전부 써요.
+SURNAMES = [
+    ("김", ["Kim", "Gim"]), ("이", ["Lee", "Yi", "Rhee"]), ("박", ["Park", "Pak", "Bak"]), ("최", ["Choi", "Choe"]),
+    ("정", ["Jung", "Jeong", "Chung"]), ("강", ["Kang", "Gang"]), ("조", ["Cho", "Jo"]), ("윤", ["Yoon", "Yun"]),
+    ("장", ["Jang", "Chang"]), ("임", ["Lim", "Im", "Yim"]), ("한", ["Han"]), ("오", ["Oh", "O"]), ("서", ["Seo", "Suh"]),
+    ("신", ["Shin", "Sin"]), ("권", ["Kwon", "Gwon"]), ("황", ["Hwang"]), ("안", ["Ahn", "An"]), ("송", ["Song"]),
+    ("전", ["Jeon", "Jun", "Chun"]), ("홍", ["Hong"]), ("유", ["Yoo", "Yu", "You"]), ("고", ["Ko", "Go"]), ("문", ["Moon", "Mun"]),
+    ("양", ["Yang"]), ("손", ["Son", "Sohn"]), ("배", ["Bae"]), ("백", ["Baek", "Paik", "Baik"]), ("허", ["Heo", "Huh", "Hur"]),
+    ("남", ["Nam"]), ("심", ["Shim", "Sim"]), ("노", ["Noh", "Roh", "No"]), ("하", ["Ha"]), ("곽", ["Kwak", "Gwak"]),
+    ("성", ["Sung", "Seong"]), ("차", ["Cha"]), ("주", ["Joo", "Ju", "Chu"]), ("우", ["Woo", "U"]), ("구", ["Koo", "Gu", "Ku"]),
+    ("민", ["Min"]), ("류", ["Ryu", "Yoo"]), ("나", ["Na", "Ra"]), ("진", ["Jin", "Chin"]), ("지", ["Ji", "Jee"]),
+    ("엄", ["Eom", "Um", "Uhm"]), ("채", ["Chae"]), ("원", ["Won"]), ("천", ["Cheon", "Chun"]), ("방", ["Bang"]),
+    ("공", ["Kong", "Gong"]), ("현", ["Hyun", "Hyeon"]), ("변", ["Byun", "Byeon"]), ("염", ["Yeom", "Yum"]), ("여", ["Yeo", "Yuh"]),
+    ("추", ["Choo", "Chu"]), ("도", ["Do", "Doh"]), ("소", ["So"]), ("석", ["Seok", "Suk"]), ("선", ["Sun", "Seon"]),
+    ("설", ["Seol", "Sul"]), ("마", ["Ma"]), ("길", ["Gil", "Kil"]), ("연", ["Yeon", "Youn"]), ("위", ["Wi", "Wee"]),
+    ("표", ["Pyo"]), ("명", ["Myung", "Myeong"]), ("기", ["Ki", "Gi"]), ("반", ["Ban", "Bahn"]), ("왕", ["Wang"]),
+    ("금", ["Keum", "Geum"]), ("옥", ["Ok"]), ("육", ["Yook", "Yuk"]), ("인", ["In"]), ("맹", ["Maeng"]), ("제", ["Je"]),
+    ("모", ["Mo"]), ("탁", ["Tak"]), ("국", ["Kook", "Guk"]), ("어", ["Eo", "Uh"]), ("은", ["Eun"]), ("편", ["Pyun", "Pyeon"]),
+    ("용", ["Yong"]), ("예", ["Ye"]), ("경", ["Kyung", "Gyeong"]), ("봉", ["Bong"]), ("사", ["Sa"]), ("부", ["Boo", "Bu"]),
+    ("가", ["Ka", "Ga"]), ("복", ["Bok"]), ("태", ["Tae"]), ("목", ["Mok"]), ("형", ["Hyung", "Hyeong"]), ("피", ["Pi"]),
+    ("두", ["Doo", "Du"]), ("감", ["Kam", "Gam"]), ("호", ["Ho"]), ("음", ["Eum"]), ("빈", ["Bin"]), ("동", ["Dong"]),
+    ("시", ["Si", "Shi"]), ("범", ["Beom", "Bum"]), ("승", ["Seung"]), ("상", ["Sang"]), ("라", ["Ra", "La"]),
+    ("남궁", ["Namgung", "Namkung"]), ("황보", ["Hwangbo"]), ("제갈", ["Jegal"]), ("선우", ["Sunwoo", "Seonu"]),
+    ("독고", ["Dokgo", "Dokko"]), ("사공", ["Sagong"]), ("서문", ["Seomun"]), ("동방", ["Dongbang"]),
+]
+COMPOUND_SUR = [s for s, _ in SURNAMES if len(s) == 2]
+
+
+def tool_ld(name, desc, url, faq):
+    app = {"@type": "WebApplication", "name": name, "url": DOMAIN + url, "description": desc, "inLanguage": "ko",
+           "applicationCategory": "UtilitiesApplication", "operatingSystem": "All", "isAccessibleForFree": True,
+           "offers": {"@type": "Offer", "price": "0", "priceCurrency": "KRW"}, "publisher": ORG}
+    bc = {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "홈", "item": DOMAIN + "/"},
+        {"@type": "ListItem", "position": 2, "name": "영어 도구", "item": DOMAIN + "/tools/"},
+        {"@type": "ListItem", "position": 3, "name": name, "item": DOMAIN + url}]}
+    fq = {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub(r"<[^>]+>", "", a)}} for q, a in faq]}
+    return [app, bc, fq]
+
+
+def tool_faq(faq):
+    return '<div class="tl-faq">' + "".join(f"<details><summary>{e(q)}</summary><p>{a}</p></details>" for q, a in faq) + "</div>"
+
+
+def tool_cards(skip=""):
+    items = [("name", "/tools/english-name/", "Aa", "영문 이름 변환기", "한글 이름을 여권·해외 사이트용 영문 이름으로")]
+    if JUSO_KEY:
+        items.append(("address", "/tools/english-address/", "#", "영문 주소 변환기", "도로명주소를 영어로, 해외직구 칸별로 나눠서"))
+    return '<div class="tl-more-tools">' + "".join(
+        f'<a class="tl-tool" href="{h}"><span class="ic">{ic}</span><span><b>{e(t)}</b><span>{e(d)}</span></span><i>›</i></a>'
+        for k, h, ic, t, d in items if k != skip) + "</div>"
+
+
+def tool_kakao():
+    k = SITE.get("kakao")
+    return (f'<a class="tl-kk" href="{e(k)}" target="_blank" rel="noopener"><span><b>매일 아침 7시, 영어 표현 하나</b>'
+            f'<span>카톡으로 받는 1일 1영, 무료예요</span></span><em>받아보기</em></a>') if k else ""
+
+
+TOOL_JS = lambda: f'<script src="/assets/tools.js?v={ASSET_V}" defer></script>'
+
+
+def page_tool_name():
+    url = "/tools/english-name/"
+    top = "".join(f"<tr><td>{e(s)}</td><td>{e(rr_word(s))}</td><td><b>{e(v[0])}</b>{(' <span class=mt>· ' + e(', '.join(v[1:])) + '</span>') if len(v) > 1 else ''}</td></tr>"
+                  for s, v in SURNAMES[:40])
+    comp = " · ".join(f"{s} <b>{e(v[0])}</b>" for s, v in SURNAMES if len(s) == 2)
+    faq = [
+        ("로마자 표기법과 다르게 써도 되나요?",
+         "이미 여권이나 카드에 쓰고 있는 표기가 있다면 그 표기를 그대로 쓰는 게 좋아요. 처음 정한다면 국립국어원 「국어의 로마자 표기법」을 기준으로 하는 게 가장 무난해요. 이 변환기의 첫 번째 표기가 그 기준이에요."),
+        ("이름을 띄어 써도 되나요? (Seung Ju)",
+         "띄어 쓰지 않는 걸 권해요. 영어권에서는 띄어 쓴 두 번째 단어를 미들네임으로 보는 경우가 많아서, 이름이 Seung으로만 처리될 수 있어요. 붙여 쓰거나(Seungju) 붙임표를 넣어(Seung-ju) 주세요."),
+        ("여권 영문 이름은 대문자로 써야 하나요?",
+         "여권에는 대문자로 인쇄돼요. 해외 사이트나 항공권 예약에서는 대문자든 소문자든 철자만 같으면 돼요."),
+        ("영어 이름(예: Ethan)과 영문 이름은 다른가요?",
+         "달라요. 영문 이름은 한글 이름을 로마자로 옮긴 공식 표기라 여권, 비자, 항공권에 써요. Ethan 같은 영어 이름은 회사나 모임에서 부르는 별칭이라 공식 서류에는 쓰지 않아요."),
+        ("성이 두 글자예요. (남궁, 황보, 제갈, 선우)",
+         "남궁, 황보처럼 두 글자 성은 자동으로 알아봐요. 자동으로 안 될 때는 입력창 아래 '성이 두 글자예요'를 켜 주세요. 두 글자 성은 붙여서 한 단어로 써요(Namgung)."),
+    ]
+    body = f"""<div class="tl">
+<div class="tl-head"><span class="lbl">영어 도구</span><h1>한글 이름 영문 변환기</h1>
+<p>이름을 넣으면 로마자 표기법에 맞는 영문 이름과 자주 쓰는 표기를 함께 보여 드려요. 여권, 항공권, 해외 사이트 가입에 바로 쓰세요.</p></div>
+<div class="tl-card">
+<form class="tl-form" id="nm-form" autocomplete="off"><input id="nm-in" type="text" inputmode="text" placeholder="예) 홍길동" aria-label="한글 이름" maxlength="8" enterkeyhint="go"><button type="submit">변환</button></form>
+<div class="tl-opt"><div class="tl-ex">예시 <button type="button" data-ex="이승주">이승주</button><button type="button" data-ex="김지현">김지현</button><button type="button" data-ex="남궁민">남궁민</button></div>
+<label class="tl-chk"><input type="checkbox" id="nm-two">성이 두 글자예요</label></div>
+<div class="tl-out" id="nm-out" hidden aria-live="polite"></div>
+</div>
+<div class="tl-doc">
+<h2>영문 이름, 이렇게 만들어요</h2>
+<div class="tl-steps">
+<div class="tl-step"><i>1</i><div><b>성은 많이 쓰는 표기에서 골라요</b><span>로마자 표기법대로라면 이(李)는 <code>I</code>지만, 실제로는 <code>Lee</code>처럼 오래 써 온 표기를 더 많이 써요. 가족이 이미 쓰는 철자가 있다면 같게 맞추세요.</span></div></div>
+<div class="tl-step"><i>2</i><div><b>이름은 소리가 아니라 글자대로</b><span>사람 이름은 발음이 바뀌어도 글자대로 적어요. 한복남은 소리 나는 대로 쓴 Bongnam이 아니라 <code>Han Boknam</code>이에요.</span></div></div>
+<div class="tl-step"><i>3</i><div><b>이름은 붙여 쓰고, 필요하면 붙임표</b><span>홍빛나는 <code>Hong Bitna</code>로 붙여 써요. 음절이 헷갈릴 때만 <code>Bit-na</code>처럼 붙임표를 넣어요.</span></div></div>
+</div>
+<h2>많이 쓰는 성씨 영문 표기</h2>
+<p>왼쪽은 로마자 표기법대로 쓴 표기, 오른쪽은 여권과 명함에서 자주 보이는 표기예요. 굵은 글씨가 가장 흔한 표기예요.</p>
+<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>성</th><th>로마자 표기법</th><th>자주 보이는 표기</th></tr></thead><tbody>{top}</tbody></table></div>
+<p>두 글자 성: {comp}</p>
+<h2>헷갈리는 글자, 이렇게 써요</h2>
+<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>한글</th><th>로마자 표기법</th><th>예</th></tr></thead><tbody>
+<tr><td>ㅓ</td><td><b>eo</b></td><td>서 Seo, 현 Hyeon <span class="mt">· 자주 보이는 표기 Hyun</span></td></tr>
+<tr><td>ㅡ</td><td><b>eu</b></td><td>은 Eun, 근 Geun</td></tr>
+<tr><td>ㅢ</td><td><b>ui</b></td><td>희 Hui <span class="mt">· 자주 보이는 표기 Hee</span></td></tr>
+<tr><td>ㅜ</td><td><b>u</b></td><td>주 Ju, 수 Su <span class="mt">· 자주 보이는 표기 Joo, Soo</span></td></tr>
+<tr><td>ㄱ (첫소리)</td><td><b>g</b></td><td>경 Gyeong, 기 Gi <span class="mt">· 자주 보이는 표기 Kyung, Ki</span></td></tr>
+<tr><td>ㅅ</td><td><b>s</b></td><td>신 Sin, 시 Si <span class="mt">· 자주 보이는 표기 Shin, Shi</span></td></tr>
+<tr><td>ㄹ</td><td><b>r / l</b></td><td>첫소리는 r(리 Ri), 받침은 l(길 Gil)</td></tr>
+</tbody></table></div>
+<p>Hyun, Joo, Kyung 같은 표기는 2000년에 지금의 로마자 표기법이 정해지기 전에 널리 쓰던 방식과 영어식 철자 습관에서 왔어요. 틀린 표기는 아니지만, 처음 정한다면 로마자 표기법을 기준으로 하는 게 좋아요.</p>
+<h2>여권 영문 이름, 정하기 전에 확인하세요</h2>
+<div class="tl-note"><b>한 번 정하면 바꾸기 어려워요</b>여권의 로마자 성명은 여권법 시행령에서 정한 경우에만 바꿀 수 있어요. 신청서에 쓰기 전에 철자를 한 번 더 확인하세요.</div>
+<ul>
+<li><b>항공권, 해외 호텔, 해외 결제 이름은 여권과 똑같이</b> 써요. 철자가 한 글자만 달라도 탑승이나 체크인에서 문제가 생길 수 있어요.</li>
+<li><b>이름은 띄어 쓰지 마세요.</b> Seung Ju처럼 띄우면 Ju를 미들네임으로 볼 수 있어요.</li>
+<li><b>가족의 성 철자를 맞추세요.</b> 부모와 자녀의 성 철자가 다르면 해외에서 가족 관계를 설명해야 할 때가 있어요.</li>
+</ul>
+<p>여권 발급과 로마자 성명 변경 절차는 <a href="https://www.passport.go.kr" target="_blank" rel="noopener">외교부 여권안내</a>에서 확인할 수 있어요.</p>
+<h2>자주 묻는 질문</h2>
+{tool_faq(faq)}
+<h2>다른 영어 도구</h2>
+{tool_cards("name")}
+{tool_kakao()}
+</div></div>{TOOL_JS()}"""
+    desc = "한글 이름을 입력하면 로마자 표기법에 맞는 영문 이름과 자주 쓰는 표기를 함께 보여 줘요. 여권 영문 이름 형식, 성씨별 영문 표기(김 Kim, 이 Lee, 박 Park)까지 한 번에 확인하세요."
+    data = {"tool": "english_name", "surnames": [[s, v] for s, v in SURNAMES], "compound": COMPOUND_SUR}
+    return layout("한글 이름 영문 변환기", desc, url, body, nav="tools", data=data,
+                  seo_title="영문 이름 변환기 - 한글 이름 영어로, 여권 영문 이름 표기법",
+                  ld=tool_ld("한글 이름 영문 변환기", desc, url, faq))
+
+
+def page_tool_address():
+    url = "/tools/english-address/"
+    faq = [
+        ("국가는 Republic of Korea와 South Korea 중 뭘 고르나요?",
+         "둘 다 같은 나라예요. 목록에서 고르는 칸이면 South Korea나 Korea, Republic of를 고르면 되고, 직접 쓰는 칸이면 Republic of Korea라고 쓰면 돼요."),
+        ("검색 결과가 안 나와요.",
+         "도로명과 건물번호를 함께 넣어 보세요. 예) 테헤란로 152. 건물 이름이나 지번 주소(예: 역삼동 737)로도 찾을 수 있어요. 시·도 이름만으로는 찾을 수 없어요."),
+        ("아파트 이름도 써야 하나요?",
+         "도로명주소와 동·호수만 있으면 집이 정확히 정해져서 아파트 이름은 넣지 않아도 돼요. 넣고 싶다면 Address Line 2 끝에 영어로 붙이세요."),
+        ("입력한 주소가 저장되나요?",
+         "이 페이지는 입력한 주소를 저장하지 않아요. 검색어는 주소를 찾기 위해 행정안전부 도로명주소 API로만 보내요."),
+        ("해외직구할 때 더 필요한 건 없나요?",
+         "해외직구로 물건을 받으려면 개인통관고유부호가 필요해요. 관세청 개인통관고유부호 사이트에서 무료로 바로 발급받을 수 있어요."),
+    ]
+    body = f"""<div class="tl">
+<div class="tl-head"><span class="lbl">영어 도구</span><h1>영문 주소 변환기</h1>
+<p>도로명주소를 검색하면 영문 주소와 우편번호를 알려 드려요. 해외직구 사이트 칸에 맞게 나눠서 바로 복사할 수 있어요.</p></div>
+<div class="tl-card">
+<form class="tl-form" id="ad-form" autocomplete="off"><input id="ad-in" type="search" placeholder="도로명, 건물 이름, 지번" aria-label="한글 주소" maxlength="80" enterkeyhint="search"><button type="submit">검색</button></form>
+<div class="tl-opt"><div class="tl-ex">예시 <button type="button" data-ex="테헤란로 152">테헤란로 152</button><button type="button" data-ex="세종대로 175">세종대로 175</button></div></div>
+<div class="tl-out" id="ad-list" hidden aria-live="polite"></div>
+<div class="tl-out" id="ad-out" hidden>
+<p class="tl-sec">동·호수 넣기 <span style="font-weight:500;color:var(--faint);font-size:13px">(아파트·오피스텔)</span></p>
+<div class="tl-det"><label>동<input id="ad-dong" inputmode="numeric" placeholder="101" maxlength="6"></label><label>호<input id="ad-ho" inputmode="numeric" placeholder="1004" maxlength="6"></label><label>층<input id="ad-floor" inputmode="text" placeholder="3" maxlength="4"></label></div>
+<div class="tl-seg" id="ad-style" role="group" aria-label="동·호수 표기 방식"><button type="button" class="on" data-v="long">101-dong 1004-ho</button><button type="button" data-v="short">#101-1004</button></div>
+<div id="ad-res" aria-live="polite"></div>
+</div>
+</div>
+<div class="tl-doc">
+<h2>영문 주소는 작은 단위부터 써요</h2>
+<p>한국 주소는 큰 단위(시·도)부터 쓰지만, 영문 주소는 반대로 가장 작은 단위인 동·호수부터 써요.</p>
+<div class="tl-flow"><span class="hl">동·호수</span><em>›</em><span>건물번호</span><em>›</em><span>도로명</span><em>›</em><span>구</span><em>›</em><span>시·도</span><em>›</em><span>우편번호</span><em>›</em><span>나라</span></div>
+<div class="tl-tbl-w"><table class="tl-tbl"><tbody>
+<tr><td>한글</td><td>서울특별시 서초구 강남대로12길 6, 101동 1004호</td></tr>
+<tr><td>영문</td><td><b>101-dong 1004-ho, 6 Gangnam-daero 12-gil, Seocho-gu, Seoul 06779, Republic of Korea</b></td></tr>
+</tbody></table></div>
+<h2>동·호수, 층은 이렇게 써요</h2>
+<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>한글</th><th>영문</th><th>짧게 쓸 때</th></tr></thead><tbody>
+<tr><td>101동 1004호</td><td><b>101-dong 1004-ho</b></td><td>#101-1004</td></tr>
+<tr><td>1004호</td><td><b>1004-ho</b></td><td>#1004</td></tr>
+<tr><td>3층</td><td><b>3F</b></td><td>3rd Floor</td></tr>
+<tr><td>지하 1층</td><td><b>B1</b></td><td>Basement 1</td></tr>
+</tbody></table></div>
+<p>어느 방식이든 국내 택배 기사님이 알아볼 수 있으면 돼요. 칸 길이가 짧은 사이트에서는 #101-1004처럼 짧게 쓰세요.</p>
+<h2>해외 쇼핑몰 칸 채우는 법</h2>
+<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>칸 이름</th><th>넣을 내용</th></tr></thead><tbody>
+<tr><td>Address Line 1</td><td>건물번호 + 도로명 + 구 <span class="mt">· 예) 6 Gangnam-daero 12-gil, Seocho-gu</span></td></tr>
+<tr><td>Address Line 2</td><td>동·호수 <span class="mt">· 예) 101-dong 1004-ho</span></td></tr>
+<tr><td>City</td><td>시 <span class="mt">· 서울은 Seoul, 경기도는 Hwaseong-si처럼 시 이름</span></td></tr>
+<tr><td>State / Province</td><td>시·도 <span class="mt">· Seoul, Gyeonggi-do</span></td></tr>
+<tr><td>ZIP / Postal Code</td><td>우편번호 5자리</td></tr>
+<tr><td>Phone</td><td>+82 뒤에 맨 앞 0을 빼고 <span class="mt">· 010-1234-5678 → +82 10-1234-5678</span></td></tr>
+</tbody></table></div>
+<h2>자주 하는 실수</h2>
+<ul>
+<li><b>우편번호를 6자리로 쓰기.</b> 지금 우편번호는 5자리예요. 예전 6자리 번호를 쓰면 배송이 늦어질 수 있어요.</li>
+<li><b>도로명주소와 지번 주소 섞기.</b> 한 주소 안에서는 한 가지 방식만 써요. 이 변환기는 도로명주소로 알려 드려요.</li>
+<li><b>Seoul-si, Seoul Special City 같은 긴 이름 쓰기.</b> 해외 사이트에서는 Seoul이면 충분해요.</li>
+<li><b>한글을 섞어 쓰기.</b> 해외 쇼핑몰은 한글을 저장하지 못해서 주소가 깨질 수 있어요.</li>
+</ul>
+<h2>자주 묻는 질문</h2>
+{tool_faq(faq)}
+<p class="tl-src">주소 정보: 행정안전부 도로명주소 영문 검색 API</p>
+<h2>다른 영어 도구</h2>
+{tool_cards("address")}
+{tool_kakao()}
+</div></div>{TOOL_JS()}"""
+    desc = "한글 도로명주소를 검색하면 영문 주소와 우편번호를 바로 알려 줘요. 아파트 동·호수 영문 표기, 해외직구 사이트 칸별(Address Line 1, City, State, ZIP) 입력법까지 정리했어요."
+    return layout("영문 주소 변환기", desc, url, body, nav="tools", data={"tool": "english_address", "jusoKey": JUSO_KEY},
+                  seo_title="영문 주소 변환기 - 도로명주소 영어로, 동 호수 영문 표기, 해외직구 주소",
+                  ld=tool_ld("영문 주소 변환기", desc, url, faq), robots="" if JUSO_KEY else "noindex")
+
+
+def page_tools():
+    body = f"""<div class="tl">
+<div class="tl-head"><span class="lbl">무료</span><h1>영어 도구</h1>
+<p>여권, 해외직구, 해외 사이트 가입처럼 영어로 바꿔 써야 할 때 바로 쓰는 도구예요. 가입 없이 무료로 쓸 수 있어요.</p></div>
+{tool_cards()}
+<div class="tl-doc">
+<h2>이런 때 쓰세요</h2>
+<ul>
+<li><b>여권을 처음 만들 때</b> 영문 이름 철자를 미리 정해 두세요.</li>
+<li><b>항공권·해외 호텔을 예약할 때</b> 여권과 같은 영문 이름을 확인하세요.</li>
+{"<li><b>해외직구를 할 때</b> 영문 주소를 쇼핑몰 칸에 맞게 나눠서 복사하세요.</li>" if JUSO_KEY else ""}
+</ul>
+{tool_kakao()}
+</div></div>"""
+    desc = "한글 이름 영문 변환, 영문 주소 변환처럼 여권, 해외직구, 해외 사이트 가입에 필요한 영어 도구를 무료로 쓸 수 있어요."
+    return layout("영어 도구", desc, "/tools/", body, nav="tools", seo_title="영어 도구 - 영문 이름 변환기, 영문 주소 변환기")
+
+
+
 def build():
     global START
     import time
@@ -2187,6 +2434,11 @@ def build():
     if (ROOT / "files").exists():
         shutil.copytree(ROOT / "files", OUT / "files", dirs_exist_ok=True)
     write("/travel/", page_travel()); pages.append("/travel/")
+    write("/tools/", page_tools()); pages.append("/tools/")
+    write("/tools/english-name/", page_tool_name()); pages.append("/tools/english-name/")
+    write("/tools/english-address/", page_tool_address())
+    if JUSO_KEY:
+        pages.append("/tools/english-address/")
     write("/app/", page_app())
     (OUT / "404.html").write_text(page_404(), "utf-8")
     (OUT / "sitemap.xml").write_text(
