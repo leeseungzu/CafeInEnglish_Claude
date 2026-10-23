@@ -514,4 +514,14 @@
 
   initWordCount();
   initCursive();
+
+  /* 영어 도구 목록: 휴대폰 세그먼트 → 오른쪽 '보기' 필터와 같이 움직이게 */
+  (function () {
+    const seg = $(".tool-seg"); if (!seg) return;
+    seg.addEventListener("click", e => {
+      const b = e.target.closest("button"); if (!b) return;
+      $$("button", seg).forEach(x => { const on = x === b; x.classList.toggle("on", on); x.setAttribute("aria-selected", on ? "true" : "false"); });
+      const f = $(`.subfilter .sf-b[data-sub="${b.dataset.sub}"]`); if (f) f.click();
+    });
+  })();
 })();

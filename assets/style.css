@@ -2794,3 +2794,12 @@ html.is-app .app-seg.study-seg{grid-template-columns:repeat(3,1fr)}
 @media (max-width:480px){.tl-uses{margin-top:48px}.tl-use{min-height:178px;padding:16px;border-radius:20px}.tl-use b{font-size:16px;margin-top:12px;max-width:100%}.tl-use .tl-use-ic{width:52px;height:52px;right:10px;bottom:10px}.tl-use .go{font-size:12.5px;max-width:70%}}
 @media (max-width:480px){.tl-use .tl-use-ic{top:12px;bottom:auto;right:10px;width:40px;height:40px}.tl-use .when{max-width:calc(100% - 44px);font-size:12px;padding:4px 9px}.tl-use .go{max-width:none;white-space:nowrap;font-size:12.5px}.tl-use b{margin-top:14px}}
 .tl-use .when{white-space:nowrap}
+
+/* 2026-10-24 영어 도구 목록 = 영상·공부와 같은 틀: 휴대폰 세그먼트(전체·분류), PC 오른쪽 '보기' 패널, 카드 위 종류 한 줄, 단색 썸네일(C안) */
+.app-seg.tool-seg{display:grid!important;grid-template-columns:repeat(4,1fr)}
+.app-seg.tool-seg button{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:center;height:40px;border-radius:10px;font-size:15px;font-weight:500;color:#6B7684;box-sizing:border-box}
+.app-seg.tool-seg button.on{background:#fff;color:#191F28;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.app-seg.tool-seg button:not(.on):hover{color:#191F28}
+.app-seg.tool-seg button:focus-visible{outline:2px solid #3182F6}
+@media (min-width:900px){.app-seg.tool-seg{display:none!important}}
+@media (max-width:899px){.subfilter.tl-filter{display:none!important}}

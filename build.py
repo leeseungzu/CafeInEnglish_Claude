@@ -2790,11 +2790,54 @@ def tool_og(url):
     return og_tool("tool-" + t["key"], "영어 도구 · " + t["group"], t["title"], sub, lab, big, small, t["icon"], t["key"], bg=bg, cursive=t["key"] == "cursive")
 
 
+TOOL_KIND = {"toeic": "계산기", "opic": "등급표", "tos": "레벨표", "compare": "비교표", "wordcount": "세기", "cursive": "변환", "name": "변환기", "address": "변환기"}
+TOOL_TH = {"toeic": ("예상 점수", "700~750점", "700~750점"), "opic": ("오픽 등급", "IM2 → IH", "IH"), "tos": ("토익스피킹 130점", "IM3", "IM3"),
+           "compare": ("오픽 IH는 토익", "900~945점", "900~945점"), "wordcount": ("Word count", "186 words", "186"),
+           "cursive": ("필기체 변환", "Cafe in English", ""), "name": ("이승주", "Lee Seungju", "Seungju"), "address": ("테헤란로 152", "152 Teheran-ro", "Teheran-ro")}
+
+
+def tool_thumb(t):
+    """도구 목록 썸네일 (C안 · 라이트 그레이 단색, 2026-10-24): 3D 아이콘 + 라벨 + 큰 결과(핵심만 라임). 휴대폰 정사각형 자르기에도 보이게 가운데 정렬"""
+    label, big, key = TOOL_TH[t["key"]]
+    ver = hashlib.md5(json.dumps([label, big, key, t["icon"], "c1"], ensure_ascii=False).encode()).hexdigest()[:8]
+    rel = f"/og/th-tool-{t['key']}.png"
+    if not (Image and FONT.exists()):
+        return "icon:" + t["icon"]
+    from PIL import ImageFilter
+    W, H = 960, 504
+    BG, FG, LAB, BRAND, HL = "#F2F4F6", "#191F28", "#6B7684", "#8B95A1", "#CDEB5B"
+    im = Image.new("RGBA", (W, H), BG)
+    ip = ASSETS / "icons" / f"{t['icon']}.webp"
+    if ip.exists():
+        ic = Image.open(ip).convert("RGBA").resize((128, 128), Image.LANCZOS)
+        sh = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        sh.paste((30, 40, 60, 255), (W // 2 - 64, 70), ic.split()[3].point(lambda v: v * .22))
+        im = Image.alpha_composite(im, sh.filter(ImageFilter.GaussianBlur(10)))
+        im.alpha_composite(ic, (W // 2 - 64, 54))
+    d = ImageDraw.Draw(im)
+    d.text((W // 2, 230), label, font=_font(34, 700), fill=LAB, anchor="mt")
+    for sz in range(104, 40, -4):
+        f = ImageFont.truetype(str(EN_FONT), sz) if (big.isascii() and EN_FONT.exists()) else _font(sz, 800)
+        if d.textlength(big, font=f) <= 430:
+            break
+    y, x = 290, W // 2 - d.textlength(big, font=f) / 2
+    if key and key in big:
+        i = big.index(key)
+        x0 = x + d.textlength(big[:i], font=f); x1 = x0 + d.textlength(key, font=f)
+        d.rounded_rectangle((x0 - 8, y + int(sz * .1), x1 + 8, y + int(sz * 1.12)), 14, fill=HL)
+    d.text((x, y), big, font=f, fill=FG)
+    d.text((W // 2, H - 44), "CafeInEnglish", font=_font(22, 700), fill=BRAND, anchor="mm")
+    out = OUT / rel.lstrip("/")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    im.convert("RGB").save(out, optimize=True)
+    im.convert("RGB").resize((480, 252), Image.LANCZOS).save(out.with_suffix(".webp"), "WEBP", quality=84)
+    return f"{rel}?v={ver}"
+
+
 def tool_card(t):
-    q, a, k = t["th"]
-    art = icon_img(t["icon"])
-    return card(t["url"], [("tool", t["group"])], t["title"], t["desc"],
-                chat_html(q, a, k, "", art, chat_bg("tool-" + t["key"])), hl=2, data_sub=t["group"])
+    c = card(t["url"], [("tool", "영어 도구"), ("tool", t["group"])], t["title"], t["desc"], tool_thumb(t), hl=2, data_sub=t["group"],
+             alt=f'{t["title"]} - {TOOL_TH[t["key"]][1]}')
+    return c.replace('</div><h2', f'<span class="lv lv-pro">{TOOL_KIND.get(t["key"], "도구")}</span></div><h2', 1)
 
 
 def tool_cards(skip="", group=None):
@@ -2814,7 +2857,7 @@ def page_tools():
     cards = "".join(tool_card(t) for t in tools)
     groups = [g for g in TOOL_GROUPS if any(t["group"] == g for t in tools)]
     b = lambda v, n, lbl, on="": f'<button type="button" class="sf-b{on}" data-sub="{e(v)}"><span>{e(lbl)}</span><em>{n}</em></button>'
-    filt = ('<aside class="subfilter sf-one" aria-label="분류"><div class="sf-g" role="group" aria-label="분류"><div class="sf-h">분류</div>'
+    filt = ('<aside class="subfilter sf-one tl-filter" aria-label="보기"><div class="sf-g" role="group" aria-label="보기"><div class="sf-h">보기</div>'
             + b("", len(tools), "전체", " on") + "".join(b(g, sum(1 for t in tools if t["group"] == g), g) for g in groups)
             + '</div><p class="sf-empty" hidden>이 분류의 도구는 아직 없어요</p></aside>')
     uses = [("toeic", "토익 시험 본 날", "맞힌 개수로 예상 점수 확인"), ("compare", "취업 준비할 때", "오픽·토스·토익 점수 한 번에 비교"),
@@ -2826,8 +2869,11 @@ def page_tools():
     about = (f'<section class="tl-uses"><h2>이럴 때 쓰세요</h2>'
              '<div class="tl-badges"><span>가입 없이</span><span>무료</span><span>입력한 내용은 저장하지 않아요</span></div>'
              f'<div class="tl-use-grid">{use_cards}</div></section>')
-    body = (f'<h1>영어 도구</h1><p class="lead">점수 계산부터 영문 이름까지, 바로 쓰는 무료 도구</p>'
-            f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>{about}')
+    seg = ('<div class="app-seg tool-seg no-print" role="tablist" aria-label="영어 도구">'
+           + "".join(f'<button type="button" role="tab" data-sub="{e(v)}"{" class=on aria-selected=true" if not v else ""}>{e(l)}</button>'
+                     for v, l in [("", "전체")] + [(g, g) for g in groups]) + '</div>')
+    body = (f'<h1>영어 도구</h1><p class="lead">점수 계산부터 영문 이름까지, 바로 쓰는 무료 도구</p>{seg}'
+            f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>{about}' + TOOL_JS())
     desc = "토익 점수 계산기, 오픽 등급표, 토익스피킹 레벨표, 영어 시험 점수 비교, 영어 단어 수 세기, 영어 필기체 변환, 영문 이름 변환기를 가입 없이 무료로 쓸 수 있어요."
     ld = [{"@type": "CollectionPage", "name": "영어 도구", "description": desc, "url": DOMAIN + "/tools/", "inLanguage": "ko",
            "mainEntity": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": DOMAIN + t["url"], "name": t["title"]} for i, t in enumerate(tools)]}},
