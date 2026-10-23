@@ -2817,11 +2817,15 @@ def page_tools():
     filt = ('<aside class="subfilter sf-one" aria-label="분류"><div class="sf-g" role="group" aria-label="분류"><div class="sf-h">분류</div>'
             + b("", len(tools), "전체", " on") + "".join(b(g, sum(1 for t in tools if t["group"] == g), g) for g in groups)
             + '</div><p class="sf-empty" hidden>이 분류의 도구는 아직 없어요</p></aside>')
-    about = ('<section class="cat-about"><h2>영어 도구는 이렇게 써요</h2><p>가입 없이 무료로 쓰는 도구예요. 입력한 내용은 브라우저 안에서만 계산하고 저장하지 않아요.</p>'
-             '<ul class="ca-tips"><li><b>토익 시험을 본 날</b> 맞힌 개수로 예상 점수를 확인하세요.</li>'
-             '<li><b>취업 준비할 때</b> 오픽, 토익스피킹, 토익 점수를 한 표에서 비교하세요.</li>'
-             '<li><b>영어로 글을 쓸 때</b> 에세이·자소서 단어 수를 세고, 같은 단어 반복을 줄이세요.</li>'
-             '<li><b>여권을 처음 만들 때</b> 영문 이름 철자를 미리 정해 두세요.</li></ul></section>')
+    uses = [("toeic", "토익 시험 본 날", "맞힌 개수로 예상 점수 확인"), ("compare", "취업 준비할 때", "오픽·토스·토익 점수 한 번에 비교"),
+            ("wordcount", "영어로 글 쓸 때", "에세이·자소서 단어 수 맞추기"), ("name", "여권 처음 만들 때", "영문 이름 철자 미리 정하기")]
+    use_cards = "".join(
+        f'<a class="tl-use" href="{TOOL_BY_KEY[k]["url"]}" style="--bg:{chat_bg("tool-" + k)}"><span class="when">{e(w)}</span>'
+        f'<b>{e(d)}</b><span class="go">{e(TOOL_BY_KEY[k]["title"])}<i>›</i></span>{icon_img(TOOL_BY_KEY[k]["icon"], "tl-use-ic")}</a>'
+        for k, w, d in uses if k in {t["key"] for t in tools})
+    about = (f'<section class="tl-uses"><h2>이럴 때 쓰세요</h2>'
+             '<div class="tl-badges"><span>가입 없이</span><span>무료</span><span>입력한 내용은 저장하지 않아요</span></div>'
+             f'<div class="tl-use-grid">{use_cards}</div></section>')
     body = (f'<h1>영어 도구</h1><p class="lead">점수 계산부터 영문 이름까지, 바로 쓰는 무료 도구</p>'
             f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>{about}')
     desc = "토익 점수 계산기, 오픽 등급표, 토익스피킹 레벨표, 영어 시험 점수 비교, 영어 단어 수 세기, 영어 필기체 변환, 영문 이름 변환기를 가입 없이 무료로 쓸 수 있어요."
