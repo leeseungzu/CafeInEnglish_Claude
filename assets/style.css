@@ -2831,3 +2831,51 @@ html.is-app .app-seg.study-seg{grid-template-columns:repeat(3,1fr)}
 html.is-app .app-seg.tool-seg{grid-template-columns:repeat(4,1fr)!important}
 html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
 @media (max-width:374px){.app-seg.tool-seg button{font-size:13.5px}}
+
+/* ===== 2026-10-24 영어 시험 일정 ===== */
+.ex-next{padding:18px}
+.ex-tg{margin:0;font-size:13px;font-weight:700;color:#6B7684}
+.ex-big{margin:6px 0 4px;font-size:32px;font-weight:800;letter-spacing:-.03em;color:#191F28;line-height:1.25}
+.ex-big span{background:linear-gradient(transparent 62%,#CDEB5B 62%);padding:0 2px}
+.ex-sub{margin:0;font-size:14px;color:#4E5968}
+.ex-dl{display:flex;align-items:center;gap:10px;background:#F2F4F6;border-radius:14px;padding:11px 13px;margin-top:14px}
+.ex-dl i{font-style:normal;font-size:12px;font-weight:800;background:#191F28;color:#fff;border-radius:7px;padding:3px 7px;white-space:nowrap}
+.ex-dl p{margin:0;font-size:14px;font-weight:700;color:#191F28;line-height:1.45}
+.ex-dl small{display:block;color:#8B95A1;font-weight:500;font-size:12.5px}
+.ex-dl.hot{background:#FFF4E6}.ex-dl.hot i{background:#F04452}
+.ex-rows{padding:4px 14px}
+.ex-lh{margin:10px 0 0;font-size:13px;font-weight:700;color:#6B7684}
+.ex-row{display:grid;grid-template-columns:66px 1fr auto;gap:8px;align-items:center;padding:12px 0;border-bottom:1px solid #F2F4F6}
+.ex-row:last-child{border:0}
+.ex-row>b{font-size:15.5px;font-weight:800;color:#191F28}.ex-row>b small{display:block;font-size:11.5px;color:#8B95A1;font-weight:600}
+.ex-row>span{font-size:13px;color:#4E5968;line-height:1.5}.ex-row>span b{color:#191F28}
+.ex-pill{font-size:12px;font-weight:800;border-radius:8px;padding:4px 8px;background:#F2F4F6;color:#4E5968;white-space:nowrap}
+.ex-pill.l{background:#CDEB5B;color:#191F28}.ex-pill.r{background:#FFEBEE;color:#E03E3E}.ex-pill.x{color:#B0B8C1}
+.ex-back{margin-top:14px}
+.ex-date{font-size:17px}
+.ex-qp{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.ex-qp button{all:unset;cursor:pointer;font-size:13px;font-weight:700;background:#F2F4F6;color:#4E5968;border-radius:10px;padding:7px 11px;transition:background .15s,color .15s}
+.ex-qp button:hover{background:#E5E8EB;color:#191F28}
+.ex-res{padding:14px 16px}
+.ex-rh{margin:0;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#6B7684}
+.ex-rb{margin:6px 0 3px;font-size:22px;font-weight:800;letter-spacing:-.02em;color:#191F28}
+.ex-rb span{background:linear-gradient(transparent 62%,#CDEB5B 62%);padding:0 2px}
+.ex-rs{margin:0;font-size:13.5px;color:#4E5968;line-height:1.5}
+#ex-r{display:grid;gap:10px}
+.ex-tbl tr.past td{color:#B0B8C1}.ex-tbl tr.past td b{color:#B0B8C1;font-weight:600}
+.tl-chk{font-size:13px!important;color:#8B95A1!important;margin-top:6px}
+@media (max-width:480px){.ex-big{font-size:27px}.ex-rb{font-size:20px}}
+
+.ex-link{display:flex;align-items:center;gap:12px;margin:14px 0 0;padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:18px;text-decoration:none;color:inherit;transition:border-color .15s,background .15s}
+.ex-link:hover{border-color:#191F28}
+.ex-link img{flex:none}
+.ex-link>span{flex:1;min-width:0}
+.ex-link b{display:block;font-size:15px;color:#191F28}
+.ex-link-s{display:block;font-size:13px;color:#4E5968;margin-top:1px}
+.ex-link i{font-style:normal;font-size:20px;color:#B0B8C1}
+
+.ex-go{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;background:#191F28;color:#fff!important;font-weight:700;font-size:15px;padding:14px;border-radius:14px;text-decoration:none;transition:background .15s}
+.ex-go:hover{background:#000}
+.ex-go i{font-style:normal;color:#CDEB5B}
+.ex-go2{display:inline-block;margin-top:8px;font-size:13px;font-weight:700;color:#191F28;text-decoration:none;background:#F2F4F6;border-radius:9px;padding:6px 10px}
+.ex-go2:hover{background:#E5E8EB}

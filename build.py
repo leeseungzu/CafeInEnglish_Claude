@@ -2618,6 +2618,7 @@ def page_tool_toeic():
 <div class="tl-pills" id="tc-pills"></div></div>{SHARE_ROW}
 <p class="tl-note2">공식 환산표가 없어서 공개된 추정치를 범위로 보여 드려요. 실제 점수는 회차 난이도에 따라 달라져요.</p>
 </div>
+{exam_link('toeic')}
 <div class="tl-doc">
 <h2>맞힌 개수별 예상 점수표</h2>
 <p>LC와 RC 모두 같은 기준으로 계산해요. 회차마다 점수가 달라질 수 있어서 범위로 정리했어요.</p>
@@ -2643,7 +2644,7 @@ def page_tool_toeic():
 {tool_kakao()}
 </div></div>{TOOL_JS()}"""
     desc = "토익 LC, RC 맞힌 개수를 넣으면 예상 점수를 범위로 알려 줘요. 맞힌 개수별 토익 점수 환산표, 2025년 평균 686점과 비교, 성적 발표일과 유효기간까지 정리했어요."
-    data = {"tool": "toeic_score", "est": TOEIC_EST, "avg": TOEIC_AVG}
+    data = {"exam": EXAM, "tool": "toeic_score", "est": TOEIC_EST, "avg": TOEIC_AVG}
     return layout("토익 점수 계산기", desc, url, body, nav="tools", og_img=tool_og(url), data=data,
                   seo_title="토익 점수 계산기 - 맞힌 개수로 예상 점수, 토익 점수 환산표",
                   ld=tool_ld("토익 점수 계산기", desc, url, faq))
@@ -2667,6 +2668,7 @@ def page_tool_opic():
 <div class="tl-cans" id="oq">{quiz}</div>
 <div class="tl-out" id="oq-out" hidden aria-live="polite"></div>
 </div>
+{exam_link('opic')}
 <div class="tl-doc">
 <h2>오픽 등급 한눈에 보기</h2>
 <div class="tl-ladder-s">{"".join(f'<span class="{ "hl" if g in ("IH", "IM2") else "" }">{g}</span>' for g, *_ in reversed(OPIC))}</div>
@@ -2691,7 +2693,7 @@ def page_tool_opic():
 {tool_kakao()}
 </div></div>{TOOL_JS()}"""
     desc = "오픽 등급표를 NL, NM, NH, IL, IM1, IM2, IM3, IH, AL 순서로 정리하고 등급별로 어느 정도 말하는지 쉬운 말로 풀었어요. IM2와 IH 차이, 다음 등급으로 가는 방법, 내 등급 자가 진단까지."
-    data = {"tool": "opic_level", "opic": [[g, n, s, t] for g, n, s, d, t in OPIC]}
+    data = {"exam": EXAM, "tool": "opic_level", "opic": [[g, n, s, t] for g, n, s, d, t in OPIC]}
     return layout("오픽 등급표", desc, url, body, nav="tools", og_img=tool_og(url), data=data,
                   seo_title="오픽 등급표 - NL부터 AL까지 등급별 수준, IM2 IH 차이",
                   ld=tool_ld("오픽 등급표", desc, url, faq))
@@ -2716,6 +2718,7 @@ def page_tool_tos():
 <div class="tl-hero-res" aria-live="polite"><span class="tl-tag">내 등급</span><p class="tl-big" id="ts-g">—</p><p class="tl-big-sub" id="ts-s"></p>
 <div class="tl-scale"><i id="ts-bar"></i></div><div class="tl-pills" id="ts-p"></div></div>{SHARE_ROW}
 </div>
+{exam_link('tos')}
 <div class="tl-doc">
 <h2>토익스피킹 점수별 등급표</h2>
 <div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>등급</th><th>ACTFL 등급</th><th>점수</th></tr></thead><tbody>{lv}</tbody></table></div>
@@ -2735,7 +2738,7 @@ def page_tool_tos():
 {tool_kakao()}
 </div></div>{TOOL_JS()}"""
     desc = "토익스피킹 점수를 넣으면 등급(AH, AM, AL, IH, IM, IL, NH)을 바로 알려 줘요. 점수별 레벨표, IM1·IM2·IM3 점수, 11문항 시험 구성, 채용 기준 예시까지 정리했어요."
-    data = {"tool": "toeic_speaking"}
+    data = {"exam": EXAM, "tool": "toeic_speaking"}
     return layout("토익스피킹 레벨표", desc, url, body, nav="tools", og_img=tool_og(url), data=data,
                   seo_title="토익스피킹 레벨 점수표 - 점수별 등급 AL IH IM3, 시험 구성",
                   ld=tool_ld("토익스피킹 레벨표", desc, url, faq))
@@ -2759,6 +2762,7 @@ def page_tool_compare():
 <p class="tl-you" id="cp-y" aria-live="polite"></p>{SHARE_ROW}
 <p class="tl-note2">시험끼리의 공식 환산표는 없어요. 아래 기준으로 만든 참고용 비교예요.</p>
 </div>
+{exam_link('')}
 <div class="tl-doc">
 <h2>영어 시험 점수 비교표</h2>
 <div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>수준</th><th>오픽</th><th>토익스피킹</th><th>토익</th></tr></thead><tbody>{rows}</tbody></table></div>
@@ -2777,17 +2781,99 @@ def page_tool_compare():
 {tool_kakao()}
 </div></div>{TOOL_JS()}"""
     desc = "토익, 오픽, 토익스피킹 점수를 한 표에서 비교해요. 오픽 IH는 토익 몇 점, 토익스피킹 IM3는 오픽 어느 등급인지 참고용 기준과 출처를 함께 정리했어요."
-    data = {"tool": "score_compare", "ladder": LADDER}
+    data = {"exam": EXAM, "tool": "score_compare", "ladder": LADDER}
     return layout("영어 시험 점수 비교", desc, url, body, nav="tools", og_img=tool_og(url), data=data,
                   seo_title="토익 오픽 토익스피킹 점수 비교표 - 영어 시험 점수 환산, 내 등급 위치",
                   ld=tool_ld("영어 시험 점수 비교", desc, url, faq))
 
 
 
+# ── 영어 시험 일정 (2026-10-24): 토익·토익스피킹·오픽 다음 시험 D-day + 서류 마감에서 거꾸로 ─────────────
+# 데이터: content/exam_schedule.json (토익 회차표·토익스피킹 주말 일정은 공식 일정을 옮겨 적고, 오픽은 규칙으로 계산)
+# 2027년 토익 일정이 발표되면 toeic 목록에 회차를 더하고 toeic_year, checked 를 바꿔요.
+EXAM_FILE = ROOT / "content" / "exam_schedule.json"
+EXAM = json.loads(EXAM_FILE.read_text("utf-8")) if EXAM_FILE.exists() else {"toeic": [], "tos": [], "opic": {"close_days": 2, "open_days": 32, "score_days": 5}}
+SRC_TOEIC_SCH = ("YBM 한국TOEIC위원회, TOEIC 정기시험 일정", "https://exam.toeic.co.kr/receipt/examSchList.php")
+SRC_TOS_SCH = ("YBM 한국TOEIC위원회, TOEIC Speaking 시험 일정", "https://www.toeicswt.co.kr/receipt/examSchList.php")
+SRC_OPIC_SCH = ("OPIc 공식 사이트, 시험일정·접수 안내", "https://www.opic.or.kr")
+
+
+def _exd(s, short=False):
+    import datetime as _dt
+    d = _dt.date.fromisoformat(s)
+    w = "월화수목금토일"[d.weekday()]
+    return f"{d.month}.{d.day} ({w})" if short else f"{d.month}월 {d.day}일 ({w})"
+
+
+def exam_link(t=""):
+    """시험 도구 → 영어 시험 일정 연결 (다음 시험 날짜·마감 D-day는 tools.js가 채워요)"""
+    n = {"toeic": "토익", "tos": "토익스피킹", "opic": "오픽"}.get(t, "영어")
+    q = f"?t={t}" if t else ""
+    return (f'<a class="ex-link" href="/tools/english-test-schedule/{q}"><img src="/assets/icons/calendar.webp?v={ASSET_V}" alt="" width="36" height="36" loading="lazy">'
+            f'<span><b>다음 {n} 시험 일정</b><span class="ex-link-s" data-ex="{t or "toeic"}">접수 마감과 성적 발표일 확인</span></span><i aria-hidden="true">›</i></a>')
+
+
+def page_tool_schedule():
+    url = "/tools/english-test-schedule/"
+    y = EXAM.get("toeic_year", 2026)
+    tr = "".join(f'<tr data-d="{t["date"]}"><td>제{t["n"]}회</td><td><b>{_exd(t["date"], True)}</b></td><td>{_exd(t["reg"][1], True)} 오전 10시</td>'
+                 f'<td>{_exd(t["add"][1], True)} 오후 1시</td><td>{_exd(t["score"], True)}</td></tr>' for t in EXAM["toeic"])
+    sr = "".join(f'<tr data-d="{t["date"]}"><td><b>{_exd(t["date"], True)}</b></td><td>{_exd(t["reg"][1], True)} 오전 10시</td><td>{_exd(t["score"], True)}</td></tr>' for t in EXAM["tos"])
+    o = EXAM["opic"]
+    faq = [
+        ("토익 성적은 언제 나오나요?", "보통 시험을 본 날로부터 9~10일 뒤 낮 12시에 나와요. 일요일 시험이면 그다음 주 화요일, 토요일 시험이면 열흘 뒤 화요일이에요."),
+        ("토익 특별추가접수가 뭔가요?", "정기접수가 끝난 뒤 시험 며칠 전까지 짧게 한 번 더 받는 접수예요. 응시료가 정기접수보다 비싸서, 일정이 정해졌다면 정기접수 안에 신청하는 게 좋아요."),
+        ("토익스피킹은 언제 볼 수 있나요?", "매주 토요일과 일요일에 봐요. 접수는 시험 3일 전(토요일 시험은 수요일, 일요일 시험은 목요일) 오전 10시에 마감하고, 성적은 5일 뒤 낮 12시에 나와요."),
+        ("오픽은 언제 볼 수 있나요?", f"거의 매일 볼 수 있어요. 시험 {o['open_days']}일 전부터 {o['close_days']}일 전까지 접수하고, 성적은 약 {o['score_days']}일 뒤에 나와요. 날짜와 시간은 고사장마다 달라서 접수할 때 확인해야 해요."),
+        ("서류 마감까지 시간이 없으면 어떤 시험이 빠른가요?", "접수부터 성적까지 가장 빠른 건 오픽이에요. 시험 2일 전까지 접수하고 약 5일 뒤 성적이 나와서, 일주일 남짓이면 점수를 받을 수 있어요. 지원하는 곳이 어떤 시험을 인정하는지 먼저 확인하세요."),
+        (f"{y + 1}년 토익 일정은 언제 나오나요?", f"YBM 한국TOEIC위원회가 보통 연말에 다음 해 일정을 발표해요. 발표되면 이 페이지에 바로 더할게요."),
+    ]
+    body = f"""<div class="tl">
+<span class="chip tool">영어 도구</span><span class="chip tool">점수·시험</span><h1>영어 시험 일정 {y}</h1><p class="lead">토익, 토익스피킹, 오픽의 다음 시험과 접수 마감, 성적 발표일을 오늘 기준으로 보여 드려요. 서류 마감일을 넣으면 마지막 기회도 알려 드려요.</p>
+<div class="tl-card">
+<div class="tl-seg" id="ex-t" role="group" aria-label="시험 선택"><button type="button" class="on" data-t="toeic">토익</button><button type="button" data-t="tos">토익스피킹</button><button type="button" data-t="opic">오픽</button></div>
+<div class="tl-box ex-next" id="ex-n" aria-live="polite"><p class="ex-tg">다음 시험을 불러오고 있어요</p></div>
+<div class="tl-box ex-rows" id="ex-l"></div>
+</div>
+<div class="tl-card ex-back">
+<div class="tl-box"><label class="tl-box-h" for="ex-d">언제까지 성적이 필요해요?</label>
+<input type="date" id="ex-d" class="tl-in ex-date" aria-label="성적이 필요한 날짜"><div class="ex-qp" id="ex-qp"><button type="button" data-w="14">2주 뒤</button><button type="button" data-w="30">한 달 뒤</button><button type="button" data-w="60">두 달 뒤</button></div></div>
+<div id="ex-r" aria-live="polite"></div>{SHARE_ROW}
+<p class="tl-note2">성적 발표가 서류 마감일과 같은 날이면 낮 12시 이후에 나와요. 접수 전 공식 사이트에서 꼭 다시 확인하세요.</p>
+</div>
+<div class="tl-doc">
+<h2>{y}년 토익 시험 일정</h2>
+<p>토익 정기시험은 한 달에 두 번 정도, 주로 일요일 오전 9시 20분에 봐요. 정기접수는 시험 약 2주 전 월요일 오전 10시에 마감하고, 그 뒤 특별추가접수가 한 번 더 열려요.</p>
+<div class="tl-tbl-w"><table class="tl-tbl ex-tbl"><thead><tr><th>회차</th><th>시험일</th><th>정기접수 마감</th><th>특별추가 마감</th><th>성적 발표</th></tr></thead><tbody>{tr}</tbody></table></div>
+<p>성적은 발표일 낮 12시에 나와요. 지난 시험은 흐리게 표시했어요.</p>
+<h2>{y}년 토익스피킹 시험 일정</h2>
+<p>토익스피킹은 매주 토요일과 일요일에 봐요. 접수 마감은 시험 3일 전 오전 10시, 성적 발표는 5일 뒤 낮 12시예요.</p>
+<div class="tl-tbl-w"><table class="tl-tbl ex-tbl"><thead><tr><th>시험일</th><th>접수 마감</th><th>성적 발표</th></tr></thead><tbody>{sr}</tbody></table></div>
+<h2>오픽 시험 일정</h2>
+<p>오픽은 고사장마다 거의 매일 시험이 있어요. 시험 {o['open_days']}일 전부터 {o['close_days']}일 전까지 접수할 수 있고, 성적은 약 {o['score_days']}일 뒤에 나와요. 그래서 세 시험 중 가장 빨리 점수를 받을 수 있어요.</p>
+<div class="tl-note"><b>점수가 급할 때는 이렇게</b>서류 마감이 2주 안이면 오픽, 3주 안이면 토익스피킹, 한 달 넘게 남았으면 토익까지 볼 수 있어요. 지원하는 회사가 어떤 시험을 인정하는지 먼저 확인하세요.</div>
+<h2>자주 묻는 질문</h2>
+{tool_faq(faq)}
+{tool_reads("시험 준비에 도움 되는 카영 글", [("LC", None, lambda p: p.get("sub") == "듣기"), ("말", None, lambda p: p.get("sub") == "회화"), ("RC", None, lambda p: p["id"] in next((s["posts"] for s in SERIES if s["id"] == "work"), []))])}
+{tool_src([SRC_TOEIC_SCH, SRC_TOS_SCH, SRC_OPIC_SCH])}
+<p class="tl-chk">{_exd(EXAM.get("checked", "2026-10-24"))} 공식 일정과 대조했어요.</p>
+<h2>다른 영어 도구</h2>
+{tool_cards("schedule", "점수·시험")}
+{tool_kakao()}
+</div></div>{TOOL_JS()}"""
+    desc = f"{y} 토익 시험일정과 접수 마감, 성적 발표일을 오늘 기준 D-day로 보여 줘요. 토익스피킹·오픽 일정도 함께, 서류 마감일을 넣으면 시험별 마지막 기회를 알려 줘요."
+    data = {"tool": "test_schedule", "exam": EXAM}
+    return layout("영어 시험 일정", desc, url, body, nav="tools", og_img=tool_og(url), data=data,
+                  seo_title=f"{y} 토익 시험일정 - 접수 마감, 성적 발표일, 토익스피킹·오픽 일정",
+                  ld=tool_ld("영어 시험 일정", desc, url, faq))
+
+
 # ── 영어 도구 v2 (2026-10-24): 사이트 흐름에 맞춘 목록·카드·공유 이미지 ─────────────
 # 도구 = 영어 도구 카테고리 안의 '글'처럼: 같은 카드 목록, 같은 칩, 같은 분류 필터(전체 · 점수·시험 · 글쓰기 · 생활 영어)
 TOOL_GROUPS = ["점수·시험", "글쓰기", "생활 영어"]
 TOOLS = [  # key, 주소, 이름, 설명, 분류, 3D 아이콘, 목록 썸네일(q, a, 강조), 공유 이미지(라벨, 큰 글씨, 작은 글씨)
+    dict(key="schedule", url="/tools/english-test-schedule/", title="영어 시험 일정", desc="토익·토익스피킹·오픽 접수 마감과 성적 발표일, D-day", group="점수·시험",
+         icon="calendar", th=("토익 접수 언제까지?", "마감 D-day", "D-day"), og=("다음 시험까지", "D-day", "접수 마감 · 성적 발표일 한눈에")),
     dict(key="toeic", url="/tools/toeic-score/", title="토익 점수 계산기", desc="맞힌 개수로 예상 점수를 범위로, 2025 평균과 비교", group="점수·시험",
          icon="trophy", th=("LC 80개 · RC 70개", "700~750점", "700~750점"), og=("예상 점수", "700~750점", "LC 80개 · RC 70개 맞혔다면")),
     dict(key="opic", url="/tools/opic-level/", title="오픽 등급표", desc="NL부터 AL까지 등급별 수준, 내 등급 자가 진단", group="점수·시험",
@@ -2811,7 +2897,7 @@ live_tools = lambda: [t for t in TOOLS if t["key"] != "address" or JUSO_KEY]
 
 
 # 공유 이미지: 글 공유 이미지와 같은 파스텔 그라데이션(OG_BG 0 복숭아 · 1 하늘 · 2 라벤더 · 3 민트 · 4 레몬)과 왼쪽 한 줄
-OG_TOOL = {"toeic": (1, "맞힌 개수로 예상 점수 바로 확인"), "opic": (2, "NL부터 AL까지, 나는 어느 등급일까"), "tos": (0, "점수를 넣으면 등급이 바로"),
+OG_TOOL = {"schedule": (4, "토익·토스·오픽 접수 마감과 성적 발표"), "toeic": (1, "맞힌 개수로 예상 점수 바로 확인"), "opic": (2, "NL부터 AL까지, 나는 어느 등급일까"), "tos": (0, "점수를 넣으면 등급이 바로"),
            "compare": (3, "토익·오픽·토익스피킹 한눈에"), "wordcount": (3, "에세이·자소서 분량 맞추기"), "cursive": (0, "복사·이미지 저장·알파벳 연습"),
            "name": (4, "여권·해외 사이트용 영문 이름"), "address": (1, "해외직구 영문 주소, 칸별로")}
 
@@ -2825,8 +2911,8 @@ def tool_og(url):
     return og_tool("tool-" + t["key"], "영어 도구 · " + t["group"], t["title"], sub, lab, big, small, t["icon"], t["key"], bg=bg, cursive=t["key"] == "cursive")
 
 
-TOOL_KIND = {"toeic": "계산기", "opic": "등급표", "tos": "레벨표", "compare": "비교표", "wordcount": "세기", "cursive": "변환", "name": "변환기", "address": "변환기"}
-TOOL_TH = {"toeic": ("예상 점수", "700~750점", "700~750점"), "opic": ("오픽 등급", "IM2 → IH", "IH"), "tos": ("토익스피킹 130점", "IM3", "IM3"),
+TOOL_KIND = {"schedule": "일정", "toeic": "계산기", "opic": "등급표", "tos": "레벨표", "compare": "비교표", "wordcount": "세기", "cursive": "변환", "name": "변환기", "address": "변환기"}
+TOOL_TH = {"schedule": ("다음 시험까지", "D-day", "D-day"), "toeic": ("예상 점수", "700~750점", "700~750점"), "opic": ("오픽 등급", "IM2 → IH", "IH"), "tos": ("토익스피킹 130점", "IM3", "IM3"),
            "compare": ("오픽 IH는 토익", "900~945점", "900~945점"), "wordcount": ("Word count", "186 words", "186"),
            "cursive": ("필기체 변환", "Cafe in English", ""), "name": ("이승주", "Lee Seungju", "Seungju"), "address": ("테헤란로 152", "152 Teheran-ro", "Teheran-ro")}
 
@@ -2896,7 +2982,7 @@ def page_tools():
     filt = ('<aside class="subfilter sf-one tl-filter" aria-label="보기"><div class="sf-g" role="group" aria-label="보기"><div class="sf-h">보기</div>'
             + b("", len(tools), "전체", " on") + "".join(b(g, sum(1 for t in tools if t["group"] == g), g) for g in groups)
             + '</div><p class="sf-empty" hidden>이 분류의 도구는 아직 없어요</p></aside>')
-    uses = [("toeic", "토익 시험 본 날", "예상 점수 확인"), ("compare", "취업 준비할 때", "시험 점수 한 번에 비교"),
+    uses = [("schedule", "시험 접수 전", "마감과 성적 발표일 확인"), ("toeic", "토익 시험 본 날", "예상 점수 확인"),
             ("wordcount", "영어로 글 쓸 때", "에세이 단어 수 맞추기")]  # 다른 카테고리와 같은 3칸
     tips = "".join(f'<li><a href="{TOOL_BY_KEY[k]["url"]}"><img src="/assets/icons/{TOOL_BY_KEY[k]["icon"]}.webp?v={ASSET_V}" alt="" width="28" height="28" loading="lazy">'
                    f'<span><b>{e(w)}</b>{e(d)}</span><i aria-hidden="true">›</i></a></li>' for k, w, d in uses if k in {t["key"] for t in tools})
@@ -2907,13 +2993,13 @@ def page_tools():
                      for v, l in [("", "전체")] + [(g, g) for g in groups]) + '</div>')
     body = (f'<h1>영어 도구</h1><p class="lead">점수 계산부터 영문 이름까지, 바로 쓰는 무료 도구</p>{seg}'
             f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>{about}' + TOOL_JS())
-    desc = "토익 점수 계산기, 오픽 등급표, 토익스피킹 레벨표, 영어 시험 점수 비교, 영어 단어 수 세기, 영어 필기체 변환, 영문 이름 변환기를 가입 없이 무료로 쓸 수 있어요."
+    desc = "영어 시험 일정(토익·토익스피킹·오픽 접수 마감), 토익 점수 계산기, 오픽 등급표, 토익스피킹 레벨표, 영어 시험 점수 비교, 영어 단어 수 세기, 영어 필기체 변환, 영문 이름 변환기를 가입 없이 무료로 쓸 수 있어요."
     ld = [{"@type": "CollectionPage", "name": "영어 도구", "description": desc, "url": DOMAIN + "/tools/", "inLanguage": "ko",
            "mainEntity": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": DOMAIN + t["url"], "name": t["title"]} for i, t in enumerate(tools)]}},
           {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": DOMAIN + "/"},
                                                          {"@type": "ListItem", "position": 2, "name": "영어 도구", "item": DOMAIN + "/tools/"}]}]
     return layout("영어 도구", desc, "/tools/", body, nav="tools", wide=True, og_img=tool_og("/tools/"), ld=ld,
-                  seo_title="영어 도구 - 토익 점수 계산기, 오픽 등급표, 영어 단어 수 세기, 영문 이름 변환기")
+                  seo_title="영어 도구 - 토익 시험일정, 토익 점수 계산기, 오픽 등급표, 영어 단어 수 세기, 영문 이름 변환기")
 
 
 SHARE_ROW = '<div class="tl-share-row" hidden><button type="button" class="tl-share">결과 공유하기</button></div>'
@@ -3027,9 +3113,9 @@ def page_tool_cursive():
 def post_tools(p):
     """글 끝 '함께 쓰면 좋은 도구' — 듣기·발음 글은 토익 계산기, 회화 글은 오픽 등급표, 단어 글은 단어 수 세기"""
     sub = p.get("sub", "")
-    keys = ["toeic", "tos"] if sub in ("듣기", "발음") else ["opic", "tos"] if sub == "회화" else ["wordcount"] if sub == "단어" else []
+    keys = ["toeic", "schedule"] if sub in ("듣기", "발음") else ["opic", "tos"] if sub == "회화" else ["wordcount"] if sub == "단어" else []
     if p["id"] in next((s["posts"] for s in SERIES if s["id"] == "work"), []):
-        keys = ["toeic", "compare"]
+        keys = ["schedule", "compare"]
     if not keys:
         return ""
     return ('<section class="post-tools no-print"><h2 class="pt-h">함께 쓰면 좋은 영어 도구</h2><div class="cards list tl-cards">'
@@ -3096,7 +3182,8 @@ def build():
     write("/tools/english-name/", page_tool_name()); pages.append("/tools/english-name/")
     for u, fn in (("/tools/toeic-score/", page_tool_toeic), ("/tools/opic-level/", page_tool_opic),
                   ("/tools/toeic-speaking-level/", page_tool_tos), ("/tools/english-score-compare/", page_tool_compare),
-                  ("/tools/english-word-count/", page_tool_wordcount), ("/tools/english-cursive/", page_tool_cursive)):
+                  ("/tools/english-word-count/", page_tool_wordcount), ("/tools/english-cursive/", page_tool_cursive),
+                  ("/tools/english-test-schedule/", page_tool_schedule)):
         write(u, fn()); pages.append(u)
     write("/tools/english-address/", page_tool_address())
     if JUSO_KEY:

@@ -515,6 +515,118 @@
   initWordCount();
   initCursive();
 
+  /* =========================================================
+     5. 영어 시험 일정 — 오늘(한국 시간) 기준 다음 시험 D-day + 서류 마감에서 거꾸로
+     ========================================================= */
+  function initExam() {
+    const N = $("#ex-n"); if (!N && !$("[data-ex]")) return;
+    const X = DATA.exam || {}, WD = "일월화수목금토", NAME = { toeic: "토익", tos: "토익스피킹", opic: "오픽" };
+    const REG = { toeic: "https://exam.toeic.co.kr/receipt/receiptStep1.php", tos: "https://www.toeicswt.co.kr/", opic: "https://www.opic.or.kr/" };
+    const goBtn = (t, w, x) => (now >= w.s && now < w.e) ? `<a class="ex-go" href="${REG[t]}" target="_blank" rel="noopener" data-go="${t}">${NAME[t]} 접수하러 가기<i aria-hidden="true">↗</i></a>` : "";
+    const DAY = 864e5, now = Date.now();
+    const today = new Date(now + 9 * 3600e3).toISOString().slice(0, 10);
+    const at = (d, h, m) => Date.parse(`${d}T${String(h).padStart(2, "0")}:${String(m || 0).padStart(2, "0")}:00+09:00`);
+    const addD = (d, k) => new Date(Date.parse(d + "T00:00:00Z") + k * DAY).toISOString().slice(0, 10);
+    const ymd = d => d.split("-").map(Number);
+    const wd = d => { const [y, m, x] = ymd(d); return WD[new Date(Date.UTC(y, m - 1, x)).getUTCDay()]; };
+    const L = d => { const [, m, x] = ymd(d); return `${m}월 ${x}일 (${wd(d)})`; };
+    const S = d => { const [, m, x] = ymd(d); return `${m}.${x} (${wd(d)})`; };
+    const dd = d => Math.round((Date.parse(d + "T00:00:00Z") - Date.parse(today + "T00:00:00Z")) / DAY);
+    const dtag = n => n === 0 ? "D-day" : n > 0 ? "D-" + n : "D+" + (-n);
+    const hm = (h, m) => (h === 12 && !m ? "낮 12시" : (h < 12 ? "오전 " : "오후 ") + (h > 12 ? h - 12 : h) + "시" + (m ? ` ${m}분` : ""));
+
+    // 시험마다 같은 모양으로: 시험일, 성적일, 접수 창(열림·닫힘)
+    function list(t) {
+      if (t === "toeic") return (X.toeic || []).map(e => ({ n: e.n, date: e.date, time: "오전 9시 20분", score: e.score,
+        wins: [{ k: "정기접수", s: at(e.reg[0], 10), e: at(e.reg[1], 10), et: `${L(e.reg[1])} 오전 10시`, es: `${S(e.reg[1])} 10시`, ed: e.reg[1], sd: e.reg[0] },
+               { k: "특별추가접수", s: at(e.add[0], 10), e: at(e.add[1], 13), et: `${L(e.add[1])} 오후 1시`, es: `${S(e.add[1])} 13시`, ed: e.add[1], sd: e.add[0] }] }));
+      if (t === "tos") return (X.tos || []).map(e => ({ date: e.date, time: "", score: e.score,
+        wins: [{ k: "접수", s: at(e.reg[0], 10), e: at(e.reg[1], 10), et: `${L(e.reg[1])} 오전 10시`, es: `${S(e.reg[1])} 10시`, ed: e.reg[1], sd: e.reg[0] }] }));
+      const o = X.opic || { close_days: 2, open_days: 32, score_days: 5 }, out = [];
+      for (let k = 0; k < 75; k++) {
+        const d = addD(today, k), c = addD(d, -o.close_days);
+        out.push({ date: d, time: "", score: addD(d, o.score_days), opic: 1,
+          wins: [{ k: "접수", s: Date.parse(addD(d, -o.open_days) + "T00:00:00+09:00"), e: Date.parse(addD(c, 1) + "T00:00:00+09:00"), et: `${L(c)}까지`, es: `${S(c)}까지`, ed: c, sd: addD(d, -o.open_days) }] });
+      }
+      return out;
+    }
+    // 지금 열려 있거나 앞으로 열릴 접수 창
+    const openWin = x => x.wins.find(w => now < w.e);
+    function status(x) {
+      const w = openWin(x);
+      if (!w) return { cls: "x", t: "접수 마감" };
+      if (now < w.s) return { cls: "", t: `${S(w.sd || today).replace(/ \(.\)/, "")} 시작` };
+      const left = dd(w.ed);
+      return left <= 3 ? { cls: "r", t: (left <= 0 ? "오늘" : "D-" + left) + " 마감" } : { cls: "l", t: w.k === "특별추가접수" ? "특별추가 중" : "접수 중" };
+    }
+    const pillH = st => `<span class="ex-pill ${st.cls}">${esc(st.t)}</span>`;
+
+    // 다른 시험 도구의 '다음 시험 일정' 줄
+    $$("[data-ex]").forEach(el => {
+      const x = list(el.dataset.ex).filter(y => y.date >= today && openWin(y))[0]; if (!x) return;
+      const w = openWin(x), left = dd(w.ed);
+      el.textContent = `${L(x.date)} 시험 · ` + (now < w.s ? `${S(w.sd)} 접수 시작` : `${w.k === "특별추가접수" ? "특별추가 " : ""}접수 마감 ${left <= 0 ? "오늘" : "D-" + left}`);
+    });
+    if (!N) return;
+    document.addEventListener("click", e => { const a = e.target.closest("[data-go]"); if (a) ga("tool_out", { tool: "test_schedule", exam: a.dataset.go }); });
+    let T = ["toeic", "tos", "opic"].indexOf(QS.get("t")) > -1 ? QS.get("t") : "toeic";
+    function draw() {
+      $$("#ex-t button").forEach(b => b.classList.toggle("on", b.dataset.t === T));
+      const all = list(T).filter(x => x.date >= today), live = all.filter(openWin);
+      const hero = live[0];
+      if (!hero) {
+        N.innerHTML = `<p class="ex-tg">다음 ${NAME[T]}</p><p class="ex-big">일정 준비 중</p><p class="ex-sub">새 일정이 발표되면 바로 올려 드릴게요.</p>`;
+        $("#ex-l").innerHTML = ""; $("#ex-l").hidden = true; return;
+      }
+      const w = openWin(hero), left = dd(w.ed), pre = now < w.s;
+      const reg = hero.wins[0], regDone = T === "toeic" && now >= reg.e;
+      N.innerHTML = `<p class="ex-tg">${T === "opic" ? "가장 빨리 볼 수 있는 오픽" : "다음 " + NAME[T] + (hero.n ? ` · 제${hero.n}회` : "")}</p>` +
+        `<p class="ex-big"><span>${dtag(dd(hero.date))}</span> ${L(hero.date)}</p>` +
+        `<p class="ex-sub">${hero.time ? hero.time + " 시험 · " : ""}성적 발표 ${L(hero.score)}${hero.opic ? " 무렵" : " 낮 12시"}</p>` +
+        `<div class="ex-dl${left <= 3 && !pre ? " hot" : ""}"><i>${pre ? "예정" : left <= 0 ? "오늘" : "D-" + left}</i><p>${pre ? `${esc(w.k)} ${L(w.sd)} 오전 10시 시작` : `${esc(w.k)} 마감 ${w.et}`}` +
+        `<small>${regDone ? "정기접수는 끝났어요 · 응시료가 정기접수보다 비싸요" : hero.opic ? "고사장마다 시험 시간이 달라요" : pre ? `마감 ${w.et}` : "마감 시간이 지나면 접수할 수 없어요"}</small></p></div>` + goBtn(T, w, hero);
+      const rows = (T === "opic" ? live.filter(x => x !== hero && /[토일]/.test(wd(x.date))) : live.filter(x => x !== hero)).slice(0, T === "opic" ? 4 : 6);
+      $("#ex-l").hidden = !rows.length;
+      $("#ex-l").innerHTML = (T === "opic" ? '<p class="ex-lh">주말 오픽</p>' : "") + rows.map(x => {
+        const ww = openWin(x) || x.wins[x.wins.length - 1];
+        return `<div class="ex-row"><b>${S(x.date).replace(" (", "<small>").replace(")", "</small>")}</b><span>${esc(ww.k === "특별추가접수" ? "특별추가" : ww.k)} <b>~${ww.es}</b><br>성적 ${S(x.score)}</span>${pillH(status(x))}</div>`;
+      }).join("");
+      if (!draw.f) setShare(`다음 ${NAME[T]} ${L(hero.date)}, ${w.k} 마감 ${w.et}`, "t=" + T);
+    }
+
+    // 서류 마감에서 거꾸로
+    const D = $("#ex-d"), R = $("#ex-r");
+    D.min = today;
+    const n0 = QS.get("need");
+    D.value = n0 && /^\d{4}-\d\d-\d\d$/.test(n0) && n0 >= today ? n0 : addD(today, 30);
+    function back() {
+      const need = D.value; if (!need) { R.innerHTML = ""; return; }
+      const lines = [];
+      R.innerHTML = ["toeic", "tos", "opic"].map(t => {
+        const ok = list(t).filter(x => x.date >= today && openWin(x) && x.score <= need), last = ok[ok.length - 1];
+        const lastAny = list(t).slice(-1)[0];
+        if (!last) {
+          const first = list(t).filter(x => x.date >= today && openWin(x))[0];
+          return `<div class="tl-box ex-res"><p class="ex-rh">${NAME[t]}<span class="ex-pill x">어려워요</span></p><p class="ex-rb">이 날짜까지는 성적이 안 나와요</p>` +
+            `<p class="ex-rs">${first ? `가장 빠른 성적은 ${S(first.score)} (${S(first.date)} 시험)` : "새 일정이 발표되면 알려 드릴게요"}</p></div>`;
+        }
+        const w = openWin(last), st = status(last), beyond = t !== "opic" && lastAny && need > lastAny.score;
+        lines.push(`${NAME[t]} ${S(last.date)}`);
+        return `<div class="tl-box ex-res"><p class="ex-rh">${NAME[t]}${pillH(st)}</p><p class="ex-rb"><span>${L(last.date)}</span>${t === "opic" ? "까지" : " 시험이 마지막"}</p>` +
+          `<p class="ex-rs">성적 ${S(last.score)} · ${esc(w.k === "특별추가접수" ? "특별추가접수" : w.k)} ${w.et}${t === "opic" ? "" : "까지"}${beyond ? `<br>${X.toeic_year + 1}년 일정은 발표되면 더해요` : ""}</p>${(now >= w.s && now < w.e) ? `<a class="ex-go2" href="${REG[t]}" target="_blank" rel="noopener" data-go="${t}">공식 사이트에서 접수 ↗</a>` : ""}</div>`;
+      }).join("");
+      if (draw.f) setShare(`${L(need)}까지 영어 성적이 필요하면 마지막 기회는 ${lines.join(", ")} 시험`, "need=" + need);
+    }
+    $("#ex-t").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; T = b.dataset.t; draw.f = 0; draw(); ga("tool_use", { tool: "test_schedule" }); });
+    D.addEventListener("change", () => { draw.f = 1; back(); ga("tool_use", { tool: "test_schedule_back" }); });
+    $("#ex-qp").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; D.value = addD(today, +b.dataset.w); draw.f = 1; back(); });
+    if (n0) draw.f = 1;
+    draw(); back();
+    // 표: 지난 시험은 흐리게
+    $$(".ex-tbl tr[data-d]").forEach(r => { if (r.dataset.d < today) r.classList.add("past"); });
+  }
+  initExam();
+
   /* 영어 도구 목록: 휴대폰 세그먼트 → 오른쪽 '보기' 필터와 같이 움직이게 */
   (function () {
     const seg = $(".tool-seg"); if (!seg) return;
