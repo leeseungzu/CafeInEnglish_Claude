@@ -2827,3 +2827,7 @@ html.is-app .app-seg.study-seg{grid-template-columns:repeat(3,1fr)}
 .ca-tips.ca-links a:hover b,.ca-tips.ca-links a:focus-visible b{color:#CDEB5B!important}
 .ca-tips.ca-links a:hover i,.ca-tips.ca-links a:focus-visible i{color:#CDEB5B;transform:translateX(3px)}
 .ca-tips.ca-links a:hover img{transform:scale(1.1) rotate(-6deg)}
+/* 앱(홈 화면)에서도 영어 도구 칸 전환을 한 줄 4칸으로 (웹과 같게) */
+html.is-app .app-seg.tool-seg{grid-template-columns:repeat(4,1fr)!important}
+html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
+@media (max-width:374px){.app-seg.tool-seg button{font-size:13.5px}}
