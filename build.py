@@ -2835,8 +2835,9 @@ def tool_thumb(t):
 
 
 def tool_card(t):
-    c = card(t["url"], [("tool", "영어 도구"), ("tool", t["group"])], t["title"], t["desc"], tool_thumb(t), hl=2, data_sub=t["group"],
-             alt=f'{t["title"]} - {TOOL_TH[t["key"]][1]}')
+    q, a, k = t["th"]  # 썸네일: 공부 카테고리와 같은 대화 카드 (2026-10-24 C안 단색에서 되돌림)
+    c = card(t["url"], [("tool", "영어 도구"), ("tool", t["group"])], t["title"], t["desc"],
+             chat_html(q, a, k, "", icon_img(t["icon"]), chat_bg("tool-" + t["key"])), hl=2, data_sub=t["group"])
     return c.replace('</div><h2', f'<span class="lv lv-pro">{TOOL_KIND.get(t["key"], "도구")}</span></div><h2', 1)
 
 
