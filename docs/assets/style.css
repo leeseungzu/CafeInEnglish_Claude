@@ -2793,3 +2793,4 @@ html.is-app .app-seg.study-seg{grid-template-columns:repeat(3,1fr)}
 @media (max-width:899px){.tl-use-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:480px){.tl-uses{margin-top:48px}.tl-use{min-height:178px;padding:16px;border-radius:20px}.tl-use b{font-size:16px;margin-top:12px;max-width:100%}.tl-use .tl-use-ic{width:52px;height:52px;right:10px;bottom:10px}.tl-use .go{font-size:12.5px;max-width:70%}}
 @media (max-width:480px){.tl-use .tl-use-ic{top:12px;bottom:auto;right:10px;width:40px;height:40px}.tl-use .when{max-width:calc(100% - 44px);font-size:12px;padding:4px 9px}.tl-use .go{max-width:none;white-space:nowrap;font-size:12.5px}.tl-use b{margin-top:14px}}
+.tl-use .when{white-space:nowrap}

@@ -2818,7 +2818,7 @@ def page_tools():
             + b("", len(tools), "전체", " on") + "".join(b(g, sum(1 for t in tools if t["group"] == g), g) for g in groups)
             + '</div><p class="sf-empty" hidden>이 분류의 도구는 아직 없어요</p></aside>')
     uses = [("toeic", "토익 시험 본 날", "맞힌 개수로 예상 점수 확인"), ("compare", "취업 준비할 때", "오픽·토스·토익 점수 한 번에 비교"),
-            ("wordcount", "영어로 글 쓸 때", "에세이·자소서 단어 수 맞추기"), ("name", "여권 처음 만들 때", "영문 이름 철자 미리 정하기")]
+            ("wordcount", "영어로 글 쓸 때", "에세이·자소서 단어 수 맞추기"), ("name", "여권 만들 때", "영문 이름 철자 미리 정하기")]
     use_cards = "".join(
         f'<a class="tl-use" href="{TOOL_BY_KEY[k]["url"]}" style="--bg:{chat_bg("tool-" + k)}"><span class="when">{e(w)}</span>'
         f'<b>{e(d)}</b><span class="go">{e(TOOL_BY_KEY[k]["title"])}<i>›</i></span>{icon_img(TOOL_BY_KEY[k]["icon"], "tl-use-ic")}</a>'
