@@ -2803,3 +2803,8 @@ html.is-app .app-seg.study-seg{grid-template-columns:repeat(3,1fr)}
 .app-seg.tool-seg button:focus-visible{outline:2px solid #3182F6}
 @media (min-width:900px){.app-seg.tool-seg{display:none!important}}
 @media (max-width:899px){.subfilter.tl-filter{display:none!important}}
+
+/* 2026-10-24 영상 칸 전환 3칸: 전체 · 영상으로 배우기 · 사유의 문장 */
+.app-seg.watch-seg,html.is-app .app-seg.watch-seg{grid-template-columns:repeat(3,1fr)!important;max-width:520px}
+@media (max-width:600px){.app-seg.watch-seg{max-width:none}.app-seg.watch-seg a{font-size:14px!important}}
+@media (min-width:900px){.app-seg.watch-seg{display:none!important}}

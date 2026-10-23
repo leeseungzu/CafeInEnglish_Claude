@@ -18,10 +18,11 @@ DOMAIN = SITE["domain"].rstrip("/")
 CATS = {"video": "영상으로 배우기", "expr": "영어표현", "tip": "영어꿀팁", "story": "영어 이야기", "think": "사유의 문장"}
 NAV_CATS = ("video", "expr", "tip", "story")  # 카테고리 순서 (메뉴는 아래 NAV_GROUPS로 묶어서 보여 줘요)
 # 위쪽 메뉴 (2026-10-23 정리): 영상(영상으로 배우기·사유의 문장) · 영어 공부(표현·꿀팁·이야기) · 영어 도구
-NAV_GROUPS = [("video", "/category/video/", "영상으로 배우기", "영상", ("video", "think")),
+NAV_GROUPS = [("video", "/category/watch/", "영상으로 배우기", "영상", ("watch", "video", "think")),
               ("study", "/category/study/", "영어 공부", "공부", ("study", "expr", "tip", "story")),
               ("tools", "/tools/", "영어 도구", "도구", ("tools",))]
 STUDY_CATS = ("expr", "tip", "story")
+WATCH_VIEW = ("watch", "video", "think")  # 영상 칸 전환: 전체 · 영상으로 배우기 · 사유의 문장 (전체 = /category/watch/, 2026-10-24)
 STUDY_VIEW = ("study",) + STUDY_CATS  # 영어 공부 칸 전환: 전체 · 표현 · 꿀팁 · 이야기 (전체 = /category/study/, 2026-10-24)
 nav_group = lambda nav: next((g for g, h, l, s, ks in NAV_GROUPS if nav in ks), nav)
 TILE_SUB = {"video": "카영 영상 속 표현을 장면과 함께", "expr": "새 표현 · 비슷한 표현 · 헷갈리는 표현",
@@ -37,6 +38,8 @@ CAT_SEO = {  # 카테고리 페이지 검색용 제목 · 설명
               "hello, OK, deadline, bug처럼 매일 쓰는 영어 단어가 어디서 왔는지 실제 기록과 사진으로 따라가고, 지금 쓰는 법과 퀴즈까지 정리했어요."),
     "study": ("영어 공부 - 원어민 영어표현, 영어꿀팁, 영어 단어 이야기 한곳에",
               "원어민이 매일 쓰는 영어표현, 바로 써먹는 회화·여행·발음 꿀팁, 영어 단어의 유래까지 예문과 원어민 발음, 퀴즈로 함께 공부해요."),
+    "watch": ("영상으로 배우는 영어 - 유명인 연설·인터뷰 영어표현과 영어 명언 필사",
+              "젠슨 황, 손흥민, 정의선 회장의 영어 연설과 인터뷰 속 표현을 장면과 함께 배우고, 곱씹을 문장은 따라 쓰며 복기해요."),
     "think": ("영어 명언 필사 - 사유의 문장, 연설과 인터뷰 속 영어 문장",
               "손흥민, 젠슨 황, 순다르 피차이의 영어 연설과 인터뷰 속 곱씹을 문장을 영상으로 듣고, 따라 쓰고, 빈칸으로 다시 떠올려 보세요."),
 }
@@ -47,6 +50,7 @@ CAT_LEAD = {  # 휴대폰(360px)에서도 한 줄에 들어가게 짧게
     "story": "매일 쓰는 단어에 숨은 역사",
     "think": "곱씹을 문장을 듣고, 쓰고, 떠올려요",
     "study": "표현·꿀팁·이야기를 한곳에서",
+    "watch": "영상 속 표현과 곱씹을 문장을 한곳에서",
 }
 e = lambda s: html.escape(str(s), quote=True)
 
@@ -511,7 +515,7 @@ def yt_thumb(video):
             f.parent.mkdir(parents=True, exist_ok=True)
             im.save(f, "WEBP", quality=80)
         except Exception:
-            return f"https://i.ytimg.com/vi/{video}/hqdefault.jpg"
+            return f"https://i.ytimg.com/vi/{video}/maxresdefault.jpg"  # 4:3(hq)은 위아래 검은 띠 때문에 잘려 보여서 16:9로
     small = f.with_name(f"{video}-400.webp")
     if not small.exists():
         try:
@@ -738,7 +742,7 @@ self.addEventListener("fetch", e => {
 # 웹 브라우저에서는 숨김(검색·광고 영향 없음). 주소 끝에 ?app=1 을 붙이면 웹에서도 미리 볼 수 있어요.
 _TI = lambda d: f'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{d}</svg>'
 TABS = [("home", "/", "홈", _TI('<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>')),
-        ("video", "/category/video/", "영상", _TI('<rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/>')),
+        ("video", "/category/watch/", "영상", _TI('<rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/>')),
         ("study", "/category/study/", "공부", _TI('<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/>')),
         ("tools", "/tools/", "도구", _TI('<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>'))]
 APP_HEAD_JS = ("<script>(function(){try{var q=/[?&]app=1/.test(location.search);if(q)sessionStorage.setItem('appPreview','1');"
@@ -755,9 +759,8 @@ def tabbar(nav):
 # '영상' 칸 안에서 영상으로 배우기 ↔ 사유의 문장 전환 (웹·앱 모두)
 STUDY_SEG = lambda cat: ('<div class="app-seg study-seg no-print" role="tablist" aria-label="영어 공부">'
                          + "".join(f'<a role="tab" href="/category/{k}/"{" class=on aria-selected=true" if k == cat else ""}>{NAV_SHORT[k]}</a>' for k in STUDY_VIEW) + '</div>')
-APP_SEG = lambda cat: ('<div class="app-seg no-print" role="tablist" aria-label="영상·문장">'
-                       + "".join(f'<a role="tab" href="/category/{k}/"{" class=on aria-selected=true" if k == cat else ""}>{CATS[k]}</a>' for k in ("video", "think")) + '</div>')
-# 앱에서는 두 카테고리가 '영상·문장' 탭 하나이므로 제목·설명도 묶음 이름으로 (웹·검색엔진에는 원래 제목 그대로)
+APP_SEG = lambda cat: ('<div class="app-seg watch-seg no-print" role="tablist" aria-label="영상·문장">'
+                       + "".join(f'<a role="tab" href="/category/{k}/"{" class=on aria-selected=true" if k == cat else ""}>{"전체" if k == "watch" else CATS[k]}</a>' for k in WATCH_VIEW) + '</div>')
 APP_HEAD = lambda cat: (f'<h1 data-app="영상·문장"><span class="wt">{CATS[cat]}</span></h1>'
                         f'<p class="lead" data-app="영상 속 표현과 곱씹을 문장을 한곳에"><span class="wt">{CAT_LEAD[cat]}</span></p>')
 NAV_SHORT = {"study": "전체", "video": "영상", "expr": "표현", "tip": "꿀팁", "story": "이야기", "think": "문장"}  # 휴대폰 위쪽 메뉴는 짧은 이름 (앱 탭과 같게)
@@ -863,7 +866,7 @@ def card(href, chips, title, sub, thumb=None, play=False, alt="", hl=3, data_sub
         else:
             img = f'<img src="{thumb.replace(".png?", ".webp?")}" alt="{e(alt)}" loading="lazy" width="960" height="504">'
         if not thumb.startswith(("icon:", "<")):
-            vt = thumb.startswith("/images/yt/")
+            vt = thumb.startswith(("/images/yt/", "https://i.ytimg.com/"))
             bg = img.replace("<img ", '<img aria-hidden="true" class="th-bg" ', 1).replace(f'alt="{e(alt)}"', 'alt=""') if vt else ""
             th = f'<div class="thumb{" vthumb" if vt else ""}">{bg}{img}{badge}</div>'
     ds = f' data-sub="{e(data_sub)}"' if data_sub else ""
@@ -1341,9 +1344,10 @@ SERIES_ABOUT = {
 }
 
 def view_card(cat):  # PC 오른쪽 '보기' 카드: 같은 탭 안의 칸 전환 (휴대폰에서는 숨기고 제목 아래 세그먼트 사용)
-    group = ("video", "think") if cat in ("video", "think") else STUDY_VIEW
-    n = {k: (len(THINKS) if k == "think" else sum(1 for p in POSTS if (p["cat"] in STUDY_CATS if k == "study" else p["cat"] == k))) for k in group}
-    lbl = lambda k: "전체" if k == "study" else CATS[k]
+    group = WATCH_VIEW if cat in WATCH_VIEW else STUDY_VIEW
+    nv = sum(1 for p in POSTS if p["cat"] == "video")
+    n = {k: (len(THINKS) if k == "think" else nv + len(THINKS) if k == "watch" else sum(1 for p in POSTS if (p["cat"] in STUDY_CATS if k == "study" else p["cat"] == k))) for k in group}
+    lbl = lambda k: "전체" if k in ("study", "watch") else CATS[k]
     return ('<div class="sf-g sf-view" role="group" aria-label="보기"><div class="sf-h">보기</div>'
             + "".join(f'<a class="sf-a{" on" if k == cat else ""}" href="/category/{k}/"><span>{lbl(k)}</span><em>{n[k]}</em></a>' for k in group) + '</div>')
 
@@ -1367,6 +1371,27 @@ def page_study():  # 영어 공부 전체: 표현·꿀팁·이야기를 한 목�
     return layout("영어 공부", seo_d, url, body, "study", wide=True, seo_title=seo_t, ld=ld, og_img=img)
 
 
+def page_watch():  # 영상 전체: 영상으로 배우기 + 사유의 문장을 날짜순 한 목록으로 (2026-10-24)
+    url = "/category/watch/"
+    vids = [p for p in POSTS if p["cat"] == "video"]
+    rows = sorted([(p.get("date", ""), "v", p) for p in vids] + [(t.get("date", ""), "t", t) for t in THINKS], key=lambda x: x[0], reverse=True)
+    cards = "".join(re.sub(r'(<span class="chip [a-z]+">)[^<]*(</span>)', lambda m: m.group(1) + "영상" + m.group(2), post_card(o, 2), 1) if k == "v"
+                    else re.sub(r'(<span class="chip [a-z]+">)[^<]*(</span>)', lambda m: m.group(1) + "사유의 문장" + m.group(2), think_card(o, 2), 1)
+                    for _, k, o in rows)
+    filt = f'<aside class="subfilter sf-one sf-viewonly" aria-label="보기">{view_card("watch")}</aside>'
+    body = (f'<h1>영상으로 배우기</h1><p class="lead">{CAT_LEAD["watch"]}</p>' + APP_SEG("watch") +
+            f'<div class="cat-grid has-filter all-cat"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get("video", ""))
+    seo_t, seo_d = CAT_SEO["watch"]
+    links = [post_url(o) if k == "v" else think_url(o) for _, k, o in rows]
+    ld = [{"@type": "CollectionPage", "name": "영상으로 배우기", "description": seo_d, "url": DOMAIN + url, "inLanguage": "ko",
+           "isPartOf": {"@type": "WebSite", "name": SITE["name"], "url": DOMAIN + "/"},
+           "mainEntity": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": DOMAIN + u} for i, u in enumerate(links)]}},
+          {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": DOMAIN + "/"},
+                                                         {"@type": "ListItem", "position": 2, "name": "영상으로 배우기", "item": DOMAIN + url}]}]
+    img = og_image("c-watch", "카테고리", "영상으로 배우기", CAT_LEAD["watch"], "듣고 · 따라 쓰고 · 퀴즈로 확인")
+    return layout("영상으로 배우기", seo_d, url, body, "watch", wide=True, seo_title=seo_t, ld=ld, og_img=img)
+
+
 def page_category(cat):
     url = f"/category/{cat}/"
     def one_filter(title, keys):  # 한 그룹 필터 (영상: 종류, 사유의 문장: 인물)
@@ -1380,7 +1405,7 @@ def page_category(cat):
         items = THINKS
         who = [t.get("theme") or "기타" for t in THINKS]  # 주제(겸손·관계·흔들릴 때 …) — 새 글마다 content/think/*.json 의 "theme"
         cards = "".join(think_card(t, 2).replace(' href=', f' data-sub="{e(w)}" href=', 1) for t, w in zip(THINKS, who))
-        filt = one_filter("주제", sorted(who, key=["겸손", "관계", "흔들릴 때"].index if all(w in ["겸손", "관계", "흔들릴 때"] for w in who) else None))
+        filt = f'<aside class="subfilter sf-one sf-viewonly" aria-label="보기">{view_card("think")}</aside>'  # 주제 필터는 2026-10-24에 뺌 (글 9개)
         body = (APP_HEAD(cat) + APP_SEG(cat) +
                 f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     elif cat == "video":
@@ -1398,7 +1423,8 @@ def page_category(cat):
         cards = "".join(re.sub(r' data-sub="[^"]*"', f' data-sub="{e(sub_of(p))}"', post_card(p, 2), 1) for p in items) or '<div class="empty"><p>곧 첫 글이 올라와요.</p></div>'
         subs = [sub_of(p) for p in items]
         ordered = sorted([x for x in subs if x], key=lambda x: (-subs.count(x), subs.index(x)))  # 글 많은 분류부터
-        filt = one_filter("분류", ordered) if len(set(ordered)) > 1 else ""
+        # 분류 필터는 꿀팁만 (2026-10-24 기준: 글 20개 이상일 때만). 표현·이야기는 보기만
+        filt = one_filter("분류", ordered) if (cat == "tip" and len(set(ordered)) > 1) else f'<aside class="subfilter sf-one sf-viewonly" aria-label="보기">{view_card(cat)}</aside>'
         body = (f'<h1>{CATS[cat]}</h1><p class="lead">{CAT_LEAD[cat]}</p>' + STUDY_SEG(cat) +
                 f'<div class="cat-grid{" has-filter" if filt else ""}"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     seo_t, seo_d = CAT_SEO[cat]
@@ -3038,6 +3064,8 @@ def build():
         write(f"/category/{c}/", page_category(c)); pages.append(f"/category/{c}/")
     LASTMOD["/category/study/"] = max([p["_mod"] for p in POSTS if p["cat"] in STUDY_CATS] or [newest])
     write("/category/study/", page_study()); pages.append("/category/study/")
+    LASTMOD["/category/watch/"] = max([p["_mod"] for p in POSTS if p["cat"] == "video"] + [t["_mod"] for t in THINKS] or [newest])
+    write("/category/watch/", page_watch()); pages.append("/category/watch/")
     for sr in SERIES:
         write(f"/series/{sr['id']}/", page_series(sr)); pages.append(f"/series/{sr['id']}/")
     write("/notes/", page_notes())
