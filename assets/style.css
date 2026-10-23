@@ -2549,3 +2549,22 @@ html.is-app .top-in>.brand,html.is-app .top-in>a:first-child{min-width:0}
 .tl-srcs a{color:var(--sub)}
 @media (max-width:480px){.tl-lad div{grid-template-columns:52px 1fr 1.3fr 1fr;font-size:12px;padding:8px}.tl-grade{grid-template-columns:50px 1fr}}
 .tl-ladder-s{display:grid;grid-template-columns:repeat(9,1fr)}.tl-ladder-s span{min-width:0;font-size:13px;padding:9px 0}@media (max-width:480px){.tl-ladder-s{gap:3px}.tl-ladder-s span{font-size:11px;padding:8px 0;border-radius:8px}}
+
+/* ===== 인쇄·PDF 저장: 대화·예문·카드가 페이지 사이에서 끊기지 않게 (2026-10-23) ===== */
+@media print{
+  html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  p{orphans:3;widows:3}
+  h1,h2,h3,h4,.sc-h,.tv-next-h,.nx-h{break-after:avoid;page-break-after:avoid}
+  h2+*,h3+*{break-before:avoid;page-break-before:avoid}
+  /* 대화: 짧은 대화는 통째로, 길면 말풍선 하나씩은 끊기지 않게 */
+  .ex.talk{display:block;break-inside:avoid;page-break-inside:avoid}
+  .ex.talk li{display:block;max-width:none;margin:0 0 6px;break-inside:avoid;page-break-inside:avoid}
+  .ex.talk li.me{text-align:right}
+  .ex.talk li .en{box-shadow:inset 0 0 0 1px #E5E8EB}
+  .ex.talk li .ko{display:block}
+  /* 예문·카드·인용 블록 */
+  .ex li,.ex.fix li,.box.scene,.mean-hi,.memo,.quote,.qc,.think-box,.xp,.rep,.rep-a,.tv-demo,.tv-row,.tv-step,.tv-tile,.note,.stat,.cmp tr,.tbl tr,blockquote,pre,figure,.fig{break-inside:avoid;page-break-inside:avoid}
+  img{break-inside:avoid;max-width:100%}
+  /* 예문 목록이 든 큰 상자는 통째로 넘기면 빈 공간이 커서, 안의 예문 단위로만 묶음 */
+  .box:has(> ul.ex){break-inside:auto;page-break-inside:auto}
+}
