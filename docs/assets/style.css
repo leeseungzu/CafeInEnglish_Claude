@@ -2879,3 +2879,9 @@ html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
 .ex-go i{font-style:normal;color:#CDEB5B}
 .ex-go2{display:inline-block;margin-top:8px;font-size:13px;font-weight:700;color:#191F28;text-decoration:none;background:#F2F4F6;border-radius:9px;padding:6px 10px}
 .ex-go2:hover{background:#E5E8EB}
+/* 아이폰 사파리 날짜 칸: 기본 모양 끄고 칸 안에 맞추기 */
+.ex-date{-webkit-appearance:none;appearance:none;display:block;width:100%;max-width:100%;min-width:0;height:56px;line-height:56px;padding:0 16px;text-align:left;background:#F2F4F6 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%238B95A1' stroke-width='2' stroke-linecap='round'%3E%3Crect x='3' y='4.5' width='14' height='12.5' rx='3'/%3E%3Cpath d='M3 8.5h14M7 2.5v3M13 2.5v3'/%3E%3C/svg%3E") no-repeat right 16px center;color:#191F28}
+.ex-date::-webkit-date-and-time-value{text-align:left;margin:0;min-height:56px;line-height:56px}
+.ex-date::-webkit-datetime-edit{padding:0;line-height:56px}
+.ex-date::-webkit-calendar-picker-indicator{opacity:0;width:24px;height:24px;cursor:pointer}
+.tl-box{min-width:0;overflow:hidden}
