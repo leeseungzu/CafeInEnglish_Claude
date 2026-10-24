@@ -340,5 +340,23 @@
     "en": "It's not just a job. It's my passion.",
     "ko": "그냥 일이 아니라, 제 열정이에요",
     "desc": "not just = 단지 ~만이 아닌. 젠슨 황의 AI is not just software technology에서 건졌어요."
+  },
+  {
+    "post": "running-late",
+    "en": "Sorry, I'm running a little late.",
+    "ko": "미안, 조금 늦을 것 같아",
+    "desc": "가는 중에 미리 알리는 말. 도착해서 사과할 땐 Sorry I'm late."
+  },
+  {
+    "post": "all-ears",
+    "en": "Go ahead, I'm all ears.",
+    "ko": "말해 봐, 듣고 있어",
+    "desc": "온몸이 귀가 된 것처럼 집중해서 듣겠다는 말. ears의 s를 빼먹지 마세요."
+  },
+  {
+    "post": "discuss-about",
+    "en": "We need to discuss the budget.",
+    "ko": "예산을 논의해야 해요",
+    "desc": "discuss 뒤에는 about 없이 바로 내용이 와요. about을 쓰려면 talk about."
   }
 ]

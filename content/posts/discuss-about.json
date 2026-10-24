@@ -1,0 +1,73 @@
+{
+  "id": "discuss-about",
+  "cat": "tip",
+  "sub": "단어",
+  "level": "기초",
+  "date": "2026-10-24",
+  "title": "\"discuss about\"은 틀려요, 전치사 없이 쓰는 동사 4개",
+  "seo_title": "discuss about 틀린 이유 - discuss, marry, contact, enter 전치사 실수",
+  "lead": "한국어 조사를 영어로 옮기면 생기는 실수",
+  "description": "discuss about, marry with, contact to, enter into는 모두 어색해요. 전치사 없이 쓰는 동사 네 개와 talk about처럼 전치사가 필요한 짝을 표와 예문, 퀴즈로 정리했어요.",
+  "og": {
+    "en": "discuss the plan",
+    "ko": "discuss 뒤에 about은 빼요"
+  },
+  "icon": "speech-balloon",
+  "chat": {
+    "q": "What's the meeting about?",
+    "a": "We need to discuss the budget.",
+    "key": "discuss the budget",
+    "ko": "예산을 논의해야 해서요."
+  },
+  "thumb": {
+    "text": "discuss about?",
+    "key": "about",
+    "ko": "이 about, 빼야 할까?"
+  },
+  "quiz": [
+    {
+      "tag": "단어",
+      "q": "'그 계획에 대해 논의해 봐요'로 자연스러운 문장은?",
+      "sub": "",
+      "options": [
+        "Let's discuss about the plan.",
+        "Let's discuss the plan.",
+        "Let's discuss to the plan.",
+        "Let's discuss on the plan."
+      ],
+      "answer": 1,
+      "explain": "discuss는 목적어를 바로 받는 동사예요. about을 쓰고 싶다면 talk about을 쓰면 돼요.",
+      "mnemonic": "discuss는 바로 직진"
+    },
+    {
+      "tag": "단어",
+      "q": "'그는 미국인과 결혼했어요'로 알맞은 문장은?",
+      "sub": "",
+      "options": [
+        "He is married with an American.",
+        "He is married to an American.",
+        "He married with an American.",
+        "He is marrying to an American."
+      ],
+      "answer": 1,
+      "explain": "결혼한 상태는 be married to, 결혼하는 동작은 marry 사람이에요. married with는 뒤에 아이가 올 때(married with two kids)만 써요.",
+      "mnemonic": "결혼 상대는 to, 아이는 with"
+    },
+    {
+      "tag": "단어",
+      "q": "빈칸에 들어갈 말로 알맞은 것은? \"Please ___ me if you have questions.\"",
+      "sub": "",
+      "options": [
+        "contact",
+        "contact to",
+        "contact with",
+        "contact for"
+      ],
+      "answer": 0,
+      "explain": "contact는 '~에게 연락하다'까지 한 단어라 사람을 바로 써요. 전치사를 쓰려면 get in touch with를 써요.",
+      "mnemonic": "contact me, get in touch with me"
+    }
+  ],
+  "body_html": "<p>\"그 문제에 대해 논의해 봐요.\" 영어로 옮기면 Let's discuss about the problem.이 먼저 떠오르기 쉬워요. 한국어에 '~에 대해'가 있으니 about을 붙이고 싶어지거든요. 그런데 이 문장은 원어민 귀에 어색해요. <b>discuss는 about 없이 바로 목적어를 받는 동사</b>예요. 롱맨 사전은 아예 \"discuss about이라고 말하지 마세요\"라는 안내를 붙여 두었어요.</p>\n<p>discuss처럼 한국어 조사 때문에 전치사를 덧붙이기 쉬운 동사가 몇 개 더 있어요. 오늘은 그중에서도 매일 쓰는 네 가지, <b>discuss, marry, contact, enter</b>를 정리해요.</p>\n<h2>전치사 없이 바로 쓰는 동사 4개</h2>\n<figure class=\"fig\"><img src=\"/images/no-preposition-verbs.png\" alt=\"전치사를 붙이지 않는 동사 네 가지: discuss about the plan이 아니라 discuss the plan, marry with him이 아니라 marry him, contact to me가 아니라 contact me, enter into the room이 아니라 enter the room\" width=\"1080\" height=\"1496\" loading=\"lazy\"><figcaption>이 네 동사에서는 한국어 조사(~에 대해, ~와, ~에게, ~에)를 영어로 옮기지 마세요</figcaption></figure>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>한국어</th><th>✕ 어색해요</th><th>○ 자연스러워요</th></tr></thead><tbody><tr><td>계획에 대해 논의하다</td><td>discuss about the plan</td><td>discuss the plan</td></tr><tr><td>그와 결혼하다</td><td>marry with him</td><td>marry him</td></tr><tr><td>나에게 연락하다</td><td>contact to me</td><td>contact me</td></tr><tr><td>방에 들어가다</td><td>enter into the room</td><td>enter the room</td></tr></tbody></table></div>\n<h2>discuss, 누구와 할지는 with로</h2>\n<p>discuss 바로 뒤에는 논의할 <b>내용</b>이 와요. 같이 논의하는 <b>사람</b>을 말하고 싶을 때만 with를 써요. 그리고 같은 뜻이라도 talk를 쓰면 about이 필요해요. 롱맨 사전도 일상 영어에서는 discuss보다 talk about을 더 많이 쓴다고 설명해요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">We need to discuss the budget.</span><span class=\"ko\">예산을 논의해야 해요.</span></li>\n<li><span class=\"en\">I discussed the idea with my team.</span><span class=\"ko\">그 아이디어를 팀과 논의했어요.</span></li>\n<li><span class=\"en\">Let's talk about it over lunch.</span><span class=\"ko\">점심 먹으면서 그 얘기 해요.</span></li>\n</ul></div>\n<p>명사 discussion은 다르게 움직여요. a discussion about the budget처럼 about이나 of를 붙여도 자연스러워요. 동사는 about 없이, 명사는 about과 함께라고 나눠서 기억하면 편해요.</p>\n<h2>marry, '~와'를 빼요</h2>\n<p>marry 뒤에는 결혼하는 상대가 바로 와요. 결혼한 상태를 말할 때는 <b>be married to</b>, 결혼식을 올리는 일은 <b>get married</b>를 써요. 롱맨 사전은 He is married with an American.을 틀린 문장으로 표시해요. 다만 married with two children처럼 with 뒤에 아이가 오면 '결혼해서 아이가 둘'이라는 뜻의 정해진 표현이라 괜찮아요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">She married her college friend.</span><span class=\"ko\">그녀는 대학 친구와 결혼했어요.</span></li>\n<li><span class=\"en\">He's married to a doctor.</span><span class=\"ko\">그는 의사와 결혼했어요.</span></li>\n<li><span class=\"en\">They got married last spring.</span><span class=\"ko\">그들은 지난봄에 결혼했어요.</span></li>\n</ul></div>\n<h2>contact와 enter도 바로 목적어</h2>\n<p>contact는 '~에게 연락하다'라는 뜻을 이미 품고 있어서 to나 with 없이 사람을 바로 써요. 전치사를 쓰고 싶다면 <b>get in touch with</b>나 <b>get in contact with</b>처럼 덩어리 표현을 쓰면 돼요. enter도 장소를 바로 받아요. enter into는 '계약이나 논의를 시작하다'처럼 전혀 다른 뜻이 돼요. 반대로 go는 into가 필요해서 go into the room이 맞아요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Please contact me if you have any questions.</span><span class=\"ko\">질문이 있으면 저에게 연락 주세요.</span></li>\n<li><span class=\"en\">I'll get in touch with you next week.</span><span class=\"ko\">다음 주에 연락드릴게요.</span></li>\n<li><span class=\"en\">Please knock before you enter the room.</span><span class=\"ko\">방에 들어가기 전에 노크해 주세요.</span></li>\n<li><span class=\"en\">The two companies entered into an agreement.</span><span class=\"ko\">두 회사가 계약을 맺었어요.</span></li>\n</ul></div>\n<h2>실제 대화 · 회의 일정을 잡을 때</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Do you have time this afternoon?</span><span class=\"ko\">오늘 오후에 시간 있어요?</span></li>\n<li class=\"me\"><span class=\"en\">Sure. What do you want to discuss?</span><span class=\"ko\">네. 어떤 걸 논의하고 싶으세요?</span></li>\n<li class=\"them\"><span class=\"en\">The new schedule. I also need to contact the client today.</span><span class=\"ko\">새 일정이요. 오늘 고객사에도 연락해야 하거든요.</span></li>\n<li class=\"me\"><span class=\"en\">Okay, let's talk about it at three.</span><span class=\"ko\">좋아요, 3시에 얘기해요.</span></li>\n</ul>\n<h2>조사를 영어로 옮기는 습관</h2>\n<p>한국어는 '계획<b>에 대해</b>', '그<b>와</b>', '나<b>에게</b>', '방<b>에</b>'처럼 명사 뒤에 조사를 붙여서 관계를 나타내요. 그래서 영어로 말할 때도 조사 자리에 about, with, to, into를 하나씩 넣는 습관이 생겨요. 그런데 영어 동사 중에는 그 관계를 이미 뜻 안에 담고 있는 것이 많아요. discuss는 '~에 대해 이야기하다', marry는 '~와 결혼하다', contact는 '~에게 연락하다', enter는 '~에 들어가다'까지가 한 단어예요. 새 동사를 외울 때 <b>뒤에 무엇이 바로 오는지</b>를 예문 하나로 같이 외우면 이런 실수가 확 줄어요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 디스커스, 메리, 컨택트, 엔터. 네 동사 모두 '바로 직진'! 사이에 전치사가 끼어들 틈이 없어요.</div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">회의에서 일정 이야기를 하자고 할 때</span><span class=\"no\">Let's discuss about the schedule.</span><span class=\"en\">Let's discuss the schedule.</span><span class=\"ko\">일정을 논의해 봐요.</span><span class=\"why\"><b>왜?</b>discuss는 목적어를 바로 받는 타동사예요. about을 넣고 싶다면 Let's talk about the schedule.처럼 talk를 쓰세요.</span></li>\n</ul></div>\n<h2>자주 묻는 질문</h2>\n<p><b>Q. 메일에서 '연락 주세요'는 어떻게 써요?</b><br>Please contact me.도 좋고, 조금 더 부드럽게 Feel free to get in touch.라고도 써요. 메일 첫 줄과 끝 줄 표현은 <a href=\"/p/email-phrases/\">영어 이메일, 첫 줄과 끝 줄만 바꿔도</a>에 모아 두었어요.</p>\n<p>전치사 뒤에 어떤 형태가 오는지도 헷갈린다면 <a href=\"/p/looking-forward-to/\">I'm looking forward to seeing you</a>도 같이 확인해 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Longman 'discuss', 'discussion', 'married', 'marry', 'contact', 'enter' · Merriam-Webster 'discuss', 'contact', 'enter' · Oxford Learner's Dictionaries 'married'.</p>",
+  "related": []
+}

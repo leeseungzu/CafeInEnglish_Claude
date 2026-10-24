@@ -1,0 +1,73 @@
+{
+  "id": "can-vs-cant",
+  "cat": "tip",
+  "sub": "발음",
+  "level": "기초",
+  "date": "2026-10-24",
+  "title": "can과 can't, t 말고 강세로 구별해요",
+  "seo_title": "can can't 발음 차이 - 원어민 can't가 안 들리는 이유와 구별법",
+  "lead": "t가 안 들려도 뜻을 놓치지 않는 듣기 요령",
+  "description": "원어민 말에서 can과 can't가 똑같이 들린다면 t 대신 강세를 들어 보세요. 약한 /kən/과 센 /kænt/, 문장 끝에서 달라지는 점, 영국식 발음 차이를 예문과 대화, 퀴즈로 정리했어요.",
+  "og": {
+    "en": "can vs can't",
+    "ko": "t 말고 강세로 구별해요"
+  },
+  "icon": "speaking-head",
+  "chat": {
+    "q": "Can you help me on Saturday?",
+    "a": "Sorry, I can't make it.",
+    "key": "can't",
+    "ko": "미안, 못 갈 것 같아."
+  },
+  "thumb": {
+    "text": "can vs can't",
+    "key": "can't",
+    "ko": "원어민 can't, 왜 안 들릴까?"
+  },
+  "quiz": [
+    {
+      "tag": "발음",
+      "q": "\"I can come.\"을 자연스럽게 말할 때 가장 세게 들리는 단어는?",
+      "sub": "",
+      "options": [
+        "I",
+        "can",
+        "come",
+        "모두 똑같이"
+      ],
+      "answer": 2,
+      "explain": "문장 가운데의 can은 약하게 /kən/으로 지나가고, 뒤의 동사 come이 세게 들려요.",
+      "mnemonic": "can은 작게, 동사는 크게"
+    },
+    {
+      "tag": "듣기",
+      "q": "원어민 말에서 can't를 알아듣는 가장 좋은 단서는?",
+      "sub": "",
+      "options": [
+        "끝의 t 소리",
+        "can't에 들어간 강세와 또렷한 모음",
+        "말하는 속도",
+        "문장의 길이"
+      ],
+      "answer": 1,
+      "explain": "can't의 t는 약하거나 안 들릴 때가 많아요. 대신 can't는 강세를 받아 모음이 또렷하게 들려요.",
+      "mnemonic": "t를 찾지 말고 세게 들리는 곳을 찾기"
+    },
+    {
+      "tag": "발음",
+      "q": "\"Yes, I can.\"의 can은 어떻게 말할까요?",
+      "sub": "",
+      "options": [
+        "약하게 /kən/",
+        "세게 /kæn/",
+        "소리를 내지 않는다",
+        "/kɑːnt/"
+      ],
+      "answer": 1,
+      "explain": "문장 끝에 오는 can은 약해지지 않고 세게 /kæn/으로 말해요.",
+      "mnemonic": "끝에 오면 can도 힘을 줘요"
+    }
+  ],
+  "body_html": "<p>\"I can come.\"과 \"I can't come.\" 글로 보면 t 하나 차이인데 뜻은 정반대예요. 그런데 원어민이 빠르게 말하면 can't의 <b>t가 잘 안 들려서</b> 둘이 똑같이 들린다는 사람이 많아요. 실제로 미국 뉴욕시립대 버룩 칼리지의 발음 자료도 can't의 마지막 t는 늘 소리 나는 게 아니라서 <b>강세로 둘을 구별한다</b>고 설명해요. 오늘은 t 대신 강세와 모음으로 can과 can't를 알아듣는 법을 정리해요.</p>\n<h2>문장 속 can은 약하게, can't는 세게</h2>\n<p>옥스퍼드 학습자 사전을 보면 can에는 발음이 두 가지 있어요. 세게 말할 때 <b>/kæn/</b>, 약하게 말할 때 <b>/kən/</b>이에요. 문장 앞이나 가운데에 오는 can은 대부분 약한 /kən/으로 짧게 지나가서 '큰'이나 '컨'처럼 들려요. 대신 뒤에 오는 동사(come, swim, help)가 세게 들려요.</p>\n<p>can't는 반대예요. 문장 가운데서도 <b>강세를 받아서</b> 모음이 또렷하게 살아 있어요. 미국식은 /kænt/로 '캔(트)'처럼 입을 크게 벌린 또렷한 모음으로 들려요. t는 약하거나 거의 안 들릴 때가 많아요.</p>\n<figure class=\"fig\"><img src=\"/images/can-cant-stress.png\" alt=\"can과 can't를 강세로 구별하는 그림: I can come.은 can이 작고 약하게(컨) come이 크게 들리고, I can't come.은 can't가 크고 또렷하게(캔트) 들린다. 문장 끝 Yes, I can. No, I can't.는 둘 다 세게 말한다\" width=\"1080\" height=\"1439\" loading=\"lazy\"><figcaption>t를 찾지 말고 어디가 세게 들리는지 들어 보세요</figcaption></figure>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>위치</th><th>can</th><th>can't</th></tr></thead><tbody><tr><td>문장 앞·가운데</td><td>약하게 /kən/ (컨)</td><td>세게 /kænt/ (캔트)</td></tr><tr><td>문장 끝 (짧은 대답)</td><td>세게 /kæn/</td><td>세게 /kænt/</td></tr><tr><td>뒤에 오는 동사</td><td>세게 들림</td><td>동사도 강세를 받음</td></tr></tbody></table></div>\n<h2>예문으로 들어 보기</h2>\n<p>스피커 버튼을 눌러 두 문장을 번갈아 들어 보세요. can 문장은 동사가, can't 문장은 can't가 귀에 먼저 꽂혀요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I can swim.</span><span class=\"ko\">나 수영할 수 있어.</span></li>\n<li><span class=\"en\">I can't swim.</span><span class=\"ko\">나 수영 못 해.</span></li>\n<li><span class=\"en\">She can help you tomorrow.</span><span class=\"ko\">그녀가 내일 도와줄 수 있어요.</span></li>\n<li><span class=\"en\">She can't help you tomorrow.</span><span class=\"ko\">그녀는 내일 못 도와줘요.</span></li>\n<li><span class=\"en\">Yes, I can. No, I can't.</span><span class=\"ko\">응, 할 수 있어. 아니, 못 해.</span></li>\n</ul></div>\n<h2>문장 끝에서는 둘 다 세게</h2>\n<p>버룩 칼리지 자료에 따르면 문장이나 말 덩어리의 <b>끝</b>에서는 can과 can't 모두 강세를 받아요. Yes, I can.의 can은 약해지지 않고 /kæn/으로 또렷하게 말해요. 다행히 이런 짧은 대답은 앞에 Yes나 No가 붙어서 뜻을 놓칠 일이 거의 없어요.</p>\n<h2>실제 대화 · 주말 이사 도와주기</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Can you help me move on Saturday?</span><span class=\"ko\">토요일에 이사 좀 도와줄 수 있어?</span></li>\n<li class=\"me\"><span class=\"en\">I can't do Saturday, but I can come on Sunday.</span><span class=\"ko\">토요일은 안 되는데, 일요일엔 갈 수 있어.</span></li>\n<li class=\"them\"><span class=\"en\">Sunday works. Can you bring your car?</span><span class=\"ko\">일요일 좋아. 차 가져올 수 있어?</span></li>\n<li class=\"me\"><span class=\"en\">Sure, I can.</span><span class=\"ko\">그럼, 가져갈 수 있지.</span></li>\n</ul>\n<p>두 번째 문장에 can't와 can이 같이 들어 있어요. can't do Saturday에서는 can't가 세게, can come에서는 come이 세게 들리는지 집중해서 들어 보세요.</p>\n<h2>'캔'으로 세게 배운 게 함정</h2>\n<p>우리는 can을 처음 배울 때 단어 하나로 '캔'이라고 또박또박 읽어요. 그래서 문장 속에서도 can을 세게 말하는 습관이 생기기 쉬워요. 그런데 영어에서는 문장 가운데의 can이 세게 들리면 오히려 can't처럼 들릴 수 있어요. 거꾸로 can't의 t만 기다리며 들으면, t가 약하게 지나갈 때 can으로 잘못 알아듣게 돼요. 듣기와 말하기 모두 <b>t보다 강세</b>에 집중하는 게 요령이에요.</p>\n<p>영국식 발음은 조금 더 쉬워요. 영국식 can't는 /kɑːnt/로 '카안트'처럼 모음 자체가 달라서, can과 소리 차이가 더 커요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">'나 갈 수 있어'라고 말하면서 can을 세게 힘주어 말할 때</span><span class=\"no\">I CAN come.</span><span class=\"en\">I can come.</span><span class=\"ko\">나 갈 수 있어. (can은 약하게, come은 세게)</span><span class=\"why\"><b>왜?</b>문장 가운데의 can은 약하게 /kən/으로 말해요. can을 세게 말하면 상대가 can't로 들을 수 있어요. 할 수 있다는 걸 일부러 강조할 때만 can을 세게 말해요.</span></li>\n</ul></div>\n<h2>자주 묻는 질문</h2>\n<p><b>Q. 그래도 헷갈리면 어떻게 하죠?</b><br>되물으면 돼요. Sorry, did you say you can or can't?(미안, 된다고 했어, 안 된다고 했어?)처럼 물으면 실례가 아니에요. 다른 되묻기 문장은 <a href=\"/p/ask-to-repeat/\">못 알아들었을 때 당황하지 않는 영어</a>에 모아 두었어요.</p>\n<p><b>Q. cannot은 어떻게 발음해요?</b><br>cannot은 미국식 /ˈkænɑːt/(캐낫), 영국식 /ˈkænɒt/로 발음해요. 줄이지 않은 형태라 글이나 강조할 때 주로 써요. 말할 때는 대부분 can't로 줄여 말해요.</p>\n<p>원어민 말이 붙어서 들리는 다른 이유가 궁금하다면 <a href=\"/p/linking/\">wanna·gonna·gotta 듣기</a>와 <a href=\"/p/ed-pronunciation/\">-ed 발음 3가지 규칙</a>도 같이 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Oxford Learner's Dictionaries 'can', 'can't' · Baruch College(CUNY) Tools for Clear Speech 'Can versus Can't'.</p>",
+  "related": []
+}

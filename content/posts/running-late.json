@@ -1,0 +1,73 @@
+{
+  "id": "running-late",
+  "cat": "expr",
+  "sub": "새 표현",
+  "level": "기초",
+  "date": "2026-10-24",
+  "title": "\"I'm running late\", '나 좀 늦을 것 같아'를 한마디로",
+  "seo_title": "I'm running late 뜻 - '좀 늦을 것 같아' 영어로, I'm late와 차이",
+  "lead": "가는 길에 늦어질 때 미리 알리는 원어민의 한마디",
+  "description": "I'm running late는 '가는 중인데 좀 늦을 것 같아'라는 뜻이에요. Sorry I'm late와의 차이, 10분 늦는다고 말하는 법, 자주 하는 실수를 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "I'm running late.",
+    "ko": "'나 좀 늦을 것 같아'를 한마디로"
+  },
+  "icon": "watch",
+  "chat": {
+    "q": "Where are you? We're all here.",
+    "a": "Sorry, I'm running late!",
+    "key": "running late",
+    "ko": "미안, 좀 늦을 것 같아!"
+  },
+  "thumb": {
+    "text": "I'm running late.",
+    "key": "late",
+    "ko": "'늦을 것 같아'를 영어로?"
+  },
+  "quiz": [
+    {
+      "tag": "표현",
+      "q": "약속 장소로 가는 중인데 늦을 것 같다고 미리 알릴 때 가장 자연스러운 말은?",
+      "sub": "",
+      "options": [
+        "I will late.",
+        "I'm running late.",
+        "I'm lately.",
+        "I late a little."
+      ],
+      "answer": 1,
+      "explain": "I'm running late는 '지금 늦어지는 중'이라 도착 전에 미리 알릴 때 딱 맞아요. late는 동사가 아니라서 혼자 쓸 수 없어요.",
+      "mnemonic": "뛰어가는 중(running)인데 늦는 중(late)"
+    },
+    {
+      "tag": "상황",
+      "q": "약속 장소에 도착해서 친구에게 사과할 때 어울리는 말은?",
+      "sub": "",
+      "options": [
+        "I'm running late.",
+        "Sorry I'm late.",
+        "I'm on my way.",
+        "We're running behind."
+      ],
+      "answer": 1,
+      "explain": "이미 도착했다면 Sorry I'm late.로 사과해요. I'm running late는 아직 가는 중일 때 써요.",
+      "mnemonic": "가는 중엔 running late, 도착하면 Sorry I'm late"
+    },
+    {
+      "tag": "뜻",
+      "q": "\"The buses are running late.\"의 뜻은?",
+      "sub": "",
+      "options": [
+        "버스가 늦게까지 다닌다",
+        "버스가 예정보다 늦게 다니고 있다",
+        "버스가 빨리 달린다",
+        "버스 운행이 끝났다"
+      ],
+      "answer": 1,
+      "explain": "run late는 시간표가 있는 교통수단이나 행사에도 써요. '예정보다 늦어지고 있다'는 뜻이에요.",
+      "mnemonic": "시간표보다 뒤에서 달리는 버스"
+    }
+  ],
+  "body_html": "<h2>뜻</h2>\n<div class=\"box\"><b>I'm running late.</b> = (가는 중인데) 좀 늦을 것 같아요 / 예정보다 늦어지고 있어요</div>\n<p>약속 장소로 가는 길에 시간이 빠듯해졌을 때, 상대에게 <b>미리</b> 알리는 말이에요. 메리엄웹스터 사전은 run late를 '예상한 시각보다 늦게 도착하거나 떠나다'로 풀이하고, 예문으로 I have to hurry. I'm running late.(서둘러야 해. 늦겠어.)를 들어요. 옥스퍼드 학습자 사전에도 I'm running late for school.(학교에 늦겠어.)이 나와요.</p>\n<p>핵심은 진행형이라는 점이에요. I'm late는 '나 늦었어'라는 상태라서 약속 시간이 이미 지났을 때 어울리고, I'm running late는 '지금 늦어지는 중'이라 아직 도착하기 전에 쓰기 좋아요. 그래서 원어민은 출발이 늦어졌거나 길이 막힐 때 이 문장으로 먼저 연락하고, 도착해서는 Sorry I'm late.라고 사과해요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 시계 바늘을 쫓아 뛰어가는(running) 모습. 열심히 뛰고 있지만 아직 늦는 중(late)이에요. 사실 여기서 run은 '달리다'보다 버스 시간표처럼 '진행되다'에 가까워서, 사람 말고 일정에도 쓸 수 있어요.</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Sorry, I'm running a little late.</span><span class=\"ko\">미안, 조금 늦을 것 같아.</span></li>\n<li><span class=\"en\">I'm running about ten minutes late.</span><span class=\"ko\">10분쯤 늦을 것 같아요.</span></li>\n<li><span class=\"en\">I'm running late for the meeting. Please start without me.</span><span class=\"ko\">회의에 늦을 것 같아요. 먼저 시작해 주세요.</span></li>\n<li><span class=\"en\">The buses are running late because of the snow.</span><span class=\"ko\">눈 때문에 버스가 늦게 다니고 있어요.</span></li>\n<li><span class=\"en\">Sorry to keep you waiting.</span><span class=\"ko\">기다리게 해서 죄송해요.</span></li>\n</ul></div>\n<p>사람뿐 아니라 버스, 기차, 행사처럼 <b>정해진 시간표가 있는 것</b>에도 써요. 늦는 시간을 말하고 싶으면 running 뒤에 ten minutes처럼 넣으면 돼요.</p>\n<h2>늦을 때 쓰는 말, 순서대로 보기</h2>\n<figure class=\"fig\"><img src=\"/images/running-late-timeline.png\" alt=\"늦을 때 쓰는 영어를 시간 순서로 정리한 그림: 가는 중에 미리 알릴 때 I'm running late. · 지금 가고 있을 때 I'm on my way. · 도착해서 사과할 때 Sorry I'm late. · 오래 기다리게 했을 때 Sorry to keep you waiting.\" width=\"1080\" height=\"1544\" loading=\"lazy\"><figcaption>미리 알릴 땐 running late, 도착해서는 Sorry I'm late</figcaption></figure>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>상황</th><th>영어</th></tr></thead><tbody><tr><td>가는 중에 늦을 것 같다고 미리 알릴 때</td><td>I'm running late.</td></tr><tr><td>얼마나 늦는지 말할 때</td><td>I'm running 10 minutes late.</td></tr><tr><td>지금 가고 있다고 할 때</td><td>I'm on my way.</td></tr><tr><td>도착해서 사과할 때</td><td>Sorry I'm late.</td></tr><tr><td>상대를 기다리게 했을 때</td><td>Sorry to keep you waiting.</td></tr><tr><td>일정 전체가 밀릴 때</td><td>We're running behind schedule.</td></tr></tbody></table></div>\n<h2>실제 대화 · 저녁 약속에 늦을 때</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Hey, where are you? We're all here.</span><span class=\"ko\">어디야? 우리 다 왔어.</span></li>\n<li class=\"me\"><span class=\"en\">Sorry, I'm running late. The traffic is terrible.</span><span class=\"ko\">미안, 좀 늦을 것 같아. 차가 엄청 막혀.</span></li>\n<li class=\"them\"><span class=\"en\">No problem. Should we order first?</span><span class=\"ko\">괜찮아. 먼저 주문할까?</span></li>\n<li class=\"me\"><span class=\"en\">Yes, please. I'll be there in fifteen minutes.</span><span class=\"ko\">응, 그래 줘. 15분 뒤에 도착해.</span></li>\n</ul>\n<h2>'늦는다'를 동사로 생각하면 막혀요</h2>\n<p>한국어 '늦다'는 동사라서 '늦을 것 같아'를 그대로 옮기면 I will late.처럼 말하기 쉬워요. 하지만 영어 late는 '늦은, 늦게'라는 형용사·부사라 혼자서는 동사 노릇을 못 해요. 그래서 앞에 be나 run 같은 동사가 꼭 필요해요. I'll be late.(늦을 거야)도 맞는 말이고, 지금 가는 중이라는 느낌까지 담고 싶을 때 I'm running late.를 쓰면 돼요.</p>\n<p>또 하나 조심할 단어가 <b>lately</b>예요. late에 -ly를 붙이면 '늦게'가 아니라 <b>'최근에'</b>라는 뜻이 돼요. I've been busy lately.는 '요즘 바빴어'라는 말이에요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">가는 길에 '나 좀 늦을 것 같아'라고 문자 보낼 때</span><span class=\"no\">I will late.</span><span class=\"en\">I'm running a bit late.</span><span class=\"ko\">나 좀 늦을 것 같아.</span><span class=\"why\"><b>왜?</b>late는 동사가 아니라서 혼자 쓸 수 없어요. I'll be late.나 I'm running late.처럼 be, run과 함께 써요.</span></li>\n</ul></div>\n<h2>자주 묻는 질문</h2>\n<p><b>Q. 문자로 짧게 보내도 되나요?</b><br>네. 친구 사이 문자에서는 주어를 빼고 Running late, sorry!라고도 많이 보내요. 회사 메일이나 상사에게는 I'm running about 10 minutes late. Apologies for the delay.처럼 완전한 문장이 좋아요.</p>\n<p><b>Q. the late는 무슨 뜻인가요?</b><br>사람 이름 앞에 붙은 the late는 '늦은'이 아니라 <b>'고(故)'</b>라는 뜻이에요. the late John Smith는 '고 존 스미스'예요. 뉴스에서 자주 보이니 같이 알아 두세요.</p>\n<p>'15분 뒤에 도착해'처럼 시간을 말할 때 after가 아니라 in을 쓰는 이유는 <a href=\"/p/in-vs-after/\">in 10 minutes</a>에서, 약속을 뜻하는 영어 단어는 <a href=\"/p/plans-appointment-promise/\">'약속'을 영어로 말하는 3가지</a>에서 확인해 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Merriam-Webster 'run late', 'run behind schedule', 'late' · Oxford Learner's Dictionaries 'late', 'keep' · Longman 'late'.</p>",
+  "related": []
+}

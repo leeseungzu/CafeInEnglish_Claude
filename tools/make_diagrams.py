@@ -486,6 +486,81 @@ def borrow_lend():
     c.save("borrow-lend.png")
 
 
+def running_late():
+    c = Canvas("늦을 때 영어, 언제 무슨 말을 할까", "가는 중인지, 도착했는지에 따라 달라요")
+    rows = [("가는 중, 미리 알릴 때", "I'm running late.", "좀 늦을 것 같아요"),
+            ("지금 가고 있을 때", "I'm on my way.", "가는 중이에요"),
+            ("도착해서 사과할 때", "Sorry I'm late.", "늦어서 미안해요"),
+            ("상대를 기다리게 했을 때", "Sorry to keep you waiting.", "기다리게 해서 죄송해요")]
+    def body(x, r):
+        for i, (when, en, ko) in enumerate(rows):
+            c.pill(x, c.y, when, F(36, 700)); c.y += 80
+            if i == 0:
+                c.hl(x, c.y, en, F(54, 800))
+            else:
+                c.d.text((x, c.y), en, font=F(54, 800), fill=INK)
+            c.y += int(54 * 1.3)
+            c.text(x, ko, F(40, 700), MUTED, 1.3)
+            if i < len(rows) - 1:
+                c.d.line((x, c.y + 4, r, c.y + 4), fill=LINE, width=3); c.y += 34
+    c.card(body)
+    c.note("도착 전엔 running late, 도착하면 Sorry I'm late!", 40)
+    c.save("running-late-timeline.png")
+
+
+def no_prep_verbs():
+    c = Canvas("전치사 없이 바로 쓰는 동사", "한국어 조사를 영어로 옮기지 마세요")
+    rows = [("논의하다", "discuss about the plan", "discuss the plan"),
+            ("결혼하다", "marry with him", "marry him"),
+            ("연락하다", "contact to me", "contact me"),
+            ("들어가다", "enter into the room", "enter the room")]
+    def body(x, r):
+        for i, (ko, no, ok) in enumerate(rows):
+            c.text(x, ko, F(40, 700), MUTED, 1.35)
+            y0 = c.y
+            c.d.line((x + 6, c.y + 14, x + 38, c.y + 46), fill="#E5484D", width=7)
+            c.d.line((x + 38, c.y + 14, x + 6, c.y + 46), fill="#E5484D", width=7)
+            c.d.text((x + 70, c.y), no, font=F(46, 700), fill=MUTED)
+            w = c.d.textlength(no, font=F(46, 700))
+            c.d.line((x + 70, y0 + 30, x + 70 + w, y0 + 30), fill=MUTED, width=4)
+            c.y += int(46 * 1.45)
+            c.d.text((x, c.y), "○", font=F(46, 800), fill="#2F9E44")
+            c.hl(x + 70, c.y, ok, F(52, 800))
+            c.y += int(52 * 1.35)
+            if i < len(rows) - 1:
+                c.d.line((x, c.y + 4, r, c.y + 4), fill=LINE, width=3); c.y += 34
+    c.card(body)
+    c.note("about이 꼭 쓰고 싶다면 talk about!", 40)
+    c.save("no-preposition-verbs.png")
+
+
+def can_cant():
+    c = Canvas("can과 can't, 강세로 구별해요", "t를 찾지 말고 세게 들리는 곳을 들어 보세요")
+    def row(x, parts, ko):
+        xx = x
+        base = c.y + 70
+        for word, big in parts:
+            f = F(84 if big else 44, 800 if big else 600)
+            c.d.text((xx, base), word, font=f, fill=INK if big else MUTED, anchor="ls")
+            xx += c.d.textlength(word + " ", font=f)
+        c.y += 100
+        c.text(x, ko, F(40, 700), MUTED, 1.3)
+    def body(x, r):
+        c.pill(x, c.y, "can = 약하게 /kən/ 컨", F(36, 700)); c.y += 84
+        row(x, [("I", False), ("can", False), ("come.", True)], "동사 come이 크게 들려요")
+        c.d.line((x, c.y + 16, r, c.y + 16), fill=LINE, width=3); c.y += 52
+        c.pill(x, c.y, "can't = 세게 /kænt/ 캔트", F(36, 700), bg=LIME, fg=INK); c.y += 84
+        row(x, [("I", False), ("can't", True), ("come.", False)], "can't가 크고 또렷하게 들려요")
+    c.card(body)
+    def body2(x, r):
+        c.text(x, "문장 끝에서는 둘 다 세게", F(46, 800), INK, 1.4)
+        c.text(x, "Yes, I can.  /  No, I can't.", F(48, 800), INK, 1.35)
+        c.text(x, "Yes·No가 함께 와서 헷갈릴 일이 적어요", F(38, 700), MUTED, 1.3)
+    c.card(body2)
+    c.note("t는 약하거나 안 들릴 때가 많아요. 강세를 들으세요!", 40)
+    c.save("can-cant-stress.png")
+
+
 if __name__ == "__main__":
-    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend):
+    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant):
         fn()

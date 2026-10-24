@@ -1,0 +1,73 @@
+{
+  "id": "quarantine-origin",
+  "cat": "story",
+  "sub": "단어의 유래",
+  "level": "기초",
+  "date": "2026-10-24",
+  "title": "quarantine은 원래 '40일'이었다, 격리라는 말이 태어난 항구 이야기",
+  "seo_title": "quarantine 어원 - 격리가 '40일'이라는 뜻에서 온 이유",
+  "lead": "1377년 항구의 30일 규칙이 오늘의 격리가 되기까지",
+  "description": "quarantine은 '40'에서 온 말이에요. 1377년 라구사의 30일 격리가 40일이 된 과정, quarantine과 isolation의 차이를 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "quarantine = 40 days",
+    "ko": "격리는 원래 '40일'이었어요"
+  },
+  "icon": "ship",
+  "chat": {
+    "q": "Why are they waiting outside the port?",
+    "a": "They're in quarantine.",
+    "key": "quarantine",
+    "ko": "격리 중이라서요."
+  },
+  "thumb": {
+    "text": "quaranta = 40",
+    "key": "40",
+    "ko": "quarantine 속 숫자는?"
+  },
+  "quiz": [
+    {
+      "tag": "영어 이야기",
+      "q": "quarantine 속에 숨어 있는 숫자는?",
+      "sub": "",
+      "options": [
+        "3",
+        "14",
+        "30",
+        "40"
+      ],
+      "answer": 3,
+      "explain": "앞부분 quarant는 '40'을 뜻하는 이탈리아어 quaranta(프랑스어 quarante)와 이어져 있어요. 원래 '40일'이라는 기간을 뜻했어요.",
+      "mnemonic": "quarant = quaranta = 40"
+    },
+    {
+      "tag": "영어 이야기",
+      "q": "1377년 라구사가 처음 정한 격리 기간은?",
+      "sub": "",
+      "options": [
+        "7일",
+        "14일",
+        "30일",
+        "100일"
+      ],
+      "answer": 2,
+      "explain": "라구사는 30일 격리(trentino)로 시작했고, 이 방식이 퍼지면서 40일로 늘었어요.",
+      "mnemonic": "처음엔 30(trentino), 나중에 40(quaranta)"
+    },
+    {
+      "tag": "단어",
+      "q": "감염 확진을 받은 사람을 떼어 두는 것을 보건 당국 기준으로 부르는 말은?",
+      "sub": "",
+      "options": [
+        "quarantine",
+        "isolation",
+        "vacation",
+        "separation day"
+      ],
+      "answer": 1,
+      "explain": "이미 감염된 사람은 isolation, 노출됐을 수 있지만 아직 아프지 않은 사람은 quarantine이에요.",
+      "mnemonic": "아프면 isolation, 아직 모르면 quarantine"
+    }
+  ],
+  "body_html": "<p>2020년 이후 뉴스에서 거의 매일 들었던 단어가 있어요. <b>quarantine</b>, '격리'예요. 그런데 이 단어 안에는 숫자 하나가 숨어 있어요. 앞부분 quarant는 이탈리아어 <b>quaranta</b>(프랑스어로는 quarante), 바로 <b>'40'</b>이에요. quarantine은 원래 <b>'40일'</b>이라는 뜻이었어요. 왜 격리라는 말에 하필 40이 들어갔을까요? 이야기는 600여 년 전 바닷가 항구에서 시작돼요.</p>\n<h2>1377년, 아드리아해의 항구 라구사</h2>\n<p>14세기 중반 유럽은 흑사병(페스트)으로 큰 피해를 입었어요. 바다를 건너 들어오는 사람들로부터 병이 퍼지는 걸 어떻게 막을지가 항구 도시들의 큰 숙제였죠. 그러다 1377년, 지금의 크로아티아 두브로브니크인 <b>라구사</b>가 먼저 규칙을 만들었어요.</p>\n<p>라구사의 대평의회는 전염병이 도는 지역에서 온 사람을 도시에 바로 들이지 않고 <b>30일 동안 따로 머물게</b> 하는 법을 정했어요. 이 기간을 이탈리아어로 '30'을 뜻하는 <b>trentino</b>라고 불렀어요. 미국 질병통제예방센터(CDC)가 펴내는 학술지도 이 법을 격리 기간을 처음 정한 법으로 소개해요.</p>\n<h2>30일이 40일이 되기까지</h2>\n<p>이 방식은 다른 항구 도시로 퍼졌고, 그 과정에서 기간이 <b>40일</b>로 늘었어요. 그래서 이름도 '40'을 뜻하는 quaranta에서 나온 말로 바뀌었죠. 왜 하필 40일로 늘렸는지는 <b>정확히 알려져 있지 않아요</b>. 30일로는 부족했다는 설, 성경 속 40일이나 사순절과 관련이 있다는 설 등 여러 이야기가 있을 뿐이에요.</p>\n<p>베네치아도 격리를 제도로 만든 대표적인 도시예요. 1423년 석호의 작은 섬에 흑사병 환자를 위한 병원을 세웠고, 1468년에는 또 다른 섬을 바다에서 온 선원과 짐이 <b>40일 동안 머무는 곳</b>으로 정했어요. 짐은 허브를 태운 연기로 소독했다고 해요.</p>\n<figure class=\"fig\"><img src=\"/images/story-quarantine-lazzaretto.webp\" alt=\"18세기 베네치아 화가 프란체스코 과르디가 그린 라차레토 베키오 섬. 높은 종탑과 붉은 지붕 건물들이 낮은 담장으로 둘러싸여 있고, 앞바다에는 곤돌라와 돛단배가 떠 있다\" width=\"1200\" height=\"839\" loading=\"lazy\"><figcaption>베네치아의 라차레토 베키오 섬. 1423년 흑사병 환자 병원이 들어선 곳이에요 (프란체스코 과르디 그림, 18세기, 퍼블릭 도메인).</figcaption></figure>\n<h2>영어에 들어온 quarantine</h2>\n<p>영어에서 quarantine이 '격리 기간'이라는 뜻으로 쓰이기 시작한 건 17세기예요. 그보다 앞서 이 단어는 예수가 광야에서 보낸 40일처럼 '40일'이라는 기간 자체를 가리키기도 했어요. 격리의 뜻으로는 처음에 <b>전염병이 의심되는 배를 항구 밖에 묶어 두는 기간</b>을 가리켰어요. 그 뒤 뜻이 넓어져 사람이든 동물이든 <b>병이 퍼지지 않게 떼어 두는 것</b> 전체를 말하게 됐고, 1800년대 초에는 '격리하다'라는 동사로도 쓰이기 시작했어요. 지금은 '40일'이라는 뜻은 사라지고 기간과 상관없이 격리를 뜻해요. 5일 격리도, 6개월 격리도 모두 quarantine이에요.</p>\n<p>발음은 <b>/ˈkwɔːrəntiːn/</b>, '쿼런틴'에 가깝고 강세는 첫 음절에 있어요. 끝의 -tine을 '타인'으로 읽지 않도록 조심하세요.</p>\n<h2>지금은 이렇게 써요</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">The ship was held in quarantine off the coast.</span><span class=\"ko\">그 배는 앞바다에 격리돼 있었어요.</span></li>\n<li><span class=\"en\">All new arrivals had to go into quarantine.</span><span class=\"ko\">새로 도착한 사람은 모두 격리에 들어가야 했어요.</span></li>\n<li><span class=\"en\">The dog stayed in quarantine for a month.</span><span class=\"ko\">그 강아지는 한 달 동안 격리됐어요.</span></li>\n<li><span class=\"en\">Imported plants are quarantined before sale.</span><span class=\"ko\">수입 식물은 판매 전에 격리 검사를 거쳐요.</span></li>\n<li><span class=\"en\">The quarantine period is finally over.</span><span class=\"ko\">격리 기간이 드디어 끝났어요.</span></li>\n</ul></div>\n<p>사람이 격리 중일 때는 <b>in quarantine</b>, 격리에 들어갈 때는 <b>go into quarantine</b>처럼 전치사와 함께 써요. 동사로 쓸 때는 be quarantined(격리되다)처럼 수동태로 자주 써요.</p>\n<h2>한국어 '격리' 하나, 영어는 두 단어</h2>\n<p>한국어로는 둘 다 '격리'라고 하지만, 보건 당국은 두 가지를 나눠서 말해요. 미국 CDC 기준으로 <b>quarantine</b>은 병에 노출됐을 수 있지만 아직 아프지 않은 사람을 떼어 두는 것이고, <b>isolation</b>은 이미 감염됐거나 감염된 것으로 보이는 사람을 떼어 두는 거예요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>단어</th><th>누구를</th><th>예</th></tr></thead><tbody><tr><td>quarantine</td><td>노출됐을 수 있지만 아직 안 아픈 사람</td><td>My roommate got sick, so I'm in quarantine.</td></tr><tr><td>isolation</td><td>감염된 사람, 감염이 의심되는 사람</td><td>I tested positive, so I'm in isolation.</td></tr></tbody></table></div>\n<p>일상 대화에서는 원어민도 두 단어를 섞어 쓰곤 해요. 하지만 보건 당국 공지나 병원 안내문에서는 이 구분을 지켜 쓰니, 알아 두면 공지를 읽을 때 헷갈리지 않아요.</p>\n<h2>실제 대화 · 룸메이트가 아플 때</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">My roommate tested positive yesterday.</span><span class=\"ko\">룸메이트가 어제 양성이 나왔어.</span></li>\n<li class=\"me\"><span class=\"en\">Oh no. Are you in quarantine?</span><span class=\"ko\">어떡해. 너도 격리 중이야?</span></li>\n<li class=\"them\"><span class=\"en\">Not officially, but I'm working from home this week just in case.</span><span class=\"ko\">공식적으로는 아닌데, 혹시 몰라서 이번 주는 재택하려고.</span></li>\n<li class=\"me\"><span class=\"en\">Smart. Let me know if you need anything.</span><span class=\"ko\">잘 생각했어. 필요한 거 있으면 말해.</span></li>\n</ul>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> quarantine 속 quarant = quaranta = 40. 항구 밖에서 40일을 기다리던 배를 떠올려 보세요.</div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">검사에서 양성이 나와 집에 있다고 말할 때</span><span class=\"no\">I tested positive, so I'm in quarantine.</span><span class=\"en\">I tested positive, so I'm in isolation.</span><span class=\"ko\">양성이 나와서 격리 중이에요.</span><span class=\"why\"><b>왜?</b>이미 감염된 사람은 보건 당국 기준으로 isolation이에요. quarantine은 노출됐을 수 있지만 아직 아프지 않은 사람에게 써요.</span></li>\n</ul></div>\n<p>단어 속에 역사가 숨어 있는 이야기를 더 보고 싶다면 <a href=\"/p/deadline-origin/\">deadline은 원래 넘으면 총에 맞는 선이었다</a>와 <a href=\"/p/robot-origin/\">robot은 원래 '강제 노동'이었다</a>도 읽어 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: CDC 학술지 Emerging Infectious Diseases 'Etymologia: Quarantine'(2013), Etymonline 'quarantine', Merriam-Webster 'quarantine', Oxford Learner's Dictionaries 'quarantine', Snopes 'Does Quarantine Originate from the Word Forty?'(2020), Medievalists.net 'Venice and the Black Death'(2020), L'Italo-Americano 'Venetian quarantine'(2020), Dictionary.com 'Quarantine vs. Isolation', 그림은 위키미디어 공용(퍼블릭 도메인).</p>",
+  "related": []
+}
