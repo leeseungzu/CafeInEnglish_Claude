@@ -10,16 +10,15 @@
       "transportation",
       "hotel-check-in",
       "travel-cafe",
+      "cafe-order",
       "travel-restaurant",
+      "restaurant",
       "shopping-checkout",
       "asking-directions",
-      "travel-trouble",
-      "cafe-order",
-      "restaurant",
-      "doctor",
+      "do-you-speak-english",
       "ask-to-repeat",
-      "excuse-me-sorry",
-      "how-are-you"
+      "doctor",
+      "travel-trouble"
     ],
     "lead": "해외에서 바로 꺼내 쓰는 여행 문장"
   },
@@ -32,17 +31,45 @@
       "keep-me-posted",
       "im-on-it",
       "video-call",
-      "swamped",
       "make-sense",
       "sounds-good",
-      "this-vs-next",
-      "email-phrases",
-      "slipped-my-mind",
-      "rain-check",
+      "swamped",
       "running-late",
-      "all-ears"
+      "slipped-my-mind",
+      "email-phrases"
     ],
     "lead": "회의·메일에서 바로 쓰는 업무 영어"
+  },
+  {
+    "id": "daily",
+    "title": "매일 주고받는 일상 영어",
+    "icons": [
+      "waving-hand",
+      "speech-balloon",
+      "thumbs-up"
+    ],
+    "bg": "video",
+    "desc": "인사, 사과, 위로, 맞장구처럼 원어민이 친구·이웃과 매일 주고받는 짧은 말과 그 말이 들리는 법",
+    "posts": [
+      "how-are-you",
+      "excuse-me-sorry",
+      "my-bad",
+      "sorry-to-hear",
+      "craving",
+      "its-on-me",
+      "id-like-to",
+      "its-up-to-you",
+      "on-the-fence",
+      "fair-enough",
+      "all-ears",
+      "rain-check",
+      "linking",
+      "james-conversation"
+    ],
+    "thinks": [
+      "james"
+    ],
+    "lead": "원어민과 매일 주고받는 짧은 말"
   },
   {
     "id": "mistakes",
@@ -61,9 +88,12 @@
       "bored-vs-boring",
       "borrow-vs-lend",
       "discuss-about",
-      "can-vs-cant"
+      "can-vs-cant",
+      "this-vs-next",
+      "ed-pronunciation"
     ],
-    "lead": "뜻이 반대로 전해지는 함정 표현 모음"
+    "lead": "뜻이 반대로 전해지는 함정 표현 모음",
+    "bg": "expr"
   },
   {
     "id": "leaders",
@@ -74,7 +104,7 @@
       "trophy"
     ],
     "bg": "video",
-    "desc": "젠슨 황, 순다르 피차이, 손흥민, 이재용·최태원, 듀오링고 CEO, 정의선 회장, 김동관 부회장의 실제 연설과 인터뷰에서 건진 표현과 문장",
+    "desc": "젠슨 황, 손흥민, 정의선 회장처럼 세계 무대에 선 리더들의 실제 연설과 인터뷰에서 건진 표현과 문장",
     "posts": [
       "jensen",
       "pichai",
