@@ -3027,3 +3027,12 @@ html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
 @media (min-width:900px){.oe-head .oe-kk{display:none}}
 /* 문장 줄바꿈 균형: 한두 단어만 다음 줄로 넘어가지 않게 (2026-10-24) */
 .mq-h,.a-phrase,.a-mean,.card h2,.tl h1,.tl .lead,.cat-about p{text-wrap:balance;word-break:keep-all}
+/* 오늘의 한 잔: 오른쪽 칸을 '보기' 카드와 같은 결로 (2026-10-24) */
+.oe-side .oe-sq{margin:2px 6px 12px;padding-bottom:14px;border-bottom:1px solid rgba(0,0,0,.07);font-size:16px}
+.oe-row{font-weight:600;color:#333D4B}
+.oe-row img{flex:none;object-fit:contain}
+.oe-row span{flex:1;min-width:0}
+.oe-row i{font-style:normal;color:#B0B8C1;font-size:17px}
+.oe-row:hover{background:rgba(0,0,0,.04);color:#191F28}
+.oe-row::before{display:none!important;content:none!important}
+.oe-row span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

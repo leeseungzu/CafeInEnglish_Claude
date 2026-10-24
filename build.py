@@ -1826,9 +1826,12 @@ def page_today():
                                        ("/notes/#routine", "check", "5분 루틴", "말해 본 문장을 내 공부방에"),
                                        (k or "/", "speech-balloon", "카톡 1일 1영", "매일 아침 7시에 받기")])
     T = L[i0]
+    chev = '<i aria-hidden="true">›</i>'
     side = (f'<aside class="subfilter sf-one sf-viewonly oe-side" aria-label="오늘의 한 잔"><div class="sf-g"><div class="sf-h">오늘의 한 잔</div>'
             f'<p class="oe-sq">"<span id="oe-sko">{e(T["ko"])}</span>"<br>영어로 하면?</p>'
-            f'<a class="oe-sgo" href="/">홈에서 말해 보고 정답 듣기 ›</a>{kk.replace("oe-kk", "oe-kk2")}</div></aside>')
+            f'<a class="sf-a oe-row" href="/"><img src="/assets/icons/hot-beverage.webp?v={ASSET_V}" alt="" width="22" height="22"><span>홈에서 정답 듣기</span>{chev}</a>'
+            + (f'<a class="sf-a oe-row" href="{e(k)}" target="_blank" rel="noopener"><img src="/assets/kakao-talk.png" alt="" width="22" height="20"><span>카톡으로 매일 받기</span>{chev}</a>' if k else "")
+            + '</div></aside>')
     about = (f'<section class="cat-about"><h2>오늘의 한 잔은 이렇게 써요</h2><p>하루 한 문장, 실제로 많이 쓰는 영어 표현을 뜻과 원어민 발음으로 익혀요. 카드를 누르면 예문과 퀴즈가 있는 글로 이어져요.</p>'
              f'<ul class="ca-tips ca-links">{tips}</ul>{tool_faq(faq)}</section>')
     body = (f'<div class="oe-head"><div><h1>오늘의 한 잔</h1><p class="lead">매일 하나씩 쌓이는 오늘의 영어회화, 지금까지 나온 표현을 모두 모았어요</p></div>{kk}</div>'
