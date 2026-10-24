@@ -559,6 +559,24 @@ ICON_LOOP = ('<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke
 
 
 
+def shadow_start(x, p):
+    """듣기·반복 시작점 (2026-10-24): 원문이 자막 여러 줄이면 표현이 나오는 줄부터 재생해 카드 제목과 영상이 맞게.
+    표현 시간(t)은 장면 카드 계산에도 쓰여서 그대로 두고, 재생 시작만 옮겨요."""
+    t, end = x["t"], x.get("end", x["t"] + 4)
+    lines = [l for l in p.get("line_times", []) if l[2] > t + 0.05 and l[1] < end - 0.05]
+    if len(lines) < 2:
+        return t
+    stop = {"a", "an", "the", "to", "of", "ing", "one's", "someone", "something", "sb", "sth"}
+    keys = [w for w in re.findall(r"[a-z']+", x["en"].lower().replace("’", "'")) if w not in stop and len(w) > 1]
+    if not keys:
+        return t
+    def score(txt):
+        ws = re.findall(r"[a-z']+", txt.lower().replace("’", "'"))
+        return sum(any(w == k or (len(k) > 3 and w[:4] == k[:4]) for w in ws) for k in keys) / len(keys)
+    best = max(lines, key=lambda l: (score(l[0]) >= 0.6, -l[1]))
+    return best[1] if score(best[0]) >= 0.6 else t
+
+
 def seg_buttons(t, end):
     return (f'<div class="sh-btns"><button class="sh-play" data-t="{t}" data-end="{end}" data-n="1">{ICON_PLAY}{mmss(t)} 듣기</button>'
             f'<button class="sh-play" data-t="{t}" data-end="{end}" data-n="3">{ICON_LOOP}3번 반복</button></div>')
@@ -1168,7 +1186,7 @@ def page_post(p):
                 end = x.get("end", x["t"] + 4)
                 say = f'<div class="sh-say"><span class="lbl">따라 말하기</span><b>{e(x["say"])}</b></div>' if x.get("say") else ""
                 tips = "".join(f"<li>{e(tp)}</li>" for tp in x.get("tips", []))
-                shadow = (f'<div class="shadow">{seg_buttons(x["t"], end)}'
+                shadow = (f'<div class="shadow">{seg_buttons(shadow_start(x, p), end)}'
                           f'{say}{f"<ul class=sh-tips>{tips}</ul>" if tips else ""}</div>')
             toc.append((f"x{xi + 1}", x["en"]))
             orig_html = f'<div class="orig">{e(x["orig"])}' + (f'<span class="orig-ko">{e(x["origKo"])}</span>' if x.get("origKo") else "") + '</div>'
