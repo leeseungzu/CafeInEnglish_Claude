@@ -20,6 +20,7 @@
     {
       "t": 382.6,
       "end": 386.5,
+      "play_t": 385.26,
       "en": "This is a big deal.",
       "ko": "이건 정말 중요한 문제예요",
       "orig": "The question is, what is AI? And this is a big deal.",
@@ -36,6 +37,7 @@
     {
       "t": 386.7,
       "end": 393.8,
+      "play_t": 392.61,
       "en": "vitally important",
       "ko": "꼭 필요할 만큼 중요한",
       "orig": "If you wanna be part of creating this future, understanding what is AI is vitally important.",
@@ -68,6 +70,7 @@
     {
       "t": 451.8,
       "end": 460.3,
+      "play_t": 454.3,
       "en": "Don't just consume. Produce.",
       "ko": "쓰기만 하지 말고, 만들어라",
       "orig": "To be part of this AI economy, you don't wanna just be consuming the AI, you want to be producing the AI.",

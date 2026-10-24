@@ -44,7 +44,7 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 | `think` | (선택) 연결된 사유의 문장 id |
 | `body_html` | 본문 HTML. 사용 가능한 블록: `.box` `.memo`(연상법) `ul.ex > li > span.en + span.ko` |
 | `og` | (선택) `{en, ko}` 카톡·SNS 미리보기 이미지 문구. en=크게 보일 표현, ko=아래 한 줄. 없으면 첫 표현/리드 사용 |
-| `expressions` | (선택) `[{t(초), end(초), en, ko, orig(원문), origKo(원문 해석), say(한글 발음), tips[연음 팁], ex, exKo, memo(연상법)}]` — t가 있으면 듣기·3번 반복 버튼 |
+| `expressions` | (선택) `[{t(초), end(초), en, ko, orig(원문), origKo(원문 해석), say(한글 발음), tips[연음 팁], ex, exKo, memo(연상법)}]` — t가 있으면 듣기·3번 반복 버튼. `play_t`(선택)=표현 첫 단어 시각: 듣기·반복은 여기서 시작(t·end는 원문 문장 구간, 장면 카드용). 롱폼 글은 꼭 넣기 — 롱폼 음성을 pocketsphinx로 그 줄 정렬해 첫 단어 −0.15초(음성 없으면 줄 안 글자 비례 −0.5초), 줄 시작 1초 안이면 줄 시작 |
 | `thumb` | 목록 카드 썸네일 `{ko, text, key}` — ko=위 한국어 한 줄(궁금증), text=크게 쓸 영어, key=라임으로 강조할 단어. 배경은 카테고리별 고정: 영어표현=에스프레소, 영어꿀팁=크림(핵심 단어에 라임 형광펜), 사유의 문장=올리브 (라임은 핵심 단어에만). 썸네일 alt는 `text - ko`로 자동. 영상 글은 유튜브 썸네일 |
 | `related` | (선택) `[{label, href}]` 추가 추천 링크 |
 | `quiz` | 3문제 권장. `{tag, q, sub, options[4], answer(0부터), explain, mnemonic}` |

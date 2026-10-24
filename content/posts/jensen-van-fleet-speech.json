@@ -35,6 +35,7 @@
     {
       "t": 299.7,
       "end": 310.0,
+      "play_t": 307.52,
       "en": "take my breath away",
       "ko": "숨이 멎을 만큼 감동적이다",
       "orig": "It was the first time I heard the name of the company I helped create chanted out loud, and it took my breath away.",
@@ -67,6 +68,7 @@
     {
       "t": 339.1,
       "end": 344.6,
+      "play_t": 340.14,
       "en": "as it turns out",
       "ko": "알고 보니, 결과적으로",
       "orig": "And this phone, as it turns out, outputs a lot of light.",
@@ -83,6 +85,7 @@
     {
       "t": 390.5,
       "end": 398.4,
+      "play_t": 391.85,
       "en": "No one is better at ~ than …",
       "ko": "~하는 데는 …가 최고예요",
       "orig": "No company, no people are better at building factories than Koreans.",

@@ -20,6 +20,7 @@
     {
       "t": 471.2,
       "end": 476.0,
+      "play_t": 473.7,
       "en": "put down roots",
       "ko": "뿌리를 내리다, 한곳에 자리 잡다",
       "orig": "We don't just come to build a plant. We come to put down roots.",
@@ -63,11 +64,13 @@
       "exKo": "바다가 보이는 집은 우리에겐 꿈같은 이야기였어요.",
       "memo": "꿈을 이루는 재료(stuff). no longer와 함께 쓰면 '이제는 현실'이 돼요.",
       "t": 410.3,
-      "end": 417.9
+      "end": 417.9,
+      "play_t": 414.2
     },
     {
       "t": 527.1,
       "end": 535.2,
+      "play_t": 531.86,
       "en": "greater than the sum of its parts",
       "ko": "부분의 합보다 더 큰, 모였을 때 더 큰 힘을 내는",
       "orig": "You are contributing to something that is, like every vehicle, greater than the sum of its parts.",

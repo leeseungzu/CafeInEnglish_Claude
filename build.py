@@ -562,6 +562,8 @@ ICON_LOOP = ('<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke
 def shadow_start(x, p):
     """듣기·반복 시작점 (2026-10-24): 원문이 자막 여러 줄이면 표현이 나오는 줄부터 재생해 카드 제목과 영상이 맞게.
     표현 시간(t)은 장면 카드 계산에도 쓰여서 그대로 두고, 재생 시작만 옮겨요."""
+    if x.get("play_t") is not None:  # 표현 첫 단어 시각 (롱폼 음성 정렬 또는 자막 줄 비례 추정, 2026-10-24)
+        return x["play_t"]
     t, end = x["t"], x.get("end", x["t"] + 4)
     lines = [l for l in p.get("line_times", []) if l[2] > t + 0.05 and l[1] < end - 0.05]
     if len(lines) < 2:
@@ -3214,13 +3216,13 @@ def page_tools():
                      for v, l in [("", "전체")] + [(g, g) for g in groups]) + '</div>')
     body = (f'<h1>영어 도구</h1><p class="lead">점수 계산부터 영문 이름까지, 바로 쓰는 무료 도구</p>{seg}'
             f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>{about}' + TOOL_JS())
-    desc = "토익·토익스피킹·오픽 시험 일정(접수 마감·성적 발표), 토익 점수 계산기, 오픽 등급표, 토익스피킹 레벨표, 영어 시험 점수 비교, 영어 단어 수 세기, 영어 필기체 변환, 영문 이름 변환기를 가입 없이 무료로 쓸 수 있어요."
+    desc = "시험 일정과 점수 계산, 영문 변환, 글쓰기까지 영어 공부와 시험 준비에 필요한 무료 도구를 모았어요. 가입 없이 바로 쓰고, 입력한 내용은 저장하지 않아요."
     ld = [{"@type": "CollectionPage", "name": "영어 도구", "description": desc, "url": DOMAIN + "/tools/", "inLanguage": "ko",
            "mainEntity": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": DOMAIN + t["url"], "name": t["title"]} for i, t in enumerate(tools)]}},
           {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": DOMAIN + "/"},
                                                          {"@type": "ListItem", "position": 2, "name": "영어 도구", "item": DOMAIN + "/tools/"}]}]
     return layout("영어 도구", desc, "/tools/", body, nav="tools", wide=True, og_img=tool_og("/tools/"), ld=ld,
-                  seo_title="영어 도구 - 토익 시험일정, 토익 점수 계산기, 오픽 등급표, 영어 단어 수 세기, 영문 이름 변환기")
+                  seo_title="무료 영어 도구 모음 - 시험 일정, 점수 계산, 영문 변환")  # 개별 도구 이름은 각 도구 페이지 몫 (허브가 검색어를 가로채지 않게, 2026-10-24)
 
 
 SHARE_ROW = '<div class="tl-share-row" hidden><button type="button" class="tl-share">결과 공유하기</button></div>'
