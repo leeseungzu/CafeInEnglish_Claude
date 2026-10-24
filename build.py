@@ -1585,7 +1585,7 @@ def page_home():
         return f"{g.tm_mon}월 {g.tm_mday}일"
     mq = ('<section class="mqs" id="mqs" aria-label="최근 일주일 한 잔 퀴즈"><div class="mq-tr" id="mq-tr">'
           + "".join(mq_card(slides_data[(i0 - k) % len(slides_data)], label(k, now_k), mq_md(k)) for k in range(N_SLIDES))
-          + '</div><div class="mq-dots" id="mq-dots"></div></section>') if slides_data else ""
+          + '</div><div class="mq-dots" id="mq-dots"></div><a class="mq-all" href="/today/">지난 한 잔 모두 보기 ›</a></section>') if slides_data else ""
     kk = SITE.get("kakao", "")
     intro = ('<section class="hi" aria-label="카페인영어 소개"><div class="hi-t"><span class="hi-k">CafeInEnglish</span>'
              '<p class="hi-h">영상으로 배우는 <em>진짜 영어표현</em></p><span class="hi-s">하루 5분 · 가입 없이 무료</span></div>'
@@ -1593,7 +1593,7 @@ def page_home():
              + '</section>')
     hero = '<div class="m-home">' + intro + picker + mq + notice_html().replace('class="notice"', 'class="notice m-nt"', 1) + '</div>' + f"""<section class="hs" aria-label="오늘의 한 잔">
   <div class="hs-track" id="hs-track">{slides}</div>
-  <div class="hs-ctl"><button type="button" class="hs-btn" id="hs-prev" aria-label="이전 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="hs-btn" id="hs-next" aria-label="다음 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button><span class="hs-dots" id="hs-dots"></span></div>
+  <div class="hs-ctl"><button type="button" class="hs-btn" id="hs-prev" aria-label="이전 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="hs-btn" id="hs-next" aria-label="다음 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button><span class="hs-dots" id="hs-dots"></span><a class="hs-all" href="/today/">지난 한 잔 모두 보기 ›</a></div>
 </section>"""
     slides_js = json.dumps(slides_data, ensure_ascii=False).replace("</", "<\\/")
     hero_js = """<script>(function(){var L=%s,n=Math.min(7,L.length);if(!n)return;var day=Math.floor((Date.now()/1000+9*3600)/86400),i0=day%%L.length,tr=document.getElementById("hs-track");
@@ -1785,10 +1785,66 @@ def today_pool():
 
 
 def page_today():
-    """예전 주소 /today/ → 내 공부방 루틴으로 이동"""
+    """오늘의 한 잔 모음 (/today/, 2026-10-24): 홈 '오늘의 한 잔'의 지난 표현 전체. 검색어 '오늘의 영어회화'·'오늘의 영단어'용 입구.
+    홈과 같은 목록·같은 날짜 계산. 카드 순서와 날짜 표시는 tools.js(initToday)가 오늘 기준으로 다시 맞춰요."""
+    url = "/today/"
+    L = today_list()
+    if not L:
+        return layout("오늘의 한 잔", "", url, "<p>준비 중이에요.</p>", nav="study", robots="noindex")
+    import time as _t
+    n = len(L)
+    i0 = daily_index(n)
+    day = int((_t.time() + 9 * 3600) // 86400)
+    def dlab(k):
+        if k == 0: return "오늘"
+        if k == 1: return "어제"
+        g = _t.gmtime((day - k) * 86400)
+        return f"{g.tm_mon}월 {g.tm_mday}일"
+    cards = []
+    for k in range(n):
+        i = (i0 - k) % n
+        d = L[i]
+        p = POST_BY_ID.get(d["post"]) or {}
+        w = d["en"].replace("~", "").strip().rstrip(".!?").split(" ")
+        thumb = chat_html("", d["en"], w[-1] if w else "", "", icon_img(p.get("icon") or "speech-balloon"), chat_bg("oe-" + d["post"]))
+        c = card(d["url"], [("expr", d["cat"])], d["en"], d["ko"], thumb, hl=2)
+        c = c.replace('</div><h2', f'<span class="lv lv-pro oe-d">{dlab(k)}</span></div><h2', 1)
+        c = c.replace('<a ', f'<a data-oe="{i}" data-ko="{e(d["ko"])}" ', 1)
+        if k >= 12:
+            c = c.replace('class="card', 'class="card oe-fold', 1)
+        cards.append(c)
+    more = f'<button type="button" class="ex-more oe-more" id="oe-more">지난 한 잔 더 보기 ({n - 12})</button>' if n > 12 else ""
+    faq = [
+        ("오늘의 한 잔은 언제 바뀌나요?", "한국 시간 자정에 다음 표현으로 바뀌어요. 홈 화면의 '오늘의 한 잔', 카톡 1일 1영과 같은 표현이에요."),
+        ("오늘 표현을 퀴즈로 풀 수 있나요?", "홈 화면의 '오늘의 한 잔'에서 한국어를 보고 영어로 말해 본 뒤 원어민 발음으로 정답을 들을 수 있어요. 카드를 누르면 예문과 퀴즈가 있는 글로 이어져요."),
+        ("매일 카톡으로 받을 수 있나요?", "네. '매일 아침 1일 1영 받기'를 누르면 매일 아침 7시에 오늘의 표현, 뜻, 예문, 실제 장면 듣기를 카톡으로 보내 드려요. 무료예요."),
+    ]
+    k = SITE.get("kakao")
+    kk = (f'<a class="hi-btn oe-kk" href="{e(k)}" target="_blank" rel="noopener"><img src="/assets/kakao-talk.png" alt="" width="24" height="22">매일 아침 1일 1영 받기<i>›</i></a>') if k else ""
+    tips = "".join(f'<li><a href="{h}"><img src="/assets/icons/{ic}.webp?v={ASSET_V}" alt="" width="28" height="28" loading="lazy"><span><b>{e(a)}</b>{e(b)}</span><i aria-hidden="true">›</i></a></li>'
+                   for h, ic, a, b in [("/", "hot-beverage", "오늘 표현 퀴즈", "홈에서 말해 보고 정답 듣기"),
+                                       ("/notes/#routine", "check", "5분 루틴", "말해 본 문장을 내 공부방에"),
+                                       (k or "/", "speech-balloon", "카톡 1일 1영", "매일 아침 7시에 받기")])
+    T = L[i0]
+    side = (f'<aside class="subfilter sf-one sf-viewonly oe-side" aria-label="오늘의 한 잔"><div class="sf-g"><div class="sf-h">오늘의 한 잔</div>'
+            f'<p class="oe-sq">"<span id="oe-sko">{e(T["ko"])}</span>"<br>영어로 하면?</p>'
+            f'<a class="oe-sgo" href="/">홈에서 말해 보고 정답 듣기 ›</a>{kk.replace("oe-kk", "oe-kk2")}</div></aside>')
+    about = (f'<section class="cat-about"><h2>오늘의 한 잔은 이렇게 써요</h2><p>하루 한 문장, 실제로 많이 쓰는 영어 표현을 뜻과 원어민 발음으로 익혀요. 카드를 누르면 예문과 퀴즈가 있는 글로 이어져요.</p>'
+             f'<ul class="ca-tips ca-links">{tips}</ul>{tool_faq(faq)}</section>')
+    body = (f'<div class="oe-head"><div><h1>오늘의 한 잔</h1><p class="lead">매일 하나씩 쌓이는 오늘의 영어회화, 지금까지 나온 표현을 모두 모았어요</p></div>{kk}</div>'
+            f'<div class="cat-grid has-filter"><div><div class="cards list oe-list" id="oe-list">{"".join(cards)}</div>{more}</div>{side}</div>{about}' + TOOL_JS())
+    desc = "오늘의 영어회화 한 문장을 매일 하나씩. 홈 '오늘의 한 잔'에 나온 영어 표현을 날짜순으로 모두 모았어요. 뜻, 예문, 원어민 발음, 퀴즈까지 이어서 공부하고 카톡 1일 1영으로 매일 받아 보세요."
+    ld = [{"@type": "CollectionPage", "name": "오늘의 한 잔", "description": desc, "url": DOMAIN + url, "inLanguage": "ko",
+           "mainEntity": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": j + 1, "url": DOMAIN + L[(i0 - j) % n]["url"], "name": L[(i0 - j) % n]["en"]} for j in range(n)]}}]
+    return layout("오늘의 한 잔", desc, url, body, nav="study", wide=True, og_img=og_tool("today", "매일 한 문장 · 무료", "오늘의 한 잔", "오늘의 영어회화 표현 모음", "오늘의 영어회화", "Sounds good!", "매일 아침 하나씩, 원어민 발음까지", "hot-beverage", "today", bg=1), data={"oe": n}, ld=ld,
+                  seo_title="오늘의 영어회화 - 매일 한 문장, 오늘의 한 잔 영어 표현 모음")
+
+
+def page_today_old():
+    """/tools/today-english/ (잠깐 있던 주소) → /today/"""
     return ('<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex">'
-            f'<link rel="canonical" href="{DOMAIN}/notes/"><meta http-equiv="refresh" content="0;url=/notes/#routine">'
-            '<title>내 공부방 | 카페인영어</title></head><body><a href="/notes/#routine">내 공부방으로 이동</a></body></html>')
+            f'<link rel="canonical" href="{DOMAIN}/today/"><meta http-equiv="refresh" content="0;url=/today/">'
+            '<title>오늘의 한 잔 | 카페인영어</title></head><body><a href="/today/">오늘의 한 잔으로 이동</a></body></html>')
 
 
 def daily_routine():
@@ -3001,73 +3057,14 @@ def today_list():
         for it in json.loads((CONTENT / "daily.json").read_text("utf-8")):
             p = POST_BY_ID.get(it["post"])
             if p:
-                out.append({"en": it["en"], "ko": it["ko"], "desc": it.get("desc", ""), "url": post_url(p), "cat": CATS[p["cat"]],
+                out.append({"post": it["post"], "en": it["en"], "ko": it["ko"], "desc": it.get("desc", ""), "url": post_url(p), "cat": CATS[p["cat"]],
                             "au": ("/audio/" + AUDIO[it["en"]]) if it["en"] in AUDIO else ""})
     return out
 
 
-def page_tool_today():
-    url = "/tools/today-english/"
-    t = TOOL_BY_URL[url]
-    L = today_list()
-    if not L:
-        return layout("오늘의 영어회화", "", url, "<p>준비 중이에요.</p>", nav="tools", robots="noindex")
-    T = L[daily_index(len(L))]
-    import time as _t
-    g = _t.gmtime(_t.time() + 9 * 3600)
-    dlabel = f'{g.tm_mon}월 {g.tm_mday}일 ({"월화수목금토일"[g.tm_wday]})'
-    play = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l11-6.5a1 1 0 0 0 0-1.72l-11-6.5A1 1 0 0 0 8 5.5z"/></svg>'
-    items = "".join(
-        f'<li class="oe-it{" oe-more" if n >= 12 else ""}"><div><b lang="en">{e(d["en"])}</b><span>{e(d["ko"])}</span></div>'
-        + (f'<button type="button" class="oe-pl" data-au="{e(d["au"])}" aria-label="{e(d["en"])} 듣기">{play}</button>' if d["au"] else "")
-        + f'<a class="oe-ln" href="{d["url"]}" aria-label="{e(d["en"])} 글 보기">›</a></li>' for n, d in enumerate(L))
-    faq = [
-        ("오늘의 영어회화는 언제 바뀌나요?", "한국 시간 자정에 다음 표현으로 바뀌어요. 홈의 '오늘의 한 잔', 카톡 1일 1영과 같은 표현이에요."),
-        ("카톡으로 매일 받을 수 있나요?", "네. 아래 '매일 아침 1일 1영 받기'를 누르면 매일 아침 7시에 오늘의 표현, 뜻, 예문, 실제 장면 듣기 링크를 카톡으로 보내 드려요. 무료예요."),
-        ("발음은 어떻게 들을 수 있나요?", "▶ 버튼을 누르면 원어민 영어 음성으로 들려 드려요. 따라 말해 보면 훨씬 오래 기억에 남아요."),
-        ("지난 표현도 볼 수 있나요?", "'어제' 버튼으로 지난 표현을 넘겨 보거나, 아래 '영어회화 표현 모음'에서 전체를 볼 수 있어요. 각 표현을 누르면 예문과 퀴즈가 있는 글로 이어져요."),
-        ("외운 표현을 따로 모을 수 있나요?", "글 안의 퀴즈를 풀거나 '내 공부방'의 5분 루틴을 쓰면 말해 본 문장과 틀린 문제가 이 기기에 저장돼요."),
-    ]
-    body = f"""<div class="tl">
-{tool_head(t["group"], "오늘의 영어회화", "하루 한 문장, 실제로 많이 쓰는 영어 표현을 뜻과 원어민 발음으로 익혀요. 먼저 한국어를 보고 영어로 말해 본 다음 정답을 확인하세요.")}
-<div class="tl-card oe-card">
-<div class="tl-box oe-q hide" id="oe-q" aria-live="polite">
-<p class="oe-k"><span id="oe-day">오늘의 영어회화</span><span id="oe-date">{dlabel}</span></p>
-<h2 class="oe-h">"<span id="oe-ko">{e(T["ko"])}</span>"<br>영어로 하면?</h2>
-<div class="oe-ans"><p class="oe-en" lang="en"><span id="oe-en">{e(T["en"])}</span></p><button type="button" class="oe-pl oe-pl-big" id="oe-play" data-au="{e(T["au"])}" aria-label="원어민 발음 듣기">{play}</button>
-<p class="oe-desc" id="oe-desc">{e(T["desc"])}</p>
-<a class="oe-go" id="oe-go" href="{T["url"]}">예문 보고 퀴즈 풀기 →</a></div>
-<button type="button" class="tl-share oe-show" id="oe-show">정답 보기</button>
-</div>
-<div class="oe-nav"><button type="button" id="oe-prev">‹ 어제</button><span id="oe-pos">오늘</span><button type="button" id="oe-next" disabled>다음 ›</button></div>
-{SHARE_ROW}
-</div>
-<div class="tl-doc">
-{tool_kakao()}
-<h2>영어회화 표현 모음</h2>
-<p>지금까지 '오늘의 영어회화'에 나온 표현이에요. ▶로 발음을 듣고, ›를 누르면 예문과 퀴즈가 있는 글로 이어져요.</p>
-<ol class="oe-list" id="oe-list">{items}</ol>
-{'<button type="button" class="ex-more oe-morebtn" id="oe-morebtn">표현 더 보기 (' + str(len(L) - 12) + ')</button>' if len(L) > 12 else ''}
-<h2>하루 한 문장, 이렇게 익혀요</h2>
-<ol>
-<li><b>한국어를 먼저 보고</b> 영어로 어떻게 말할지 떠올려요. 틀려도 괜찮아요.</li>
-<li><b>정답을 보고 ▶로 들어요.</b> 소리 내어 세 번 따라 말해요.</li>
-<li><b>글에서 예문과 퀴즈</b>까지 풀면, 오늘 표현이 내 문장이 돼요.</li>
-</ol>
-<h2>자주 묻는 질문</h2>
-{tool_faq(faq)}
-<h2>다른 영어 도구</h2>
-{tool_cards("today", t["group"])}
-</div></div>{TOOL_JS()}"""
-    desc = "매일 바뀌는 오늘의 영어회화 한 문장. 한국어를 보고 영어로 말해 본 뒤 정답, 원어민 발음, 쉬운 설명, 예문과 퀴즈까지 확인해요. 지난 영어회화 표현 모음과 카톡 1일 1영도 함께."
-    return layout("오늘의 영어회화", desc, url, body, nav="tools", og_img=tool_og(url), data={"tool": "today_english", "oe": L},
-                  seo_title="오늘의 영어회화 - 매일 한 문장, 원어민 발음과 영어 표현 모음",
-                  ld=tool_ld("오늘의 영어회화", desc, url, faq))
-
-
 # ── 영어 도구 v2 (2026-10-24): 사이트 흐름에 맞춘 목록·카드·공유 이미지 ─────────────
-# 도구 = 영어 도구 카테고리 안의 '글'처럼: 같은 카드 목록, 같은 칩, 같은 분류 필터(전체 · 시험 · 변환 · 공부)
-TOOL_GROUPS = ["시험", "변환", "공부"]
+# 도구 = 영어 도구 카테고리 안의 '글'처럼: 같은 카드 목록, 같은 칩, 같은 분류 필터(전체 · 시험 · 변환 · 글쓰기)
+TOOL_GROUPS = ["시험", "변환", "글쓰기"]
 TOOLS = [  # key, 주소, 이름, 설명, 분류, 3D 아이콘, 목록 썸네일(q, a, 강조), 공유 이미지(라벨, 큰 글씨, 작은 글씨)
     dict(key="schedule", url="/tools/english-test-schedule/", title="토익 시험 일정", desc="정기·특별추가접수 마감과 성적 발표일, D-day", group="시험",
          icon="calendar", th=("토익 접수 언제까지?", "마감 D-day", "D-day"), og=("다음 토익까지", "D-day", "접수 마감 · 성적 발표일 한눈에")),
@@ -3083,9 +3080,7 @@ TOOLS = [  # key, 주소, 이름, 설명, 분류, 3D 아이콘, 목록 썸네일
          icon="telephone", th=("토익스피킹 130점", "IM3", "IM3"), og=("토익스피킹", "130점 = IM3", "점수별 등급 바로 확인")),
     dict(key="compare", url="/tools/english-score-compare/", title="영어 시험 점수 비교", desc="토익·오픽·토익스피킹을 한 사다리에서", group="시험",
          icon="clipboard", th=("오픽 IH는 토익 몇 점?", "900~945점", "900~945점"), og=("오픽 IH는 토익", "900~945점", "토익·오픽·토익스피킹 한눈에")),
-    dict(key="today", url="/tools/today-english/", title="오늘의 영어회화", desc="매일 한 문장, 영어로 말해 보고 원어민 발음으로 확인", group="공부",
-         icon="speech-balloon", th=("할 일이 산더미야", "I'm swamped.", "swamped"), og=("오늘의 영어회화", "I'm swamped.", "매일 한 문장, 원어민 발음까지")),
-    dict(key="wordcount", url="/tools/english-word-count/", title="영어 단어 수 세기", desc="에세이·자소서 단어 수, 글자 수, 읽는 시간", group="공부",
+    dict(key="wordcount", url="/tools/english-word-count/", title="영어 단어 수 세기", desc="에세이·자소서 단어 수, 글자 수, 읽는 시간", group="글쓰기",
          icon="page", th=("My essay is about…", "186 words", "186"), og=("Word count", "186 words", "글자 수 · 문장 수 · 읽는 시간")),
     dict(key="cursive", url="/tools/english-cursive/", title="영어 필기체 변환", desc="복사해서 쓰는 필기체, 이미지 저장, 알파벳 연습", group="변환",
          icon="raised-hand", th=("Cafe in English", "𝒞𝒶𝒻𝑒 𝒾𝓃 ℰ𝓃𝑔𝓁𝒾𝓈𝒽", ""), og=("필기체 변환", "Cafe in English", "복사 · 이미지 저장 · 알파벳 연습")),
@@ -3102,7 +3097,7 @@ live_tools = lambda: [t for t in TOOLS if t["key"] != "address" or JUSO_KEY]
 
 
 # 공유 이미지: 글 공유 이미지와 같은 파스텔 그라데이션(OG_BG 0 복숭아 · 1 하늘 · 2 라벤더 · 3 민트 · 4 레몬)과 왼쪽 한 줄
-OG_TOOL = {"today": (1, "매일 한 문장, 원어민 발음까지"), "number": (3, "숫자·날짜를 영어로 쓰고 읽기"), "schedule": (4, "토익 접수 마감과 성적 발표일"), "tos_schedule": (0, "토익스피킹 접수 마감과 성적 발표일"), "opic_schedule": (2, "오픽 접수 마감과 성적 발표일"), "toeic": (1, "맞힌 개수로 예상 점수 바로 확인"), "opic": (2, "NL부터 AL까지, 나는 어느 등급일까"), "tos": (0, "점수를 넣으면 등급이 바로"),
+OG_TOOL = {"number": (3, "숫자·날짜를 영어로 쓰고 읽기"), "schedule": (4, "토익 접수 마감과 성적 발표일"), "tos_schedule": (0, "토익스피킹 접수 마감과 성적 발표일"), "opic_schedule": (2, "오픽 접수 마감과 성적 발표일"), "toeic": (1, "맞힌 개수로 예상 점수 바로 확인"), "opic": (2, "NL부터 AL까지, 나는 어느 등급일까"), "tos": (0, "점수를 넣으면 등급이 바로"),
            "compare": (3, "토익·오픽·토익스피킹 한눈에"), "wordcount": (3, "에세이·자소서 분량 맞추기"), "cursive": (0, "복사·이미지 저장·알파벳 연습"),
            "name": (4, "여권·해외 사이트용 영문 이름"), "address": (1, "해외직구 영문 주소, 칸별로")}
 
@@ -3116,8 +3111,8 @@ def tool_og(url):
     return og_tool("tool-" + t["key"], "영어 도구 · " + t["group"], t["title"], sub, lab, big, small, t["icon"], t["key"], bg=bg, cursive=t["key"] == "cursive")
 
 
-TOOL_KIND = {"today": "매일", "number": "변환기", "schedule": "일정", "tos_schedule": "일정", "opic_schedule": "일정", "toeic": "계산기", "opic": "등급표", "tos": "레벨표", "compare": "비교표", "wordcount": "세기", "cursive": "변환", "name": "변환기", "address": "변환기"}
-TOOL_TH = {"today": ("오늘의 영어회화", "I'm swamped.", "swamped"), "number": ("1억 2천만은", "120 million", "million"), "schedule": ("다음 토익까지", "D-day", "D-day"), "tos_schedule": ("토익스피킹", "매주 토·일", "토·일"), "opic_schedule": ("오픽 접수", "2일 전까지", "2일 전"), "toeic": ("예상 점수", "700~750점", "700~750점"), "opic": ("오픽 등급", "IM2 → IH", "IH"), "tos": ("토익스피킹 130점", "IM3", "IM3"),
+TOOL_KIND = {"number": "변환기", "schedule": "일정", "tos_schedule": "일정", "opic_schedule": "일정", "toeic": "계산기", "opic": "등급표", "tos": "레벨표", "compare": "비교표", "wordcount": "세기", "cursive": "변환", "name": "변환기", "address": "변환기"}
+TOOL_TH = {"number": ("1억 2천만은", "120 million", "million"), "schedule": ("다음 토익까지", "D-day", "D-day"), "tos_schedule": ("토익스피킹", "매주 토·일", "토·일"), "opic_schedule": ("오픽 접수", "2일 전까지", "2일 전"), "toeic": ("예상 점수", "700~750점", "700~750점"), "opic": ("오픽 등급", "IM2 → IH", "IH"), "tos": ("토익스피킹 130점", "IM3", "IM3"),
            "compare": ("오픽 IH는 토익", "900~945점", "900~945점"), "wordcount": ("Word count", "186 words", "186"),
            "cursive": ("필기체 변환", "Cafe in English", ""), "name": ("이승주", "Lee Seungju", "Seungju"), "address": ("테헤란로 152", "152 Teheran-ro", "Teheran-ro")}
 
@@ -3367,7 +3362,8 @@ def build():
     for sr in SERIES:
         write(f"/series/{sr['id']}/", page_series(sr)); pages.append(f"/series/{sr['id']}/")
     write("/notes/", page_notes())
-    write("/today/", page_today())
+    write("/today/", page_today()); pages.append("/today/")
+    write("/tools/today-english/", page_today_old())
     (OUT / "manifest.webmanifest").write_text(json.dumps({
         "name": "카페인영어 - 오늘의 5분", "short_name": "카페인영어", "lang": "ko", "start_url": "/notes/?src=app", "scope": "/",
         "display": "standalone", "background_color": "#FFFFFF", "theme_color": "#FFFFFF",
@@ -3389,7 +3385,7 @@ def build():
                   ("/tools/toeic-speaking-level/", page_tool_tos), ("/tools/english-score-compare/", page_tool_compare),
                   ("/tools/english-word-count/", page_tool_wordcount), ("/tools/english-cursive/", page_tool_cursive),
                   ("/tools/english-test-schedule/", page_tool_schedule), ("/tools/toeic-speaking-schedule/", page_tool_tos_schedule),
-                  ("/tools/opic-schedule/", page_tool_opic_schedule), ("/tools/number-to-english/", page_tool_number), ("/tools/today-english/", page_tool_today)):
+                  ("/tools/opic-schedule/", page_tool_opic_schedule), ("/tools/number-to-english/", page_tool_number)):
         write(u, fn()); pages.append(u)
     write("/tools/english-address/", page_tool_address())
     if JUSO_KEY:

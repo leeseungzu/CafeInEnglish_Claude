@@ -3005,40 +3005,25 @@ html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
 .nb-units td:nth-child(2){white-space:nowrap;font-variant-numeric:tabular-nums}
 @media (max-width:480px){.nb-units{font-size:13.5px}.nb-units th:first-child,.nb-units td:first-child{white-space:nowrap}}
 
-/* 오늘의 영어회화 (2026-10-24) */
-.oe-q{padding:20px 18px 18px;text-align:center}
-.oe-k{display:flex;justify-content:space-between;margin:0;font-size:13px;font-weight:700;color:#6B7684}
-.oe-h{margin:18px 0 16px;font-size:24px;font-weight:800;line-height:1.4;letter-spacing:-.02em;color:#191F28;word-break:keep-all}
-.oe-ans{min-height:150px}
-.oe-en{display:flex;align-items:center;justify-content:center;gap:10px;margin:0;font-size:28px;font-weight:800;letter-spacing:-.02em;color:#191F28}
-.oe-en span{background:linear-gradient(transparent 62%,#CDEB5B 62%);padding:0 3px}
-.oe-desc{margin:10px auto 12px;max-width:440px;font-size:14.5px;line-height:1.6;color:#4E5968;word-break:keep-all}
-.oe-go{font-size:14px;font-weight:700;color:#191F28;text-decoration:none;border-bottom:1.5px solid #CDEB5B}
-.oe-q.hide .oe-ans{filter:blur(9px);pointer-events:none;user-select:none}
-.oe-show{margin-top:16px}
-.oe-pl{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:#F2F4F6;color:#191F28;flex:none;transition:background .15s}
-.oe-pl:hover{background:#E5E8EB}
-.oe-pl-big{width:40px;height:40px;background:#191F28;color:#CDEB5B}
-.oe-pl-big:hover{background:#000}
-.oe-nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;margin-top:10px}
-.oe-nav button{all:unset;cursor:pointer;font-size:14px;font-weight:700;color:#4E5968;padding:8px 10px;border-radius:10px}
-.oe-nav button:last-child{justify-self:end}
-.oe-nav button:hover:not(:disabled){background:#E5E8EB;color:#191F28}
-.oe-nav button:disabled{color:#C9CDD2;cursor:default}
-.oe-nav span{font-size:13px;font-weight:700;color:#8B95A1}
-.tl-doc ol.oe-list{list-style:none;padding:0;margin:12px 0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.oe-it{display:flex;align-items:center;gap:8px;margin:0!important;padding:12px 10px 12px 14px;border:1px solid var(--line);border-radius:14px}
-.oe-it>div{flex:1;min-width:0}
-.oe-it b{display:block;font-size:15px;color:#191F28;line-height:1.35}
-.oe-it span{display:block;font-size:13px;color:#6B7684;line-height:1.45;margin-top:1px}
-.oe-it.oe-more{display:none}
-.oe-ln{font-size:20px;color:#B0B8C1;text-decoration:none;padding:4px 6px}
-.oe-ln:hover{color:#191F28}
-@media (max-width:640px){.tl-doc ol.oe-list{grid-template-columns:1fr}}
-@media (max-width:480px){.oe-h{font-size:21px}.oe-en{font-size:24px}}
-.oe-en{display:block;line-height:1.4;word-break:keep-all}
-.oe-en span{-webkit-box-decoration-break:clone;box-decoration-break:clone}
-.oe-pl-big{display:flex;margin:12px auto 0}
-.oe-q.long .oe-en{font-size:23px}
-@media (max-width:480px){.oe-q.long .oe-en{font-size:21px}}
-.oe-ans{min-height:200px}
+/* 오늘의 한 잔 모음 (/today/, 2026-10-24) */
+.oe-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}
+.oe-head h1{margin-bottom:6px}
+.oe-head .lead{margin:0;text-wrap:balance;word-break:keep-all}
+.oe-kk{flex:none}
+.card.oe-fold{display:none!important}
+.card.oe-now .oe-d{background:#CDEB5B;color:#191F28}
+.oe-more{margin:6px 0 30px}
+.oe-list .card h2,.oe-list .card p{text-wrap:balance;word-break:keep-all}
+@media (max-width:640px){.oe-head{flex-direction:column;align-items:stretch;gap:14px}.oe-kk{justify-content:center}}
+.hs-all,.mq-all{font-size:13.5px;font-weight:700;color:#4E5968;text-decoration:none;margin-left:auto}
+.hs-all:hover,.mq-all:hover{color:#191F28}
+.mq-all{display:block;text-align:center;margin:10px auto 0}
+.card.oe-now .oe-d{background:none!important;color:#191F28;font-weight:800}
+.oe-side .sf-g{padding-bottom:16px}
+.oe-sq{margin:4px 0 10px;font-size:17px;font-weight:800;line-height:1.45;color:#191F28;text-wrap:balance;word-break:keep-all}
+.oe-sgo{display:block;font-size:13.5px;font-weight:700;color:#4E5968;text-decoration:none;margin-bottom:14px}
+.oe-sgo:hover{color:#191F28}
+.oe-kk2{display:flex;justify-content:center;font-size:14px;padding:12px 14px}
+@media (min-width:900px){.oe-head .oe-kk{display:none}}
+/* 문장 줄바꿈 균형: 한두 단어만 다음 줄로 넘어가지 않게 (2026-10-24) */
+.mq-h,.a-phrase,.a-mean,.card h2,.tl h1,.tl .lead,.cat-about p{text-wrap:balance;word-break:keep-all}
