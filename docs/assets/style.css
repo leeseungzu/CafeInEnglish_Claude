@@ -2907,3 +2907,43 @@ html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
   .sf-a.sf-all{margin-bottom:6px;position:relative}
   .sf-a.sf-all::after{content:"";position:absolute;left:6px;right:6px;bottom:-4px;height:1px;background:rgba(0,0,0,.07)}
 }
+
+/* 시험 일정: 표 → 날짜 카드 (2026-10-24) */
+.ex-leg{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}
+.ex-leg span{font-size:13px;color:#4E5968;background:#F2F4F6;border-radius:9px;padding:6px 10px}
+.ex-leg b{color:#191F28;margin-right:5px;font-weight:700}
+.tl-doc .ex-mh{margin:20px 0 8px;font-size:14px;font-weight:800;color:#191F28}
+.tl-doc ul.ex-grid{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tl-doc ul.ex-g-tos{grid-template-columns:repeat(4,1fr)}
+.ex-tile{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 15px 12px;margin:0!important;display:flex;flex-direction:column;transition:border-color .15s}
+.ex-th{display:flex;align-items:center;justify-content:space-between;gap:6px;min-height:22px}
+.ex-th span{font-size:12.5px;font-weight:700;color:#8B95A1}
+.ex-tp{font-style:normal;font-size:11.5px;font-weight:800;border-radius:7px;padding:3px 7px;background:#F2F4F6;color:#6B7684;white-space:nowrap}
+.ex-tp:empty{display:none}
+.ex-tp.l{background:#CDEB5B;color:#191F28}.ex-tp.r{background:#FFEBEE;color:#E03E3E}.ex-tp.x{color:#B0B8C1}
+.tl-doc .ex-td{margin:6px 0 10px;font-size:24px;font-weight:800;letter-spacing:-.03em;color:#191F28;line-height:1.15}
+.ex-td small{display:block;font-size:12.5px;font-weight:600;color:#8B95A1;letter-spacing:0;margin-top:3px}
+.ex-tile dl{margin:auto 0 0;padding-top:10px;border-top:1px solid #F2F4F6;display:grid;gap:5px}
+.ex-tile dl div{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.ex-tile dt{font-size:12.5px;color:#8B95A1;white-space:nowrap}
+.ex-tile dd{margin:0;font-size:13.5px;font-weight:600;color:#333D4B;white-space:nowrap}
+.ex-tile.next{border:1.5px solid #191F28;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.ex-tile.next .ex-td{background:linear-gradient(transparent 62%,#CDEB5B 62%);align-self:flex-start;padding:0 2px}
+.ex-tile.next .ex-td small{background:#fff}
+.ex-tile.closed,.ex-tile.past{background:#F9FAFB;border-color:#F2F4F6}
+.ex-tile.closed .ex-td,.ex-tile.closed dd,.ex-tile.past .ex-td,.ex-tile.past dd{color:#B0B8C1}
+@media (max-width:640px){
+  .tl-doc ul.ex-grid,.tl-doc ul.ex-g-tos{grid-template-columns:repeat(2,1fr);gap:8px}
+  .ex-tile{padding:12px 12px 10px;border-radius:16px}
+  .tl-doc .ex-td{font-size:21px}
+  .ex-tile dt{font-size:12px}.ex-tile dd{font-size:12.5px}
+}
+.tl-doc ul.ex-grid,.tl-doc ul.ex-g-tos{grid-template-columns:repeat(3,1fr);margin-top:14px}
+.ex-tile[hidden],.ex-tile.ex-fold{display:none!important}
+.ex-tile.next .ex-td{background:none;padding:0}
+.ex-tile.next .ex-td small{background:none}
+.ex-td span{padding:0 2px;margin-left:-2px}
+.ex-tile.next .ex-td span{background:linear-gradient(transparent 60%,#CDEB5B 60%)}
+.ex-more{all:unset;box-sizing:border-box;display:block;width:100%;margin-top:10px;text-align:center;cursor:pointer;font-size:14px;font-weight:700;color:#191F28;background:#F2F4F6;border-radius:14px;padding:13px;transition:background .15s}
+.ex-more:hover{background:#E5E8EB}
+@media (max-width:640px){.tl-doc ul.ex-grid,.tl-doc ul.ex-g-tos{grid-template-columns:repeat(2,1fr)}}

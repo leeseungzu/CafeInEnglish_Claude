@@ -624,7 +624,20 @@
     if (n0) draw.f = 1;
     draw(); back();
     // 표: 지난 시험은 흐리게
-    $$(".ex-tbl tr[data-d]").forEach(r => { if (r.dataset.d < today) r.classList.add("past"); else if (r.dataset.c < today) r.classList.add("closed"); });
+    const seen = {};
+    $$(".ex-tile").forEach(el => {
+      const k = el.dataset.exT, x = list(k).find(y => y.date === el.dataset.d), p = $(".ex-tp", el); if (!x) return;
+      if (x.date < today || !openWin(x)) { el.hidden = true; return; }  // 지난 시험·접수 끝난 시험은 숨김 (검색용 HTML에는 그대로)
+      const st = status(x); p.textContent = st.t; p.className = "ex-tp " + st.cls;
+      if (!seen[k]) { seen[k] = 1; el.classList.add("next"); }
+    });
+    $$(".ex-grid").forEach(g => {  // 토익스피킹처럼 긴 목록은 6개만 먼저
+      const btn = g.nextElementSibling; if (!btn || !btn.classList.contains("ex-more")) return;
+      const vis = $$(".ex-tile", g).filter(el => !el.hidden); if (vis.length <= 6) return;
+      vis.slice(6).forEach(el => el.classList.add("ex-fold"));
+      btn.hidden = false; btn.textContent = `일정 더 보기 (${vis.length - 6})`;
+      btn.addEventListener("click", () => { $$(".ex-fold", g).forEach(el => el.classList.remove("ex-fold")); btn.hidden = true; });
+    });
   }
   initExam();
 
