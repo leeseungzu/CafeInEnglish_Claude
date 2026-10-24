@@ -519,7 +519,7 @@
      5. 영어 시험 일정 — 오늘(한국 시간) 기준 다음 시험 D-day + 서류 마감에서 거꾸로
      ========================================================= */
   function initExam() {
-    const N = $("#ex-n"); if (!N && !$("[data-ex]")) return;
+    const N = $("#ex-n"); if (!N && !$(".ex-link-s[data-ex]")) return;
     const X = DATA.exam || {}, WD = "일월화수목금토", NAME = { toeic: "토익", tos: "토익스피킹", opic: "오픽" };
     const REG = { toeic: "https://exam.toeic.co.kr/receipt/receiptStep1.php", tos: "https://www.toeicswt.co.kr/", opic: "https://www.opic.or.kr/" };
     const goBtn = (t, w, x) => (now >= w.s && now < w.e) ? `<a class="ex-go" href="${REG[t]}" target="_blank" rel="noopener" data-go="${t}">${NAME[t]} 접수하러 가기<i aria-hidden="true">↗</i></a>` : "";
@@ -563,7 +563,7 @@
     const pillH = st => `<span class="ex-pill ${st.cls}">${esc(st.t)}</span>`;
 
     // 다른 시험 도구의 '다음 시험 일정' 줄
-    $$("[data-ex]").forEach(el => {
+    $$(".ex-link-s[data-ex]").forEach(el => {
       const x = list(el.dataset.ex).filter(y => y.date >= today && openWin(y))[0]; if (!x) return;
       const w = openWin(x), left = dd(w.ed);
       el.textContent = `${L(x.date)} 시험 · ` + (now < w.s ? `${S(w.sd)} 접수 시작` : `${w.k === "특별추가접수" ? "특별추가 " : ""}접수 마감 ${left <= 0 ? "오늘" : "D-" + left}`);

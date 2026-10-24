@@ -2947,3 +2947,13 @@ html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
 .ex-more{all:unset;box-sizing:border-box;display:block;width:100%;margin-top:10px;text-align:center;cursor:pointer;font-size:14px;font-weight:700;color:#191F28;background:#F2F4F6;border-radius:14px;padding:13px;transition:background .15s}
 .ex-more:hover{background:#E5E8EB}
 @media (max-width:640px){.tl-doc ul.ex-grid,.tl-doc ul.ex-g-tos{grid-template-columns:repeat(2,1fr)}}
+/* 시험 일정: 스크립트가 채우기 전에 자리를 잡아 화면 밀림(CLS) 방지 */
+#ex-n{min-height:268px}
+#ex-l{min-height:320px}
+#ex-r{min-height:500px}
+/* 점수 비교: 스크립트가 채우기 전 자리 잡기 (CLS) */
+#cp-p{min-height:42px}
+#cp-l{min-height:418px}
+#cp-y{min-height:74px}
+@media (max-width:640px){#cp-p{min-height:90px}}
+#cp-y+.tl-share-row[hidden],#ex-r+.tl-share-row[hidden]{display:block!important;visibility:hidden}
