@@ -19,6 +19,9 @@
     {
       "t": 8.7,
       "end": 12.8,
+      "play_t": 10.9,
+      "play_end": 12.85,
+      "play_en": "keep it simple, stupid.",
       "en": "Keep it simple.",
       "ko": "단순하게 해, 복잡하게 하지 마",
       "orig": "In English, we have a saying, a kiss is keep it simple, stupid.",
@@ -35,6 +38,9 @@
     {
       "t": 51.3,
       "end": 54.2,
+      "play_t": 51.3,
+      "play_end": 52.65,
+      "play_en": "Is there a Starbucks around here?",
       "en": "Is there a ~ around here?",
       "ko": "이 근처에 ~ 있나요?",
       "orig": "Is there a Starbucks around here? I love their coffee.",
@@ -51,6 +57,9 @@
     {
       "t": 104.9,
       "end": 109.1,
+      "play_t": 104.95,
+      "play_end": 106.3,
+      "play_en": "Ask open-ended questions",
       "en": "open-ended question",
       "ko": "열린 질문 (예/아니오로 끝나지 않는 질문)",
       "orig": "Ask open-ended questions like, where is there a Starbucks around here?",
@@ -67,6 +76,9 @@
     {
       "t": 151.2,
       "end": 154.0,
+      "play_t": 152.75,
+      "play_end": 154.05,
+      "play_en": "you create a bond.",
       "en": "create a bond",
       "ko": "유대감을 쌓다, 가까워지다",
       "orig": "By saying that and saying it sincerely, you create a bond.",
@@ -83,6 +95,9 @@
     {
       "t": 262.6,
       "end": 264.3,
+      "play_t": 263.2,
+      "play_end": 264.3,
+      "play_en": "right off the bat.",
       "en": "right off the bat",
       "ko": "처음부터 바로, 대뜸",
       "orig": "So I'm telling you that right off the bat.",

@@ -18,6 +18,9 @@
     {
       "t": 14.5,
       "end": 17.8,
+      "play_t": 14.5,
+      "play_end": 17.8,
+      "play_en": "I feel pretty stupid that I don't know any foreign languages.",
       "en": "I feel pretty stupid that ~",
       "ko": "~해서 좀 바보 같다, 민망하다",
       "orig": "I feel pretty stupid that I don't know any foreign languages.",
@@ -34,7 +37,9 @@
     {
       "t": 291.9,
       "end": 297.0,
-      "play_t": 295.36,
+      "play_t": 295.7,
+      "play_end": 297.0,
+      "play_en": "put in about 500 hours.",
       "en": "put in (시간·노력)",
       "ko": "시간이나 노력을 들이다",
       "orig": "If you want to learn Spanish and you're an English speaker, you kind of have to put in about 500 hours.",
@@ -51,6 +56,9 @@
     {
       "t": 337.6,
       "end": 339.7,
+      "play_t": 338.75,
+      "play_end": 339.75,
+      "play_en": "keep people motivated.",
       "en": "keep someone motivated",
       "ko": "누군가를 계속 의욕 있게 만들다",
       "orig": "There are multiple ways to keep people motivated.",
@@ -67,7 +75,9 @@
     {
       "t": 324.0,
       "end": 329.2,
-      "play_t": 327.77,
+      "play_t": 328.2,
+      "play_end": 329.2,
+      "play_en": "end up doing more.",
       "en": "end up -ing",
       "ko": "결국 ~하게 되다",
       "orig": "Whenever we make it more fun, even the people who call themselves serious learners end up doing more.",

@@ -69,6 +69,9 @@
     {
       "t": 58.4,
       "end": 63.9,
+      "play_t": 60.4,
+      "play_end": 63.9,
+      "play_en": "companies are all in on AI.",
       "en": "be all in on ~",
       "ko": "~에 올인하다, 전부 걸다",
       "orig": "First, both of our companies are all in on AI.",
@@ -85,6 +88,9 @@
     {
       "t": 128.9,
       "end": 136.0,
+      "play_t": 129.3,
+      "play_end": 134.4,
+      "play_en": "I'm sorry to break it to you.",
       "en": "I'm sorry to break it to you.",
       "ko": "이런 말 해서 미안하지만, (안 좋은 소식을 전할 때)",
       "orig": "I'm sorry to break it to you. You're going to live forever.",
@@ -101,6 +107,9 @@
     {
       "t": 166.3,
       "end": 168.6,
+      "play_t": 166.6,
+      "play_end": 168.6,
+      "play_en": "Can you make it faster?",
       "en": "Can you make it faster?",
       "ko": "더 빨리 되나요? 더 빨리 만들 수 있어요?",
       "orig": "Can you make it faster?",
@@ -117,6 +126,9 @@
     {
       "t": 202.0,
       "end": 211.2,
+      "play_t": 205.1,
+      "play_end": 210.95,
+      "play_en": "SK makes sure it never forgets",
       "en": "make sure ~",
       "ko": "반드시 ~하게 하다, 꼭 ~인지 확인하다",
       "orig": "Nvidia thinks lightning fast, and SK makes sure it never forgets.",
@@ -133,6 +145,9 @@
     {
       "t": 243.6,
       "end": 250.0,
+      "play_t": 243.9,
+      "play_end": 250.0,
+      "play_en": "May our partnership scale even faster than GPU demand.",
       "en": "May + 주어 + 동사원형",
       "ko": "~하기를 바랍니다 (건배사·축하 인사)",
       "orig": "May our partnership scale even faster than GPU demand.",

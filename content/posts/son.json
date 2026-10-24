@@ -19,6 +19,9 @@
     {
       "t": 6.2,
       "end": 7.7,
+      "play_t": 6.2,
+      "play_end": 7.7,
+      "play_en": "I'm enjoying every single moment.",
       "en": "every single ~",
       "ko": "하나하나 모든 ~ (강조)",
       "orig": "I'm enjoying every single moment.",
@@ -35,6 +38,9 @@
     {
       "t": 42.3,
       "end": 45.05,
+      "play_t": 44.55,
+      "play_end": 45.45,
+      "play_en": "I'm trying.",
       "en": "I'm trying.",
       "ko": "(칭찬에) 노력 중이에요",
       "orig": "You seem like a very nice guy. / I'm trying.",
@@ -51,6 +57,9 @@
     {
       "t": 84.7,
       "end": 88.2,
+      "play_t": 84.7,
+      "play_end": 87.1,
+      "play_en": "But, flip side of that,",
       "en": "on the flip side",
       "ko": "반면에, 다른 면으로는",
       "orig": "But flip side of that, off the pitch...",
@@ -67,6 +76,9 @@
     {
       "t": 134.85,
       "end": 136.5,
+      "play_t": 134.85,
+      "play_end": 136.5,
+      "play_en": "I just want to give something back.",
       "en": "give back",
       "ko": "받은 걸 돌려주다, 보답하다",
       "orig": "I just want to give something back.",
@@ -83,6 +95,9 @@
     {
       "t": 163.8,
       "end": 167.0,
+      "play_t": 165.8,
+      "play_end": 167.15,
+      "play_en": "since day one.",
       "en": "since day one",
       "ko": "처음부터, 첫날부터",
       "orig": "A lot of people who (have been) supporting me since day one.",

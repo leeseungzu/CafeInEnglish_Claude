@@ -19,6 +19,9 @@
     {
       "t": 26.8,
       "end": 28.9,
+      "play_t": 26.8,
+      "play_end": 28.9,
+      "play_en": "I am their dream come true.",
       "en": "a dream come true",
       "ko": "꿈이 이루어진 것, 꿈만 같은 일",
       "orig": "I am their dream come true.",
@@ -35,6 +38,9 @@
     {
       "t": 45.25,
       "end": 49.55,
+      "play_t": 45.25,
+      "play_end": 49.55,
+      "play_en": "We ended up at a Baptist boarding school in Oneida, Kentucky,",
       "en": "end up ~",
       "ko": "결국 ~하게 되다, ~에 가게 되다",
       "orig": "We ended up at a Baptist boarding school in Oneida, Kentucky.",
@@ -51,6 +57,9 @@
     {
       "t": 57.2,
       "end": 59.05,
+      "play_t": 57.2,
+      "play_end": 59.05,
+      "play_en": "They came with little to nothing.",
       "en": "with little to nothing",
       "ko": "거의 빈손으로",
       "orig": "They came with little to nothing.",
@@ -67,6 +76,9 @@
     {
       "t": 142.65,
       "end": 147.4,
+      "play_t": 143.45,
+      "play_end": 144.85,
+      "play_en": "How hard could it be?",
       "en": "How hard could it be?",
       "ko": "뭐 얼마나 어렵겠어?",
       "orig": "I just thought, \"How hard could it be?\" It turns out it is super hard.",
@@ -83,6 +95,9 @@
     {
       "t": 151.28,
       "end": 152.7,
+      "play_t": 151.28,
+      "play_end": 152.7,
+      "play_en": "We nearly ran out of money.",
       "en": "run out of ~",
       "ko": "~이 바닥나다, 다 떨어지다",
       "orig": "We nearly ran out of money.",

@@ -56,6 +56,16 @@ home = gz("index.html")
 if sizes.get("assets/site.css", 0) > 45: warn["CSS가 큼(gzip 45KB 넘음)"].append(f"{sizes['assets/site.css']}KB")
 if font > 200: warn["폰트 서브셋이 큼(200KB 넘음)"].append(f"{font}KB")
 if home > 45: warn["홈 HTML이 큼(gzip 45KB 넘음)"].append(f"{home}KB")
+# 영상 표현 카드: 듣기·반복 구간(play_t·play_end)과 따라 말할 영어(play_en)가 있어야 해요 (2026-10-24)
+for f in sorted((D.parent / "content" / "posts").glob("*.json")):
+    po = json.loads(f.read_text("utf-8"))
+    if not po.get("video"): continue
+    for x in po.get("expressions", []):
+        if "t" not in x: continue
+        if x.get("play_t") is None or x.get("play_end") is None or not x.get("play_en"):
+            bad["영상 표현 반복 구간 없음(play_t·play_end·play_en)"].append(f"{po['id']}: {x['en']}")
+        elif not 0.6 <= x["play_end"] - x["play_t"] <= 9:
+            warn["영상 표현 반복 구간 길이(0.6~9초)"].append(f"{po['id']}: {x['en']} {x['play_end'] - x['play_t']:.1f}s")
 print(f"페이지 {len(pages)}개 · 사이트맵 {len(sm)}개 · 내부 링크 {len(links)}개")
 print("크기(gzip):", ", ".join(f"{k.split('/')[-1]} {v}KB" for k, v in sizes.items()), f"· 폰트 {font}KB · 홈 HTML {home}KB")
 for k, v in bad.items(): print(f"❌ {k} ({len(v)}): {', '.join(v[:8])}")

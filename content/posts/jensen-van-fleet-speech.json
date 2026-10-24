@@ -19,6 +19,9 @@
     {
       "t": 268.6,
       "end": 272.0,
+      "play_t": 268.6,
+      "play_end": 271.8,
+      "play_en": "I have to admit, I'm rather uncomfortable with all this attention.",
       "en": "I have to admit ~",
       "ko": "솔직히 말하면, 인정하자면",
       "orig": "I have to admit, I'm rather uncomfortable with all this attention.",
@@ -35,7 +38,9 @@
     {
       "t": 299.7,
       "end": 310.0,
-      "play_t": 307.52,
+      "play_t": 307.85,
+      "play_end": 310.0,
+      "play_en": "it took my breath away.",
       "en": "take my breath away",
       "ko": "숨이 멎을 만큼 감동적이다",
       "orig": "It was the first time I heard the name of the company I helped create chanted out loud, and it took my breath away.",
@@ -52,6 +57,9 @@
     {
       "t": 314.1,
       "end": 317.0,
+      "play_t": 314.75,
+      "play_end": 316.6,
+      "play_en": "Could somebody pass me my phone?",
       "en": "Could somebody pass me ~?",
       "ko": "누가 ~ 좀 건네주실래요?",
       "orig": "Excuse me. Could somebody pass me my phone?",
@@ -68,7 +76,9 @@
     {
       "t": 339.1,
       "end": 344.6,
-      "play_t": 340.14,
+      "play_t": 340.35,
+      "play_end": 342.0,
+      "play_en": "as it turns out",
       "en": "as it turns out",
       "ko": "알고 보니, 결과적으로",
       "orig": "And this phone, as it turns out, outputs a lot of light.",
@@ -85,7 +95,9 @@
     {
       "t": 390.5,
       "end": 398.4,
-      "play_t": 391.85,
+      "play_t": 392.0,
+      "play_end": 398.4,
+      "play_en": "no company, no people are better at building factories than Koreans.",
       "en": "No one is better at ~ than …",
       "ko": "~하는 데는 …가 최고예요",
       "orig": "No company, no people are better at building factories than Koreans.",

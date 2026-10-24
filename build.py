@@ -1186,7 +1186,12 @@ def page_post(p):
             shadow = ""
             if video and "t" in x:
                 end = x.get("end", x["t"] + 4)
-                say = f'<div class="sh-say"><span class="lbl">따라 말하기</span><b>{e(x["say"])}</b></div>' if x.get("say") else ""
+                if x.get("play_end") is not None:  # 듣기·반복 구간 = 표현이 들리는 부분만 (2026-10-24)
+                    end = x["play_end"]
+                pe = x.get("play_en")  # 반복해서 듣고 따라 할 실제 영어 문장
+                say = (f'<div class="sh-say"><span class="lbl">따라 말하기</span>'
+                       + (f'<b lang="en">{e(pe)}</b></div>' + (f'<p class="sh-pr">발음 {e(x["say"])}</p>' if x.get("say") else "") if pe
+                          else (f'<b>{e(x["say"])}</b></div>' if x.get("say") else "</div>"))) if (pe or x.get("say")) else ""
                 tips = "".join(f"<li>{e(tp)}</li>" for tp in x.get("tips", []))
                 shadow = (f'<div class="shadow">{seg_buttons(shadow_start(x, p), end)}'
                           f'{say}{f"<ul class=sh-tips>{tips}</ul>" if tips else ""}</div>')

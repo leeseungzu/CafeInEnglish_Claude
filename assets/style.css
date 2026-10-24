@@ -3039,3 +3039,6 @@ html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
 /* 도구 페이지 본문(.tl-doc b) 규칙이 카드 썸네일 말풍선 글씨를 덮지 않게 (2026-10-24) */
 .tl-doc .chatv .cv-a b,.cat-about .chatv .cv-a b,.chatv .cv-a b{color:#CDEB5B}
 .tl-doc .chatv .cv-q{color:#333D4B}
+/* 따라 말하기: 반복 구간의 실제 영어 문장 + 한글 발음 (2026-10-24) */
+.sh-say b[lang=en]{font-size:17px;line-height:1.45}
+.sh-pr{margin:4px 0 0;font-size:14px;color:var(--muted)}
