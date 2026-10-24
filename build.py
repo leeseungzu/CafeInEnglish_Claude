@@ -3400,6 +3400,18 @@ def build():
         + "".join(f"  <url><loc>{DOMAIN}{u}</loc>" + (f"<lastmod>{LASTMOD[u]}</lastmod>" if u in LASTMOD else "") + "</url>\n" for u in pages)
         + "</urlset>\n", "utf-8")
     (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n", "utf-8")
+    # RSS (네이버 서치어드바이저 제출용, 최신 글 30편)
+    import email.utils as _eu, datetime as _dt
+    def _rfc(d):
+        try: return _eu.format_datetime(_dt.datetime.fromisoformat(d[:10] + "T09:00:00+09:00"))
+        except Exception: return ""
+    _items = sorted(POSTS, key=lambda p: (p.get("date", ""), p["id"]), reverse=True)[:30]
+    (OUT / "rss.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel>'
+        f'<title>카페인영어 CafeInEnglish</title><link>{DOMAIN}/</link><description>{e(SITE.get("description", ""))}</description><language>ko</language>'
+        + "".join(f'<item><title>{e(p["title"])}</title><link>{DOMAIN}{post_url(p)}</link><guid>{DOMAIN}{post_url(p)}</guid>'
+                  f'<description>{e(p.get("description") or p.get("lead", ""))}</description><pubDate>{_rfc(p.get("date", ""))}</pubDate></item>' for p in _items)
+        + "</channel></rss>\n", "utf-8")
     (OUT / "CNAME").write_text(DOMAIN.replace("https://", "") + "\n", "utf-8")
     (OUT / ".nojekyll").write_text("", "utf-8")
     if SITE.get("adsense_client"):
