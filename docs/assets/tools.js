@@ -791,6 +791,48 @@
   }
   initNumber();
 
+  /* =========================================================
+     7. 오늘의 영어회화 — 홈 '오늘의 한 잔'과 같은 계산 (한국 시간 자정에 바뀜)
+     ========================================================= */
+  function initToday() {
+    const Q = $("#oe-q"); if (!Q) return;
+    const L = DATA.oe || []; if (!L.length) return;
+    const day = Math.floor((Date.now() / 1000 + 9 * 3600) / 86400), WDK = "일월화수목금토";
+    let k = 0, au = null;
+    const at = kk => L[(((day - kk) % L.length) + L.length) % L.length];
+    const dstr = kk => { const d = new Date((day - kk) * 864e5); return `${d.getUTCMonth() + 1}월 ${d.getUTCDate()}일 (${WDK[d.getUTCDay()]})`; };
+    function play(src, txt) {
+      try { if (au) au.pause(); } catch (e) {}
+      if (src) { au = new Audio(src); au.play().catch(() => {}); }
+      else if ("speechSynthesis" in window) { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(txt); u.lang = "en-US"; speechSynthesis.speak(u); }
+    }
+    function draw() {
+      const T = at(k);
+      $("#oe-day").textContent = k === 0 ? "오늘의 영어회화" : k === 1 ? "어제의 영어회화" : `${k}일 전 영어회화`;
+      $("#oe-date").textContent = dstr(k);
+      $("#oe-ko").textContent = T.ko; $("#oe-en").textContent = T.en; $("#oe-desc").textContent = T.desc;
+      $("#oe-go").href = T.url; $("#oe-play").dataset.au = T.au || ""; $("#oe-play").dataset.say = T.en;
+      $("#oe-pos").textContent = k === 0 ? "오늘" : k === 1 ? "어제" : `${k}일 전`;
+      $("#oe-next").disabled = k === 0; $("#oe-prev").disabled = k >= 13;
+      Q.classList.add("hide"); $("#oe-show").hidden = false; Q.classList.toggle("long", T.en.length > 18);
+      setShare(`오늘의 영어회화: "${T.ko}"는 영어로 ${T.en}`, "");
+    }
+    $("#oe-show").addEventListener("click", () => {
+      Q.classList.remove("hide"); $("#oe-show").hidden = true;
+      const T = at(k); play(T.au, T.en); ga("tool_use", { tool: "today_english", days_ago: k });
+    });
+    $("#oe-prev").addEventListener("click", () => { if (k < 13) { k++; draw(); } });
+    $("#oe-next").addEventListener("click", () => { if (k > 0) { k--; draw(); } });
+    document.addEventListener("click", e => {
+      const b = e.target.closest(".oe-pl"); if (!b) return;
+      play(b.dataset.au, b.dataset.say || ""); ga("tool_use", { tool: "today_english_listen" });
+    });
+    const mb = $("#oe-morebtn");
+    if (mb) mb.addEventListener("click", () => { $$(".oe-it.oe-more").forEach(li => li.classList.remove("oe-more")); mb.hidden = true; });
+    draw();
+  }
+  initToday();
+
   /* 영어 도구 목록: 휴대폰 세그먼트 → 오른쪽 '보기' 필터와 같이 움직이게 */
   (function () {
     const seg = $(".tool-seg"); if (!seg) return;
