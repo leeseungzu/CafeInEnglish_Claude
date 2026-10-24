@@ -2963,7 +2963,7 @@ def page_tool_number():
 <div class="tl-doc">
 <h2>영어 숫자 단위, 한국 단위와 비교</h2>
 <p>한국어는 네 자리(만·억·조)마다, 영어는 세 자리(thousand·million·billion)마다 단위가 바뀌어요. 그래서 쉼표 위치를 보면 영어로 읽기 쉬워요.</p>
-<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>한국어</th><th>숫자</th><th>영어</th></tr></thead><tbody>{units}</tbody></table></div>
+<div class="tl-tbl-w"><table class="tl-tbl nb-units"><thead><tr><th>한국어</th><th>숫자</th><th>영어</th></tr></thead><tbody>{units}</tbody></table></div>
 <h2>큰 숫자 읽는 법</h2>
 <ol>
 <li>쉼표로 세 자리씩 끊어요. 1,250,000 → 1 / 250 / 000</li>
@@ -2973,11 +2973,11 @@ def page_tool_number():
 <h2>서수(첫째, 둘째) 쓰는 법</h2>
 <p>대부분 뒤에 th를 붙여요(fourth, 4th). 1·2·3으로 끝나면 first(1st), second(2nd), third(3rd)이고, 11·12·13은 eleventh(11th), twelfth(12th), thirteenth(13th)예요. 21은 twenty-first(21st)예요.</p>
 <h2>날짜 쓰는 법, 미국식과 영국식</h2>
-<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th></th><th>미국식</th><th>영국식</th></tr></thead><tbody>
-<tr><td>글로 쓰기</td><td><b>October 24, 2026</b></td><td><b>24 October 2026</b></td></tr>
-<tr><td>숫자로 쓰기</td><td>10/24/2026</td><td>24/10/2026</td></tr>
-<tr><td>읽기</td><td>October twenty-fourth</td><td>the twenty-fourth of October</td></tr>
-</tbody></table></div>
+<p>미국은 월·일·연도, 영국은 일·월·연도 순서예요. 2026년 10월 24일로 비교해 볼게요.</p>
+<div class="nb-cmp">
+<div class="nb-c"><p class="nb-ch">미국식</p><dl><div><dt>글로 쓰기</dt><dd><b>October 24, 2026</b></dd></div><div><dt>숫자로 쓰기</dt><dd>10/24/2026</dd></div><div><dt>읽기</dt><dd>October twenty-fourth</dd></div></dl></div>
+<div class="nb-c"><p class="nb-ch">영국식</p><dl><div><dt>글로 쓰기</dt><dd><b>24 October 2026</b></dd></div><div><dt>숫자로 쓰기</dt><dd>24/10/2026</dd></div><div><dt>읽기</dt><dd>the twenty-fourth of October</dd></div></dl></div>
+</div>
 <div class="tl-note"><b>해외 서류에는 달 이름을 쓰세요</b>03/04/2026은 미국에서는 3월 4일, 영국에서는 4월 3일이에요. 비자·항공권·해외직구처럼 틀리면 곤란한 곳에는 Mar 4, 2026처럼 달을 글자로 쓰면 헷갈리지 않아요.</div>
 <h2>자주 묻는 질문</h2>
 {tool_faq(faq)}

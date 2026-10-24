@@ -2988,3 +2988,19 @@ html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
   .nb-out .tl-v{grid-column:1;grid-row:2}
   .nb-out .nb-act{grid-column:2;grid-row:2}
 }
+/* 숫자·날짜: 미국식·영국식 비교 카드 (모바일에서 표가 잘리던 것 대신) */
+.nb-cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 16px}
+.nb-c{border:1px solid var(--line);border-radius:18px;padding:16px}
+.tl-doc .nb-ch{margin:0 0 10px;font-size:13px;font-weight:800;color:#191F28;display:inline-block;background:#F2F4F6;border-radius:8px;padding:4px 9px}
+.nb-c dl{margin:0;display:grid;gap:12px}
+.nb-c dt{font-size:12.5px;color:#8B95A1;margin-bottom:2px}
+.nb-c dd{margin:0;font-size:15px;color:#333D4B;line-height:1.45;word-break:keep-all}
+.nb-c dd b{color:#191F28;font-size:16px}
+@media (max-width:480px){.nb-cmp{gap:8px}.nb-c{padding:13px}.nb-c dd{font-size:14px}.nb-c dd b{font-size:15px}}
+/* 표: 모바일에서 옆으로 잘리지 않게 (가로 스크롤 대신 줄바꿈) */
+@media (max-width:480px){
+  .tl-tbl{min-width:0;font-size:14px}
+  .tl-tbl th,.tl-tbl td{padding:10px 9px;word-break:keep-all;overflow-wrap:break-word}
+}
+.nb-units td:nth-child(2){white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:480px){.nb-units{font-size:13.5px}.nb-units th:first-child,.nb-units td:first-child{white-space:nowrap}}
