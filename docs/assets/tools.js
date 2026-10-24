@@ -648,6 +648,149 @@
   }
   initExam();
 
+  /* =========================================================
+     6. 숫자·날짜 영어로 — 브라우저 안에서만 바꿔요
+     ========================================================= */
+  const NW = (() => {
+    const ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+    const TENS = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+    const SCALE = ["", "thousand", "million", "billion", "trillion"];
+    function under100(n) { return n < 20 ? ONES[n] : TENS[Math.floor(n / 10)] + (n % 10 ? "-" + ONES[n % 10] : ""); }
+    function under1000(n, uk) {
+      const h = Math.floor(n / 100), r = n % 100;
+      return [h ? ONES[h] + " hundred" : "", r ? (h && uk ? "and " : "") + under100(r) : ""].filter(Boolean).join(" ");
+    }
+    function words(n, uk) {  // 0 ≤ n < 10^15, 정수
+      if (n === 0) return "zero";
+      const parts = []; let i = 0;
+      while (n > 0) {
+        const c = n % 1000;
+        if (c) parts.unshift(under1000(c, uk) + (SCALE[i] ? " " + SCALE[i] : ""));
+        n = Math.floor(n / 1000); i++;
+      }
+      if (uk && parts.length > 1 && !/hundred/.test(parts[parts.length - 1]) && !/thousand|million|billion|trillion/.test(parts[parts.length - 1])) parts[parts.length - 1] = "and " + parts[parts.length - 1];
+      return parts.join(" ");
+    }
+    const ORD = { one: "first", two: "second", three: "third", five: "fifth", eight: "eighth", nine: "ninth", twelve: "twelfth" };
+    function ordWords(n) {
+      const w = words(n), m = w.match(/([a-z]+)$/), last = m[1];
+      const o = ORD[last] || (/y$/.test(last) ? last.slice(0, -1) + "ieth" : last + "th");
+      return w.slice(0, -last.length) + o;
+    }
+    function ordShort(n) { const t = n % 100, u = n % 10; return n.toLocaleString("en-US") + (t >= 11 && t <= 13 ? "th" : u === 1 ? "st" : u === 2 ? "nd" : u === 3 ? "rd" : "th"); }
+    function year(n) {
+      if (n < 1100 || n > 2999) return "";
+      if (n % 1000 === 0) return words(n);
+      if (n >= 2000 && n < 2010) return words(n);
+      const a = Math.floor(n / 100), b = n % 100;
+      return under100(a) + " " + (b === 0 ? "hundred" : b < 10 ? "oh-" + ONES[b] : under100(b));
+    }
+    function digits(s) { return s.split("").map(c => ONES[+c]).join(" "); }
+    // 1억 2천만, 3만 5천, 2.5억 → 숫자
+    function parseKo(s) {
+      const BIG = { "조": 1e12, "억": 1e8, "만": 1e4 }, SMALL = { "천": 1000, "백": 100, "십": 10 };
+      let total = 0, chunk = 0, num = "";
+      const flushSmall = () => { if (num !== "") { chunk += parseFloat(num); num = ""; } };
+      for (const ch of s.replace(/[\s,원]/g, "")) {
+        if (/[0-9.]/.test(ch)) num += ch;
+        else if (SMALL[ch]) { chunk += (num === "" ? 1 : parseFloat(num)) * SMALL[ch]; num = ""; }
+        else if (BIG[ch]) { flushSmall(); total += (chunk || 1) * BIG[ch]; chunk = 0; }
+        else return NaN;
+      }
+      flushSmall();
+      return Math.round((total + chunk) * 100) / 100;
+    }
+    function ko(n) {  // 1250000 → 125만
+      if (n < 1e4) return n.toLocaleString("en-US");
+      const jo = Math.floor(n / 1e12), eok = Math.floor(n % 1e12 / 1e8), man = Math.floor(n % 1e8 / 1e4), r = n % 1e4;
+      return [jo && jo + "조", eok && eok.toLocaleString() + "억", man && man.toLocaleString() + "만", r && r.toLocaleString()].filter(Boolean).join(" ");
+    }
+    function short(n) {
+      const S = [[1e12, "trillion"], [1e9, "billion"], [1e6, "million"]];
+      for (const [v, w] of S) if (n >= v) { const x = Math.round(n / v * 100) / 100; return x >= 1000 ? "" : x + " " + w; }
+      return "";
+    }
+    return { words, ordWords, ordShort, year, digits, parseKo, ko, short };
+  })();
+
+  function initNumber() {
+    const box = $("#nb-out"); if (!box) return;
+    const inp = $("#nb-n"), din = $("#nb-d");
+    let mode = QS.get("d") ? "date" : "num", used = false;
+    if (QS.get("n")) inp.value = QS.get("n").slice(0, 30);
+    const tz = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+    din.value = /^\d{4}-\d\d-\d\d$/.test(QS.get("d") || "") ? QS.get("d") : tz;
+    const voice = "speechSynthesis" in window;
+    const row = (k, v, sub, say) => `<div class="tl-row"><span class="tl-k">${esc(k)}${sub ? `<small>${esc(sub)}</small>` : ""}</span><b class="tl-v">${esc(v)}</b>` +
+      `<span class="nb-act">${voice ? `<button type="button" class="tl-cp nb-say" data-say="${esc(say || v)}" aria-label="듣기">▶</button>` : ""}<button type="button" class="tl-cp" data-copy="${esc(v)}" data-f="${esc(k)}">복사</button></span></div>`;
+    const MON = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const DAY = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    function num() {
+      const raw = inp.value.trim(); if (!raw) { box.innerHTML = ""; return; }
+      let s = raw.replace(/\s+/g, " "), money = /^\$/.test(s), n;
+      s = s.replace(/^\$/, "");
+      n = /[조억만천백십]/.test(s) ? NW.parseKo(s) : parseFloat(s.replace(/[, ]/g, ""));
+      if (!isFinite(n) || n < 0 || n >= 1e15 || !/^[0-9.,\s조억만천백십원]+$/.test(s)) {
+        box.innerHTML = `<p class="tl-err">0부터 999조까지의 숫자를 넣어 주세요. 예) 1250000, 1억 2천만, 3.14</p>`; return;
+      }
+      const int = Math.floor(n), dec = (String(s.replace(/[, ]/g, "")).split(".")[1] || "").replace(/\D/g, "");
+      const out = [];
+      if (money) {
+        const c = Math.round((n - int) * 100);
+        const say = NW.words(int) + (int === 1 ? " dollar" : " dollars") + (c ? " and " + NW.words(c) + (c === 1 ? " cent" : " cents") : "");
+        out.push(row("달러로 읽기", say, "$" + n.toLocaleString("en-US", { minimumFractionDigits: c ? 2 : 0 })));
+      }
+      const w = NW.words(int) + (dec && !money ? " point " + NW.digits(dec) : "");
+      if (money) {  // 달러: 금액 읽기 + 숫자 표기만
+        out.push(row("숫자로 쓰기", "$" + n.toLocaleString("en-US", { minimumFractionDigits: n % 1 ? 2 : 0 }), "달러 표기"));
+        if (NW.short(int)) out.push(row("짧게 쓰기", "$" + NW.short(int), "뉴스·발표에서"));
+      } else {
+        out.push(row("영어로 읽기", w, "미국식"));
+        const uk = NW.words(int, true) + (dec ? " point " + NW.digits(dec) : "");
+        if (uk !== w) out.push(row("영어로 읽기", uk, "영국식(and)"));
+        out.push(row("숫자로 쓰기", int.toLocaleString("en-US") + (dec ? "." + dec : ""), "세 자리 쉼표", w));
+        if (NW.short(int)) out.push(row("짧게 쓰기", NW.short(int), "뉴스·발표에서"));
+        if (int >= 1e4) out.push(row("한국 단위", NW.ko(int), "", w));
+        if (!dec && int > 0 && int <= 1000) out.push(row("서수", NW.ordShort(int) + " · " + NW.ordWords(int), "몇 번째", NW.ordWords(int)));
+        const yr = !dec ? NW.year(int) : ""; if (yr) out.push(row("연도로 읽기", yr, int + "년"));
+      }
+      box.innerHTML = out.join("");
+      setShare(`${raw}는 영어로 ${money ? $("#nb-out .tl-v").textContent : w}`, "n=" + encodeURIComponent(raw));
+    }
+    function date() {
+      const v = din.value; if (!v) { box.innerHTML = ""; return; }
+      const [y, m, d] = v.split("-").map(Number), wd = DAY[new Date(Date.UTC(y, m - 1, d)).getUTCDay()];
+      const M = MON[m - 1], o = NW.ordWords(d), Y = NW.year(y) || NW.words(y);
+      box.innerHTML = [
+        row("미국식", `${M} ${d}, ${y}`, "월 일, 연도", `${M} ${o}, ${Y}`),
+        row("영국식", `${d} ${M} ${y}`, "일 월 연도", `the ${o} of ${M}, ${Y}`),
+        row("요일까지", `${wd}, ${M} ${d}, ${y}`, "격식 있는 글", `${wd}, ${M} ${o}, ${Y}`),
+        row("줄여 쓰기", `${M.slice(0, 3)}${M.length > 3 ? "." : ""} ${d}, ${y}`, "표·일정표"),
+        row("숫자 (미국)", `${String(m).padStart(2, "0")}/${String(d).padStart(2, "0")}/${y}`, "월/일/연도", `${M} ${o}, ${Y}`),
+        row("숫자 (영국)", `${String(d).padStart(2, "0")}/${String(m).padStart(2, "0")}/${y}`, "일/월/연도", `the ${o} of ${M}, ${Y}`),
+        row("미국식 읽기", `${M} ${o}, ${Y}`, "말할 때"),
+        row("국제 표준", v, "ISO 8601", `${M} ${o}, ${Y}`)].join("");
+      setShare(`${y}년 ${m}월 ${d}일은 영어로 ${M} ${d}, ${y}`, "d=" + v);
+    }
+    const run = () => { mode === "num" ? num() : date(); if (used && !run.g) { run.g = 1; ga("tool_use", { tool: "number_english", mode }); } used = true; };
+    function setMode(mm) {
+      mode = mm; $$("#nb-t button").forEach(b => b.classList.toggle("on", b.dataset.t === mode));
+      $("#nb-numbox").hidden = mode !== "num"; $("#nb-datebox").hidden = mode !== "date"; run();
+    }
+    $("#nb-t").addEventListener("click", e => { const b = e.target.closest("button"); if (b) setMode(b.dataset.t); });
+    inp.addEventListener("input", run); din.addEventListener("change", run);
+    $$("[data-nx]").forEach(b => b.addEventListener("click", () => { inp.value = b.dataset.nx; run(); }));
+    box.addEventListener("click", e => {
+      const b = e.target.closest(".nb-say"); if (!b || !voice) return;
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(b.dataset.say); u.lang = "en-US"; u.rate = .9;
+      const v = speechSynthesis.getVoices().find(x => /^en-US/.test(x.lang)); if (v) u.voice = v;
+      speechSynthesis.speak(u); ga("tool_use", { tool: "number_english_listen" });
+    });
+    setMode(mode);
+  }
+  initNumber();
+
   /* 영어 도구 목록: 휴대폰 세그먼트 → 오른쪽 '보기' 필터와 같이 움직이게 */
   (function () {
     const seg = $(".tool-seg"); if (!seg) return;

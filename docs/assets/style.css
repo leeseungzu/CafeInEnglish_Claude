@@ -769,7 +769,8 @@ main h2{font-size:22px;line-height:1.45;font-weight:700;margin:52px 0 14px}
 /* ===== 홈: 아티클 시리즈 ===== */
 .series{margin-top:80px}
 .sr-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-@media (min-width:860px){ .sr-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px} }
+@media (min-width:860px){ .sr-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px} }
+@media (min-width:860px){ .series .sr-cover{aspect-ratio:4/3} .series .sr-cover img{width:26%} }  /* 시리즈 6개 = 3×2 (2026-10-24) */
 .sr-card{display:flex;flex-direction:column;background:var(--soft);border-radius:24px;padding:18px;text-decoration:none;transition:transform .15s}
 .sr-card:hover{transform:translateY(-3px)}
 .sr-cover{aspect-ratio:1;border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#E5E8EB;margin-bottom:16px}
@@ -1085,7 +1086,7 @@ textarea.cf-in{min-height:170px;resize:vertical;line-height:1.6}
 .about-sub{color:var(--muted);margin:-4px 0 14px}
 .prose .about-sr{margin:0 0 30px}
 .prose .about-sr a{text-decoration:none}
-@media (min-width:860px){ .prose .about-sr{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px} .prose .about-sr .sr-card{padding:14px;border-radius:20px} .prose .about-sr h3{font-size:15px} .prose .about-sr p{font-size:12.5px} }
+@media (min-width:860px){ .prose .about-sr{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px} .prose .about-sr .sr-card{padding:14px;border-radius:20px} .prose .about-sr h3{font-size:15px} .prose .about-sr p{font-size:12.5px} }
 .about-kk-btns{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:12px}
 .about-kk .tv-kk-btn{margin:0}
 .about-yt{font-size:14px;font-weight:700;color:inherit;text-decoration:none;opacity:.85}
@@ -2971,3 +2972,19 @@ html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
 .ex-other>span{display:flex;flex-direction:column}
 .ex-other i{font-style:normal;font-size:20px;color:#B0B8C1}
 @media (max-width:480px){.ex-others{grid-template-columns:1fr}}
+
+/* 숫자·날짜 영어로 (2026-10-24) */
+.nb-out{min-height:300px}
+.nb-out .tl-row{grid-template-columns:110px 1fr auto}
+.nb-out .tl-k small{display:block;font-size:11.5px;color:#8B95A1;font-weight:500;margin-top:1px}
+.nb-out .tl-v{font-weight:700;color:#191F28;overflow-wrap:anywhere;line-height:1.45}
+.nb-act{display:flex;gap:6px;align-items:center}
+.nb-say{min-width:34px;text-align:center}
+#nb-numbox .tl-ex{margin-top:10px}
+#nb-numbox .tl-ex button,#nb-numbox .tl-ex{font-size:13px}
+@media (max-width:480px){
+  .nb-out .tl-row{grid-template-columns:1fr auto}
+  .nb-out .tl-k{grid-column:1/-1}
+  .nb-out .tl-v{grid-column:1;grid-row:2}
+  .nb-out .nb-act{grid-column:2;grid-row:2}
+}

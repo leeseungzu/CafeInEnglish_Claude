@@ -1351,6 +1351,9 @@ SERIES_ABOUT = {
     "leaders": _about_box("이 시리즈를 이렇게 활용하세요",
         "세계 무대에 선 리더들의 실제 연설과 인터뷰예요. 어떤 구조로 말했고 어떤 표현이 청중을 움직였는지 해설해요.",
         [("headphone", "듣기 연습", "이 장면 듣기"), ("studio-microphone", "발표 준비", "연설 구조 따라 하기"), ("page", "말하기 연습", "사유의 문장 필사")]),
+    "daily": _about_box("이 시리즈를 이렇게 활용하세요",
+        "인사, 사과, 위로, 맞장구처럼 친구·이웃과 매일 주고받는 짧은 말을 모았어요. 상황마다 한마디씩 익히고, 원어민이 줄여 말할 때 어떻게 들리는지도 함께 봐요.",
+        [("waving-hand", "처음 만났을 때", "How are you?"), ("speech-balloon", "대화 중에는", "Fair enough"), ("ear", "안 들릴 때", "gonna·wanna")]),
 }
 
 def view_card(cat):  # PC 오른쪽 '보기' 카드: 같은 탭 안의 칸 전환 (휴대폰에서는 숨기고 제목 아래 세그먼트 사용)
@@ -2927,6 +2930,69 @@ page_tool_tos_schedule = lambda: _schedule_page("tos")
 page_tool_opic_schedule = lambda: _schedule_page("opic")
 
 
+# ── 숫자·날짜 영어로 (2026-10-24): 숫자영어로 4,180 · 영어숫자단위 1,890 · 영어날짜표기 1,240 ─────────────
+SRC_CAM_NUM = ("Cambridge Dictionary, Grammar: Numbers", "https://dictionary.cambridge.org/grammar/british-grammar/numbers")
+SRC_CAM_DATE = ("Cambridge Dictionary, Grammar: Dates", "https://dictionary.cambridge.org/grammar/british-grammar/dates")
+NUM_UNITS = [("1천", "1,000", "one thousand"), ("1만", "10,000", "ten thousand"), ("10만", "100,000", "one hundred thousand"),
+             ("100만", "1,000,000", "one million"), ("1,000만", "10,000,000", "ten million"), ("1억", "100,000,000", "one hundred million"),
+             ("10억", "1,000,000,000", "one billion"), ("100억", "10,000,000,000", "ten billion"), ("1조", "1,000,000,000,000", "one trillion")]
+
+
+def page_tool_number():
+    url = "/tools/number-to-english/"
+    t = TOOL_BY_URL[url]
+    units = "".join(f"<tr><td><b>{a}</b></td><td>{b}</td><td>{c}</td></tr>" for a, b, c in NUM_UNITS)
+    faq = [
+        ("1억은 영어로 뭐예요?", "one hundred million이에요. 영어는 세 자리(천·백만·십억)마다 단위가 바뀌어서, 1억은 '백 개의 백만'으로 읽어요. 10억이 one billion이에요."),
+        ("hundred, thousand에 s를 붙이나요?", "숫자 뒤에서는 붙이지 않아요. two hundred, five thousand, three million처럼 써요. '수백, 수천'처럼 정확한 수가 아닐 때만 hundreds of, thousands of처럼 s를 붙여요."),
+        ("and는 언제 넣나요?", "영국식은 백 단위 뒤에 and를 넣어 one hundred and five처럼 읽고, 미국식은 보통 빼고 one hundred five라고 읽어요. 둘 다 맞아요."),
+        ("소수점은 어떻게 읽어요?", "점은 point, 뒤의 숫자는 한 자리씩 읽어요. 3.14는 three point one four, 0.5는 zero point five(영국식 nought point five)예요."),
+        ("2026년은 어떻게 읽어요?", "보통 두 자리씩 끊어 twenty twenty-six라고 읽어요. two thousand twenty-six도 맞아요. 2000~2009년은 two thousand five처럼 읽는 경우가 많아요."),
+        ("영어 날짜는 미국식과 영국식이 어떻게 달라요?", "미국은 월/일/연(October 24, 2026 · 10/24/2026), 영국은 일/월/연(24 October 2026 · 24/10/2026) 순서예요. 숫자로만 쓰면 헷갈리니 해외 서류에는 달 이름을 영어로 쓰는 게 안전해요."),
+    ]
+    body = f"""<div class="tl">
+{tool_head(t["group"], "숫자·날짜 영어로", "숫자나 날짜를 넣으면 영어로 어떻게 쓰고 읽는지 바로 보여 드려요. 1억 2천만 같은 한국식 단위도 넣을 수 있고, 원어민 발음으로 들어 볼 수 있어요.")}
+<div class="tl-card">
+<div class="tl-seg" id="nb-t" role="group" aria-label="바꿀 종류"><button type="button" class="on" data-t="num">숫자</button><button type="button" data-t="date">날짜</button></div>
+<div class="tl-box" id="nb-numbox"><label class="sr-only" for="nb-n">숫자</label><input id="nb-n" class="tl-in" type="text" inputmode="text" value="1,250,000" maxlength="30" autocomplete="off" placeholder="예) 1250000, 1억 2천만, 3.14, 21">
+<div class="tl-ex">예시 <button type="button" data-nx="1억 2천만">1억 2천만</button><button type="button" data-nx="3.14">3.14</button><button type="button" data-nx="1999">1999</button><button type="button" data-nx="$12.50">$12.50</button></div></div>
+<div class="tl-box" id="nb-datebox" hidden><label class="sr-only" for="nb-d">날짜</label><input id="nb-d" class="tl-in ex-date" type="date"></div>
+<div class="tl-rows nb-out" id="nb-out" aria-live="polite"></div>{SHARE_ROW}
+<p class="tl-note2">▶ 버튼을 누르면 이 기기의 영어 음성으로 읽어 줘요. 입력한 숫자는 저장하지 않아요.</p>
+</div>
+<div class="tl-doc">
+<h2>영어 숫자 단위, 한국 단위와 비교</h2>
+<p>한국어는 네 자리(만·억·조)마다, 영어는 세 자리(thousand·million·billion)마다 단위가 바뀌어요. 그래서 쉼표 위치를 보면 영어로 읽기 쉬워요.</p>
+<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>한국어</th><th>숫자</th><th>영어</th></tr></thead><tbody>{units}</tbody></table></div>
+<h2>큰 숫자 읽는 법</h2>
+<ol>
+<li>쉼표로 세 자리씩 끊어요. 1,250,000 → 1 / 250 / 000</li>
+<li>앞에서부터 각 덩어리를 읽고 단위를 붙여요. one <b>million</b>, two hundred fifty <b>thousand</b></li>
+<li>0인 덩어리는 건너뛰어요. 2,000,500 → two million five hundred</li>
+</ol>
+<h2>서수(첫째, 둘째) 쓰는 법</h2>
+<p>대부분 뒤에 th를 붙여요(fourth, 4th). 1·2·3으로 끝나면 first(1st), second(2nd), third(3rd)이고, 11·12·13은 eleventh(11th), twelfth(12th), thirteenth(13th)예요. 21은 twenty-first(21st)예요.</p>
+<h2>날짜 쓰는 법, 미국식과 영국식</h2>
+<div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th></th><th>미국식</th><th>영국식</th></tr></thead><tbody>
+<tr><td>글로 쓰기</td><td><b>October 24, 2026</b></td><td><b>24 October 2026</b></td></tr>
+<tr><td>숫자로 쓰기</td><td>10/24/2026</td><td>24/10/2026</td></tr>
+<tr><td>읽기</td><td>October twenty-fourth</td><td>the twenty-fourth of October</td></tr>
+</tbody></table></div>
+<div class="tl-note"><b>해외 서류에는 달 이름을 쓰세요</b>03/04/2026은 미국에서는 3월 4일, 영국에서는 4월 3일이에요. 비자·항공권·해외직구처럼 틀리면 곤란한 곳에는 Mar 4, 2026처럼 달을 글자로 쓰면 헷갈리지 않아요.</div>
+<h2>자주 묻는 질문</h2>
+{tool_faq(faq)}
+{tool_reads("영어 숫자 감각 키우는 카영 글", [("말", None, lambda p: p.get("sub") == "회화"), ("귀", None, lambda p: p.get("sub") == "듣기"), ("말", None, lambda p: p.get("sub") == "회화")])}
+{tool_src([SRC_CAM_NUM, SRC_CAM_DATE])}
+<h2>다른 영어 도구</h2>
+{tool_cards("number", t["group"])}
+{tool_kakao()}
+</div></div>{TOOL_JS()}"""
+    desc = "숫자를 영어로 쓰고 읽는 법을 바로 보여 줘요. 1억 2천만 같은 한국식 단위, 서수, 연도, 소수점, 달러 금액, 미국식·영국식 날짜 표기까지 복사하고 원어민 발음으로 들어 보세요."
+    return layout("숫자·날짜 영어로", desc, url, body, nav="tools", og_img=tool_og(url), data={"tool": "number_english"},
+                  seo_title="숫자 영어로 - 영어 숫자 단위, 큰 숫자 읽기, 영어 날짜 표기 변환기",
+                  ld=tool_ld("숫자·날짜 영어로", desc, url, faq))
+
+
 # ── 영어 도구 v2 (2026-10-24): 사이트 흐름에 맞춘 목록·카드·공유 이미지 ─────────────
 # 도구 = 영어 도구 카테고리 안의 '글'처럼: 같은 카드 목록, 같은 칩, 같은 분류 필터(전체 · 시험 · 변환 · 글쓰기 · 연습)
 TOOL_GROUPS = ["시험", "변환", "글쓰기", "연습"]
@@ -2949,6 +3015,8 @@ TOOLS = [  # key, 주소, 이름, 설명, 분류, 3D 아이콘, 목록 썸네일
          icon="page", th=("My essay is about…", "186 words", "186"), og=("Word count", "186 words", "글자 수 · 문장 수 · 읽는 시간")),
     dict(key="cursive", url="/tools/english-cursive/", title="영어 필기체 변환", desc="복사해서 쓰는 필기체, 이미지 저장, 알파벳 연습", group="변환",
          icon="raised-hand", th=("Cafe in English", "𝒞𝒶𝒻𝑒 𝒾𝓃 ℰ𝓃𝑔𝓁𝒾𝓈𝒽", ""), og=("필기체 변환", "Cafe in English", "복사 · 이미지 저장 · 알파벳 연습")),
+    dict(key="number", url="/tools/number-to-english/", title="숫자·날짜 영어로", desc="1억 2천만, 서수, 연도, 날짜를 영어로 쓰고 읽기", group="변환",
+         icon="input-numbers", th=("1억 2천만은 영어로?", "120 million", "120 million"), og=("1억 2천만은", "120 million", "숫자·날짜 영어로 쓰고 읽기")),
     dict(key="name", url="/tools/english-name/", title="영문 이름 변환기", desc="여권·해외 사이트용 영문 이름, 성씨별 표기", group="변환",
          icon="passport-control", th=("이승주", "Lee Seungju", "Seungju"), og=("이승주", "Lee Seungju", "여권 영문 이름 형식까지")),
     dict(key="address", url="/tools/english-address/", title="영문 주소 변환기", desc="도로명주소를 영어로, 해외직구 칸별 복사", group="변환",
@@ -2960,7 +3028,7 @@ live_tools = lambda: [t for t in TOOLS if t["key"] != "address" or JUSO_KEY]
 
 
 # 공유 이미지: 글 공유 이미지와 같은 파스텔 그라데이션(OG_BG 0 복숭아 · 1 하늘 · 2 라벤더 · 3 민트 · 4 레몬)과 왼쪽 한 줄
-OG_TOOL = {"schedule": (4, "토익 접수 마감과 성적 발표일"), "tos_schedule": (0, "토익스피킹 접수 마감과 성적 발표일"), "opic_schedule": (2, "오픽 접수 마감과 성적 발표일"), "toeic": (1, "맞힌 개수로 예상 점수 바로 확인"), "opic": (2, "NL부터 AL까지, 나는 어느 등급일까"), "tos": (0, "점수를 넣으면 등급이 바로"),
+OG_TOOL = {"number": (3, "숫자·날짜를 영어로 쓰고 읽기"), "schedule": (4, "토익 접수 마감과 성적 발표일"), "tos_schedule": (0, "토익스피킹 접수 마감과 성적 발표일"), "opic_schedule": (2, "오픽 접수 마감과 성적 발표일"), "toeic": (1, "맞힌 개수로 예상 점수 바로 확인"), "opic": (2, "NL부터 AL까지, 나는 어느 등급일까"), "tos": (0, "점수를 넣으면 등급이 바로"),
            "compare": (3, "토익·오픽·토익스피킹 한눈에"), "wordcount": (3, "에세이·자소서 분량 맞추기"), "cursive": (0, "복사·이미지 저장·알파벳 연습"),
            "name": (4, "여권·해외 사이트용 영문 이름"), "address": (1, "해외직구 영문 주소, 칸별로")}
 
@@ -2974,8 +3042,8 @@ def tool_og(url):
     return og_tool("tool-" + t["key"], "영어 도구 · " + t["group"], t["title"], sub, lab, big, small, t["icon"], t["key"], bg=bg, cursive=t["key"] == "cursive")
 
 
-TOOL_KIND = {"schedule": "일정", "tos_schedule": "일정", "opic_schedule": "일정", "toeic": "계산기", "opic": "등급표", "tos": "레벨표", "compare": "비교표", "wordcount": "세기", "cursive": "변환", "name": "변환기", "address": "변환기"}
-TOOL_TH = {"schedule": ("다음 토익까지", "D-day", "D-day"), "tos_schedule": ("토익스피킹", "매주 토·일", "토·일"), "opic_schedule": ("오픽 접수", "2일 전까지", "2일 전"), "toeic": ("예상 점수", "700~750점", "700~750점"), "opic": ("오픽 등급", "IM2 → IH", "IH"), "tos": ("토익스피킹 130점", "IM3", "IM3"),
+TOOL_KIND = {"number": "변환기", "schedule": "일정", "tos_schedule": "일정", "opic_schedule": "일정", "toeic": "계산기", "opic": "등급표", "tos": "레벨표", "compare": "비교표", "wordcount": "세기", "cursive": "변환", "name": "변환기", "address": "변환기"}
+TOOL_TH = {"number": ("1억 2천만은", "120 million", "million"), "schedule": ("다음 토익까지", "D-day", "D-day"), "tos_schedule": ("토익스피킹", "매주 토·일", "토·일"), "opic_schedule": ("오픽 접수", "2일 전까지", "2일 전"), "toeic": ("예상 점수", "700~750점", "700~750점"), "opic": ("오픽 등급", "IM2 → IH", "IH"), "tos": ("토익스피킹 130점", "IM3", "IM3"),
            "compare": ("오픽 IH는 토익", "900~945점", "900~945점"), "wordcount": ("Word count", "186 words", "186"),
            "cursive": ("필기체 변환", "Cafe in English", ""), "name": ("이승주", "Lee Seungju", "Seungju"), "address": ("테헤란로 152", "152 Teheran-ro", "Teheran-ro")}
 
@@ -3247,7 +3315,7 @@ def build():
                   ("/tools/toeic-speaking-level/", page_tool_tos), ("/tools/english-score-compare/", page_tool_compare),
                   ("/tools/english-word-count/", page_tool_wordcount), ("/tools/english-cursive/", page_tool_cursive),
                   ("/tools/english-test-schedule/", page_tool_schedule), ("/tools/toeic-speaking-schedule/", page_tool_tos_schedule),
-                  ("/tools/opic-schedule/", page_tool_opic_schedule)):
+                  ("/tools/opic-schedule/", page_tool_opic_schedule), ("/tools/number-to-english/", page_tool_number)):
         write(u, fn()); pages.append(u)
     write("/tools/english-address/", page_tool_address())
     if JUSO_KEY:
