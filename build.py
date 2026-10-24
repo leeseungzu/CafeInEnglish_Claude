@@ -1359,7 +1359,7 @@ def view_card(cat):  # PC 오른쪽 '보기' 카드: 같은 탭 안의 칸 전�
     n = {k: (len(THINKS) if k == "think" else nv + len(THINKS) if k == "watch" else sum(1 for p in POSTS if (p["cat"] in STUDY_CATS if k == "study" else p["cat"] == k))) for k in group}
     lbl = lambda k: "전체" if k in ("study", "watch") else CATS[k]
     return ('<div class="sf-g sf-view" role="group" aria-label="보기"><div class="sf-h">보기</div>'
-            + "".join(f'<a class="sf-a{" on" if k == cat else ""}" href="/category/{k}/"><span>{lbl(k)}</span><em>{n[k]}</em></a>' for k in group) + '</div>')
+            + "".join(f'<a class="sf-a{" on" if k == cat else ""}{" sf-all" if k in ("study", "watch") else ""}" href="/category/{k}/"><span>{lbl(k)}</span><em>{n[k]}</em></a>' for k in group) + '</div>')
 
 
 def page_study():  # 영어 공부 전체: 표현·꿀팁·이야기를 한 목록으로, 카드마다 난이도 옆에 종류 표시
@@ -2816,9 +2816,9 @@ def exam_link(t=""):
 def page_tool_schedule():
     url = "/tools/english-test-schedule/"
     y = EXAM.get("toeic_year", 2026)
-    tr = "".join(f'<tr data-d="{t["date"]}"><td>제{t["n"]}회</td><td><b>{_exd(t["date"], True)}</b></td><td>{_exd(t["reg"][1], True)} 오전 10시</td>'
-                 f'<td>{_exd(t["add"][1], True)} 오후 1시</td><td>{_exd(t["score"], True)}</td></tr>' for t in EXAM["toeic"])
-    sr = "".join(f'<tr data-d="{t["date"]}"><td><b>{_exd(t["date"], True)}</b></td><td>{_exd(t["reg"][1], True)} 오전 10시</td><td>{_exd(t["score"], True)}</td></tr>' for t in EXAM["tos"])
+    tr = "".join(f'<tr data-d="{t["date"]}" data-c="{t["add"][1]}"><td>{t["n"]}</td><td><b>{_exd(t["date"], True)}</b></td><td>{_exd(t["reg"][1], True)}</td>'
+                 f'<td>{_exd(t["add"][1], True)}</td><td>{_exd(t["score"], True)}</td></tr>' for t in EXAM["toeic"])
+    sr = "".join(f'<tr data-d="{t["date"]}" data-c="{t["reg"][1]}"><td><b>{_exd(t["date"], True)}</b></td><td>{_exd(t["reg"][1], True)}</td><td>{_exd(t["score"], True)}</td></tr>' for t in EXAM["tos"])
     o = EXAM["opic"]
     faq = [
         ("토익 성적은 언제 나오나요?", "보통 시험을 본 날로부터 9~10일 뒤 낮 12시에 나와요. 일요일 시험이면 그다음 주 화요일, 토요일 시험이면 열흘 뒤 화요일이에요."),
@@ -2844,11 +2844,11 @@ def page_tool_schedule():
 <div class="tl-doc">
 <h2>{y}년 토익 시험 일정</h2>
 <p>토익 정기시험은 한 달에 두 번 정도, 주로 일요일 오전 9시 20분에 봐요. 정기접수는 시험 약 2주 전 월요일 오전 10시에 마감하고, 그 뒤 특별추가접수가 한 번 더 열려요.</p>
-<div class="tl-tbl-w"><table class="tl-tbl ex-tbl"><thead><tr><th>회차</th><th>시험일</th><th>정기접수 마감</th><th>특별추가 마감</th><th>성적 발표</th></tr></thead><tbody>{tr}</tbody></table></div>
-<p>성적은 발표일 낮 12시에 나와요. 지난 시험은 흐리게 표시했어요.</p>
+<div class="tl-tbl-w"><table class="tl-tbl ex-tbl"><colgroup><col style="width:12%"><col><col><col><col></colgroup><thead><tr><th>회차</th><th>시험일<small>오전 9:20</small></th><th>정기접수<small>~오전 10시</small></th><th>특별추가<small>~오후 1시</small></th><th>성적 발표<small>낮 12시</small></th></tr></thead><tbody>{tr}</tbody></table></div>
+<p>접수가 끝난 시험과 지난 시험은 흐리게 표시했어요.</p>
 <h2>{y}년 토익스피킹 시험 일정</h2>
 <p>토익스피킹은 매주 토요일과 일요일에 봐요. 접수 마감은 시험 3일 전 오전 10시, 성적 발표는 5일 뒤 낮 12시예요.</p>
-<div class="tl-tbl-w"><table class="tl-tbl ex-tbl"><thead><tr><th>시험일</th><th>접수 마감</th><th>성적 발표</th></tr></thead><tbody>{sr}</tbody></table></div>
+<div class="tl-tbl-w"><table class="tl-tbl ex-tbl"><thead><tr><th>시험일</th><th>접수 마감<small>~오전 10시</small></th><th>성적 발표<small>낮 12시</small></th></tr></thead><tbody>{sr}</tbody></table></div>
 <h2>오픽 시험 일정</h2>
 <p>오픽은 고사장마다 거의 매일 시험이 있어요. 시험 {o['open_days']}일 전부터 {o['close_days']}일 전까지 접수할 수 있고, 성적은 약 {o['score_days']}일 뒤에 나와요. 그래서 세 시험 중 가장 빨리 점수를 받을 수 있어요.</p>
 <div class="tl-note"><b>점수가 급할 때는 이렇게</b>서류 마감이 2주 안이면 오픽, 3주 안이면 토익스피킹, 한 달 넘게 남았으면 토익까지 볼 수 있어요. 지원하는 회사가 어떤 시험을 인정하는지 먼저 확인하세요.</div>

@@ -533,6 +533,7 @@
     const S = d => { const [, m, x] = ymd(d); return `${m}.${x} (${wd(d)})`; };
     const dd = d => Math.round((Date.parse(d + "T00:00:00Z") - Date.parse(today + "T00:00:00Z")) / DAY);
     const dtag = n => n === 0 ? "D-day" : n > 0 ? "D-" + n : "D+" + (-n);
+    const nb = x => `<span class="nw">${x}</span>`;
     const hm = (h, m) => (h === 12 && !m ? "낮 12시" : (h < 12 ? "오전 " : "오후 ") + (h > 12 ? h - 12 : h) + "시" + (m ? ` ${m}분` : ""));
 
     // 시험마다 같은 모양으로: 시험일, 성적일, 접수 창(열림·닫힘)
@@ -580,16 +581,16 @@
       }
       const w = openWin(hero), left = dd(w.ed), pre = now < w.s;
       const reg = hero.wins[0], regDone = T === "toeic" && now >= reg.e;
-      N.innerHTML = `<p class="ex-tg">${T === "opic" ? "가장 빨리 볼 수 있는 오픽" : "다음 " + NAME[T] + (hero.n ? ` · 제${hero.n}회` : "")}</p>` +
+      N.innerHTML = `<p class="ex-tg">${T === "opic" ? "가장 빨리 볼 수 있는 오픽" : "다음 " + NAME[T] + (hero.n ? ` · 제${hero.n}회` : "") + (hero.time ? ` · ${hero.time.replace("오전 9시 20분", "오전 9:20")} 시험` : "")}</p>` +
         `<p class="ex-big"><span>${dtag(dd(hero.date))}</span> ${L(hero.date)}</p>` +
-        `<p class="ex-sub">${hero.time ? hero.time + " 시험 · " : ""}성적 발표 ${L(hero.score)}${hero.opic ? " 무렵" : " 낮 12시"}</p>` +
-        `<div class="ex-dl${left <= 3 && !pre ? " hot" : ""}"><i>${pre ? "예정" : left <= 0 ? "오늘" : "D-" + left}</i><p>${pre ? `${esc(w.k)} ${L(w.sd)} 오전 10시 시작` : `${esc(w.k)} 마감 ${w.et}`}` +
-        `<small>${regDone ? "정기접수는 끝났어요 · 응시료가 정기접수보다 비싸요" : hero.opic ? "고사장마다 시험 시간이 달라요" : pre ? `마감 ${w.et}` : "마감 시간이 지나면 접수할 수 없어요"}</small></p></div>` + goBtn(T, w, hero);
+        `<p class="ex-sub">성적 발표 ${nb(L(hero.score) + (hero.opic ? " 무렵" : " 낮 12시"))}</p>` +
+        `<div class="ex-dl${left <= 3 && !pre ? " hot" : ""}"><i>${pre ? "예정" : left <= 0 ? "오늘" : "D-" + left}</i><p>${pre ? `${nb(L(w.sd) + " 오전 10시")} 접수 시작` : `${nb(w.et.replace(/까지$/, ""))} 마감`}` +
+        `<small>${esc(w.k)}${regDone ? " · 정기접수보다 응시료가 비싸요" : hero.opic ? " · 고사장마다 시험 시간이 달라요" : pre ? ` · 마감 ${w.et}` : " · 시간이 지나면 접수할 수 없어요"}</small></p></div>` + goBtn(T, w, hero);
       const rows = (T === "opic" ? live.filter(x => x !== hero && /[토일]/.test(wd(x.date))) : live.filter(x => x !== hero)).slice(0, T === "opic" ? 4 : 6);
       $("#ex-l").hidden = !rows.length;
       $("#ex-l").innerHTML = (T === "opic" ? '<p class="ex-lh">주말 오픽</p>' : "") + rows.map(x => {
         const ww = openWin(x) || x.wins[x.wins.length - 1];
-        return `<div class="ex-row"><b>${S(x.date).replace(" (", "<small>").replace(")", "</small>")}</b><span>${esc(ww.k === "특별추가접수" ? "특별추가" : ww.k)} <b>~${ww.es}</b><br>성적 ${S(x.score)}</span>${pillH(status(x))}</div>`;
+        return `<div class="ex-row"><b>${S(x.date).replace(/ \((.)\)/, " <small>($1)</small>")}</b><span>${ww.k === "특별추가접수" ? "특별추가" : "접수"} <b class="nw">~${ww.es}</b><br>성적 ${S(x.score)}</span>${pillH(status(x))}</div>`;
       }).join("");
       if (!draw.f) setShare(`다음 ${NAME[T]} ${L(hero.date)}, ${w.k} 마감 ${w.et}`, "t=" + T);
     }
@@ -613,7 +614,7 @@
         const w = openWin(last), st = status(last), beyond = t !== "opic" && lastAny && need > lastAny.score;
         lines.push(`${NAME[t]} ${S(last.date)}`);
         return `<div class="tl-box ex-res"><p class="ex-rh">${NAME[t]}${pillH(st)}</p><p class="ex-rb"><span>${L(last.date)}</span>${t === "opic" ? "까지" : " 시험이 마지막"}</p>` +
-          `<p class="ex-rs">성적 ${S(last.score)} · ${esc(w.k === "특별추가접수" ? "특별추가접수" : w.k)} ${w.et}${t === "opic" ? "" : "까지"}${beyond ? `<br>${X.toeic_year + 1}년 일정은 발표되면 더해요` : ""}</p>${(now >= w.s && now < w.e) ? `<a class="ex-go2" href="${REG[t]}" target="_blank" rel="noopener" data-go="${t}">공식 사이트에서 접수 ↗</a>` : ""}</div>`;
+          `<p class="ex-rs">성적 ${S(last.score)} · ${esc(w.k)} ${nb(w.et + (t === "opic" ? "" : "까지"))}${beyond ? `<br>${X.toeic_year + 1}년 일정은 발표되면 더해요` : ""}</p>${(now >= w.s && now < w.e) ? `<a class="ex-go2" href="${REG[t]}" target="_blank" rel="noopener" data-go="${t}">공식 사이트에서 접수 ↗</a>` : ""}</div>`;
       }).join("");
       if (draw.f) setShare(`${L(need)}까지 영어 성적이 필요하면 마지막 기회는 ${lines.join(", ")} 시험`, "need=" + need);
     }
@@ -623,7 +624,7 @@
     if (n0) draw.f = 1;
     draw(); back();
     // 표: 지난 시험은 흐리게
-    $$(".ex-tbl tr[data-d]").forEach(r => { if (r.dataset.d < today) r.classList.add("past"); });
+    $$(".ex-tbl tr[data-d]").forEach(r => { if (r.dataset.d < today) r.classList.add("past"); else if (r.dataset.c < today) r.classList.add("closed"); });
   }
   initExam();
 

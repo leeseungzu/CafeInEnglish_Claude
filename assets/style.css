@@ -2885,3 +2885,25 @@ html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
 .ex-date::-webkit-datetime-edit{padding:0;line-height:56px}
 .ex-date::-webkit-calendar-picker-indicator{opacity:0;width:24px;height:24px;cursor:pointer}
 .tl-box{min-width:0;overflow:hidden}
+
+/* 시험 일정 균형 (2026-10-24) */
+.nw{white-space:nowrap}
+.ex-row{grid-template-columns:auto 1fr auto;gap:14px}
+.ex-row>b{min-width:78px;white-space:nowrap}
+.ex-row>b small{display:inline;font-size:13px;margin-left:1px}
+.ex-dl{align-items:center}
+.ex-dl p{font-size:15px}
+.ex-dl small{margin-top:2px}
+.ex-tbl{table-layout:fixed;min-width:0}
+.ex-tbl th,.ex-tbl td{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ex-tbl tr.closed td{color:#8B95A1}
+@media (max-width:480px){.ex-tbl th,.ex-tbl td{padding:10px 8px;font-size:13.5px}.ex-tbl thead th{font-size:12px}}
+.ex-tbl th small{display:block;font-size:11.5px;font-weight:600;color:#8B95A1;margin-top:1px}
+.ex-tbl td:first-child{color:#6B7684}
+.ex-tbl tr.closed td b{color:#8B95A1;font-weight:600}
+.ex-row>span{min-width:0}
+/* 보기 카드: 영상·공부도 '전체' 아래 구분선 (도구와 같게) */
+@media (min-width:900px){
+  .sf-a.sf-all{margin-bottom:6px;position:relative}
+  .sf-a.sf-all::after{content:"";position:absolute;left:6px;right:6px;bottom:-4px;height:1px;background:rgba(0,0,0,.07)}
+}
