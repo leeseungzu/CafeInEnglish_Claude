@@ -2957,3 +2957,17 @@ html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
 #cp-y{min-height:74px}
 @media (max-width:640px){#cp-p{min-height:90px}}
 #cp-y+.tl-share-row[hidden],#ex-r+.tl-share-row[hidden]{display:block!important;visibility:hidden}
+/* 시험 바로가기 줄 · 다른 시험 일정 (2026-10-24) */
+.ex-nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:-4px 0 18px}
+.ex-nav b{font-size:13px;font-weight:800;color:#191F28;margin-right:4px}
+.ex-nav a{font-size:13.5px;font-weight:700;color:#4E5968;background:#F2F4F6;border-radius:999px;padding:7px 13px;text-decoration:none;transition:background .15s,color .15s}
+.ex-nav a:hover{background:#E5E8EB;color:#191F28}
+.ex-nav a.on{background:#191F28;color:#fff}
+.ex-others{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:10px 0 16px}
+.ex-other{display:flex;align-items:center;gap:10px;padding:15px 16px;border:1px solid var(--line);border-radius:16px;text-decoration:none;color:inherit;transition:border-color .15s}
+.ex-other:hover{border-color:#191F28}
+.ex-other b{display:block;font-size:15px;color:#191F28}
+.ex-other span{flex:1;min-width:0;font-size:13px;color:#6B7684}
+.ex-other>span{display:flex;flex-direction:column}
+.ex-other i{font-style:normal;font-size:20px;color:#B0B8C1}
+@media (max-width:480px){.ex-others{grid-template-columns:1fr}}

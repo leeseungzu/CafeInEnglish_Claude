@@ -2378,7 +2378,7 @@ def page_tool_name():
          "남궁, 황보처럼 두 글자 성은 자동으로 알아봐요. 자동으로 안 될 때는 입력창 아래 '성이 두 글자예요'를 켜 주세요. 두 글자 성은 붙여서 한 단어로 써요(Namgung)."),
     ]
     body = f"""<div class="tl">
-<span class="chip tool">영어 도구</span><span class="chip tool">생활 영어</span><h1>한글 이름 영문 변환기</h1><p class="lead">이름을 넣으면 로마자 표기법에 맞는 영문 이름과 자주 쓰는 표기를 함께 보여 드려요. 여권, 항공권, 해외 사이트 가입에 바로 쓰세요.</p>
+<span class="chip tool">영어 도구</span><span class="chip tool">변환</span><h1>한글 이름 영문 변환기</h1><p class="lead">이름을 넣으면 로마자 표기법에 맞는 영문 이름과 자주 쓰는 표기를 함께 보여 드려요. 여권, 항공권, 해외 사이트 가입에 바로 쓰세요.</p>
 <div class="tl-card">
 <form class="tl-form" id="nm-form" autocomplete="off"><input id="nm-in" type="text" inputmode="text" placeholder="예) 홍길동" aria-label="한글 이름" maxlength="8" enterkeyhint="go"><button type="submit">변환</button></form>
 <div class="tl-opt"><div class="tl-ex">예시 <button type="button" data-ex="이승주">이승주</button><button type="button" data-ex="김지현">김지현</button><button type="button" data-ex="남궁민">남궁민</button></div>
@@ -2443,7 +2443,7 @@ def page_tool_address():
          "해외직구로 물건을 받으려면 개인통관고유부호가 필요해요. 관세청 개인통관고유부호 사이트에서 무료로 바로 발급받을 수 있어요."),
     ]
     body = f"""<div class="tl">
-<span class="chip tool">영어 도구</span><span class="chip tool">생활 영어</span><h1>영문 주소 변환기</h1><p class="lead">도로명주소를 검색하면 영문 주소와 우편번호를 알려 드려요. 해외직구 사이트 칸에 맞게 나눠서 바로 복사할 수 있어요.</p>
+<span class="chip tool">영어 도구</span><span class="chip tool">변환</span><h1>영문 주소 변환기</h1><p class="lead">도로명주소를 검색하면 영문 주소와 우편번호를 알려 드려요. 해외직구 사이트 칸에 맞게 나눠서 바로 복사할 수 있어요.</p>
 <div class="tl-card">
 <form class="tl-form" id="ad-form" autocomplete="off"><input id="ad-in" type="search" placeholder="도로명, 건물 이름, 지번" aria-label="한글 주소" maxlength="80" enterkeyhint="search"><button type="submit">검색</button></form>
 <div class="tl-opt"><div class="tl-ex">예시 <button type="button" data-ex="테헤란로 152">테헤란로 152</button><button type="button" data-ex="세종대로 175">세종대로 175</button></div></div>
@@ -2608,7 +2608,8 @@ def page_tool_toeic():
          "흔한 일이에요. 2025년 정기시험 평균도 LC 378.7점, RC 307.5점으로 RC가 70점 넘게 낮았어요. RC는 시간이 부족해서 점수가 깎이는 경우가 많아요."),
     ]
     body = f"""<div class="tl">
-<span class="chip tool">영어 도구</span><span class="chip tool">점수·시험</span><h1>토익 점수 계산기</h1><p class="lead">LC와 RC에서 맞힌 개수를 넣으면 예상 점수를 범위로 알려 드려요. 2025년 평균 점수와도 바로 비교해요.</p>
+<span class="chip tool">영어 도구</span><span class="chip tool">시험</span><h1>토익 점수 계산기</h1><p class="lead">LC와 RC에서 맞힌 개수를 넣으면 예상 점수를 범위로 알려 드려요. 2025년 평균 점수와도 바로 비교해요.</p>
+{exam_nav('toeic', '/tools/toeic-score/')}
 <div class="tl-card" id="tc">
 <div class="tl-sl"><label for="tc-lc"><b>LC 맞힌 개수</b><small>듣기 100문항</small></label><div class="tl-sl-v"><input type="number" id="tc-lc-n" min="0" max="100" value="80" inputmode="numeric" aria-label="LC 맞힌 개수"><span>/ 100</span></div><input type="range" id="tc-lc" min="0" max="100" value="80"></div>
 <div class="tl-sl"><label for="tc-rc"><b>RC 맞힌 개수</b><small>읽기 100문항</small></label><div class="tl-sl-v"><input type="number" id="tc-rc-n" min="0" max="100" value="70" inputmode="numeric" aria-label="RC 맞힌 개수"><span>/ 100</span></div><input type="range" id="tc-rc" min="0" max="100" value="70"></div>
@@ -2640,7 +2641,7 @@ def page_tool_toeic():
 {tool_reads("점수 올리는 데 도움 되는 카영 글", [("LC", None, lambda p: p.get("sub") == "듣기"), ("LC", None, lambda p: p.get("sub") == "발음"), ("LC", None, lambda p: p.get("sub") == "듣기"), ("RC", None, lambda p: p["id"] in next((s["posts"] for s in SERIES if s["id"] == "work"), []))])}
 {tool_src([SRC_TOEICSTORY, SRC_LINK])}
 <h2>다른 영어 도구</h2>
-{tool_cards("toeic", "점수·시험")}
+{tool_cards("toeic", "시험")}
 {tool_kakao()}
 </div></div>{TOOL_JS()}"""
     desc = "토익 LC, RC 맞힌 개수를 넣으면 예상 점수를 범위로 알려 줘요. 맞힌 개수별 토익 점수 환산표, 2025년 평균 686점과 비교, 성적 발표일과 유효기간까지 정리했어요."
@@ -2662,7 +2663,8 @@ def page_tool_opic():
         ("오픽과 토익스피킹 중 뭘 봐야 하나요?", "회사가 인정하는 시험이 먼저예요. 둘 다 인정하면, 내 경험을 자유롭게 말하는 게 편하면 오픽, 정해진 유형을 연습하는 게 편하면 토익스피킹이 잘 맞는 편이에요."),
     ]
     body = f"""<div class="tl">
-<span class="chip tool">영어 도구</span><span class="chip tool">점수·시험</span><h1>오픽 등급표</h1><p class="lead">NL부터 AL까지, 오픽 등급마다 어느 정도로 말하는지 공식 기준을 쉬운 말로 정리했어요. 내 등급도 간단히 짐작해 보세요.</p>
+<span class="chip tool">영어 도구</span><span class="chip tool">시험</span><h1>오픽 등급표</h1><p class="lead">NL부터 AL까지, 오픽 등급마다 어느 정도로 말하는지 공식 기준을 쉬운 말로 정리했어요. 내 등급도 간단히 짐작해 보세요.</p>
+{exam_nav('opic', '/tools/opic-level/')}
 <div class="tl-card">
 <p class="tl-sec" style="margin-top:0">나는 어느 등급쯤일까? <span class="tl-sec-s">할 수 있는 것 중 가장 높은 것을 골라요</span></p>
 <div class="tl-cans" id="oq">{quiz}</div>
@@ -2689,7 +2691,7 @@ def page_tool_opic():
 {tool_reads("말하기 등급 올리는 카영 글", [("말", None, lambda p: p.get("sub") == "회화"), ("말", None, lambda p: p.get("sub") == "회화"), ("말", None, lambda p: p.get("sub") == "발음")])}
 {tool_src([SRC_OPIC])}
 <h2>다른 영어 도구</h2>
-{tool_cards("opic", "점수·시험")}
+{tool_cards("opic", "시험")}
 {tool_kakao()}
 </div></div>{TOOL_JS()}"""
     desc = "오픽 등급표를 NL, NM, NH, IL, IM1, IM2, IM3, IH, AL 순서로 정리하고 등급별로 어느 정도 말하는지 쉬운 말로 풀었어요. IM2와 IH 차이, 다음 등급으로 가는 방법, 내 등급 자가 진단까지."
@@ -2712,7 +2714,8 @@ def page_tool_tos():
         ("토익스피킹 등급과 오픽 등급은 같은가요?", "둘 다 ACTFL 등급 이름을 쓰지만 시험 방식이 달라서 똑같다고 볼 수는 없어요. 두 시험을 공식으로 바꿔 주는 환산표도 없어요. 비교가 필요하면 영어 시험 점수 비교표를 참고하세요."),
     ]
     body = f"""<div class="tl">
-<span class="chip tool">영어 도구</span><span class="chip tool">점수·시험</span><h1>토익스피킹 레벨표</h1><p class="lead">토익스피킹 점수를 넣으면 등급을 바로 알려 드려요. 점수별 등급표와 시험 구성도 함께 정리했어요.</p>
+<span class="chip tool">영어 도구</span><span class="chip tool">시험</span><h1>토익스피킹 레벨표</h1><p class="lead">토익스피킹 점수를 넣으면 등급을 바로 알려 드려요. 점수별 등급표와 시험 구성도 함께 정리했어요.</p>
+{exam_nav('tos', '/tools/toeic-speaking-level/')}
 <div class="tl-card">
 <div class="tl-sl"><label for="ts"><b>토익스피킹 점수</b><small>0~200점, 10점 단위</small></label><div class="tl-sl-v"><input type="number" id="ts-n" min="0" max="200" step="10" value="130" inputmode="numeric" aria-label="토익스피킹 점수"><span>/ 200</span></div><input type="range" id="ts" min="0" max="200" step="10" value="130"></div>
 <div class="tl-hero-res" aria-live="polite"><span class="tl-tag">내 등급</span><p class="tl-big" id="ts-g">—</p><p class="tl-big-sub" id="ts-s"></p>
@@ -2734,7 +2737,7 @@ def page_tool_tos():
 {tool_reads("말하기 점수 올리는 카영 글", [("말", None, lambda p: p.get("sub") == "회화"), ("말", None, lambda p: p.get("sub") == "발음"), ("말", None, lambda p: p.get("sub") == "회화")])}
 {tool_src([SRC_TOS, SRC_LINK])}
 <h2>다른 영어 도구</h2>
-{tool_cards("tos", "점수·시험")}
+{tool_cards("tos", "시험")}
 {tool_kakao()}
 </div></div>{TOOL_JS()}"""
     desc = "토익스피킹 점수를 넣으면 등급(AH, AM, AL, IH, IM, IL, NH)을 바로 알려 줘요. 점수별 레벨표, IM1·IM2·IM3 점수, 11문항 시험 구성, 채용 기준 예시까지 정리했어요."
@@ -2754,7 +2757,7 @@ def page_tool_compare():
         ("다른 사이트와 숫자가 달라요.", "기관마다 기준이 달라서 그래요. 예를 들어 인크루트는 예전 토익스피킹 레벨(Lv1~Lv8) 기준으로 비교해서 이 표의 토익스피킹 칸과 다를 수 있어요."),
     ]
     body = f"""<div class="tl">
-<span class="chip tool">영어 도구</span><span class="chip tool">점수·시험</span><h1>영어 시험 점수 비교</h1><p class="lead">토익, 오픽, 토익스피킹 점수를 하나의 사다리에 놓고 비교해요. 내 점수가 어디쯤인지, 다음 목표는 무엇인지 확인하세요.</p>
+<span class="chip tool">영어 도구</span><span class="chip tool">시험</span><h1>영어 시험 점수 비교</h1><p class="lead">토익, 오픽, 토익스피킹 점수를 하나의 사다리에 놓고 비교해요. 내 점수가 어디쯤인지, 다음 목표는 무엇인지 확인하세요.</p>
 <div class="tl-card">
 <div class="tl-seg" id="cp-t" role="group" aria-label="시험 선택"><button type="button" class="on" data-t="opic">오픽</button><button type="button" data-t="tos">토익스피킹</button><button type="button" data-t="toeic">토익</button></div>
 <div class="tl-picks" id="cp-p"></div>
@@ -2777,7 +2780,7 @@ def page_tool_compare():
 {tool_faq(faq)}
 {tool_src([SRC_OPIC, SRC_TOS, SRC_INCRUIT, SRC_LINK])}
 <h2>다른 영어 도구</h2>
-{tool_cards("compare", "점수·시험")}
+{tool_cards("compare", "시험")}
 {tool_kakao()}
 </div></div>{TOOL_JS()}"""
     desc = "토익, 오픽, 토익스피킹 점수를 한 표에서 비교해요. 오픽 IH는 토익 몇 점, 토익스피킹 IM3는 오픽 어느 등급인지 참고용 기준과 출처를 함께 정리했어요."
@@ -2805,17 +2808,33 @@ def _exd(s, short=False):
     return f"{d.month}.{d.day} ({w})" if short else f"{d.month}월 {d.day}일 ({w})"
 
 
+EXAM_PAGES = {  # 시험별 일정 페이지 (2026-10-24): 같은 위젯, 시험마다 제목·설명·표 순서·FAQ를 다르게
+    "toeic": "/tools/english-test-schedule/", "tos": "/tools/toeic-speaking-schedule/", "opic": "/tools/opic-schedule/"}
+EXAM_NAV = {  # 시험 바로가기 줄: 일정 · 점수 · 비교
+    "toeic": [("시험 일정", "/tools/english-test-schedule/"), ("점수 계산기", "/tools/toeic-score/"), ("점수 비교", "/tools/english-score-compare/")],
+    "tos": [("시험 일정", "/tools/toeic-speaking-schedule/"), ("레벨표", "/tools/toeic-speaking-level/"), ("점수 비교", "/tools/english-score-compare/")],
+    "opic": [("시험 일정", "/tools/opic-schedule/"), ("등급표", "/tools/opic-level/"), ("점수 비교", "/tools/english-score-compare/")]}
+EXAM_NAME = {"toeic": "토익", "tos": "토익스피킹", "opic": "오픽"}
+
+
+def exam_nav(t, cur):
+    """시험 페이지 위 '시험 바로가기' 줄 (토익 · 토익스피킹 · 오픽 각각 일정·점수·비교)"""
+    links = "".join(f'<a href="{u}"{" class=on aria-current=page" if u == cur else ""}>{n}</a>' for n, u in EXAM_NAV[t])
+    return f'<nav class="ex-nav" aria-label="{EXAM_NAME[t]} 바로가기"><b>{EXAM_NAME[t]}</b>{links}</nav>'
+
+
 def exam_link(t=""):
-    """시험 도구 → 영어 시험 일정 연결 (다음 시험 날짜·마감 D-day는 tools.js가 채워요)"""
-    n = {"toeic": "토익", "tos": "토익스피킹", "opic": "오픽"}.get(t, "영어")
-    q = f"?t={t}" if t else ""
-    return (f'<a class="ex-link" href="/tools/english-test-schedule/{q}"><img src="/assets/icons/calendar.webp?v={ASSET_V}" alt="" width="36" height="36" loading="lazy">'
+    """시험 도구 → 시험 일정 연결 (다음 시험 날짜·마감 D-day는 tools.js가 채워요)"""
+    n = EXAM_NAME.get(t, "영어")
+    return (f'<a class="ex-link" href="{EXAM_PAGES.get(t or "toeic")}"><img src="/assets/icons/calendar.webp?v={ASSET_V}" alt="" width="36" height="36" loading="lazy">'
             f'<span><b>다음 {n} 시험 일정</b><span class="ex-link-s" data-ex="{t or "toeic"}">접수 마감과 성적 발표일 확인</span></span><i aria-hidden="true">›</i></a>')
 
 
-def page_tool_schedule():
-    url = "/tools/english-test-schedule/"
+def _schedule_page(focus):
+    url = EXAM_PAGES[focus]
     y = EXAM.get("toeic_year", 2026)
+    o = EXAM["opic"]
+
     def _tile(kind, t, rows, head=""):
         import datetime as _dt
         d = _dt.date.fromisoformat(t["date"])
@@ -2827,22 +2846,48 @@ def page_tool_schedule():
         more = '<button type="button" class="ex-more" hidden>일정 더 보기</button>' if kind == "tos" else ""
         return f'<ul class="ex-grid ex-g-{kind}">' + "".join(_tile(kind, t, rows(t), head(t)) for t in items) + "</ul>" + more
 
-    tr = _grid("toeic", EXAM["toeic"], lambda t: [("정기접수", t["reg"][1]), ("특별추가", t["add"][1]), ("성적 발표", t["score"])], lambda t: f'제{t["n"]}회')
-    sr = _grid("tos", EXAM["tos"], lambda t: [("접수 마감", t["reg"][1]), ("성적 발표", t["score"])], lambda t: "")
     leg = lambda items: '<div class="ex-leg">' + "".join(f"<span><b>{k}</b>{v}</span>" for k, v in items) + "</div>"
-    o = EXAM["opic"]
-    faq = [
-        ("토익 성적은 언제 나오나요?", "보통 시험을 본 날로부터 9~10일 뒤 낮 12시에 나와요. 일요일 시험이면 그다음 주 화요일, 토요일 시험이면 열흘 뒤 화요일이에요."),
-        ("토익 특별추가접수가 뭔가요?", "정기접수가 끝난 뒤 시험 며칠 전까지 짧게 한 번 더 받는 접수예요. 응시료가 정기접수보다 비싸서, 일정이 정해졌다면 정기접수 안에 신청하는 게 좋아요."),
-        ("토익스피킹은 언제 볼 수 있나요?", "매주 토요일과 일요일에 봐요. 접수는 시험 3일 전(토요일 시험은 수요일, 일요일 시험은 목요일) 오전 10시에 마감하고, 성적은 5일 뒤 낮 12시에 나와요."),
-        ("오픽은 언제 볼 수 있나요?", f"거의 매일 볼 수 있어요. 시험 {o['open_days']}일 전부터 {o['close_days']}일 전까지 접수하고, 성적은 약 {o['score_days']}일 뒤에 나와요. 날짜와 시간은 고사장마다 달라서 접수할 때 확인해야 해요."),
-        ("서류 마감까지 시간이 없으면 어떤 시험이 빠른가요?", "접수부터 성적까지 가장 빠른 건 오픽이에요. 시험 2일 전까지 접수하고 약 5일 뒤 성적이 나와서, 일주일 남짓이면 점수를 받을 수 있어요. 지원하는 곳이 어떤 시험을 인정하는지 먼저 확인하세요."),
-        (f"{y + 1}년 토익 일정은 언제 나오나요?", f"YBM 한국TOEIC위원회가 보통 연말에 다음 해 일정을 발표해요. 발표되면 이 페이지에 바로 더할게요."),
-    ]
+    sec = {
+        "toeic": f"""<h2>{y}년 토익 시험 일정</h2>
+<p>토익 정기시험은 한 달에 두 번 정도, 주로 일요일 오전 9시 20분에 봐요. 정기접수는 시험 약 2주 전 월요일 오전 10시에 마감하고, 그 뒤 특별추가접수가 한 번 더 열려요.</p>
+{leg([("시험", "오전 9:20"), ("정기접수", "오전 10시 마감"), ("특별추가", "오후 1시 마감"), ("성적", "낮 12시")])}
+{_grid("toeic", EXAM["toeic"], lambda t: [("정기접수", t["reg"][1]), ("특별추가", t["add"][1]), ("성적 발표", t["score"])], lambda t: f'제{t["n"]}회')}""",
+        "tos": f"""<h2>{y}년 토익스피킹 시험 일정</h2>
+<p>토익스피킹은 매주 토요일과 일요일에 봐요. 접수 마감은 시험 3일 전 오전 10시(토요일 시험은 수요일, 일요일 시험은 목요일), 성적 발표는 5일 뒤 낮 12시예요.</p>
+{leg([("접수", "시험 3일 전 오전 10시 마감"), ("성적", "5일 뒤 낮 12시")])}
+{_grid("tos", EXAM["tos"], lambda t: [("접수 마감", t["reg"][1]), ("성적 발표", t["score"])], lambda t: "")}""",
+        "opic": f"""<h2>오픽 시험 일정</h2>
+<p>오픽은 고사장마다 거의 매일 시험이 있어요. 시험 {o['open_days']}일 전부터 {o['close_days']}일 전까지 접수할 수 있고, 성적은 약 {o['score_days']}일 뒤에 나와요. 그래서 세 시험 중 가장 빨리 점수를 받을 수 있어요. 아래는 오늘부터 접수할 수 있는 가까운 시험이에요.</p>
+{leg([("접수", f"시험 {o['close_days']}일 전까지"), ("성적", f"약 {o['score_days']}일 뒤"), ("시간", "고사장마다 달라요")])}
+<ul class="ex-grid ex-g-opic" id="ex-og"></ul><noscript><p>시험일 {o['close_days']}일 전까지 접수하고, 성적은 약 {o['score_days']}일 뒤에 나와요.</p></noscript>"""}
+    faq_all = {
+        "toeic": [("토익 성적은 언제 나오나요?", "보통 시험을 본 날로부터 9~10일 뒤 낮 12시에 나와요. 일요일 시험이면 그다음 주 화요일, 토요일 시험이면 열흘 뒤 화요일이에요."),
+                  ("토익 특별추가접수가 뭔가요?", "정기접수가 끝난 뒤 시험 며칠 전까지 짧게 한 번 더 받는 접수예요. 응시료가 정기접수보다 비싸서, 일정이 정해졌다면 정기접수 안에 신청하는 게 좋아요."),
+                  ("토익 접수는 어디서 하나요?", "YBM 한국TOEIC위원회 사이트(exam.toeic.co.kr)에서 해요. 위 '접수하러 가기' 버튼을 누르면 바로 열려요."),
+                  (f"{y + 1}년 토익 일정은 언제 나오나요?", "YBM 한국TOEIC위원회가 보통 연말에 다음 해 일정을 발표해요. 발표되면 이 페이지에 바로 더할게요.")],
+        "tos": [("토익스피킹은 언제 볼 수 있나요?", "매주 토요일과 일요일에 봐요. 접수는 시험 3일 전(토요일 시험은 수요일, 일요일 시험은 목요일) 오전 10시에 마감해요."),
+                ("토익스피킹 성적은 언제 나오나요?", "시험을 본 날로부터 5일 뒤 낮 12시에 나와요. 토요일 시험은 목요일, 일요일 시험은 금요일이에요."),
+                ("토익스피킹 접수는 어디서 하나요?", "YBM 한국TOEIC위원회 토익스피킹 사이트(toeicswt.co.kr)에서 해요. 위 '접수하러 가기' 버튼을 누르면 바로 열려요."),
+                ("토익스피킹 성적은 얼마나 유효한가요?", "응시일로부터 2년 동안 유효해요. 회사가 '최근 2년 이내 성적'을 요구하는 경우가 많아요.")],
+        "opic": [("오픽은 언제 볼 수 있나요?", f"거의 매일 볼 수 있어요. 시험 {o['open_days']}일 전부터 {o['close_days']}일 전까지 접수하고, 날짜와 시간은 고사장마다 달라서 접수할 때 확인해야 해요."),
+                 ("오픽 성적은 언제 나오나요?", f"보통 시험 뒤 약 {o['score_days']}일 뒤에 나와요. 세 시험 중 가장 빨라요."),
+                 ("오픽 접수는 어디서 하나요?", "OPIc 공식 사이트(opic.or.kr)에서 해요. 위 '접수하러 가기' 버튼을 누르면 바로 열려요."),
+                 ("오픽 성적은 얼마나 유효한가요?", "응시일로부터 2년 동안 유효해요.")]}
+    common = [("서류 마감까지 시간이 없으면 어떤 시험이 빠른가요?", "접수부터 성적까지 가장 빠른 건 오픽이에요. 시험 2일 전까지 접수하고 약 5일 뒤 성적이 나와서, 일주일 남짓이면 점수를 받을 수 있어요. 지원하는 곳이 어떤 시험을 인정하는지 먼저 확인하세요.")]
+    faq = faq_all[focus] + common
+    head = {"toeic": (f"토익 시험 일정 {y}", "토익 다음 시험과 정기·특별추가접수 마감, 성적 발표일을 오늘 기준 D-day로 보여 드려요. 토익스피킹·오픽 일정도 함께 비교하고, 서류 마감일을 넣으면 마지막 기회를 알려 드려요."),
+            "tos": (f"토익스피킹 시험 일정 {y}", "토익스피킹 다음 시험과 접수 마감, 성적 발표일을 오늘 기준 D-day로 보여 드려요. 매주 토·일 일정을 한눈에 보고, 서류 마감일을 넣으면 마지막 기회를 알려 드려요."),
+            "opic": (f"오픽 시험 일정 {y}", "오늘 접수하면 언제 오픽을 볼 수 있는지, 접수 마감과 성적 발표일을 D-day로 보여 드려요. 서류 마감일을 넣으면 마지막으로 볼 수 있는 날도 알려 드려요.")}[focus]
+    others = "".join(f'<a class="ex-other" href="{EXAM_PAGES[k]}"><b>{EXAM_NAME[k]} 시험 일정</b><span>{d}</span><i aria-hidden="true">›</i></a>'
+                     for k, d in [("toeic", "정기·특별추가접수, 성적 발표"), ("tos", "매주 토·일, 3일 전 마감"), ("opic", "거의 매일, 2일 전 마감")] if k != focus)
+    tabs = "".join(f'<button type="button"{" class=on" if k == focus else ""} data-t="{k}">{EXAM_NAME[k]}</button>' for k in ("toeic", "tos", "opic"))
+    srcs = {"toeic": [SRC_TOEIC_SCH, SRC_TOS_SCH, SRC_OPIC_SCH], "tos": [SRC_TOS_SCH, SRC_TOEIC_SCH, SRC_OPIC_SCH], "opic": [SRC_OPIC_SCH, SRC_TOEIC_SCH, SRC_TOS_SCH]}[focus]
+    key = {"toeic": "schedule", "tos": "tos_schedule", "opic": "opic_schedule"}[focus]
     body = f"""<div class="tl">
-<span class="chip tool">영어 도구</span><span class="chip tool">점수·시험</span><h1>영어 시험 일정 {y}</h1><p class="lead">토익, 토익스피킹, 오픽의 다음 시험과 접수 마감, 성적 발표일을 오늘 기준으로 보여 드려요. 서류 마감일을 넣으면 마지막 기회도 알려 드려요.</p>
+<span class="chip tool">영어 도구</span><span class="chip tool">시험</span><h1>{head[0]}</h1><p class="lead">{head[1]}</p>
+{exam_nav(focus, url)}
 <div class="tl-card">
-<div class="tl-seg" id="ex-t" role="group" aria-label="시험 선택"><button type="button" class="on" data-t="toeic">토익</button><button type="button" data-t="tos">토익스피킹</button><button type="button" data-t="opic">오픽</button></div>
+<div class="tl-seg" id="ex-t" role="group" aria-label="시험 선택">{tabs}</div>
 <div class="tl-box ex-next" id="ex-n" aria-live="polite"><p class="ex-tg">다음 시험을 불러오고 있어요</p></div>
 <div class="tl-box ex-rows" id="ex-l"></div>
 </div>
@@ -2853,54 +2898,60 @@ def page_tool_schedule():
 <p class="tl-note2">성적 발표가 서류 마감일과 같은 날이면 낮 12시 이후에 나와요. 접수 전 공식 사이트에서 꼭 다시 확인하세요.</p>
 </div>
 <div class="tl-doc">
-<h2>{y}년 토익 시험 일정</h2>
-<p>토익 정기시험은 한 달에 두 번 정도, 주로 일요일 오전 9시 20분에 봐요. 정기접수는 시험 약 2주 전 월요일 오전 10시에 마감하고, 그 뒤 특별추가접수가 한 번 더 열려요.</p>
-{leg([("시험", "오전 9:20"), ("정기접수", "오전 10시 마감"), ("특별추가", "오후 1시 마감"), ("성적", "낮 12시")])}
-{tr}
-<h2>{y}년 토익스피킹 시험 일정</h2>
-<p>토익스피킹은 매주 토요일과 일요일에 봐요. 접수 마감은 시험 3일 전 오전 10시, 성적 발표는 5일 뒤 낮 12시예요.</p>
-{leg([("접수", "시험 3일 전 오전 10시 마감"), ("성적", "5일 뒤 낮 12시")])}
-{sr}
-<h2>오픽 시험 일정</h2>
-<p>오픽은 고사장마다 거의 매일 시험이 있어요. 시험 {o['open_days']}일 전부터 {o['close_days']}일 전까지 접수할 수 있고, 성적은 약 {o['score_days']}일 뒤에 나와요. 그래서 세 시험 중 가장 빨리 점수를 받을 수 있어요.</p>
+{sec[focus]}
+<h2>다른 시험 일정</h2>
+<div class="ex-others">{others}</div>
 <div class="tl-note"><b>점수가 급할 때는 이렇게</b>서류 마감이 2주 안이면 오픽, 3주 안이면 토익스피킹, 한 달 넘게 남았으면 토익까지 볼 수 있어요. 지원하는 회사가 어떤 시험을 인정하는지 먼저 확인하세요.</div>
 <h2>자주 묻는 질문</h2>
 {tool_faq(faq)}
 {tool_reads("시험 준비에 도움 되는 카영 글", [("LC", None, lambda p: p.get("sub") == "듣기"), ("말", None, lambda p: p.get("sub") == "회화"), ("RC", None, lambda p: p["id"] in next((s["posts"] for s in SERIES if s["id"] == "work"), []))])}
-{tool_src([SRC_TOEIC_SCH, SRC_TOS_SCH, SRC_OPIC_SCH])}
-<p class="tl-chk">{_exd(EXAM.get("checked", "2026-10-24"))} 공식 일정과 대조했어요.</p>
+{tool_src(srcs)}
+<p class="tl-chk">{_exd(EXAM.get("checked", "2026-10-24"))} 공식 일정과 대조했어요. 카페인영어는 YBM·ACTFL과 관계없는 비공식 안내예요.</p>
 <h2>다른 영어 도구</h2>
-{tool_cards("schedule", "점수·시험")}
+{tool_cards(key, "시험")}
 {tool_kakao()}
 </div></div>{TOOL_JS()}"""
-    desc = f"{y} 토익 시험일정과 접수 마감, 성적 발표일을 오늘 기준 D-day로 보여 줘요. 토익스피킹·오픽 일정도 함께, 서류 마감일을 넣으면 시험별 마지막 기회를 알려 줘요."
-    data = {"tool": "test_schedule", "exam": EXAM}
-    return layout("영어 시험 일정", desc, url, body, nav="tools", og_img=tool_og(url), data=data,
-                  seo_title=f"{y} 토익 시험일정 - 접수 마감, 성적 발표일, 토익스피킹·오픽 일정",
-                  ld=tool_ld("영어 시험 일정", desc, url, faq))
+    desc = {"toeic": f"{y} 토익 시험일정과 정기·특별추가접수 마감, 성적 발표일을 오늘 기준 D-day로 보여 줘요. 서류 마감일을 넣으면 마지막으로 볼 수 있는 토익 회차를 알려 줘요.",
+            "tos": f"{y} 토익스피킹 시험일정과 접수 마감, 성적 발표일을 D-day로 보여 줘요. 매주 토·일 시험 일정, 접수 방법, 서류 마감에 맞는 마지막 기회까지 정리했어요.",
+            "opic": f"오픽 시험일정과 접수 마감, 성적 발표일을 오늘 기준으로 보여 줘요. 오픽은 거의 매일 볼 수 있어요. 서류 마감일을 넣으면 마지막으로 볼 수 있는 날을 알려 줘요."}[focus]
+    seo = {"toeic": f"{y} 토익 시험일정 - 접수 마감, 특별추가접수, 성적 발표일",
+           "tos": f"{y} 토익스피킹 시험일정 - 토스 접수 마감, 성적 발표일",
+           "opic": f"{y} 오픽 시험일정 - 오픽 접수 마감, 성적 발표일"}[focus]
+    data = {"tool": "test_schedule", "exam": EXAM, "focus": focus}
+    return layout(head[0].rsplit(" ", 1)[0], desc, url, body, nav="tools", og_img=tool_og(url), data=data,
+                  seo_title=seo, ld=tool_ld(head[0].rsplit(" ", 1)[0], desc, url, faq))
+
+
+page_tool_schedule = lambda: _schedule_page("toeic")
+page_tool_tos_schedule = lambda: _schedule_page("tos")
+page_tool_opic_schedule = lambda: _schedule_page("opic")
 
 
 # ── 영어 도구 v2 (2026-10-24): 사이트 흐름에 맞춘 목록·카드·공유 이미지 ─────────────
-# 도구 = 영어 도구 카테고리 안의 '글'처럼: 같은 카드 목록, 같은 칩, 같은 분류 필터(전체 · 점수·시험 · 글쓰기 · 생활 영어)
-TOOL_GROUPS = ["점수·시험", "글쓰기", "생활 영어"]
+# 도구 = 영어 도구 카테고리 안의 '글'처럼: 같은 카드 목록, 같은 칩, 같은 분류 필터(전체 · 시험 · 변환 · 글쓰기 · 연습)
+TOOL_GROUPS = ["시험", "변환", "글쓰기", "연습"]
 TOOLS = [  # key, 주소, 이름, 설명, 분류, 3D 아이콘, 목록 썸네일(q, a, 강조), 공유 이미지(라벨, 큰 글씨, 작은 글씨)
-    dict(key="schedule", url="/tools/english-test-schedule/", title="영어 시험 일정", desc="토익·토익스피킹·오픽 접수 마감과 성적 발표일, D-day", group="점수·시험",
-         icon="calendar", th=("토익 접수 언제까지?", "마감 D-day", "D-day"), og=("다음 시험까지", "D-day", "접수 마감 · 성적 발표일 한눈에")),
-    dict(key="toeic", url="/tools/toeic-score/", title="토익 점수 계산기", desc="맞힌 개수로 예상 점수를 범위로, 2025 평균과 비교", group="점수·시험",
+    dict(key="schedule", url="/tools/english-test-schedule/", title="토익 시험 일정", desc="정기·특별추가접수 마감과 성적 발표일, D-day", group="시험",
+         icon="calendar", th=("토익 접수 언제까지?", "마감 D-day", "D-day"), og=("다음 토익까지", "D-day", "접수 마감 · 성적 발표일 한눈에")),
+    dict(key="tos_schedule", url="/tools/toeic-speaking-schedule/", title="토익스피킹 시험 일정", desc="매주 토·일 시험, 접수 마감과 성적 발표일", group="시험",
+         icon="calendar", th=("토스 접수 언제까지?", "3일 전 마감", "3일 전"), og=("토익스피킹", "매주 토·일", "접수 마감 · 성적 발표일 한눈에")),
+    dict(key="opic_schedule", url="/tools/opic-schedule/", title="오픽 시험 일정", desc="거의 매일 시험, 접수 마감과 성적 발표일", group="시험",
+         icon="calendar", th=("오픽 언제 볼 수 있어?", "2일 전 마감", "2일 전"), og=("오픽", "2일 전까지 접수", "가장 빨리 점수 받는 시험")),
+    dict(key="toeic", url="/tools/toeic-score/", title="토익 점수 계산기", desc="맞힌 개수로 예상 점수를 범위로, 2025 평균과 비교", group="시험",
          icon="trophy", th=("LC 80개 · RC 70개", "700~750점", "700~750점"), og=("예상 점수", "700~750점", "LC 80개 · RC 70개 맞혔다면")),
-    dict(key="opic", url="/tools/opic-level/", title="오픽 등급표", desc="NL부터 AL까지 등급별 수준, 내 등급 자가 진단", group="점수·시험",
+    dict(key="opic", url="/tools/opic-level/", title="오픽 등급표", desc="NL부터 AL까지 등급별 수준, 내 등급 자가 진단", group="시험",
          icon="studio-microphone", th=("지금 IM2, 다음은?", "IM2 → IH", "IH"), og=("오픽 등급", "IM2 → IH", "다음 등급으로 가려면")),
-    dict(key="tos", url="/tools/toeic-speaking-level/", title="토익스피킹 레벨표", desc="점수를 넣으면 등급, 11문항 시험 구성까지", group="점수·시험",
+    dict(key="tos", url="/tools/toeic-speaking-level/", title="토익스피킹 레벨표", desc="점수를 넣으면 등급, 11문항 시험 구성까지", group="시험",
          icon="telephone", th=("토익스피킹 130점", "IM3", "IM3"), og=("토익스피킹", "130점 = IM3", "점수별 등급 바로 확인")),
-    dict(key="compare", url="/tools/english-score-compare/", title="영어 시험 점수 비교", desc="토익·오픽·토익스피킹을 한 사다리에서", group="점수·시험",
+    dict(key="compare", url="/tools/english-score-compare/", title="영어 시험 점수 비교", desc="토익·오픽·토익스피킹을 한 사다리에서", group="시험",
          icon="clipboard", th=("오픽 IH는 토익 몇 점?", "900~945점", "900~945점"), og=("오픽 IH는 토익", "900~945점", "토익·오픽·토익스피킹 한눈에")),
     dict(key="wordcount", url="/tools/english-word-count/", title="영어 단어 수 세기", desc="에세이·자소서 단어 수, 글자 수, 읽는 시간", group="글쓰기",
          icon="page", th=("My essay is about…", "186 words", "186"), og=("Word count", "186 words", "글자 수 · 문장 수 · 읽는 시간")),
-    dict(key="cursive", url="/tools/english-cursive/", title="영어 필기체 변환", desc="복사해서 쓰는 필기체, 이미지 저장, 알파벳 연습", group="글쓰기",
+    dict(key="cursive", url="/tools/english-cursive/", title="영어 필기체 변환", desc="복사해서 쓰는 필기체, 이미지 저장, 알파벳 연습", group="변환",
          icon="raised-hand", th=("Cafe in English", "𝒞𝒶𝒻𝑒 𝒾𝓃 ℰ𝓃𝑔𝓁𝒾𝓈𝒽", ""), og=("필기체 변환", "Cafe in English", "복사 · 이미지 저장 · 알파벳 연습")),
-    dict(key="name", url="/tools/english-name/", title="영문 이름 변환기", desc="여권·해외 사이트용 영문 이름, 성씨별 표기", group="생활 영어",
+    dict(key="name", url="/tools/english-name/", title="영문 이름 변환기", desc="여권·해외 사이트용 영문 이름, 성씨별 표기", group="변환",
          icon="passport-control", th=("이승주", "Lee Seungju", "Seungju"), og=("이승주", "Lee Seungju", "여권 영문 이름 형식까지")),
-    dict(key="address", url="/tools/english-address/", title="영문 주소 변환기", desc="도로명주소를 영어로, 해외직구 칸별 복사", group="생활 영어",
+    dict(key="address", url="/tools/english-address/", title="영문 주소 변환기", desc="도로명주소를 영어로, 해외직구 칸별 복사", group="변환",
          icon="world-map", th=("테헤란로 152", "152 Teheran-ro", "Teheran-ro"), og=("영문 주소", "152 Teheran-ro", "해외직구 칸별로 복사")),
 ]
 TOOL_BY_URL = {t["url"]: t for t in TOOLS}
@@ -2909,7 +2960,7 @@ live_tools = lambda: [t for t in TOOLS if t["key"] != "address" or JUSO_KEY]
 
 
 # 공유 이미지: 글 공유 이미지와 같은 파스텔 그라데이션(OG_BG 0 복숭아 · 1 하늘 · 2 라벤더 · 3 민트 · 4 레몬)과 왼쪽 한 줄
-OG_TOOL = {"schedule": (4, "토익·토스·오픽 접수 마감과 성적 발표"), "toeic": (1, "맞힌 개수로 예상 점수 바로 확인"), "opic": (2, "NL부터 AL까지, 나는 어느 등급일까"), "tos": (0, "점수를 넣으면 등급이 바로"),
+OG_TOOL = {"schedule": (4, "토익 접수 마감과 성적 발표일"), "tos_schedule": (0, "토익스피킹 접수 마감과 성적 발표일"), "opic_schedule": (2, "오픽 접수 마감과 성적 발표일"), "toeic": (1, "맞힌 개수로 예상 점수 바로 확인"), "opic": (2, "NL부터 AL까지, 나는 어느 등급일까"), "tos": (0, "점수를 넣으면 등급이 바로"),
            "compare": (3, "토익·오픽·토익스피킹 한눈에"), "wordcount": (3, "에세이·자소서 분량 맞추기"), "cursive": (0, "복사·이미지 저장·알파벳 연습"),
            "name": (4, "여권·해외 사이트용 영문 이름"), "address": (1, "해외직구 영문 주소, 칸별로")}
 
@@ -2923,8 +2974,8 @@ def tool_og(url):
     return og_tool("tool-" + t["key"], "영어 도구 · " + t["group"], t["title"], sub, lab, big, small, t["icon"], t["key"], bg=bg, cursive=t["key"] == "cursive")
 
 
-TOOL_KIND = {"schedule": "일정", "toeic": "계산기", "opic": "등급표", "tos": "레벨표", "compare": "비교표", "wordcount": "세기", "cursive": "변환", "name": "변환기", "address": "변환기"}
-TOOL_TH = {"schedule": ("다음 시험까지", "D-day", "D-day"), "toeic": ("예상 점수", "700~750점", "700~750점"), "opic": ("오픽 등급", "IM2 → IH", "IH"), "tos": ("토익스피킹 130점", "IM3", "IM3"),
+TOOL_KIND = {"schedule": "일정", "tos_schedule": "일정", "opic_schedule": "일정", "toeic": "계산기", "opic": "등급표", "tos": "레벨표", "compare": "비교표", "wordcount": "세기", "cursive": "변환", "name": "변환기", "address": "변환기"}
+TOOL_TH = {"schedule": ("다음 토익까지", "D-day", "D-day"), "tos_schedule": ("토익스피킹", "매주 토·일", "토·일"), "opic_schedule": ("오픽 접수", "2일 전까지", "2일 전"), "toeic": ("예상 점수", "700~750점", "700~750점"), "opic": ("오픽 등급", "IM2 → IH", "IH"), "tos": ("토익스피킹 130점", "IM3", "IM3"),
            "compare": ("오픽 IH는 토익", "900~945점", "900~945점"), "wordcount": ("Word count", "186 words", "186"),
            "cursive": ("필기체 변환", "Cafe in English", ""), "name": ("이승주", "Lee Seungju", "Seungju"), "address": ("테헤란로 152", "152 Teheran-ro", "Teheran-ro")}
 
@@ -3005,7 +3056,7 @@ def page_tools():
                      for v, l in [("", "전체")] + [(g, g) for g in groups]) + '</div>')
     body = (f'<h1>영어 도구</h1><p class="lead">점수 계산부터 영문 이름까지, 바로 쓰는 무료 도구</p>{seg}'
             f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>{about}' + TOOL_JS())
-    desc = "영어 시험 일정(토익·토익스피킹·오픽 접수 마감), 토익 점수 계산기, 오픽 등급표, 토익스피킹 레벨표, 영어 시험 점수 비교, 영어 단어 수 세기, 영어 필기체 변환, 영문 이름 변환기를 가입 없이 무료로 쓸 수 있어요."
+    desc = "토익·토익스피킹·오픽 시험 일정(접수 마감·성적 발표), 토익 점수 계산기, 오픽 등급표, 토익스피킹 레벨표, 영어 시험 점수 비교, 영어 단어 수 세기, 영어 필기체 변환, 영문 이름 변환기를 가입 없이 무료로 쓸 수 있어요."
     ld = [{"@type": "CollectionPage", "name": "영어 도구", "description": desc, "url": DOMAIN + "/tools/", "inLanguage": "ko",
            "mainEntity": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": DOMAIN + t["url"], "name": t["title"]} for i, t in enumerate(tools)]}},
           {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": DOMAIN + "/"},
@@ -3195,7 +3246,8 @@ def build():
     for u, fn in (("/tools/toeic-score/", page_tool_toeic), ("/tools/opic-level/", page_tool_opic),
                   ("/tools/toeic-speaking-level/", page_tool_tos), ("/tools/english-score-compare/", page_tool_compare),
                   ("/tools/english-word-count/", page_tool_wordcount), ("/tools/english-cursive/", page_tool_cursive),
-                  ("/tools/english-test-schedule/", page_tool_schedule)):
+                  ("/tools/english-test-schedule/", page_tool_schedule), ("/tools/toeic-speaking-schedule/", page_tool_tos_schedule),
+                  ("/tools/opic-schedule/", page_tool_opic_schedule)):
         write(u, fn()); pages.append(u)
     write("/tools/english-address/", page_tool_address())
     if JUSO_KEY:

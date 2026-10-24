@@ -547,7 +547,7 @@
       for (let k = 0; k < 75; k++) {
         const d = addD(today, k), c = addD(d, -o.close_days);
         out.push({ date: d, time: "", score: addD(d, o.score_days), opic: 1,
-          wins: [{ k: "접수", s: Date.parse(addD(d, -o.open_days) + "T00:00:00+09:00"), e: Date.parse(addD(c, 1) + "T00:00:00+09:00"), et: `${L(c)}까지`, es: `${S(c)}까지`, ed: c, sd: addD(d, -o.open_days) }] });
+          wins: [{ k: "접수", s: Date.parse(addD(d, -o.open_days) + "T00:00:00+09:00"), e: Date.parse(addD(c, 1) + "T00:00:00+09:00"), et: `${L(c)}까지`, es: `${S(c)}`, ed: c, sd: addD(d, -o.open_days) }] });
       }
       return out;
     }
@@ -570,7 +570,7 @@
     });
     if (!N) return;
     document.addEventListener("click", e => { const a = e.target.closest("[data-go]"); if (a) ga("tool_out", { tool: "test_schedule", exam: a.dataset.go }); });
-    let T = ["toeic", "tos", "opic"].indexOf(QS.get("t")) > -1 ? QS.get("t") : "toeic";
+    let T = ["toeic", "tos", "opic"].indexOf(QS.get("t")) > -1 ? QS.get("t") : (DATA.focus || "toeic");
     function draw() {
       $$("#ex-t button").forEach(b => b.classList.toggle("on", b.dataset.t === T));
       const all = list(T).filter(x => x.date >= today), live = all.filter(openWin);
@@ -624,6 +624,13 @@
     if (n0) draw.f = 1;
     draw(); back();
     // 표: 지난 시험은 흐리게
+    // 오픽 일정 페이지: 오늘부터 접수할 수 있는 가까운 시험 12개를 카드로
+    const OG = $("#ex-og");
+    if (OG) OG.innerHTML = list("opic").filter(x => openWin(x)).slice(0, 12).map(x => {
+      const w = openWin(x), [, m, d] = ymd(x.date);
+      return `<li class="ex-tile" data-ex-t="opic" data-d="${x.date}"><div class="ex-th"><span></span><em class="ex-tp"></em></div>` +
+        `<p class="ex-td"><span>${m}.${d}</span><small>${wd(x.date)}요일</small></p><dl><div><dt>접수 마감</dt><dd>${S(w.ed)}</dd></div><div><dt>성적 발표</dt><dd>${S(x.score)} 무렵</dd></div></dl></li>`;
+    }).join("");
     const seen = {};
     $$(".ex-tile").forEach(el => {
       const k = el.dataset.exT, x = list(k).find(y => y.date === el.dataset.d), p = $(".ex-tp", el); if (!x) return;
