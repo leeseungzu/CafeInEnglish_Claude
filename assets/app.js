@@ -662,8 +662,24 @@ ${my}
     apply();
   })();
   // 홈 전체 아티클 페이지 넘기기
+  // 페이지 번호는 지금 페이지 주변만 (1 2 3 4 5 … 11 / 1 … 4 5 6 … 11), 모바일에서도 한 줄 (2026-10-27)
+  function pagerWin(cur) {
+    const bs = $$("#pager button[data-pg]"), N = bs.length;
+    $$("#pager .pg-gap").forEach(g => g.remove());
+    const lo = Math.max(1, Math.min(cur - 1, N - 4)), hi = Math.min(N, Math.max(cur + 1, 5));
+    let last = 0;
+    bs.forEach((b, i) => {
+      const n = i + 1, vis = N <= 7 || n === 1 || n === N || (n >= lo && n <= hi);
+      b.hidden = !vis;
+      if (!vis) return;
+      if (last && n - last > 1) { const g = document.createElement("span"); g.className = "pg-gap"; g.textContent = "…"; g.setAttribute("aria-hidden", "true"); b.before(g); }
+      last = n;
+    });
+  }
+  if ($("#pager")) pagerWin(1);
   $$("#pager button").forEach(b => b.onclick = () => {
     $$("#pager button").forEach(x => x.classList.toggle("on", x === b));
+    pagerWin(+b.dataset.pg);
     $$("#all-arts .card").forEach(c => c.classList.toggle("pg-hide", c.dataset.pg !== b.dataset.pg));
     const h = $("#all-arts"); if (h) scrollTo({ top: h.getBoundingClientRect().top + scrollY - 120, behavior: "smooth" });
   });

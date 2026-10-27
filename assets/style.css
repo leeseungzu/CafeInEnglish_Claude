@@ -3042,3 +3042,8 @@ html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
 /* 따라 말하기: 반복 구간의 실제 영어 문장 + 한글 발음 (2026-10-24) */
 .sh-say b[lang=en]{font-size:17px;line-height:1.45}
 .sh-pr{margin:4px 0 0;font-size:14px;color:var(--muted)}
+/* 모바일 홈: 페이지 번호가 많아져도 화면 밖으로 밀리지 않게 (2026-10-27) */
+@media (max-width:999px){.home-grid{grid-template-columns:minmax(0,1fr)}}
+.pager{flex-wrap:wrap;align-items:center}
+.pager button[hidden]{display:none}
+.pager .pg-gap{min-width:22px;height:36px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;color:var(--muted)}
