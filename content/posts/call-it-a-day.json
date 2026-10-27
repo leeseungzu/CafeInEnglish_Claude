@@ -1,0 +1,73 @@
+{
+  "id": "call-it-a-day",
+  "cat": "expr",
+  "sub": "새 표현",
+  "level": "기초",
+  "date": "2026-10-27",
+  "title": "\"Let's call it a day\", '오늘은 여기까지 하자'",
+  "seo_title": "call it a day 뜻 - '오늘은 여기까지' 영어로, call it a night 차이",
+  "lead": "하던 일을 마무리하는 원어민의 퇴근 신호",
+  "description": "call it a day는 '오늘은 여기까지 하자'라는 뜻이에요. call it a night, call it quits와 무엇이 다른지, call이 여기서 무슨 뜻인지 대화와 예문, 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Let's call it a day.",
+    "ko": "'오늘은 여기까지 하자'를 한마디로"
+  },
+  "icon": "sunset",
+  "chat": {
+    "q": "It's almost seven. Should we keep going?",
+    "a": "Let's call it a day.",
+    "key": "call it a day",
+    "ko": "오늘은 여기까지 해요."
+  },
+  "thumb": {
+    "text": "Let's call it a day.",
+    "key": "call it a day",
+    "ko": "'하루라고 부르자'는 무슨 뜻?"
+  },
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "동료가 \"Let's call it a day.\"라고 했어요. 무슨 뜻일까요?",
+      "sub": "",
+      "options": [
+        "오늘 하루 정말 좋았다",
+        "오늘은 여기까지 하자",
+        "하루 종일 전화하자",
+        "하루 휴가를 내자"
+      ],
+      "answer": 1,
+      "explain": "call it a day는 하던 일을 그날은 그만하자는 말이에요. 퇴근이나 회의를 마무리할 때 자주 써요.",
+      "mnemonic": "오늘 한 걸로 하루(a day) 친 셈"
+    },
+    {
+      "tag": "표현",
+      "q": "밤늦게 친구들과 놀다가 '오늘 밤은 여기까지 하자'라고 할 때 가장 알맞은 말은?",
+      "sub": "",
+      "options": [
+        "Let's call it a night.",
+        "Let's call it quits forever.",
+        "Let's call a night.",
+        "Let's call the day."
+      ],
+      "answer": 0,
+      "explain": "밤에 하던 일이나 모임을 끝낼 때는 call it a night이에요. it을 빼면 안 돼요.",
+      "mnemonic": "낮엔 a day, 밤엔 a night"
+    },
+    {
+      "tag": "표현",
+      "q": "\"After twenty years, he decided to call it quits.\"의 뜻은?",
+      "sub": "",
+      "options": [
+        "20년 만에 그는 오늘 일을 일찍 끝냈다",
+        "20년 만에 그는 일을 그만두기로 했다",
+        "20년 동안 그는 매일 전화했다",
+        "20년 만에 그는 조용히 하기로 했다"
+      ],
+      "answer": 1,
+      "explain": "call it quits는 일이나 활동을 그만둘 때 써요. 오래 하던 일을 접을 때 특히 자주 들려요.",
+      "mnemonic": "quits = quit, 그만두기"
+    }
+  ],
+  "body_html": "<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">It's almost seven. Should we keep going?</span><span class=\"ko\">벌써 7시 다 됐네요. 계속할까요?</span></li>\n<li class=\"me\"><span class=\"en\">I think we've done enough. Let's call it a day.</span><span class=\"ko\">이 정도면 충분히 한 것 같아요. 오늘은 여기까지 해요.</span></li>\n<li class=\"them\"><span class=\"en\">Sounds good. We can finish the rest tomorrow.</span><span class=\"ko\">좋아요. 나머지는 내일 마무리하죠.</span></li>\n</ul>\n<p>퇴근 시간이 다가올 때 회의실이나 사무실에서 정말 자주 들리는 말이 <b>Let's call it a day.</b>예요. 뜻은 <b>\"오늘은 여기까지 하자\"</b>. 단어만 보면 \"그걸 하루라고 부르자?\"처럼 알쏭달쏭한데, 원어민에게는 '이만하면 됐다'며 일을 마무리하는 신호예요.</p>\n<h2>'하루'라고 치고 끝내자는 말</h2>\n<p>메리엄웹스터 사전은 call it a day를 <b>'하던 일을 그날은, 또는 당분간 그만두다'</b>로 풀이해요. 롱맨 사전도 '충분히 했거나 지쳐서 일을 그만하기로 하다'라고 설명하고 비격식(informal) 표현으로 표시해요.</p>\n<p>여기서 call은 '전화하다'가 아니라 <b>'~라고 치다, ~로 여기다'</b>에 가까워요. \"오늘 한 걸로 하루치 일을 한 셈 치자\"는 그림이에요. 그래서 일이 다 끝나지 않았더라도 \"이만하면 됐다\"는 마음으로 쓰는 경우가 많아요. 혼자 공부하다가, 청소하다가, 운동하다가도 쓸 수 있어요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Let's call it a day and go home.</span><span class=\"ko\">오늘은 여기까지 하고 집에 가자.</span></li>\n<li><span class=\"en\">I'm exhausted. I'm going to call it a day.</span><span class=\"ko\">너무 지쳤어. 오늘은 그만할래.</span></li>\n<li><span class=\"en\">We worked until six and then called it a day.</span><span class=\"ko\">우리는 6시까지 일하고 마무리했어요.</span></li>\n<li><span class=\"en\">Should we call it a day?</span><span class=\"ko\">오늘은 이만할까요?</span></li>\n</ul></div>\n<p>마지막 문장처럼 질문으로 바꾸면 상대 의견을 묻는 부드러운 제안이 돼요. 상사나 팀원에게 먼저 끝내자고 말하기 부담스러울 때 쓰기 좋아요.</p>\n<h2>밤이면 night, 그만두면 quits</h2>\n<p>call it 뒤에 오는 말만 바꾸면 뜻이 달라져요. 저녁 모임이나 밤늦게까지 하던 일을 끝낼 때는 <b>call it a night</b>, 일이나 활동을 그만둘 때는 <b>call it quits</b>를 많이 써요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>표현</th><th>뜻</th><th>이럴 때</th></tr></thead><tbody><tr><td>call it a day</td><td>오늘은 여기까지 하다</td><td>하던 일·업무를 그날은 끝낼 때</td></tr><tr><td>call it a night</td><td>오늘 밤은 여기까지 하다</td><td>저녁 모임, 밤샘 작업을 끝내고 집에 가거나 잘 때</td></tr><tr><td>call it quits</td><td>그만두다, 손을 떼다</td><td>그만둘 때 (오래 하던 일을 접을 때 특히 자주)</td></tr></tbody></table></div>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">It's getting late. Let's call it a night.</span><span class=\"ko\">늦었다. 오늘 밤은 여기까지 하자.</span></li>\n<li><span class=\"en\">After twenty years, he decided to call it quits.</span><span class=\"ko\">20년 만에 그는 일을 그만두기로 했어요.</span></li>\n</ul></div>\n<p>call it quits에는 '빚이나 다툼을 셈 끝난 걸로 치다'라는 뜻도 있어요. 롱맨 사전은 \"20달러만 주면 우리 셈은 끝난 걸로 하자\" 같은 예문을 들어요. 반면 call it a day는 주로 <b>그날 하던 일</b>을 끝낼 때 써요. 다만 옥스퍼드 학습자 사전에 '40년 정치 인생을 마무리할 때'라는 예문이 있을 만큼, 오랜 경력을 접는다는 뜻으로 쓰일 때도 있어요.</p>\n<h2>call을 '부르다'로만 알면 막혀요</h2>\n<p>한국인이 이 표현을 처음 들으면 call을 '부르다, 전화하다'로 해석해서 \"하루를 부르자?\" 하고 멈칫해요. 하지만 call에는 '~라고 부르다'에서 넓어진 '~라고 치다'라는 쓰임이 있어요. 숫자를 대충 맞출 때 Let's just call it ten dollars.(그냥 10달러로 치자)라고 하는 것과 같은 call이에요. 그래서 call it a day는 '오늘 한 걸로 하루를 채운 셈 치자'라는 말이 돼요. 이렇게 이해하면 night, quits로 바뀌어도 바로 감이 와요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 달력에 오늘 날짜를 동그라미 치며 \"이걸로 하루(a day) 끝!\" 하고 부르는(call) 모습.</div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">회의를 마무리하며 '오늘은 여기까지 하죠'라고 할 때</span><span class=\"no\">Let's call a day.</span><span class=\"en\">Let's call it a day.</span><span class=\"ko\">오늘은 여기까지 하죠.</span><span class=\"why\"><b>왜?</b>굳어진 표현이라 it이 꼭 들어가요. it을 빼면 원어민에게 뜻이 통하지 않는 문장이 돼요.</span></li>\n</ul></div>\n<p>바쁜 하루를 말하는 다른 표현이 궁금하다면 <a href=\"/p/swamped/\">I'm swamped</a>를, 일을 마무리하며 진행 상황을 부탁할 때는 <a href=\"/p/keep-me-posted/\">Keep me posted</a>를 같이 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Merriam-Webster 'call it a day', 'call it a night', 'call it quits' · Longman 'call it a day', 'call it quits' · Dictionary.com 'call it a day'.</p>",
+  "related": []
+}

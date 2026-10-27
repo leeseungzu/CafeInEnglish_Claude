@@ -561,6 +561,27 @@ def can_cant():
     c.save("can-cant-stress.png")
 
 
+def me_too_neither():
+    c = Canvas("'나도'는 상대 말에 따라 달라요", "긍정에는 too, 부정에는 neither")
+    rows = [("상대가 긍정으로 말하면", "I like coffee.", ["Me too.", "So do I."], "나도 좋아해"),
+            ("상대가 부정으로 말하면", "I don't like coffee.", ["Me neither.", "Neither do I."], "나도 안 좋아해")]
+    for who, said, ans, ko in rows:
+        def body(x, r, who=who, said=said, ans=ans, ko=ko):
+            c.pill(x, c.y, who, F(36, 700)); c.y += 84
+            c.d.text((x, c.y), said, font=F(48, 700), fill=MUTED); c.y += int(48 * 1.45)
+            xx = x
+            for i, a in enumerate(ans):
+                w = c.hl(xx, c.y, a, F(56, 800))
+                xx += w + 40
+                if i == 0:
+                    c.d.text((xx, c.y + 6), "/", font=F(48, 700), fill=MUTED); xx += 50
+            c.y += int(56 * 1.35)
+            c.text(x, ko, F(40, 700), MUTED, 1.2)
+        c.card(body)
+    c.note("not, never가 들리면 neither로 맞장구!", 40)
+    c.save("me-too-neither.png")
+
+
 if __name__ == "__main__":
-    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant):
+    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither):
         fn()

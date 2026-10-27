@@ -1,0 +1,73 @@
+{
+  "id": "me-too-me-neither",
+  "cat": "tip",
+  "sub": "회화",
+  "level": "기초",
+  "date": "2026-10-27",
+  "title": "\"나도 안 좋아해\"는 Me too가 아니에요",
+  "seo_title": "Me neither 뜻 - Me too와 차이, So do I·Neither do I 쓰는 법",
+  "lead": "상대 말이 부정이면 맞장구도 부정으로",
+  "description": "'나도 안 좋아해'를 Me too라고 하면 어색해요. Me too와 Me neither의 차이, So do I·Neither do I에서 조동사 맞추는 법을 표와 대화, 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Me neither.",
+    "ko": "'나도 안 그래'는 Me too가 아니에요"
+  },
+  "icon": "people-hugging",
+  "chat": {
+    "q": "I don't like horror movies.",
+    "a": "Me neither!",
+    "key": "Me neither",
+    "ko": "나도 (안 좋아해)!"
+  },
+  "thumb": {
+    "text": "Me too? Me neither?",
+    "key": "Me neither",
+    "ko": "'나도 안 좋아해'를 영어로?"
+  },
+  "quiz": [
+    {
+      "tag": "회화",
+      "q": "친구가 \"I don't drink coffee.\"라고 했고, 나도 커피를 안 마셔요. 알맞은 대답은?",
+      "sub": "",
+      "options": [
+        "Me too.",
+        "Me neither.",
+        "So do I.",
+        "I do too."
+      ],
+      "answer": 1,
+      "explain": "상대 말이 부정문(don't)이라 맞장구도 부정으로 해요. Me neither 또는 Neither do I예요.",
+      "mnemonic": "not이 들리면 neither"
+    },
+    {
+      "tag": "회화",
+      "q": "\"I went to the concert last night.\"에 '나도 갔어'라고 할 때 알맞은 말은?",
+      "sub": "",
+      "options": [
+        "So do I.",
+        "So did I.",
+        "Neither did I.",
+        "So was I."
+      ],
+      "answer": 1,
+      "explain": "상대 문장이 과거(went)라서 조동사도 did로 맞춰 So did I.라고 해요.",
+      "mnemonic": "상대 시제 그대로, went면 did"
+    },
+    {
+      "tag": "회화",
+      "q": "\"I haven't had lunch yet.\"(나 아직 점심 안 먹었어)에 '나도 아직 안 먹었어'라고 할 때 알맞은 말은?",
+      "sub": "",
+      "options": [
+        "Me too.",
+        "So have I.",
+        "Neither have I.",
+        "Neither did I."
+      ],
+      "answer": 2,
+      "explain": "상대 문장이 haven't가 들어간 부정문이라 Neither에 have를 맞춰 Neither have I.라고 해요. 짧게 Me neither.라고 해도 돼요.",
+      "mnemonic": "haven't면 Neither have I"
+    }
+  ],
+  "body_html": "<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">친구가 \"I don't like horror movies.\"라고 했고, 나도 공포 영화를 싫어할 때</span><span class=\"no\">Me too.</span><span class=\"en\">Me neither.</span><span class=\"ko\">나도 (안 좋아해).</span><span class=\"why\"><b>왜?</b>상대 말이 부정문이면 맞장구도 부정으로 해요. 롱맨 사전은 Me too를 '같은 기분이거나 같은 상황'일 때, Me neither를 '상대의 부정문에 동의할 때' 쓰는 말로 풀이해요.</span></li>\n</ul></div>\n<p>한국어로는 \"나도\"라는 말 하나면 끝이에요. \"나 커피 좋아해.\" \"나도.\" \"나 커피 안 좋아해.\" \"나도.\" 그래서 영어로도 무조건 Me too가 튀어나오기 쉬워요. 그런데 영어는 <b>상대가 한 말이 긍정인지 부정인지</b>에 따라 맞장구가 달라져요. 오늘은 이 차이를 한 번에 정리해요.</p>\n<h2>긍정엔 too, 부정엔 neither</h2>\n<figure class=\"fig\"><img src=\"/images/me-too-neither.png\" alt=\"맞장구 정리 그림: I like coffee.처럼 긍정문에는 Me too. 또는 So do I., I don't like coffee.처럼 부정문에는 Me neither. 또는 Neither do I.\" width=\"1080\" height=\"1290\" loading=\"lazy\"><figcaption>상대 말이 부정이면 맞장구에도 neither를 써요</figcaption></figure>\n<p>Me too는 '상대와 같은 기분이거나 같은 상황이라고 말할 때' 쓰는 구어 표현이에요. 롱맨 사전은 \"I'm hungry!\" \"Me too.\"를 예문으로 들어요. 반대로 Me neither는 <b>상대의 부정문에 동의할 때</b> 쓰는 말로 풀이해요. 옥스퍼드 학습자 사전도 Me neither를 부정문에 맞장구치는 비격식 표현으로 소개해요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I'm so hungry.</span><span class=\"ko\">배고파 죽겠어.</span></li>\n<li><span class=\"en\">Me too.</span><span class=\"ko\">나도.</span></li>\n<li><span class=\"en\">I don't eat spicy food.</span><span class=\"ko\">나 매운 거 안 먹어.</span></li>\n<li><span class=\"en\">Me neither.</span><span class=\"ko\">나도 안 먹어.</span></li>\n</ul></div>\n<p>I can't wait for the weekend.(주말이 너무 기다려져)처럼 뜻은 긍정인데 can't가 들어간 문장에는 원어민도 갈려요. 일상 대화에서는 Me too!가 아주 흔하고, 문법을 따져 Neither can I라고 하는 사람도 있어요. 둘 다 통하니 크게 걱정하지 않아도 돼요. 헷갈리는 건 이런 경우뿐이고, 보통은 상대 문장에 not이 들어 있는지만 들으면 돼요.</p>\n<h2>So do I와 Neither do I</h2>\n<p>Me too, Me neither는 짧고 편한 말이에요. 한 단계 더 또박또박 말하고 싶을 때는 <b>So + 조동사 + 나</b>, <b>Neither + 조동사 + 나</b>를 써요. 롱맨 사전은 \"I don't have any money.\" \"Neither do I.\"를 예문으로 들어요. 이때 조동사는 상대 문장에 맞춰 바꿔야 해요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>상대가 한 말</th><th>나도 그래 (긍정)</th><th>나도 안 그래 (부정)</th></tr></thead><tbody><tr><td>I like it. / I don't like it.</td><td>So do I.</td><td>Neither do I.</td></tr><tr><td>I went there. / I didn't go there.</td><td>So did I.</td><td>Neither did I.</td></tr><tr><td>I can swim. / I can't swim.</td><td>So can I.</td><td>Neither can I.</td></tr><tr><td>I'm tired. / I'm not tired.</td><td>So am I.</td><td>Neither am I.</td></tr><tr><td>I've been there. / I haven't been there.</td><td>So have I.</td><td>Neither have I.</td></tr></tbody></table></div>\n<p>헷갈린다면 \"I can't swim.\" \"I can't either.\"처럼 상대 문장을 그대로 받아 끝에 either를 붙여도 돼요. 롱맨 사전에도 실린 방식이에요.</p>\n<h2>실제 대화 · 점심 메뉴 고르기</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">I don't really feel like pizza today.</span><span class=\"ko\">오늘은 피자가 별로 안 당기네.</span></li>\n<li class=\"me\"><span class=\"en\">Me neither. How about sushi?</span><span class=\"ko\">나도. 초밥 어때?</span></li>\n<li class=\"them\"><span class=\"en\">I love sushi!</span><span class=\"ko\">나 초밥 엄청 좋아해!</span></li>\n<li class=\"me\"><span class=\"en\">Me too! Let's go.</span><span class=\"ko\">나도. 가자.</span></li>\n</ul>\n<h2>'나도' 하나로 끝나는 한국어 습관</h2>\n<p>한국어 '나도'는 앞말이 긍정이든 부정이든 똑같이 붙일 수 있어요. 뜻을 정하는 건 상대 문장이고, '나도'는 그 뜻에 그냥 올라타요. 영어 Me too의 too는 '또한, 역시'라서 긍정 내용에 붙는 말이고, 부정 내용에는 neither(어느 쪽도 아닌)나 either를 써요. 그래서 상대가 don't, can't, not 같은 말을 했는지 한 번만 귀 기울이면 실수가 확 줄어요. 부정 질문에 Yes·No로 대답하는 법도 한국어와 반대라서 함께 알아 두면 좋아요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> not이 들리면 neither. n으로 시작하는 말엔 n으로 시작하는 말로 맞장구!</div>\n<h2>자주 묻는 질문</h2>\n<p><b>Q. 상대가 never라고 하면요?</b><br>never도 부정이라 neither로 맞장구쳐요. \"I've never been to Paris.\" \"Neither have I.\"(나도 안 가 봤어)처럼요. 문장에 not이 없어도 never, nothing, nobody 같은 말이 들어가면 부정문이라는 걸 기억하세요.</p>\n<p><b>Q. Nor do I도 같은 뜻인가요?</b><br>네, Neither do I와 같은 자리에 Nor do I를 쓸 수 있어요. 롱맨 사전은 Me neither 대신 Nor me(주로 영국식)라고 해도 된다고 소개해요. 다만 일상 대화에서는 Me neither가 가장 흔하게 들려요.</p>\n<p>부정으로 물었을 때 Yes와 No가 헷갈린다면 <a href=\"/p/negative-question/\">Don't you like coffee?에 대답하기</a>를, 안부 인사에 자연스럽게 답하는 법은 <a href=\"/p/how-are-you/\">How are you?에 I'm fine 말고</a>를 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Longman 'me too', 'me neither', 'neither', 'either' · Oxford Learner's Dictionaries 'neither' · Merriam-Webster 'so', 'either'.</p>",
+  "related": []
+}

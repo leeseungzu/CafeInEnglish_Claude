@@ -358,5 +358,17 @@
     "en": "We need to discuss the budget.",
     "ko": "예산을 논의해야 해요",
     "desc": "discuss 뒤에는 about 없이 바로 내용이 와요. about을 쓰려면 talk about."
+  },
+  {
+    "post": "call-it-a-day",
+    "en": "Let's call it a day.",
+    "ko": "오늘은 여기까지 하자",
+    "desc": "하던 일을 그날은 마무리하자는 말. 밤에 끝낼 땐 call it a night."
+  },
+  {
+    "post": "me-too-me-neither",
+    "en": "Me neither.",
+    "ko": "나도 (안 그래)",
+    "desc": "상대가 don't, can't처럼 부정으로 말했을 때의 '나도'. 긍정이면 Me too."
   }
 ]
