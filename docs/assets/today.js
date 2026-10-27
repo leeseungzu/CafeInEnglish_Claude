@@ -97,6 +97,15 @@
     if (!from && !when) return "";
     return `<p class="rv-src">${v.t && v.p ? `<a href="${esc(v.p)}">${from}</a>` : from}${from && when ? " · " : ""}${when}</p>`;
   }
+  // 지난 한 잔 (2026-10-27): 오늘 걸 다 하고 더 공부하고 싶을 때 → 어제·그 전 표현 3개 + /today/ 모두 보기
+  function pastBlock() {
+    const n = DAILY.length; if (n < 2) return "";
+    const CH = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+    const lab = k => { if (k === 1) return "어제"; const d = new Date((DAY - k) * 864e5); return (d.getUTCMonth() + 1) + "월 " + d.getUTCDate() + "일"; };
+    const li = [1, 2, 3].filter(k => k < n).map(k => { const x = DAILY[((DAY - k) % n + n) % n];
+      return `<a href="${esc(x.p)}" data-past="item"><span class="pt-d">${lab(k)}</span><span class="pt-t"><b>${esc(x.en)}</b><small>${esc(x.ko)}</small></span>${CH}</a>`; }).join("");
+    return `<section class="pt-card" id="past"><h3>지난 한 잔</h3><p class="pt-s">오늘 걸로 아쉽다면, 지난 표현으로 이어서 공부해요</p><div class="pt-li">${li}</div><a class="pt-all" href="/today/" data-past="all">지난 한 잔 ${n}잔 모두 보기 ${CH}</a></section>`;
+  }
   function rvBlock() {
     const all = Object.values(S.srs || {}); if (!all.length) return "";
     const due = dueList(), v = due[0];
@@ -188,7 +197,7 @@ ${S.src !== "daily" ? `<div class="rt-goals">${SRCS.map(g => `<button type="butt
 <p class="rt-hint">${n === 3 ? `<b class="lbl">쾅!</b> 오늘 도장을 찍었어요. ${st > 1 ? "연속 " + st + "일째예요." : "내일 또 만나요."}` : stamped ? '<b class="lbl">도장</b> 오늘 도장은 이미 찍혔어요. 편하게 한 번 더 연습해요' : '<b class="lbl">도장</b> 듣기·말하기·복습을 다 하면 오늘 도장이 찍혀요'}</p>
 ${n ? '<button type="button" class="rt-again" data-act="again">↻ 처음부터 한 번 더 연습하기</button>' : ""}
 </section>
-${rvBlock()}</div>`;
+${rvBlock()}${pastBlock()}</div>`;
     if (logRoot) logRoot.innerHTML = `<div class="lg-sum"><div><b>${S.stamps.length}<em>개</em></b><span>찍은 도장</span></div><div><b>${st}<em>일</em></b><span>연속 공부</span></div><div><b>${said.length}<em>개</em></b><span>말해 본 문장</span></div></div>
 <h2 class="rt-h">말해 본 문장 <small>${said.length}개</small></h2>
 ${said.length ? '<div class="acts rt-said">' + said.slice(0, saidAll ? 30 : 3).map(x => `<button type="button" class="act" data-play="${x.a}"><span class="act-ic">▶</span><span class="act-t"><b>${esc(x.en)}</b><small>${esc(x.ko)} · ${ago(x.d) ? ago(x.d) + "일 전" : "오늘"}</small></span></button>`).join("") + (said.length > 3 ? `<button type="button" class="rt-more" data-said="1">${saidAll ? "접기" : "전체 보기 · " + said.length + "개"}</button>` : "") + "</div>" : '<p class="rt-sub">루틴에서 듣고 말해 본 문장이 여기에 모여요.</p>'}
@@ -216,6 +225,7 @@ ${installCard()}`;
 <ol class="rt-in-steps">${steps.map(([t, d]) => `<li><div><strong class="st-t">${t}</strong><span>${d}</span></div></li>`).join("")}</ol></div>`;
   }
   const onClick = ev => {
+    const pa = ev.target.closest("[data-past]"); if (pa) { ga("past_cup", { to: pa.dataset.past }); return; }
     const b = ev.target.closest("button"); if (!b) return;
     const r = S.days[TODAY];
     if (b.dataset.go) { document.getElementById(b.dataset.go)?.scrollIntoView({ block: "start", behavior: "smooth" }); return; }
