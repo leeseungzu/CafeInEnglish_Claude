@@ -582,6 +582,43 @@ def me_too_neither():
     c.save("me-too-neither.png")
 
 
+def im_beat():
+    c = Canvas("'피곤해'를 자리에 맞게 고르기", "위 두 개는 어디서나, 아래 두 개는 편한 사이에서")
+    rows = [("어디서나 기본", "I'm tired.", "피곤해", False),
+            ("회사에서도 무난", "I'm exhausted.", "진이 다 빠졌어", False),
+            ("친구·편한 동료", "I'm beat.", "완전 녹초야", True),
+            ("친구·편한 동료", "I'm wiped out.", "완전 뻗었어", False)]
+    def body(x, r):
+        for i, (when, en, ko, key) in enumerate(rows):
+            c.pill(x, c.y, when, F(36, 700), bg=INK if i < 2 else LIME, fg=BG if i < 2 else INK); c.y += 80
+            if key:
+                c.hl(x, c.y, en, F(56, 800))
+            else:
+                c.d.text((x, c.y), en, font=F(56, 800), fill=INK)
+            c.y += int(56 * 1.3)
+            c.text(x, ko, F(40, 700), MUTED, 1.3)
+            if i < len(rows) - 1:
+                c.d.line((x, c.y + 4, r, c.y + 4), fill=LINE, width=3); c.y += 34
+    c.card(body)
+    c.note("beat는 명사 앞에 안 써요. You look beat!", 40)
+    c.save("im-beat-tired.png")
+
+
+def agree_preps():
+    c = Canvas("agree 뒤에 오는 말", "with, to, on은 동의하는 대상이 달라요")
+    rows = [("agree with", "사람·의견에 같은 생각", "I agree with you."),
+            ("agree to", "제안·조건을 받아들이다", "She agreed to the plan."),
+            ("agree on", "함께 정하다 (날짜·가격)", "Let's agree on a date.")]
+    for w, ko, ex in rows:
+        def body(x, r, w=w, ko=ko, ex=ex):
+            c.hl(x, c.y, w, F(64, 800)); c.y += int(64 * 1.35)
+            c.text(x, ko, F(42, 700), MUTED, 1.45)
+            c.text(x, ex, F(48, 800), INK, 1.2)
+        c.card(body)
+    c.note("agree는 동사! I'm agree가 아니라 I agree", 40)
+    c.save("agree-with-to-on.png")
+
+
 if __name__ == "__main__":
-    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither):
+    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps):
         fn()

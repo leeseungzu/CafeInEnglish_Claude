@@ -1,0 +1,73 @@
+{
+  "id": "im-beat",
+  "cat": "expr",
+  "sub": "새 표현",
+  "level": "기초",
+  "date": "2026-10-28",
+  "title": "\"I'm beat\", '나 완전 녹초야'를 한마디로",
+  "seo_title": "I'm beat 뜻 - '완전 지쳤어' 영어로, tired와 차이",
+  "lead": "맞았다는 말이 아니에요, 녹초가 됐다는 말",
+  "description": "I'm beat는 '완전 지쳤어, 녹초야'라는 뜻이에요. tired·exhausted와의 차이, 비슷하게 생긴 Beats me(모르겠어), I beat와 헷갈리지 않는 법을 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "I'm beat.",
+    "ko": "'나 완전 녹초야'를 한마디로"
+  },
+  "icon": "sleeping-face",
+  "chat": {
+    "q": "Want to grab a drink after work?",
+    "a": "Not tonight. I'm beat.",
+    "key": "I'm beat",
+    "ko": "오늘은 안 돼. 완전 녹초야."
+  },
+  "thumb": {
+    "text": "I'm beat.",
+    "key": "beat",
+    "ko": "누구한테 맞았다는 걸까?"
+  },
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "퇴근길 동료가 \"I'm beat.\"이라고 했어요. 무슨 뜻일까요?",
+      "sub": "",
+      "options": [
+        "오늘 누구한테 맞았어",
+        "내가 이겼어",
+        "완전 지쳤어",
+        "박자를 놓쳤어"
+      ],
+      "answer": 2,
+      "explain": "be 동사 뒤의 beat는 '아주 피곤한'이라는 형용사예요. 하루를 다 써서 녹초가 됐다는 말이에요.",
+      "mnemonic": "일에 두들겨 맞은 몸 = I'm beat"
+    },
+    {
+      "tag": "헷갈리는 표현",
+      "q": "\"Where's my charger?\" \"Beats me.\"에서 Beats me의 뜻은?",
+      "sub": "",
+      "options": [
+        "나도 모르겠어",
+        "내가 가져갔어",
+        "나 너무 피곤해",
+        "내가 이길게"
+      ],
+      "answer": 0,
+      "explain": "Beats me는 It beats me의 줄임으로 '그 질문이 나를 이겼다', 즉 '나도 모르겠어'예요.",
+      "mnemonic": "질문이 나를 이겼다(beats me) = 모르겠어"
+    },
+    {
+      "tag": "표현",
+      "q": "친구에게 '나 완전 녹초야'라고 할 때 가장 자연스러운 문장은?",
+      "sub": "",
+      "options": [
+        "I beat.",
+        "I'm beat.",
+        "I'm beating.",
+        "I'm a beat."
+      ],
+      "answer": 1,
+      "explain": "형용사 beat 앞에는 be 동사가 필요해요. I beat는 '내가 이겼다', I'm beating은 '때리는 중'처럼 들려요.",
+      "mnemonic": "I'm을 붙여야 녹초 모드"
+    }
+  ],
+  "body_html": "<p>금요일 저녁, 야근을 마친 동료가 가방을 챙기며 한숨처럼 말해요. \"I'm beat.\" beat는 '때리다, 이기다'로 배웠으니 누구한테 맞았다는 걸까, 아니면 이겼다는 걸까? 둘 다 아니에요. 이 말은 <b>\"완전 녹초야, 진이 다 빠졌어\"</b>라는 뜻이에요.</p>\n<h2>beat 하나에 얼굴이 셋</h2>\n<p>beat는 쓰임이 많은 단어라서, 문장 모양을 보고 뜻을 골라야 해요. 일상 대화에서 자주 마주치는 세 가지를 나란히 놓으면 이래요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>문장</th><th>beat의 역할</th><th>뜻</th></tr></thead><tbody><tr><td>I'm beat.</td><td>형용사 (be 동사 뒤)</td><td>완전 지쳤어</td></tr><tr><td>We beat them 3 to 1.</td><td>동사 (과거형도 beat)</td><td>우리가 3대 1로 이겼어</td></tr><tr><td>Beats me.</td><td>동사 (It beats me의 줄임)</td><td>나도 모르겠어</td></tr></tbody></table></div>\n<p>오늘의 주인공은 첫 줄이에요. 옥스퍼드와 롱맨 사전 모두 형용사 beat를 '아주 피곤한(very tired)'으로 풀고, <b>비격식(informal)</b> 표시를 붙여 놨어요. 메리엄웹스터는 이 뜻이 1800년부터 기록돼 있다고 적고 있어요. 친구, 가족, 편한 동료 사이에서 하루를 다 쓴 느낌을 짧게 전하는 말이에요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 하루 종일 일에 두들겨 맞은(beat) 몸. 그래서 I'm beat = 녹초!</div>\n<h2>실제 대화 · 야근 끝난 금요일</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Want to grab a drink after work?</span><span class=\"ko\">퇴근하고 한잔할래?</span></li>\n<li class=\"me\"><span class=\"en\">I'd love to, but I'm beat. Rain check?</span><span class=\"ko\">그러고 싶은데 완전 녹초야. 다음에 할까?</span></li>\n<li class=\"them\"><span class=\"en\">Yeah, you look beat. Long week?</span><span class=\"ko\">그래, 지쳐 보이긴 한다. 힘든 한 주였어?</span></li>\n<li class=\"me\"><span class=\"en\">The longest. I'm going straight to bed.</span><span class=\"ko\">최고로 길었지. 바로 가서 잘 거야.</span></li>\n</ul>\n<p>두 번째 줄처럼 I'm 대신 <b>You look beat.</b>(지쳐 보이네)라고 상대 상태를 말할 수도 있어요. look, feel 같은 동사 뒤에도 beat를 그대로 붙이면 돼요. 거절 뒤에 붙인 Rain check?은 '다음에 하자'는 뜻인데, <a href=\"/p/rain-check/\">rain check</a>에서 자세히 볼 수 있어요.</p>\n<h2>피곤하다는 말, 자리에 맞게 고르기</h2>\n<figure class=\"fig\"><img src=\"/images/im-beat-tired.png\" alt=\"피곤하다는 말 고르기: I'm tired(피곤해, 어디서나) · I'm exhausted(진이 다 빠졌어, 회사에서도 무난) · I'm beat(완전 녹초야, 편한 사이) · I'm wiped out(완전 뻗었어, 편한 사이). beat와 wiped out은 명사 앞에 쓰지 않아요\" width=\"1080\" height=\"1552\" loading=\"lazy\"><figcaption>위의 두 개는 어디서나, 아래 두 개는 편한 사이에서</figcaption></figure>\n<p>tired는 가장 기본적인 '피곤해'예요. exhausted는 '기진맥진한'이라는 뜻으로 tired보다 훨씬 강하지만 격식 있는 자리에서도 무난해요. beat와 wiped out은 둘 다 사전에서 '아주 피곤한'으로 풀이하는 비격식 표현이에요. 그래서 상사에게 보내는 메일보다는 친구와의 대화나 메신저에 어울려요.</p>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I'm beat. I'm going to bed.</span><span class=\"ko\">완전 녹초야. 나 잘게.</span></li>\n<li><span class=\"en\">You must be dead beat after that hike.</span><span class=\"ko\">그 등산하고 나서 완전 뻗었겠다.</span></li>\n<li><span class=\"en\">I was so beat that I fell asleep on the couch.</span><span class=\"ko\">너무 지쳐서 소파에서 그대로 잠들었어.</span></li>\n<li><span class=\"en\">Let's call it a day. I'm beat.</span><span class=\"ko\">오늘은 여기까지 하자. 나 녹초야.</span></li>\n</ul></div>\n<p>두 번째 문장의 <b>dead beat</b>는 beat를 더 세게 말한 형태로, 사전에도 함께 실려 있어요. 붙여 쓴 <b>deadbeat</b>(명사)는 '빈둥거리는 사람, 빚을 안 갚는 사람'이라는 전혀 다른 말이니 꼭 띄어 쓰세요. 마지막 문장의 Let's call it a day는 '오늘은 여기까지'라는 뜻이라 I'm beat와 짝을 이뤄 자주 들려요. 자세한 쓰임은 <a href=\"/p/call-it-a-day/\">Let's call it a day</a>에 정리해 뒀어요.</p>\n<h2>Beats me, 생김새는 비슷한데 뜻은 딴판</h2>\n<p>I'm beat와 가장 헷갈리는 말이 <b>Beats me.</b>예요. 이건 It beats me의 줄임말로, 질문이 '나를 이겼다', 즉 '나도 도저히 모르겠다'는 뜻이에요. 옥스퍼드 사전도 이 표현을 '(질문이) 누군가에게 너무 어렵다'로 풀고, 예문으로 \"Where's she gone?\" \"Beats me.\"를 들어요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Where did Jake go?</span><span class=\"ko\">제이크 어디 갔어?</span></li>\n<li><span class=\"en\">Beats me.</span><span class=\"ko\">글쎄, 나도 몰라.</span></li>\n<li><span class=\"en\">It beats me why he quit.</span><span class=\"ko\">그 사람이 왜 그만뒀는지 도통 모르겠어.</span></li>\n</ul></div>\n<p>정리하면, <b>I'm beat</b>는 '지쳤다', 대답으로 짧게 하는 <b>Beats me</b>는 '모르겠다'예요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">친구에게 '나 완전 지쳤어'라고 할 때</span><span class=\"no\">I beat.</span><span class=\"en\">I'm beat.</span><span class=\"ko\">나 완전 지쳤어.</span><span class=\"why\"><b>왜?</b>be 동사 없이 I beat라고 하면 동사 beat(이기다, 때리다)가 돼서 '내가 이겼다'처럼 들려요. I'm의 'm은 짧게 붙어 들리니 말할 때 빼먹지 않도록 주의해요.</span></li>\n<li><span class=\"ctx\">'정말 피곤한 하루였어'라고 할 때</span><span class=\"no\">It was a beat day.</span><span class=\"en\">It was a long day. I'm beat.</span><span class=\"ko\">긴 하루였어. 완전 녹초야.</span><span class=\"why\"><b>왜?</b>'피곤한'이라는 뜻의 beat는 명사 앞에 쓰지 않아요. 사람 상태를 말할 때 be, look, feel 뒤에만 써요.</span></li>\n</ul></div>\n<h2>tired만 알면 왜 막힐까</h2>\n<p>우리는 피곤할 때 '피곤해'라는 말을 가장 많이 쓰죠. 그래서 영어로도 tired 하나만 쓰다 보면, 원어민이 beat, wiped out처럼 다른 단어로 말할 때 바로 알아듣지 못할 수 있어요. 특히 beat는 '때리다, 이기다'라는 뜻이 머릿속에 먼저 떠올라서 엉뚱하게 해석하기 쉬워요. 이 표현은 단어를 쪼개 생각하지 말고 <b>I'm beat = 녹초</b>라는 한 덩어리 소리로 귀에 익혀 두는 게 가장 빨라요. 일이 몰려서 바쁠 때 쓰는 말은 <a href=\"/p/swamped/\">I'm swamped</a>에 따로 정리해 뒀어요. 바빠서(swamped) 결국 녹초가 됐다(beat)는 순서로 같이 외우면 좋아요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Oxford Learner's Dictionaries 'beat'(형용사·동사 숙어), Longman 'beat', Merriam-Webster 'beat', Oxford Learner's Dictionaries 'wiped out'.</p>",
+  "related": []
+}

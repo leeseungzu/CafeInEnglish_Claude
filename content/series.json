@@ -65,7 +65,8 @@
       "all-ears",
       "rain-check",
       "linking",
-      "james-conversation"
+      "james-conversation",
+      "im-beat"
     ],
     "thinks": [
       "james"
@@ -92,7 +93,8 @@
       "can-vs-cant",
       "this-vs-next",
       "ed-pronunciation",
-      "me-too-me-neither"
+      "me-too-me-neither",
+      "i-agree"
     ],
     "lead": "뜻이 반대로 전해지는 함정 표현 모음",
     "bg": "expr"
@@ -149,7 +151,8 @@
       "bug-origin",
       "words-changed-meaning",
       "robot-origin",
-      "quarantine-origin"
+      "quarantine-origin",
+      "clue-origin"
     ],
     "thinks": [],
     "lead": "매일 쓰는 단어의 숨은 역사"

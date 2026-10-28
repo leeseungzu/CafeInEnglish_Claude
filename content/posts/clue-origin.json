@@ -1,0 +1,73 @@
+{
+  "id": "clue-origin",
+  "cat": "story",
+  "sub": "단어의 유래",
+  "level": "기초",
+  "date": "2026-10-28",
+  "title": "clue는 원래 '실뭉치'였다, 미궁을 빠져나온 실 한 가닥 이야기",
+  "seo_title": "clue 어원 - 미궁의 실뭉치에서 온 '단서', clue와 실마리",
+  "lead": "그리스 신화의 실 한 뭉치가 오늘의 '단서'가 되기까지",
+  "description": "clue는 원래 '실뭉치'를 뜻하는 clew였어요. 테세우스를 미궁에서 꺼내 준 실에서 '단서'라는 뜻이 생긴 과정과 have no clue, clue me in 쓰는 법을 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "clew → clue",
+    "ko": "clue는 원래 '실뭉치'였어요"
+  },
+  "icon": "thread",
+  "chat": {
+    "q": "Do you know where Mina went?",
+    "a": "No idea. I don't have a clue.",
+    "key": "don't have a clue",
+    "ko": "몰라. 전혀 모르겠어."
+  },
+  "thumb": {
+    "text": "clew → clue",
+    "key": "clew",
+    "ko": "clue의 원래 뜻은?"
+  },
+  "quiz": [
+    {
+      "tag": "영어 이야기",
+      "q": "clue의 옛 형태 clew는 원래 무엇을 뜻했을까요?",
+      "sub": "",
+      "options": [
+        "발자국",
+        "실뭉치",
+        "열쇠",
+        "지도"
+      ],
+      "answer": 1,
+      "explain": "clew는 감아 놓은 실뭉치였어요. 미궁에서 길을 알려 준 실이 비유가 되어 '단서'라는 뜻이 생겼어요.",
+      "mnemonic": "clue = 실마리, 둘 다 실에서 왔어요"
+    },
+    {
+      "tag": "영어 이야기",
+      "q": "그리스 신화에서 테세우스에게 실뭉치를 건넨 사람은?",
+      "sub": "",
+      "options": [
+        "미노스 왕",
+        "미노타우로스",
+        "아리아드네",
+        "초서"
+      ],
+      "answer": 2,
+      "explain": "미노스 왕의 딸 아리아드네가 실을 건넸고, 테세우스는 그 실을 따라 미궁을 빠져나왔어요.",
+      "mnemonic": "아리아드네의 실 = 미궁의 출구"
+    },
+    {
+      "tag": "표현",
+      "q": "동료가 \"Can you clue me in?\"이라고 했다면 무슨 뜻일까요?",
+      "sub": "",
+      "options": [
+        "힌트는 주지 마",
+        "무슨 일인지 나한테도 알려 줄래?",
+        "나를 의심하는 거야?",
+        "같이 문제를 풀자"
+      ],
+      "answer": 1,
+      "explain": "clue someone in은 모르는 사람에게 사정을 알려 준다는 구동사예요. 대화나 회의를 놓쳤을 때 써요.",
+      "mnemonic": "단서(clue)를 내 안으로(in) 넣어 줘"
+    }
+  ],
+  "body_html": "<p>한국어로 사건을 푸는 첫 단서를 <b>실마리</b>라고 하죠. 국어사전을 찾아보면 실마리의 첫 번째 뜻은 '감겨 있거나 헝클어진 실의 첫머리'예요. 엉킨 실은 끝 한 가닥만 찾으면 풀리니까, 문제를 푸는 첫 단서에도 같은 말을 쓰게 된 거예요. 그런데 영어 <b>clue</b>(단서)에도 똑같이 실이 숨어 있어요. clue는 원래 '실뭉치'라는 뜻이었어요.</p>\n<h2>미궁 앞에서 건넨 실 한 뭉치</h2>\n<p>그리스 신화에서 크레타섬의 왕 미노스는 반은 사람, 반은 소인 괴물 미노타우로스를 <b>미궁(Labyrinth)</b> 안에 가둬 두었어요. 한번 들어가면 길을 잃어 다시 나올 수 없는 곳이었죠. 아테네의 영웅 테세우스가 이 괴물을 물리치러 왔을 때, 미노스의 딸 아리아드네가 그에게 <b>실 한 뭉치</b>를 건넸어요.</p>\n<p>테세우스는 실을 풀면서 미궁 안으로 들어갔고, 괴물을 물리친 뒤 그 실을 따라 되돌아 나왔어요. 길을 알려 준 것은 칼이 아니라 실 한 가닥이었던 셈이에요.</p>\n<figure class=\"fig\"><img src=\"/images/story-clue-ariadne.webp\" alt=\"붉은 깃털 투구를 쓴 테세우스가 몸을 숙이고, 노란 옷을 입은 아리아드네가 손에 든 작은 실뭉치를 그에게 건네는 그림\" width=\"855\" height=\"1000\" loading=\"lazy\"><figcaption>'실뭉치를 건네 테세우스를 돕는 아리아드네', 요한 하인리히 티슈바인 작, 1779년(위키미디어 공용 표기 기준). 퍼블릭 도메인.</figcaption></figure>\n<p>영어에서 이 실뭉치를 부르던 말이 <b>clew</b>였어요. 1380년대 중반 초서(Chaucer)가 아리아드네 이야기를 영어 시로 다시 쓸 때도 테세우스가 'a clewe of twyn'(실 한 뭉치)을 따라 미궁을 나온다고 썼어요.</p>\n<h2>clew가 clue가 되기까지</h2>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>시기</th><th>모양</th><th>뜻</th></tr></thead><tbody><tr><td>고대 영어</td><td>cliewen</td><td>감아 놓은 실뭉치</td></tr><tr><td>1380년대</td><td>clewe</td><td>초서의 시 속 미궁의 실</td></tr><tr><td>1400년대 중반</td><td>clue 철자 등장</td><td>여전히 실뭉치</td></tr><tr><td>1500년대 말~1600년대</td><td>clew, clue</td><td>복잡한 일을 풀어 주는 단서</td></tr><tr><td>1930~40년대</td><td>clue (동사)</td><td>단서를 주다(1934), 사정을 알려 주다 clue someone in(1948)</td></tr></tbody></table></div>\n<p>미궁에서 길을 찾게 해 준 실이 비유가 되어, '얽힌 문제에서 길을 알려 주는 것'이라는 뜻이 생겼어요. 이 비유적인 뜻이 처음 기록된 해는 사전마다 조금씩 달라서, Etymonline은 1590년대, 메리엄웹스터는 1665년 무렵으로 봐요. 철자도 한동안 clew와 clue가 함께 쓰이다가 지금은 '단서'는 clue로 굳었어요.</p>\n<p>원래 철자 clew가 사라진 것은 아니에요. 지금도 사전에는 clew가 '실뭉치'와 함께 <b>돛의 아래쪽 귀퉁이</b>라는 항해 용어로 남아 있어요. 옛 철자는 바다에서, 새 철자는 추리 소설에서 살아남은 셈이에요.</p>\n<h2>실마리와 clue, 같은 길을 걸은 두 단어</h2>\n<p>재미있는 건 한국어와 영어가 전혀 다른 언어인데도 같은 비유를 골랐다는 점이에요. 한국어 실마리는 '실의 첫머리'에서 '일을 풀어 갈 첫 단서'가 됐고, 영어 clue는 '실뭉치'에서 '수수께끼를 푸는 단서'가 됐어요. 엉킨 일을 '푼다'고 말하는 것도 두 언어가 같아요. 영어로 문제를 푸는 것도 unravel(엉킨 실을 풀다)이라고 해요. 그래서 clue를 외울 때는 <b>clue = 실마리</b>로 기억하면 뜻과 유래가 한 번에 잡혀요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 미궁 속 실 한 가닥 = 실마리 = clue. 실을 따라가면 답이 나와요.</div>\n<h2>지금은 이렇게 써요</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I don't have a clue.</span><span class=\"ko\">전혀 모르겠어.</span></li>\n<li><span class=\"en\">I have no clue where she lives.</span><span class=\"ko\">그 사람이 어디 사는지 전혀 몰라.</span></li>\n<li><span class=\"en\">The police are still looking for clues.</span><span class=\"ko\">경찰은 아직 단서를 찾고 있어요.</span></li>\n<li><span class=\"en\">Give me a clue.</span><span class=\"ko\">힌트 좀 줘. (퀴즈·게임에서)</span></li>\n<li><span class=\"en\">Can you clue me in?</span><span class=\"ko\">무슨 일인지 나한테도 좀 알려 줄래?</span></li>\n</ul></div>\n<p>일상 대화에서 가장 많이 듣는 건 첫 번째 문장이에요. 단서가 하나도 없다는 말이니, 한국어로는 \"전혀 모르겠어\", \"감도 안 와\"에 가까워요. 마지막 문장의 <b>clue someone in</b>은 '모르는 사람에게 사정을 알려 주다'라는 뜻의 구동사예요. 회의에 늦게 들어왔거나 단톡방 대화를 놓쳤을 때 딱 맞아요.</p>\n<h2>실제 대화 · 회의를 놓쳤을 때</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Did you hear about the new schedule?</span><span class=\"ko\">새 일정 얘기 들었어?</span></li>\n<li class=\"me\"><span class=\"en\">No, I haven't heard a thing. Can you clue me in?</span><span class=\"ko\">아니, 하나도 못 들었어. 나한테도 좀 알려 줄래?</span></li>\n<li class=\"them\"><span class=\"en\">Sure. The launch moved to next month.</span><span class=\"ko\">그래. 출시가 다음 달로 미뤄졌어.</span></li>\n<li class=\"me\"><span class=\"en\">Oh, that explains a lot. Thanks!</span><span class=\"ko\">아, 그래서 그랬구나. 고마워!</span></li>\n</ul>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">'전혀 모르겠어'라고 말할 때</span><span class=\"no\">I don't have clue.</span><span class=\"en\">I don't have a clue.</span><span class=\"ko\">전혀 모르겠어.</span><span class=\"why\"><b>왜?</b>clue는 하나, 둘 셀 수 있는 명사라서 a가 필요해요. a를 빼고 싶다면 I have no clue.처럼 no를 써요.</span></li>\n<li><span class=\"ctx\">고객이나 상사의 질문에 답을 모를 때</span><span class=\"no\">I have no clue.</span><span class=\"en\">I'm not sure, but I'll find out.</span><span class=\"ko\">잘 모르겠는데, 확인해 볼게요.</span><span class=\"why\"><b>왜?</b>not have a clue는 사전에 '비격식'으로 표시된 말이에요. 친구 사이엔 괜찮지만, 공식적인 자리에서는 무성의하게 들릴 수 있어요.</span></li>\n</ul></div>\n<p>또 He doesn't have a clue.는 상황에 따라 '그 사람 아무것도 몰라(무능해)'라는 핀잔으로 들릴 수 있어요. 사전에도 이 뜻은 '못마땅함'을 나타낸다고 표시돼 있으니, 다른 사람을 두고 말할 땐 조심하세요.</p>\n<p>평범한 단어 속에 숨은 이야기가 더 궁금하다면 <a href=\"/p/deadline-origin/\">deadline의 유래</a>와 <a href=\"/p/words-changed-meaning/\">뜻이 정반대로 바뀐 단어들</a>도 읽어 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Etymonline 'clue', Merriam-Webster 'clue'·'clew', Oxford Learner's Dictionaries·Longman 'clue', Phrases.org.uk 'I haven't got a clue'(초서 인용), Britannica 'Ariadne', 국어사전 '실마리'. 그림: 위키미디어 공용(퍼블릭 도메인).</p>",
+  "related": []
+}
