@@ -1,0 +1,73 @@
+{
+  "id": "almost-vs-most",
+  "cat": "tip",
+  "sub": "단어",
+  "level": "기초",
+  "date": "2026-10-29",
+  "title": "almost와 most, '대부분'을 영어로 말할 때",
+  "seo_title": "almost most 차이 - '대부분' 영어로, most of와 almost all",
+  "lead": "'대부분'을 almost로 옮기면 생기는 실수",
+  "description": "Almost my friends, Most of people, The most people은 모두 어색해요. '대부분'을 영어로 말하는 most, most of the, almost all의 차이와 mostly 뜻을 표와 대화, 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Most of my friends",
+    "ko": "Almost my friends는 틀려요"
+  },
+  "icon": "bar-chart",
+  "chat": {
+    "q": "Do your friends live nearby?",
+    "a": "Most of my friends live in Seoul.",
+    "key": "Most of my friends",
+    "ko": "내 친구들은 대부분 서울에 살아."
+  },
+  "thumb": {
+    "text": "Almost my friends?",
+    "key": "Almost",
+    "ko": "'대부분'을 이렇게 말하면 어색해요"
+  },
+  "quiz": [
+    {
+      "tag": "고치기",
+      "q": "'내 친구들은 거의 다 서울에 살아'를 바르게 말한 문장은?",
+      "sub": "",
+      "options": [
+        "Almost my friends live in Seoul.",
+        "Almost all of my friends live in Seoul.",
+        "The most my friends live in Seoul.",
+        "Most of friends live in Seoul."
+      ],
+      "answer": 1,
+      "explain": "almost는 부사라서 명사 앞에 바로 붙지 않고 all과 짝을 이뤄요. Almost all of my friends가 '거의 다'예요.",
+      "mnemonic": "almost는 혼자 못 가요, all을 앞장세우기"
+    },
+    {
+      "tag": "most",
+      "q": "'사람들 대부분은 휴대폰이 있어'로 가장 자연스러운 것은?",
+      "sub": "",
+      "options": [
+        "Most people have a phone.",
+        "Most of people have a phone.",
+        "The most people have a phone.",
+        "Almost people have a phone."
+      ],
+      "answer": 0,
+      "explain": "일반적인 사람들을 말할 때는 most 뒤에 바로 명사를 써요. of는 정해진 무리, the most는 '가장 많은'이에요.",
+      "mnemonic": "일반 사람은 Most people, 바로 붙이기"
+    },
+    {
+      "tag": "뜻",
+      "q": "\"The soup is mostly water.\"에서 mostly의 뜻은?",
+      "sub": "",
+      "options": [
+        "거의 없이",
+        "주로, 대부분",
+        "가장 먼저",
+        "완전히"
+      ],
+      "answer": 1,
+      "explain": "mostly는 '주로, 대체로'라는 뜻이에요. 이 수프는 주로 물이라는 말이에요.",
+      "mnemonic": "mostly = mainly, 주로"
+    }
+  ],
+  "body_html": "<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">\"내 친구들은 대부분 서울에 살아\"를 영어로 말할 때</span><span class=\"no\">Almost my friends live in Seoul.</span><span class=\"en\">Most of my friends live in Seoul.</span><span class=\"ko\">내 친구들은 대부분 서울에 살아.</span><span class=\"why\"><b>왜?</b>almost는 '거의'라는 부사라서 my friends 같은 명사 덩어리 앞에 바로 붙이지 않아요. '대부분'은 most of, '거의 다'는 almost all of로 말해요.</span></li>\n</ul></div>\n<p>'대부분'과 '거의'를 둘 다 almost로 옮기면 위 문장처럼 어색한 영어가 나와요. 뜻은 대충 전해지지만, 원어민 귀에는 문장이 어딘가 빠진 것처럼 들려요. 고치는 방법은 생각보다 단순해요. almost가 <b>무엇 앞에 붙는 말인지</b>만 알면 돼요.</p>\n<h2>almost는 수량이 아니라 '거의'예요</h2>\n<p>옥스퍼드 학습자 사전과 롱맨 사전은 almost를 모두 <b>부사</b>로 싣고, 뜻을 '거의, 완전히는 아니지만'으로 풀이해요. 부사는 동사, 형용사, 다른 부사, 그리고 all이나 every 같은 말을 꾸며요. 그래서 almost 혼자서는 '친구들 중 대부분'이라는 수량을 만들지 못하고, <b>all, every, everyone</b>이나 숫자, half 같은 말과 짝을 이뤄요(almost 30 people, almost half). 옥스퍼드 사전도 almost를 all, every, everybody 같은 말 앞에 쓸 수 있다고 설명하고, 롱맨 사전은 almost all, almost every를 대표 짝으로 보여 줘요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Almost all of my friends live in Seoul.</span><span class=\"ko\">내 친구들은 거의 다 서울에 살아.</span></li>\n<li><span class=\"en\">I go to the gym almost every day.</span><span class=\"ko\">나 거의 매일 헬스장 가.</span></li>\n<li><span class=\"en\">Almost everyone was late.</span><span class=\"ko\">거의 모두가 늦었어.</span></li>\n<li><span class=\"en\">I almost forgot your birthday.</span><span class=\"ko\">네 생일 깜빡할 뻔했어.</span></li>\n</ul></div>\n<p>마지막 예문처럼 almost forgot, almost fell같이 실제로 일어나지 않은 일에 쓰면 '~할 뻔했다'가 돼요. 실제로는 잊지 않았다는 뜻이에요. almost가 '양'이 아니라 '거의 그 지점까지 갔다'를 나타낸다는 걸 잘 보여 주는 문장이에요.</p>\n<h2>세 가지 모양, 한눈에 보기</h2>\n<figure class=\"fig\"><img src=\"/images/almost-most-of.png\" alt=\"명사 앞 수량 표현 세 가지: Most people(대부분의 사람들, 일반적으로), Most of the students in my class(우리 반 학생 대부분, 정해진 무리), Almost all (of) my friends(내 친구 거의 다). 틀린 형태: Almost people, The most people, Most of people\" width=\"1080\" height=\"1882\" loading=\"lazy\"><figcaption>most는 바로 명사, 정해진 무리면 most of the, '거의 다'는 almost all</figcaption></figure>\n<div class=\"box\"><table class=\"cmp\"><thead><tr><th>말하고 싶은 것</th><th>이렇게 말해요</th><th>피해야 할 모양</th></tr></thead><tbody>\n<tr><td>사람들 대부분 (일반적으로)</td><td>Most people</td><td>Almost people</td></tr>\n<tr><td>정해진 무리 중 대부분</td><td>Most of the students</td><td>Most of students</td></tr>\n<tr><td>내 친구 거의 다</td><td>Almost all (of) my friends</td><td>Almost my friends</td></tr>\n</tbody></table></div>\n<p>롱맨 사전은 일반적인 사람이나 사물을 말할 때 복수 명사 앞에 most를 바로 쓴다고 설명해요(Most people disagree.). 반대로 <b>정해진 무리</b>를 말할 때는 most of the, most of my처럼 of 뒤에 the나 my를 붙이고, most of shops처럼 관사 없이 쓰지 말라고 짚어요. 같은 이유로 '사람들 대부분'은 most of people이 아니라 most people이에요.</p>\n<h2>the most는 '대부분'이 아니에요</h2>\n<p>'대부분'이라는 뜻의 most 앞에는 the를 붙이지 않아요. 옥스퍼드 사전은 이 뜻의 most에는 the를 쓰지 않는다고 적어 두었고, 롱맨 사전도 The most people disagree.를 틀린 문장으로 들어요. the most는 '가장 많은'이라는 최상급이라서, Who got the most votes?(누가 가장 많은 표를 받았어?)처럼 여럿 중 1등을 가릴 때 써요. Which city has the most people?(어느 도시에 사람이 가장 많아?)처럼요. the 하나로 '대부분'이 '가장 많은'으로 바뀌는 셈이에요.</p>\n<h2>실제 대화 · 동아리 모임 인원 확인</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Is everyone coming to the meetup on Saturday?</span><span class=\"ko\">토요일 모임에 다들 와?</span></li>\n<li class=\"me\"><span class=\"en\">Almost everyone. Most of the members said yes.</span><span class=\"ko\">거의 다. 회원 대부분이 온대.</span></li>\n<li class=\"them\"><span class=\"en\">What about the new people?</span><span class=\"ko\">새로 온 사람들은?</span></li>\n<li class=\"me\"><span class=\"en\">Most of them are coming too. Almost no one said no.</span><span class=\"ko\">그 사람들도 대부분 와. 안 온다는 사람은 거의 없어.</span></li>\n</ul>\n<p>마지막 문장의 <b>almost no one</b>(거의 아무도 ~않다)은 옥스퍼드 사전에도 나오는 모양이에요. almost는 no one, never, nothing 같은 말 앞에도 붙어서 '거의 없다'를 만들어요. 비슷한 말로 hardly anyone도 자주 써요.</p>\n<h2>'대부분'을 almost로 옮기는 습관</h2>\n<p>한국어의 '대부분', '거의 다', '거의'는 뜻이 겹쳐서 영어로 옮길 때 하나의 단어로 뭉뚱그리기 쉬워요. 단어장에 almost = 거의, 대부분처럼 적어 두면 더 그렇죠. 기준을 하나만 기억하세요. 명사 앞에서 <b>'대부분'</b>이라는 양을 말하고 싶으면 most, 그 양이 <b>전부에 가깝다</b>고 강조하고 싶으면 almost all이에요. 비슷하게 생긴 <b>mostly</b>도 헷갈리기 쉬운데, 옥스퍼드와 메리엄웹스터 사전은 mostly를 '주로(mainly)'로 풀이해요. My coffee is mostly milk.(내 커피는 대부분 우유야.)처럼 성분이나 이유, 대부분의 경우를 말할 때 써요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> almost는 '거의 도착'한 화살표, most는 '대부분'이라는 덩어리. '대부분'이라는 양은 혼자 못 만드니 all을 앞장세워요. almost all!</div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">'사람들 대부분은 그걸 몰라'라고 말할 때</span><span class=\"no\">Most of people don't know that.</span><span class=\"en\">Most people don't know that.</span><span class=\"ko\">사람들 대부분은 그걸 몰라.</span><span class=\"why\"><b>왜?</b>일반적인 사람들을 말할 때는 most 뒤에 바로 명사를 써요. of는 the students, my friends처럼 정해진 무리를 말할 때만 붙여요.</span></li>\n</ul></div>\n<h2>자주 묻는 질문</h2>\n<p><b>Q. 미국 드라마에서 most everyone이라고 하던데요?</b><br>맞아요. 미국 구어에서는 most를 almost처럼 쓰기도 해요. 롱맨 사전은 이 쓰임을 '미국 영어, 편한 말'로 표시하고, 메리엄웹스터 사전은 일부는 받아들이지 않는 쓰임이라고 덧붙여요. 듣고 알아들으면 충분하고, 직접 말하거나 쓸 때는 almost everyone이 안전해요.</p>\n<p>bored와 boring처럼 한 글자 차이로 뜻이 갈리는 단어는 <a href=\"/p/bored-vs-boring/\">\"I'm boring\"은 '나 지루해'가 아니에요</a>에, 한국어 조사 때문에 생기는 실수는 <a href=\"/p/discuss-about/\">discuss about이 틀린 이유</a>에 정리해 두었어요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Oxford Learner's Dictionaries 'almost', 'most', 'mostly' · Longman 'almost', 'most', 'mostly' · Merriam-Webster 'most'(Usage Guide), 'mostly'.</p>",
+  "related": []
+}

@@ -619,6 +619,49 @@ def agree_preps():
     c.save("agree-with-to-on.png")
 
 
+def long_story_short():
+    c = Canvas("Long story short, 이렇게 말해요", "사정은 접고, 결과 한 문장만")
+    def before(x, r):
+        c.pill(x, c.y, "앞: 길고 복잡한 사정", F(36, 700), bg=SOFT, fg=INK); c.y += 84
+        for en, ko in (("Our flight was delayed.", "비행기가 지연됐고"),
+                       ("We missed our connection.", "환승 편을 놓쳤고"),
+                       ("We slept at the airport.", "공항에서 잤어")):
+            c.d.text((x, c.y), en, font=F(46, 700), fill=MUTED); c.y += int(46 * 1.3)
+            c.text(x, ko, F(38, 600), MUTED, 1.45)
+    c.card(before)
+    c.dark(["Long story short,"], 64, "간단히 말하면, (잠깐 쉬고)")
+    def after(x, r):
+        c.pill(x, c.y, "뒤: 결과 한 문장", F(36, 700), bg=LIME, fg=INK); c.y += 84
+        c.hl(x, c.y, "We got home a day late.", F(58, 800)); c.y += int(58 * 1.35)
+        c.text(x, "하루 늦게 집에 왔어.", F(42, 700), MUTED, 1.2)
+    c.card(after)
+    c.note("긴 형태는 영국 cut, 미국 make를 넣어 말해요", 40)
+    c.save("long-story-short-flow.png")
+
+
+def almost_most():
+    c = Canvas("'대부분'을 영어로 말할 때", "명사 앞에는 이 세 가지 모양")
+    rows = [("일반적인 사람·사물", "Most people", "대부분의 사람들"),
+            ("정해진 무리 중에서", "Most of the students", "그 학생들 대부분"),
+            ("거의 전부라고 강조", "Almost all (of) my friends", "내 친구 거의 다")]
+    for when, en, ko in rows:
+        def body(x, r, when=when, en=en, ko=ko):
+            c.pill(x, c.y, when, F(36, 700)); c.y += 84
+            c.hl(x, c.y, en, F(58, 800)); c.y += int(58 * 1.35)
+            c.text(x, ko, F(42, 700), MUTED, 1.2)
+        c.card(body)
+    def wrong(x, r):
+        c.pill(x, c.y, "이렇게는 말하지 않아요", F(36, 700), bg=SOFT, fg=INK); c.y += 84
+        for en in ("Almost people", "The most people", "Most of people"):
+            w = c.d.textlength(en, font=F(50, 700))
+            c.d.text((x, c.y), en, font=F(50, 700), fill=MUTED)
+            c.d.line((x - 4, c.y + 32, x + w + 4, c.y + 32), fill="#E5484D", width=5)
+            c.y += int(50 * 1.45)
+    c.card(wrong)
+    c.note("almost는 부사! 명사 앞에선 almost all", 40)
+    c.save("almost-most-of.png")
+
+
 if __name__ == "__main__":
-    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps):
+    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps, long_story_short, almost_most):
         fn()

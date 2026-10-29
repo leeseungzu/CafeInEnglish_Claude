@@ -394,5 +394,17 @@
     "en": "It feels like a journal.",
     "ko": "꼭 일기장 같아요",
     "desc": "feels like 뒤에 명사를 붙이면 '꼭 ~ 같은 느낌'. 로제가 지난 앨범을 설명한 말이에요."
+  },
+  {
+    "post": "long-story-short",
+    "en": "Long story short, we got home a day late.",
+    "ko": "간단히 말하면, 하루 늦게 집에 왔어",
+    "desc": "긴 사정은 접고 결과로 건너뛸 때 쓰는 편한 말. 뒤에는 결론을 한 문장으로 말해요."
+  },
+  {
+    "post": "almost-vs-most",
+    "en": "Most of my friends live in Seoul.",
+    "ko": "내 친구들은 대부분 서울에 살아",
+    "desc": "'대부분'은 most of my friends. almost는 부사라 almost all of my friends처럼 all과 같이 써요."
   }
 ]

@@ -1,0 +1,73 @@
+{
+  "id": "long-story-short",
+  "cat": "expr",
+  "sub": "새 표현",
+  "level": "기초",
+  "date": "2026-10-29",
+  "title": "Long story short 뜻, 사연은 접고 결론만 말하기",
+  "seo_title": "Long story short 뜻 - '간단히 말하면, 결론만 말하자면' 영어로",
+  "lead": "긴 사연을 접고 결과로 건너뛸 때 쓰는 말",
+  "description": "Long story short는 '간단히 말하면, 결론만 말하자면'이라는 뜻이에요. 영국식 cut, 미국식 make 차이, in a nutshell·the bottom line과 쓰임 비교를 예문과 대화, 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Long story short,",
+    "ko": "'결론만 말하면'을 한마디로"
+  },
+  "icon": "scissors",
+  "chat": {
+    "q": "What took you so long?",
+    "a": "Long story short, we missed our flight.",
+    "key": "Long story short",
+    "ko": "간단히 말하면, 비행기를 놓쳤어."
+  },
+  "thumb": {
+    "text": "Long story short,",
+    "key": "short",
+    "ko": "긴 얘기 다 빼고 결론만"
+  },
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "\"Long story short, I got the job.\"에서 Long story short의 뜻은?",
+      "sub": "",
+      "options": [
+        "이야기가 너무 짧아서",
+        "간단히 말하면, 결론만 말하자면",
+        "긴 이야기를 들려줄게",
+        "짧은 이야기 하나 할게"
+      ],
+      "answer": 1,
+      "explain": "Long story short는 자세한 사정은 빼고 결론으로 바로 갈 때 쓰는 말이에요. 여기서는 '결론만 말하면, 나 그 회사 붙었어'예요.",
+      "mnemonic": "긴 이야기를 싹둑, 남는 건 결론 한 줄"
+    },
+    {
+      "tag": "쓰임",
+      "q": "Long story short 뒤에 오기 가장 자연스러운 말은?",
+      "sub": "",
+      "options": [
+        "we got home a day late.",
+        "first, let me tell you about the airport.",
+        "what do you think?",
+        "it's a long story."
+      ],
+      "answer": 0,
+      "explain": "Long story short는 '이제 결론'이라는 신호라서 뒤에 결과 한 문장이 와요. 다시 사정을 늘어놓거나 질문을 던지면 어색해요.",
+      "mnemonic": "short 다음엔 결과만"
+    },
+    {
+      "tag": "영국·미국",
+      "q": "옥스퍼드 학습자 사전 기준, 영국 영어에서 주로 쓰는 긴 형태는?",
+      "sub": "",
+      "options": [
+        "to make a long story short",
+        "to cut a long story short",
+        "to say a long story short",
+        "to tell long story short"
+      ],
+      "answer": 1,
+      "explain": "영국 영어는 to cut a long story short, 북미 영어는 to make a long story short를 써요. 짧게 Long story short만 말해도 통해요.",
+      "mnemonic": "영국은 가위로 cut, 미국은 make"
+    }
+  ],
+  "body_html": "<p>한국어로 이야기를 하다 보면 \"각설하고\", \"본론만 말하면\", \"결론부터 말하면\" 같은 말로 앞의 사정을 훌쩍 건너뛸 때가 있죠. 영어에도 똑같은 역할을 하는 말이 있어요. 바로 <b>Long story short</b>예요. 친구에게 지난 주말 사건을 털어놓다가 \"아무튼 결론은 이거야\" 하고 넘어갈 때 자주 쓰는 한마디예요.</p>\n<h2>긴 사연을 접고 결과로 건너뛰는 말</h2>\n<div class=\"box\"><b>Long story short,</b> = 간단히 말하면, 결론만 말하자면 / 아무튼 그래서</div>\n<p>옥스퍼드 학습자 사전은 이 표현을 '자세한 내용은 빼고 하려는 말의 요점으로 바로 가겠다고 할 때 쓰는 말'로 풀이하고, <b>informal</b>(편한 말) 표시를 붙여요. 그러니까 Long story short 뒤에는 이야기의 <b>결과</b>나 <b>핵심</b>이 한 문장으로 와야 자연스러워요. 앞에서 사정을 조금 말하다가 \"얘기하자면 긴데, 아무튼\" 하고 결론을 내는 느낌이에요.</p>\n<p>말할 때는 Long story short 다음에 살짝 쉬고 결론을 말해요. 글로 쓸 때는 뒤에 쉼표를 찍거나, 사전 예문처럼 쌍점(:)을 찍기도 해요.</p>\n<figure class=\"fig\"><img src=\"/images/long-story-short-flow.png\" alt=\"Long story short의 흐름: 앞부분은 길고 복잡한 사정(비행기 지연, 환승 놓침, 공항 노숙)을 생략하고, 뒤에는 결과 한 문장(We got home a day late. 하루 늦게 집에 왔어)만 말한다\" width=\"1080\" height=\"1618\" loading=\"lazy\"><figcaption>사정은 접고, 결과 한 문장만</figcaption></figure>\n<h2>영국은 cut, 미국은 make</h2>\n<p>Long story short는 원래 더 긴 관용구를 줄인 말이에요. 옥스퍼드 학습자 사전은 영국 영어에서 <b>to cut a long story short</b>, 북미 영어에서 <b>to make a long story short</b>를 쓴다고 나눠 적어 두었어요. Dictionary.com에서도 cut a long story short를 찾으면 make a long story short로 안내해요. 일상 대화에서는 앞을 떼고 Long story short만 말하는 경우가 많고, 옥스퍼드 사전의 예문에도 \"Anyway, long story short:\"처럼 짧은 형태가 나와요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Long story short, we missed the last train.</span><span class=\"ko\">간단히 말하면, 우리 막차 놓쳤어.</span></li>\n<li><span class=\"en\">To make a long story short, I got the job.</span><span class=\"ko\">결론만 말하면, 나 그 회사 붙었어.</span></li>\n<li><span class=\"en\">To cut a long story short, they're getting married.</span><span class=\"ko\">긴 얘기 줄이자면, 그 둘 결혼한대.</span></li>\n<li><span class=\"en\">It's a long story. Long story short, my phone died.</span><span class=\"ko\">얘기하자면 길어. 아무튼, 휴대폰 배터리가 나갔어.</span></li>\n</ul></div>\n<p>마지막 예문의 <b>It's a long story.</b>는 \"얘기하자면 복잡해\"라는 말이에요. 메리엄웹스터 사전은 a long story를 '어떻게 된 일인지 설명하기 복잡한 사연'으로 풀이하고, 이 문장을 예문으로 들어요. 둘을 이어서 말하면 \"사연은 많은데 결론은 이거야\"라는 흐름이 아주 자연스럽게 만들어져요.</p>\n<h2>비슷한 요약 표현 3개 비교</h2>\n<div class=\"box\"><table class=\"cmp\"><thead><tr><th>표현</th><th>뒤에 오는 말</th><th>잘 어울리는 자리</th></tr></thead><tbody>\n<tr><td>Long story short,</td><td>사연의 결과</td><td>친구와 수다, 경험담</td></tr>\n<tr><td>In a nutshell,</td><td>내용을 아주 짧게 요약</td><td>설명을 한 줄로 정리할 때</td></tr>\n<tr><td>The bottom line is (that) ~</td><td>꼭 알아야 할 핵심</td><td>회의, 결정을 내릴 때</td></tr>\n</tbody></table></div>\n<p>세 표현 모두 \"짧게 말하면\"이지만 쓰임이 조금씩 달라요. 옥스퍼드 학습자 사전은 in a nutshell을 '아주 분명하게, 적은 말로'라고 풀이하고, the bottom line을 '반드시 고려하거나 받아들여야 할 가장 중요한 점'이라고 설명해요. 그래서 일어난 일을 털어놓는 이야기에는 Long story short가, 회의에서 \"그래서 우리가 할 일은\"을 말할 때는 The bottom line is가 더 잘 맞아요.</p>\n<h2>실제 대화 · 여행에서 돌아온 친구</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">You were supposed to be back on Sunday. What happened?</span><span class=\"ko\">일요일에 돌아온다고 했잖아. 무슨 일 있었어?</span></li>\n<li class=\"me\"><span class=\"en\">Oh, it's a long story. Our flight was delayed, and we missed our connection.</span><span class=\"ko\">아, 얘기하자면 길어. 비행기가 지연돼서 환승 편을 놓쳤거든.</span></li>\n<li class=\"them\"><span class=\"en\">Oh no. So what did you do?</span><span class=\"ko\">저런. 그래서 어떻게 했어?</span></li>\n<li class=\"me\"><span class=\"en\">Long story short, we got home a day late.</span><span class=\"ko\">간단히 말하면, 하루 늦게 집에 왔어.</span></li>\n</ul>\n<p>사정을 다 듣고 싶은 친구라면 여기서 \"Wait, tell me everything!\"이라고 되물을 거예요. 반대로 상대에게 차근차근 설명해 달라고 부탁하고 싶을 땐 <a href=\"/p/walk-me-through/\">Could you walk me through it?</a>을 써 보세요.</p>\n<h2>short라는 단어 때문에 생기는 오해</h2>\n<p>이 표현을 처음 들으면 \"긴 이야기, 짧은?\"처럼 단어를 하나씩 옮기다가 뜻을 놓치기 쉬워요. '짧게 말하면'을 그대로 옮겨 Speaking shortly라고 하면 어색해요. shortly는 주로 '곧, 머지않아'라는 뜻이라서 엉뚱하게 들리거든요. Long story short는 앞의 to make a, to cut a가 빠진 채 굳어진 덩어리라서 문법을 따지기보다 \"<b>결론만 말하면</b>\" 한 덩어리로 외우는 편이 빨라요. 앞에 It's a long story.를 붙여 함께 연습하면 실제 대화에서 바로 꺼내 쓸 수 있어요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 긴 이야기(long story)를 가위로 싹둑 잘라(cut) 짧게(short)! 남는 건 결론 한 줄이에요.</div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">말을 줄이겠다고 해 놓고 다시 사정을 늘어놓을 때</span><span class=\"no\">Long story short, so first we went to the airport, and then the flight was delayed, and then...</span><span class=\"en\">Long story short, we got home a day late.</span><span class=\"ko\">간단히 말하면, 하루 늦게 집에 왔어.</span><span class=\"why\"><b>왜?</b>Long story short는 '이제 결론만 말할게'라는 신호예요. 뒤에는 결과를 한 문장으로 말해야 듣는 사람이 기다리지 않아요.</span></li>\n<li><span class=\"ctx\">관용구를 다 말할 때 관사를 빼먹은 경우</span><span class=\"no\">To make long story short, I passed.</span><span class=\"en\">To make a long story short, I passed.</span><span class=\"ko\">결론만 말하면, 나 합격했어.</span><span class=\"why\"><b>왜?</b>긴 형태에서는 story 앞에 a가 꼭 들어가요. 헷갈리면 a 없이 쓰는 짧은 형태 Long story short만 기억해도 충분해요.</span></li>\n</ul></div>\n<p>회사 메일이나 보고서처럼 격식을 갖춘 글에서는 편한 말인 Long story short를 피하는 게 좋아요. 회의에서 결정할 핵심을 말할 때는 The bottom line is that ~이 더 잘 어울려요. 진행 상황을 계속 공유해 달라고 할 땐 <a href=\"/p/keep-me-posted/\">Keep me posted</a>도 함께 알아 두세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Oxford Learner's Dictionaries 'short'(idiom: (to cut a) long story short), 'nutshell', 'bottom line' · Dictionary.com 'cut a long story short' · Merriam-Webster 'a long story'.</p>",
+  "related": []
+}
