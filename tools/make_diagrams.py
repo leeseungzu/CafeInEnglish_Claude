@@ -662,6 +662,47 @@ def almost_most():
     c.save("almost-most-of.png")
 
 
+def fingers_crossed():
+    c = Canvas("Fingers crossed, 세 가지 모양", "누구의 행운을 비는지에 따라 달라져요")
+    rows = [("짧게 한마디", "Fingers crossed!", "잘되길 빌어!"),
+            ("상대를 위해 빌어 줄 때", "I'll keep my fingers crossed for you.", "너 잘되길 빌게."),
+            ("나를 위해 빌어 달라고 할 때", "Keep your fingers crossed for me.", "나 잘되게 빌어 줘.")]
+    for when, en, ko in rows:
+        def body(x, r, when=when, en=en, ko=ko):
+            c.pill(x, c.y, when, F(36, 700)); c.y += 84
+            sz = 56
+            while c.d.textlength(en, font=F(sz, 800)) > r - x - 12 and sz > 40:
+                sz -= 2
+            c.hl(x, c.y, en, F(sz, 800)); c.y += int(sz * 1.35)
+            c.text(x, ko, F(42, 700), MUTED, 1.2)
+        c.card(body)
+    c.note("바라는 일은 that 뒤에: ...crossed that it works", 40)
+    c.save("fingers-crossed-three.png")
+
+
+def go_home():
+    c = Canvas("home 앞에는 to를 쓰지 않아요", "home 한 단어에 '집으로'가 들어 있어요")
+    def ok(x, r):
+        c.pill(x, c.y, "움직이는 동사 + home", F(36, 700), bg=LIME, fg=INK); c.y += 84
+        for en, ko in (("go home", "집에 가다"), ("come home", "집에 오다"),
+                       ("get home", "집에 도착하다"), ("walk home", "걸어서 집에 가다"),
+                       ("go back home", "집으로 돌아가다")):
+            w = c.hl(x, c.y, en, F(54, 800))
+            c.d.text((x + w + 28, c.y + 12), ko, font=F(40, 700), fill=MUTED)
+            c.y += int(54 * 1.45)
+    c.card(ok)
+    def wrong(x, r):
+        c.pill(x, c.y, "이렇게는 말하지 않아요", F(36, 700), bg=SOFT, fg=INK); c.y += 84
+        for en in ("go to home", "come to home", "get to home"):
+            w = c.d.textlength(en, font=F(50, 700))
+            c.d.text((x, c.y), en, font=F(50, 700), fill=MUTED)
+            c.d.line((x - 4, c.y + 32, x + w + 4, c.y + 32), fill="#E5484D", width=5)
+            c.y += int(50 * 1.45)
+    c.card(wrong)
+    c.note("집에 '있다'는 at home, 집으로 '간다'는 그냥 home", 40)
+    c.save("go-home-no-to.png")
+
+
 if __name__ == "__main__":
-    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps, long_story_short, almost_most):
+    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps, long_story_short, almost_most, fingers_crossed, go_home):
         fn()

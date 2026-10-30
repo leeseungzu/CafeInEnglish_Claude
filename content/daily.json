@@ -406,5 +406,17 @@
     "en": "Most of my friends live in Seoul.",
     "ko": "내 친구들은 대부분 서울에 살아",
     "desc": "'대부분'은 most of my friends. almost는 부사라 almost all of my friends처럼 all과 같이 써요."
+  },
+  {
+    "post": "fingers-crossed",
+    "en": "Fingers crossed!",
+    "ko": "잘되길 빌게!",
+    "desc": "결과를 기다리는 친구에게 건네는 짧은 응원. 상대를 위해 빌 땐 I'll keep my fingers crossed for you."
+  },
+  {
+    "post": "go-home",
+    "en": "Text me when you get home.",
+    "ko": "집에 도착하면 문자해",
+    "desc": "home 앞에는 to를 쓰지 않아요. go home, get home처럼 동사 뒤에 바로 붙여요."
   }
 ]

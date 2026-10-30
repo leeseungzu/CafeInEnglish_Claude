@@ -1,0 +1,73 @@
+{
+  "id": "fingers-crossed",
+  "cat": "expr",
+  "sub": "새 표현",
+  "level": "기초",
+  "date": "2026-10-30",
+  "title": "\"Fingers crossed\", '잘되길 빌어'를 손가락으로 말하기",
+  "seo_title": "Fingers crossed 뜻 - '잘되길 빌어' 영어로, Good luck과 차이",
+  "lead": "손가락이 꼬였다는 말이 아니라, 좋은 결과를 바라는 말",
+  "description": "Fingers crossed는 '잘되길 빌어, 좋은 결과 있길'이라는 뜻이에요. for you·for me·that으로 넓혀 쓰는 법, Good luck과의 차이, 자주 하는 실수를 대화와 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Fingers crossed!",
+    "ko": "'잘되길 빌어'를 한마디로"
+  },
+  "icon": "crossed-fingers",
+  "chat": {
+    "q": "Did you hear back about the job?",
+    "a": "Not yet. Fingers crossed!",
+    "key": "Fingers crossed",
+    "ko": "아직. 잘되길 빌고 있어!"
+  },
+  "thumb": {
+    "text": "Fingers crossed!",
+    "key": "crossed",
+    "ko": "손가락은 왜 꼴까?"
+  },
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "친구가 결과를 기다리는 나에게 \"Fingers crossed!\"라고 했어요. 무슨 뜻일까요?",
+      "sub": "",
+      "options": [
+        "손가락 다쳤어?",
+        "잘되길 빌게!",
+        "거짓말하지 마!",
+        "길 건너자!"
+      ],
+      "answer": 1,
+      "explain": "Fingers crossed는 원하는 결과가 나오길 바란다는 말이에요. 아직 결과를 모르는 일에 '잘되길 빌게'라는 뜻으로 써요.",
+      "mnemonic": "손가락 꼭 꼬고 결과를 기다리는 모습"
+    },
+    {
+      "tag": "빈칸",
+      "q": "'너 잘되길 빌게'를 영어로 완성하세요. I'll keep my fingers crossed ___ you.",
+      "sub": "",
+      "options": [
+        "to",
+        "for",
+        "at",
+        "with"
+      ],
+      "answer": 1,
+      "explain": "누군가를 '위해' 비는 거라 for를 써요. 나를 위해 빌어 달라고 할 땐 Keep your fingers crossed for me.",
+      "mnemonic": "for = ~를 위해, 너를 위해 비는 손가락"
+    },
+    {
+      "tag": "상황",
+      "q": "이미 시험을 다 봤고 결과 발표만 남은 친구에게 가장 잘 어울리는 말은?",
+      "sub": "",
+      "options": [
+        "Wish me luck.",
+        "Fingers crossed!",
+        "Congratulations!",
+        "I'm crossing fingers."
+      ],
+      "answer": 1,
+      "explain": "결과를 기다리는 상황에는 Fingers crossed!가 잘 어울려요. Wish me luck은 내가 도전하기 직전에 하는 말, Congratulations!는 결과가 나온 뒤 축하하는 말이고, I'm crossing fingers는 my가 빠져서 어색해요.",
+      "mnemonic": "할 일은 끝, 이제 손가락만 꼬고 기다리기"
+    }
+  ],
+  "body_html": "<p>면접을 보고 온 친구에게 결과를 물었더니, 대답 끝에 짧은 한마디가 붙어요. 설명보다 대화를 먼저 볼게요.</p>\n<h2>실제 대화 · 면접 결과를 기다리는 친구</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">How did the interview go?</span><span class=\"ko\">면접 어땠어?</span></li>\n<li class=\"me\"><span class=\"en\">Pretty well, I think. They'll let me know by Friday.</span><span class=\"ko\">괜찮았던 것 같아. 금요일까지 알려 준대.</span></li>\n<li class=\"them\"><span class=\"en\">Fingers crossed!</span><span class=\"ko\">잘되길 빌게!</span></li>\n<li class=\"me\"><span class=\"en\">Thanks. I'm keeping my fingers crossed too.</span><span class=\"ko\">고마워. 나도 잘되길 빌고 있어.</span></li>\n</ul>\n<p>친구가 한 <b>Fingers crossed!</b>는 '손가락이 꼬였다'는 말이 아니라 <b>\"잘되길 빌게, 좋은 결과 있길!\"</b>이라는 뜻이에요. 결과가 아직 나오지 않은 일을 두고, 원하는 쪽으로 풀리길 함께 바랄 때 써요.</p>\n<h2>손가락을 겹치는 건 행운을 비는 몸짓</h2>\n<div class=\"box\"><b>Fingers crossed.</b> = 잘되길 빌어, 좋은 결과 있길!</div>\n<p>메리엄웹스터는 cross one's fingers(또는 keep one's fingers crossed)를 '특정한 결과가 나오길 바라다'로 풀고, 첫 기록을 1896년으로 적어요. Dictionary.com은 '한 손의 두 손가락을 겹쳐 행운을 빌다'로 설명해요. 실제로 검지 위에 중지를 겹치는 손 모양을 하기도 하지만, 말만 해도 똑같은 뜻이에요.</p>\n<p>손 모양이 어디서 왔는지는 확실하지 않아요. Dictionary.com은 십자가 표시와 관련 있다고 보는 설명을 소개하지만, 사전마다 첫 기록 시기도 다르게 적고 있어서 하나로 단정하기는 어려워요.</p>\n<h2>누구의 행운을 비는지에 따라 모양이 달라요</h2>\n<figure class=\"fig\"><img src=\"/images/fingers-crossed-three.png\" alt=\"Fingers crossed 세 가지 모양: 짧게 Fingers crossed!(잘되길 빌어) · 상대를 위해 I'll keep my fingers crossed for you.(너 잘되길 빌게) · 나를 위해 Keep your fingers crossed for me.(나 잘되게 빌어 줘). 바라는 일은 that 뒤에 붙여요\" width=\"1080\" height=\"1456\" loading=\"lazy\"><figcaption>짧게 말할지, 누구를 위해 빌지에 따라 고르면 돼요</figcaption></figure>\n<p>상대를 응원할 때는 <b>for you</b>, 나를 응원해 달라고 할 때는 <b>for me</b>를 붙여요. 바라는 내용을 구체적으로 말하고 싶다면 that 뒤에 문장을 이어요. 메리엄웹스터 예문도 Keep your fingers crossed that something will be worked out.(일이 잘 풀리길 빌어 줘)처럼 that을 써요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Fingers crossed it doesn't rain tomorrow.</span><span class=\"ko\">내일 비 안 오길 빌어.</span></li>\n<li><span class=\"en\">I'm crossing my fingers that I get the job.</span><span class=\"ko\">그 일자리 붙길 빌고 있어.</span></li>\n<li><span class=\"en\">Good luck on your test! I'll keep my fingers crossed for you.</span><span class=\"ko\">시험 잘 봐! 잘되길 빌게.</span></li>\n<li><span class=\"en\">I have a big presentation today. Keep your fingers crossed for me.</span><span class=\"ko\">오늘 중요한 발표가 있어. 잘되게 빌어 줘.</span></li>\n</ul></div>\n<h2>Good luck, I hope so와 뭐가 다를까</h2>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>표현</th><th>초점</th><th>어울리는 때</th></tr></thead><tbody><tr><td>Good luck!</td><td>상대에게 행운을</td><td>시험·경기 시작 전 응원</td></tr><tr><td>Fingers crossed!</td><td>바라는 결과에</td><td>결과가 내 손을 떠난 일 (발표, 날씨 등)</td></tr><tr><td>I hope so.</td><td>나도 그러길 바라</td><td>상대 말에 맞장구</td></tr><tr><td>Wish me luck.</td><td>나에게 행운을</td><td>내가 도전하기 직전</td></tr></tbody></table></div>\n<p>Good luck은 '행운'을 직접 건네는 말이라 시작 전에 잘 어울리고, Fingers crossed는 결과가 내 손을 떠난 일, 예를 들어 발표나 날씨처럼 바라기만 할 수 있을 때 특히 자연스러워요. 둘을 이어서 Good luck! Fingers crossed!라고 해도 어색하지 않아요. 결과를 듣고 나서 이야기를 길게 풀기 싫다면 <a href=\"/p/long-story-short/\">Long story short</a>로 결론만 전하면 돼요.</p>\n<h2>crossed는 '건넜다'가 아니에요</h2>\n<p>한국인이 이 표현에서 가장 많이 멈칫하는 곳은 crossed예요. '건넜다'라는 과거형으로 읽으면 뜻이 안 잡히거든요. 여기서 crossed는 과거분사로 '꼬인, 겹쳐진' 상태를 말해요. keep my fingers crossed는 '내 손가락을 겹친 상태로 유지하다', 즉 결과가 나올 때까지 계속 빌고 있겠다는 말이에요. 맨 앞의 Fingers crossed!는 이 문장에서 앞부분을 줄인 꼴로 보면 이해하기 쉬워요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 결과 발표까지 손가락을 꼰 채로(crossed) 꼭 쥐고 기다리는 모습.</div>\n<p>재미있게도 아이들 사이에서는 반대 쓰임도 있어요. Dictionary.com은 cross one's fingers의 뜻 하나로 '대수롭지 않은 거짓말을 하다'를 싣고, 손가락을 꼬면 '무효'가 된다고 여기던 아이들 놀이에서 왔을 거라고 설명해요. I had my fingers crossed.(사실 손가락 꼬고 있었지롱)처럼 장난스럽게 쓰는 말이에요. 대화에서 그냥 Fingers crossed!라고 하면 '잘되길 빌어'로 받아들이면 돼요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">시험을 앞둔 친구를 응원할 때</span><span class=\"no\">I'll cross my fingers to you.</span><span class=\"en\">Fingers crossed for you!</span><span class=\"ko\">너 잘되길 빌게!</span><span class=\"why\"><b>왜?</b>'너를 위해' 비는 거라 for you를 써요. to you는 무언가를 건넬 때 쓰는 말이라 어색해요.</span></li>\n<li><span class=\"ctx\">내가 빌고 있다고 말할 때</span><span class=\"no\">I'm crossing fingers.</span><span class=\"en\">I'm crossing my fingers.</span><span class=\"ko\">잘되길 빌고 있어.</span><span class=\"why\"><b>왜?</b>문장에서 cross나 keep을 쓸 때는 누구의 손가락인지 my, your를 꼭 붙여요. 소유격 없이 쓰는 건 Fingers crossed!, Fingers crossed (that) ~처럼 짧게 말할 때예요.</span></li>\n</ul></div>\n<p>상대 말에 가볍게 맞장구치는 다른 한마디가 궁금하다면 <a href=\"/p/sounds-good/\">Sounds good</a>도 같이 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Merriam-Webster 'cross one's fingers', Dictionary.com 'cross one's fingers'·'keep one's fingers crossed'.</p>",
+  "related": []
+}

@@ -1,0 +1,73 @@
+{
+  "id": "halloween-origin",
+  "cat": "story",
+  "sub": "단어의 유래",
+  "level": "기초",
+  "date": "2026-10-30",
+  "title": "Halloween은 원래 '모든 성인의 날 전야'였다",
+  "seo_title": "Halloween 어원 - '모든 성인의 날 전야'가 핼러윈이 되기까지",
+  "lead": "사탕도 호박도 아닌, 성인과 전날 밤이 숨어 있는 이름",
+  "description": "Halloween은 All Hallows' Even, '모든 성인의 날 전날 저녁'을 줄인 말이에요. hallow의 뜻과 호박등, trick or treat 이름의 유래를 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "All Hallows' Even",
+    "ko": "Halloween은 원래 '성인의 날 전야'였어요"
+  },
+  "icon": "jack-o-lantern",
+  "chat": {
+    "q": "What are you going to be for Halloween?",
+    "a": "I'm going as a ghost.",
+    "key": "going as a ghost",
+    "ko": "나 유령으로 분장하고 갈 거야."
+  },
+  "thumb": {
+    "text": "Hallow + e'en",
+    "key": "Hallow",
+    "ko": "Halloween의 원래 뜻은?"
+  },
+  "quiz": [
+    {
+      "tag": "영어 이야기",
+      "q": "Halloween 속 hallow는 원래 무슨 뜻이었을까요?",
+      "sub": "",
+      "options": [
+        "텅 빈",
+        "성인, 거룩한 사람",
+        "호박",
+        "유령"
+      ],
+      "answer": 1,
+      "explain": "명사 hallow(성인)는 고대 영어 halga에서 온 말이에요. 이 명사는 지금은 Halloween 속에만 남아 있어요.",
+      "mnemonic": "hallow는 holy의 친척, 거룩한 사람"
+    },
+    {
+      "tag": "영어 이야기",
+      "q": "Halloween은 어떤 날의 '전날 밤'일까요?",
+      "sub": "",
+      "options": [
+        "크리스마스",
+        "모든 성인의 날(11월 1일)",
+        "새해 첫날",
+        "추수감사절"
+      ],
+      "answer": 1,
+      "explain": "All Hallows' Even은 '모든 성인의 날 전날 저녁'이에요. 11월 1일 All Saints' Day의 전날이라 10월 31일이에요.",
+      "mnemonic": "e'en = evening, 전날 밤"
+    },
+    {
+      "tag": "표현",
+      "q": "'핼러윈에 뭐로 분장할 거야?'를 영어로 가장 자연스럽게 하면?",
+      "sub": "",
+      "options": [
+        "What will you wear Halloween?",
+        "What are you going to be for Halloween?",
+        "Who are you on Halloween?",
+        "What do you dress Halloween?"
+      ],
+      "answer": 1,
+      "explain": "핼러윈에는 What are you going to be?가 '뭐로 분장할 거야?'라는 뜻으로 통해요. 대답은 I'm going as a ghost.처럼 해요.",
+      "mnemonic": "핼러윈엔 뭐가 될(be) 거야 = 뭐로 분장해?"
+    }
+  ],
+  "body_html": "<p>10월 31일 밤이면 호박등에 불을 켜고, 분장한 아이들이 \"Trick or treat!\"를 외치며 집집마다 돌아다녀요. 해마다 부르는 이름 <b>Halloween</b>을 천천히 뜯어 보면 사탕도 호박도 나오지 않아요. 대신 '모든', '성인(聖人)', '전날 저녁'이라는 오래된 영어 세 조각이 들어 있어요.</p>\n<h2>Halloween을 세 조각으로 나누면</h2>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>조각</th><th>원래 모양</th><th>뜻</th></tr></thead><tbody><tr><td>All</td><td>all</td><td>모든</td></tr><tr><td>Hallow</td><td>고대 영어 halga</td><td>성인, 거룩한 사람</td></tr><tr><td>e'en</td><td>even (evening)</td><td>전날 저녁, 전야</td></tr></tbody></table></div>\n<p>세 조각을 합치면 <b>All Hallows' Even</b>, '모든 성인의 날 전날 저녁'이에요. 11월 1일은 서방 기독교에서 모든 성인을 함께 기리는 <b>All Saints' Day</b>(모든 성인의 날)이고, 그 전날 밤이 바로 10월 31일이에요. 브리태니커 백과사전도 핼러윈을 All Hallows' Eve를 줄인 말로 소개해요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> All + Hallow + e'en = 모든 성인의 날, 그 전날 밤.</div>\n<h2>hallow, 지금은 핼러윈에만 남은 옛말</h2>\n<p>가운데 조각 hallow는 고대 영어 halga에서 온 명사로 '거룩한 사람, 성인'이라는 뜻이었어요. 어원 사전 Etymonline은 이 명사를 <b>'Halloween 말고는 이제 쓰지 않는 말'</b>로 설명해요. 이름 하나에 천 년 넘은 단어가 화석처럼 남아 있는 셈이에요.</p>\n<p>같은 뿌리의 동사 hallow(거룩하게 하다)는 holy와 친척이에요. 영어 주기도문의 <b>Hallowed be thy name</b>(이름이 거룩히 여김을 받으시오며)에서 이 동사를 볼 수 있어요. 일상 회화에서는 거의 쓰지 않으니 '핼러윈 속 hallow = 성인'만 기억해 두면 충분해요.</p>\n<h2>스코틀랜드에서 줄어든 이름</h2>\n<p>Etymonline에 따르면 All Hallows even이라는 긴 이름은 15세기 중반 기록에 보이고(비슷한 표현은 1300년 무렵부터), 이를 짧게 줄인 Hallowe'en은 스코틀랜드에서 쓰이기 시작했어요. 첫 기록 연대는 사전마다 조금 달라요. Etymonline은 1560년대 스코틀랜드 기록을, 메리엄웹스터는 1700년 무렵을 첫 사용으로 적고 있어요.</p>\n<p>이 말을 널리 알린 계기로 Etymonline은 스코틀랜드 시인 <b>로버트 번스</b>(Robert Burns)의 시 「Halloween」(1785년 작, 이듬해 출간)을 꼽아요. 이날 밤에 얽힌 신비한 풍습을 시에 담았거든요. 옛 표기 Hallowe'en의 아포스트로피(')는 even에서 v가 빠진 자리 표시예요. 지금은 대부분 아포스트로피 없이 Halloween이라고 써요.</p>\n<figure class=\"fig\"><img src=\"/images/story-halloween-snap-apple-night.webp\" alt=\"어두운 헛간 같은 방 가운데서 사람들이 춤을 추고, 앞쪽에는 물통에 얼굴을 숙인 아이들, 왼쪽에는 불가에 모여 앉은 사람들이 보이는 19세기 핼러윈 밤 풍경 그림\" width=\"800\" height=\"539\" loading=\"lazy\"><figcaption>대니얼 매클리스, 「스냅 애플의 밤(Snap-Apple Night)」, 1833년. 1832년 아일랜드 블라니의 핼러윈 밤을 그려 1833년에 전시한 그림이에요 (위키미디어 공용, 퍼블릭 도메인).</figcaption></figure>\n<h2>호박등과 trick or treat, 이름은 언제 생겼을까</h2>\n<p>핼러윈의 상징 <b>jack-o'-lantern</b>(호박등)도 처음부터 호박이 아니었어요. Etymonline에 따르면 1650년대에 Jack with the lanthorn은 밤에 늪지에서 떠도는 도깨비불을 부르던 이름이었어요. 조각한 호박 등을 이렇게 부른 기록은 1828년 미국 영어에서 보여요. 브리태니커는 호박등이 원래 순무를 깎아 만든 것이었다고 설명해요.</p>\n<p><b>trick or treat</b>은 생각보다 젊은 말이에요. 메리엄웹스터 기사에 따르면 가장 이른 예는 1920년대 캐나다 서부, 서스캐처원과 앨버타 지역 신문에서 나왔고, 미국 신문 기록은 1928년부터 보여요. 핼러윈 풍습의 뿌리는 고대 켈트족의 축제 사윈(Samhain)과 이어진다고 브리태니커와 메리엄웹스터 모두 설명해요. 다만 분장하고 집집마다 도는 풍습이 정확히 어디서 시작됐는지는 알려지지 않았다고 메리엄웹스터는 덧붙여요.</p>\n<h2>지금은 이렇게 써요</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Happy Halloween!</span><span class=\"ko\">해피 핼러윈!</span></li>\n<li><span class=\"en\">What are you going to be for Halloween?</span><span class=\"ko\">핼러윈에 뭐로 분장할 거야?</span></li>\n<li><span class=\"en\">I'm going as a vampire.</span><span class=\"ko\">나 뱀파이어로 분장하고 갈 거야.</span></li>\n<li><span class=\"en\">The kids went trick-or-treating last night.</span><span class=\"ko\">아이들이 어젯밤 사탕 받으러 집집마다 돌았어.</span></li>\n<li><span class=\"en\">We carved a jack-o'-lantern together.</span><span class=\"ko\">우리 같이 호박등을 만들었어.</span></li>\n</ul></div>\n<p>두 번째 문장은 직역하면 '핼러윈에 뭐가 될 거야?'지만, 핼러윈에는 '뭐로 분장할 거야?'라는 뜻으로 통해요. 대답은 <b>I'm going as ~</b>(~로 분장하고 갈 거야)로 하면 자연스러워요. trick-or-treating처럼 -ing를 붙이면 '사탕 받으러 다니기'라는 활동이 돼요.</p>\n<h2>실제 대화 · 핼러윈 파티 전날</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Are you coming to the Halloween party tomorrow?</span><span class=\"ko\">내일 핼러윈 파티 올 거야?</span></li>\n<li class=\"me\"><span class=\"en\">Of course. I'm going as a ghost.</span><span class=\"ko\">당연하지. 나 유령으로 분장하고 갈 거야.</span></li>\n<li class=\"them\"><span class=\"en\">Nice! I still haven't picked a costume.</span><span class=\"ko\">좋다! 난 아직 의상을 못 골랐어.</span></li>\n<li class=\"me\"><span class=\"en\">You can borrow my witch hat.</span><span class=\"ko\">내 마녀 모자 빌려 가도 돼.</span></li>\n</ul>\n<p>마지막 줄은 '내가 빌려줄게'를 상대 입장에서 You can borrow라고 말한 거예요. borrow와 lend가 헷갈린다면 <a href=\"/p/borrow-vs-lend/\">빌리다와 빌려주다 영어로</a>를 같이 보세요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">핼러윈 카드에 인사를 쓸 때</span><span class=\"no\">Happy Haloween!</span><span class=\"en\">Happy Halloween!</span><span class=\"ko\">해피 핼러윈!</span><span class=\"why\"><b>왜?</b>성인을 뜻하는 hallow에서 왔으니 l이 두 개예요. Hal-low-een으로 나눠 쓰면 틀리지 않아요.</span></li>\n<li><span class=\"ctx\">핼러윈 날짜를 말할 때</span><span class=\"no\">Halloween is on November 1.</span><span class=\"en\">Halloween is on October 31.</span><span class=\"ko\">핼러윈은 10월 31일이에요.</span><span class=\"why\"><b>왜?</b>11월 1일은 모든 성인의 날이고, 핼러윈은 그 '전날 밤'이에요. 이름 끝의 e'en(전야)이 날짜를 알려 줘요.</span></li>\n</ul></div>\n<p>nice처럼 뜻이 완전히 바뀐 단어가 궁금하다면 <a href=\"/p/words-changed-meaning/\">뜻이 정반대로 바뀐 영어 단어 5개</a>도 읽어 보세요. 옛 영어가 오늘의 단어 속에 어떻게 숨어 있는지 하나 더 보고 싶다면 <a href=\"/p/clue-origin/\">clue의 유래</a>도 추천해요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Etymonline 'Halloween'·'hallow'·'jack-o'-lantern', Merriam-Webster 'Halloween' 및 \"'Trick or Treat': A History\", Encyclopaedia Britannica 'Halloween', 위키미디어 공용(그림).</p>",
+  "related": []
+}

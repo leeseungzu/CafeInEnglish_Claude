@@ -1,0 +1,73 @@
+{
+  "id": "go-home",
+  "cat": "tip",
+  "sub": "단어",
+  "level": "기초",
+  "date": "2026-10-30",
+  "title": "\"go to home\"은 틀려요, home 앞에 to를 쓰지 않는 이유",
+  "seo_title": "go to home 틀린 이유 - '집에 가다' 영어로, go home과 at home",
+  "lead": "한 단어만 빼면 자연스러워지는 '집에 가'",
+  "description": "'집에 가'는 go to home이 아니라 go home이에요. home이 '집으로'라는 부사로 쓰이기 때문이에요. get home, at home, stay home, I'm home까지 대화와 퀴즈로 정리했어요.",
+  "og": {
+    "en": "go home",
+    "ko": "go to home이 아니에요"
+  },
+  "icon": "house",
+  "chat": {
+    "q": "Where are you headed?",
+    "a": "I'm going home.",
+    "key": "going home",
+    "ko": "나 집에 가."
+  },
+  "thumb": {
+    "text": "go home",
+    "key": "home",
+    "ko": "to는 어디 갔을까?"
+  },
+  "quiz": [
+    {
+      "tag": "고르기",
+      "q": "'나 이제 집에 가'를 영어로 바르게 말한 것은?",
+      "sub": "",
+      "options": [
+        "I'm going to home now.",
+        "I'm going home now.",
+        "I'm going at home now.",
+        "I'm going in home now."
+      ],
+      "answer": 1,
+      "explain": "go 뒤의 home은 '집으로'라는 부사예요. 이미 방향이 들어 있어서 to, at, in을 붙이지 않아요.",
+      "mnemonic": "home 안에 '집으로'가 다 들어 있어요"
+    },
+    {
+      "tag": "빈칸",
+      "q": "'지금 집이야'를 완성하세요. I'm ___ home now.",
+      "sub": "",
+      "options": [
+        "to",
+        "at",
+        "into",
+        "for"
+      ],
+      "answer": 1,
+      "explain": "집에 있다는 상태는 at home으로 말해요(I'm home도 써요). 집으로 움직일 때는 to 없이 home만 써요.",
+      "mnemonic": "있을 땐 at home, 갈 땐 그냥 home"
+    },
+    {
+      "tag": "뜻",
+      "q": "\"He left home at twenty.\"는 무슨 뜻일까요?",
+      "sub": "",
+      "options": [
+        "그는 스무 살에 집을 샀다.",
+        "그는 스무 살에 부모님 집을 떠나 독립했다.",
+        "그는 스무 시에 집을 나섰다.",
+        "그는 스무 번 집을 비웠다."
+      ],
+      "answer": 1,
+      "explain": "leave home은 사전에 '부모님 집을 떠나 따로 살기 시작하다'로 실려 있어요. 문맥상 스무 살(at twenty)이라 독립했다는 뜻이에요.",
+      "mnemonic": "leave home = 둥지를 떠나다"
+    }
+  ],
+  "body_html": "<p>퇴근 시간에 동료가 \"Where are you headed?\"(어디 가?)라고 물어요. \"집에 가\"를 영어로 말하려는 순간 I'm going to home이 먼저 떠오른다면, 오늘 글이 딱 맞아요. 정답은 to를 뺀 <b>I'm going home.</b>이에요. 이유는 home이라는 단어가 하는 일에 있어요.</p>\n<h2>home은 '집'이자 '집으로'</h2>\n<p>사전에서 home을 찾으면 명사와 부사가 따로 나와요. 옥스퍼드 러너스 사전도 두 항목으로 나눠 싣고 있어요. 명사 home은 '집, 가정'이고, 부사 home은 메리엄웹스터의 풀이처럼 <b>'집으로, 집에'</b>라는 뜻이에요. 부사 안에 이미 '~으로'가 들어 있으니 앞에 to를 또 붙일 필요가 없어요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>문장</th><th>home의 역할</th><th>뜻</th></tr></thead><tbody><tr><td>I'm going home.</td><td>부사 (집으로)</td><td>집에 가.</td></tr><tr><td>What time did you get home?</td><td>부사 (집에)</td><td>몇 시에 집에 왔어?</td></tr><tr><td>I'm at home.</td><td>명사 (at 뒤)</td><td>집에 있어.</td></tr><tr><td>He left home at twenty.</td><td>명사</td><td>그는 스무 살에 독립했어.</td></tr></tbody></table></div>\n<p>마지막 줄의 leave home은 롱맨 사전에 '부모님 집을 떠나 따로 살기 시작하다'로 실려 있어요. '집을 나서다'라는 뜻으로만 알면 오해하기 쉬운 표현이에요.</p>\n<figure class=\"fig\"><img src=\"/images/go-home-no-to.png\" alt=\"home 앞에는 to를 쓰지 않아요: go home(집에 가다), come home(집에 오다), get home(집에 도착하다), walk home(걸어서 집에 가다), go back home(집으로 돌아가다). go to home, come to home, get to home은 틀린 말. 집에 있다는 at home\" width=\"1080\" height=\"1512\" loading=\"lazy\"><figcaption>움직임을 나타내는 동사 뒤에는 home을 바로 붙여요</figcaption></figure>\n<p>롱맨 사전은 home의 문법 설명에서 go home, come home, get home을 쓰고 go to home, come to home, get to home은 쓰지 말라고 분명히 적어 두었어요. back을 붙일 때도 go back home이라고 하지, go back to home이라고 하지 않아요.</p>\n<p>단, <b>my home</b>, <b>her parents' home</b>처럼 home 앞에 꾸미는 말이 붙으면 명사라서 to가 필요해요. We went to her parents' home.(그녀의 부모님 댁에 갔어)처럼요. to를 빼는 건 home 한 단어만 쓸 때예요.</p>\n<h2>실제 대화 · 회식이 끝난 밤</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">It's getting late. How are you getting home?</span><span class=\"ko\">늦었다. 집에 어떻게 가?</span></li>\n<li class=\"me\"><span class=\"en\">I'll take a taxi. What about you?</span><span class=\"ko\">택시 탈 거야. 너는?</span></li>\n<li class=\"them\"><span class=\"en\">I'll just walk home. It's not far.</span><span class=\"ko\">그냥 걸어갈래. 멀지 않아.</span></li>\n<li class=\"me\"><span class=\"en\">Okay. Text me when you get home.</span><span class=\"ko\">알았어. 집에 도착하면 문자해.</span></li>\n</ul>\n<p>대화에 home이 세 번 나오지만 to는 한 번도 없어요. 특히 마지막 줄의 <b>when you get home</b>(집에 도착하면)은 헤어질 때 정말 자주 듣는 말이에요. '도착하다'라고 arrive부터 떠올리기보다 get home을 한 덩어리로 기억해 두면 편해요.</p>\n<h2>집에 '있을' 때는 at home도, home도</h2>\n<p>움직임이 아니라 집에 머무는 상태를 말할 때는 조금 달라요. '집에 있어'는 <b>I'm at home.</b>이라고 해요. 집이라는 장소에 있다는 뜻이라 at이 붙어요. '집에 머물다'는 stay at home과 stay home 둘 다 써요. 롱맨 사전에는 두 형태의 예문이 모두 있고, 옥스퍼드 러너스 사전은 stay home 예문에 북미 영어 표시를 붙여 두었어요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I stayed home all weekend.</span><span class=\"ko\">주말 내내 집에 있었어.</span></li>\n<li><span class=\"en\">Is anyone home?</span><span class=\"ko\">집에 누구 있어요?</span></li>\n<li><span class=\"en\">I'm home!</span><span class=\"ko\">나 왔어! (집에 도착했을 때)</span></li>\n<li><span class=\"en\">You're home early today.</span><span class=\"ko\">오늘 일찍 왔네.</span></li>\n</ul></div>\n<p>집에 들어서며 외치는 I'm home!은 '나 집에 있어'보다 '나 왔어, 다녀왔어'에 가까운 말이에요. 같은 home인데 상황에 따라 우리말이 이렇게 달라져요.</p>\n<h2>'집에'를 그대로 옮기는 습관</h2>\n<p>한국어는 '학교에 가다', '회사에 가다', '집에 가다'처럼 모두 같은 조사 '에'를 써요. 그래서 '에'를 to로 바꾸는 습관이 생기기 쉬워요. go to school, go to work는 맞으니까 go to home도 맞을 것 같죠. 하지만 school, work는 명사라서 to가 필요하고, home은 부사로 쓰여서 to가 필요 없어요. 한국어 조사를 영어 전치사로 하나씩 옮기다 생기는 비슷한 실수는 <a href=\"/p/discuss-about/\">discuss about이 틀린 이유</a>에도 정리해 두었어요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> home 한 단어에 '집으로'가 다 들어 있어요. to는 짐이 돼요.</div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">퇴근하면서 동료에게</span><span class=\"no\">I'm going to home.</span><span class=\"en\">I'm going home.</span><span class=\"ko\">나 집에 가.</span><span class=\"why\"><b>왜?</b>go 뒤의 home은 '집으로'라는 부사라 to를 붙이지 않아요.</span></li>\n<li><span class=\"ctx\">친구에게 도착 시간을 물을 때</span><span class=\"no\">What time did you get to home?</span><span class=\"en\">What time did you get home?</span><span class=\"ko\">몇 시에 집에 왔어?</span><span class=\"why\"><b>왜?</b>get to the station처럼 다른 장소에는 to를 쓰지만, home 앞에서는 빼요.</span></li>\n<li><span class=\"ctx\">지금 집이라고 말할 때</span><span class=\"no\">I'm in home now.</span><span class=\"en\">I'm at home now.</span><span class=\"ko\">나 지금 집이야.</span><span class=\"why\"><b>왜?</b>집에 있다는 상태는 at home으로 말해요. in home은 이런 뜻으로 쓰지 않아요.</span></li>\n</ul></div>\n<p>'10분 뒤에 집에 갈게'까지 말하고 싶다면 시간 표현도 같이 챙겨 보세요. <a href=\"/p/in-vs-after/\">after 10 minutes 말고 in 10 minutes</a>에 정리해 두었어요. 합치면 I'll be home in ten minutes.(10분 뒤에 집에 도착해)가 돼요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Longman Dictionary of Contemporary English 'home'(문법 설명·leave home), Oxford Learner's Dictionaries 'home'(부사), Merriam-Webster 'home'(부사).</p>",
+  "related": []
+}
