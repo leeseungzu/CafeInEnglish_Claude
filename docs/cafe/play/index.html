@@ -248,6 +248,10 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .stage.exB .sheet .leaverow{position:sticky;bottom:-16px;margin:12px -16px -16px;padding:12px 16px 16px;background:var(--g);border-top:1px solid var(--gb);z-index:2}
 .stage.exB.night .sheet .leaverow{background:rgba(30,22,16,.98)}
 @media (max-width:640px){.stage.exB .sheet .leaverow{bottom:calc(-14px - env(safe-area-inset-bottom,0px));margin:12px -14px calc(-14px - env(safe-area-inset-bottom,0px));padding:12px 14px calc(14px + env(safe-area-inset-bottom,0px))}.standchip{bottom:84px}}
+.fzdots{display:flex;gap:6px;margin:12px 0 8px}.fzdots i{flex:1;height:5px;border-radius:9px;background:rgba(127,127,127,.25)}.fzdots i.ok{background:#CDEB5B}.fzdots i.ng{background:#E8846B}.fzdots i.cur{background:rgba(255,246,230,.7)}
+.fzq{font-size:19px;font-weight:800;line-height:1.4;margin:4px 0 10px}.fzq small{display:block;font-size:12px;font-weight:600;opacity:.6;margin-bottom:2px}
+#fzC .choice.ok{border-color:#CDEB5B;box-shadow:inset 0 0 0 1.5px #CDEB5B}#fzC .choice.ng{border-color:#E8846B;box-shadow:inset 0 0 0 1.5px #E8846B;opacity:.8}#fzC.lock .choice{pointer-events:none}
+.fzres{text-align:center;padding:10px 0 2px}.fzres b{display:block;font-size:22px;font-weight:800;margin-bottom:4px}
 .bp.on{border-color:var(--ink)}.cp{padding:12px 16px;font-size:13px}.cp.on{background:#CDEB5B;color:#2B1D14}
 .bp i{font-style:normal;display:flex;align-items:center;gap:8px;justify-content:center;border-radius:20px;padding:12px 22px;font-size:14px;font-weight:800}
 .nogl{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:30px;color:#fff;background:#2B1D14;font-size:14px}
@@ -428,6 +432,17 @@ body{padding:0!important;background:#140E0A}
       <p class="small" id="mNote"></p>
     </div>
 
+    <div class="sheet glass" id="sheetFire" role="dialog" aria-label="모닥불 퀴즈">
+      <button class="x" data-close>✕</button>
+      <h3>모닥불 퀴즈</h3>
+      <div class="small" style="margin:0" id="fzTopic"></div>
+      <div class="fzdots" id="fzDots"></div>
+      <div class="fzq" id="fzQ"></div>
+      <div class="choices" id="fzC"></div>
+      <div class="fzres" id="fzRes" hidden></div>
+      <p class="small">불가에 둘러앉아 한국어를 보고 맞는 영어를 골라요. 세 문제를 다 맞히면 쿠폰 도장을 하나 받아요.</p>
+    </div>
+
     <div class="sheet glass" id="sheetOrder" role="dialog" aria-label="주문하기">
       <button class="x" data-close>✕</button>
       <div class="say"><div style="flex:1;min-width:0"><div class="en" id="bEn"></div><div class="ko" id="bKo"></div></div><button class="again" id="again"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>다시 듣기</button></div>
@@ -492,7 +507,7 @@ body{padding:0!important;background:#140E0A}
       <ul class="list">
         <li><b>카운터.</b> 바리스타에게 다가가 주문해요. 바리스타는 말풍선과 음성으로 말하고, 끝나면 영수증과 쿠폰 도장이 나와요.</li>
         <li><b>테이블 4곳.</b> 2인석, 4인석, 창가석, 라운지 소파예요. 앉으면 컵홀더 질문과 15분 타이머가 나와요.</li>
-        <li><b>오늘의 주제.</b> 요일마다 주제가 바뀌어요. 메뉴판, 퀵챗, 테이블 질문이 모두 그날 주제로 바뀌어요. 위쪽 주제 칩을 누르면 다른 요일을 미리 볼 수 있어요.</li><li><b>메뉴판.</b> 오늘의 표현과 예문, 내 쿠폰 도장과 오늘 쓴 영어 문장을 볼 수 있어요. cafeinenglish.com 학습 페이지로 바로 이어져요.</li><li><b>시즌 장식.</b> 할로윈(10/24~31)과 크리스마스(12/1~26)에는 카페가 자동으로 그 분위기로 꾸며져요. 왼쪽 미리보기 버튼으로 확인할 수 있어요.</li><li><b>창밖 풍경.</b> 창가 쪽 창문을 넓히고 창가석을 8석으로 늘렸어요. 창밖 산과 호수 풍경이 실제 시간에 맞춰 새벽·낮·노을(오후 4시 반~6시 반)·저녁·밤으로 바뀌어요.</li><li><b>포스트잇 벽.</b> 입구 옆 벽에 오늘의 표현으로 만든 문장을 붙이고, 다른 사람 문장에 하트를 눌러요. 주제가 바뀌면 벽도 새로 채워져요.</li><li><b>테라스 오픈마이크.</b> 카페 앞 테라스 무대에 올라가 오늘의 한 줄을 듣고 소리 내어 말해요. 사이트에서는 말한 걸 알아듣고 얼마나 비슷한지 알려 주고, 손님들이 박수를 쳐요.</li><li><b>스터디룸.</b> 오른쪽 문으로 들어가면 조용한 스터디룸이 있어요. 들어가면 음악이 잔잔한 클래식으로 바뀌어요. 집중 시간은 5·25·50분이나 1~180분 직접 입력이고, 공부 음악 음량, 끝 알람 켜기·끄기, 알람 소리 4가지(미리 듣기)를 고를 수 있어요. 대화 대신 오늘의 표현 카드와 옆자리 응원만 있어요.</li><li><b>앉기 표시.</b> 테이블 가까이 가거나 마우스를 올리면 바닥 링과 빈자리 점이 켜져요. 테이블을 바로 눌러도 걸어가서 앉아요.</li><li><b>대화 알림음.</b> 테이블 대화에서 새 말이 뜰 때마다 사람마다 다른 음높이로 "띵동" 하고 짧게 울려요.</li><li><b>인사와 짠.</b> "인사"는 고개를 까딱하고, 주변 손님도 같이 인사해요. "짠"은 가까운 손님과 머그를 부딪쳐요. 누가 들어오거나 인사하면 위쪽에 알림이 떠요.</li><li><b>카페 음악.</b> 화면을 처음 누르면 카페 재즈가 흘러요. 바리스타가 말할 때는 소리가 작아지고, 음표 버튼으로 끌 수 있어요.</li><li><b>테이블 대화.</b> 컵홀더 질문을 고르면 대화창이 열리고, 같은 테이블 손님이 퀵챗으로 대답한 뒤 내 차례가 와요.</li>
+        <li><b>오늘의 주제.</b> 요일마다 주제가 바뀌어요. 메뉴판, 퀵챗, 테이블 질문이 모두 그날 주제로 바뀌어요. 위쪽 주제 칩을 누르면 다른 요일을 미리 볼 수 있어요.</li><li><b>메뉴판.</b> 오늘의 표현과 예문, 내 쿠폰 도장과 오늘 쓴 영어 문장을 볼 수 있어요. cafeinenglish.com 학습 페이지로 바로 이어져요.</li><li><b>시즌 장식.</b> 할로윈(10/24~31)과 크리스마스(12/1~26)에는 카페가 자동으로 그 분위기로 꾸며져요. 왼쪽 미리보기 버튼으로 확인할 수 있어요.</li><li><b>창밖 풍경.</b> 창가 쪽 창문을 넓히고 창가석을 8석으로 늘렸어요. 창밖 산과 호수 풍경이 실제 시간에 맞춰 새벽·낮·노을(오후 4시 반~6시 반)·저녁·밤으로 바뀌어요.</li><li><b>포스트잇 벽.</b> 입구 옆 벽에 오늘의 표현으로 만든 문장을 붙이고, 다른 사람 문장에 하트를 눌러요. 주제가 바뀌면 벽도 새로 채워져요.</li><li><b>테라스 오픈마이크.</b> 카페 앞 테라스 무대에 올라가 오늘의 한 줄을 듣고 소리 내어 말해요. 사이트에서는 말한 걸 알아듣고 얼마나 비슷한지 알려 주고, 손님들이 박수를 쳐요.</li><li><b>모닥불 쉼터.</b> 테라스 오른쪽 모닥불 앞에 가면 "모닥불 퀴즈"가 열려요. 오늘의 주제로 세 문제를 풀고, 다 맞히면 손님들이 박수를 치고 쿠폰 도장을 받아요.</li><li><b>스터디룸.</b> 오른쪽 문으로 들어가면 조용한 스터디룸이 있어요. 들어가면 음악이 잔잔한 클래식으로 바뀌어요. 집중 시간은 5·25·50분이나 1~180분 직접 입력이고, 공부 음악 음량, 끝 알람 켜기·끄기, 알람 소리 4가지(미리 듣기)를 고를 수 있어요. 대화 대신 오늘의 표현 카드와 옆자리 응원만 있어요.</li><li><b>앉기 표시.</b> 테이블 가까이 가거나 마우스를 올리면 바닥 링과 빈자리 점이 켜져요. 테이블을 바로 눌러도 걸어가서 앉아요.</li><li><b>대화 알림음.</b> 테이블 대화에서 새 말이 뜰 때마다 사람마다 다른 음높이로 "띵동" 하고 짧게 울려요.</li><li><b>인사와 짠.</b> "인사"는 고개를 까딱하고, 주변 손님도 같이 인사해요. "짠"은 가까운 손님과 머그를 부딪쳐요. 누가 들어오거나 인사하면 위쪽에 알림이 떠요.</li><li><b>카페 음악.</b> 화면을 처음 누르면 카페 재즈가 흘러요. 바리스타가 말할 때는 소리가 작아지고, 음표 버튼으로 끌 수 있어요.</li><li><b>테이블 대화.</b> 컵홀더 질문을 고르면 대화창이 열리고, 같은 테이블 손님이 퀵챗으로 대답한 뒤 내 차례가 와요.</li>
         <li><b>웹 연결.</b> 영수증의 "자세히 공부하기"를 누르면 cafeinenglish.com 학습 페이지로 이어져요.</li>
       </ul>
     </div>
@@ -926,6 +941,7 @@ function frame(now){const dt=Math.min(.1,(now-last)/1000);last=now;const t=now/1
  tmp.set(focus.x+Math.sin(yaw)*D*Math.cos(pitch),D*Math.sin(pitch)+10,focus.z+Math.cos(yaw)*D*Math.cos(pitch));cam.position.lerp(tmp,Math.min(1,dt*5));cam.lookAt(focus.x,24,focus.z);
  const lo=cam.position.x<-BX?.12:1,ro=((cam.position.x>BX)!==(me.x>BX))?.12:1,bo=cam.position.z<-BZ-10?.1:1,abo=cam.position.z<AZ0?.1:1,aro=cam.position.x>AX1?.1:1;[MAT.wall,MAT.wains,board.material,logoP.material].forEach(m=>{m.transparent=true;m.opacity+=(bo-m.opacity)*.15;});annexMats.back.opacity+=(abo-annexMats.back.opacity)*.15;fBoard.material.opacity=annexMats.back.opacity;annexMats.right.opacity+=(aro-annexMats.right.opacity)*.15;[0,1].forEach(i=>sideMats[i].opacity+=(lo-sideMats[i].opacity)*.15);frameM.opacity=sideMats[0].opacity;winMat.opacity=.08*sideMats[0].opacity;[2,3].forEach(i=>sideMats[i].opacity+=(ro-sideMats[i].opacity)*.15);
  if(typeof awn!=='undefined'){const ao=(cam.position.z>BZ-10&&focus.z<BZ+60)?.12:1;awn.material.opacity+=(ao-awn.material.opacity)*.15;awnStripe.material.opacity=awn.material.opacity;archM.color.copy(M('frame').color);archM.roughness=M('frame').roughness;archM.opacity=Math.max(.18,awn.material.opacity);const dw=awn.material.opacity>.6;awn.material.depthWrite=dw;awnStripe.material.depthWrite=dw;archM.depthWrite=dw;awn.castShadow=true;}
+ if(typeof fireTick==='function')fireTick(now/1000);
  renderer.render(scene,cam);
  const r=stage.getBoundingClientRect();all.forEach(p=>{tmp.set(p.x,(p.barista?48:40)+(p.py||0),p.z).project(cam);const sx=(tmp.x+1)/2*r.width,sy=(1-tmp.y)/2*r.height,vis=tmp.z<1&&sx>-80&&sx<r.width+80&&sy>-40&&sy<r.height+40;
   p.tagEl.style.display=vis?'':'none';p.tagEl.style.left=sx+'px';p.tagEl.style.top=sy+'px';p.bubEl.style.left=sx+'px';p.bubEl.style.top=(sy-24)+'px';if(!vis)p.bubEl.style.visibility='hidden';else p.bubEl.style.visibility='';});
@@ -934,6 +950,7 @@ function frame(now){const dt=Math.min(.1,(now-last)/1000);last=now;const t=now/1
 function updateNear(){const sb=$('standBtn');if(sb){const v=!(seated&&exitMode==='A');if(sb.hidden!==v){sb.hidden=v;if(!v){sb.classList.remove('pop');void sb.offsetWidth;sb.classList.add('pop');}}}if(!seated)hideChip();let n=null;if(!seated){if(Math.hypot(me.x-COUNTER.x,me.z-COUNTER.z)<60)n={k:'counter',key:'c'};
  else if(me.x>330&&me.x<BX+5&&me.z>270&&me.z<525)n={k:'wall',z:WALL_ZONE,key:'wall'};
  else if(Math.abs(me.x-STAGE.x)<150&&Math.abs(me.z-STAGE.z)<120)n={k:'stage',z:STAGE_ZONE,key:'stage'};
+ else if(Math.hypot(me.x-FIRE.x,me.z-FIRE.z)<185)n={k:'fire',key:'fire'};
  else ZONES.forEach(z=>{const d=z.type==='study'?Math.max(Math.abs(me.x-z.x)-z.w/2,Math.abs(me.z-z.z)-z.d/2)-62:z.type==='bar'?(me.x<-320&&me.z>-410&&me.z<440?0:999):Math.hypot(me.x-z.x,me.z-z.z)-(z.type==='lounge'?120:z.r+56);if(d<=0)n={k:'zone',z,key:z.id};});}
  const key=seated?'seated':(n?n.key:'');if(key===actBtn.dataset.key)return;actBtn.dataset.key=key;near=n;
  if(seated){actBtn.disabled=false;actBtn.textContent=seated.type==='study'?'스터디룸 보기':'테이블 보기';return;}
@@ -941,6 +958,7 @@ function updateNear(){const sb=$('standBtn');if(sb){const v=!(seated&&exitMode==
  else if(n.k==='counter'){actBtn.disabled=false;actBtn.textContent='바리스타에게 주문하기';}
  else if(n.k==='wall'){actBtn.disabled=false;actBtn.textContent='포스트잇 벽 보기';}
  else if(n.k==='stage'){actBtn.disabled=false;actBtn.textContent='오픈마이크 올라가기';}
+ else if(n.k==='fire'){actBtn.disabled=false;actBtn.textContent='모닥불 퀴즈 하기';}
  else{const used=people.filter(p=>p.seat&&p.seat[0]===n.z.id).length;actBtn.disabled=used>=n.z.seats;actBtn.textContent=used>=n.z.seats?n.z.name+' 만석':n.z.name+' 앉기 '+used+'/'+n.z.seats;}}
 
 function sheetOpen(){return !!document.querySelector('.sheet.open,.modal.open');}
@@ -1089,8 +1107,32 @@ $('leaveS').addEventListener('click',()=>{if(!seated)return;const z=seated;delet
 document.getElementById('leave').addEventListener('click',()=>{if(!seated)return;chatId++;tHushAll();const z=seated;delete me.seat;seated=null;tEnd=0;clearInterval(tInt);if(z.type==='bar'){me.x=-330;}else{me.z=z.z+(z.r||40)+60;me.x=z.x;}collide(me);closeAll();});
 actBtn.addEventListener('click',()=>{if(seated){if(seated.type==='study')showStudy();else showTable();return;}if(!near){walkTo(COUNTER.x,COUNTER.z+8);return;}
  if(near.k==='counter'){order={item:'',size:'',said:[]};me.walk=false;me.x=COUNTER.x;me.z=COUNTER.z;me.ang=Math.PI;open('sheetOrder');camFocus=new THREE.Vector3(COUNTER.x,0,(COUNTER.z+barista.z)/2+30);camDist=300;node('start');}
- else if(near.k==='wall')openWall();else if(near.k==='stage')openMic();
+ else if(near.k==='wall')openWall();else if(near.k==='stage')openMic();else if(near.k==='fire')openFire();
  else sit(near.z);});
+
+/* 모닥불 퀴즈 */
+let fzQs=[],fzI=0,fzScore=0,fzCrowd=[];
+function shuf(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildQuiz(){const others=shuf(TOPICS.filter(t=>t!==TOPIC));const qs=[{ko:TOPIC.expr[1],tag:'오늘의 표현',ans:TOPIC.expr[0],opts:[TOPIC.expr[0],others[0].expr[0],others[1].expr[0]]}];
+ shuf(TOPIC.q.slice()).slice(0,2).forEach(q=>{const a=shuf(q.a.slice());qs.push({ko:a[0][1],tag:'"'+q.en+'"에 대답하기',ans:a[0][0],opts:[a[0][0],a[1][0],a[2][0]]});});
+ qs.forEach(q=>shuf(q.opts));return qs;}
+function openFire(){me.walk=false;me.path=[];me.x=FIRE.x;me.z=FIRE.z+54;me.ang=Math.PI;fzQs=buildQuiz();fzI=0;fzScore=0;$('fzTopic').textContent='오늘의 주제 · '+TOPIC.en+' · '+TOPIC.ko;renderFire();open('sheetFire');
+ camFocus=new THREE.Vector3(FIRE.x,0,FIRE.z+20);camDist=330;
+ fzCrowd=people.filter(p=>!p.me&&!p.seat).slice(0,3);fzCrowd.forEach((p,i)=>{const L=FIRE_LOGS[[0,2,3][i]];p.tx=L.x+(FIRE.x-L.x)*.24;p.tz=L.z+(FIRE.z-L.z)*.24;});toast('모닥불 앞에 앉았어요. 손님들이 모여요');}
+function renderFire(){const d=$('fzDots');d.innerHTML='';fzQs.forEach((q,i)=>{const e=document.createElement('i');e.className=q.res||(i===fzI?'cur':'');d.appendChild(e);});
+ const box=$('fzC');box.innerHTML='';box.classList.remove('lock');$('fzRes').hidden=true;
+ if(fzI>=fzQs.length){$('fzQ').innerHTML='';const r=$('fzRes');r.hidden=false;r.innerHTML='';const b=document.createElement('b');b.textContent=fzScore+' / '+fzQs.length+(fzScore===fzQs.length?' · 다 맞혔어요!':' 맞혔어요');r.appendChild(b);
+  const s=document.createElement('div');s.className='small';s.textContent=fzScore===fzQs.length?'쿠폰 도장 +1 · 손님들이 박수를 쳐요':'다시 하면 다른 문제가 나와요';r.appendChild(s);
+  const row=document.createElement('div');row.className='btnrow';const again=Object.assign(document.createElement('button'),{className:'btn',textContent:'다시 하기'});again.onclick=()=>{fzQs=buildQuiz();fzI=0;fzScore=0;renderFire();};
+  const done=Object.assign(document.createElement('button'),{className:'btn dark',textContent:'불가에서 일어나기'});done.onclick=()=>{closeAll();me.z=FIRE.z+150;};row.append(again,done);r.appendChild(row);
+  if(fzScore===fzQs.length){stampsN=Math.min(10,stampsN+1);fzCrowd.forEach((p,i)=>setTimeout(()=>{nod(p);say(p,['Bravo!','You nailed it!','Wow, perfect!'][i%3],'',2200,true);},200+i*250));sfx('clink');}
+  return;}
+ const q=fzQs[fzI];$('fzQ').innerHTML='';const sm=document.createElement('small');sm.textContent=q.tag;$('fzQ').append(sm,document.createTextNode(q.ko));
+ q.opts.forEach(o=>{const b=document.createElement('button');b.className='choice';b.append(Object.assign(document.createElement('span'),{className:'en',textContent:o}));
+  b.onclick=()=>{box.classList.add('lock');const ok=o===q.ans;haptic();q.res=ok?'ok':'ng';if(ok){fzScore++;sfx('clink');}else sfx();
+   [...box.children].forEach(c=>{if(c.textContent===q.ans)c.classList.add('ok');else if(c===b)c.classList.add('ng');});
+   const p=fzCrowd[fzI%Math.max(1,fzCrowd.length)];if(p)say(p,ok?['Nice one!','Exactly!','Good job!'][fzI%3]:'So close!',ok?'':'아깝다!',1800,true);
+   say(me,q.ans,q.ko,1800,true);setTimeout(()=>{fzI++;renderFire();},1300);};box.appendChild(b);});}
 
 const BR=[['1호점',24],['2호점',38],['3호점',50],['4호점',15],['5호점',44],['6호점',6]];let curBr=0;
 function renderBr(){const box=document.getElementById('branches');box.innerHTML='';BR.forEach((b,i)=>{const e=document.createElement('button');const full=b[1]>=50&&i!==curBr;e.className='br'+(i===curBr?' cur':'')+(full?' full':'');e.append(Object.assign(document.createElement('b'),{textContent:'카영 카페 '+b[0]}),Object.assign(document.createElement('span'),{textContent:full?'만석 · 50/50명':b[1]+'/50명'}));
@@ -1201,6 +1243,29 @@ const mpC=document.createElement('canvas');mpC.width=512;mpC.height=128;{const x
 /* 바닥 등 */
 const lanternLights=[];
 [[-TX+30,TZ0+60],[TX-30,TZ0+60],[-TX+30,TZ1-40],[TX-30,TZ1-40],[-120,TZ1+40],[120,TZ1+40],[-TX-60,BZ-200]].forEach(([x,z])=>{const post=cyl(2,2,26,M('leg'),8);add(post,x,0,z);const box=new THREE.Mesh(new THREE.BoxGeometry(12,14,12),new THREE.MeshBasicMaterial({color:'#FFD58F'}));box.position.set(x,32,z);scene.add(box);lanternLights.push(box);});
+/* 모닥불 쉼터 (테라스 오른쪽) */
+const FIRE={x:668,z:BZ+232};
+{const fx0=462,fx1=870,fz0=BZ+60,fz1=BZ+404;
+ add(rbox(fx1-fx0+20,26,fz1-fz0+20,10,M('stageWood')),(fx0+fx1)/2,-26.5,(fz0+fz1)/2,false,true);
+ const t2=new THREE.CanvasTexture(deckC);t2.wrapS=t2.wrapT=THREE.RepeatWrapping;t2.repeat.set(1.8,2.6);
+ const d2=new THREE.Mesh(new THREE.PlaneGeometry(fx1-fx0,fz1-fz0),new THREE.MeshStandardMaterial({map:t2,roughness:.9}));d2.rotation.x=-Math.PI/2;d2.position.set((fx0+fx1)/2,.21,(fz0+fz1)/2);d2.receiveShadow=true;scene.add(d2);
+ RECTS.push([fx0,fx1,fz0+6,fz1-6]);
+ const corners=[[fx0+14,fz0+14],[fx1-14,fz0+14],[fx1-14,fz1-14],[fx0+14,fz1-14]];corners.forEach(([x,z])=>add(cyl(2.4,2.4,150,M('leg'),8),x,0,z));
+ const pts=[];for(let k=0;k<4;k++){const a=corners[k],b=corners[(k+1)%4];const n=Math.round(Math.hypot(b[0]-a[0],b[1]-a[1])/26);for(let i=0;i<n;i++){const u=i/n;pts.push([a[0]+(b[0]-a[0])*u,148-Math.sin(u*Math.PI)*22,a[1]+(b[1]-a[1])*u]);}}
+ lightString(scene,pts,['#FFE3B0','#FFD58F']);}
+const stoneM=new THREE.MeshStandardMaterial({color:'#6E6A66',roughness:.95,flatShading:true});
+for(let i=0;i<12;i++){const a=i/12*Math.PI*2;const st=new THREE.Mesh(new THREE.DodecahedronGeometry(7+(i%3),0),stoneM);st.position.set(FIRE.x+Math.cos(a)*30,4,FIRE.z+Math.sin(a)*30);st.scale.y=.7;st.rotation.y=i;st.castShadow=true;scene.add(st);}
+const logM=new THREE.MeshStandardMaterial({color:'#6B4329',roughness:.9}),logEnd=new THREE.MeshStandardMaterial({color:'#D9B48A',roughness:.9});
+[0,2.1,4.2].forEach(a=>{const l=new THREE.Mesh(new THREE.CylinderGeometry(3,3.4,40,10),logM);l.position.set(FIRE.x+Math.cos(a)*7,10,FIRE.z+Math.sin(a)*7);l.rotation.set(Math.sin(a)*.9,0,-Math.cos(a)*.9);l.castShadow=true;scene.add(l);});
+const flames=[];[['#FF7A1A',13,34,0],['#FFB23A',9,26,1],['#FFE48A',5,16,2]].forEach(([c,r,h,i])=>{const f=new THREE.Mesh(new THREE.ConeGeometry(r,h,12),new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:.92}));f.position.set(FIRE.x,10+h/2,FIRE.z);f.userData.h=h;f.userData.i=i;scene.add(f);flames.push(f);});
+const fireLight=new THREE.PointLight(0xff9a3c,1.5,460,1.6);fireLight.position.set(FIRE.x,34,FIRE.z);scene.add(fireLight);
+{const gc=document.createElement('canvas');gc.width=gc.height=128;const x=gc.getContext('2d');const gr=x.createRadialGradient(64,64,4,64,64,64);gr.addColorStop(0,'rgba(255,170,80,.55)');gr.addColorStop(1,'rgba(255,140,60,0)');x.fillStyle=gr;x.fillRect(0,0,128,128);
+ const glow=new THREE.Mesh(new THREE.PlaneGeometry(260,260),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(gc),transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));glow.rotation.x=-Math.PI/2;glow.position.set(FIRE.x,.6,FIRE.z);scene.add(glow);}
+CIRC.push({x:FIRE.x,z:FIRE.z,r:40});
+const FIRE_LOGS=[0,Math.PI/2,Math.PI,Math.PI*1.5].map(a=>({a,x:FIRE.x+Math.cos(a)*96,z:FIRE.z+Math.sin(a)*96}));
+FIRE_LOGS.forEach(L=>{const g=new THREE.Group();const l=new THREE.Mesh(new THREE.CylinderGeometry(8,8,72,14),logM);l.rotation.z=Math.PI/2;l.position.y=8;l.castShadow=true;g.add(l);[-1,1].forEach(s=>{const e=new THREE.Mesh(new THREE.CircleGeometry(7.6,14),logEnd);e.position.set(s*36.1,8,0);e.rotation.y=s*Math.PI/2;g.add(e);});g.position.set(L.x,0,L.z);g.rotation.y=-L.a-Math.PI/2;scene.add(g);
+ const tx=-Math.sin(L.a),tz=Math.cos(L.a);[-1,1].forEach(s=>CIRC.push({x:L.x+tx*s*20,z:L.z+tz*s*20,r:16}));});
+function fireTick(t){flames.forEach(f=>{const k=1+Math.sin(t*9+f.userData.i*2)*.12+Math.sin(t*23+f.userData.i)*.06;f.scale.set(1+Math.sin(t*7+f.userData.i)*.08,k,1+Math.cos(t*6+f.userData.i)*.08);f.position.y=10+f.userData.h*k/2;});fireLight.intensity=1.35+Math.sin(t*11)*.18+Math.sin(t*27)*.1;}
 /* 나무 · 언덕 */
 const leafM=[new THREE.MeshStandardMaterial({color:'#3F6E3A',roughness:.9,flatShading:true}),new THREE.MeshStandardMaterial({color:'#4F8044',roughness:.9,flatShading:true}),new THREE.MeshStandardMaterial({color:'#2F5A34',roughness:.9,flatShading:true})];
 const trunkM=new THREE.MeshStandardMaterial({color:'#5A3D2A'});
@@ -1279,7 +1344,7 @@ function fadeTo(v,ms){fadeA(trk(inStudy),v,ms);}
 function setMusic(on){musicOn=on;$('mslash').style.opacity=on?0:1;$('musicBtn').setAttribute('aria-label',on?'카페 음악 끄기':'카페 음악 켜기');
  if(on){fadeA(trk(inStudy),tv(),1500);}else{fadeA(bgm,0,600);fadeA(bgmS,0,600);}}
 function duck(on){if(!musicOn)return;fadeA(trk(inStudy),on?Math.min(MD,tv()):tv(),250);}
-function checkRoom(){const now=me.x>BX+10;if(now===inStudy)return;inStudy=now;
+function checkRoom(){const now=me.x>BX+10&&me.z<AZ1;if(now===inStudy)return;inStudy=now;
  if(musicOn){fadeA(trk(!now),0,1200);fadeA(trk(now),tv(),1800);}
  toast(now?'스터디룸이에요. 공부 음악: '+STUDY_TRACKS[studyTrack][0]:'카페로 돌아왔어요');
  const l=$('musicLabel');if(l)l.textContent=now?'스터디룸 음악':'카페 음악';syncVolSlider();}
@@ -1292,7 +1357,7 @@ cv.addEventListener('pointerdown',()=>{$('volPop').hidden=true;});
 let firstTouch=false;stage.addEventListener('pointerdown',e=>{if(e.target.closest('#musicBtn,#volPop')){firstTouch=true;return;}if(!firstTouch){firstTouch=true;if(!musicOn){setMusic(true);syncVol();}}},{capture:true});
 document.querySelectorAll('.skb').forEach(b=>b.addEventListener('click',()=>{skyMode=b.dataset.sk;document.querySelectorAll('.skb').forEach(x=>x.classList.toggle('on',x===b));skyCur='';updSky();}));
 function haptic(){try{navigator.vibrate&&navigator.vibrate(12);}catch(e){}}
-{const SHORT={'바리스타에게 주문하기':'주문하기','오픈마이크 올라가기':'무대 오르기','포스트잇 벽 보기':'포스트잇 벽'};const fit=()=>{if(innerWidth<=640){const m=SHORT[actBtn.textContent];if(m)actBtn.textContent=m;}};new MutationObserver(fit).observe(actBtn,{childList:true,characterData:true,subtree:true});fit();addEventListener('resize',()=>{actBtn.dataset.key='';});}
+{const SHORT={'바리스타에게 주문하기':'주문하기','오픈마이크 올라가기':'무대 오르기','모닥불 퀴즈 하기':'모닥불 퀴즈','포스트잇 벽 보기':'포스트잇 벽'};const fit=()=>{if(innerWidth<=640){const m=SHORT[actBtn.textContent];if(m)actBtn.textContent=m;}};new MutationObserver(fit).observe(actBtn,{childList:true,characterData:true,subtree:true});fit();addEventListener('resize',()=>{actBtn.dataset.key='';});}
 actBtn.addEventListener('pointerdown',()=>{actBtn.classList.add('press');haptic();});['pointerup','pointerleave','pointercancel'].forEach(t=>actBtn.addEventListener(t,()=>actBtn.classList.remove('press')));
 document.querySelectorAll('.dock button:not(.main)').forEach(b=>b.addEventListener('pointerdown',haptic));
 $('standBtn').addEventListener('click',standUp);$('standChip').addEventListener('click',()=>{hideChip();standUp();});document.querySelectorAll('.ep').forEach(b=>b.addEventListener('click',()=>setExit(b.dataset.e)));setExit(exitMode);
