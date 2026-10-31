@@ -316,7 +316,7 @@ body{padding:0!important;background:#140E0A}
     <div class="top">
       <div>
         <a class="chip glass ic exit" href="/" aria-label="카페인영어 홈으로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h5v16h-5"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h10"/></svg></a>
-        <button class="chip glass" id="branchBtn"><span class="d"></span><span id="branchName">카영 카페 1호점</span><span class="n" id="countTxt">14/30</span></button>
+        <button class="chip glass" id="branchBtn"><span class="d"></span><span id="branchName">카영 카페 1호점</span><span class="n" id="countTxt">24/50</span></button>
         <button class="chip glass" id="topicBtn" title="다른 요일 주제 미리보기"><span style="opacity:.7;font-weight:600">오늘의 주제</span><b id="topicName"></b></button>
       </div>
       <div>
@@ -541,8 +541,8 @@ const ZONES=[
  {id:'t4',name:'2인석',type:'round',x:140,z:230,r:34,seats:2},
  {id:'bar',name:'창가석',type:'bar',x:-385,z:15,seats:8},
  {id:'lounge',name:'라운지',type:'lounge',x:300,z:-120,r:32,seats:4},
- {id:'s1',name:'스터디룸',type:'study',x:600,z:250,w:60,d:300,seats:8},
- {id:'s2',name:'스터디룸',type:'study',x:760,z:250,w:60,d:300,seats:8}
+ {id:'s1',name:'스터디룸',type:'study',x:600,z:0,w:60,d:840,seats:22},
+ {id:'s2',name:'스터디룸',type:'study',x:760,z:0,w:60,d:840,seats:22}
 ];
 ZONES.forEach(t=>{t.spots=[];
  if(t.type==='round'){for(let i=0;i<t.seats;i++){const a=(t.seats===2?[Math.PI/2,-Math.PI/2][i]:[Math.PI/4,Math.PI*3/4,-Math.PI*3/4,-Math.PI/4][i]);t.spots.push({x:t.x+Math.cos(a)*(t.r+24),z:t.z+Math.sin(a)*(t.r+24)});}}
@@ -552,8 +552,8 @@ ZONES.forEach(t=>{t.spots=[];
 });
 const COUNTER={x:-75,z:-392};
 const CIRC=[...ZONES.filter(t=>t.type==='round').map(t=>({x:t.x,z:t.z,r:t.r+14})),{x:300,z:-120,r:44},{x:-418,z:-518,r:26},{x:418,z:60,r:26},{x:-418,z:440,r:26},{x:395,z:495,r:26}];
-const BOXES=[[-330,170,-560,-422],[360,460,-245,0],[268,332,-8,46],[400,460,-505,-335],[-470,-404,-410,440],[570,630,100,400],[730,790,100,400],[835,880,220,380],[835,880,-40,120]];
-const RECTS=[[-BX,BX,-BZ,BZ],[BX-5,488,130,210],[480,862,-36,545],[-470,470,BZ-5,BZ+515]];
+const BOXES=[[-330,170,-560,-422],[360,460,-245,0],[268,332,-8,46],[400,460,-505,-335],[-470,-404,-410,440],[570,630,-420,420],[730,790,-420,420],[835,880,220,380],[835,880,-40,120]];
+const RECTS=[[-BX,BX,-BZ,BZ],[BX-5,488,130,210],[480,862,-545,545],[-470,470,BZ-5,BZ+515]];
 const inR=(p,r)=>p.x>=r[0]&&p.x<=r[1]&&p.z>=r[2]&&p.z<=r[3];
 function collide(p){if(!RECTS.some(r=>inR(p,r))){let best=null,bd=1e9;for(const r of RECTS){const q={x:Math.max(r[0],Math.min(r[1],p.x)),z:Math.max(r[2],Math.min(r[3],p.z))};const d=Math.hypot(q.x-p.x,q.z-p.z);if(d<bd){bd=d;best=q;}}p.x=best.x;p.z=best.z;}
  for(const c of CIRC){const dx=p.x-c.x,dz=p.z-c.z,d=Math.hypot(dx,dz);if(d<c.r+11){const k=(c.r+11)/(d||1);p.x=c.x+dx*k;p.z=c.z+dz*k;}}
@@ -693,7 +693,7 @@ const bookCols=['#3182F6','#CDEB5B','#F49A7C','#FFF6E6','#2B1D14','#9AC4F8','#E9
 function plant(x,z,s){add(cyl(13*s,10*s,24*s,M('pot'),20),x,0,z);const lg=new THREE.IcosahedronGeometry(14*s,1);[[0,40,0,1.1],[-9,32,5,.8],[9,34,-4,.85],[2,52,2,.7]].forEach(a=>{const m=new THREE.Mesh(lg,M('leaf',{flatShading:true}));m.scale.setScalar(a[3]);add(m,x+a[0]*s,a[1]*s,z+a[2]*s);});}
 plant(-418,-518,1.2);plant(418,60,1);plant(-418,440,1.1);plant(-130,-410,.6);
 /* 스터디룸 (오른쪽 별관) */
-const AX0=466,AX1=880,AZ0=-58,AZ1=BZ+18;
+const AX0=466,AX1=880,AZ0=-BZ-18,AZ1=BZ+18;
 const crC=document.createElement('canvas');crC.width=256;crC.height=256;const crx=crC.getContext('2d');crx.fillStyle='#fff';crx.fillRect(0,0,256,256);crx.fillStyle='rgba(0,0,0,.06)';for(let i=0;i<256;i+=16){crx.fillRect(i,0,1,256);crx.fillRect(0,i,256,1);}
 const crT=new THREE.CanvasTexture(crC);crT.wrapS=crT.wrapT=THREE.RepeatWrapping;crT.repeat.set(6,7);
 const carpet=new THREE.Mesh(new THREE.PlaneGeometry(AX1-AX0,AZ1-AZ0),M('carpet',{map:crT}));carpet.rotation.x=-Math.PI/2;carpet.position.set((AX0+AX1)/2,.3,(AZ0+AZ1)/2);carpet.receiveShadow=true;scene.add(carpet);
@@ -718,8 +718,8 @@ ZONES.filter(z=>z.type==='study').forEach(z=>{const top=add(rbox(z.w,5,z.d,6,M('
  const lamp=new THREE.Mesh(new THREE.SphereGeometry(4,12,10),new THREE.MeshBasicMaterial({color:'#FFE3B0'}));lamp.position.set(z.x,46,z.z);scene.add(lamp);add(cyl(1.2,1.2,14,M('leg'),8),z.x,32,z.z);});
 add(rbox(40,150,160,4,M('shelf')),858,0,40);
 [[-20],[0],[20]].forEach(()=>{});
-plant(850,520,1);plant(500,-30,.9);plant(500,520,.9);add(rbox(40,150,160,4,M('shelf')),858,0,300);
-const studyLight=new THREE.PointLight(0xffd59a,1,420,1.4);studyLight.position.set(680,140,250);scene.add(studyLight);
+plant(850,520,1);plant(500,-520,.9);plant(500,520,.9);plant(850,-520,1);add(rbox(40,150,160,4,M('shelf')),858,0,300);
+const studyLight=new THREE.PointLight(0xffd59a,1,420,1.4);studyLight.position.set(680,140,0);{const l2=new THREE.PointLight(0xffd59a,.8,420,1.4);l2.position.set(680,140,-330);scene.add(l2);const l3=new THREE.PointLight(0xffd59a,.8,420,1.4);l3.position.set(680,140,330);scene.add(l3);}scene.add(studyLight);
 
 const sbC=document.createElement('canvas');sbC.width=256;sbC.height=340;const sbT=new THREE.CanvasTexture(sbC);
 function drawSign(t){const x=sbC.getContext('2d');x.fillStyle=t.c.sign;x.fillRect(0,0,256,340);x.fillStyle='#1A110B';x.fillRect(18,18,220,304);x.textAlign='center';x.fillStyle=LIME;x.font='800 40px sans-serif';x.fillText('OPEN',128,84);x.fillStyle=CREAM;x.font='600 22px sans-serif';x.fillText('Today 9PM',128,128);x.fillText('Voice Tables',128,158);x.fillStyle=LIME;x.font='700 20px sans-serif';x.fillText("TODAY'S TOPIC",128,212);x.fillStyle=CREAM;x.font='800 28px sans-serif';TOPIC.en.split(' ').reduce((acc,w)=>{const l=acc[acc.length-1];if(l&&(l+' '+w).length<=10)acc[acc.length-1]=l+' '+w;else acc.push(w);return acc;},[]).slice(0,3).forEach((l,i)=>x.fillText(l,128,250+i*32));sbT.needsUpdate=true;}
@@ -989,9 +989,9 @@ actBtn.addEventListener('click',()=>{if(seated){if(seated.type==='study')showStu
  else if(near.k==='wall')openWall();else if(near.k==='stage')openMic();
  else sit(near.z);});
 
-const BR=[['1호점',14],['2호점',22],['3호점',30],['4호점',9],['5호점',27],['6호점',4]];let curBr=0;
-function renderBr(){const box=document.getElementById('branches');box.innerHTML='';BR.forEach((b,i)=>{const e=document.createElement('button');const full=b[1]>=30&&i!==curBr;e.className='br'+(i===curBr?' cur':'')+(full?' full':'');e.append(Object.assign(document.createElement('b'),{textContent:'카영 카페 '+b[0]}),Object.assign(document.createElement('span'),{textContent:full?'만석 · 30/30명':b[1]+'/30명'}));
- if(!full)e.addEventListener('click',()=>{curBr=i;document.getElementById('branchName').textContent='카영 카페 '+b[0];document.getElementById('countTxt').textContent=b[1]+'/30';closeAll();});box.appendChild(e);});}
+const BR=[['1호점',24],['2호점',38],['3호점',50],['4호점',15],['5호점',44],['6호점',6]];let curBr=0;
+function renderBr(){const box=document.getElementById('branches');box.innerHTML='';BR.forEach((b,i)=>{const e=document.createElement('button');const full=b[1]>=50&&i!==curBr;e.className='br'+(i===curBr?' cur':'')+(full?' full':'');e.append(Object.assign(document.createElement('b'),{textContent:'카영 카페 '+b[0]}),Object.assign(document.createElement('span'),{textContent:full?'만석 · 50/50명':b[1]+'/50명'}));
+ if(!full)e.addEventListener('click',()=>{curBr=i;document.getElementById('branchName').textContent='카영 카페 '+b[0];document.getElementById('countTxt').textContent=b[1]+'/50';closeAll();});box.appendChild(e);});}
 $('branchBtn').addEventListener('pointerdown',e=>e.stopPropagation());document.getElementById('branchBtn').addEventListener('click',()=>{renderBr();open('modalBranch');});
 
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===b));const k=b.dataset.t;
@@ -1024,10 +1024,10 @@ $('clinkBtn').addEventListener('click',()=>{if(me.anim)return;startMove();const 
 const lastGreet={};let gGreet=0;
 setInterval(()=>{if(sheetOpen())return;const now=performance.now();if(now-gGreet<7000)return;people.forEach(p=>{if(p.me||p.anim||(p.seat&&p.seat[0][0]==='s'))return;const d=Math.hypot(p.x-me.x,p.z-me.z);if(d<75&&now-(lastGreet[p.id]||-1e9)>30000&&now-gGreet>=7000){lastGreet[p.id]=now;gGreet=now;nod(p);say(p,'Hi there!','안녕하세요!',1800);toast(p.ko+'님이 고개 까딱 인사했어요');}});},500);
 /* 입장 알림 */
-let count=14;function setCount(){$('countTxt').textContent=count+'/30';}
+let count=24;function setCount(){$('countTxt').textContent=count+'/50';}
 setTimeout(()=>toast(me.ko+'님, '+$('branchName').textContent+'에 오신 걸 환영해요'),900);
 setInterval(()=>{if(document.hidden)return;const w=people.filter(p=>!p.me&&!p.seat&&Math.hypot(p.x-me.x,p.z-me.z)>160);if(!w.length)return;const p=w[Math.floor(Math.random()*w.length)];
- p.x=300+Math.random()*40-20;p.z=530;p.tx=200+Math.random()*120;p.tz=380;p.walk=true;if(count<30){count++;setCount();}toast(p.ko+'님이 들어왔어요');setTimeout(()=>nod(p),1800);},26000);
+ p.x=300+Math.random()*40-20;p.z=530;p.tx=200+Math.random()*120;p.tz=380;p.walk=true;if(count<50){count++;setCount();}toast(p.ko+'님이 들어왔어요');setTimeout(()=>nod(p),1800);},26000);
 function openMenu(){const ms=$('mStudy');ms.href='/'+(TOPIC.post?'p/'+TOPIC.post+'/':'category/expr/');ms.firstChild.nodeValue=TOPIC.post?'이 표현 자세히 공부하기 ':'영어표현 더 보기 ';$('mTopic').textContent=(dayIdx===todayIdx?'오늘':DAYS[dayIdx]+'요일')+'의 주제 · '+TOPIC.en+' ('+TOPIC.ko+')';$('mExpr').textContent=TOPIC.expr[0];$('mExprKo').textContent=TOPIC.expr[1];
  const ex=[TOPIC.qc,...TOPIC.q.map(x=>x.a[0])].filter((v,i,a)=>a.findIndex(y=>y[0]===v[0])===i).slice(0,3);const ul=$('mEx');ul.innerHTML='';ex.forEach(e=>{const li=document.createElement('li');li.textContent=e[0];li.append(Object.assign(document.createElement('small'),{textContent:e[1]}));ul.appendChild(li);});
  $('mStamp').textContent=stampsN;const st=$('mStamps');st.innerHTML='';for(let i=0;i<10;i++){const e=document.createElement('i');if(i<stampsN)e.className='on';st.appendChild(e);}
@@ -1081,7 +1081,7 @@ add(rbox(2*TX+20,26,TZ1-TZ0+20,10,M('stageWood',{color:'#4A3324'})),0,-26.5,(TZ0
 /* 열린 입구: 앞쪽 큰 아치 */
 [[-BX-10],[BX+10]].forEach(([x])=>add(rbox(24,200,24,4,M('frame')),x,0,BZ+12));add(rbox(2*BX+44,16,24,4,M('frame')),0,200,BZ+12);
 const awn=new THREE.Mesh(new THREE.BoxGeometry(2*BX+60,4,90),new THREE.MeshStandardMaterial({color:'#2B1D14',transparent:true}));awn.position.set(0,205,BZ+55);awn.rotation.x=-.18;awn.castShadow=true;scene.add(awn);
-const awnStripe=new THREE.Mesh(new THREE.BoxGeometry(2*BX+60,2,12),new THREE.MeshBasicMaterial({color:LIME,transparent:true}));awnStripe.position.set(0,199,BZ+98);awnStripe.rotation.x=-.18;scene.add(awnStripe);
+const awnStripe=new THREE.Mesh(new THREE.BoxGeometry(2*BX+60,2,12),new THREE.MeshBasicMaterial({color:'#3A2A20',transparent:true}));awnStripe.position.set(0,199,BZ+98);awnStripe.rotation.x=-.18;scene.add(awnStripe);
 const STAGE={x:0,z:TZ1-110};
 const stageM=add(rbox(220,14,110,12,M('stageWood')),STAGE.x,0,STAGE.z);
 const STAGE_ZONE={id:'stage',name:'오픈마이크',type:'stage',x:STAGE.x,z:STAGE.z};stageM.userData.zone=STAGE_ZONE;clickables.push(stageM);
