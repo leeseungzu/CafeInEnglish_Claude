@@ -223,6 +223,9 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .heart.on{background:#FF6B81;color:#fff}
 .mres{margin-top:10px;background:rgba(205,235,91,.14);border:1px solid rgba(205,235,91,.45);border-radius:14px;padding:10px 12px;font-size:13.5px;font-weight:700}
 .mres small{display:block;font-weight:500;color:var(--gs);margin-top:2px}
+.mres .cmp{margin-top:8px;font-weight:600;font-size:14px;line-height:1.6}.mres .cmp .lb{display:block;font-size:11px;font-weight:700;opacity:.6;margin-top:4px}
+.mres .ok{color:inherit}.mres .miss{color:#F0A08A;text-decoration:underline wavy rgba(240,160,138,.8);text-underline-offset:3px}.mres .extra{color:#F0A08A}
+.mres .plays{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.mres .plays button{border:0;border-radius:99px;padding:7px 12px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;background:rgba(255,246,230,.12);color:var(--gt)}.mres .plays button.on{background:#FFF6E6;color:#2B1D14}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
 .fc{border:1px solid rgba(127,127,127,.25);background:rgba(127,127,127,.1);color:var(--gt);border-radius:14px;padding:10px;min-height:62px;font:inherit;font-size:13px;font-weight:700;text-align:left;cursor:pointer;line-height:1.35}
 .fc.flip{background:rgba(205,235,91,.14);border-color:rgba(205,235,91,.5);font-weight:600}
@@ -1319,17 +1322,31 @@ function openWall(){me.walk=false;wPicked=null;renderWall();open('sheetWall');ca
 let mPick=null;const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 function micLines(){return [TOPIC.qc,...TOPIC.q.map(q=>q.a[0]),[TOPIC.q[0].en,TOPIC.q[0].ko]].filter((v,i,a)=>a.findIndex(y=>y[0]===v[0])===i).slice(0,4);}
 function renderMic(){const box=$('mLines');box.innerHTML='';const ls=micLines();if(!mPick)mPick=ls[0];ls.forEach(o=>{const b=document.createElement('button');b.className='qc'+(mPick[0]===o[0]?' today':'');b.textContent=o[0];b.addEventListener('click',()=>{mPick=o;$('mRes').hidden=true;renderMic();});box.appendChild(b);});
- $('mLine').textContent=mPick[0];$('mLineKo').textContent=mPick[1];$('mNote').textContent=SR?'"말하기"를 누르고 마이크에 대고 말하면 얼마나 비슷한지 알려 줘요.':'이 화면에서는 마이크를 쓸 수 없어요. 소리 내어 말한 뒤 "말하기"를 누르면 박수를 받아요. 사이트에서는 실제로 말하기를 알아들어요.';}
+ $('mLine').textContent=mPick[0];$('mLineKo').textContent=mPick[1];$('mNote').textContent=SR?'"말하기"를 누르고 마이크에 대고 말하면 얼마나 비슷한지 알려 주고, 내 목소리와 원어민 목소리를 번갈아 들을 수 있어요. 녹음은 내 기기 안에서만 재생돼요.':'이 화면에서는 마이크를 쓸 수 없어요. 소리 내어 말한 뒤 "말하기"를 누르면 박수를 받아요. 사이트에서는 실제로 말하기를 알아들어요.';}
 function sim(a,b){const n=t=>t.toLowerCase().replace(/[^a-z' ]/g,'').split(/\s+/).filter(Boolean);const A=n(a),B=n(b);if(!A.length)return 0;let hit=0;const pool=[...B];A.forEach(w=>{const i=pool.indexOf(w);if(i>=0){hit++;pool.splice(i,1);}});return Math.round(hit/Math.max(A.length,B.length)*100);}
 function applause(score){sfx('clink');setTimeout(()=>sfx('clink'),220);const crowd=people.filter(p=>!p.me&&!p.seat&&Math.abs(p.z-STAGE.z)<260);const lines=score>=80?['Bravo!','Wow, so natural!','Nailed it!']:['Nice try!','You got this!','Good job!'];
  crowd.forEach((p,i)=>setTimeout(()=>{nod(p);say(p,lines[i%3],'',2000,true);},300+i*260));nod(me);if(score>=60){stampsN=Math.min(10,stampsN+1);toast('박수 받았어요! 쿠폰 도장 +1');}else toast('조금만 더! 한 번 더 들어 보고 말해 봐요');}
-function showRes(heard,score){const r=$('mRes');r.hidden=false;r.textContent=(score>=80?'완벽해요! ':score>=60?'좋아요! ':'한 번 더! ')+'비슷한 정도 '+score+'%';if(heard)r.append(Object.assign(document.createElement('small'),{textContent:'들린 말: '+heard}));}
+let myVoice=null,myAudio=null;
+function showRes(heard,score){const r=$('mRes');r.hidden=false;r.innerHTML='';r.append(document.createTextNode((score>=80?'완벽해요! ':score>=60?'좋아요! ':'한 번 더! ')+'비슷한 정도 '+score+'%'));
+ if(heard){const nw=t=>t.toLowerCase().replace(/[^a-z' ]/g,'');const hw=heard.split(/\s+/).filter(Boolean),pool=hw.map(nw);const cmp=document.createElement('div');cmp.className='cmp';
+  cmp.append(Object.assign(document.createElement('span'),{className:'lb',textContent:'오늘의 한 줄 · 빨간 단어가 다르게 들렸어요'}));let miss=0;
+  mPick[0].split(/\s+/).forEach(w=>{const i=pool.indexOf(nw(w));const sp=document.createElement('span');if(i>=0){pool[i]=null;sp.className='ok';}else{sp.className='miss';miss++;}sp.textContent=w;cmp.append(sp,' ');});
+  cmp.append(Object.assign(document.createElement('span'),{className:'lb',textContent:'들린 말'}));const tw=new Set(mPick[0].split(/\s+/).map(nw));
+  hw.forEach(w=>{const sp=document.createElement('span');sp.className=tw.has(nw(w))?'ok':'extra';sp.textContent=w;cmp.append(sp,' ');});r.appendChild(cmp);}
+ const pl=document.createElement('div');pl.className='plays';
+ const mk=(t,fn)=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>{haptic();pl.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');fn(()=>b.classList.remove('on'));};pl.appendChild(b);return b;};
+ const playMine=done=>{if(!myVoice){done();return;}try{if(myAudio)myAudio.pause();myAudio=new Audio(myVoice);duck(true);myAudio.onended=()=>{duck(false);done();};myAudio.play().catch(()=>{duck(false);done();});}catch(e){done();}};
+ const playNative=done=>{say(me,mPick[0],mPick[1],3000,true);speak(mPick[0],'me',done);};
+ if(myVoice)mk('내 목소리 듣기',playMine);mk('원어민 듣기',playNative);if(myVoice)mk('번갈아 듣기',done=>playNative(()=>setTimeout(()=>playMine(done),350)));
+ r.appendChild(pl);}
 $('mListen').addEventListener('click',()=>{speak(mPick[0],'me');say(me,mPick[0],mPick[1],3000,true);});
 $('mSpeak').addEventListener('click',()=>{if(!SR){say(me,mPick[0],mPick[1],3200);showRes('',100);applause(100);return;}
  try{const rec=new SR();rec.lang='en-US';rec.interimResults=false;rec.maxAlternatives=1;$('mSpeak').textContent='듣는 중…';duck(true);
-  rec.onresult=e=>{const heard=e.results[0][0].transcript,sc=sim(mPick[0],heard);say(me,heard,'',3000);showRes(heard,sc);applause(sc);};
+  let mr=null,chunks=[],gotRes=null;if(myVoice){URL.revokeObjectURL(myVoice);myVoice=null;}
+  if(navigator.mediaDevices&&window.MediaRecorder){navigator.mediaDevices.getUserMedia({audio:true}).then(st=>{mr=new MediaRecorder(st);mr.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};mr.onstop=()=>{st.getTracks().forEach(t=>t.stop());if(chunks.length){myVoice=URL.createObjectURL(new Blob(chunks,{type:mr.mimeType||'audio/webm'}));if(gotRes)showRes(gotRes[0],gotRes[1]);}};mr.start();rec._mr=mr;}).catch(()=>{});}
+  rec.onresult=e=>{const heard=e.results[0][0].transcript,sc=sim(mPick[0],heard);gotRes=[heard,sc];say(me,heard,'',3000);showRes(heard,sc);applause(sc);};
   rec.onerror=()=>{$('mNote').textContent='마이크를 쓸 수 없어요. 브라우저에서 마이크 권한을 허용해 주세요.';};
-  rec.onend=()=>{clearTimeout(rec._t);$('mSpeak').textContent='말하기';duck(false);};rec.start();rec._t=setTimeout(()=>{try{rec.stop();}catch(_){}$('mSpeak').textContent='말하기';$('mNote').textContent='소리가 안 들렸어요. 마이크 권한을 확인하거나, 한 번 더 눌러 말해 보세요.';},8000);}catch(e){$('mSpeak').textContent='말하기';}});
+  rec.onend=()=>{clearTimeout(rec._t);$('mSpeak').textContent='말하기';duck(false);setTimeout(()=>{try{if(rec._mr&&rec._mr.state!=='inactive')rec._mr.stop();}catch(_){}},250);};rec.start();rec._t=setTimeout(()=>{try{rec.stop();}catch(_){}$('mSpeak').textContent='말하기';$('mNote').textContent='소리가 안 들렸어요. 마이크 권한을 확인하거나, 한 번 더 눌러 말해 보세요.';},8000);}catch(e){$('mSpeak').textContent='말하기';}});
 function openMic(){me.walk=false;me.x=STAGE.x;me.z=STAGE.z+5;me.ang=Math.PI;spot.intensity=2.2;mPick=null;$('mRes').hidden=true;renderMic();open('sheetMic');camFocus=new THREE.Vector3(STAGE.x,0,STAGE.z-60);camDist=380;yaw=Math.PI;pitch=.32;
  const crowd=people.filter(p=>!p.me&&!p.seat).slice(0,4);crowd.forEach((p,i)=>{p.tx=STAGE.x-120+i*80;p.tz=STAGE.z-120-(i%2)*30;});toast('무대에 올라왔어요! 손님들이 모여요');}
 function applyTopic(){TOPIC=TOPICS[dayIdx];$('topicName').textContent=(dayIdx===todayIdx?'':DAYS[dayIdx]+'요일 · ')+TOPIC.en;drawBoards(THEMES[theme]);drawSign(THEMES[theme]);buildQC();drawWall();if(seated&&!$('tblList').hidden)renderQList();}
