@@ -51,12 +51,12 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .stage.clay .glass{box-shadow:0 6px 0 rgba(90,58,42,.12),0 10px 24px rgba(90,58,42,.12)}
 .overlay{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .tag{position:absolute;transform:translate(-50%,-100%);font-size:11px;font-weight:700;color:var(--tagt);background:var(--tag);padding:2px 8px;border-radius:99px;white-space:nowrap}
-.tag.me{background:var(--lime);color:#2B1D14}
+.tag.me{background:#fff;color:#191F28;display:flex;align-items:center;gap:5px;padding:2px 9px 2px 3px}.tag.me b{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;background:#4E5968;color:#fff;font-size:9.5px;font-weight:700}
 .tag.ba{background:#FFF6E6;color:#2B1D14}
 .bub{position:absolute;transform:translate(-50%,-100%);background:#fff;color:#191F28;font-size:12.5px;font-weight:700;padding:7px 11px;border-radius:14px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.18);transition:opacity .2s;max-width:260px}
 .bub::after{content:"";position:absolute;left:50%;bottom:-6px;margin-left:-6px;border:6px solid transparent;border-bottom:0;border-top-color:#fff}
 .bub small{display:block;font-weight:500;color:var(--blue);font-size:11px}
-.bub.ba{background:#CDEB5B;color:#2B1D14}.bub.ba::after{border-top-color:#CDEB5B}.bub.ba small{color:#55621F}
+
 .top{position:absolute;left:14px;right:14px;top:14px;display:flex;justify-content:space-between;gap:8px;pointer-events:none}
 .top>div{display:flex;gap:8px}
 .chip{pointer-events:auto;border-radius:99px;font:inherit;font-size:13px;font-weight:700;padding:8px 14px;display:flex;align-items:center;gap:8px;cursor:pointer}
@@ -504,13 +504,13 @@ const people=[me,
  {ko:'바삭한 크루아상',col:'#FFE1B3',x:60,z:120},{ko:'느긋한 스콘',col:'#F4E7D3',x:-60,z:330},{ko:'고소한 라떼',col:'#E3D9FF',x:220,z:60},
  {ko:'성실한 콜드브루',col:'#D9E8FF',seat:['s1',0]},{ko:'차분한 얼그레이',col:'#F3E3FF',seat:['s1',4]},{ko:'열공하는 마카롱',col:'#FFE0E6',seat:['s2',1]},{ko:'꾸준한 녹차라떼',col:'#DDF2D0',seat:['s2',3]}];
 people.forEach((p,i)=>{p.id=p.id||'n'+i;if(p.seat){const z=ZONES.find(t=>t.id===p.seat[0]);const s=z.spots[p.seat[1]];p.x=s.x;p.z=s.z;}p.tx=p.x;p.tz=p.z;p.ang=0;p.ph=Math.random()*6;p.vx=0;p.vz=1;});
-const barista={id:'b',ko:'바리스타 다정한 크레마',x:-75,z:-500,col:'#FFFFFF',barista:true,ang:0,ph:0};
+const barista={id:'b',ko:'바리스타 카영이',x:-75,z:-500,col:'#FFFFFF',barista:true,ang:0,ph:0};
 const all=[...people,barista];
 const QC_BASE=[['Hey! Mind if I join you?','안녕하세요! 같이 앉아도 될까요?'],['This place has such a cozy vibe.','여기 분위기 진짜 아늑하다.'],['Ooh, what are you drinking?','오, 뭐 마셔요?'],['Sorry, could you say that again?','미안해요, 다시 말해 줄래요?'],['No way, that\'s awesome!','헐, 대박이다!'],['Haha, I feel that.','하하, 무슨 말인지 알아요.'],['Okay, I gotta run. See ya!','이제 가 봐야 해요. 또 봐요!']];
 const NPC_LINES=[['Hey there!','안녕하세요!'],['This place has such a cozy vibe.','여기 분위기 진짜 아늑하다.'],['Cheers!','짠!'],['No way, that\'s awesome!','헐, 대박!'],['Ooh, what are you drinking?','오, 뭐 마셔요?'],['I need another coffee. Like, now.','커피 한 잔 더 필요해. 지금 당장.'],['This music is such a vibe.','음악 분위기 너무 좋다.']];
 
 const stage=document.getElementById('stage'),ov=document.getElementById('ov');
-all.forEach(p=>{p.tagEl=document.createElement('div');p.tagEl.className='tag'+(p.me?' me':'')+(p.barista?' ba':'');p.tagEl.textContent=p.ko;ov.appendChild(p.tagEl);
+all.forEach(p=>{p.tagEl=document.createElement('div');p.tagEl.className='tag'+(p.me?' me':'')+(p.barista?' ba':'');if(p.me){p.tagEl.append(Object.assign(document.createElement('b'),{textContent:'나'}),document.createTextNode(p.ko));}else p.tagEl.textContent=p.ko;ov.appendChild(p.tagEl);
  p.bubEl=document.createElement('div');p.bubEl.className='bub'+(p.barista?' ba':'');p.bubEl.style.opacity=0;ov.appendChild(p.bubEl);p.until=0;});
 const usedSet=new Set();function say(p,en,ko,ms,nolog){if(p.me&&en&&!nolog)usedSet.add(en);p.bubEl.textContent=en;if(ko){const s=document.createElement('small');s.textContent=ko;p.bubEl.append(s);}p.bubEl.style.opacity=1;p.until=ms===0?Infinity:performance.now()+(ms||2800);}
 function hush(p){p.bubEl.style.opacity=0;p.until=0;}
@@ -791,7 +791,7 @@ function node(k){curNode=k;const n=S[k];document.getElementById('bEn').textConte
  say(barista,n.en,n.ko,0);speak(n.en,'b');
  const box=document.getElementById('bChoices');box.innerHTML='';n.c.forEach(c=>{const en=c[0]==='ME'?"It's "+me.en+'.':c[0];const ko=c[0]==='ME'?'"'+me.ko+'"이에요.':c[1];
   const b=document.createElement('button');b.className='choice';b.innerHTML='<span class="en"></span><span class="ko"></span>';b.querySelector('.en').textContent=en;b.querySelector('.ko').textContent=ko;
-  b.addEventListener('click',()=>{box.querySelectorAll('button').forEach(x=>x.disabled=true);order.said.push(en);hush(barista);say(me,en,'',2600);if(k==='start'||k==='rec')order.item=c[3];if(k==='size')order.size=c[3];
+  b.addEventListener('click',()=>{box.querySelectorAll('button').forEach(x=>x.disabled=true);order.said.push(en);hush(barista);say(me,en,ko,2600);if(k==='start'||k==='rec')order.item=c[3];if(k==='size')order.size=c[3];
    speak(en,'me',()=>{if(!document.getElementById('sheetOrder').classList.contains('open'))return;if(c[2]==='receipt')showReceipt();else node(c[2]);});});box.appendChild(b);});}
 document.getElementById('again').addEventListener('click',()=>speak(S[curNode].en,'b'));
 let stampsN=0;
@@ -829,7 +829,7 @@ function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random
 function startChat(i){const id=++chatId,q=TOPIC.q[i],ms=mates();$('sheetTable').classList.add('chatting');$('tblList').hidden=true;$('tblChat').hidden=false;$('log').innerHTML='';setOpts('듣는 중',[],()=>{});
  const later=(fn,t)=>setTimeout(()=>{if(id===chatId)fn();},t);
  addMsg('나 · '+me.ko,q.en,q.ko,true);say(me,q.en,q.ko,3000);
- if(!ms.length){later(()=>{addMsg('바리스타 다정한 크레마',"Looks like it's just you for now. Try another table!",'지금은 혼자네요. 다른 테이블에 가 보세요!');setOpts('다음',[NEXT],showList);},900);return;}
+ if(!ms.length){later(()=>{addMsg('바리스타 카영이',"Looks like it's just you for now. Try another table!",'지금은 혼자네요. 다른 테이블에 가 보세요!');setOpts('다음',[NEXT],showList);},900);return;}
  const pool=shuffle(q.a.slice());let t=1000;
  ms.forEach((m,k)=>{const ans=pool[k%pool.length];later(()=>{addMsg(m.ko,ans[0],ans[1]);say(m,ans[0],ans[1],3600);},t);t+=1500;});
  later(()=>{const m=ms[ms.length-1];addMsg(m.ko,'What about you?','당신은요?');say(m,'What about you?','당신은요?',2600);
