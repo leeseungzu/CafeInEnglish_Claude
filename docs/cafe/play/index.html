@@ -238,6 +238,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .stage.btnB .dock .main::after{content:"";position:absolute;left:30%;right:30%;bottom:7px;height:2px;border-radius:2px;background:#CDEB5B}
 .btnpick{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
 .bp{border:2px solid transparent;border-radius:18px;padding:10px;background:#2B1D14;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;font:inherit;color:#FFF6E6;font-size:12px;font-weight:700;min-width:150px}
+.dock .stand[hidden],.standchip[hidden],#shareR[hidden]{display:none!important}
 .ep{padding:12px 16px;font-size:13px}.ep.on{background:#CDEB5B;color:#2B1D14}
 .dock .stand{white-space:nowrap;color:#FFF6E6;box-shadow:inset 0 0 0 1.5px rgba(255,246,230,.5)}.dock .stand:hover{background:rgba(255,246,230,.12)}
 .dock .stand.pop{animation:standPop .5s ease 2}@keyframes standPop{50%{transform:scale(1.08);background:rgba(255,246,230,.2)}}
@@ -467,7 +468,7 @@ body{padding:0!important;background:#140E0A}
       <div class="card glass">
         <div class="receipt" id="receipt"></div>
         <a class="study" href="/p/cafe-order/" target="_blank" rel="noopener">"Can I get ~?" 자세히 공부하기 <span>카페 주문 영어 →</span></a>
-        <div class="btnrow"><button class="btn" data-close>닫기</button><button class="btn dark" id="shareR">스토리에 공유</button></div>
+        <div class="btnrow"><button class="btn" data-close>닫기</button><button class="btn dark" id="shareR" hidden>스토리에 공유</button></div>
       </div>
     </div>
   </div>
@@ -937,7 +938,7 @@ function frame(now){const dt=Math.min(.1,(now-last)/1000);last=now;const t=now/1
  if(camFocus)want.copy(camFocus);else want.set(me.x,0,me.z);focus.lerp(want,Math.min(1,dt*4));const D=camDist||dist;
  tmp.set(focus.x+Math.sin(yaw)*D*Math.cos(pitch),D*Math.sin(pitch)+10,focus.z+Math.cos(yaw)*D*Math.cos(pitch));cam.position.lerp(tmp,Math.min(1,dt*5));cam.lookAt(focus.x,24,focus.z);
  const lo=cam.position.x<-BX?.12:1,ro=((cam.position.x>BX)!==(me.x>BX))?.12:1,bo=cam.position.z<-BZ-10?.1:1,abo=cam.position.z<AZ0?.1:1,aro=cam.position.x>AX1?.1:1;[MAT.wall,MAT.wains,board.material,logoP.material].forEach(m=>{m.transparent=true;m.opacity+=(bo-m.opacity)*.15;});annexMats.back.opacity+=(abo-annexMats.back.opacity)*.15;fBoard.material.opacity=annexMats.back.opacity;annexMats.right.opacity+=(aro-annexMats.right.opacity)*.15;[0,1].forEach(i=>sideMats[i].opacity+=(lo-sideMats[i].opacity)*.15);frameM.opacity=sideMats[0].opacity;winMat.opacity=.08*sideMats[0].opacity;[2,3].forEach(i=>sideMats[i].opacity+=(ro-sideMats[i].opacity)*.15);
- if(typeof awn!=='undefined'){const ao=(cam.position.z>BZ+30&&cam.position.y<420&&focus.z<BZ+60)?.12:1;awn.material.opacity+=(ao-awn.material.opacity)*.15;awnStripe.material.opacity=awn.material.opacity;}
+ if(typeof awn!=='undefined'){const ao=(cam.position.z>BZ-10&&focus.z<BZ+60)?.12:1;awn.material.opacity+=(ao-awn.material.opacity)*.15;awnStripe.material.opacity=awn.material.opacity;archM.opacity=Math.max(.18,awn.material.opacity);const dw=awn.material.opacity>.6;awn.material.depthWrite=dw;awnStripe.material.depthWrite=dw;archM.depthWrite=dw;awn.castShadow=true;}
  renderer.render(scene,cam);
  const r=stage.getBoundingClientRect();all.forEach(p=>{tmp.set(p.x,(p.barista?48:40)+(p.py||0),p.z).project(cam);const sx=(tmp.x+1)/2*r.width,sy=(1-tmp.y)/2*r.height,vis=tmp.z<1&&sx>-80&&sx<r.width+80&&sy>-40&&sy<r.height+40;
   p.tagEl.style.display=vis?'':'none';p.tagEl.style.left=sx+'px';p.tagEl.style.top=sy+'px';p.bubEl.style.left=sx+'px';p.bubEl.style.top=(sy-24)+'px';if(!vis)p.bubEl.style.visibility='hidden';else p.bubEl.style.visibility='';});
@@ -1194,7 +1195,7 @@ const deckT=new THREE.CanvasTexture(deckC);deckT.wrapS=deckT.wrapT=THREE.RepeatW
 const deck=new THREE.Mesh(new THREE.PlaneGeometry(2*TX,TZ1-TZ0),new THREE.MeshStandardMaterial({map:deckT,roughness:.9}));deck.rotation.x=-Math.PI/2;deck.position.set(0,.2,(TZ0+TZ1)/2);deck.receiveShadow=true;scene.add(deck);
 add(rbox(2*TX+20,26,TZ1-TZ0+20,10,M('stageWood',{color:'#4A3324'})),0,-26.5,(TZ0+TZ1)/2,false,true);
 /* 열린 입구: 앞쪽 큰 아치 */
-[[-BX-10],[BX+10]].forEach(([x])=>add(rbox(24,200,24,4,M('frame')),x,0,BZ+12));add(rbox(2*BX+44,16,24,4,M('frame')),0,200,BZ+12);
+const archM=M('frame').clone();archM.transparent=true;[[-BX-10],[BX+10]].forEach(([x])=>add(rbox(24,200,24,4,archM),x,0,BZ+12));add(rbox(2*BX+44,16,24,4,archM),0,200,BZ+12);
 const awn=new THREE.Mesh(new THREE.BoxGeometry(2*BX+60,4,90),new THREE.MeshStandardMaterial({color:'#2B1D14',transparent:true}));awn.position.set(0,205,BZ+55);awn.rotation.x=-.18;awn.castShadow=true;scene.add(awn);
 const awnStripe=new THREE.Mesh(new THREE.BoxGeometry(2*BX+60,2,12),new THREE.MeshBasicMaterial({color:'#3A2A20',transparent:true}));awnStripe.position.set(0,199,BZ+98);awnStripe.rotation.x=-.18;scene.add(awnStripe);
 const STAGE={x:0,z:TZ1-110};
@@ -1304,6 +1305,7 @@ cv.addEventListener('pointerdown',()=>{$('volPop').hidden=true;});
 let firstTouch=false;stage.addEventListener('pointerdown',e=>{if(e.target.closest('#musicBtn,#volPop')){firstTouch=true;return;}if(!firstTouch){firstTouch=true;if(!musicOn){setMusic(true);syncVol();}}},{capture:true});
 document.querySelectorAll('.skb').forEach(b=>b.addEventListener('click',()=>{skyMode=b.dataset.sk;document.querySelectorAll('.skb').forEach(x=>x.classList.toggle('on',x===b));skyCur='';updSky();}));
 function haptic(){try{navigator.vibrate&&navigator.vibrate(12);}catch(e){}}
+{const SHORT={'바리스타에게 주문하기':'주문하기','바리스타에게 가기':'카운터로 가기','오픈마이크 올라가기':'무대 오르기','포스트잇 벽 보기':'포스트잇 벽'};const fit=()=>{if(innerWidth<=640){const m=SHORT[actBtn.textContent];if(m)actBtn.textContent=m;}};new MutationObserver(fit).observe(actBtn,{childList:true,characterData:true,subtree:true});fit();addEventListener('resize',()=>{actBtn.dataset.key='';});}
 actBtn.addEventListener('pointerdown',()=>{actBtn.classList.add('press');haptic();});['pointerup','pointerleave','pointercancel'].forEach(t=>actBtn.addEventListener(t,()=>actBtn.classList.remove('press')));
 document.querySelectorAll('.dock button:not(.main)').forEach(b=>b.addEventListener('pointerdown',haptic));
 $('standBtn').addEventListener('click',standUp);$('standChip').addEventListener('click',()=>{hideChip();standUp();});document.querySelectorAll('.ep').forEach(b=>b.addEventListener('click',()=>setExit(b.dataset.e)));setExit(exitMode);
