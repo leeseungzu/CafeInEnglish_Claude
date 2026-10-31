@@ -478,19 +478,6 @@ body{padding:0!important;background:#140E0A}
       <h2 id="thName">A · 에스프레소 나이트</h2>
       <p id="thDesc"></p>
       <div class="sw3" id="thSw"></div>
-      <div class="evrow" style="display:block"><span>캐릭터 시안 (눌러서 적용)</span>
-        <div class="btnpick">
-          <button class="cp bp" data-c="mug">지금 · 머그</button>
-          <button class="cp bp" data-c="human">A · 카페 손님 (사람)</button>
-          <button class="cp bp" data-c="bean">B · 원두콩 친구</button>
-          <button class="cp bp" data-c="cat">C · 크림 고양이</button>
-        </div></div>
-      <div class="evrow" style="display:block"><span>일어나기 시안 (눌러서 적용 · 앉은 뒤 확인)</span>
-        <div class="btnpick">
-          <button class="bp ep" data-e="A">A · 독에 일어나기 버튼</button>
-          <button class="bp ep" data-e="B">B · 아래 고정 + 닫으면 알림</button>
-          <button class="bp ep" data-e="C">C · 바닥 누르면 일어나기</button>
-        </div></div>
       <div class="evrow" style="display:block"><span>가운데 버튼 시안 (눌러서 적용)</span>
         <div class="btnpick">
           <button class="bp on" data-b="btnA"><i style="background:#FFF6E6;color:#2B1D14"><span style="width:7px;height:7px;border-radius:50%;background:#CDEB5B;display:inline-block"></span>스터디룸 보기</i>A · 크림 에스프레소</button>
@@ -812,7 +799,7 @@ function mugMesh(p){const wrap=new THREE.Group(),g=new THREE.Group();const bm=ne
  scene.add(wrap);p.wrap=wrap;p.g=g;}
 
 /* 캐릭터 시안: mug(머그) · human(사람) · bean(원두) · cat(크림 고양이) */
-let charType='mug';try{const st=JSON.parse(localStorage.getItem('kycafe')||'{}');if(st.char)charType=st.char;}catch(e){}
+let charType='mug';
 const HAIR=['#3A2A20','#5A3D2A','#1F1A17','#8A5A3B','#2E2420','#6B4A2F'],SKIN=['#FFE0C4','#F7D2B0','#EFC39E'],FUR=['#FFF3E2','#F2D3AE','#D9A877','#BDBDC2','#FFE8D0','#8C6A57'];
 const hsh=t=>{let h=0;for(const c of t)h=(h*31+c.charCodeAt(0))>>>0;return h;};
 const SM=(c,r)=>new THREE.MeshStandardMaterial({color:c,roughness:r==null?.75:r});
@@ -960,7 +947,7 @@ function sheetOpen(){return !!document.querySelector('.sheet.open,.modal.open');
 function open(id){startMove();closeAll(true);document.getElementById(id).classList.add('open');}
 function closeAll(keep){if(!keep&&typeof spot!=='undefined')spot.intensity=0;document.querySelectorAll('.sheet.open,.modal.open').forEach(e=>e.classList.remove('open'));if(!keep){camFocus=null;camDist=null;hush(barista);if(synth)synth.cancel();}}
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const sh=b.closest('.sheet');const id=sh&&sh.id;closeAll();afterClose(id);}));
-let exitMode='A';try{exitMode=(JSON.parse(localStorage.getItem('kycafe')||'{}').exit)||'A';}catch(e){}
+let exitMode='A';
 let chipT=0;
 function standUp(){if(!seated)return;haptic();if(seated.type==='study')$('leaveS').click();else $('leave').click();}
 function showChip(){const c=$('standChip');c.hidden=false;requestAnimationFrame(()=>c.classList.add('show'));try{navigator.vibrate&&navigator.vibrate([10,50,14]);}catch(e){}clearTimeout(chipT);chipT=setTimeout(hideChip,5000);}
@@ -1305,7 +1292,7 @@ cv.addEventListener('pointerdown',()=>{$('volPop').hidden=true;});
 let firstTouch=false;stage.addEventListener('pointerdown',e=>{if(e.target.closest('#musicBtn,#volPop')){firstTouch=true;return;}if(!firstTouch){firstTouch=true;if(!musicOn){setMusic(true);syncVol();}}},{capture:true});
 document.querySelectorAll('.skb').forEach(b=>b.addEventListener('click',()=>{skyMode=b.dataset.sk;document.querySelectorAll('.skb').forEach(x=>x.classList.toggle('on',x===b));skyCur='';updSky();}));
 function haptic(){try{navigator.vibrate&&navigator.vibrate(12);}catch(e){}}
-{const SHORT={'바리스타에게 주문하기':'주문하기','바리스타에게 가기':'카운터로 가기','오픈마이크 올라가기':'무대 오르기','포스트잇 벽 보기':'포스트잇 벽'};const fit=()=>{if(innerWidth<=640){const m=SHORT[actBtn.textContent];if(m)actBtn.textContent=m;}};new MutationObserver(fit).observe(actBtn,{childList:true,characterData:true,subtree:true});fit();addEventListener('resize',()=>{actBtn.dataset.key='';});}
+{const SHORT={'바리스타에게 주문하기':'주문하기','오픈마이크 올라가기':'무대 오르기','포스트잇 벽 보기':'포스트잇 벽'};const fit=()=>{if(innerWidth<=640){const m=SHORT[actBtn.textContent];if(m)actBtn.textContent=m;}};new MutationObserver(fit).observe(actBtn,{childList:true,characterData:true,subtree:true});fit();addEventListener('resize',()=>{actBtn.dataset.key='';});}
 actBtn.addEventListener('pointerdown',()=>{actBtn.classList.add('press');haptic();});['pointerup','pointerleave','pointercancel'].forEach(t=>actBtn.addEventListener(t,()=>actBtn.classList.remove('press')));
 document.querySelectorAll('.dock button:not(.main)').forEach(b=>b.addEventListener('pointerdown',haptic));
 $('standBtn').addEventListener('click',standUp);$('standChip').addEventListener('click',()=>{hideChip();standUp();});document.querySelectorAll('.ep').forEach(b=>b.addEventListener('click',()=>setExit(b.dataset.e)));setExit(exitMode);
