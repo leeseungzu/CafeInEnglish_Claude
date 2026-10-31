@@ -191,6 +191,9 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
 .fc{border:1px solid rgba(127,127,127,.25);background:rgba(127,127,127,.1);color:var(--gt);border-radius:14px;padding:10px;min-height:62px;font:inherit;font-size:13px;font-weight:700;text-align:left;cursor:pointer;line-height:1.35}
 .fc.flip{background:rgba(205,235,91,.14);border-color:rgba(205,235,91,.5);font-weight:600}
+.evrow{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:14px;font-size:13px;color:var(--sub)}
+.evbtn{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink)}
+.evbtn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 .nogl{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:30px;color:#fff;background:#2B1D14;font-size:14px}
 
 /* ── 아래 설명 ── */
@@ -320,7 +323,7 @@ body{padding:0!important;background:#140E0A}
       <div class="holder"><div style="font-size:11px;letter-spacing:.08em;color:#E9C79A;font-weight:700">TODAY'S EXPRESSION</div><div class="q" id="mExpr"></div><div class="k" id="mExprKo"></div></div>
       <div class="lbl">이렇게 써 보세요</div>
       <ul class="ex" id="mEx"></ul>
-      <a class="study" href="https://www.cafeinenglish.com" target="_blank" rel="noopener">이 표현 자세히 공부하기 <span>cafeinenglish.com →</span></a>
+      <a class="study" id="mStudy" href="/category/expr/" target="_blank" rel="noopener">이 표현 자세히 공부하기 <span>cafeinenglish.com →</span></a>
       <div class="lbl" style="margin-top:14px">내 기록</div>
       <div class="mine"><div class="row"><span>쿠폰 도장</span><b><span id="mStamp">0</span> / 10</b></div><div class="stamps" id="mStamps"></div>
       <div class="row" style="margin-top:8px"><span>오늘 내가 쓴 영어</span><b><span id="mUsed">0</span>문장</b></div><ul class="used" id="mUsedList"></ul></div>
@@ -376,7 +379,7 @@ body{padding:0!important;background:#140E0A}
     <div class="modal" id="modalReceipt" role="dialog" aria-label="영수증">
       <div class="card glass">
         <div class="receipt" id="receipt"></div>
-        <a class="study" href="https://www.cafeinenglish.com" target="_blank" rel="noopener">오늘 쓴 표현 자세히 공부하기 <span>cafeinenglish.com →</span></a>
+        <a class="study" href="/p/cafe-order/" target="_blank" rel="noopener">"Can I get ~?" 자세히 공부하기 <span>카페 주문 영어 →</span></a>
         <div class="btnrow"><button class="btn" data-close>닫기</button><button class="btn dark" id="shareR">스토리에 공유</button></div>
       </div>
     </div>
@@ -387,13 +390,14 @@ body{padding:0!important;background:#140E0A}
       <h2 id="thName">A · 에스프레소 나이트</h2>
       <p id="thDesc"></p>
       <div class="sw3" id="thSw"></div>
+      <div class="evrow"><span>시즌 장식 미리보기</span><button class="evbtn" data-ev="">기본</button><button class="evbtn" data-ev="halloween">할로윈</button><button class="evbtn" data-ev="christmas">크리스마스</button></div>
     </div>
     <div>
       <h2>공간 둘러보기</h2>
       <ul class="list">
         <li><b>카운터.</b> 바리스타에게 다가가 주문해요. 바리스타는 말풍선과 음성으로 말하고, 끝나면 영수증과 쿠폰 도장이 나와요.</li>
         <li><b>테이블 4곳.</b> 2인석, 4인석, 창가석, 라운지 소파예요. 앉으면 컵홀더 질문과 15분 타이머가 나와요.</li>
-        <li><b>오늘의 주제.</b> 요일마다 주제가 바뀌어요. 메뉴판, 퀵챗, 테이블 질문이 모두 그날 주제로 바뀌어요. 위쪽 주제 칩을 누르면 다른 요일을 미리 볼 수 있어요.</li><li><b>메뉴판.</b> 오늘의 표현과 예문, 내 쿠폰 도장과 오늘 쓴 영어 문장을 볼 수 있어요. cafeinenglish.com 학습 페이지로 바로 이어져요.</li><li><b>스터디룸.</b> 오른쪽 문으로 들어가면 조용한 스터디룸이 있어요. 집중 타이머(25분·5분), 오늘의 표현 카드, 옆자리 응원만 있고 대화는 없어요.</li><li><b>앉기 표시.</b> 테이블 가까이 가거나 마우스를 올리면 바닥 링과 빈자리 점이 켜져요. 테이블을 바로 눌러도 걸어가서 앉아요.</li><li><b>대화 알림음.</b> 테이블 대화에서 새 말이 뜰 때마다 사람마다 다른 음높이로 "띵동" 하고 짧게 울려요.</li><li><b>인사와 짠.</b> "인사"는 고개를 까딱하고, 주변 손님도 같이 인사해요. "짠"은 가까운 손님과 머그를 부딪쳐요. 누가 들어오거나 인사하면 위쪽에 알림이 떠요.</li><li><b>카페 음악.</b> 화면을 처음 누르면 카페 재즈가 흘러요. 바리스타가 말할 때는 소리가 작아지고, 음표 버튼으로 끌 수 있어요.</li><li><b>테이블 대화.</b> 컵홀더 질문을 고르면 대화창이 열리고, 같은 테이블 손님이 퀵챗으로 대답한 뒤 내 차례가 와요.</li>
+        <li><b>오늘의 주제.</b> 요일마다 주제가 바뀌어요. 메뉴판, 퀵챗, 테이블 질문이 모두 그날 주제로 바뀌어요. 위쪽 주제 칩을 누르면 다른 요일을 미리 볼 수 있어요.</li><li><b>메뉴판.</b> 오늘의 표현과 예문, 내 쿠폰 도장과 오늘 쓴 영어 문장을 볼 수 있어요. cafeinenglish.com 학습 페이지로 바로 이어져요.</li><li><b>시즌 장식.</b> 할로윈(10/24~31)과 크리스마스(12/1~26)에는 카페가 자동으로 그 분위기로 꾸며져요. 왼쪽 미리보기 버튼으로 확인할 수 있어요.</li><li><b>스터디룸.</b> 오른쪽 문으로 들어가면 조용한 스터디룸이 있어요. 집중 타이머(25분·5분), 오늘의 표현 카드, 옆자리 응원만 있고 대화는 없어요.</li><li><b>앉기 표시.</b> 테이블 가까이 가거나 마우스를 올리면 바닥 링과 빈자리 점이 켜져요. 테이블을 바로 눌러도 걸어가서 앉아요.</li><li><b>대화 알림음.</b> 테이블 대화에서 새 말이 뜰 때마다 사람마다 다른 음높이로 "띵동" 하고 짧게 울려요.</li><li><b>인사와 짠.</b> "인사"는 고개를 까딱하고, 주변 손님도 같이 인사해요. "짠"은 가까운 손님과 머그를 부딪쳐요. 누가 들어오거나 인사하면 위쪽에 알림이 떠요.</li><li><b>카페 음악.</b> 화면을 처음 누르면 카페 재즈가 흘러요. 바리스타가 말할 때는 소리가 작아지고, 음표 버튼으로 끌 수 있어요.</li><li><b>테이블 대화.</b> 컵홀더 질문을 고르면 대화창이 열리고, 같은 테이블 손님이 퀵챗으로 대답한 뒤 내 차례가 와요.</li>
         <li><b>웹 연결.</b> 영수증의 "자세히 공부하기"를 누르면 cafeinenglish.com 학습 페이지로 이어져요.</li>
       </ul>
     </div>
@@ -415,33 +419,33 @@ body{padding:0!important;background:#140E0A}
 (function(){
 const LIME='#CDEB5B',ESP='#2B1D14',CREAM='#FFF6E6';
 const TOPICS=[
- {en:'Movies & Shows',ko:'영화와 드라마',expr:["I'm hooked on ~","~에 푹 빠졌어요"],qc:["I'm hooked on a new drama.","새 드라마에 푹 빠졌어요."],q:[
+ {en:'Movies & Shows',ko:'영화와 드라마',post:'long-story-short',expr:["Long story short,","결론만 말하면,"],qc:["Long story short, I stayed up till 3 a.m.","결론만 말하면, 새벽 3시까지 봤어요."],q:[
   {en:'What are you watching these days?',ko:'요즘 뭐 봐요?',a:[["I'm hooked on a crime drama.","범죄 드라마에 푹 빠졌어요."],["Mostly YouTube videos.","주로 유튜브 영상이요."],["A cooking show on Netflix.","넷플릭스 요리 프로그램이요."],["Nothing right now. Any tips?","지금은 없어요. 추천해 줄래요?"]]},
-  {en:"What's your all-time favorite movie?",ko:'인생 영화가 뭐예요?',a:[["It's hard to pick just one.","하나만 고르기 어려워요."],["An animated movie from my childhood.","어릴 때 본 애니메이션이요."],["A romantic comedy I watch every year.","매년 보는 로맨틱 코미디요."],["A sci-fi movie set in space.","우주 배경 SF 영화요."]]},
+  {en:"What's your all-time favorite movie?",ko:'인생 영화가 뭐예요?',a:[["Long story short, I can't pick just one.","결론만 말하면, 하나만 못 골라요."],["An animated movie from my childhood.","어릴 때 본 애니메이션이요."],["A romantic comedy I watch every year.","매년 보는 로맨틱 코미디요."],["A sci-fi movie set in space.","우주 배경 SF 영화요."]]},
   {en:'Do you watch with subtitles?',ko:'자막 켜고 봐요?',a:[["Yes, English subtitles.","네, 영어 자막이요."],["Korean subtitles, for now.","아직은 한국어 자막이요."],["No subtitles. It's good practice.","자막 없이요. 연습이 돼요."],["It depends on the show.","작품에 따라 달라요."]]}],chat:[["No spoilers, please!","스포 금지예요!"],["Is it worth watching?","볼 만해요?"],["I cried at the ending.","결말에서 울었어요."]]},
- {en:'Learning English',ko:'영어 공부',expr:["I'm trying to ~","~하려고 노력 중이에요"],qc:["I'm trying to speak more every day.","매일 더 말해 보려고 노력 중이에요."],q:[
+ {en:'Learning English',ko:'영어 공부',post:'make-sense',expr:["Does that make sense?","무슨 말인지 이해돼요?"],qc:["Wait, does that make sense?","잠깐, 무슨 말인지 이해돼요?"],q:[
   {en:'Why are you learning English?',ko:'왜 영어 공부해요?',a:[["For my job. I use it at work.","일 때문에요. 회사에서 써요."],["I want to travel more freely.","여행을 더 자유롭게 하고 싶어서요."],["To watch shows without subtitles.","자막 없이 드라마 보고 싶어서요."],["Just for fun. I like it.","그냥 재밌어서요."]]},
   {en:'How do you practice English?',ko:'영어 연습은 어떻게 해요?',a:[["I watch shows in English.","영어로 드라마 봐요."],["I talk to myself in English.","영어로 혼잣말해요."],["I use an app every morning.","아침마다 앱으로 해요."],["I come here to practice!","여기 와서 연습해요!"]]},
   {en:"What's the hardest part for you?",ko:'뭐가 제일 어려워요?',a:[["Speaking. I freeze up.","말하기요. 얼어붙어요."],["Listening to fast speech.","빠른 말 알아듣기요."],["Remembering new words.","새 단어 외우기요."],["Grammar, for sure.","당연히 문법이요."]]}],
-  chat:[["How long have you been studying?","공부한 지 얼마나 됐어요?"],["Can you say that more slowly?","조금 천천히 말해 줄래요?"],["How do you say that in English?","그거 영어로 어떻게 말해요?"]]},
- {en:'Food & Cafés',ko:'음식과 카페',expr:["I'm craving ~","~가 당겨요"],qc:["I'm craving something sweet.","단 게 당겨요."],q:[
+  chat:[["How long have you been studying?","공부한 지 얼마나 됐어요?"],["Sorry, can you say that a bit slower?","미안한데, 조금만 천천히 말해 줄래요?"],["How do you say that in English?","그거 영어로 어떻게 말해요?"]]},
+ {en:'Food & Cafés',ko:'음식과 카페',post:'craving',expr:["I'm craving ~","~가 당겨요"],qc:["I'm craving something sweet.","단 게 당겨요."],q:[
   {en:'What are you craving right now?',ko:'지금 뭐가 당겨요?',a:[["I'm craving something sweet.","단 게 당겨요."],["Spicy tteokbokki, for sure.","당연히 매운 떡볶이요."],["A big bowl of ramen.","라멘 한 그릇이요."],["Just another coffee.","커피 한 잔 더요."]]},
   {en:"What's your go-to coffee order?",ko:'늘 시키는 커피가 뭐예요?',a:[["An iced americano, always.","무조건 아이스 아메리카노요."],["A vanilla latte with oat milk.","오트밀크 바닐라 라떼요."],["Whatever the barista recommends.","바리스타 추천 메뉴요."],["I don't drink coffee. Just tea.","커피 안 마셔요. 차만요."]]},
   {en:'Do you like to cook?',ko:'요리하는 거 좋아해요?',a:[["I love it. I cook every day.","좋아해요. 매일 해요."],["I only make instant noodles.","라면만 끓여요."],["I'm trying to learn.","배우는 중이에요."],["Not really. I order in a lot.","별로요. 배달 많이 시켜요."]]}],chat:[["This place has great desserts.","여기 디저트 맛있어요."],["Have you tried the cheesecake?","치즈케이크 먹어 봤어요?"],["I could eat this every day.","매일 먹을 수 있어요."]]},
- {en:'Travel',ko:'여행',expr:["I've always wanted to ~","늘 ~해 보고 싶었어요"],qc:["I've always wanted to visit Iceland.","늘 아이슬란드에 가 보고 싶었어요."],q:[
-  {en:'Where do you want to travel next?',ko:'다음엔 어디로 여행 가고 싶어요?',a:[["I've always wanted to visit Iceland.","늘 아이슬란드에 가 보고 싶었어요."],["Somewhere warm with a beach.","해변 있는 따뜻한 곳이요."],["Japan again. I love it there.","또 일본이요. 너무 좋아요."],["New York, to see a Broadway show.","뉴욕이요. 브로드웨이 공연 보러요."]]},
+ {en:'Travel',ko:'여행',post:'id-like-to',expr:["I'd like to ~","~하고 싶어요"],qc:["I'd like to visit Iceland someday.","언젠가 아이슬란드에 가 보고 싶어요."],q:[
+  {en:'Where do you want to travel next?',ko:'다음엔 어디로 여행 가고 싶어요?',a:[["I'd like to visit Iceland someday.","언젠가 아이슬란드에 가 보고 싶어요."],["Somewhere warm with a beach.","해변 있는 따뜻한 곳이요."],["Japan again. I love it there.","또 일본이요. 너무 좋아요."],["New York, to see a Broadway show.","뉴욕이요. 브로드웨이 공연 보러요."]]},
   {en:"What's the best trip you've ever taken?",ko:'가장 좋았던 여행은요?',a:[["A road trip with my family.","가족이랑 간 자동차 여행이요."],["My first solo trip to Europe.","첫 유럽 혼자 여행이요."],["A short trip to Jeju last year.","작년에 짧게 간 제주도요."],["I haven't traveled much yet.","아직 여행을 많이 못 해 봤어요."]]},
   {en:'Do you prefer the beach or the mountains?',ko:'바다가 좋아요, 산이 좋아요?',a:[["The beach, definitely.","당연히 바다요."],["Mountains. I love hiking.","산이요. 등산 좋아해요."],["Both, depending on my mood.","기분 따라 둘 다요."],["Neither. I like cities.","둘 다 아니에요. 도시가 좋아요."]]}],chat:[["Is it worth visiting?","가 볼 만해요?"],["Any must-see spots?","꼭 가 봐야 할 곳 있어요?"],["I have serious wanderlust.","여행 가고 싶어서 근질근질해요."]]},
- {en:'Work English',ko:'직장 영어',expr:["I'm swamped with ~","~ 때문에 정신없어요"],qc:["I'm swamped with work this week.","이번 주는 일 때문에 정신없어요."],q:[
+ {en:'Work English',ko:'직장 영어',post:'swamped',expr:["I'm swamped with ~","~ 때문에 정신없어요"],qc:["I'm swamped with work this week.","이번 주는 일 때문에 정신없어요."],q:[
   {en:'What do you do for work?',ko:'무슨 일 해요?',a:[["I work in marketing.","마케팅 일을 해요."],["I'm a software developer.","개발자예요."],["I'm a teacher.","선생님이에요."],["I'm between jobs right now.","지금은 쉬는 중이에요."]]},
   {en:"How's work going these days?",ko:'요즘 일은 어때요?',a:[["I'm swamped with deadlines.","마감 때문에 정신없어요."],["Pretty good, actually.","생각보다 괜찮아요."],["It's been a long week.","긴 한 주였어요."],["I just started a new job!","새 일을 막 시작했어요!"]]},
   {en:'How do you deal with stress?',ko:'스트레스는 어떻게 풀어요?',a:[["I go for a run.","달리기해요."],["I eat something delicious.","맛있는 거 먹어요."],["I talk to my friends.","친구들이랑 얘기해요."],["I just sleep it off.","잠으로 풀어요."]]}],
   chat:[["Let me get back to you on that.","확인하고 다시 알려 드릴게요."],["Could you walk me through it?","차근차근 설명해 주실래요?"],["Let's touch base next week.","다음 주에 다시 얘기해요."]]},
- {en:'Weekend Plans',ko:'주말 계획',expr:["I'm thinking of ~ing","~할까 생각 중이에요"],qc:["I'm thinking of going hiking.","등산 갈까 생각 중이에요."],q:[
-  {en:'Any plans for the weekend?',ko:'주말에 계획 있어요?',a:[["I'm thinking of going hiking.","등산 갈까 생각 중이에요."],["Nothing much. Just chilling at home.","별거 없어요. 그냥 집에서 쉬어요."],["I'm meeting some friends for brunch.","친구들이랑 브런치 먹어요."],["I have to work, unfortunately.","아쉽게도 일해야 해요."]]},
+ {en:'Weekend Plans',ko:'주말 계획',post:'im-down',expr:["I'm down!","콜, 나도 낄래!"],qc:["Brunch on Saturday? I'm down!","토요일 브런치? 콜!"],q:[
+  {en:'Any plans for the weekend?',ko:'주말에 계획 있어요?',a:[["I'm thinking of going hiking.","등산 갈까 생각 중이에요."],["Nothing much. Just chilling at home.","별거 없어요. 그냥 집에서 쉬어요."],["Brunch with friends. Wanna come?","친구들이랑 브런치요. 같이 갈래요?"],["I have to work, unfortunately.","아쉽게도 일해야 해요."]]},
   {en:'What did you do last weekend?',ko:'지난 주말에 뭐 했어요?',a:[["I binge-watched a new show.","새 드라마 몰아 봤어요."],["I tried a new café nearby.","근처 새 카페에 가 봤어요."],["I cleaned my whole apartment.","집 대청소했어요."],["I just slept in. It was great.","늦잠 잤어요. 최고였어요."]]},
-  {en:"What's your perfect Sunday?",ko:'완벽한 일요일은 어떤 모습이에요?',a:[["Sleeping in and a late brunch.","늦잠 자고 늦은 브런치요."],["A long walk and a good book.","긴 산책이랑 좋은 책이요."],["Coffee with friends, no plans.","계획 없이 친구들이랑 커피요."],["Staying in my pajamas all day.","하루 종일 잠옷 입고 있기요."]]}],chat:[["Want to join us?","같이 갈래요?"],["Sounds like a plan!","좋아요, 그렇게 해요!"],["I need a lazy weekend.","느긋한 주말이 필요해요."]]},
- {en:'Hobbies',ko:'취미',expr:["I'm really into ~","~에 빠져 있어요"],qc:["I'm really into photography.","요즘 사진에 빠져 있어요."],q:[
+  {en:"What's your perfect Sunday?",ko:'완벽한 일요일은 어떤 모습이에요?',a:[["Sleeping in and a late brunch.","늦잠 자고 늦은 브런치요."],["A long walk and a good book.","긴 산책이랑 좋은 책이요."],["Coffee with friends, no plans.","계획 없이 친구들이랑 커피요."],["Staying in my pajamas all day.","하루 종일 잠옷 입고 있기요."]]}],chat:[["Wanna join us? We're getting tacos.","같이 갈래요? 타코 먹으러 가요."],["Sounds like a plan!","좋아요, 그렇게 해요!"],["I need a lazy weekend.","느긋한 주말이 필요해요."]]},
+ {en:'Hobbies',ko:'취미',post:'',expr:["I'm really into ~","~에 빠져 있어요"],qc:["I'm really into photography.","요즘 사진에 빠져 있어요."],q:[
   {en:'What do you do for fun?',ko:'재미로 뭐 해요?',a:[["I'm really into photography.","사진에 빠져 있어요."],["I play tennis on weekends.","주말에 테니스 쳐요."],["I bake bread at home.","집에서 빵 구워요."],["I watch a lot of videos.","영상을 많이 봐요."]]},
   {en:'Is there a hobby you want to try?',ko:'해 보고 싶은 취미 있어요?',a:[["I want to learn the guitar.","기타 배우고 싶어요."],["Pottery. It looks relaxing.","도예요. 마음이 편해질 것 같아요."],["Surfing, someday.","언젠가 서핑이요."],["Drawing. I used to love it.","그림이요. 예전에 좋아했어요."]]},
   {en:'Do you prefer staying in or going out?',ko:'집에 있는 게 좋아요, 나가는 게 좋아요?',a:[["Staying in. I'm a homebody.","집이요. 집에 있는 게 좋아요."],["Going out! I get bored at home.","나가는 거요! 집에선 심심해요."],["It depends on the weather.","날씨에 따라 달라요."],["A little of both.","둘 다 조금씩이요."]]}],chat:[["How did you get into it?","어쩌다 시작하게 됐어요?"],["Is it hard to learn?","배우기 어려워요?"],["Ooh, I wanna try that too!","오, 저도 해 보고 싶다!"]]}
@@ -893,12 +897,37 @@ let count=14;function setCount(){$('countTxt').textContent=count+'/30';}
 setTimeout(()=>toast(me.ko+'님, '+$('branchName').textContent+'에 오신 걸 환영해요'),900);
 setInterval(()=>{if(document.hidden)return;const w=people.filter(p=>!p.me&&!p.seat&&Math.hypot(p.x-me.x,p.z-me.z)>160);if(!w.length)return;const p=w[Math.floor(Math.random()*w.length)];
  p.x=300+Math.random()*40-20;p.z=530;p.tx=200+Math.random()*120;p.tz=380;p.walk=true;if(count<30){count++;setCount();}toast(p.ko+'님이 들어왔어요');setTimeout(()=>nod(p),1800);},26000);
-function openMenu(){$('mTopic').textContent=(dayIdx===todayIdx?'오늘':DAYS[dayIdx]+'요일')+'의 주제 · '+TOPIC.en+' ('+TOPIC.ko+')';$('mExpr').textContent=TOPIC.expr[0];$('mExprKo').textContent=TOPIC.expr[1];
+function openMenu(){const ms=$('mStudy');ms.href='/'+(TOPIC.post?'p/'+TOPIC.post+'/':'category/expr/');ms.firstChild.nodeValue=TOPIC.post?'이 표현 자세히 공부하기 ':'영어표현 더 보기 ';$('mTopic').textContent=(dayIdx===todayIdx?'오늘':DAYS[dayIdx]+'요일')+'의 주제 · '+TOPIC.en+' ('+TOPIC.ko+')';$('mExpr').textContent=TOPIC.expr[0];$('mExprKo').textContent=TOPIC.expr[1];
  const ex=[TOPIC.qc,...TOPIC.q.map(x=>x.a[0])].filter((v,i,a)=>a.findIndex(y=>y[0]===v[0])===i).slice(0,3);const ul=$('mEx');ul.innerHTML='';ex.forEach(e=>{const li=document.createElement('li');li.textContent=e[0];li.append(Object.assign(document.createElement('small'),{textContent:e[1]}));ul.appendChild(li);});
  $('mStamp').textContent=stampsN;const st=$('mStamps');st.innerHTML='';for(let i=0;i<10;i++){const e=document.createElement('i');if(i<stampsN)e.className='on';st.appendChild(e);}
  $('mUsed').textContent=usedSet.size;const ul2=$('mUsedList');ul2.innerHTML='';if(!usedSet.size){const li=document.createElement('li');li.textContent='아직 없어요. 퀵챗이나 주문으로 첫 문장을 말해 보세요.';ul2.appendChild(li);}else[...usedSet].reverse().forEach(t=>{const li=document.createElement('li');li.textContent=t;ul2.appendChild(li);});
  open('sheetMenu');}
 $('menuBtn').addEventListener('click',openMenu);
+
+/* 시즌 이벤트 장식: 할로윈(10/24~10/31), 크리스마스(12/1~12/26) */
+const evGroups={};
+function lightString(g,pts,cols){pts.forEach((pt,i)=>{const b=new THREE.Mesh(new THREE.SphereGeometry(2.4,10,8),new THREE.MeshBasicMaterial({color:cols[i%cols.length]}));b.position.set(pt[0],pt[1],pt[2]);g.add(b);});}
+function wallLights(g,cols){const pts=[];for(let x=-430;x<=430;x+=26)pts.push([x,182+Math.sin(x/40)*8,-BZ-8]);for(let z=-520;z<=520;z+=26)pts.push([-BX-8,182+Math.sin(z/40)*8,z]);lightString(g,pts,cols);}
+(function(){const g=new THREE.Group();wallLights(g,['#FF8A1F','#B26BFF','#FFB347']);
+ const orange=new THREE.MeshStandardMaterial({color:'#F08A24',roughness:.6}),stem=new THREE.MeshStandardMaterial({color:'#4F7A45'}),face=new THREE.MeshBasicMaterial({color:'#FFD27A'});
+ [[-60,-395,1],[-350,-480,1.4],[360,430,1.2],[-400,380,1],[180,-430,.8],[620,-20,1]].forEach(([x,z,k])=>{const p=new THREE.Group();const b=new THREE.Mesh(new THREE.SphereGeometry(12,20,14),orange);b.scale.set(1.2,.85,1.2);b.position.y=10;b.castShadow=true;const st=new THREE.Mesh(new THREE.CylinderGeometry(1.5,2,6,8),stem);st.position.y=21;
+  [[-4.5,13],[4.5,13]].forEach(([ex,ey])=>{const e=new THREE.Mesh(new THREE.CircleGeometry(2.4,3),face);e.position.set(ex,ey,13.9);e.rotation.z=Math.PI/2;p.add(e);});const m=new THREE.Mesh(new THREE.PlaneGeometry(9,2.4),face);m.position.set(0,7,14);p.add(b,st,m);p.scale.setScalar(k);p.position.set(x,0,z);p.rotation.y=Math.atan2(0-x,300-z)*.6;g.add(p);});
+ const bat=new THREE.MeshBasicMaterial({color:'#1A110B',side:THREE.DoubleSide});[[-200,160,-300],[100,175,0],[-60,168,250]].forEach(([x,y,z])=>{const w=new THREE.Mesh(new THREE.CircleGeometry(9,3),bat);w.scale.set(2,.6,1);w.position.set(x,y,z);w.rotation.x=-1.2;g.add(w);});
+ g.visible=false;scene.add(g);evGroups.halloween={g,toast:'🎃 Happy Halloween! 오늘은 할로윈 카페예요',light:0xff9a3c};})();
+(function(){const g=new THREE.Group();wallLights(g,['#FF4D4D','#FFE08A','#4FD27A']);
+ const tree=new THREE.Group(),tm=new THREE.MeshStandardMaterial({color:'#2F6B3F',roughness:.8});[[0,30,36,46],[0,58,28,40],[0,82,19,32]].forEach(([x,y,r,h])=>{const c=new THREE.Mesh(new THREE.ConeGeometry(r,h,20),tm);c.position.y=y;c.castShadow=true;tree.add(c);});
+ const trunk=new THREE.Mesh(new THREE.CylinderGeometry(4,5,12,10),new THREE.MeshStandardMaterial({color:'#6B4430'}));trunk.position.y=6;tree.add(trunk);
+ const star=new THREE.Mesh(new THREE.OctahedronGeometry(5),new THREE.MeshBasicMaterial({color:'#FFE08A'}));star.position.y=102;tree.add(star);
+ const orn=['#FF4D4D','#FFE08A','#CDEB5B','#FFFFFF'];for(let i=0;i<22;i++){const a=i*2.4,y=18+(i%11)*7,r=(36-(y-18)*.33);const o=new THREE.Mesh(new THREE.SphereGeometry(2.2,8,6),new THREE.MeshBasicMaterial({color:orn[i%4]}));o.position.set(Math.cos(a)*r*.9,y,Math.sin(a)*r*.9);tree.add(o);}
+ tree.position.set(-290,0,505);g.add(tree);
+ [['#FF4D4D',-250,515],['#CDEB5B',-265,465],['#FFFFFF',-236,478]].forEach(([c,x,z])=>{const bx=new THREE.Mesh(new THREE.BoxGeometry(14,12,14),new THREE.MeshStandardMaterial({color:c}));bx.position.set(x,6,z);bx.castShadow=true;g.add(bx);const rb=new THREE.Mesh(new THREE.BoxGeometry(14.4,12.4,3),new THREE.MeshBasicMaterial({color:c==='#FF4D4D'?'#FFE08A':'#FF4D4D'}));rb.position.set(x,6,z);g.add(rb);});
+ const wr=new THREE.Mesh(new THREE.TorusGeometry(16,4.5,10,28),new THREE.MeshStandardMaterial({color:'#2F6B3F'}));wr.position.set(-260,150,-BZ-8);g.add(wr);const bow=new THREE.Mesh(new THREE.SphereGeometry(4,10,8),new THREE.MeshBasicMaterial({color:'#FF4D4D'}));bow.position.set(-260,136,-BZ-4);g.add(bow);
+ g.visible=false;scene.add(g);evGroups.christmas={g,toast:'🎄 Merry Christmas! 오늘은 크리스마스 카페예요',light:0xffc070};})();
+let curEvent='';
+function setEvent(k){curEvent=k;Object.entries(evGroups).forEach(([n,o])=>o.g.visible=n===k);if(k&&evGroups[k])setTimeout(()=>toast(evGroups[k].toast),1600);document.querySelectorAll('.evbtn').forEach(b=>b.classList.toggle('on',b.dataset.ev===k));}
+function autoEvent(){const d=new Date(),m=d.getMonth()+1,day=d.getDate();const h=(location.hash||'').slice(1);if(h==='halloween'||h==='christmas')return h;if(m===10&&day>=24)return 'halloween';if(m===12&&day<=26)return 'christmas';return '';}
+document.querySelectorAll('.evbtn').forEach(b=>b.addEventListener('click',()=>setEvent(b.dataset.ev)));
+setEvent(autoEvent());
 function applyTopic(){TOPIC=TOPICS[dayIdx];$('topicName').textContent=(dayIdx===todayIdx?'':DAYS[dayIdx]+'요일 · ')+TOPIC.en;drawBoards(THEMES[theme]);drawSign(THEMES[theme]);buildQC();if(seated&&!$('tblList').hidden)renderQList();}
 
 /* 카페 음악: ElevenLabs로 만든 카페 재즈·보사노바 연주곡(가사 없음), 반복 재생 */
