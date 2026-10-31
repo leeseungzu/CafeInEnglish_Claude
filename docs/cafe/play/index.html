@@ -757,7 +757,7 @@ add(new THREE.Mesh(new THREE.BoxGeometry(16,230,AZ1-AZ0+16),annexMats.right),AX1
 const fbC=document.createElement('canvas');fbC.width=640;fbC.height=240;const fbT=new THREE.CanvasTexture(fbC);
 function drawFocusBoard(txt){const x=fbC.getContext('2d');x.fillStyle='#1A110B';x.fillRect(0,0,640,240);x.textAlign='center';x.fillStyle=LIME;x.font='800 36px sans-serif';x.fillText('STUDY ROOM',320,62);x.fillStyle=CREAM;x.font='800 76px sans-serif';x.fillText(txt||'FOCUS 25:00',320,150);x.font='500 28px sans-serif';x.globalAlpha=.7;x.fillText('조용히, 함께 공부해요',320,206);x.globalAlpha=1;fbT.needsUpdate=true;}
 drawFocusBoard();
-const fBoard=new THREE.Mesh(new THREE.PlaneGeometry(200,75),new THREE.MeshBasicMaterial({map:fbT,transparent:true}));fBoard.position.set((AX0+AX1)/2,118,-BZ-9);scene.add(fBoard);
+const fBoard=new THREE.Mesh(new THREE.PlaneGeometry(213,80),new THREE.MeshBasicMaterial({map:fbT,transparent:true}));fBoard.position.set((AX0+AX1)/2,150,-BZ-9.5);scene.add(fBoard);
 /* 문 위 표지 */
 const dsC=document.createElement('canvas');dsC.width=400;dsC.height=90;const dsx=dsC.getContext('2d');dsx.fillStyle='#1A110B';dsx.fillRect(0,0,400,90);dsx.fillStyle=LIME;dsx.font='800 34px sans-serif';dsx.textAlign='center';dsx.fillText('STUDY ROOM →',200,40);dsx.fillStyle=CREAM;dsx.font='500 24px sans-serif';dsx.fillText('스터디룸',200,74);
 const dSign=new THREE.Mesh(new THREE.PlaneGeometry(90,20),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(dsC)}));dSign.rotation.y=-Math.PI/2;dSign.position.set(BX+9,109,170);scene.add(dSign);
