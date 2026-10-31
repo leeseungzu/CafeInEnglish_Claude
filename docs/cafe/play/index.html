@@ -546,7 +546,8 @@ document.getElementById('fsBtn').addEventListener('click',()=>{if(stage.classLis
 const cv=document.getElementById('c3');
 if(!window.THREE){stage.insertAdjacentHTML('beforeend','<div class="nogl">3D 화면을 불러오지 못했어요. 새로고침해 주세요.</div>');return;}
 let renderer;try{renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true});}catch(e){stage.insertAdjacentHTML('beforeend','<div class="nogl">이 기기에서는 3D 화면을 열 수 없어요.</div>');return;}
-renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+renderer.shadowMap.enabled=true;
+cv.addEventListener('webglcontextlost',e=>{e.preventDefault();if(!document.querySelector('.nogl'))stage.insertAdjacentHTML('beforeend','<div class="nogl" style="z-index:20"><div>화면이 잠시 멈췄어요.<br><button onclick="location.reload()" style="margin-top:12px;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:700;background:#CDEB5B;color:#2B1D14;cursor:pointer">다시 불러오기</button></div></div>');});renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 const scene=new THREE.Scene();
 const cam=new THREE.PerspectiveCamera(42,1,5,5000);
 const hemi=new THREE.HemisphereLight(0xffffff,0x444444,1);scene.add(hemi);
@@ -713,7 +714,7 @@ cv.addEventListener('pointerleave',()=>{hoverZone=null;cv.style.cursor='';});
 let hoverZone=null,hvT=0;const ptrs=new Map();let pinch=null;
 const pd=()=>{const a=[...ptrs.values()];return Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);};
 function zoneTarget(z){if(z.type==='bar')return{x:-345,z:Math.max(-50,Math.min(330,me.z))};if(z.type==='study'){const sd=me.x<z.x?-1:1;return{x:z.x+sd*(z.w/2+48),z:Math.max(z.z-z.d/2,Math.min(z.z+z.d/2,me.z))};}const R=(z.type==='lounge'?95:z.r+44),a=Math.atan2(me.z-z.z,me.x-z.x);return{x:z.x+Math.cos(a)*R,z:z.z+Math.sin(a)*R};}
-cv.addEventListener('pointerdown',e=>{ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});try{cv.setPointerCapture(e.pointerId);}catch(_){}
+cv.addEventListener('pointerdown',e=>{if(e.isPrimary||e.pointerType==='mouse'){ptrs.clear();pinch=null;}ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});try{cv.setPointerCapture(e.pointerId);}catch(_){}
  if(ptrs.size===2){pinch={d:pd()};drag=null;return;}if(ptrs.size>2)return;drag={x:e.clientX,y:e.clientY,moved:false,id:e.pointerId};});
 cv.addEventListener('pointermove',e=>{if(!drag&&!pinch&&e.pointerType==='mouse'){const n=performance.now();if(n-hvT>60){hvT=n;const r=cv.getBoundingClientRect();v2.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(v2,cam);const h=ray.intersectObjects(clickables,false)[0];hoverZone=h?h.object.userData.zone:null;cv.style.cursor=hoverZone&&!seated?'pointer':'';}}
  if(ptrs.has(e.pointerId))ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
@@ -725,7 +726,7 @@ function endPtr(e){ptrs.delete(e.pointerId);if(pinch){if(ptrs.size<2)pinch=null;
   const th=ray.intersectObjects(clickables,false)[0];if(th&&!seated&&!sheetOpen()){const z=th.object.userData.zone,tg=zoneTarget(z);walkTo(tg.x,tg.z);pendingSit=z;drag=null;return;}
   const hit=ray.intersectObjects([floor,carpet],false)[0];if(hit){pendingSit=null;walkTo(hit.point.x,hit.point.z);}}
  drag=null;}
-cv.addEventListener('pointerup',endPtr);cv.addEventListener('pointercancel',e=>{ptrs.delete(e.pointerId);pinch=null;drag=null;});
+cv.addEventListener('pointerup',endPtr);['pointerup','pointercancel'].forEach(t=>window.addEventListener(t,e=>{if(ptrs.has(e.pointerId)&&e.target!==cv){ptrs.delete(e.pointerId);if(ptrs.size<2)pinch=null;}}));window.addEventListener('blur',()=>{ptrs.clear();pinch=null;drag=null;for(const k in keys)keys[k]=false;});cv.addEventListener('pointercancel',e=>{ptrs.delete(e.pointerId);pinch=null;drag=null;});
 cv.addEventListener('wheel',e=>{e.preventDefault();dist=Math.max(220,Math.min(820,dist+e.deltaY*.5));},{passive:false});
 const keys={};window.addEventListener('keydown',e=>{if(document.getElementById('cafeView').hidden)return;const k=e.key.toLowerCase();if(['w','a','s','d','arrowup','arrowdown','arrowleft','arrowright'].includes(k)){keys[k]=true;if(k.startsWith('arrow'))e.preventDefault();}});
 window.addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=false;});
