@@ -194,8 +194,8 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .fset .tg{border:1px solid rgba(127,127,127,.3);border-radius:99px;padding:6px 11px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;background:transparent;color:var(--gt)}
 .fset .tg.on{background:var(--lime);border-color:var(--lime);color:#2B1D14}
 .fcustom{display:flex;align-items:center;gap:4px;margin-left:auto;font-size:13px;font-weight:700;color:var(--gs)}
-.fcustom input{width:52px;text-align:center;font:inherit;font-weight:800;font-size:15px;border:1px solid rgba(127,127,127,.35);border-radius:10px;padding:5px 2px;background:transparent;color:var(--gt)}
-.fcustom .st{width:28px;height:28px;border-radius:50%;border:0;background:rgba(127,127,127,.18);color:var(--gt);font-size:16px;font-weight:700;cursor:pointer}
+.fcustom input::-webkit-outer-spin-button,.fcustom input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.fcustom input{-moz-appearance:textfield;appearance:textfield;width:52px;text-align:center;font:inherit;font-weight:800;font-size:15px;border:1px solid rgba(127,127,127,.35);border-radius:10px;padding:5px 2px;background:transparent;color:var(--gt)}
+.fcustom .st{touch-action:manipulation;user-select:none;width:28px;height:28px;border-radius:50%;border:0;background:rgba(127,127,127,.18);color:var(--gt);font-size:16px;font-weight:700;cursor:pointer}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .fnote{font-size:11.5px;color:var(--gs);margin:2px 0 4px}
 .fphone{display:block;text-align:center;text-decoration:none;font-size:13px;font-weight:700;color:var(--gt);border:1px dashed rgba(127,127,127,.45);border-radius:12px;padding:8px;margin:4px 0 6px}
@@ -224,6 +224,17 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .evrow{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:14px;font-size:13px;color:var(--sub)}
 .evbtn{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink)}
 .evbtn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.stage.btnA{--main:#FFF6E6;--maint:#2B1D14}
+.stage.btnB{--main:rgba(255,246,230,.1);--maint:#FFF6E6}.stage.btnB .dock .main{box-shadow:inset 0 0 0 1.5px rgba(255,246,230,.55)}
+.stage.btnC{--main:#3182F6;--maint:#fff}
+.dock .main{position:relative;transition:transform .12s ease,filter .15s}
+.dock .main.press{transform:scale(.95)}
+.stage.btnA .dock .main::before{content:"";width:7px;height:7px;border-radius:50%;background:#CDEB5B;box-shadow:0 0 0 2px rgba(43,29,20,.12);flex:none}
+.stage.btnB .dock .main::after{content:"";position:absolute;left:30%;right:30%;bottom:7px;height:2px;border-radius:2px;background:#CDEB5B}
+.btnpick{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.bp{border:2px solid transparent;border-radius:18px;padding:10px;background:#2B1D14;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;font:inherit;color:#FFF6E6;font-size:12px;font-weight:700;min-width:150px}
+.bp.on{border-color:var(--ink)}
+.bp i{font-style:normal;display:flex;align-items:center;gap:8px;justify-content:center;border-radius:20px;padding:12px 22px;font-size:14px;font-weight:800}
 .nogl{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:30px;color:#fff;background:#2B1D14;font-size:14px}
 
 /* ── 아래 설명 ── */
@@ -451,6 +462,12 @@ body{padding:0!important;background:#140E0A}
       <h2 id="thName">A · 에스프레소 나이트</h2>
       <p id="thDesc"></p>
       <div class="sw3" id="thSw"></div>
+      <div class="evrow" style="display:block"><span>가운데 버튼 시안 (눌러서 적용)</span>
+        <div class="btnpick">
+          <button class="bp on" data-b="btnA"><i style="background:#FFF6E6;color:#2B1D14"><span style="width:7px;height:7px;border-radius:50%;background:#CDEB5B;display:inline-block"></span>스터디룸 보기</i>A · 크림 에스프레소</button>
+          <button class="bp" data-b="btnB"><i style="background:rgba(255,246,230,.1);color:#FFF6E6;box-shadow:inset 0 0 0 1.5px rgba(255,246,230,.55)">스터디룸 보기</i>B · 글라스 라인</button>
+          <button class="bp" data-b="btnC"><i style="background:#3182F6;color:#fff">스터디룸 보기</i>C · 카영 웹 블루</button>
+        </div></div>
       <div class="evrow"><span>창밖 시간 미리보기 (지금: <b id="skyLabel"></b>)</span><button class="evbtn skb on" data-sk="auto">자동</button><button class="evbtn skb" data-sk="day">낮</button><button class="evbtn skb" data-sk="sunset">노을</button><button class="evbtn skb" data-sk="night">밤</button></div>
       <div class="evrow"><span>시즌 장식 미리보기</span><button class="evbtn" data-ev="">기본</button><button class="evbtn" data-ev="halloween">할로윈</button><button class="evbtn" data-ev="christmas">크리스마스</button></div>
     </div>
@@ -623,7 +640,8 @@ const sideMats=[M('wallL',{transparent:true}),M('wainsL',{transparent:true}),M('
  seg(z0,w0,0,230);seg(w1,z1,0,230);seg(w0,w1,0,70);seg(w0,w1,210,230);}
 add(new THREE.Mesh(new THREE.BoxGeometry(20,74,2*BZ+36),sideMats[1]),-BX-13,37,0,false,true);
 {const L1=BZ+18+120,L2=BZ+18-220;add(new THREE.Mesh(new THREE.BoxGeometry(16,120,L1),sideMats[2]),BX+18,60,-BZ-18+L1/2,false,true);add(new THREE.Mesh(new THREE.BoxGeometry(16,120,L2),sideMats[2]),BX+18,60,220+L2/2,false,true);add(new THREE.Mesh(new THREE.BoxGeometry(16,22,100),sideMats[2]),BX+18,109,170,false,true);}
-{const L1=BZ+18+120,L2=BZ+18-220;add(new THREE.Mesh(new THREE.BoxGeometry(20,74,L1),sideMats[3]),BX+13,37,-BZ-18+L1/2,false,true);add(new THREE.Mesh(new THREE.BoxGeometry(20,74,L2),sideMats[3]),BX+13,37,220+L2/2,false,true);}
+{const L1=BZ+18+117,L2=BZ+18-223;add(new THREE.Mesh(new THREE.BoxGeometry(20,74,L1),sideMats[3]),BX+13,37,-BZ-18+L1/2,false,true);add(new THREE.Mesh(new THREE.BoxGeometry(20,74,L2),sideMats[3]),BX+13,37,223+L2/2,false,true);
+ const jamb=M('frame');[118.5,221.5].forEach(z=>add(new THREE.Mesh(new THREE.BoxGeometry(20,98,3),jamb),BX+18,49,z,false,true));}
 const skyC=document.createElement('canvas');skyC.width=1700;skyC.height=300;const skyT=new THREE.CanvasTexture(skyC);
 const winMat=new THREE.MeshBasicMaterial({color:'#BFD8EE',transparent:true,opacity:.08,depthWrite:false});const winMesh=new THREE.Mesh(new THREE.PlaneGeometry(850,140),winMat);winMesh.rotation.y=Math.PI/2;winMesh.position.set(-BX-9.5,140,45);scene.add(winMesh);
 const SKY={day:{top:'#6FB6F0',bot:'#CFEAFB',sun:'#FFF6D8',far:'#8FB7A8',mid:'#5E9A6E',near:'#3F7A4C',lake:'#7FC3E8',label:'낮'},
@@ -772,7 +790,7 @@ function applyTheme(k){theme=k;const t=THEMES[k];
  hemi.color.setHex(t.hemi[0]);hemi.groundColor.setHex(t.hemi[1]);hemi.intensity=t.hemi[2];sun.color.setHex(t.dir[0]);sun.intensity=t.dir[1];amb.intensity=t.amb;
  plights.forEach(l=>l.intensity=t.point);bulbs.forEach(b=>b.material.color.set(k==='night'?'#FFD58F':'#FFF6E6'));
  drawFloor(t);drawBoards(t);drawSign(t);
- stage.className='stage '+k;
+ stage.className='stage '+k+' '+(window.__btn||'btnA');
  document.getElementById('thName').textContent=t.name;document.getElementById('thDesc').innerHTML=t.desc;
  const sw=document.getElementById('thSw');sw.innerHTML='';t.swatch.forEach(c=>{const i=document.createElement('i');i.style.background=c;sw.appendChild(i);});}
 
@@ -807,7 +825,21 @@ const mk=new THREE.Mesh(new THREE.RingGeometry(9,12.5,48),new THREE.MeshBasicMat
 const mkDot=new THREE.Mesh(new THREE.CircleGeometry(3.2,24),mk.material);mkDot.rotation.x=-Math.PI/2;mkDot.position.y=.9;scene.add(mkDot);let mkT=0;
 let seated=null,near=null,started=false;const hint=document.getElementById('hint'),actBtn=document.getElementById('actBtn');
 function startMove(){if(!started){started=true;hint.style.opacity=0;}}
-function walkTo(x,z){if(seated||sheetOpen())return;me.tx=x;me.tz=z;me.walk=true;startMove();const q={x,z};collide(q);mk.position.x=mkDot.position.x=q.x;mk.position.z=mkDot.position.z=q.z;mkT=performance.now();mk.material.opacity=.95;}
+/* 길찾기: 벽·테이블을 피해 격자 A* 경로 */
+function freeAt(x,z,m){if(!RECTS.some(r=>x>=r[0]&&x<=r[1]&&z>=r[2]&&z<=r[3]))return false;for(const c of CIRC){if(Math.hypot(x-c.x,z-c.z)<c.r+m)return false;}for(const b of BOXES){if(x>b[0]-m&&x<b[1]+m&&z>b[2]-m&&z<b[3]+m)return false;}return true;}
+function los(a,b){const d=Math.hypot(b[0]-a[0],b[1]-a[1]),n=Math.ceil(d/8);for(let i=1;i<n;i++){const t=i/n;if(!freeAt(a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,13))return false;}return true;}
+const GS=18,GX0=-500,GZ0=-580,GW=Math.ceil((900-GX0)/GS),GH=Math.ceil((1060-GZ0)/GS);let gridOK=null;
+function buildGrid(){gridOK=new Uint8Array(GW*GH);for(let j=0;j<GH;j++)for(let i=0;i<GW;i++)gridOK[j*GW+i]=freeAt(GX0+i*GS,GZ0+j*GS,14)?1:0;}
+function cellOf(x,z){let i=Math.round((x-GX0)/GS),j=Math.round((z-GZ0)/GS);i=Math.max(0,Math.min(GW-1,i));j=Math.max(0,Math.min(GH-1,j));if(gridOK[j*GW+i])return j*GW+i;let best=-1,bd=1e9;for(let r=1;r<8&&best<0;r++)for(let dj=-r;dj<=r;dj++)for(let di=-r;di<=r;di++){const ii=i+di,jj=j+dj;if(ii<0||jj<0||ii>=GW||jj>=GH)continue;const k=jj*GW+ii;if(gridOK[k]){const d=di*di+dj*dj;if(d<bd){bd=d;best=k;}}}return best;}
+function findPath(sx,sz,tx,tz){if(!gridOK)buildGrid();if(los([sx,sz],[tx,tz]))return [[tx,tz]];const s0=cellOf(sx,sz),g0=cellOf(tx,tz);if(s0<0||g0<0)return null;
+ const G=new Float32Array(GW*GH).fill(1e9),P=new Int32Array(GW*GH).fill(-1),C=new Uint8Array(GW*GH);const heap=[];const push=(k,f)=>{heap.push([f,k]);let i=heap.length-1;while(i>0){const p=(i-1)>>1;if(heap[p][0]<=heap[i][0])break;[heap[p],heap[i]]=[heap[i],heap[p]];i=p;}};
+ const pop=()=>{const t=heap[0],l=heap.pop();if(heap.length){heap[0]=l;let i=0;for(;;){let a=2*i+1,b=a+1,m=i;if(a<heap.length&&heap[a][0]<heap[m][0])m=a;if(b<heap.length&&heap[b][0]<heap[m][0])m=b;if(m===i)break;[heap[m],heap[i]]=[heap[i],heap[m]];i=m;}}return t;};
+ const gx=g0%GW,gz=(g0/GW)|0,h=k=>Math.hypot(k%GW-gx,((k/GW)|0)-gz);G[s0]=0;push(s0,h(s0));
+ while(heap.length){const [,k]=pop();if(C[k])continue;C[k]=1;if(k===g0)break;const i=k%GW,j=(k/GW)|0;
+  for(let dj=-1;dj<=1;dj++)for(let di=-1;di<=1;di++){if(!di&&!dj)continue;const ii=i+di,jj=j+dj;if(ii<0||jj<0||ii>=GW||jj>=GH)continue;const n=jj*GW+ii;if(!gridOK[n]||C[n])continue;if(di&&dj&&(!gridOK[j*GW+ii]||!gridOK[jj*GW+i]))continue;const g=G[k]+(di&&dj?1.414:1);if(g<G[n]){G[n]=g;P[n]=k;push(n,g+h(n));}}}
+ if(P[g0]<0&&g0!==s0)return null;const pts=[];for(let k=g0;k>=0&&k!==s0;k=P[k])pts.push([GX0+(k%GW)*GS,GZ0+((k/GW)|0)*GS]);pts.reverse();pts.push([tx,tz]);
+ const out=[];let cur=[sx,sz],idx=0;while(idx<pts.length){let far=idx;for(let q=pts.length-1;q>idx;q--){if(los(cur,pts[q])){far=q;break;}}out.push(pts[far]);cur=pts[far];idx=far+1;}return out;}
+function walkTo(x,z){if(seated||sheetOpen())return;const q={x,z};const pth=findPath(me.x,me.z,x,z);if(pth&&pth.length){const f=pth.shift();x=f[0];z=f[1];me.path=pth;}else me.path=[];me.tx=x;me.tz=z;me.walk=true;startMove();collide(q);mk.position.x=mkDot.position.x=q.x;mk.position.z=mkDot.position.z=q.z;mkT=performance.now();mk.material.opacity=.95;}
 
 let last=performance.now();const tmp=new THREE.Vector3(),want=new THREE.Vector3();
 function frame(now){const dt=Math.min(.1,(now-last)/1000);last=now;const t=now/1000;
@@ -815,7 +847,7 @@ function frame(now){const dt=Math.min(.1,(now-last)/1000);last=now;const t=now/1
  if(!seated&&!sheetOpen()&&(Math.abs(ix)>.05||Math.abs(iz)>.05)){startMove();me.walk=false;pendingSit=null;const l=Math.min(1,Math.hypot(ix,iz));
   const fx=-Math.sin(yaw),fz=-Math.cos(yaw),rx=Math.cos(yaw),rz=-Math.sin(yaw);let mx=rx*ix-fx*iz,mz=rz*ix-fz*iz;const n=Math.hypot(mx,mz)||1;mx=mx/n*l;mz=mz/n*l;
   me.x+=mx*170*dt;me.z+=mz*170*dt;me.vx=mx;me.vz=mz;collide(me);me.moving=true;}
- else if(me.walk){const dx=me.tx-me.x,dz=me.tz-me.z,d=Math.hypot(dx,dz);if(d>2){const k=Math.min(1,170*dt/d);me.vx=dx/d;me.vz=dz/d;const ox=me.x,oz=me.z;me.x+=dx*k;me.z+=dz*k;collide(me);me.moving=true;if(Math.hypot(me.x-ox,me.z-oz)<.2*170*dt)me.walk=false;}else{me.walk=false;me.moving=false;}}
+ else if(me.walk){const dx=me.tx-me.x,dz=me.tz-me.z,d=Math.hypot(dx,dz);if(d>2){const k=Math.min(1,170*dt/d);me.vx=dx/d;me.vz=dz/d;const ox=me.x,oz=me.z;me.x+=dx*k;me.z+=dz*k;collide(me);me.moving=true;if(Math.hypot(me.x-ox,me.z-oz)<.2*170*dt){if(me.path&&me.path.length){const n=me.path.shift();me.tx=n[0];me.tz=n[1];}else me.walk=false;}}else if(me.path&&me.path.length){const n=me.path.shift();me.tx=n[0];me.tz=n[1];}else{me.walk=false;me.moving=false;}}
  else me.moving=false;
  people.forEach(p=>{if(p.me||p.seat)return;const dx=p.tx-p.x,dz=p.tz-p.z,d=Math.hypot(dx,dz);
   if(d>2){const k=Math.min(1,48*dt/d);p.vx=dx/d;p.vz=dz/d;p.x+=dx*k;p.z+=dz*k;collide(p);p.moving=true;if(Math.random()<dt*.15){p.tx=p.x;p.tz=p.z;}}else{p.moving=false;if(Math.random()<dt*.3){p.tx=-300+Math.random()*560;p.tz=-300+Math.random()*740;}}});
@@ -843,7 +875,7 @@ function frame(now){const dt=Math.min(.1,(now-last)/1000);last=now;const t=now/1
  requestAnimationFrame(frame);}
 
 function updateNear(){let n=null;if(!seated){if(Math.hypot(me.x-COUNTER.x,me.z-COUNTER.z)<60)n={k:'counter',key:'c'};
- else if(me.x>330&&me.z>270&&me.z<525)n={k:'wall',z:WALL_ZONE,key:'wall'};
+ else if(me.x>330&&me.x<BX+5&&me.z>270&&me.z<525)n={k:'wall',z:WALL_ZONE,key:'wall'};
  else if(Math.abs(me.x-STAGE.x)<150&&Math.abs(me.z-STAGE.z)<120)n={k:'stage',z:STAGE_ZONE,key:'stage'};
  else ZONES.forEach(z=>{const d=z.type==='study'?Math.max(Math.abs(me.x-z.x)-z.w/2,Math.abs(me.z-z.z)-z.d/2)-62:z.type==='bar'?(me.x<-320&&me.z>-410&&me.z<440?0:999):Math.hypot(me.x-z.x,me.z-z.z)-(z.type==='lounge'?120:z.r+56);if(d<=0)n={k:'zone',z,key:z.id};});}
  const key=seated?'seated':(n?n.key:'');if(key===actBtn.dataset.key)return;actBtn.dataset.key=key;near=n;
@@ -940,7 +972,9 @@ function showStudy(){syncAlarmUI();$('stNow').textContent='지금 '+studyCount()
 const isAndroid=/Android/i.test(navigator.userAgent),isIOS=/iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),isMobile=isAndroid||isIOS;
 function setMin(m){if(fEnd)return;fMin=Math.max(1,Math.min(180,Math.round(+m||25)));$('fInput').value=fMin;document.querySelectorAll('.fset .tg').forEach(x=>x.classList.toggle('on',+x.dataset.min===fMin));$('ftime').textContent=fmt(fMin*60000);updPhone();}
 document.querySelectorAll('.fset .tg').forEach(b=>b.addEventListener('click',()=>setMin(b.dataset.min)));
-$('fMinus').addEventListener('click',()=>setMin(fMin-1));$('fPlus').addEventListener('click',()=>setMin(fMin+1));
+[['fMinus',-1],['fPlus',1]].forEach(([id,d])=>{const b=$(id);let hold=null,rep=null;const step=()=>{if(fEnd){toast('집중 중에는 시간을 바꿀 수 없어요');return;}setMin(fMin+d);haptic();};
+ b.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();step();hold=setTimeout(()=>{rep=setInterval(step,90);},450);});
+ const end=()=>{clearTimeout(hold);clearInterval(rep);};['pointerup','pointerleave','pointercancel'].forEach(t=>b.addEventListener(t,end));b.addEventListener('click',e=>e.preventDefault());});
 $('fInput').addEventListener('change',e=>setMin(e.target.value));
 function updPhone(){const a=$('fPhone');if(isAndroid){a.hidden=false;a.href='intent:#Intent;action=android.intent.action.SET_TIMER;i.android.intent.extra.alarm.LENGTH='+(fMin*60)+';S.android.intent.extra.alarm.MESSAGE=카영카페 집중;B.android.intent.extra.alarm.SKIP_UI=true;end';}
  $('fNote').textContent=isAndroid?'화면을 켜 두면 끝날 때 소리와 진동으로 알려요. 화면을 꺼도 받으려면 아래 버튼으로 휴대폰 타이머도 같이 맞춰 두세요.':isIOS?'화면을 켜 두면 끝날 때 소리로 알려요. 화면을 끄거나 다른 앱으로 가면 아이폰이 웹 알람을 막아요. 그럴 땐 시계 앱 타이머도 같은 시간으로 맞춰 두세요.':'끝나면 소리와 함께 컴퓨터 알림으로 알려요. 다른 탭에 있어도 알림이 떠요.';}
@@ -1100,7 +1134,7 @@ const lanternLights=[];
 /* 나무 · 언덕 */
 const leafM=[new THREE.MeshStandardMaterial({color:'#3F6E3A',roughness:.9,flatShading:true}),new THREE.MeshStandardMaterial({color:'#4F8044',roughness:.9,flatShading:true}),new THREE.MeshStandardMaterial({color:'#2F5A34',roughness:.9,flatShading:true})];
 const trunkM=new THREE.MeshStandardMaterial({color:'#5A3D2A'});
-function tree(x,z,k,kind){const g=new THREE.Group();const t=new THREE.Mesh(new THREE.CylinderGeometry(4*k,6*k,40*k,8),trunkM);t.position.y=20*k;t.castShadow=true;g.add(t);
+function tree(x,z,k,kind){const R=90*k;if(x>-BX-30-R&&x<880+40+R&&z>-BZ-30-R&&z<BZ+520+R&&!(x<-BX-30-R))return;if(x>-BX-30-R&&x<880+40+R&&z>-BZ-30-R&&z<BZ+10)return;const g=new THREE.Group();const t=new THREE.Mesh(new THREE.CylinderGeometry(4*k,6*k,40*k,8),trunkM);t.position.y=20*k;t.castShadow=true;g.add(t);
  if(kind===0){[[0,70,34],[0,98,26],[0,120,17]].forEach(([ox,y,r],i)=>{const c=new THREE.Mesh(new THREE.ConeGeometry(r*k,44*k,8),leafM[i%3]);c.position.y=y*k;c.castShadow=true;g.add(c);});}
  else{[[0,72,30],[-16,62,22],[16,64,22],[0,92,22]].forEach(([ox,y,r],i)=>{const c=new THREE.Mesh(new THREE.IcosahedronGeometry(r*k,1),leafM[(i+1)%3]);c.position.set(ox*k,y*k,0);c.castShadow=true;g.add(c);});}
  g.position.set(x,-27,z);g.rotation.y=(x*z)%6;scene.add(g);}
@@ -1187,6 +1221,10 @@ function syncVolSlider(){$('vol').value=Math.round(tv()*100);}
 cv.addEventListener('pointerdown',()=>{$('volPop').hidden=true;});
 let firstTouch=false;stage.addEventListener('pointerdown',e=>{if(e.target.closest('#musicBtn,#volPop')){firstTouch=true;return;}if(!firstTouch){firstTouch=true;if(!musicOn){setMusic(true);syncVol();}}},{capture:true});
 document.querySelectorAll('.skb').forEach(b=>b.addEventListener('click',()=>{skyMode=b.dataset.sk;document.querySelectorAll('.skb').forEach(x=>x.classList.toggle('on',x===b));skyCur='';updSky();}));
+function haptic(){try{navigator.vibrate&&navigator.vibrate(12);}catch(e){}}
+actBtn.addEventListener('pointerdown',()=>{actBtn.classList.add('press');haptic();});['pointerup','pointerleave','pointercancel'].forEach(t=>actBtn.addEventListener(t,()=>actBtn.classList.remove('press')));
+document.querySelectorAll('.dock button:not(.main)').forEach(b=>b.addEventListener('pointerdown',haptic));
+document.querySelectorAll('.bp').forEach(b=>b.addEventListener('click',()=>{window.__btn=b.dataset.b;['btnA','btnB','btnC'].forEach(c=>stage.classList.remove(c));stage.classList.add(b.dataset.b);document.querySelectorAll('.bp').forEach(x=>x.classList.toggle('on',x===b));}));
 $('topicBtn').addEventListener('click',()=>{dayIdx=(dayIdx+1)%7;applyTopic();});
 applyTheme('night');applyTopic();updSky();setInterval(updSky,60000);size();requestAnimationFrame(frame);
 })();
