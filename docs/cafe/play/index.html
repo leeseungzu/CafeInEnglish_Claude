@@ -197,6 +197,14 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .fnote{font-size:11.5px;color:var(--gs);margin:2px 0 4px}
 .fphone{display:block;text-align:center;text-decoration:none;font-size:13px;font-weight:700;color:var(--gt);border:1px dashed rgba(127,127,127,.45);border-radius:12px;padding:8px;margin:4px 0 6px}
+.opts{display:flex;flex-direction:column;gap:8px;background:rgba(127,127,127,.1);border-radius:14px;padding:10px 12px;margin:2px 0 8px}
+.orow{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700}
+.orow .ol{flex:none;width:58px;color:var(--gs)}
+.orow input[type=range]{flex:1;min-width:0;accent-color:var(--lime)}
+.orow select{flex:1;min-width:0;font:inherit;font-size:13px;font-weight:600;border:1px solid rgba(127,127,127,.35);border-radius:10px;padding:5px 6px;background:transparent;color:var(--gt)}
+.orow select option{color:#191F28}
+.tg2{flex:none;border:1px solid rgba(127,127,127,.35);border-radius:99px;padding:5px 11px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;background:transparent;color:var(--gt)}
+.tg2.on{background:var(--lime);border-color:var(--lime);color:#2B1D14}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
 .fc{border:1px solid rgba(127,127,127,.25);background:rgba(127,127,127,.1);color:var(--gt);border-radius:14px;padding:10px;min-height:62px;font:inherit;font-size:13px;font-weight:700;text-align:left;cursor:pointer;line-height:1.35}
 .fc.flip{background:rgba(205,235,91,.14);border-color:rgba(205,235,91,.5);font-weight:600}
@@ -347,6 +355,10 @@ body{padding:0!important;background:#140E0A}
         <div class="fcustom"><button class="st" id="fMinus" aria-label="1분 줄이기">−</button><label class="sr" for="fInput">집중 시간(분)</label><input id="fInput" type="number" inputmode="numeric" min="1" max="180" value="25"><span>분</span><button class="st" id="fPlus" aria-label="1분 늘리기">+</button></div></div>
       <div class="fnote" id="fNote"></div>
       <a class="fphone" id="fPhone" hidden>휴대폰 타이머에도 맞추기</a>
+      <div class="opts">
+        <div class="orow"><span class="ol">공부 음악</span><input type="range" id="sVol" min="0" max="100" value="24" aria-label="공부 음악 음량"><button class="tg2" id="sMusic">끄기</button></div>
+        <div class="orow"><span class="ol">끝 알람</span><button class="tg2 on" id="alOn">켜짐</button><select id="alSound" aria-label="알람 소리"><option value="chime">차임벨</option><option value="marimba">마림바</option><option value="glass">유리잔</option><option value="beep">디지털</option></select><button class="tg2" id="alTest">미리 듣기</button></div>
+      </div>
       <div class="lbl">오늘의 표현 카드 · 눌러서 뜻 보기</div>
       <div class="cards" id="cards"></div>
       <div class="btnrow"><button class="btn" id="cheerBtn">옆자리 응원하기</button><button class="btn dark" id="leaveS">일어나기</button></div>
@@ -410,7 +422,7 @@ body{padding:0!important;background:#140E0A}
       <ul class="list">
         <li><b>카운터.</b> 바리스타에게 다가가 주문해요. 바리스타는 말풍선과 음성으로 말하고, 끝나면 영수증과 쿠폰 도장이 나와요.</li>
         <li><b>테이블 4곳.</b> 2인석, 4인석, 창가석, 라운지 소파예요. 앉으면 컵홀더 질문과 15분 타이머가 나와요.</li>
-        <li><b>오늘의 주제.</b> 요일마다 주제가 바뀌어요. 메뉴판, 퀵챗, 테이블 질문이 모두 그날 주제로 바뀌어요. 위쪽 주제 칩을 누르면 다른 요일을 미리 볼 수 있어요.</li><li><b>메뉴판.</b> 오늘의 표현과 예문, 내 쿠폰 도장과 오늘 쓴 영어 문장을 볼 수 있어요. cafeinenglish.com 학습 페이지로 바로 이어져요.</li><li><b>시즌 장식.</b> 할로윈(10/24~31)과 크리스마스(12/1~26)에는 카페가 자동으로 그 분위기로 꾸며져요. 왼쪽 미리보기 버튼으로 확인할 수 있어요.</li><li><b>스터디룸.</b> 오른쪽 문으로 들어가면 조용한 스터디룸이 있어요. 집중 시간은 5·25·50분이나 1~180분 직접 입력이고, 끝나면 소리와 진동(안드로이드), 컴퓨터 알림으로 알려요. 들어가면 음악이 잔잔한 공부용 음악으로 바뀌고 소리도 조금 작아져요. 집중 타이머(25분·5분), 오늘의 표현 카드, 옆자리 응원만 있고 대화는 없어요.</li><li><b>앉기 표시.</b> 테이블 가까이 가거나 마우스를 올리면 바닥 링과 빈자리 점이 켜져요. 테이블을 바로 눌러도 걸어가서 앉아요.</li><li><b>대화 알림음.</b> 테이블 대화에서 새 말이 뜰 때마다 사람마다 다른 음높이로 "띵동" 하고 짧게 울려요.</li><li><b>인사와 짠.</b> "인사"는 고개를 까딱하고, 주변 손님도 같이 인사해요. "짠"은 가까운 손님과 머그를 부딪쳐요. 누가 들어오거나 인사하면 위쪽에 알림이 떠요.</li><li><b>카페 음악.</b> 화면을 처음 누르면 카페 재즈가 흘러요. 바리스타가 말할 때는 소리가 작아지고, 음표 버튼으로 끌 수 있어요.</li><li><b>테이블 대화.</b> 컵홀더 질문을 고르면 대화창이 열리고, 같은 테이블 손님이 퀵챗으로 대답한 뒤 내 차례가 와요.</li>
+        <li><b>오늘의 주제.</b> 요일마다 주제가 바뀌어요. 메뉴판, 퀵챗, 테이블 질문이 모두 그날 주제로 바뀌어요. 위쪽 주제 칩을 누르면 다른 요일을 미리 볼 수 있어요.</li><li><b>메뉴판.</b> 오늘의 표현과 예문, 내 쿠폰 도장과 오늘 쓴 영어 문장을 볼 수 있어요. cafeinenglish.com 학습 페이지로 바로 이어져요.</li><li><b>시즌 장식.</b> 할로윈(10/24~31)과 크리스마스(12/1~26)에는 카페가 자동으로 그 분위기로 꾸며져요. 왼쪽 미리보기 버튼으로 확인할 수 있어요.</li><li><b>스터디룸.</b> 오른쪽 문으로 들어가면 조용한 스터디룸이 있어요. 들어가면 음악이 잔잔한 클래식으로 바뀌어요. 집중 시간은 5·25·50분이나 1~180분 직접 입력이고, 공부 음악 음량, 끝 알람 켜기·끄기, 알람 소리 4가지(미리 듣기)를 고를 수 있어요. 대화 대신 오늘의 표현 카드와 옆자리 응원만 있어요.</li><li><b>앉기 표시.</b> 테이블 가까이 가거나 마우스를 올리면 바닥 링과 빈자리 점이 켜져요. 테이블을 바로 눌러도 걸어가서 앉아요.</li><li><b>대화 알림음.</b> 테이블 대화에서 새 말이 뜰 때마다 사람마다 다른 음높이로 "띵동" 하고 짧게 울려요.</li><li><b>인사와 짠.</b> "인사"는 고개를 까딱하고, 주변 손님도 같이 인사해요. "짠"은 가까운 손님과 머그를 부딪쳐요. 누가 들어오거나 인사하면 위쪽에 알림이 떠요.</li><li><b>카페 음악.</b> 화면을 처음 누르면 카페 재즈가 흘러요. 바리스타가 말할 때는 소리가 작아지고, 음표 버튼으로 끌 수 있어요.</li><li><b>테이블 대화.</b> 컵홀더 질문을 고르면 대화창이 열리고, 같은 테이블 손님이 퀵챗으로 대답한 뒤 내 차례가 와요.</li>
         <li><b>웹 연결.</b> 영수증의 "자세히 공부하기"를 누르면 cafeinenglish.com 학습 페이지로 이어져요.</li>
       </ul>
     </div>
@@ -492,19 +504,19 @@ const ZONES=[
  {id:'t4',name:'2인석',type:'round',x:140,z:230,r:34,seats:2},
  {id:'bar',name:'창가석',type:'bar',x:-385,z:140,seats:4},
  {id:'lounge',name:'라운지',type:'lounge',x:300,z:-120,r:32,seats:4},
- {id:'s1',name:'스터디룸',type:'study',x:600,z:170,w:60,d:220,seats:6},
- {id:'s2',name:'스터디룸',type:'study',x:760,z:170,w:60,d:220,seats:6}
+ {id:'s1',name:'스터디룸',type:'study',x:600,z:250,w:60,d:300,seats:8},
+ {id:'s2',name:'스터디룸',type:'study',x:760,z:250,w:60,d:300,seats:8}
 ];
 ZONES.forEach(t=>{t.spots=[];
  if(t.type==='round'){for(let i=0;i<t.seats;i++){const a=(t.seats===2?[Math.PI/2,-Math.PI/2][i]:[Math.PI/4,Math.PI*3/4,-Math.PI*3/4,-Math.PI/4][i]);t.spots.push({x:t.x+Math.cos(a)*(t.r+24),z:t.z+Math.sin(a)*(t.r+24)});}}
  else if(t.type==='bar'){[-10,90,190,290].forEach(z=>t.spots.push({x:-388,z,face:-Math.PI/2}));}
- else if(t.type==='study'){for(let i=0;i<6;i++){const sd=i<3?-1:1;t.spots.push({x:t.x+sd*(t.w/2+22),z:t.z-70+(i%3)*70,face:sd<0?Math.PI/2:-Math.PI/2});}}
+ else if(t.type==='study'){const per=t.seats/2;for(let i=0;i<t.seats;i++){const sd=i<per?-1:1;t.spots.push({x:t.x+sd*(t.w/2+22),z:t.z-(per-1)/2*75+(i%per)*75,face:sd<0?Math.PI/2:-Math.PI/2});}}
  else{[[392,-180],[392,-120],[392,-60],[300,12]].forEach(s=>t.spots.push({x:s[0],z:s[1]}));}
 });
 const COUNTER={x:-75,z:-392};
 const CIRC=[...ZONES.filter(t=>t.type==='round').map(t=>({x:t.x,z:t.z,r:t.r+14})),{x:300,z:-120,r:44},{x:-418,z:-518,r:26},{x:418,z:60,r:26},{x:-418,z:440,r:26},{x:395,z:495,r:26}];
-const BOXES=[[-330,170,-560,-422],[360,460,-245,0],[268,332,-8,46],[400,460,-505,-335],[-470,-404,-80,360],[570,630,60,280],[730,790,60,280],[835,880,-40,120]];
-const RECTS=[[-BX,BX,-BZ,BZ],[BX-5,488,130,210],[480,862,-36,378]];
+const BOXES=[[-330,170,-560,-422],[360,460,-245,0],[268,332,-8,46],[400,460,-505,-335],[-470,-404,-80,360],[570,630,100,400],[730,790,100,400],[835,880,220,380],[835,880,-40,120]];
+const RECTS=[[-BX,BX,-BZ,BZ],[BX-5,488,130,210],[480,862,-36,545]];
 const inR=(p,r)=>p.x>=r[0]&&p.x<=r[1]&&p.z>=r[2]&&p.z<=r[3];
 function collide(p){if(!RECTS.some(r=>inR(p,r))){let best=null,bd=1e9;for(const r of RECTS){const q={x:Math.max(r[0],Math.min(r[1],p.x)),z:Math.max(r[2],Math.min(r[3],p.z))};const d=Math.hypot(q.x-p.x,q.z-p.z);if(d<bd){bd=d;best=q;}}p.x=best.x;p.z=best.z;}
  for(const c of CIRC){const dx=p.x-c.x,dz=p.z-c.z,d=Math.hypot(dx,dz);if(d<c.r+11){const k=(c.r+11)/(d||1);p.x=c.x+dx*k;p.z=c.z+dz*k;}}
@@ -621,7 +633,7 @@ const bookCols=['#3182F6','#CDEB5B','#F49A7C','#FFF6E6','#2B1D14','#9AC4F8','#E9
 function plant(x,z,s){add(cyl(13*s,10*s,24*s,M('pot'),20),x,0,z);const lg=new THREE.IcosahedronGeometry(14*s,1);[[0,40,0,1.1],[-9,32,5,.8],[9,34,-4,.85],[2,52,2,.7]].forEach(a=>{const m=new THREE.Mesh(lg,M('leaf',{flatShading:true}));m.scale.setScalar(a[3]);add(m,x+a[0]*s,a[1]*s,z+a[2]*s);});}
 plant(-418,-518,1.2);plant(418,60,1);plant(-418,440,1.1);plant(-130,-410,.6);
 /* 스터디룸 (오른쪽 별관) */
-const AX0=466,AX1=880,AZ0=-58,AZ1=398;
+const AX0=466,AX1=880,AZ0=-58,AZ1=BZ+18;
 const crC=document.createElement('canvas');crC.width=256;crC.height=256;const crx=crC.getContext('2d');crx.fillStyle='#fff';crx.fillRect(0,0,256,256);crx.fillStyle='rgba(0,0,0,.06)';for(let i=0;i<256;i+=16){crx.fillRect(i,0,1,256);crx.fillRect(0,i,256,1);}
 const crT=new THREE.CanvasTexture(crC);crT.wrapS=crT.wrapT=THREE.RepeatWrapping;crT.repeat.set(6,7);
 const carpet=new THREE.Mesh(new THREE.PlaneGeometry(AX1-AX0,AZ1-AZ0),M('carpet',{map:crT}));carpet.rotation.x=-Math.PI/2;carpet.position.set((AX0+AX1)/2,.3,(AZ0+AZ1)/2);carpet.receiveShadow=true;scene.add(carpet);
@@ -646,8 +658,8 @@ ZONES.filter(z=>z.type==='study').forEach(z=>{const top=add(rbox(z.w,5,z.d,6,M('
  const lamp=new THREE.Mesh(new THREE.SphereGeometry(4,12,10),new THREE.MeshBasicMaterial({color:'#FFE3B0'}));lamp.position.set(z.x,46,z.z);scene.add(lamp);add(cyl(1.2,1.2,14,M('leg'),8),z.x,32,z.z);});
 add(rbox(40,150,160,4,M('shelf')),858,0,40);
 [[-20],[0],[20]].forEach(()=>{});
-plant(850,360,1);plant(500,-30,.9);
-const studyLight=new THREE.PointLight(0xffd59a,1,420,1.4);studyLight.position.set(680,140,170);scene.add(studyLight);
+plant(850,520,1);plant(500,-30,.9);plant(500,520,.9);add(rbox(40,150,160,4,M('shelf')),858,0,300);
+const studyLight=new THREE.PointLight(0xffd59a,1,420,1.4);studyLight.position.set(680,140,250);scene.add(studyLight);
 
 const sbC=document.createElement('canvas');sbC.width=256;sbC.height=340;const sbT=new THREE.CanvasTexture(sbC);
 function drawSign(t){const x=sbC.getContext('2d');x.fillStyle=t.c.sign;x.fillRect(0,0,256,340);x.fillStyle='#1A110B';x.fillRect(18,18,220,304);x.textAlign='center';x.fillStyle=LIME;x.font='800 40px sans-serif';x.fillText('OPEN',128,84);x.fillStyle=CREAM;x.font='600 22px sans-serif';x.fillText('Today 9PM',128,128);x.fillText('Voice Tables',128,158);x.fillStyle=LIME;x.font='700 20px sans-serif';x.fillText("TODAY'S TOPIC",128,212);x.fillStyle=CREAM;x.font='800 28px sans-serif';TOPIC.en.split(' ').reduce((acc,w)=>{const l=acc[acc.length-1];if(l&&(l+' '+w).length<=10)acc[acc.length-1]=l+' '+w;else acc.push(w);return acc;},[]).slice(0,3).forEach((l,i)=>x.fillText(l,128,250+i*32));sbT.needsUpdate=true;}
@@ -858,7 +870,7 @@ function studyCount(){return people.filter(p=>p.seat&&p.seat[0][0]==='s').length
 function fmt(ms){return String(Math.floor(ms/60000)).padStart(2,'0')+':'+String(Math.floor(ms/1000)%60).padStart(2,'0');}
 function renderCards(){const box=$('cards');box.innerHTML='';const items=[TOPIC.expr,TOPIC.qc,...TOPIC.q.map(x=>x.a[0]),...(TOPIC.chat||[]).slice(0,1)].filter((v,i,a)=>a.findIndex(y=>y[0]===v[0])===i).slice(0,6);
  items.forEach(it=>{const b=document.createElement('button');b.className='fc';b.textContent=it[0];b.addEventListener('click',()=>{b.classList.toggle('flip');b.textContent=b.classList.contains('flip')?it[1]:it[0];});box.appendChild(b);});}
-function showStudy(){$('stNow').textContent='지금 '+studyCount()+'명이 같이 공부하고 있어요';renderCards();if(!fEnd)$('ftime').textContent=fmt(fMin*60000);open('sheetStudy');camFocus=new THREE.Vector3(seated.x,0,seated.z);camDist=340;}
+function showStudy(){syncAlarmUI();$('stNow').textContent='지금 '+studyCount()+'명이 같이 공부하고 있어요';renderCards();if(!fEnd)$('ftime').textContent=fmt(fMin*60000);open('sheetStudy');camFocus=new THREE.Vector3(seated.x,0,seated.z);camDist=340;}
 const isAndroid=/Android/i.test(navigator.userAgent),isIOS=/iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),isMobile=isAndroid||isIOS;
 function setMin(m){if(fEnd)return;fMin=Math.max(1,Math.min(180,Math.round(+m||25)));$('fInput').value=fMin;document.querySelectorAll('.fset .tg').forEach(x=>x.classList.toggle('on',+x.dataset.min===fMin));$('ftime').textContent=fmt(fMin*60000);updPhone();}
 document.querySelectorAll('.fset .tg').forEach(b=>b.addEventListener('click',()=>setMin(b.dataset.min)));
@@ -872,7 +884,23 @@ let wakeLock=null;async function keepAwake(on){try{if(on&&'wakeLock' in navigato
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){if(fEnd&&!wakeLock)keepAwake(true);focusTick();stopTitleFlash();}});
 let tWorker=null;try{tWorker=new Worker(URL.createObjectURL(new Blob(['setInterval(()=>postMessage(0),250)'],{type:'text/javascript'})));tWorker.onmessage=()=>focusTick();}catch(e){}
 let titleT=null;const baseTitle=document.title;function stopTitleFlash(){clearInterval(titleT);titleT=null;document.title=baseTitle;}
-function focusAlarm(){[0,700,1400].forEach(d=>setTimeout(()=>sfx('clink'),d));try{navigator.vibrate&&navigator.vibrate([300,150,300,150,600]);}catch(e){}
+let alarmOn=true,alarmSound='chime';
+try{const st=JSON.parse(localStorage.getItem('kycafe')||'{}');if(typeof st.alarmOn==='boolean')alarmOn=st.alarmOn;if(st.alarmSound)alarmSound=st.alarmSound;}catch(e){}
+function savePrefs(){try{localStorage.setItem('kycafe',JSON.stringify({alarmOn,alarmSound,svol:SVOL}));}catch(e){}}
+function tone(f,t,d,v,type){const o=SX.createOscillator(),g=SX.createGain();o.type=type||'sine';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.008);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(SX.destination);o.start(t);o.stop(t+d+.05);}
+function playAlarm(kind,full){try{if(!SX)SX=new (window.AudioContext||window.webkitAudioContext)();SX.resume();const t0=SX.currentTime+.05,R=full?3:1;
+ for(let r=0;r<R;r++){const t=t0+r*1.6;
+  if(kind==='chime'){[[1046.5,0],[1318.5,.18],[1568,.36]].forEach(([f,d])=>{tone(f,t+d,1.4,.12);tone(f*2,t+d,.6,.03);});}
+  else if(kind==='marimba'){[523.25,659.25,783.99,1046.5,783.99].forEach((f,i)=>{tone(f,t+i*.13,.35,.16,'triangle');tone(f*4,t+i*.13,.08,.03);});}
+  else if(kind==='glass'){[[2093,.22,.9],[3136,.12,.6],[4186,.07,.35]].forEach(([f,v,d])=>tone(f,t,d,v));[[2093,.18,.8],[3136,.1,.5]].forEach(([f,v,d])=>tone(f,t+.45,d,v));}
+  else{for(let i=0;i<4;i++)tone(988,t+i*.18,.1,.07,'square');}}}catch(e){}}
+function syncAlarmUI(){$('alOn').textContent=alarmOn?'켜짐':'꺼짐';$('alOn').classList.toggle('on',alarmOn);$('alSound').value=alarmSound;$('alSound').disabled=!alarmOn;$('sVol').value=Math.round(SVOL*100);$('sMusic').textContent=musicOn?'끄기':'켜기';$('sMusic').classList.toggle('on',musicOn);}
+$('alOn').addEventListener('click',()=>{alarmOn=!alarmOn;savePrefs();syncAlarmUI();});
+$('alSound').addEventListener('change',e=>{alarmSound=e.target.value;savePrefs();playAlarm(alarmSound,false);});
+$('alTest').addEventListener('click',()=>playAlarm($('alSound').value,false));
+$('sVol').addEventListener('input',e=>{SVOL=e.target.value/100;savePrefs();if(musicOn&&inStudy){const a=trk(true);clearInterval(a._f);a.volume=SVOL;}});
+$('sMusic').addEventListener('click',()=>{setMusic(!musicOn);syncVol();syncAlarmUI();});
+function focusAlarm(){if(alarmOn){playAlarm(alarmSound,true);try{navigator.vibrate&&navigator.vibrate([300,150,300,150,600]);}catch(e){}}
  if(document.hidden){try{if('Notification' in window&&Notification.permission==='granted')new Notification('카영카페 · 집중 완료',{body:fMin+'분 집중을 마쳤어요. 잠깐 쉬어 가요!',icon:'/assets/icon-192.png'});}catch(e){}
   let on=false;titleT=setInterval(()=>{on=!on;document.title=on?'⏰ 집중 끝!':baseTitle;},900);}
  keepAwake(false);}
@@ -965,17 +993,17 @@ setEvent(autoEvent());
 function applyTopic(){TOPIC=TOPICS[dayIdx];$('topicName').textContent=(dayIdx===todayIdx?'':DAYS[dayIdx]+'요일 · ')+TOPIC.en;drawBoards(THEMES[theme]);drawSign(THEMES[theme]);buildQC();if(seated&&!$('tblList').hidden)renderQList();}
 
 /* 카페 음악: ElevenLabs로 만든 카페 재즈·보사노바 연주곡(가사 없음), 반복 재생 */
-let musicOn=false,bgm=null,bgmS=null,inStudy=false;let MV=.32;const MD=.1,SV=.75;
-function trk(st){if(st){if(!bgmS){bgmS=new Audio('study-music.mp3');bgmS.loop=true;bgmS.volume=0;}return bgmS;}if(!bgm){bgm=new Audio('cafe-music.mp3');bgm.loop=true;bgm.volume=0;}return bgm;}
+let musicOn=false,bgm=null,bgmS=null,inStudy=false;let MV=.32,SVOL=.24;const MD=.1;try{const st=JSON.parse(localStorage.getItem('kycafe')||'{}');if(typeof st.svol==='number')SVOL=st.svol;}catch(e){}
+function trk(st){if(st){if(!bgmS){bgmS=new Audio('study-music.mp3?v=2');bgmS.loop=true;bgmS.volume=0;}return bgmS;}if(!bgm){bgm=new Audio('cafe-music.mp3');bgm.loop=true;bgm.volume=0;}return bgm;}
 function fadeA(a,v,ms){if(!a)return;clearInterval(a._f);const st=a.volume,t0=performance.now();if(v>0&&a.paused){const pr=a.play();if(pr&&pr.catch)pr.catch(()=>{});}a._f=setInterval(()=>{const k=Math.min(1,(performance.now()-t0)/ms);a.volume=Math.max(0,Math.min(1,st+(v-st)*k));if(k>=1){clearInterval(a._f);if(v===0)a.pause();}},40);}
-const tv=()=>inStudy?MV*SV:MV;
+const tv=()=>inStudy?SVOL:MV;
 function fadeTo(v,ms){fadeA(trk(inStudy),v,ms);}
 function setMusic(on){musicOn=on;$('mslash').style.opacity=on?0:1;$('musicBtn').setAttribute('aria-label',on?'카페 음악 끄기':'카페 음악 켜기');
  if(on){fadeA(trk(inStudy),tv(),1500);}else{fadeA(bgm,0,600);fadeA(bgmS,0,600);}}
 function duck(on){if(!musicOn)return;fadeA(trk(inStudy),on?Math.min(MD,tv()):tv(),250);}
 function checkRoom(){const now=me.x>BX+10;if(now===inStudy)return;inStudy=now;
  if(musicOn){fadeA(trk(!now),0,1200);fadeA(trk(now),tv(),1800);}
- toast(now?'스터디룸이에요. 조용한 공부 음악으로 바꿨어요':'카페로 돌아왔어요');
+ toast(now?'스터디룸이에요. 잔잔한 클래식으로 바꿨어요':'카페로 돌아왔어요');
  const l=$('musicLabel');if(l)l.textContent=now?'스터디룸 음악':'카페 음악';}
 function syncVol(){const t=$('musicToggle');t.textContent=musicOn?'끄기':'켜기';t.classList.toggle('on',musicOn);}
 $('musicBtn').addEventListener('click',e=>{e.stopPropagation();const v=$('volPop');v.hidden=!v.hidden;if(!v.hidden&&!musicOn)setMusic(true);syncVol();});
