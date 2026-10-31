@@ -296,7 +296,7 @@ body{padding:0!important;background:#140E0A}
       </div>
     </div>
     <div class="vol glass" id="volPop" hidden>
-      <div class="row"><span>카페 음악</span><button class="tg" id="musicToggle">켜기</button></div>
+      <div class="row"><span id="musicLabel">카페 음악</span><button class="tg" id="musicToggle">켜기</button></div>
       <input type="range" id="vol" min="0" max="100" value="32" aria-label="음악 음량">
     </div>
     <div class="toasts" id="toasts"></div>
@@ -397,7 +397,7 @@ body{padding:0!important;background:#140E0A}
       <ul class="list">
         <li><b>카운터.</b> 바리스타에게 다가가 주문해요. 바리스타는 말풍선과 음성으로 말하고, 끝나면 영수증과 쿠폰 도장이 나와요.</li>
         <li><b>테이블 4곳.</b> 2인석, 4인석, 창가석, 라운지 소파예요. 앉으면 컵홀더 질문과 15분 타이머가 나와요.</li>
-        <li><b>오늘의 주제.</b> 요일마다 주제가 바뀌어요. 메뉴판, 퀵챗, 테이블 질문이 모두 그날 주제로 바뀌어요. 위쪽 주제 칩을 누르면 다른 요일을 미리 볼 수 있어요.</li><li><b>메뉴판.</b> 오늘의 표현과 예문, 내 쿠폰 도장과 오늘 쓴 영어 문장을 볼 수 있어요. cafeinenglish.com 학습 페이지로 바로 이어져요.</li><li><b>시즌 장식.</b> 할로윈(10/24~31)과 크리스마스(12/1~26)에는 카페가 자동으로 그 분위기로 꾸며져요. 왼쪽 미리보기 버튼으로 확인할 수 있어요.</li><li><b>스터디룸.</b> 오른쪽 문으로 들어가면 조용한 스터디룸이 있어요. 집중 타이머(25분·5분), 오늘의 표현 카드, 옆자리 응원만 있고 대화는 없어요.</li><li><b>앉기 표시.</b> 테이블 가까이 가거나 마우스를 올리면 바닥 링과 빈자리 점이 켜져요. 테이블을 바로 눌러도 걸어가서 앉아요.</li><li><b>대화 알림음.</b> 테이블 대화에서 새 말이 뜰 때마다 사람마다 다른 음높이로 "띵동" 하고 짧게 울려요.</li><li><b>인사와 짠.</b> "인사"는 고개를 까딱하고, 주변 손님도 같이 인사해요. "짠"은 가까운 손님과 머그를 부딪쳐요. 누가 들어오거나 인사하면 위쪽에 알림이 떠요.</li><li><b>카페 음악.</b> 화면을 처음 누르면 카페 재즈가 흘러요. 바리스타가 말할 때는 소리가 작아지고, 음표 버튼으로 끌 수 있어요.</li><li><b>테이블 대화.</b> 컵홀더 질문을 고르면 대화창이 열리고, 같은 테이블 손님이 퀵챗으로 대답한 뒤 내 차례가 와요.</li>
+        <li><b>오늘의 주제.</b> 요일마다 주제가 바뀌어요. 메뉴판, 퀵챗, 테이블 질문이 모두 그날 주제로 바뀌어요. 위쪽 주제 칩을 누르면 다른 요일을 미리 볼 수 있어요.</li><li><b>메뉴판.</b> 오늘의 표현과 예문, 내 쿠폰 도장과 오늘 쓴 영어 문장을 볼 수 있어요. cafeinenglish.com 학습 페이지로 바로 이어져요.</li><li><b>시즌 장식.</b> 할로윈(10/24~31)과 크리스마스(12/1~26)에는 카페가 자동으로 그 분위기로 꾸며져요. 왼쪽 미리보기 버튼으로 확인할 수 있어요.</li><li><b>스터디룸.</b> 오른쪽 문으로 들어가면 조용한 스터디룸이 있어요. 들어가면 음악이 잔잔한 공부용 음악으로 바뀌고 소리도 조금 작아져요. 집중 타이머(25분·5분), 오늘의 표현 카드, 옆자리 응원만 있고 대화는 없어요.</li><li><b>앉기 표시.</b> 테이블 가까이 가거나 마우스를 올리면 바닥 링과 빈자리 점이 켜져요. 테이블을 바로 눌러도 걸어가서 앉아요.</li><li><b>대화 알림음.</b> 테이블 대화에서 새 말이 뜰 때마다 사람마다 다른 음높이로 "띵동" 하고 짧게 울려요.</li><li><b>인사와 짠.</b> "인사"는 고개를 까딱하고, 주변 손님도 같이 인사해요. "짠"은 가까운 손님과 머그를 부딪쳐요. 누가 들어오거나 인사하면 위쪽에 알림이 떠요.</li><li><b>카페 음악.</b> 화면을 처음 누르면 카페 재즈가 흘러요. 바리스타가 말할 때는 소리가 작아지고, 음표 버튼으로 끌 수 있어요.</li><li><b>테이블 대화.</b> 컵홀더 질문을 고르면 대화창이 열리고, 같은 테이블 손님이 퀵챗으로 대답한 뒤 내 차례가 와요.</li>
         <li><b>웹 연결.</b> 영수증의 "자세히 공부하기"를 누르면 cafeinenglish.com 학습 페이지로 이어져요.</li>
       </ul>
     </div>
@@ -746,6 +746,7 @@ function frame(now){const dt=Math.min(.1,(now-last)/1000);last=now;const t=now/1
  fxMat.opacity=.5+.3*Math.sin(t*4);zoneFx.forEach(f=>{const on=!seated&&((near&&near.z===f.z)||pendingSit===f.z||hoverZone===f.z);f.g.visible=on;if(on){const used=people.filter(q=>q.seat&&q.seat[0]===f.z.id).map(q=>q.seat[1]);f.dots.forEach((d,i)=>d.visible=!used.includes(i));}});
  if(pendingSit&&near&&near.z===pendingSit&&!seated&&!sheetOpen()){const z=pendingSit;pendingSit=null;me.walk=false;sit(z);}
  if(me.walk){const k=((now-mkT)/900)%1;mk.scale.setScalar(1+k*.5);mk.material.opacity=.95-k*.35;}else{mk.material.opacity*=.86;}
+ checkRoom();
  updateNear();ordMat.opacity=near&&near.k==='counter'?.9:.35+Math.sin(t*3)*.12;
  if(camFocus)want.copy(camFocus);else want.set(me.x,0,me.z);focus.lerp(want,Math.min(1,dt*4));const D=camDist||dist;
  tmp.set(focus.x+Math.sin(yaw)*D*Math.cos(pitch),D*Math.sin(pitch)+10,focus.z+Math.cos(yaw)*D*Math.cos(pitch));cam.position.lerp(tmp,Math.min(1,dt*5));cam.lookAt(focus.x,24,focus.z);
@@ -845,13 +846,15 @@ function renderCards(){const box=$('cards');box.innerHTML='';const items=[TOPIC.
  items.forEach(it=>{const b=document.createElement('button');b.className='fc';b.textContent=it[0];b.addEventListener('click',()=>{b.classList.toggle('flip');b.textContent=b.classList.contains('flip')?it[1]:it[0];});box.appendChild(b);});}
 function showStudy(){$('stNow').textContent='지금 '+studyCount()+'명이 같이 공부하고 있어요';renderCards();if(!fEnd)$('ftime').textContent=fmt(fMin*60000);open('sheetStudy');camFocus=new THREE.Vector3(seated.x,0,seated.z);camDist=340;}
 document.querySelectorAll('.focus .tg').forEach(b=>b.addEventListener('click',()=>{if(fEnd)return;fMin=+b.dataset.min;document.querySelectorAll('.focus .tg').forEach(x=>x.classList.toggle('on',x===b));$('ftime').textContent=fmt(fMin*60000);}));
-$('fstart').addEventListener('click',()=>{if(fEnd){clearInterval(fInt);fEnd=0;$('fstart').textContent='집중 시작';$('ftime').textContent=fmt(fMin*60000);drawFocusBoard();hush(me);return;}
- fEnd=Date.now()+fMin*60000;$('fstart').textContent='그만하기';say(me,'Focus mode ✍︎','집중 중',0,true);sfx('pop');
- fInt=setInterval(()=>{const ms=Math.max(0,fEnd-Date.now());$('ftime').textContent=fmt(ms);drawFocusBoard('FOCUS '+fmt(ms));
-  if(!ms){clearInterval(fInt);fEnd=0;$('fstart').textContent='집중 시작';drawFocusBoard();hush(me);stampsN=Math.min(10,stampsN+1);sfx('clink');toast(fMin+'분 집중 완료! 쿠폰 도장 +1');}},1000);});
+let fLast='';setInterval(()=>focusTick(),200);
+function fText(ms){const sec=Math.ceil(ms/1000);return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');}
+function focusTick(){if(!fEnd)return;const ms=Math.max(0,fEnd-Date.now()),t=fText(ms);if(t!==fLast){fLast=t;$('ftime').textContent=t;drawFocusBoard('FOCUS '+t);}
+ if(!ms){fEnd=0;fLast='';$('fstart').textContent='집중 시작';drawFocusBoard();hush(me);stampsN=Math.min(10,stampsN+1);sfx('clink');toast(fMin+'분 집중 완료! 쿠폰 도장 +1');}}
+$('fstart').addEventListener('click',()=>{if(fEnd){fEnd=0;fLast='';$('fstart').textContent='집중 시작';$('ftime').textContent=fmt(fMin*60000);drawFocusBoard();hush(me);return;}
+ fEnd=Date.now()+fMin*60000;fLast='';$('fstart').textContent='그만하기';say(me,'Focus mode ✍︎','집중 중',0,true);sfx('pop');focusTick();});
 $('cheerBtn').addEventListener('click',()=>{const ms=people.filter(p=>!p.me&&p.seat&&seated&&p.seat[0]===seated.id);const p=ms[Math.floor(Math.random()*ms.length)];nod(me);say(me,'You got this! 💪','화이팅!',2000);
  if(p){setTimeout(()=>{nod(p);say(p,'Thanks! You too!','고마워요, 당신도!',2200,true);toast(p.ko+'님이 응원에 고개 까딱했어요');},700);}});
-$('leaveS').addEventListener('click',()=>{if(!seated)return;const z=seated;delete me.seat;seated=null;if(fEnd){clearInterval(fInt);fEnd=0;$('fstart').textContent='집중 시작';drawFocusBoard();}hush(me);me.x=z.x+(me.x<z.x?-1:1)*(z.w/2+55);collide(me);closeAll();});
+$('leaveS').addEventListener('click',()=>{if(!seated)return;const z=seated;delete me.seat;seated=null;if(fEnd){fEnd=0;fLast='';$('fstart').textContent='집중 시작';drawFocusBoard();}hush(me);me.x=z.x+(me.x<z.x?-1:1)*(z.w/2+55);collide(me);closeAll();});
 
 document.getElementById('leave').addEventListener('click',()=>{if(!seated)return;chatId++;const z=seated;delete me.seat;seated=null;tEnd=0;clearInterval(tInt);if(z.type==='bar'){me.x=-330;}else{me.z=z.z+(z.r||40)+60;me.x=z.x;}collide(me);closeAll();});
 actBtn.addEventListener('click',()=>{if(seated){if(seated.type==='study')showStudy();else showTable();return;}if(!near){walkTo(COUNTER.x,COUNTER.z+8);return;}
@@ -931,15 +934,22 @@ setEvent(autoEvent());
 function applyTopic(){TOPIC=TOPICS[dayIdx];$('topicName').textContent=(dayIdx===todayIdx?'':DAYS[dayIdx]+'요일 · ')+TOPIC.en;drawBoards(THEMES[theme]);drawSign(THEMES[theme]);buildQC();if(seated&&!$('tblList').hidden)renderQList();}
 
 /* 카페 음악: ElevenLabs로 만든 카페 재즈·보사노바 연주곡(가사 없음), 반복 재생 */
-let musicOn=false,bgm=null;let MV=.32;const MD=.1;
-function fadeTo(v,ms){if(!bgm)return;clearInterval(bgm._f);const st=bgm.volume,t0=performance.now();bgm._f=setInterval(()=>{const k=Math.min(1,(performance.now()-t0)/ms);bgm.volume=Math.max(0,Math.min(1,st+(v-st)*k));if(k>=1){clearInterval(bgm._f);if(v===0)bgm.pause();}},40);}
+let musicOn=false,bgm=null,bgmS=null,inStudy=false;let MV=.32;const MD=.1,SV=.75;
+function trk(st){if(st){if(!bgmS){bgmS=new Audio('study-music.mp3');bgmS.loop=true;bgmS.volume=0;}return bgmS;}if(!bgm){bgm=new Audio('cafe-music.mp3');bgm.loop=true;bgm.volume=0;}return bgm;}
+function fadeA(a,v,ms){if(!a)return;clearInterval(a._f);const st=a.volume,t0=performance.now();if(v>0&&a.paused){const pr=a.play();if(pr&&pr.catch)pr.catch(()=>{});}a._f=setInterval(()=>{const k=Math.min(1,(performance.now()-t0)/ms);a.volume=Math.max(0,Math.min(1,st+(v-st)*k));if(k>=1){clearInterval(a._f);if(v===0)a.pause();}},40);}
+const tv=()=>inStudy?MV*SV:MV;
+function fadeTo(v,ms){fadeA(trk(inStudy),v,ms);}
 function setMusic(on){musicOn=on;$('mslash').style.opacity=on?0:1;$('musicBtn').setAttribute('aria-label',on?'카페 음악 끄기':'카페 음악 켜기');
- if(on){if(!bgm){bgm=new Audio('cafe-music.mp3');bgm.loop=true;bgm.volume=0;}const pr=bgm.play();if(pr&&pr.catch)pr.catch(()=>{});fadeTo(MV,1500);}else fadeTo(0,600);}
-function duck(on){if(!bgm||!musicOn)return;fadeTo(on?Math.min(MD,MV):MV,250);}
+ if(on){fadeA(trk(inStudy),tv(),1500);}else{fadeA(bgm,0,600);fadeA(bgmS,0,600);}}
+function duck(on){if(!musicOn)return;fadeA(trk(inStudy),on?Math.min(MD,tv()):tv(),250);}
+function checkRoom(){const now=me.x>BX+10;if(now===inStudy)return;inStudy=now;
+ if(musicOn){fadeA(trk(!now),0,1200);fadeA(trk(now),tv(),1800);}
+ toast(now?'스터디룸이에요. 조용한 공부 음악으로 바꿨어요':'카페로 돌아왔어요');
+ const l=$('musicLabel');if(l)l.textContent=now?'스터디룸 음악':'카페 음악';}
 function syncVol(){const t=$('musicToggle');t.textContent=musicOn?'끄기':'켜기';t.classList.toggle('on',musicOn);}
 $('musicBtn').addEventListener('click',e=>{e.stopPropagation();const v=$('volPop');v.hidden=!v.hidden;if(!v.hidden&&!musicOn)setMusic(true);syncVol();});
 $('musicToggle').addEventListener('click',()=>{setMusic(!musicOn);syncVol();});
-$('vol').addEventListener('input',e=>{MV=e.target.value/100;if(bgm&&musicOn){clearInterval(bgm._f);bgm.volume=MV;}});
+$('vol').addEventListener('input',e=>{MV=e.target.value/100;if(musicOn){const a=trk(inStudy);clearInterval(a._f);a.volume=tv();}});
 cv.addEventListener('pointerdown',()=>{$('volPop').hidden=true;});
 let firstTouch=false;stage.addEventListener('pointerdown',e=>{if(e.target.closest('#musicBtn,#volPop')){firstTouch=true;return;}if(!firstTouch){firstTouch=true;if(!musicOn){setMusic(true);syncVol();}}},{capture:true});
 $('topicBtn').addEventListener('click',()=>{dayIdx=(dayIdx+1)%7;applyTopic();});
