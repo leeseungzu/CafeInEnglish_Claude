@@ -188,6 +188,15 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .focus .fb{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
 .focus .tg{border:0;border-radius:99px;padding:6px 10px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;background:rgba(255,255,255,.12);color:#FFF6E6}
 .focus .tg.on{background:var(--lime);color:#2B1D14}.focus .btn{flex:none;padding:8px 12px;background:var(--lime);color:#2B1D14}
+.fset{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:-2px 0 6px}
+.fset .tg{border:1px solid rgba(127,127,127,.3);border-radius:99px;padding:6px 11px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;background:transparent;color:var(--gt)}
+.fset .tg.on{background:var(--lime);border-color:var(--lime);color:#2B1D14}
+.fcustom{display:flex;align-items:center;gap:4px;margin-left:auto;font-size:13px;font-weight:700;color:var(--gs)}
+.fcustom input{width:52px;text-align:center;font:inherit;font-weight:800;font-size:15px;border:1px solid rgba(127,127,127,.35);border-radius:10px;padding:5px 2px;background:transparent;color:var(--gt)}
+.fcustom .st{width:28px;height:28px;border-radius:50%;border:0;background:rgba(127,127,127,.18);color:var(--gt);font-size:16px;font-weight:700;cursor:pointer}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.fnote{font-size:11.5px;color:var(--gs);margin:2px 0 4px}
+.fphone{display:block;text-align:center;text-decoration:none;font-size:13px;font-weight:700;color:var(--gt);border:1px dashed rgba(127,127,127,.45);border-radius:12px;padding:8px;margin:4px 0 6px}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
 .fc{border:1px solid rgba(127,127,127,.25);background:rgba(127,127,127,.1);color:var(--gt);border-radius:14px;padding:10px;min-height:62px;font:inherit;font-size:13px;font-weight:700;text-align:left;cursor:pointer;line-height:1.35}
 .fc.flip{background:rgba(205,235,91,.14);border-color:rgba(205,235,91,.5);font-weight:600}
@@ -333,7 +342,11 @@ body{padding:0!important;background:#140E0A}
       <button class="x" data-close>✕</button>
       <h3>스터디룸 · 조용히 함께</h3>
       <div class="small" style="margin:0" id="stNow"></div>
-      <div class="focus"><div class="ft" id="ftime">25:00</div><div class="fb"><button class="tg on" data-min="25">25분</button><button class="tg" data-min="5">5분</button><button class="btn dark" id="fstart">집중 시작</button></div></div>
+      <div class="focus"><div class="ft" id="ftime">25:00</div><div class="fb"><button class="btn dark" id="fstart">집중 시작</button></div></div>
+      <div class="fset"><button class="tg" data-min="5">5분</button><button class="tg on" data-min="25">25분</button><button class="tg" data-min="50">50분</button>
+        <div class="fcustom"><button class="st" id="fMinus" aria-label="1분 줄이기">−</button><label class="sr" for="fInput">집중 시간(분)</label><input id="fInput" type="number" inputmode="numeric" min="1" max="180" value="25"><span>분</span><button class="st" id="fPlus" aria-label="1분 늘리기">+</button></div></div>
+      <div class="fnote" id="fNote"></div>
+      <a class="fphone" id="fPhone" hidden>휴대폰 타이머에도 맞추기</a>
       <div class="lbl">오늘의 표현 카드 · 눌러서 뜻 보기</div>
       <div class="cards" id="cards"></div>
       <div class="btnrow"><button class="btn" id="cheerBtn">옆자리 응원하기</button><button class="btn dark" id="leaveS">일어나기</button></div>
@@ -397,7 +410,7 @@ body{padding:0!important;background:#140E0A}
       <ul class="list">
         <li><b>카운터.</b> 바리스타에게 다가가 주문해요. 바리스타는 말풍선과 음성으로 말하고, 끝나면 영수증과 쿠폰 도장이 나와요.</li>
         <li><b>테이블 4곳.</b> 2인석, 4인석, 창가석, 라운지 소파예요. 앉으면 컵홀더 질문과 15분 타이머가 나와요.</li>
-        <li><b>오늘의 주제.</b> 요일마다 주제가 바뀌어요. 메뉴판, 퀵챗, 테이블 질문이 모두 그날 주제로 바뀌어요. 위쪽 주제 칩을 누르면 다른 요일을 미리 볼 수 있어요.</li><li><b>메뉴판.</b> 오늘의 표현과 예문, 내 쿠폰 도장과 오늘 쓴 영어 문장을 볼 수 있어요. cafeinenglish.com 학습 페이지로 바로 이어져요.</li><li><b>시즌 장식.</b> 할로윈(10/24~31)과 크리스마스(12/1~26)에는 카페가 자동으로 그 분위기로 꾸며져요. 왼쪽 미리보기 버튼으로 확인할 수 있어요.</li><li><b>스터디룸.</b> 오른쪽 문으로 들어가면 조용한 스터디룸이 있어요. 들어가면 음악이 잔잔한 공부용 음악으로 바뀌고 소리도 조금 작아져요. 집중 타이머(25분·5분), 오늘의 표현 카드, 옆자리 응원만 있고 대화는 없어요.</li><li><b>앉기 표시.</b> 테이블 가까이 가거나 마우스를 올리면 바닥 링과 빈자리 점이 켜져요. 테이블을 바로 눌러도 걸어가서 앉아요.</li><li><b>대화 알림음.</b> 테이블 대화에서 새 말이 뜰 때마다 사람마다 다른 음높이로 "띵동" 하고 짧게 울려요.</li><li><b>인사와 짠.</b> "인사"는 고개를 까딱하고, 주변 손님도 같이 인사해요. "짠"은 가까운 손님과 머그를 부딪쳐요. 누가 들어오거나 인사하면 위쪽에 알림이 떠요.</li><li><b>카페 음악.</b> 화면을 처음 누르면 카페 재즈가 흘러요. 바리스타가 말할 때는 소리가 작아지고, 음표 버튼으로 끌 수 있어요.</li><li><b>테이블 대화.</b> 컵홀더 질문을 고르면 대화창이 열리고, 같은 테이블 손님이 퀵챗으로 대답한 뒤 내 차례가 와요.</li>
+        <li><b>오늘의 주제.</b> 요일마다 주제가 바뀌어요. 메뉴판, 퀵챗, 테이블 질문이 모두 그날 주제로 바뀌어요. 위쪽 주제 칩을 누르면 다른 요일을 미리 볼 수 있어요.</li><li><b>메뉴판.</b> 오늘의 표현과 예문, 내 쿠폰 도장과 오늘 쓴 영어 문장을 볼 수 있어요. cafeinenglish.com 학습 페이지로 바로 이어져요.</li><li><b>시즌 장식.</b> 할로윈(10/24~31)과 크리스마스(12/1~26)에는 카페가 자동으로 그 분위기로 꾸며져요. 왼쪽 미리보기 버튼으로 확인할 수 있어요.</li><li><b>스터디룸.</b> 오른쪽 문으로 들어가면 조용한 스터디룸이 있어요. 집중 시간은 5·25·50분이나 1~180분 직접 입력이고, 끝나면 소리와 진동(안드로이드), 컴퓨터 알림으로 알려요. 들어가면 음악이 잔잔한 공부용 음악으로 바뀌고 소리도 조금 작아져요. 집중 타이머(25분·5분), 오늘의 표현 카드, 옆자리 응원만 있고 대화는 없어요.</li><li><b>앉기 표시.</b> 테이블 가까이 가거나 마우스를 올리면 바닥 링과 빈자리 점이 켜져요. 테이블을 바로 눌러도 걸어가서 앉아요.</li><li><b>대화 알림음.</b> 테이블 대화에서 새 말이 뜰 때마다 사람마다 다른 음높이로 "띵동" 하고 짧게 울려요.</li><li><b>인사와 짠.</b> "인사"는 고개를 까딱하고, 주변 손님도 같이 인사해요. "짠"은 가까운 손님과 머그를 부딪쳐요. 누가 들어오거나 인사하면 위쪽에 알림이 떠요.</li><li><b>카페 음악.</b> 화면을 처음 누르면 카페 재즈가 흘러요. 바리스타가 말할 때는 소리가 작아지고, 음표 버튼으로 끌 수 있어요.</li><li><b>테이블 대화.</b> 컵홀더 질문을 고르면 대화창이 열리고, 같은 테이블 손님이 퀵챗으로 대답한 뒤 내 차례가 와요.</li>
         <li><b>웹 연결.</b> 영수증의 "자세히 공부하기"를 누르면 cafeinenglish.com 학습 페이지로 이어져요.</li>
       </ul>
     </div>
@@ -845,12 +858,29 @@ function fmt(ms){return String(Math.floor(ms/60000)).padStart(2,'0')+':'+String(
 function renderCards(){const box=$('cards');box.innerHTML='';const items=[TOPIC.expr,TOPIC.qc,...TOPIC.q.map(x=>x.a[0]),...(TOPIC.chat||[]).slice(0,1)].filter((v,i,a)=>a.findIndex(y=>y[0]===v[0])===i).slice(0,6);
  items.forEach(it=>{const b=document.createElement('button');b.className='fc';b.textContent=it[0];b.addEventListener('click',()=>{b.classList.toggle('flip');b.textContent=b.classList.contains('flip')?it[1]:it[0];});box.appendChild(b);});}
 function showStudy(){$('stNow').textContent='지금 '+studyCount()+'명이 같이 공부하고 있어요';renderCards();if(!fEnd)$('ftime').textContent=fmt(fMin*60000);open('sheetStudy');camFocus=new THREE.Vector3(seated.x,0,seated.z);camDist=340;}
-document.querySelectorAll('.focus .tg').forEach(b=>b.addEventListener('click',()=>{if(fEnd)return;fMin=+b.dataset.min;document.querySelectorAll('.focus .tg').forEach(x=>x.classList.toggle('on',x===b));$('ftime').textContent=fmt(fMin*60000);}));
+const isAndroid=/Android/i.test(navigator.userAgent),isIOS=/iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),isMobile=isAndroid||isIOS;
+function setMin(m){if(fEnd)return;fMin=Math.max(1,Math.min(180,Math.round(+m||25)));$('fInput').value=fMin;document.querySelectorAll('.fset .tg').forEach(x=>x.classList.toggle('on',+x.dataset.min===fMin));$('ftime').textContent=fmt(fMin*60000);updPhone();}
+document.querySelectorAll('.fset .tg').forEach(b=>b.addEventListener('click',()=>setMin(b.dataset.min)));
+$('fMinus').addEventListener('click',()=>setMin(fMin-1));$('fPlus').addEventListener('click',()=>setMin(fMin+1));
+$('fInput').addEventListener('change',e=>setMin(e.target.value));
+function updPhone(){const a=$('fPhone');if(isAndroid){a.hidden=false;a.href='intent:#Intent;action=android.intent.action.SET_TIMER;i.android.intent.extra.alarm.LENGTH='+(fMin*60)+';S.android.intent.extra.alarm.MESSAGE=카영카페 집중;B.android.intent.extra.alarm.SKIP_UI=true;end';}
+ $('fNote').textContent=isAndroid?'화면을 켜 두면 끝날 때 소리와 진동으로 알려요. 화면을 꺼도 받으려면 아래 버튼으로 휴대폰 타이머도 같이 맞춰 두세요.':isIOS?'화면을 켜 두면 끝날 때 소리로 알려요. 화면을 끄거나 다른 앱으로 가면 아이폰이 웹 알람을 막아요. 그럴 땐 시계 앱 타이머도 같은 시간으로 맞춰 두세요.':'끝나면 소리와 함께 컴퓨터 알림으로 알려요. 다른 탭에 있어도 알림이 떠요.';}
+updPhone();
+/* 집중 중 화면 꺼짐 방지, 백그라운드에서도 정확한 시간 */
+let wakeLock=null;async function keepAwake(on){try{if(on&&'wakeLock' in navigator){wakeLock=await navigator.wakeLock.request('screen');}else if(!on&&wakeLock){await wakeLock.release();wakeLock=null;}}catch(e){}}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){if(fEnd&&!wakeLock)keepAwake(true);focusTick();stopTitleFlash();}});
+let tWorker=null;try{tWorker=new Worker(URL.createObjectURL(new Blob(['setInterval(()=>postMessage(0),250)'],{type:'text/javascript'})));tWorker.onmessage=()=>focusTick();}catch(e){}
+let titleT=null;const baseTitle=document.title;function stopTitleFlash(){clearInterval(titleT);titleT=null;document.title=baseTitle;}
+function focusAlarm(){[0,700,1400].forEach(d=>setTimeout(()=>sfx('clink'),d));try{navigator.vibrate&&navigator.vibrate([300,150,300,150,600]);}catch(e){}
+ if(document.hidden){try{if('Notification' in window&&Notification.permission==='granted')new Notification('카영카페 · 집중 완료',{body:fMin+'분 집중을 마쳤어요. 잠깐 쉬어 가요!',icon:'/assets/icon-192.png'});}catch(e){}
+  let on=false;titleT=setInterval(()=>{on=!on;document.title=on?'⏰ 집중 끝!':baseTitle;},900);}
+ keepAwake(false);}
 let fLast='';setInterval(()=>focusTick(),200);
 function fText(ms){const sec=Math.ceil(ms/1000);return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');}
 function focusTick(){if(!fEnd)return;const ms=Math.max(0,fEnd-Date.now()),t=fText(ms);if(t!==fLast){fLast=t;$('ftime').textContent=t;drawFocusBoard('FOCUS '+t);}
- if(!ms){fEnd=0;fLast='';$('fstart').textContent='집중 시작';drawFocusBoard();hush(me);stampsN=Math.min(10,stampsN+1);sfx('clink');toast(fMin+'분 집중 완료! 쿠폰 도장 +1');}}
-$('fstart').addEventListener('click',()=>{if(fEnd){fEnd=0;fLast='';$('fstart').textContent='집중 시작';$('ftime').textContent=fmt(fMin*60000);drawFocusBoard();hush(me);return;}
+ if(!ms){fEnd=0;fLast='';$('fstart').textContent='집중 시작';drawFocusBoard();hush(me);stampsN=Math.min(10,stampsN+1);focusAlarm();toast(fMin+'분 집중 완료! 쿠폰 도장 +1');}}
+$('fstart').addEventListener('click',()=>{if(fEnd){fEnd=0;fLast='';$('fstart').textContent='집중 시작';$('ftime').textContent=fmt(fMin*60000);drawFocusBoard();hush(me);keepAwake(false);return;}
+ setMin($('fInput').value);if(!isMobile&&'Notification' in window&&Notification.permission==='default'){try{Notification.requestPermission();}catch(e){}}keepAwake(true);if(SX)SX.resume();
  fEnd=Date.now()+fMin*60000;fLast='';$('fstart').textContent='그만하기';say(me,'Focus mode ✍︎','집중 중',0,true);sfx('pop');focusTick();});
 $('cheerBtn').addEventListener('click',()=>{const ms=people.filter(p=>!p.me&&p.seat&&seated&&p.seat[0]===seated.id);const p=ms[Math.floor(Math.random()*ms.length)];nod(me);say(me,'You got this! 💪','화이팅!',2000);
  if(p){setTimeout(()=>{nod(p);say(p,'Thanks! You too!','고마워요, 당신도!',2200,true);toast(p.ko+'님이 응원에 고개 까딱했어요');},700);}});
