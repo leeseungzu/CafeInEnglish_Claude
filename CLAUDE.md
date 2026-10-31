@@ -93,6 +93,7 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 - `kakao`: 카카오톡 오픈채팅방 링크 (현재 https://open.kakao.com/o/gxsl5iQi) (비어 있으면 SNS 메뉴에서 누를 때 "곧 열려요" 안내. 주소를 넣으면 바로 연결. youtube · instagram도 site.json에서 관리)
 - `contact_email`: 문의 페이지에 공개할 이메일
 - `adsense_client`: 예) `ca-pub-XXXXXXXXXXXXXXXX` — 넣으면 광고 스크립트와 ads.txt 자동 생성
+  - 2026-11-01부터 애드센스 스크립트는 head에 구글 기본 코드(async) 그대로 넣는다 (재검토 크롤러가 바로 찾도록). 이전 지연 로딩(스크롤·7초 뒤) 방식으로 되돌리지 않는다.
 - `google_verify` / `naver_verify`: 서치콘솔·서치어드바이저 'HTML 태그' 인증 코드 (content 값만)
 - `ga_id`: 구글 애널리틱스 측정 ID (예: `G-XXXXXXX`)
 

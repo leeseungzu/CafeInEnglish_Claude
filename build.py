@@ -789,12 +789,9 @@ NAV_SHORT = {"study": "전체", "video": "영상", "expr": "표현", "tip": "꿀
 def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og-home-2.png", seo_title=None, ld=None, preload="", robots=""):
     full_title = f"{seo_title or title} | 카페인영어" if path != "/" else f"카페인영어 | {SITE.get('home_title') or SITE['tagline']}"
     full_title = full_title.replace(" - ", " | ")  # 브라우저 탭·검색 제목 구분은 하이픈 대신 세로 바로 통일
-    # 애드센스: 소유 확인은 meta 태그로, 광고 스크립트(약 200KB)는 첫 스크롤·터치 때(또는 로드 7초 뒤) 불러와요 → 첫 화면 속도 ↑
+    # 애드센스: 소유 확인 meta + 구글 기본 코드(async)를 head에 그대로 (2026-11-01, 심사 크롤러가 코드를 바로 찾도록. 이전엔 스크롤·7초 지연 로딩)
     ads = (f'<meta name="google-adsense-account" content="{e(SITE["adsense_client"])}">'
-           f"<script>(function(){{var d=0;function L(){{if(d)return;d=1;var s=document.createElement('script');s.async=1;s.crossOrigin='anonymous';"
-           f"s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={e(SITE['adsense_client'])}';document.head.appendChild(s)}};"
-           f"['scroll','touchstart','mousemove','keydown','click'].forEach(function(t){{addEventListener(t,L,{{once:true,passive:true}})}});"
-           f"addEventListener('load',function(){{setTimeout(L,7000)}})}})();</script>"
+           f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={e(SITE["adsense_client"])}" crossorigin="anonymous"></script>'
            if SITE.get("adsense_client") else "")
     # 방문 통계(GA)는 페이지가 다 뜬 뒤에 불러와요 (첫 화면 속도 ↑, 방문 기록은 그대로 남아요)
     ga = (f"<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag('js',new Date());gtag('config','{e(SITE['ga_id'])}');"
