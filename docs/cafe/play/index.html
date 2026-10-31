@@ -751,13 +751,13 @@ const carpet=new THREE.Mesh(new THREE.PlaneGeometry(AX1-AX0,AZ1-AZ0),M('carpet',
 add(rbox(AX1-AX0+24,26,AZ1-AZ0+24,10,M('base')),(AX0+AX1)/2,-26.5,(AZ0+AZ1)/2,false,true);
 const doorF=new THREE.Mesh(new THREE.PlaneGeometry(40,90),M('carpet'));doorF.rotation.x=-Math.PI/2;doorF.position.set(BX+20,.35,170);scene.add(doorF);
 const annexMats={back:M('wallAB',{transparent:true}),right:M('wallAR',{transparent:true})};
-add(new THREE.Mesh(new THREE.BoxGeometry(AX1-AX0+16,150,14),annexMats.back),(AX0+AX1)/2,75,AZ0-7,false,true);
-add(new THREE.Mesh(new THREE.BoxGeometry(14,150,AZ1-AZ0+14),annexMats.right),AX1+7,75,(AZ0+AZ1)/2,false,true);
+add(new THREE.Mesh(new THREE.BoxGeometry(AX1-AX0+40,230,16),annexMats.back),(AX0+AX1)/2+12,115,-BZ-18,false,true);
+add(new THREE.Mesh(new THREE.BoxGeometry(16,230,AZ1-AZ0+16),annexMats.right),AX1+8,115,(AZ0+AZ1)/2,false,true);
 /* 집중 보드 */
 const fbC=document.createElement('canvas');fbC.width=640;fbC.height=240;const fbT=new THREE.CanvasTexture(fbC);
 function drawFocusBoard(txt){const x=fbC.getContext('2d');x.fillStyle='#1A110B';x.fillRect(0,0,640,240);x.textAlign='center';x.fillStyle=LIME;x.font='800 36px sans-serif';x.fillText('STUDY ROOM',320,62);x.fillStyle=CREAM;x.font='800 76px sans-serif';x.fillText(txt||'FOCUS 25:00',320,150);x.font='500 28px sans-serif';x.globalAlpha=.7;x.fillText('조용히, 함께 공부해요',320,206);x.globalAlpha=1;fbT.needsUpdate=true;}
 drawFocusBoard();
-const fBoard=new THREE.Mesh(new THREE.PlaneGeometry(200,75),new THREE.MeshBasicMaterial({map:fbT,transparent:true}));fBoard.position.set((AX0+AX1)/2,105,AZ0+1);scene.add(fBoard);
+const fBoard=new THREE.Mesh(new THREE.PlaneGeometry(200,75),new THREE.MeshBasicMaterial({map:fbT,transparent:true}));fBoard.position.set((AX0+AX1)/2,118,-BZ-9);scene.add(fBoard);
 /* 문 위 표지 */
 const dsC=document.createElement('canvas');dsC.width=400;dsC.height=90;const dsx=dsC.getContext('2d');dsx.fillStyle='#1A110B';dsx.fillRect(0,0,400,90);dsx.fillStyle=LIME;dsx.font='800 34px sans-serif';dsx.textAlign='center';dsx.fillText('STUDY ROOM →',200,40);dsx.fillStyle=CREAM;dsx.font='500 24px sans-serif';dsx.fillText('스터디룸',200,74);
 const dSign=new THREE.Mesh(new THREE.PlaneGeometry(90,20),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(dsC)}));dSign.rotation.y=-Math.PI/2;dSign.position.set(BX+9,109,170);scene.add(dSign);
@@ -888,7 +888,7 @@ cv.addEventListener('pointermove',e=>{if(!drag&&!pinch&&e.pointerType==='mouse')
 function endPtr(e){ptrs.delete(e.pointerId);if(pinch){if(ptrs.size<2)pinch=null;drag=null;return;}if(!drag||drag.id!==e.pointerId)return;
  if(!drag.moved){const r=cv.getBoundingClientRect();v2.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(v2,cam);
   const th=ray.intersectObjects(clickables,false)[0];if(th&&!seated&&!sheetOpen()){const z=th.object.userData.zone,tg=zoneTarget(z);walkTo(tg.x,tg.z);pendingSit=z;drag=null;return;}
-  const hit=ray.intersectObjects([floor,carpet,deck],false)[0];if(hit){pendingSit=null;walkTo(hit.point.x,hit.point.z);}}
+  const hit=ray.intersectObjects([floor,carpet,deck,fireDeck].filter(Boolean),false)[0];if(hit){pendingSit=null;walkTo(hit.point.x,hit.point.z);}}
  drag=null;}
 cv.addEventListener('pointerup',endPtr);['pointerup','pointercancel'].forEach(t=>window.addEventListener(t,e=>{if(ptrs.has(e.pointerId)&&e.target!==cv){ptrs.delete(e.pointerId);if(ptrs.size<2)pinch=null;}}));window.addEventListener('blur',()=>{ptrs.clear();pinch=null;drag=null;for(const k in keys)keys[k]=false;});cv.addEventListener('pointercancel',e=>{ptrs.delete(e.pointerId);pinch=null;drag=null;});
 cv.addEventListener('wheel',e=>{e.preventDefault();dist=Math.max(220,Math.min(820,dist+e.deltaY*.5));},{passive:false});
@@ -1247,11 +1247,11 @@ const mpC=document.createElement('canvas');mpC.width=512;mpC.height=128;{const x
 const lanternLights=[];
 [[-TX+30,TZ0+60],[TX-30,TZ0+60],[-TX+30,TZ1-40],[TX-30,TZ1-40],[-120,TZ1+40],[120,TZ1+40],[-TX-60,BZ-200]].forEach(([x,z])=>{const post=cyl(2,2,26,M('leg'),8);add(post,x,0,z);const box=new THREE.Mesh(new THREE.BoxGeometry(12,14,12),new THREE.MeshBasicMaterial({color:'#FFD58F'}));box.position.set(x,32,z);scene.add(box);lanternLights.push(box);});
 /* 모닥불 쉼터 (테라스 오른쪽) */
-const FIRE={x:668,z:BZ+232};
-{const fx0=462,fx1=870,fz0=BZ+60,fz1=BZ+404;
+const FIRE={x:668,z:BZ+250};let fireDeck=null;
+{const fx0=462,fx1=870,fz0=BZ+60,fz1=TZ1;
  add(rbox(fx1-fx0+20,26,fz1-fz0+20,10,M('stageWood')),(fx0+fx1)/2,-26.5,(fz0+fz1)/2,false,true);
- const t2=new THREE.CanvasTexture(deckC);t2.wrapS=t2.wrapT=THREE.RepeatWrapping;t2.repeat.set(1.8,2.6);
- const d2=new THREE.Mesh(new THREE.PlaneGeometry(fx1-fx0,fz1-fz0),new THREE.MeshStandardMaterial({map:t2,roughness:.9}));d2.rotation.x=-Math.PI/2;d2.position.set((fx0+fx1)/2,.21,(fz0+fz1)/2);d2.receiveShadow=true;scene.add(d2);
+ const t2=new THREE.CanvasTexture(deckC);t2.wrapS=t2.wrapT=THREE.RepeatWrapping;t2.repeat.set((fx1-fx0)/(2*TX/4),(fz1-fz0)/((TZ1-TZ0)/4));
+ const d2=new THREE.Mesh(new THREE.PlaneGeometry(fx1-fx0,fz1-fz0),new THREE.MeshStandardMaterial({map:t2,roughness:.9}));d2.rotation.x=-Math.PI/2;d2.position.set((fx0+fx1)/2,.21,(fz0+fz1)/2);d2.receiveShadow=true;scene.add(d2);fireDeck=d2;
  RECTS.push([fx0,fx1,fz0+6,fz1-6]);
  const corners=[[fx0+14,fz0+14],[fx1-14,fz0+14],[fx1-14,fz1-14],[fx0+14,fz1-14]];corners.forEach(([x,z])=>add(cyl(2.4,2.4,150,M('leg'),8),x,0,z));
  const pts=[];for(let k=0;k<4;k++){const a=corners[k],b=corners[(k+1)%4];const n=Math.round(Math.hypot(b[0]-a[0],b[1]-a[1])/26);for(let i=0;i<n;i++){const u=i/n;pts.push([a[0]+(b[0]-a[0])*u,148-Math.sin(u*Math.PI)*22,a[1]+(b[1]-a[1])*u]);}}
@@ -1264,6 +1264,17 @@ const flames=[];[['#FF7A1A',13,34,0],['#FFB23A',9,26,1],['#FFE48A',5,16,2]].forE
 const fireLight=new THREE.PointLight(0xff9a3c,1.5,460,1.6);fireLight.position.set(FIRE.x,34,FIRE.z);scene.add(fireLight);
 {const gc=document.createElement('canvas');gc.width=gc.height=128;const x=gc.getContext('2d');const gr=x.createRadialGradient(64,64,4,64,64,64);gr.addColorStop(0,'rgba(255,170,80,.55)');gr.addColorStop(1,'rgba(255,140,60,0)');x.fillStyle=gr;x.fillRect(0,0,128,128);
  const glow=new THREE.Mesh(new THREE.PlaneGeometry(260,260),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(gc),transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));glow.rotation.x=-Math.PI/2;glow.position.set(FIRE.x,.6,FIRE.z);scene.add(glow);}
+/* 텐트 · 랜턴 상자 · 안내판 */
+{const tx=790,tz=TZ1-80;
+ const tg=new THREE.Group();const ts=new THREE.Shape();ts.moveTo(-40,0);ts.lineTo(40,0);ts.lineTo(0,58);ts.lineTo(-40,0);const tgeo=new THREE.ExtrudeGeometry(ts,{depth:90,bevelEnabled:false});tgeo.translate(0,0,-45);
+ const tm=new THREE.Mesh(tgeo,new THREE.MeshStandardMaterial({color:'#E9D8B8',roughness:.9,flatShading:true}));tm.castShadow=true;tg.add(tm);
+ const ds=new THREE.Shape();ds.moveTo(-15,0);ds.lineTo(15,0);ds.lineTo(0,34);ds.lineTo(-15,0);const door=new THREE.Mesh(new THREE.ShapeGeometry(ds),new THREE.MeshBasicMaterial({color:'#2B1D14'}));door.position.set(0,.5,45.3);tg.add(door);
+ const ridge=new THREE.Mesh(new THREE.CylinderGeometry(1.2,1.2,96,6),M('leg'));ridge.rotation.x=Math.PI/2;ridge.position.y=58;tg.add(ridge);
+ const pole=new THREE.Mesh(new THREE.CylinderGeometry(.8,.8,22,6),M('leg'));pole.position.set(0,68,-40);tg.add(pole);const flag=new THREE.Mesh(new THREE.PlaneGeometry(14,9),new THREE.MeshBasicMaterial({color:'#CDEB5B',side:THREE.DoubleSide}));flag.position.set(7,74,-40);tg.add(flag);
+ tg.position.set(tx,0,tz);tg.rotation.y=-.7;scene.add(tg);BOXES.push([tx-50,tx+50,tz-50,tz+50]);
+ const crate=rbox(26,20,20,3,M('wood'));add(crate,tx-110,0,tz+10);const lb=new THREE.Mesh(new THREE.BoxGeometry(8,12,8),new THREE.MeshBasicMaterial({color:'#FFD58F'}));lb.position.set(tx-110,27,tz+10);scene.add(lb);lanternLights.push(lb);BOXES.push([tx-126,tx-94,tz-4,tz+24]);
+ const sc=document.createElement('canvas');sc.width=512;sc.height=200;const x=sc.getContext('2d');x.fillStyle='#1A110B';x.fillRect(0,0,512,200);x.textAlign='center';x.fillStyle=LIME;x.font='800 54px sans-serif';x.fillText('CAMPFIRE',256,84);x.fillStyle=CREAM;x.font='600 32px sans-serif';x.fillText('모닥불 퀴즈 · 세 문제 맞히면 도장',256,146);
+ const sg=new THREE.Group();const bd=new THREE.Mesh(new THREE.PlaneGeometry(92,36),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(sc)}));bd.position.y=70;sg.add(bd);[-40,40].forEach(o=>{const pl=cyl(1.8,1.8,88,M('leg'),8);pl.position.set(o,0,-.5);sg.add(pl);});sg.position.set(530,0,BZ+96);sg.rotation.y=-.35;scene.add(sg);}
 CIRC.push({x:FIRE.x,z:FIRE.z,r:40});
 const FIRE_LOGS=[0,Math.PI/2,Math.PI,Math.PI*1.5].map(a=>({a,x:FIRE.x+Math.cos(a)*96,z:FIRE.z+Math.sin(a)*96}));
 FIRE_LOGS.forEach(L=>{const g=new THREE.Group();const l=new THREE.Mesh(new THREE.CylinderGeometry(8,8,72,14),logM);l.rotation.z=Math.PI/2;l.position.y=8;l.castShadow=true;g.add(l);[-1,1].forEach(s=>{const e=new THREE.Mesh(new THREE.CircleGeometry(7.6,14),logEnd);e.position.set(s*36.1,8,0);e.rotation.y=s*Math.PI/2;g.add(e);});g.position.set(L.x,0,L.z);g.rotation.y=-L.a-Math.PI/2;scene.add(g);
