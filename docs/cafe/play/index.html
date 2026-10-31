@@ -8,7 +8,12 @@
 <meta name="description" content="영어로 하는 카페, 카영카페. 바리스타에게 주문하고 테이블에 앉아 오늘의 주제로 영어 대화를 연습해요.">
 <meta property="og:title" content="카영카페 - 영어로 하는 카페">
 <meta property="og:description" content="바리스타에게 주문하고, 테이블에 앉아 오늘의 주제로 영어 대화를 연습해요.">
-<meta property="og:image" content="https://www.cafeinenglish.com/assets/og.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.cafeinenglish.com/cafe/play/">
+<meta property="og:image" content="https://www.cafeinenglish.com/cafe/play/og-cafe.png?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#140E0A">
 <link rel="icon" href="/assets/favicon.svg?v=3" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png?v=3" sizes="32x32" type="image/png">
@@ -233,7 +238,16 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .stage.btnB .dock .main::after{content:"";position:absolute;left:30%;right:30%;bottom:7px;height:2px;border-radius:2px;background:#CDEB5B}
 .btnpick{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
 .bp{border:2px solid transparent;border-radius:18px;padding:10px;background:#2B1D14;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;font:inherit;color:#FFF6E6;font-size:12px;font-weight:700;min-width:150px}
-.bp.on{border-color:var(--ink)}
+.ep{padding:12px 16px;font-size:13px}.ep.on{background:#CDEB5B;color:#2B1D14}
+.dock .stand{white-space:nowrap;color:#FFF6E6;box-shadow:inset 0 0 0 1.5px rgba(255,246,230,.5)}.dock .stand:hover{background:rgba(255,246,230,.12)}
+.dock .stand.pop{animation:standPop .5s ease 2}@keyframes standPop{50%{transform:scale(1.08);background:rgba(255,246,230,.2)}}
+.standchip{position:absolute;left:50%;bottom:92px;transform:translate(-50%,8px);display:flex;align-items:center;gap:6px;border:0;border-radius:99px;padding:10px 18px;font:inherit;font-weight:800;font-size:14px;background:#FFF6E6;color:#2B1D14;box-shadow:0 8px 24px rgba(0,0,0,.35);cursor:pointer;opacity:0;transition:opacity .25s,transform .25s;pointer-events:auto;z-index:5}
+.standchip.show{opacity:1;transform:translate(-50%,0);animation:chipPulse 1.6s ease-in-out .3s 2}
+@keyframes chipPulse{50%{box-shadow:0 0 0 8px rgba(255,246,230,.18),0 8px 24px rgba(0,0,0,.35)}}
+.stage.exB .sheet .leaverow{position:sticky;bottom:-16px;margin:12px -16px -16px;padding:12px 16px 16px;background:var(--g);border-top:1px solid var(--gb);z-index:2}
+.stage.exB.night .sheet .leaverow{background:rgba(30,22,16,.98)}
+@media (max-width:640px){.stage.exB .sheet .leaverow{bottom:calc(-14px - env(safe-area-inset-bottom,0px));margin:12px -14px calc(-14px - env(safe-area-inset-bottom,0px));padding:12px 14px calc(14px + env(safe-area-inset-bottom,0px))}.standchip{bottom:84px}}
+.bp.on{border-color:var(--ink)}.cp{padding:12px 16px;font-size:13px}.cp.on{background:#CDEB5B;color:#2B1D14}
 .bp i{font-style:normal;display:flex;align-items:center;gap:8px;justify-content:center;border-radius:20px;padding:12px 22px;font-size:14px;font-weight:800}
 .nogl{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:30px;color:#fff;background:#2B1D14;font-size:14px}
 
@@ -294,7 +308,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
  #sheetTable #myOpts .qc{flex:0 0 auto;width:auto;max-width:74%;white-space:normal;padding:8px 12px;font-size:13.5px}
 }
 </style>
-
 <style>
 /* 사이트 공개용(/cafe/play/): A안 고정, 화면 가득 */
 html,body{height:100%}
@@ -307,6 +320,7 @@ body{padding:0!important;background:#140E0A}
 .top{top:calc(12px + env(safe-area-inset-top,0px))!important}
 .hint,.toasts{top:calc(60px + env(safe-area-inset-top,0px))!important}
 </style>
+
 <div class="wrap">
   <header>
     <div class="logo" aria-hidden="true"><svg width="30" height="30" viewBox="0 0 30 30"><path d="M20.5 9.2A8 8 0 1 0 20.5 20.8" fill="none" stroke="#FFF6E6" stroke-width="4" stroke-linecap="round"/><circle cx="24" cy="21.5" r="2.6" fill="#CDEB5B"/></svg></div>
@@ -345,11 +359,12 @@ body{padding:0!important;background:#140E0A}
             <div class="dock glass">
       <button id="qcBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>퀵챗</button>
       <button id="menuBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>메뉴판</button>
-      <button id="actBtn" class="main">바리스타에게 가기</button>
+      <button id="actBtn" class="main">바리스타에게 가기</button><button id="standBtn" class="stand" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/><path d="M10 16l4-4-4-4"/><path d="M14 12H4"/></svg>일어나기</button>
       <button id="nodBtn" title="고개 까딱 인사"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="4.5" transform="rotate(18 12 14)"/><path d="M6 20c1.5-3 3.6-4.5 6-4.5s4.5 1.5 6 4.5"/></svg>인사</button>
       <button id="clinkBtn" title="근처 손님과 짠"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5l6-1.6 1.4 5.4a3.2 3.2 0 0 1-6.2 1.6z" /><path d="M20.5 9.5l-6-1.6-1.4 5.4a3.2 3.2 0 0 0 6.2 1.6z"/><path d="M12 3v2M9 4l.8 1.4M15 4l-.8 1.4"/></svg>짠</button>
     </div>
 
+    <button id="standChip" class="standchip" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/><path d="M10 16l4-4-4-4"/><path d="M14 12H4"/></svg>일어나기</button>
     <div class="sheet glass" id="sheetQC" role="dialog" aria-label="퀵챗">
       <button class="x" data-close>✕</button>
       <h3>퀵챗</h3>
@@ -386,7 +401,7 @@ body{padding:0!important;background:#140E0A}
       </div>
       <div class="lbl">오늘의 표현 카드 · 눌러서 뜻 보기</div>
       <div class="cards" id="cards"></div>
-      <div class="btnrow"><button class="btn" id="cheerBtn">옆자리 응원하기</button><button class="btn dark" id="leaveS">일어나기</button></div>
+      <div class="btnrow leaverow"><button class="btn dark" id="cheerBtn">옆자리 응원하기</button><button class="btn dark" id="leaveS">일어나기</button></div>
       <p class="small">스터디룸에서는 대화 대신 응원만 주고받아요. 집중을 끝까지 마치면 쿠폰 도장을 하나 받아요.</p>
     </div>
 
@@ -428,7 +443,7 @@ body{padding:0!important;background:#140E0A}
         <div class="topicline">오늘의 주제<b id="tTopic"></b> · 컵홀더 질문을 골라 대화를 시작해요</div>
         <div class="qlist" id="qlist"></div>
         <div class="seats" id="seats"></div>
-        <div class="btnrow"><button class="btn dark" id="leave">일어나기</button></div>
+        <div class="btnrow leaverow"><button class="btn dark" id="leave">일어나기</button></div>
         <p class="small">음성 대화는 매일 밤 9시 영업시간에 열리는 음성 테이블로 연결돼요.</p>
       </div>
       <div id="tblChat" hidden>
@@ -462,6 +477,19 @@ body{padding:0!important;background:#140E0A}
       <h2 id="thName">A · 에스프레소 나이트</h2>
       <p id="thDesc"></p>
       <div class="sw3" id="thSw"></div>
+      <div class="evrow" style="display:block"><span>캐릭터 시안 (눌러서 적용)</span>
+        <div class="btnpick">
+          <button class="cp bp" data-c="mug">지금 · 머그</button>
+          <button class="cp bp" data-c="human">A · 카페 손님 (사람)</button>
+          <button class="cp bp" data-c="bean">B · 원두콩 친구</button>
+          <button class="cp bp" data-c="cat">C · 크림 고양이</button>
+        </div></div>
+      <div class="evrow" style="display:block"><span>일어나기 시안 (눌러서 적용 · 앉은 뒤 확인)</span>
+        <div class="btnpick">
+          <button class="bp ep" data-e="A">A · 독에 일어나기 버튼</button>
+          <button class="bp ep" data-e="B">B · 아래 고정 + 닫으면 알림</button>
+          <button class="bp ep" data-e="C">C · 바닥 누르면 일어나기</button>
+        </div></div>
       <div class="evrow" style="display:block"><span>가운데 버튼 시안 (눌러서 적용)</span>
         <div class="btnpick">
           <button class="bp on" data-b="btnA"><i style="background:#FFF6E6;color:#2B1D14"><span style="width:7px;height:7px;border-radius:50%;background:#CDEB5B;display:inline-block"></span>스터디룸 보기</i>A · 크림 에스프레소</button>
@@ -781,7 +809,48 @@ function mugMesh(p){const wrap=new THREE.Group(),g=new THREE.Group();const bm=ne
  wrap.add(g);if(p.barista)wrap.scale.setScalar(1.4);
  if(p.me){const r=new THREE.Mesh(new THREE.RingGeometry(15,18.5,40),limeM);r.rotation.x=-Math.PI/2;r.position.y=2.2;wrap.add(r);}
  scene.add(wrap);p.wrap=wrap;p.g=g;}
-all.forEach(mugMesh);
+
+/* 캐릭터 시안: mug(머그) · human(사람) · bean(원두) · cat(크림 고양이) */
+let charType='mug';try{const st=JSON.parse(localStorage.getItem('kycafe')||'{}');if(st.char)charType=st.char;}catch(e){}
+const HAIR=['#3A2A20','#5A3D2A','#1F1A17','#8A5A3B','#2E2420','#6B4A2F'],SKIN=['#FFE0C4','#F7D2B0','#EFC39E'],FUR=['#FFF3E2','#F2D3AE','#D9A877','#BDBDC2','#FFE8D0','#8C6A57'];
+const hsh=t=>{let h=0;for(const c of t)h=(h*31+c.charCodeAt(0))>>>0;return h;};
+const SM=(c,r)=>new THREE.MeshStandardMaterial({color:c,roughness:r==null?.75:r});
+function face(g,y,z,sc,dark){const em=dark?eyeB:eyeM;[-1,1].forEach(s=>{const e=new THREE.Mesh(G_EYE,em);e.scale.set(sc,sc,.45*sc);e.position.set(s*3.6*sc,y,z);g.add(e);const b=new THREE.Mesh(G_BLUSH,blM);b.scale.setScalar(sc*.9);b.position.set(s*6*sc,y-2.6*sc,z-1.1);b.rotation.y=s*.5;g.add(b);});const m=new THREE.Mesh(G_SMILE,em);m.scale.setScalar(sc*.85);m.rotation.z=Math.PI;m.position.set(0,y-2.8*sc,z+.25);g.add(m);}
+function addApron(g,r,y,h){const ap=new THREE.Mesh(new THREE.CylinderGeometry(r,r*.98,h,40,1,true,-1.15,2.3),new THREE.MeshStandardMaterial({color:ESP,roughness:.8,side:THREE.DoubleSide}));ap.position.y=y;g.add(ap);const tie=new THREE.Mesh(new THREE.TorusGeometry(r+.1,.55,6,40),new THREE.MeshBasicMaterial({color:LIME}));tie.rotation.x=Math.PI/2;tie.position.y=y+h/2-.6;g.add(tie);}
+function buildHuman(g,p){const id=hsh(p.ko||'x'),skin=SKIN[id%3],hair=p.barista?'#2E2420':HAIR[id%6],cloth=p.barista?'#FFFFFF':p.col;
+ const body=new THREE.Mesh(new THREE.CylinderGeometry(7.2,8.6,14,24),SM(cloth));body.position.y=10;body.castShadow=true;g.add(body);
+ [-1,1].forEach(s=>{const f=new THREE.Mesh(new THREE.SphereGeometry(3.2,12,10),SM('#4A3A30'));f.scale.set(1,.7,1.3);f.position.set(s*3.4,2,1);g.add(f);const a=new THREE.Mesh(new THREE.SphereGeometry(2.8,12,10),SM(cloth));a.scale.set(.9,1.4,.9);a.position.set(s*8.6,10,0);g.add(a);const hd=new THREE.Mesh(new THREE.SphereGeometry(2,10,8),SM(skin));hd.position.set(s*9,5.6,1);g.add(hd);});
+ const head=new THREE.Mesh(new THREE.SphereGeometry(10,28,20),SM(skin,.6));head.position.y=26;head.castShadow=true;g.add(head);
+ const hairM=SM(hair,.7);const cap=new THREE.Mesh(new THREE.SphereGeometry(10.7,28,16,0,Math.PI*2,0,Math.PI*.55),hairM);cap.position.set(0,26.6,-.6);cap.rotation.x=-.18;g.add(cap);
+ const back=new THREE.Mesh(new THREE.SphereGeometry(10.4,24,16),hairM);back.scale.set(1,.9,.8);back.position.set(0,24.5,-3);g.add(back);
+ if(id%3===0){const bun=new THREE.Mesh(new THREE.SphereGeometry(4,16,12),hairM);bun.position.set(0,37,-3);g.add(bun);}
+ face(g,25.5,9.6,1,false);
+ if(p.barista){addApron(g,7.9,9.5,11);const bc=new THREE.Mesh(new THREE.SphereGeometry(10.9,24,12,0,Math.PI*2,0,Math.PI/2),SM(ESP));bc.scale.y=.5;bc.position.y=31;g.add(bc);const br=new THREE.Mesh(new THREE.CylinderGeometry(7,7,.8,24,1,false,-Math.PI/2,Math.PI),SM(ESP));br.position.set(0,31.4,7);g.add(br);}
+ else{const sc=new THREE.Mesh(new THREE.TorusGeometry(6.6,1.6,8,24),SM(id%2?'#CDEB5B':CREAM));sc.rotation.x=Math.PI/2;sc.position.y=17.5;g.add(sc);}}
+function buildBean(g,p){const id=hsh(p.ko||'x'),beanC=p.barista?'#3B2418':['#6B4430','#7A4F35','#5C3A28','#86583B'][id%4];
+ const b=new THREE.Mesh(new THREE.SphereGeometry(12,32,24),SM(beanC,.45));b.scale.set(.95,1.18,.82);b.position.y=15;b.castShadow=true;g.add(b);
+ const gr=new THREE.Mesh(new THREE.TorusGeometry(11.6,.75,8,30,Math.PI*.9),SM('#2E1C12'));gr.rotation.set(0,Math.PI/2,Math.PI*.55);gr.scale.set(1.15,1,.8);gr.position.set(0,15,-2);g.add(gr);
+ [-1,1].forEach(s=>{const f=new THREE.Mesh(new THREE.SphereGeometry(2.8,12,10),SM('#2E1C12'));f.scale.set(1,.65,1.25);f.position.set(s*4.5,1.6,1.5);g.add(f);});
+ face(g,17,9.4,1,true);
+ const lf=new THREE.Mesh(new THREE.SphereGeometry(3,12,8),new THREE.MeshStandardMaterial({color:p.barista?'#CDEB5B':p.col,roughness:.6}));lf.scale.set(1.5,.35,.8);lf.position.set(2.5,29.6,0);lf.rotation.z=.5;g.add(lf);
+ const st=new THREE.Mesh(new THREE.CylinderGeometry(.5,.6,3,6),SM('#4F7A45'));st.position.set(0,28.4,0);g.add(st);
+ if(p.barista)addApron(g,10.6,10,10);else{const sc=new THREE.Mesh(new THREE.TorusGeometry(9.2,1.5,8,24),SM(p.col));sc.rotation.x=Math.PI/2;sc.position.y=7.5;g.add(sc);}}
+function buildCat(g,p){const id=hsh(p.ko||'x'),fur=p.barista?'#3A2A20':FUR[id%6],furM=SM(fur,.85),inner=SM('#FFC9D2',.8);
+ const body=new THREE.Mesh(new THREE.SphereGeometry(10,24,18),furM);body.scale.set(1,.95,.95);body.position.y=10;body.castShadow=true;g.add(body);
+ const head=new THREE.Mesh(new THREE.SphereGeometry(10.5,28,20),furM);head.scale.set(1.08,.94,1);head.position.y=24;head.castShadow=true;g.add(head);
+ [-1,1].forEach(s=>{const ear=new THREE.Mesh(new THREE.ConeGeometry(3.6,6.5,4),furM);ear.position.set(s*6.2,32.6,0);ear.rotation.z=-s*.28;ear.rotation.y=Math.PI/4;g.add(ear);const ie=new THREE.Mesh(new THREE.ConeGeometry(2,4,4),inner);ie.position.set(s*6.1,32.2,1.2);ie.rotation.z=-s*.28;ie.rotation.y=Math.PI/4;g.add(ie);
+  const paw=new THREE.Mesh(new THREE.SphereGeometry(3,12,10),furM);paw.scale.set(1,.7,1.2);paw.position.set(s*4.5,1.8,4.5);g.add(paw);});
+ const tail=new THREE.Mesh(new THREE.TorusGeometry(6,1.8,8,20,Math.PI*1.1),furM);tail.position.set(0,12,-9);tail.rotation.y=Math.PI/2;g.add(tail);
+ face(g,24,10.2,1,!!p.barista);const nose=new THREE.Mesh(new THREE.SphereGeometry(.9,10,8),SM('#FF8FA3'));nose.position.set(0,22.6,10.6);g.add(nose);
+ if(p.barista)addApron(g,9.4,7,9);else{const bell=new THREE.Mesh(new THREE.SphereGeometry(1.6,10,8),new THREE.MeshStandardMaterial({color:'#E9C46A',metalness:.6,roughness:.3}));bell.position.set(0,15.6,9.6);g.add(bell);const col=new THREE.Mesh(new THREE.TorusGeometry(7.2,1,8,24),SM(p.col));col.rotation.x=Math.PI/2;col.position.y=16.6;g.add(col);}}
+function charMesh(p){if(charType==='mug')return mugMesh(p);const wrap=new THREE.Group(),g=new THREE.Group();
+ ({human:buildHuman,bean:buildBean,cat:buildCat})[charType](g,p);g.traverse(m=>{if(m.isMesh)m.castShadow=true;});
+ wrap.add(g);if(p.barista)wrap.scale.setScalar(1.3);
+ if(p.me){const r=new THREE.Mesh(new THREE.RingGeometry(15,18.5,40),limeM);r.rotation.x=-Math.PI/2;r.position.y=2.2;wrap.add(r);}
+ scene.add(wrap);p.wrap=wrap;p.g=g;}
+function setChar(t){charType=t;try{const st=JSON.parse(localStorage.getItem('kycafe')||'{}');st.char=t;localStorage.setItem('kycafe',JSON.stringify(st));}catch(e){}
+ all.forEach(p=>{if(p.wrap){scene.remove(p.wrap);}charMesh(p);});document.querySelectorAll('.cp').forEach(x=>x.classList.toggle('on',x.dataset.c===t));}
+all.forEach(charMesh);
 
 function applyTheme(k){theme=k;const t=THEMES[k];
  for(const r in t.c){M(r).color.set(t.c[r]);}M('wallL').color.set(t.c.wall);M('wallR').color.set(t.c.wall);M('wainsL').color.set(t.c.wains);M('wallAB').color.set(t.c.wall);M('wallAR').color.set(t.c.wall);M('wainsR').color.set(t.c.wains);M('cup').color.set(k==='night'?'#F5EFE6':'#FFFFFF');
@@ -790,7 +859,7 @@ function applyTheme(k){theme=k;const t=THEMES[k];
  hemi.color.setHex(t.hemi[0]);hemi.groundColor.setHex(t.hemi[1]);hemi.intensity=t.hemi[2];sun.color.setHex(t.dir[0]);sun.intensity=t.dir[1];amb.intensity=t.amb;
  plights.forEach(l=>l.intensity=t.point);bulbs.forEach(b=>b.material.color.set(k==='night'?'#FFD58F':'#FFF6E6'));
  drawFloor(t);drawBoards(t);drawSign(t);
- stage.className='stage '+k+' '+(window.__btn||'btnA');
+ stage.className='stage '+k+' '+(window.__btn||'btnA')+' ex'+(window.__ex||'A');
  document.getElementById('thName').textContent=t.name;document.getElementById('thDesc').innerHTML=t.desc;
  const sw=document.getElementById('thSw');sw.innerHTML='';t.swatch.forEach(c=>{const i=document.createElement('i');i.style.background=c;sw.appendChild(i);});}
 
@@ -839,7 +908,7 @@ function findPath(sx,sz,tx,tz){if(!gridOK)buildGrid();if(los([sx,sz],[tx,tz]))re
   for(let dj=-1;dj<=1;dj++)for(let di=-1;di<=1;di++){if(!di&&!dj)continue;const ii=i+di,jj=j+dj;if(ii<0||jj<0||ii>=GW||jj>=GH)continue;const n=jj*GW+ii;if(!gridOK[n]||C[n])continue;if(di&&dj&&(!gridOK[j*GW+ii]||!gridOK[jj*GW+i]))continue;const g=G[k]+(di&&dj?1.414:1);if(g<G[n]){G[n]=g;P[n]=k;push(n,g+h(n));}}}
  if(P[g0]<0&&g0!==s0)return null;const pts=[];for(let k=g0;k>=0&&k!==s0;k=P[k])pts.push([GX0+(k%GW)*GS,GZ0+((k/GW)|0)*GS]);pts.reverse();pts.push([tx,tz]);
  const out=[];let cur=[sx,sz],idx=0;while(idx<pts.length){let far=idx;for(let q=pts.length-1;q>idx;q--){if(los(cur,pts[q])){far=q;break;}}out.push(pts[far]);cur=pts[far];idx=far+1;}return out;}
-function walkTo(x,z){if(seated||sheetOpen())return;const q={x,z};const pth=findPath(me.x,me.z,x,z);if(pth&&pth.length){const f=pth.shift();x=f[0];z=f[1];me.path=pth;}else me.path=[];me.tx=x;me.tz=z;me.walk=true;startMove();collide(q);mk.position.x=mkDot.position.x=q.x;mk.position.z=mkDot.position.z=q.z;mkT=performance.now();mk.material.opacity=.95;}
+function walkTo(x,z){if(seated&&exitMode==='C'&&!sheetOpen()){standUp();}if(seated||sheetOpen())return;const q={x,z};const pth=findPath(me.x,me.z,x,z);if(pth&&pth.length){const f=pth.shift();x=f[0];z=f[1];me.path=pth;}else me.path=[];me.tx=x;me.tz=z;me.walk=true;startMove();collide(q);mk.position.x=mkDot.position.x=q.x;mk.position.z=mkDot.position.z=q.z;mkT=performance.now();mk.material.opacity=.95;}
 
 let last=performance.now();const tmp=new THREE.Vector3(),want=new THREE.Vector3();
 function frame(now){const dt=Math.min(.1,(now-last)/1000);last=now;const t=now/1000;
@@ -874,7 +943,7 @@ function frame(now){const dt=Math.min(.1,(now-last)/1000);last=now;const t=now/1
   p.tagEl.style.display=vis?'':'none';p.tagEl.style.left=sx+'px';p.tagEl.style.top=sy+'px';p.bubEl.style.left=sx+'px';p.bubEl.style.top=(sy-24)+'px';if(!vis)p.bubEl.style.visibility='hidden';else p.bubEl.style.visibility='';});
  requestAnimationFrame(frame);}
 
-function updateNear(){let n=null;if(!seated){if(Math.hypot(me.x-COUNTER.x,me.z-COUNTER.z)<60)n={k:'counter',key:'c'};
+function updateNear(){const sb=$('standBtn');if(sb){const v=!(seated&&exitMode==='A');if(sb.hidden!==v){sb.hidden=v;if(!v){sb.classList.remove('pop');void sb.offsetWidth;sb.classList.add('pop');}}}if(!seated)hideChip();let n=null;if(!seated){if(Math.hypot(me.x-COUNTER.x,me.z-COUNTER.z)<60)n={k:'counter',key:'c'};
  else if(me.x>330&&me.x<BX+5&&me.z>270&&me.z<525)n={k:'wall',z:WALL_ZONE,key:'wall'};
  else if(Math.abs(me.x-STAGE.x)<150&&Math.abs(me.z-STAGE.z)<120)n={k:'stage',z:STAGE_ZONE,key:'stage'};
  else ZONES.forEach(z=>{const d=z.type==='study'?Math.max(Math.abs(me.x-z.x)-z.w/2,Math.abs(me.z-z.z)-z.d/2)-62:z.type==='bar'?(me.x<-320&&me.z>-410&&me.z<440?0:999):Math.hypot(me.x-z.x,me.z-z.z)-(z.type==='lounge'?120:z.r+56);if(d<=0)n={k:'zone',z,key:z.id};});}
@@ -889,7 +958,20 @@ function updateNear(){let n=null;if(!seated){if(Math.hypot(me.x-COUNTER.x,me.z-C
 function sheetOpen(){return !!document.querySelector('.sheet.open,.modal.open');}
 function open(id){startMove();closeAll(true);document.getElementById(id).classList.add('open');}
 function closeAll(keep){if(!keep&&typeof spot!=='undefined')spot.intensity=0;document.querySelectorAll('.sheet.open,.modal.open').forEach(e=>e.classList.remove('open'));if(!keep){camFocus=null;camDist=null;hush(barista);if(synth)synth.cancel();}}
-document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeAll()));
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const sh=b.closest('.sheet');const id=sh&&sh.id;closeAll();afterClose(id);}));
+let exitMode='A';try{exitMode=(JSON.parse(localStorage.getItem('kycafe')||'{}').exit)||'A';}catch(e){}
+let chipT=0;
+function standUp(){if(!seated)return;haptic();if(seated.type==='study')$('leaveS').click();else $('leave').click();}
+function showChip(){const c=$('standChip');c.hidden=false;requestAnimationFrame(()=>c.classList.add('show'));try{navigator.vibrate&&navigator.vibrate([10,50,14]);}catch(e){}clearTimeout(chipT);chipT=setTimeout(hideChip,5000);}
+function hideChip(){const c=$('standChip');if(!c||c.hidden)return;c.classList.remove('show');clearTimeout(chipT);setTimeout(()=>{if(!c.classList.contains('show'))c.hidden=true;},260);}
+function afterClose(id){
+ if(id==='sheetOrder'){/* 바리스타 대화에서 벗어나면 카운터에서 한 걸음 물러나기 */const tx=me.x+(me.x-COUNTER.x)*0.2,tz=COUNTER.z+70;setTimeout(()=>walkTo(tx,tz),120);if(exitMode==='C')toast('대화를 마쳤어요. 바닥을 눌러 어디든 걸어가 보세요');return;}
+ if(!seated)return;
+ if(exitMode==='B')showChip();
+ else if(exitMode==='C')toast('바닥 아무 곳이나 누르면 일어나서 걸어가요');
+ else{const sb=$('standBtn');sb.classList.remove('pop');void sb.offsetWidth;sb.classList.add('pop');try{navigator.vibrate&&navigator.vibrate(12);}catch(e){}}
+}
+function setExit(m){exitMode=m;window.__ex=m;try{const o=JSON.parse(localStorage.getItem('kycafe')||'{}');o.exit=m;localStorage.setItem('kycafe',JSON.stringify(o));}catch(e){}['exA','exB','exC'].forEach(c=>stage.classList.remove(c));stage.classList.add('ex'+m);document.querySelectorAll('.ep').forEach(x=>x.classList.toggle('on',x.dataset.e===m));hideChip();}
 
 const qcList=document.getElementById('qcList');
 function qcBtn(q,today){const b=document.createElement('button');b.className='qc'+(today?' today':'');b.append(document.createTextNode(q[0]));if(q[1])b.append(Object.assign(document.createElement('span'),{className:'ko',textContent:q[1]}));b.addEventListener('click',()=>{say(me,q[0],q[1]);closeAll();
@@ -1224,7 +1306,9 @@ document.querySelectorAll('.skb').forEach(b=>b.addEventListener('click',()=>{sky
 function haptic(){try{navigator.vibrate&&navigator.vibrate(12);}catch(e){}}
 actBtn.addEventListener('pointerdown',()=>{actBtn.classList.add('press');haptic();});['pointerup','pointerleave','pointercancel'].forEach(t=>actBtn.addEventListener(t,()=>actBtn.classList.remove('press')));
 document.querySelectorAll('.dock button:not(.main)').forEach(b=>b.addEventListener('pointerdown',haptic));
-document.querySelectorAll('.bp').forEach(b=>b.addEventListener('click',()=>{window.__btn=b.dataset.b;['btnA','btnB','btnC'].forEach(c=>stage.classList.remove(c));stage.classList.add(b.dataset.b);document.querySelectorAll('.bp').forEach(x=>x.classList.toggle('on',x===b));}));
+$('standBtn').addEventListener('click',standUp);$('standChip').addEventListener('click',()=>{hideChip();standUp();});document.querySelectorAll('.ep').forEach(b=>b.addEventListener('click',()=>setExit(b.dataset.e)));setExit(exitMode);
+document.querySelectorAll('.cp').forEach(b=>{b.classList.toggle('on',b.dataset.c===charType);b.addEventListener('click',()=>setChar(b.dataset.c));});
+document.querySelectorAll('.bp:not(.cp):not(.ep)').forEach(b=>b.addEventListener('click',()=>{window.__btn=b.dataset.b;['btnA','btnB','btnC'].forEach(c=>stage.classList.remove(c));stage.classList.add(b.dataset.b);document.querySelectorAll('.bp:not(.cp):not(.ep)').forEach(x=>x.classList.toggle('on',x===b));}));
 $('topicBtn').addEventListener('click',()=>{dayIdx=(dayIdx+1)%7;applyTopic();});
 applyTheme('night');applyTopic();updSky();setInterval(updSky,60000);size();requestAnimationFrame(frame);
 })();
