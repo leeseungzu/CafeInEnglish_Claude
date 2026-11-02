@@ -786,6 +786,19 @@ APP_HEAD = lambda cat: (f'<h1 data-app="영상·문장"><span class="wt">{CATS[c
 NAV_SHORT = {"study": "전체", "video": "영상", "expr": "표현", "tip": "꿀팁", "story": "이야기", "think": "문장"}  # 휴대폰 위쪽 메뉴는 짧은 이름 (앱 탭과 같게)
 
 
+def _og_v(img):
+    """공유 이미지가 바뀌면 주소도 바뀌게(?v=해시) → 카톡이 옛 썸네일을 계속 보여 주지 않아요."""
+    if "?" in img:
+        return ""
+    f = OUT / img.lstrip("/")
+    if not f.exists():
+        f = ROOT / img.lstrip("/")
+    if not f.exists():
+        return ""
+    import hashlib
+    return "?v=" + hashlib.md5(f.read_bytes()).hexdigest()[:6]
+
+
 def layout(title, desc, path, body, nav="", data=None, og_type="website", aside="", wide=False, og_img="/assets/og-home-2.png", seo_title=None, ld=None, preload="", robots=""):
     full_title = f"{seo_title or title} | 카페인영어" if path != "/" else f"카페인영어 | {SITE.get('home_title') or SITE['tagline']}"
     full_title = full_title.replace(" - ", " | ")  # 브라우저 탭·검색 제목 구분은 하이픈 대신 세로 바로 통일
@@ -821,10 +834,10 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{DOMAIN}{path}">
-<meta property="og:image" content="{DOMAIN}{og_img}">
+<meta property="og:image" content="{DOMAIN}{og_img}{_og_v(og_img)}">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="{DOMAIN}{og_img}">
+<meta name="twitter:image" content="{DOMAIN}{og_img}{_og_v(og_img)}">
 {f'<meta name="google-site-verification" content="{e(SITE["google_verify"])}">' if SITE.get("google_verify") else ""}{f'<meta name="naver-site-verification" content="{e(SITE["naver_verify"])}">' if SITE.get("naver_verify") else ""}
 {ld_html(ld)}
 <link rel="icon" href="/assets/favicon.svg?v=3" type="image/svg+xml">
@@ -1500,6 +1513,86 @@ def daily_index(n):
     return int((time.time() + 9 * 3600) // 86400) % n
 
 
+# ── 1일 1영 일정 (2026-11-02): 카톡·홈·카페가 같은 날 같은 표현, 한 번 보낸 표현은 다시 안 보냄 ──
+# content/daily_plan.json {plan: {날짜: en}} 에 날짜별 표현을 고정하고, 목록을 '(한국 날짜 일수) % 길이' 자리에
+# 그날 표현이 오도록 다시 배열해요. 그래서 기존 계산식(day % len)을 쓰는 홈·app.js·today.js·카톡 작업이 그대로 맞아요.
+PLAN_FILE = CONTENT / "daily_plan.json"
+PLAN_AHEAD = 7
+
+
+def _kday():
+    import time
+    return int((time.time() + 9 * 3600) // 86400)
+
+
+def _dstr(day):
+    import time
+    g = time.gmtime(day * 86400)
+    return f"{g.tm_year:04d}-{g.tm_mon:02d}-{g.tm_mday:02d}"
+
+
+def ensure_plan():
+    """앞으로 PLAN_AHEAD일 일정이 비어 있으면, 아직 한 번도 안 쓴 표현 중 가장 최근에 추가된 것부터 채워요."""
+    if not (CONTENT / "daily.json").exists():
+        return {}
+    items = [it for it in json.loads((CONTENT / "daily.json").read_text("utf-8")) if it.get("post") in POST_BY_ID]
+    doc = json.loads(PLAN_FILE.read_text("utf-8")) if PLAN_FILE.exists() else {"plan": {}}
+    plan = doc.setdefault("plan", {})
+    used = set(plan.values())
+    fresh = [it["en"] for it in reversed(items) if it["en"] not in used]
+    today, changed = _kday(), False
+    for d in range(today, today + PLAN_AHEAD + 1):
+        k = _dstr(d)
+        if k in plan:
+            continue
+        if fresh:
+            plan[k] = fresh.pop(0)
+        else:  # 새 표현이 다 떨어졌으면 가장 오래전에 쓴 것부터 다시
+            last = {}
+            for dk, en in sorted(plan.items()):
+                last[en] = dk
+            pool = [it["en"] for it in items]
+            plan[k] = min(pool, key=lambda en: last.get(en, ""))
+        changed = True
+    if changed:
+        doc["plan"] = dict(sorted(plan.items()))
+        PLAN_FILE.write_text(json.dumps(doc, ensure_ascii=False, indent=1), "utf-8")
+    return doc["plan"]
+
+
+def plan_order(items, key="en"):
+    """items를 다시 배열해 (오늘 일수 - k) % len 자리에 k일 전 표현이 오게 해요. 미래 PLAN_AHEAD일도 같은 방식."""
+    n = len(items)
+    if n < 2:
+        return items
+    plan = json.loads(PLAN_FILE.read_text("utf-8")).get("plan", {}) if PLAN_FILE.exists() else {}
+    today = _kday()
+    ahead = min(PLAN_AHEAD, n - 1)
+    start = today + ahead - n + 1
+    by = {}
+    for it in items:
+        by.setdefault(it[key], it)
+    slot, used = {}, set()
+    for d in range(start, start + n):
+        en = plan.get(_dstr(d))
+        if en in by and en not in used:
+            slot[d] = by[en]
+            used.add(en)
+    last = {}
+    for dk, en in sorted(plan.items()):
+        last[en] = dk
+    rest = [it for it in items if it[key] not in used]
+    rest.sort(key=lambda it: last.get(it[key], ""), reverse=True)  # 최근에 쓴 것이 오늘 가까이
+    free = [d for d in range(start + n - 1, start - 1, -1) if d not in slot and d <= today]
+    free += [d for d in range(start, start + n) if d not in slot and d > today]
+    for d, it in zip(free, rest):
+        slot[d] = it
+    out = [None] * n
+    for d, it in slot.items():
+        out[d % n] = it
+    return out
+
+
 
 def notice_html(n=None):
     """홈 공지 배너 — site.json 의 notice {label, title, sub, href} 가 있을 때만 보여요. n을 주면 그 내용으로 그려요."""
@@ -1517,9 +1610,10 @@ def page_home():
             p = POST_BY_ID.get(it["post"])
             if p:
                 daily.append({**it, "url": post_url(p), "cat": CATS[p["cat"]]})
+    daily = plan_order(daily)
     # 카톡 '오늘의 한 잔' 예약 작업이 읽는 공개 목록 (홈과 같은 순서·같은 날짜 계산)
     (OUT / "daily.json").write_text(json.dumps(
-        [{"en": d["en"], "ko": d["ko"], "desc": d.get("desc", ""), "url": DOMAIN + d["url"]} for d in daily],
+        [{"en": d["en"], "ko": d["ko"], "desc": d.get("desc", ""), "url": DOMAIN + d["url"], **({"au": "/audio/" + AUDIO[d["en"]]} if d["en"] in AUDIO else {})} for d in daily],
         ensure_ascii=False, indent=1), "utf-8")
     today = daily[daily_index(len(daily))] if daily else (SITE.get("today") or {})
     tp = POST_BY_ID.get(today.get("post")) or next((p for p in POSTS if p["cat"] == "expr"), POSTS[0])
@@ -1880,7 +1974,7 @@ def daily_routine():
             p = POST_BY_ID.get(d["post"])
             if p and d["en"] in AUDIO:
                 out.append({"en": d["en"], "ko": d["ko"], "a": "/audio/" + AUDIO[d["en"]], "p": post_url(p)})
-    return out
+    return plan_order(out)
 
 
 SVG_DL = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 19h16"/></svg>'
@@ -3084,7 +3178,7 @@ def today_list():
             if p:
                 out.append({"post": it["post"], "en": it["en"], "ko": it["ko"], "desc": it.get("desc", ""), "url": post_url(p), "cat": CATS[p["cat"]],
                             "au": ("/audio/" + AUDIO[it["en"]]) if it["en"] in AUDIO else ""})
-    return out
+    return plan_order(out)
 
 
 # ── 영어 도구 v2 (2026-10-24): 사이트 흐름에 맞춘 목록·카드·공유 이미지 ─────────────
@@ -3351,6 +3445,7 @@ def build():
     global START
     import time
     START = time.time() - 1
+    ensure_plan()
     # 기존 파일은 덮어쓰기만 합니다 (삭제하지 않음). 더 이상 쓰지 않는 파일은 마지막에 알려줍니다.
     before = {f for f in OUT.rglob("*") if f.is_file()} if OUT.exists() else set()
     OUT.mkdir(exist_ok=True)
