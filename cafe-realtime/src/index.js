@@ -18,6 +18,7 @@ export default {
     const lobby = env.LOBBY.get(env.LOBBY.idFromName("main"));
     if (url.pathname === "/stats") return lobby.fetch("https://lobby/stats");
     if (url.pathname === "/feedback") return feedback(req, env);
+    if (url.pathname === "/stt") return stt(req, env);
     if (url.pathname === "/ws") {
       if (req.headers.get("upgrade") !== "websocket") return new Response("expected websocket", { status: 426 });
       const room = await (await lobby.fetch("https://lobby/assign")).text();
@@ -48,6 +49,30 @@ async function feedback(req, env) {
   const r = await fetch(env.FEEDBACK_URL, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ token: env.FEEDBACK_TOKEN || "", kind, text, info }), redirect: "manual" });
   const ok = r.status < 400;
   return new Response(JSON.stringify({ ok }), { status: ok ? 200 : 502, headers: { ...cors, "content-type": "application/json" } });
+}
+
+// 말하기 채점: 녹음 한 번 → 받아쓰기(Workers AI Whisper). 소리는 저장하지 않고 글자만 돌려준다.
+const sttSeen = new Map();
+async function stt(req, env) {
+  const cors = { "access-control-allow-origin": req.headers.get("origin") || "*", "access-control-allow-methods": "POST, OPTIONS", "access-control-allow-headers": "content-type" };
+  if (req.method === "OPTIONS") return new Response(null, { headers: cors });
+  if (req.method !== "POST") return new Response("method", { status: 405, headers: cors });
+  const out = (d, s = 200) => new Response(JSON.stringify(d), { status: s, headers: { ...cors, "content-type": "application/json", "cache-control": "no-store" } });
+  if (!env.AI) return out({ ok: false, why: "setup" }, 503);
+  const ip = req.headers.get("cf-connecting-ip") || "?"; const now = Date.now();
+  if (now - (sttSeen.get(ip) || 0) < 1500) return out({ ok: false, why: "wait" }, 429);
+  sttSeen.set(ip, now); if (sttSeen.size > 2000) sttSeen.clear();
+  const buf = new Uint8Array(await req.arrayBuffer());
+  if (buf.length < 800) return out({ ok: false, why: "empty" }, 400);
+  if (buf.length > 1500000) return out({ ok: false, why: "big" }, 413);
+  try {
+    let b64 = ""; for (let i = 0; i < buf.length; i += 0x8000) b64 += String.fromCharCode(...buf.subarray(i, i + 0x8000));
+    const r = await env.AI.run("@cf/openai/whisper-large-v3-turbo", { audio: btoa(b64), language: "en" });
+    return out({ ok: true, text: String((r && r.text) || "").trim().slice(0, 300) });
+  } catch (e) {
+    try { const r = await env.AI.run("@cf/openai/whisper", { audio: [...buf] }); return out({ ok: true, text: String((r && r.text) || "").trim().slice(0, 300) }); }
+    catch (e2) { return out({ ok: false, why: "ai" }, 502); }
+  }
 }
 
 // 방별 인원 집계 + 배정

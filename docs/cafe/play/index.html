@@ -524,7 +524,7 @@ body{padding:0!important;background:#140E0A}
         <h3>카영에 오신 걸 환영해요</h3>
         <p class="small" style="margin:4px 0 12px;font-size:13.5px">영어로 주문하고, 대화하고, 소리 내어 말해 보는 연습 카페예요.</p>
         <ol class="histeps"><li><b>걷기</b>바닥을 누르면 걸어가고, 끌어서 둘러봐요.</li><li><b>주문하기</b>바리스타 카영이에게 주문하고 오늘의 표현도 연습해요.</li><li><b>말해 보기</b>테이블 대화, 모닥불 퀴즈, 테라스 오픈마이크, 스터디룸이 있어요.</li></ol>
-        <p class="hinote">지금 접속한 실제 손님들과 함께해요. 손님이 적을 땐 연습 캐릭터가 채워 줘요. 내 목소리는 저장되거나 전송되지 않아요.</p>
+        <p class="hinote">지금 접속한 실제 손님들과 함께해요. 손님이 적을 땐 연습 캐릭터가 채워 줘요. 내 목소리는 점수를 매기는 데만 쓰이고 저장되지 않아요.</p>
         <button class="btn dark" id="hiGo" style="width:100%;margin-top:12px">입장하기</button>
       </div>
     </div>
@@ -1464,7 +1464,7 @@ function openWall(){me.walk=false;wPicked=null;renderWall();open('sheetWall');ca
 let mPick=null;const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 function micLines(){return [...(typeof DAILY!=='undefined'&&DAILY?[[DAILY.en,DAILY.ko]]:[]),TOPIC.qc,...TOPIC.q.map(q=>q.a[0]),[TOPIC.q[0].en,TOPIC.q[0].ko]].filter((v,i,a)=>a.findIndex(y=>y[0]===v[0])===i).slice(0,4);}
 function renderMic(){const box=$('mLines');box.innerHTML='';const ls=micLines();if(!mPick)mPick=ls[0];ls.forEach(o=>{const b=document.createElement('button');b.className='qc'+(mPick[0]===o[0]?' today':'');b.textContent=o[0];b.addEventListener('click',()=>{mPick=o;$('mRes').hidden=true;renderMic();});box.appendChild(b);});
- $('mLine').textContent=mPick[0];$('mLineKo').textContent=mPick[1];$('mNote').textContent=SR?'"말하기"를 누르고 마이크에 대고 말하면 얼마나 비슷한지 알려 주고, 내 목소리와 원어민 목소리를 번갈아 들을 수 있어요. 녹음은 내 기기 안에서만 재생돼요.':'이 화면에서는 마이크를 쓸 수 없어요. 소리 내어 말한 뒤 "말하기"를 누르면 박수를 받아요. 사이트에서는 실제로 말하기를 알아들어요.';}
+ $('mLine').textContent=mPick[0];$('mLineKo').textContent=mPick[1];$('mNote').textContent=(window.MediaRecorder&&navigator.mediaDevices)?'"말하기"를 누르고 말한 뒤 잠깐 멈추거나 버튼을 한 번 더 누르면, 얼마나 비슷한지 알려 주고 내 목소리와 원어민 목소리를 번갈아 들을 수 있어요. 녹음은 점수를 매기는 데만 쓰고 저장하지 않아요.':'이 화면에서는 마이크를 쓸 수 없어요. 소리 내어 말한 뒤 "말하기"를 누르면 박수를 받아요. 사이트에서는 실제로 말하기를 알아들어요.';}
 function sim(a,b){const n=t=>t.toLowerCase().replace(/[^a-z' ]/g,'').split(/\s+/).filter(Boolean);const A=n(a),B=n(b);if(!A.length)return 0;let hit=0;const pool=[...B];A.forEach(w=>{const i=pool.indexOf(w);if(i>=0){hit++;pool.splice(i,1);}});return Math.round(hit/Math.max(A.length,B.length)*100);}
 function applause(score){sfx('clink');setTimeout(()=>sfx('clink'),220);const crowd=people.filter(p=>!p.me&&!p.real&&!p.seat&&Math.abs(p.z-STAGE.z)<260);const lines=score>=80?['Bravo!','Wow, so natural!','Nailed it!']:['Nice try!','You got this!','Good job!'];
  crowd.forEach((p,i)=>setTimeout(()=>{nod(p);say(p,lines[i%3],'',2000,true);},300+i*260));nod(me);if(score>=60){addStamp();toast('박수 받았어요! 쿠폰 도장 +1');}else toast('조금만 더! 한 번 더 들어 보고 말해 봐요');}
@@ -1492,30 +1492,34 @@ let micBusy=false;
 const BADW=/\b(piss\w*|shit\w*|fuck\w*|damn|bitch\w*|ass|asshole|dick|crap)\b/gi;const clean=t=>t.replace(BADW,m=>m[0]+'*'.repeat(m.length-1));
 function micQuiet(on){try{if(on){if(typeof tvStop==='function')tvStop();if(synth)synth.cancel();if(curAudio)curAudio.pause();if(myAudio)myAudio.pause();if(typeof bgm!=='undefined'){fadeA(bgm,0,150);fadeA(bgmS,0,150);}}
  else if(typeof musicOn!=='undefined'&&musicOn&&!MUTE)fadeA(trk(inStudy),tv(),900);}catch(_){}}
-$('mSpeak').addEventListener('click',async()=>{if(micBusy)return;const note=$('mNote'),btn=$('mSpeak');
- if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){say(me,mPick[0],mPick[1],3200);showRes('',100);applause(100);return;}
- micBusy=true;btn.textContent='마이크 준비 중…';note.textContent='';let st=null,gErr=null;
+const STT_URL=()=>RT_URL.replace('wss://','https://').replace(/\/ws$/,'/stt');
+$('mSpeak').addEventListener('click',async()=>{const note=$('mNote'),btn=$('mSpeak');
+ if(micBusy){if(btn._stop)btn._stop();return;}
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.MediaRecorder){say(me,mPick[0],mPick[1],3200);showRes('',100);applause(100);return;}
+ micBusy=true;btn.textContent='마이크 준비 중…';note.textContent='';$('mRes').hidden=true;let st=null,gErr=null;
  const gum=async()=>{if(!IOS){try{return await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:true}});}catch(e){if(e&&(e.name==='NotAllowedError'||e.name==='SecurityError'))throw e;}}return navigator.mediaDevices.getUserMedia({audio:true});};
  try{st=await gum();}catch(e){gErr=e;}
  if(!st&&gErr&&!['NotAllowedError','NotFoundError','SecurityError'].includes(gErr.name)){await new Promise(r=>setTimeout(r,600));try{st=await gum();gErr=null;}catch(e){gErr=e;}}
- if(!st&&gErr&&SR&&!['NotAllowedError','NotFoundError','SecurityError'].includes(gErr.name)){track('cafe_mic_error',{e:gErr.name+'_sronly'});gErr=null;}
- if(gErr){const e=gErr;micBusy=false;btn.textContent='말하기';
-  const en=e&&e.name,ios=/iP(hone|ad|od)/.test(navigator.userAgent);note.textContent=en==='NotFoundError'?'마이크를 찾을 수 없어요. 마이크가 연결돼 있는지 확인해 주세요.':en==='NotAllowedError'||en==='SecurityError'?(ios?'마이크가 허용되지 않았어요. 주소창의 "가가"(aA) → 웹 사이트 설정 → 마이크를 "허용"으로 바꾼 뒤 다시 눌러 주세요.':'마이크 권한이 꺼져 있어요. 주소창 왼쪽 아이콘(사이트 설정)에서 마이크를 "허용"으로 바꾼 뒤 다시 눌러 주세요.'):'마이크를 잠깐 쓸 수 없었어요. 통화나 다른 앱이 마이크를 쓰고 있지 않은지 확인하고 다시 눌러 주세요. ('+(en||'오류')+')';track('cafe_mic_error',{e:(e&&e.name)||'gum'});return;}
- duck(true);if(myVoice){URL.revokeObjectURL(myVoice);myVoice=null;}
- let chunks=[],gotRes=null,srFail=null,done=false,t=null;let mr=null;try{mr=(st&&window.MediaRecorder&&!(IOS&&recSep&&SR))?new MediaRecorder(st):null;}catch(_){mr=null;}
- function finish(){if(done)return;done=true;micBusy=false;btn.textContent='말하기';btn.classList.remove('rec');duck(false);if(st&&!mr)st.getTracks().forEach(x=>x.stop());if(IOS&&SR&&mr&&!myVoice){recSep=true;try{localStorage.setItem('kycafe.recsep','1');}catch(_){}}
-  if(myVoice){const u=myVoice;voiceOk(u).then(ok=>{if(ok||myVoice!==u)return;URL.revokeObjectURL(u);myVoice=null;if(IOS&&SR){recSep=true;try{localStorage.setItem('kycafe.recsep','1');}catch(_){}}track('cafe_mic_silent_rec');if(!$('mRes').hidden)showRes(lastRes[0],lastRes[1]);});}
-  if(gotRes)showRes(gotRes[0],gotRes[1]);else if(myVoice){showRes('',null);note.textContent=srFail||'말소리를 알아듣지 못해 이번엔 점수가 없어요. 조금 더 또박또박 말해 보세요.';}else note.textContent=srFail||'소리가 안 들렸어요. 한 번 더 눌러 말해 보세요.';}
- const stopAll=()=>{try{if(mr&&mr.state!=='inactive')mr.stop();else{if(st)st.getTracks().forEach(x=>x.stop());finish();}}catch(_){finish();}};
- if(mr){mr.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};mr.onstop=()=>{st.getTracks().forEach(x=>x.stop());if(chunks.length)myVoice=URL.createObjectURL(new Blob(chunks,{type:mr.mimeType||'audio/webm'}));finish();};try{mr.start();}catch(_){mr=null;}}
- let live=false;const goLive=()=>{if(live||done)return;live=true;btn.textContent='지금 말해 보세요';btn.classList.add('rec');haptic();};
- btn.textContent='잠깐만요…';
- if(SR){const rec=new SR();rec.lang='en-US';rec.interimResults=false;rec.maxAlternatives=5;rec.onaudiostart=()=>setTimeout(goLive,150);
-  rec.onresult=e=>{const alts=[...e.results[0]].map(a=>a.transcript);let heard=alts[0],sc=sim(mPick[0],heard);alts.forEach(a=>{const x=sim(mPick[0],a);if(x>sc){sc=x;heard=a;}});heard=clean(heard);gotRes=[heard,sc];track('cafe_mic_try',{score:sc});say(me,heard,'',3000);applause(sc);};
-  rec.onerror=e=>{const M={'not-allowed':'이 브라우저에서는 음성 인식이 막혀 있어요. 점수 대신 내 목소리는 들어 볼 수 있어요.','service-not-allowed':'이 브라우저는 음성 인식을 지원하지 않아요. Chrome에서 열면 점수까지 볼 수 있어요.','network':'음성 인식 서버에 연결하지 못했어요. 인터넷 연결을 확인해 주세요.','no-speech':'소리가 안 들렸어요. 마이크에 조금 더 가까이 대고 말해 보세요.','audio-capture':'마이크 소리를 받지 못했어요. 다른 앱이 마이크를 쓰고 있는지 확인해 주세요.'};srFail=M[e.error]||'음성 인식이 잠깐 안 됐어요. 한 번 더 눌러 주세요.';track('cafe_mic_error',{e:e.error});};
-  rec.onend=()=>{clearTimeout(t);setTimeout(stopAll,250);};t=setTimeout(()=>{try{rec.stop();}catch(_){}},9000);setTimeout(goLive,1200);
-  try{rec.start();}catch(e){srFail='음성 인식을 시작하지 못했어요. 내 목소리는 들어 볼 수 있어요.';goLive();setTimeout(stopAll,5000);}}
- else{srFail='이 브라우저는 음성 인식을 지원하지 않아서 점수는 못 매겨요. 내 목소리는 들어 볼 수 있어요.';goLive();setTimeout(stopAll,5000);}});
+ if(!st){const en=gErr&&gErr.name;micBusy=false;btn.textContent='말하기';
+  note.textContent=en==='NotFoundError'?'마이크를 찾을 수 없어요. 마이크가 연결돼 있는지 확인해 주세요.':en==='NotAllowedError'||en==='SecurityError'?(IOS?'마이크가 허용되지 않았어요. 주소창의 "가가"(aA) → 웹 사이트 설정 → 마이크를 "허용"으로 바꾼 뒤 다시 눌러 주세요.':'마이크 권한이 꺼져 있어요. 주소창 왼쪽 아이콘(사이트 설정)에서 마이크를 "허용"으로 바꾼 뒤 다시 눌러 주세요.'):'마이크를 잠깐 쓸 수 없었어요. 통화나 다른 앱이 마이크를 쓰고 있지 않은지 확인하고 다시 눌러 주세요. ('+(en||'오류')+')';track('cafe_mic_error',{e:en||'gum'});return;}
+ if(myVoice){URL.revokeObjectURL(myVoice);myVoice=null;}
+ duck(true);let chunks=[],mr;try{mr=new MediaRecorder(st);}catch(e){st.getTracks().forEach(x=>x.stop());micBusy=false;btn.textContent='말하기';duck(false);note.textContent='이 브라우저에서는 녹음을 할 수 없어요.';return;}
+ let stopped=false,timer=null,poll=null,an=null,srcN=null;
+ const stop=()=>{if(stopped)return;stopped=true;clearTimeout(timer);clearInterval(poll);try{srcN&&srcN.disconnect();}catch(_){}try{if(mr.state!=='inactive')mr.stop();}catch(_){}};btn._stop=stop;
+ mr.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
+ mr.onstop=async()=>{st.getTracks().forEach(x=>x.stop());duck(false);btn.classList.remove('rec');btn._stop=null;
+  const blob=chunks.length?new Blob(chunks,{type:mr.mimeType||(IOS?'audio/mp4':'audio/webm')}):null;
+  if(!blob||blob.size<1200){micBusy=false;btn.textContent='말하기';note.textContent='소리가 안 들렸어요. 마이크에 조금 더 가까이 대고 다시 말해 보세요.';return;}
+  myVoice=URL.createObjectURL(blob);btn.textContent='채점 중…';
+  let heard=null;try{const ctl=new AbortController();setTimeout(()=>ctl.abort(),12000);const r=await fetch(STT_URL(),{method:'POST',body:blob,headers:{'content-type':blob.type||'application/octet-stream'},signal:ctl.signal});const d=await r.json();if(d&&d.ok)heard=d.text||'';}catch(_){}
+  micBusy=false;btn.textContent='말하기';
+  if(heard==null){showRes('',null);note.textContent='이번엔 점수를 못 매겼어요. 내 목소리는 들어 볼 수 있어요.';track('cafe_mic_error',{e:'stt'});return;}
+  heard=clean(heard.replace(/[.!?,]+$/,''));if(!heard){showRes('',null);note.textContent='말소리를 알아듣지 못해 이번엔 점수가 없어요. 조금 더 또박또박 말해 보세요.';return;}
+  const sc=sim(mPick[0],heard);track('cafe_mic_try',{score:sc});say(me,heard,'',3000);applause(sc);showRes(heard,sc);};
+ mr.start(250);btn.textContent='지금 말해 보세요 · 다 말하면 누르기';btn.classList.add('rec');haptic();
+ try{const c=AC();if(c){if(c.state!=='running')c.resume();an=c.createAnalyser();an.fftSize=1024;srcN=c.createMediaStreamSource(st);srcN.connect(an);const d=new Float32Array(an.fftSize);let spoke=false,t0=performance.now(),lastLoud=0;
+  poll=setInterval(()=>{an.getFloatTimeDomainData(d);let s=0;for(let i=0;i<d.length;i++)s+=d[i]*d[i];const rms=Math.sqrt(s/d.length),now=performance.now();if(rms>.02){spoke=true;lastLoud=now;}if(spoke&&now-lastLoud>1400)stop();if(!spoke&&now-t0>6000)stop();},100);}}catch(_){}
+ timer=setTimeout(stop,9000);});
 function openMic(){track('cafe_mic_open');situ='stage';me.walk=false;me.x=STAGE.x;me.z=STAGE.z+5;me.ang=Math.PI;spot.intensity=2.2;mPick=null;$('mRes').hidden=true;renderMic();open('sheetMic');camFocus=new THREE.Vector3(STAGE.x,0,STAGE.z-60);camDist=380;yaw=Math.PI;pitch=.32;
  const crowd=people.filter(p=>!p.me&&!p.real&&!p.seat).slice(0,4);crowd.forEach((p,i)=>{p.tx=STAGE.x-120+i*80;p.tz=STAGE.z-120-(i%2)*30;});toast('무대에 올라왔어요! 손님들이 모여요');}
 function applyTopic(){TOPIC=TOPICS[dayIdx];$('topicName').textContent=(dayIdx===todayIdx?'':DAYS[dayIdx]+'요일 · ')+TOPIC.en;{const l=$('topicBtn').firstElementChild;if(l)l.textContent=dayIdx===todayIdx?'오늘의 주제':'연습 주제';}drawBoards(THEMES[theme]);drawSign(THEMES[theme]);buildQC();drawWall();if(seated&&!$('tblList').hidden)renderQList();}
