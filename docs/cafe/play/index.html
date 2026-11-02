@@ -169,6 +169,11 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .vol input[type=range]{width:100%;accent-color:var(--lime)}
 .vol .tg{border:0;border-radius:99px;padding:5px 11px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;background:rgba(127,127,127,.18);color:var(--gt)}
 .vol .tg.on{background:var(--lime);color:#2B1D14}
+.vol.fb{width:min(300px,calc(100vw - 40px));gap:9px}.fb .fbs{margin:0;font-size:12px;opacity:.75;line-height:1.45}
+.fbk{display:grid;grid-template-columns:1fr 1fr;gap:6px}.fbk button{border:1px solid var(--gb);background:rgba(127,127,127,.12);color:var(--gt);border-radius:99px;padding:6px 10px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}.fbk button.on{background:var(--lime);color:#2B1D14;border-color:transparent}
+.fb textarea{width:100%;box-sizing:border-box;border-radius:12px;border:1px solid var(--gb);background:rgba(255,255,255,.92);color:#191F28;font:inherit;font-size:13.5px;padding:9px 10px;resize:none}
+.fbgo{border:0;border-radius:12px;padding:10px;font:inherit;font-weight:800;font-size:13.5px;background:#FFF6E6;color:#2B1D14;cursor:pointer}
+.fbm{font-size:11.5px;opacity:.85;display:flex;align-items:center;justify-content:space-between;gap:6px}.fbm b{font-weight:700}
 @media (min-width:760px){.sheet{left:auto;right:14px;width:min(390px,calc(100% - 28px));transform:translateX(calc(100% + 40px))}.sheet.open{transform:none}}
 #sheetTable.chatting{padding:12px 14px 12px}
 #sheetTable.chatting h3{font-size:14px}
@@ -364,9 +369,10 @@ body{padding:0!important;background:#140E0A}
       <div>
         <a class="chip glass ic exit" href="/" aria-label="카페인영어 홈으로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h5v16h-5"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h10"/></svg></a>
         <button class="chip glass" id="branchBtn"><span class="d"></span><span id="branchName">카영</span><span class="n" id="countTxt">베타</span></button>
-        <button class="chip glass" id="topicBtn" title="다른 요일 주제 미리보기"><span style="opacity:.7;font-weight:600">오늘의 주제</span><b id="topicName"></b></button>
+        <button class="chip glass" id="topicBtn" title="눌러서 다른 요일 주제로 연습하기 (나에게만 적용)"><span style="opacity:.7;font-weight:600">오늘의 주제</span><b id="topicName"></b></button>
       </div>
       <div>
+        <button class="chip glass ic" id="fbBtn" aria-label="의견 보내기" title="의견 보내기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></button>
         <button class="chip glass ic" id="musicBtn" aria-label="카페 음악 켜기" title="카페 음악"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/><path id="mslash" d="M3 3l18 18"/></svg></button>
         <button class="chip glass ic" id="soundBtn" aria-label="소리 끄기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path id="sw1" d="M15.5 8.5a5 5 0 0 1 0 7"/><path id="sw2" d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></button>
         <button class="chip glass ic" id="fsBtn" hidden aria-label="전체 화면"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
@@ -379,6 +385,14 @@ body{padding:0!important;background:#140E0A}
     <div class="vol glass" id="voicePop" hidden>
       <div class="row"><span>목소리</span><button class="tg on" id="voiceToggle">끄기</button></div>
       <input type="range" id="vvol" min="0" max="100" value="100" aria-label="목소리 음량">
+    </div>
+    <div class="vol glass fb" id="fbPop" hidden>
+      <div class="row"><span>의견 보내기</span><button class="tg" id="fbX" aria-label="닫기">✕</button></div>
+      <p class="fbs">한 줄도 좋아요. 카영을 더 좋게 만들게요.</p>
+      <div class="fbk" id="fbKind"><button class="on" data-k="좋았던 점">😊 좋았어요</button><button data-k="불편한 점">😕 불편해요</button><button data-k="오류 신고">🐞 오류</button><button data-k="아이디어">💡 아이디어</button></div>
+      <textarea id="fbText" rows="3" maxlength="1000" placeholder="어떤 점이 그랬는지 적어 주세요"></textarea>
+      <button class="fbgo" id="fbSend">메일로 보내기</button>
+      <div class="fbm"><span>메일 앱이 안 열리면</span><button class="tg" id="fbCopy">주소 복사</button></div>
     </div>
     <div class="toasts" id="toasts"></div>
     <div class="hint glass" id="hint">바닥을 눌러 걷고, 끌어서 둘러보세요</div>
@@ -685,7 +699,7 @@ function speak(text,who,done){if(curAudio){curAudio.pause();curAudio=null;}if(sy
  if(src){try{const au=vAudio(src);curAudio=au;au.onended=fin;au.onerror=fin;const pr=au.play();if(pr&&pr.catch)pr.catch(()=>setTimeout(fin,600));setTimeout(fin,7000);}catch(e){setTimeout(fin,400);}return;}
  if(!synth){setTimeout(fin,500);return;}try{const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.volume=VV;const v=who==='me'?VM:VB;if(v)u.voice=v;u.onend=fin;u.onerror=fin;synth.speak(u);setTimeout(fin,Math.max(1800,text.length*90));}catch(e){setTimeout(fin,400);}}
 function setSound(on){sound=on;['sw1','sw2'].forEach(id=>document.getElementById(id).style.opacity=sound?1:0);const b=document.getElementById('soundBtn');b.setAttribute('aria-label',sound?'목소리 음량':'목소리 켜기');const t=document.getElementById('voiceToggle');t.textContent=sound?'끄기':'켜기';t.classList.toggle('on',sound);applyVV();if(!sound){if(synth)synth.cancel();if(curAudio)curAudio.pause();}}
-document.getElementById('soundBtn').addEventListener('click',e=>{e.stopPropagation();const v=document.getElementById('voicePop');v.hidden=!v.hidden;document.getElementById('volPop').hidden=true;document.getElementById('vvol').value=Math.round(VV*100);});
+document.getElementById('soundBtn').addEventListener('click',e=>{e.stopPropagation();const v=document.getElementById('voicePop');v.hidden=!v.hidden;document.getElementById('volPop').hidden=true;document.getElementById('fbPop').hidden=true;document.getElementById('vvol').value=Math.round(VV*100);});
 document.getElementById('voiceToggle').addEventListener('click',()=>setSound(!sound));
 document.getElementById('vvol').addEventListener('input',e=>{VV=e.target.value/100;if(!sound&&VV>0)setSound(true);applyVV();[curAudio,typeof tvAudio!=='undefined'?tvAudio:null].forEach(a=>{if(a&&!a._g)a.volume=VV;});try{const o=JSON.parse(localStorage.getItem('kycafe')||'{}');o.vv=VV;localStorage.setItem('kycafe',JSON.stringify(o));}catch(_){}});
 function pfs(on){stage.classList.toggle('pfs',on);document.body.style.overflow=on?'hidden':'';setTimeout(size,60);}
@@ -769,8 +783,8 @@ const mbC=document.createElement('canvas');mbC.width=640;mbC.height=220;const mb
 const board=new THREE.Mesh(new THREE.PlaneGeometry(232,80),new THREE.MeshBasicMaterial({map:mbT}));board.position.set(-75,150,-BZ-9.5);scene.add(board);
 const lgC=document.createElement('canvas');lgC.width=400;lgC.height=400;const lgT=new THREE.CanvasTexture(lgC);
 const logoP=new THREE.Mesh(new THREE.PlaneGeometry(130,130),new THREE.MeshBasicMaterial({map:lgT,transparent:true}));logoP.position.set(260,140,-BZ-9);scene.add(logoP);logoP.material.depthWrite=false;logoP.renderOrder=3;board.renderOrder=3;
-function drawBoards(t){const x=mbC.getContext('2d');x.fillStyle=t.board;x.fillRect(0,0,640,220);x.textAlign='center';x.fillStyle=LIME;x.font='800 30px sans-serif';x.fillText("TODAY'S TOPIC · "+TOPIC.en.toUpperCase(),320,66);
- let fs=54;x.font='800 '+fs+'px sans-serif';while(x.measureText(TOPIC.expr[0]).width>590&&fs>30){fs-=2;x.font='800 '+fs+'px sans-serif';}x.fillStyle=CREAM;x.fillText(TOPIC.expr[0],320,140);x.font='500 30px sans-serif';x.globalAlpha=.7;x.fillText(TOPIC.expr[1],320,192);x.globalAlpha=1;mbT.needsUpdate=true;
+function drawBoards(t){const x=mbC.getContext('2d');x.fillStyle=t.board;x.fillRect(0,0,640,220);x.textAlign='center';x.fillStyle=LIME;x.font='800 30px sans-serif';const BE=DAILY?[DAILY.en,DAILY.ko]:TOPIC.expr;x.fillText(DAILY?"TODAY'S ENGLISH · 카영 1일 1영":"TODAY'S TOPIC · "+TOPIC.en.toUpperCase(),320,66);
+ let fs=54;x.font='800 '+fs+'px sans-serif';while(x.measureText(BE[0]).width>590&&fs>30){fs-=2;x.font='800 '+fs+'px sans-serif';}x.fillStyle=CREAM;x.fillText(BE[0],320,140);x.font='500 30px sans-serif';x.globalAlpha=.7;x.fillText(BE[1],320,192);x.globalAlpha=1;mbT.needsUpdate=true;
  const l=lgC.getContext('2d');l.clearRect(0,0,400,400);l.save();const ink=t.ink;
  if(t.neon){l.shadowColor='rgba(255,236,200,.9)';l.shadowBlur=24;}
  l.strokeStyle=ink;l.lineWidth=36;l.lineCap='round';l.beginPath();l.arc(185,165,92,Math.PI*.28,Math.PI*1.72);l.stroke();
@@ -1473,7 +1487,7 @@ $('mSpeak').addEventListener('click',async()=>{if(micBusy)return;const note=$('m
  else{srFail='이 브라우저는 음성 인식을 지원하지 않아서 점수는 못 매겨요. 내 목소리는 들어 볼 수 있어요.';setTimeout(stopAll,4500);}});
 function openMic(){track('cafe_mic_open');situ='stage';me.walk=false;me.x=STAGE.x;me.z=STAGE.z+5;me.ang=Math.PI;spot.intensity=2.2;mPick=null;$('mRes').hidden=true;renderMic();open('sheetMic');camFocus=new THREE.Vector3(STAGE.x,0,STAGE.z-60);camDist=380;yaw=Math.PI;pitch=.32;
  const crowd=people.filter(p=>!p.me&&!p.real&&!p.seat).slice(0,4);crowd.forEach((p,i)=>{p.tx=STAGE.x-120+i*80;p.tz=STAGE.z-120-(i%2)*30;});toast('무대에 올라왔어요! 손님들이 모여요');}
-function applyTopic(){TOPIC=TOPICS[dayIdx];$('topicName').textContent=(dayIdx===todayIdx?'':DAYS[dayIdx]+'요일 · ')+TOPIC.en;drawBoards(THEMES[theme]);drawSign(THEMES[theme]);buildQC();drawWall();if(seated&&!$('tblList').hidden)renderQList();}
+function applyTopic(){TOPIC=TOPICS[dayIdx];$('topicName').textContent=(dayIdx===todayIdx?'':DAYS[dayIdx]+'요일 · ')+TOPIC.en;{const l=$('topicBtn').firstElementChild;if(l)l.textContent=dayIdx===todayIdx?'오늘의 주제':'연습 주제';}drawBoards(THEMES[theme]);drawSign(THEMES[theme]);buildQC();drawWall();if(seated&&!$('tblList').hidden)renderQList();}
 
 /* 카페 음악: ElevenLabs로 만든 카페 재즈·보사노바 연주곡(가사 없음), 반복 재생 */
 let musicOn=false,bgm=null,bgmS=null,inStudy=false;let MV=.32,SVOL=.24;const MD=.1;try{const st=JSON.parse(localStorage.getItem('kycafe')||'{}');if(typeof st.svol==='number')SVOL=st.svol;}catch(e){}
@@ -1490,15 +1504,23 @@ function checkRoom(){const now=me.x>BX+10&&me.z<AZ1;if(now===inStudy)return;inSt
  toast(now?'스터디룸이에요. 공부 음악: '+STUDY_TRACKS[studyTrack][0]:'카페로 돌아왔어요');
  const l=$('musicLabel');if(l)l.textContent=now?'스터디룸 음악':'카페 음악';syncVolSlider();}
 function syncVol(){const t=$('musicToggle');t.textContent=musicOn?'끄기':'켜기';t.classList.toggle('on',musicOn);}
-$('musicBtn').addEventListener('click',e=>{e.stopPropagation();const v=$('volPop');v.hidden=!v.hidden;$('voicePop').hidden=true;if(!v.hidden&&!musicOn)setMusic(true);syncVol();});
+$('musicBtn').addEventListener('click',e=>{e.stopPropagation();const v=$('volPop');v.hidden=!v.hidden;$('voicePop').hidden=true;$('fbPop').hidden=true;if(!v.hidden&&!musicOn)setMusic(true);syncVol();});
 $('musicToggle').addEventListener('click',()=>{setMusic(!musicOn);syncVol();});
 $('vol').addEventListener('input',e=>{const v=e.target.value/100;if(inStudy){SVOL=v;try{savePrefs();}catch(_){}}else MV=v;if(musicOn){const a=trk(inStudy);clearInterval(a._f);setV(a,tv());}});
 function syncVolSlider(){$('vol').value=Math.round(tv()*100);}
-cv.addEventListener('pointerdown',()=>{$('volPop').hidden=true;$('voicePop').hidden=true;});
-let firstTouch=false;stage.addEventListener('pointerdown',e=>{if(e.target.closest('#musicBtn,#volPop,#soundBtn,#voicePop')){firstTouch=true;return;}if(!firstTouch){firstTouch=true;if(!musicOn){setMusic(true);syncVol();}}},{capture:true});
+cv.addEventListener('pointerdown',()=>{$('volPop').hidden=true;$('voicePop').hidden=true;$('fbPop').hidden=true;});
+/* 의견 보내기: 메일 앱으로 (서버 저장 없음) */
+{const FB_MAIL='leeseungzu0609@gmail.com';let fbK='좋았던 점';
+ $('fbBtn').addEventListener('click',e=>{e.stopPropagation();const p=$('fbPop');p.hidden=!p.hidden;$('volPop').hidden=true;$('voicePop').hidden=true;if(!p.hidden)track('cafe_feedback_open');});
+ $('fbX').addEventListener('click',()=>{$('fbPop').hidden=true;});
+ $('fbKind').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;fbK=b.dataset.k;[...$('fbKind').children].forEach(x=>x.classList.toggle('on',x===b));});
+ $('fbSend').addEventListener('click',()=>{const t=$('fbText').value.trim();const info='\n\n---\n'+(innerWidth<=640?'모바일':'PC')+' · '+navigator.userAgent.slice(0,120)+'\n'+new Date().toLocaleString('ko-KR');
+  location.href='mailto:'+FB_MAIL+'?subject='+encodeURIComponent('[카영 의견] '+fbK)+'&body='+encodeURIComponent((t||'(내용을 적어 주세요)')+info);track('cafe_feedback_send',{kind:fbK});setTimeout(()=>toast('보내 주셔서 고마워요! 꼭 읽어 볼게요'),600);});
+ $('fbCopy').addEventListener('click',()=>{try{navigator.clipboard.writeText(FB_MAIL);toast('메일 주소를 복사했어요');}catch(e){}});}
+let firstTouch=false;stage.addEventListener('pointerdown',e=>{if(e.target.closest('#musicBtn,#volPop,#soundBtn,#voicePop,#fbBtn,#fbPop')){firstTouch=true;return;}if(!firstTouch){firstTouch=true;if(!musicOn){setMusic(true);syncVol();}}},{capture:true});
 /* 오늘의 1일 1영: 사이트 daily.json과 같은 계산 → 카톡·홈·카페가 같은 문장 */
 (async()=>{if(!/cafeinenglish\.com$/.test(location.hostname)&&!/[?&]rt=1/.test(location.search))return;try{const L=await fetch('/daily.json',{cache:'no-cache'}).then(r=>r.json());if(!L||!L.length)return;
- const it=L[Math.floor((Date.now()/1000+9*3600)/86400)%L.length];DAILY=it;if(it.au)CLIP[it.en]=it.au;buildQC();
+ const it=L[Math.floor((Date.now()/1000+9*3600)/86400)%L.length];DAILY=it;if(it.au)CLIP[it.en]=it.au;buildQC();try{drawBoards(THEMES[theme]);}catch(e){}
  setTimeout(()=>toast('☕ 오늘의 1일 1영 · '+it.en),3200);}catch(e){}})();
 /* 실시간 같이 있기 (Cloudflare Workers) */
 const RT_URL='wss://kayoung-realtime.leeseungzu0609.workers.dev/ws';
@@ -1549,7 +1571,7 @@ $('hiGo').addEventListener('click',()=>{closeAll();try{localStorage.setItem('kyc
 setTimeout(()=>{let seen=false;try{seen=!!localStorage.getItem('kycafe_seen');}catch(e){}if(!seen){open('modalHi');try{localStorage.setItem('kycafe_seen','1');}catch(e){}}},600);
 document.querySelectorAll('.cp').forEach(b=>{b.classList.toggle('on',b.dataset.c===charType);b.addEventListener('click',()=>setChar(b.dataset.c));});
 document.querySelectorAll('.bp:not(.cp):not(.ep)').forEach(b=>b.addEventListener('click',()=>{window.__btn=b.dataset.b;['btnA','btnB','btnC'].forEach(c=>stage.classList.remove(c));stage.classList.add(b.dataset.b);document.querySelectorAll('.bp:not(.cp):not(.ep)').forEach(x=>x.classList.toggle('on',x===b));}));
-$('topicBtn').addEventListener('click',()=>{dayIdx=(dayIdx+1)%7;applyTopic();});
+$('topicBtn').addEventListener('click',()=>{dayIdx=(dayIdx+1)%7;applyTopic();toast(dayIdx===todayIdx?'오늘의 주제로 돌아왔어요':DAYS[dayIdx]+'요일 주제로 연습해요 · 나에게만 바뀌어요');});
 applyTheme('night');applyTopic();updSky();setInterval(updSky,60000);size();requestAnimationFrame(frame);
 })();
 </script>
