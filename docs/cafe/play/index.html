@@ -175,7 +175,25 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .vol .tg{border:0;border-radius:99px;padding:5px 11px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;background:rgba(127,127,127,.18);color:var(--gt)}
 .vol .tg.on{background:var(--lime);color:#2B1D14}
 #mSpeak.rec{background:var(--lime)!important;color:#191F28!important;animation:recP 1.1s ease-in-out infinite}@keyframes recP{50%{box-shadow:0 0 0 6px rgba(205,235,91,.25)}}
+.say .ko,.say .en{word-break:keep-all}
 .again.on{background:#FFF6E6!important;color:#2B1D14!important}
+#fv{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:68px 14px calc(14px + env(safe-area-inset-bottom,0px));background:radial-gradient(120% 70% at 50% 28%,rgba(58,42,31,.94),rgba(18,12,8,.97));color:#F4E6D2;pointer-events:auto;word-break:keep-all}
+#fv[hidden]{display:none}
+.fv-top{display:flex;justify-content:space-between;align-items:center}.fv-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,246,230,.08);border:1px solid rgba(255,246,230,.12);border-radius:99px;padding:8px 14px;font-size:13px}.fv-pill i{width:8px;height:8px;border-radius:50%;background:#CDEB5B;box-shadow:0 0 0 4px rgba(205,235,91,.18)}
+.fv-ic{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,246,230,.12);background:rgba(255,246,230,.08);color:#F4E6D2;font-size:15px;margin-left:6px;cursor:pointer}
+.fv-main,.fv-brk{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.fv-lab{font-size:13px;font-weight:700;color:#CDEB5B;letter-spacing:.14em}.fv-time{font-size:clamp(72px,24vw,120px);font-weight:800;color:#FFF6E6;letter-spacing:-3px;line-height:1;font-variant-numeric:tabular-nums}
+.fv-bar{width:min(240px,60vw);height:6px;border-radius:9px;background:rgba(255,246,230,.12);overflow:hidden}.fv-bar i{display:block;height:100%;width:0;background:#CDEB5B;border-radius:9px;transition:width .5s}
+.fv-mins{display:flex;gap:8px}.fv-mins button{border:1px solid rgba(255,246,230,.16);background:transparent;color:#D9C9B6;border-radius:99px;padding:8px 16px;font:inherit;font-weight:700;font-size:13px;cursor:pointer}.fv-mins button.on{background:#FFF6E6;color:#2B1D14;border-color:#FFF6E6}
+.fv-go{border:0;border-radius:18px;padding:15px 34px;font:inherit;font-weight:800;font-size:16px;background:#FFF6E6;color:#2B1D14;cursor:pointer;min-width:200px}.fv-go.run{background:rgba(255,246,230,.1);color:#F4E6D2}
+.fv-bt{background:#CDEB5B;color:#191F28;border-radius:99px;padding:6px 14px;font-size:13px;font-weight:800}.fv-brk h2{font-size:28px;font-weight:800;color:#fff;margin:0}
+.fv-cup{background:#FFF6E6;color:#191F28;border-radius:24px;padding:20px;width:min(380px,100%);text-align:left}.fv-cup .t{font-size:11.5px;font-weight:800;color:#8B6A4E;letter-spacing:.08em}.fv-cup h3{font-size:22px;font-weight:800;line-height:1.3;margin:8px 0 4px}.fv-cup p{font-size:14.5px;color:#3182F6;font-weight:600;margin:0}
+.fv-cup .bs{display:flex;gap:8px;margin-top:14px}.fv-cup .bs button{flex:1;border:0;border-radius:14px;padding:12px;font:inherit;font-weight:800;font-size:14px;background:#EFE3D2;color:#2B1D14;cursor:pointer}.fv-cup .bs button.d{background:#2B1D14;color:#FFF6E6}
+.fv-bot{display:flex;flex-direction:column;gap:10px;width:min(440px,100%);margin:0 auto}
+.fv-who{background:rgba(255,246,230,.06);border-radius:18px;padding:12px 14px}.fv-who .h{font-size:12px;font-weight:700;color:#A8998B}.fv-who .av{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.fv-who .av span{background:rgba(255,246,230,.09);border-radius:99px;padding:5px 10px;font-size:12px;font-weight:600}.fv-who .av span.f{color:#CDEB5B}
+.fv-snd{display:flex;gap:8px}.fv-snd button{flex:1;border:1px solid rgba(255,246,230,.1);background:rgba(255,246,230,.07);color:#D9C9B6;border-radius:14px;padding:9px 4px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}.fv-snd button i{display:block;font-style:normal;font-size:16px;margin-bottom:2px}.fv-snd button.on{background:#FFF6E6;color:#2B1D14}
+.fv-st{display:flex;gap:8px}.fv-st div{flex:1;background:rgba(255,246,230,.06);border-radius:14px;padding:10px;text-align:center}.fv-st b{display:block;font-size:17px;font-weight:800;color:#fff}.fv-st span{font-size:11px;color:#A8998B;font-weight:600}
+@media (max-height:700px){.fv-who{display:none}.fv-time{font-size:64px}}
 .vol.setp{width:min(300px,calc(100vw - 40px));gap:9px;max-height:calc(100% - 140px);overflow:auto}.sp-h b{font-size:15px}.sp-d{margin:-4px 0 2px;font-size:12px;opacity:.7}
 .sc{border:1px solid var(--gb);background:rgba(127,127,127,.1);border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}.sc-t{display:flex;flex-direction:column;gap:1px}.sc-t b{font-size:13.5px}.sc-t small{font-size:11px;opacity:.65;font-weight:500}
 .vol.fb{width:min(300px,calc(100vw - 40px));gap:9px}.fb .fbs{margin:0;font-size:12px;opacity:.75;line-height:1.45}
@@ -438,6 +456,25 @@ body{padding:0!important;background:#140E0A}
       <div class="row" style="margin-top:8px"><span>오늘 내가 쓴 영어</span><b><span id="mUsed">0</span>문장</b></div><ul class="used" id="mUsedList"></ul></div>
     </div>
 
+    <div id="fv" hidden>
+      <div class="fv-top"><span class="fv-pill"><i></i><b id="fvNow">함께 집중 중</b></span><span><button class="fv-ic" id="fvSet" aria-label="세부 설정">⚙</button><button class="fv-ic" id="fvX" aria-label="스터디룸 나가기">✕</button></span></div>
+      <div class="fv-main" id="fvMain">
+        <div class="fv-lab" id="fvLab">READY</div><div class="fv-time" id="fvTime">25:00</div><div class="fv-bar"><i id="fvBar"></i></div>
+        <div class="fv-mins" id="fvMins"><button data-m="25" class="on">25분</button><button data-m="50">50분</button></div>
+        <button class="fv-go" id="fvGo">집중 시작</button>
+      </div>
+      <div class="fv-brk" id="fvBrk" hidden>
+        <span class="fv-bt" id="fvBt">BREAK · 5:00</span><h2>영어 한 잔 하고 가요</h2>
+        <div class="fv-cup"><div class="t">TODAY'S ENGLISH · 1일 1영</div><h3 id="fvEn"></h3><p id="fvKo"></p><div class="bs"><button id="fvListen">원어민 듣기</button><button class="d" id="fvSay">따라 말하기</button></div></div>
+        <button class="fv-go" id="fvAgain">다시 집중하기</button>
+      </div>
+      <div class="fv-bot">
+        <div class="fv-who"><div class="h">지금 같이 있는 손님</div><div class="av" id="fvWho"></div></div>
+        <div class="fv-snd"><button id="fvMusic"><i>♫</i>공부 음악</button><button id="fvRain"><i>☂</i>빗소리</button><button id="fvLounge"><i>☕</i>라운지</button></div>
+        <div class="fv-st"><div><b id="fvToday">0분</b><span>오늘 공부</span></div><div><b id="fvStreak">1일</b><span>연속 출석</span></div><div><b id="fvStamp">☕ 0</b><span>커피 도장</span></div></div>
+      </div>
+    </div>
+
     <div class="sheet glass" id="sheetStudy" role="dialog" aria-label="스터디룸">
       <button class="x" data-close>✕</button>
       <h3>스터디룸 · 조용히 함께</h3>
@@ -523,10 +560,10 @@ body{padding:0!important;background:#140E0A}
         <button class="x" data-close>✕</button>
         <div class="hitag">BETA</div>
         <h3>카영에 오신 걸 환영해요</h3>
-        <p class="small" style="margin:4px 0 12px;font-size:13.5px">영어로 주문하고, 대화하고, 소리 내어 말해 보는 연습 카페예요.</p>
-        <ol class="histeps"><li><b>걷기</b>바닥을 누르면 걸어가고, 끌어서 둘러봐요.</li><li><b>주문하기</b>바리스타 카영이에게 주문하고 오늘의 표현도 연습해요.</li><li><b>말해 보기</b>테이블 대화, 모닥불 퀴즈, 테라스 오픈마이크, 스터디룸이 있어요.</li></ol>
+        <p class="small" style="margin:4px 0 12px;font-size:13.5px">틀어 두고 같이 공부하는 영어 스터디카페예요. 쉬는 시간엔 영어 한 잔.</p>
+        <ol class="histeps"><li><b>스터디룸</b>타이머를 켜고 다른 손님들과 함께 집중해요.</li><li><b>쉬는 시간</b>오늘의 1일 1영을 듣고 따라 말하면 커피 도장을 받아요.</li><li><b>라운지</b>바리스타 주문, 테이블 대화, 오픈마이크로 쉬어 가요.</li></ol>
         <p class="hinote">지금 접속한 실제 손님들과 함께해요. 손님이 적을 땐 연습 캐릭터가 채워 줘요. 내 목소리는 점수를 매기는 데만 쓰이고 저장되지 않아요.</p>
-        <button class="btn dark" id="hiGo" style="width:100%;margin-top:12px">입장하기</button>
+        <button class="btn dark" id="hiStudy" style="width:100%;margin-top:12px">스터디룸 바로 가기</button><button class="btn" id="hiGo" style="width:100%;margin-top:8px">카페 둘러보기</button>
       </div>
     </div>
 
@@ -1192,7 +1229,7 @@ function studyCount(){return people.filter(p=>p.seat&&p.seat[0][0]==='s').length
 function fmt(ms){return String(Math.floor(ms/60000)).padStart(2,'0')+':'+String(Math.floor(ms/1000)%60).padStart(2,'0');}
 function renderCards(){const box=$('cards');box.innerHTML='';const items=[TOPIC.expr,TOPIC.qc,...TOPIC.q.map(x=>x.a[0]),...(TOPIC.chat||[]).slice(0,1)].filter((v,i,a)=>a.findIndex(y=>y[0]===v[0])===i).slice(0,6);
  items.forEach(it=>{const b=document.createElement('button');b.className='fc';b.textContent=it[0];b.addEventListener('click',()=>{b.classList.toggle('flip');b.textContent=b.classList.contains('flip')?it[1]:it[0];});box.appendChild(b);});}
-function showStudy(){syncAlarmUI();$('stNow').textContent='지금 '+studyCount()+'명이 같이 공부하고 있어요';renderCards();if(!fEnd)$('ftime').textContent=fmt(fMin*60000);open('sheetStudy');camFocus=new THREE.Vector3(me.x,0,me.z);camDist=300;}
+function showStudy(){syncAlarmUI();$('stNow').textContent='지금 '+studyCount()+'명이 같이 공부하고 있어요';renderCards();if(!fEnd)$('ftime').textContent=fmt(fMin*60000);closeAll(true);openFV();camFocus=new THREE.Vector3(me.x,0,me.z);camDist=300;}
 const isAndroid=/Android/i.test(navigator.userAgent),isIOS=/iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),isMobile=isAndroid||isIOS;
 function setMin(m){if(fEnd)return;fMin=Math.max(1,Math.min(180,Math.round(+m||25)));$('fInput').value=fMin;document.querySelectorAll('.fset .tg').forEach(x=>x.classList.toggle('on',+x.dataset.min===fMin));$('ftime').textContent=fmt(fMin*60000);updPhone();}
 document.querySelectorAll('.fset .tg').forEach(b=>b.addEventListener('click',()=>setMin(b.dataset.min)));
@@ -1232,13 +1269,13 @@ function focusAlarm(){if(alarmOn){playAlarm(alarmSound,true);try{navigator.vibra
 let fLast='';setInterval(()=>focusTick(),200);
 function fText(ms){const sec=Math.ceil(ms/1000);return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');}
 function focusTick(){if(!fEnd)return;const ms=Math.max(0,fEnd-Date.now()),t=fText(ms);if(t!==fLast){fLast=t;$('ftime').textContent=t;drawFocusBoard('FOCUS '+t);}
- if(!ms){fEnd=0;fLast='';$('fstart').textContent='집중 시작';drawFocusBoard();hush(me);addStamp();focusAlarm();track('cafe_focus_done',{min:fMin});toast(fMin+'분 집중 완료! 쿠폰 도장 +1');}}
+ if(!ms){fEnd=0;fLast='';$('fstart').textContent='집중 시작';drawFocusBoard();hush(me);addStamp();focusAlarm();track('cafe_focus_done',{min:fMin});toast(fMin+'분 집중 완료! 쿠폰 도장 +1');try{fvBreak();}catch(_){}}}
 $('fstart').addEventListener('click',()=>{if(!fEnd)track('cafe_focus_start',{min:fMin});if(fEnd){fEnd=0;fLast='';$('fstart').textContent='집중 시작';$('ftime').textContent=fmt(fMin*60000);drawFocusBoard();hush(me);keepAwake(false);return;}
  setMin($('fInput').value);if(!isMobile&&'Notification' in window&&Notification.permission==='default'){try{Notification.requestPermission();}catch(e){}}keepAwake(true);if(SX)SX.resume();
  fEnd=Date.now()+fMin*60000;fLast='';$('fstart').textContent='그만하기';say(me,'Focus mode ✍︎','집중 중',0,true);sfx('pop');focusTick();});
 $('cheerBtn').addEventListener('click',()=>{const ms=people.filter(p=>!p.me&&!p.real&&p.seat&&seated&&p.seat[0]===seated.id);const p=ms[Math.floor(Math.random()*ms.length)];nod(me);say(me,'You got this! 💪','화이팅!',2000);
  if(p){setTimeout(()=>{nod(p);say(p,'Thanks! You too!','고마워요, 당신도!',2200,true);toast(p.ko+'님이 응원에 고개 까딱했어요');},700);}});
-$('leaveS').addEventListener('click',()=>{if(!seated)return;const z=seated;delete me.seat;seated=null;if(fEnd){fEnd=0;fLast='';$('fstart').textContent='집중 시작';drawFocusBoard();}hush(me);me.x=z.x+(me.x<z.x?-1:1)*(z.w/2+55);collide(me);closeAll();});
+$('leaveS').addEventListener('click',()=>{if(!seated)return;try{if(!$('fv').hidden)closeFV();}catch(_){}const z=seated;delete me.seat;seated=null;if(fEnd){fEnd=0;fLast='';$('fstart').textContent='집중 시작';drawFocusBoard();}hush(me);me.x=z.x+(me.x<z.x?-1:1)*(z.w/2+55);collide(me);closeAll();});
 
 document.getElementById('leave').addEventListener('click',()=>{if(!seated)return;chatId++;tHushAll();const z=seated;delete me.seat;seated=null;tEnd=0;clearInterval(tInt);if(z.type==='bar'){me.x=-330;}else{me.z=z.z+(z.r||40)+60;me.x=z.x;}collide(me);closeAll();});
 actBtn.addEventListener('click',()=>{if(seated){standUp();return;}if(situ){exitSitu();return;}if(!near){walkTo(COUNTER.x,COUNTER.z+8);return;}
@@ -1491,6 +1528,35 @@ function showRes(heard,score){lastRes=[heard,score];const r=$('mRes');r.hidden=f
  r.appendChild(pl);}
 (()=>{const sb=document.getElementById('slowBtn');if(!sb)return;const sync=()=>{sb.classList.toggle('on',VRATE<1);sb.setAttribute('aria-pressed',VRATE<1);sb.textContent=VRATE<1?'0.8×':'1×';};sync();
  sb.addEventListener('click',()=>{VRATE=VRATE<1?1:.8;try{localStorage.setItem('kycafe.slow',VRATE<1?'1':'0');}catch(_){}sync();haptic();toast(VRATE<1?'바리스타가 천천히 말해요':'보통 속도로 말해요');const a=document.getElementById('again');if(a)a.click();});})();
+/* 영어 스터디카페: 집중 화면 */
+const FV={brkEnd:0,brkInt:null,rain:null};
+const dkey=()=>{const d=new Date(Date.now()+9*3600e3);return d.toISOString().slice(0,10);};
+function stGet(){let o={};try{o=JSON.parse(localStorage.getItem('kycafe.study')||'{}');}catch(_){}return o;}
+function stSave(o){try{localStorage.setItem('kycafe.study',JSON.stringify(o));}catch(_){}}
+function stVisit(){const o=stGet(),k=dkey();if(o.last!==k){const y=new Date(Date.now()+9*3600e3-864e5).toISOString().slice(0,10);o.streak=(o.last===y?(o.streak||0)+1:1);o.last=k;if(o.d!==k){o.d=k;o.m=0;}stSave(o);}return o;}
+function stAdd(min){const o=stVisit();if(o.d!==dkey()){o.d=dkey();o.m=0;}o.m=(o.m||0)+min;stSave(o);fvStats();}
+function fvStats(){const o=stGet();const m=o.d===dkey()?(o.m||0):0;$('fvToday').textContent=m>=60?Math.floor(m/60)+'시간 '+(m%60)+'분':m+'분';$('fvStreak').textContent=(o.streak||1)+'일';$('fvStamp').textContent='☕ '+(typeof stampsN!=='undefined'?stampsN:0);}
+function fvWho(){const box=$('fvWho');box.innerHTML='';const ps=people.filter(p=>p.seat&&p.seat[0][0]==='s');$('fvNow').textContent=ps.length+'명 함께 집중 중';ps.slice(0,6).forEach(p=>{const s=document.createElement('span');s.className=p.me&&!fEnd?'':'f';s.textContent='● '+(p.me?'나 · ':'')+(p.ko||'');box.appendChild(s);});if(ps.length>6){const s=document.createElement('span');s.textContent='+'+(ps.length-6);box.appendChild(s);}}
+function fvRender(){if($('fv').hidden)return;const run=!!fEnd;$('fvLab').textContent=run?'FOCUS':'READY';$('fvTime').textContent=$('ftime').textContent;$('fvGo').textContent=run?'그만하기':'집중 시작';$('fvGo').classList.toggle('run',run);$('fvMins').style.visibility=run?'hidden':'visible';
+ $('fvBar').style.width=run?Math.min(100,100-(fEnd-Date.now())/(fMin*600)).toFixed(1)+'%':'0%';document.querySelectorAll('#fvMins button').forEach(b=>b.classList.toggle('on',+b.dataset.m===fMin));
+ $('fvMusic').classList.toggle('on',typeof musicOn!=='undefined'&&musicOn&&inStudy);$('fvRain').classList.toggle('on',!!FV.rain);}
+let fvT=null;
+function openFV(){stVisit();$('fv').hidden=false;$('fvMain').hidden=false;$('fvBrk').hidden=true;fvStats();fvWho();fvRender();clearInterval(fvT);fvT=setInterval(()=>{fvRender();fvWho();},1000);keepAwake(true);}
+function closeFV(){$('fv').hidden=true;clearInterval(fvT);clearInterval(FV.brkInt);if(!fEnd)keepAwake(false);}
+$('fvGo').addEventListener('click',()=>{haptic();if(fEnd){const left=Math.max(0,fEnd-Date.now());const done=Math.floor((fMin*60000-left)/60000);if(done>0)stAdd(done);}$('fstart').click();fvRender();});
+document.querySelectorAll('#fvMins button').forEach(b=>b.addEventListener('click',()=>{setMin(b.dataset.m);fvRender();haptic();}));
+$('fvSet').addEventListener('click',()=>{open('sheetStudy');});
+$('fvX').addEventListener('click',()=>{closeFV();const l=$('leaveS');if(l)l.click();});
+$('fvMusic').addEventListener('click',()=>{const b=$('sMusic');if(b)b.click();setTimeout(fvRender,100);});
+$('fvLounge').addEventListener('click',()=>{closeFV();const l=$('leaveS');if(l)l.click();toast('라운지로 나왔어요. 테이블·테라스·모닥불을 둘러보세요');});
+$('fvRain').addEventListener('click',()=>{const c=AC();if(!c)return;if(FV.rain){try{FV.rain.g.gain.setTargetAtTime(0,c.currentTime,.3);const r=FV.rain;setTimeout(()=>{try{r.s.stop();}catch(_){}},1200);}catch(_){}FV.rain=null;fvRender();return;}
+ c.resume();const len=c.sampleRate*4,buf=c.createBuffer(1,len,c.sampleRate),d=buf.getChannelData(0);let last=0;for(let i=0;i<len;i++){const w=Math.random()*2-1;last=(last+.02*w)/1.02;d[i]=last*3.2+(Math.random()<.0009?(Math.random()*2-1)*.6:0);}
+ const s=c.createBufferSource();s.buffer=buf;s.loop=true;const f=c.createBiquadFilter();f.type='lowpass';f.frequency.value=2600;const g=c.createGain();g.gain.value=0;s.connect(f);f.connect(g);g.connect(c.destination);s.start();g.gain.setTargetAtTime(MUTE?0:.5,c.currentTime,.4);FV.rain={s,g};fvRender();haptic();});
+function fvBreak(){if($('fv').hidden)return;stAdd(fMin);$('fvMain').hidden=true;$('fvBrk').hidden=false;const it=(typeof DAILY!=='undefined'&&DAILY)?[DAILY.en,DAILY.ko]:(TOPIC.expr||['Does that make sense?','이해되나요?']);$('fvEn').textContent=it[0];$('fvKo').textContent=it[1];
+ FV.brkEnd=Date.now()+5*60000;clearInterval(FV.brkInt);const tick=()=>{const ms=Math.max(0,FV.brkEnd-Date.now());$('fvBt').textContent='BREAK · '+fmt(ms);if(!ms){clearInterval(FV.brkInt);}};tick();FV.brkInt=setInterval(tick,1000);fvStats();}
+$('fvListen').addEventListener('click',()=>{haptic();speak($('fvEn').textContent,'me');});
+$('fvSay').addEventListener('click',()=>{haptic();mPick=[$('fvEn').textContent,$('fvKo').textContent];if(typeof renderMic==='function')renderMic();open('sheetMic');});
+$('fvAgain').addEventListener('click',()=>{clearInterval(FV.brkInt);$('fvBrk').hidden=true;$('fvMain').hidden=false;haptic();$('fstart').click();fvRender();});
 $('mListen').addEventListener('click',()=>{speak(mPick[0],'me');say(me,mPick[0],mPick[1],3000,true);});
 let micBusy=false;
 const BADW=/\b(piss\w*|shit\w*|fuck\w*|damn|bitch\w*|ass|asshole|dick|crap)\b/gi;const clean=t=>t.replace(BADW,m=>m[0]+'*'.repeat(m.length-1));
@@ -1623,6 +1689,7 @@ document.querySelectorAll('.dock button:not(.main)').forEach(b=>b.addEventListen
 $('standBtn').addEventListener('click',standUp);$('standChip').addEventListener('click',()=>{hideChip();standUp();});document.querySelectorAll('.ep').forEach(b=>b.addEventListener('click',()=>setExit(b.dataset.e)));setExit(exitMode);
 document.addEventListener('click',e=>{const a=e.target.closest('a.study');if(a)track('cafe_study_link',{link:a.getAttribute('href')});},true);
 $('hiGo').addEventListener('click',()=>{closeAll();try{localStorage.setItem('kycafe_seen','1');}catch(e){}track('cafe_welcome_ok');});
+$('hiStudy').addEventListener('click',()=>{closeAll();try{localStorage.setItem('kycafe_seen','1');}catch(e){}track('cafe_welcome_study');const z=ZONES.find(o=>o.type==='study');if(z)sit(z);});
 setTimeout(()=>{let seen=false;try{seen=!!localStorage.getItem('kycafe_seen');}catch(e){}if(!seen){open('modalHi');try{localStorage.setItem('kycafe_seen','1');}catch(e){}}},600);
 document.querySelectorAll('.cp').forEach(b=>{b.classList.toggle('on',b.dataset.c===charType);b.addEventListener('click',()=>setChar(b.dataset.c));});
 document.querySelectorAll('.bp:not(.cp):not(.ep)').forEach(b=>b.addEventListener('click',()=>{window.__btn=b.dataset.b;['btnA','btnB','btnC'].forEach(c=>stage.classList.remove(c));stage.classList.add(b.dataset.b);document.querySelectorAll('.bp:not(.cp):not(.ep)').forEach(x=>x.classList.toggle('on',x===b));}));
