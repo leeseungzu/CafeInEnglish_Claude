@@ -1220,7 +1220,7 @@ setInterval(()=>{if(sheetOpen())return;const now=performance.now();if(now-gGreet
 let count=24;function setCount(){}
 setTimeout(()=>toast(me.ko+'님, '+$('branchName').textContent+'에 오신 걸 환영해요'),900);
 setInterval(()=>{if(document.hidden)return;const w=people.filter(p=>!p.me&&!p.seat&&Math.hypot(p.x-me.x,p.z-me.z)>160);if(!w.length)return;const p=w[Math.floor(Math.random()*w.length)];
- p.x=300+Math.random()*40-20;p.z=530;p.tx=200+Math.random()*120;p.tz=380;p.walk=true;if(count<50){count++;setCount();}toast(p.ko+'님이 들어왔어요');setTimeout(()=>nod(p),1800);},26000);
+ p.x=Math.random()*40-20;p.z=530;p.tx=Math.random()*160-80;p.tz=400;p.walk=true;if(count<50){count++;setCount();}toast(p.ko+'님이 들어왔어요');setTimeout(()=>nod(p),1800);},26000);
 function openMenu(){const ms=$('mStudy');ms.href='/'+(TOPIC.post?'p/'+TOPIC.post+'/':'category/expr/');ms.firstChild.nodeValue=TOPIC.post?'이 표현 자세히 공부하기 ':'영어표현 더 보기 ';$('mTopic').textContent=(dayIdx===todayIdx?'오늘':DAYS[dayIdx]+'요일')+'의 주제 · '+TOPIC.en+' ('+TOPIC.ko+')';$('mExpr').textContent=TOPIC.expr[0];$('mExprKo').textContent=TOPIC.expr[1];
  const ex=[TOPIC.qc,...TOPIC.q.map(x=>x.a[0])].filter((v,i,a)=>a.findIndex(y=>y[0]===v[0])===i).slice(0,3);const ul=$('mEx');ul.innerHTML='';ex.forEach(e=>{const li=document.createElement('li');li.textContent=e[0];li.append(Object.assign(document.createElement('small'),{textContent:e[1]}));ul.appendChild(li);});
  $('mStamp').textContent=stampsN;const st=$('mStamps');st.innerHTML='';for(let i=0;i<10;i++){const e=document.createElement('i');if(i<stampsN)e.className='on';st.appendChild(e);}
