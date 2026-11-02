@@ -201,6 +201,9 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .fv-tg{margin-left:auto;border:0;border-radius:99px;padding:7px 14px;font:inherit;font-weight:700;font-size:12.5px;background:rgba(255,246,230,.1);color:#D9C9B6;cursor:pointer}.fv-tg.on{background:#CDEB5B;color:#191F28}
 .fv-tl{display:flex;flex-direction:column;gap:6px}.fv-tl button{text-align:left;border:1px solid rgba(255,246,230,.08);background:rgba(255,246,230,.05);color:#F4E6D2;border-radius:12px;padding:11px 12px;font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between}.fv-tl button.on{border-color:#CDEB5B;color:#CDEB5B}
 .fv-cr{font-size:11px;color:#8B7A6B;margin:0;line-height:1.5}
+.fv-ic.fv-v{width:auto;padding:0 14px;border-radius:99px;font:inherit;font-size:12.5px;font-weight:700}
+.fv-mini{position:absolute;left:50%;top:68px;transform:translateX(-50%);z-index:5;display:flex;align-items:center;gap:8px;border:1px solid rgba(255,246,230,.18);background:rgba(26,18,12,.82);backdrop-filter:blur(10px);color:#F4E6D2;border-radius:99px;padding:9px 16px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;pointer-events:auto;box-shadow:0 8px 24px rgba(0,0,0,.3)}.fv-mini[hidden]{display:none}.fv-mini b{font-size:16px;color:#fff;font-variant-numeric:tabular-nums}.fv-mini .d{width:8px;height:8px;border-radius:50%;background:#CDEB5B}
+#modalHi.ret .histeps,#modalHi.ret .hinote{display:none}
 @media (max-height:700px){.fv-who{display:none}.fv-time{font-size:64px}}
 .vol.setp{width:min(300px,calc(100vw - 40px));gap:9px;max-height:calc(100% - 140px);overflow:auto}.sp-h b{font-size:15px}.sp-d{margin:-4px 0 2px;font-size:12px;opacity:.7}
 .sc{border:1px solid var(--gb);background:rgba(127,127,127,.1);border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}.sc-t{display:flex;flex-direction:column;gap:1px}.sc-t b{font-size:13.5px}.sc-t small{font-size:11px;opacity:.65;font-weight:500}
@@ -464,8 +467,9 @@ body{padding:0!important;background:#140E0A}
       <div class="row" style="margin-top:8px"><span>오늘 내가 쓴 영어</span><b><span id="mUsed">0</span>문장</b></div><ul class="used" id="mUsedList"></ul></div>
     </div>
 
+    <button id="fvMini" class="fv-mini" hidden><span class="d"></span><b id="fvMiniT">25:00</b><span>집중 화면</span></button>
     <div id="fv" hidden>
-      <div class="fv-top"><span class="fv-pill"><i></i><b id="fvNow">함께 집중 중</b></span><span><button class="fv-ic" id="fvSet" aria-label="세부 설정">⚙</button><button class="fv-ic" id="fvX" aria-label="스터디룸 나가기">✕</button></span></div>
+      <div class="fv-top"><span class="fv-pill"><i></i><b id="fvNow">함께 집중 중</b></span><span><button class="fv-ic fv-v" id="fvView" aria-label="같이 공부하는 모습 보기">같이 보기</button><button class="fv-ic" id="fvSet" aria-label="소리 설정">⚙</button><button class="fv-ic" id="fvX" aria-label="스터디룸 나가기">✕</button></span></div>
       <div class="fv-main" id="fvMain">
         <div class="fv-lab" id="fvLab">READY</div><div class="fv-time" id="fvTime">25:00</div><div class="fv-bar"><i id="fvBar"></i></div>
         <div class="fv-mins" id="fvMins"><button data-m="25" class="on">25분</button><button data-m="50">50분</button></div>
@@ -1558,10 +1562,13 @@ function fvRender(){if($('fv').hidden)return;const run=!!fEnd;$('fvLab').textCon
  $('fvBar').style.width=run?Math.min(100,100-(fEnd-Date.now())/(fMin*600)).toFixed(1)+'%':'0%';document.querySelectorAll('#fvMins button').forEach(b=>b.classList.toggle('on',+b.dataset.m===fMin));
  $('fvMusic').classList.toggle('on',BGM==='music'||BGM==='both');$('fvRain').classList.toggle('on',BGM==='rain'||BGM==='both');}
 let fvT=null;
-function openFV(){stVisit();$('fv').hidden=false;$('fvPan').hidden=true;setTimeout(()=>{try{applyBg();}catch(_){}},300);$('fvMain').hidden=false;$('fvBrk').hidden=true;fvStats();fvWho();fvRender();clearInterval(fvT);fvT=setInterval(()=>{fvRender();fvWho();},1000);keepAwake(true);}
-function closeFV(){$('fv').hidden=true;try{if(rainA)fadeA(rainA,0,500);}catch(_){}clearInterval(fvT);clearInterval(FV.brkInt);if(!fEnd)keepAwake(false);}
+function miniFV(){$('fv').hidden=true;$('fvMini').hidden=false;$('fvMiniT').textContent=$('ftime').textContent;haptic();}
+function backFV(){$('fvMini').hidden=true;$('fv').hidden=false;fvRender();fvWho();haptic();}
+function openFV(){stVisit();$('fv').hidden=false;$('fvPan').hidden=true;setTimeout(()=>{try{applyBg();}catch(_){}},300);$('fvMain').hidden=false;$('fvBrk').hidden=true;fvStats();fvWho();fvRender();clearInterval(fvT);fvT=setInterval(()=>{if(!$('fvMini').hidden)$('fvMiniT').textContent=$('ftime').textContent;fvRender();fvWho();},1000);keepAwake(true);}
+function closeFV(){$('fv').hidden=true;$('fvMini').hidden=true;try{if(rainA)fadeA(rainA,0,500);}catch(_){}clearInterval(fvT);clearInterval(FV.brkInt);if(!fEnd)keepAwake(false);}
 $('fvGo').addEventListener('click',()=>{haptic();if(fEnd){const left=Math.max(0,fEnd-Date.now());const done=Math.floor((fMin*60000-left)/60000);if(done>0)stAdd(done);}$('fstart').click();fvRender();});
 document.querySelectorAll('#fvMins button').forEach(b=>b.addEventListener('click',()=>{setMin(b.dataset.m);fvRender();haptic();}));
+$('fvView').addEventListener('click',miniFV);$('fvMini').addEventListener('click',backFV);
 $('fvSet').addEventListener('click',()=>{fvPanelSync();$('fvPan').hidden=false;haptic();});
 $('fvX').addEventListener('click',()=>{closeFV();const l=$('leaveS');if(l)l.click();});
 $('fvLounge').addEventListener('click',()=>{closeFV();const l=$('leaveS');if(l)l.click();toast('라운지로 나왔어요. 테이블·테라스·모닥불을 둘러보세요');});
@@ -1574,7 +1581,7 @@ function setBg(m){BGM=m;bgSave();applyBg();haptic();}
 $('fvMusic').addEventListener('click',()=>setBg(BGM==='music'?'off':'music'));
 $('fvRain').addEventListener('click',()=>setBg(BGM==='rain'?'off':'rain'));
 function fvPanelSync(){const P=$('fvPan');if(!P)return;document.querySelectorAll('#fvMode button').forEach(b=>b.classList.toggle('on',b.dataset.v===BGM));$('fvMVr').hidden=!(BGM==='music'||BGM==='both');$('fvRVr').hidden=!(BGM==='rain'||BGM==='both');$('fvMV').value=Math.round(SVOL*100);$('fvRV').value=Math.round(RVOL*100);
- const tl=$('fvTl');if(!tl.children.length){Object.entries(STUDY_TRACKS).forEach(([k,v])=>{const b=document.createElement('button');b.dataset.k=k;b.innerHTML='<span></span><em style="font-style:normal">♪</em>';b.firstChild.textContent=v[0];b.addEventListener('click',()=>{if(BGM==='rain'||BGM==='off')setBg(BGM==='rain'?'both':'music');setStudyTrack(k);haptic();});tl.appendChild(b);});}
+ const tl=$('fvTl');if(!tl.children.length){Object.entries(STUDY_TRACKS).forEach(([k,v])=>{const b=document.createElement('button');b.dataset.k=k;b.innerHTML='<span></span><em style="font-style:normal">♪</em>';b.firstChild.textContent=v[0];b.addEventListener('click',()=>{if(BGM==='rain'||BGM==='off')setBg('music');setStudyTrack(k);haptic();});tl.appendChild(b);});}
  tl.querySelectorAll('button').forEach(b=>{b.classList.toggle('on',b.dataset.k===studyTrack);b.lastChild.style.visibility=b.dataset.k===studyTrack&&musicOn?'visible':'hidden';});const al=$('fvAl');al.textContent=alarmOn?'켜짐':'꺼짐';al.classList.toggle('on',alarmOn);}
 document.querySelectorAll('#fvMode button').forEach(b=>b.addEventListener('click',()=>setBg(b.dataset.v)));
 $('fvMV').addEventListener('input',e=>{SVOL=e.target.value/100;try{savePrefs();}catch(_){}if(musicOn&&inStudy&&!MUTE){const a=trk(true);clearInterval(a._f);setV(a,SVOL);}});
@@ -1721,7 +1728,7 @@ $('standBtn').addEventListener('click',standUp);$('standChip').addEventListener(
 document.addEventListener('click',e=>{const a=e.target.closest('a.study');if(a)track('cafe_study_link',{link:a.getAttribute('href')});},true);
 $('hiGo').addEventListener('click',()=>{closeAll();try{localStorage.setItem('kycafe_seen','1');}catch(e){}track('cafe_welcome_ok');});
 $('hiStudy').addEventListener('click',()=>{closeAll();try{localStorage.setItem('kycafe_seen','1');}catch(e){}track('cafe_welcome_study');const z=ZONES.find(o=>o.type==='study');if(z)sit(z);});
-setTimeout(()=>{let seen=false;try{seen=!!localStorage.getItem('kycafe_seen');}catch(e){}if(!seen){open('modalHi');try{localStorage.setItem('kycafe_seen','1');}catch(e){}}},600);
+setTimeout(()=>{let seen=false;try{seen=!!localStorage.getItem('kycafe_seen');}catch(e){}const m=$('modalHi');if(seen&&m){m.classList.add('ret');const h=m.querySelector('h3');if(h)h.textContent='오늘도 한 잔 하고 가요';}open('modalHi');try{localStorage.setItem('kycafe_seen','1');}catch(e){}},600);
 document.querySelectorAll('.cp').forEach(b=>{b.classList.toggle('on',b.dataset.c===charType);b.addEventListener('click',()=>setChar(b.dataset.c));});
 document.querySelectorAll('.bp:not(.cp):not(.ep)').forEach(b=>b.addEventListener('click',()=>{window.__btn=b.dataset.b;['btnA','btnB','btnC'].forEach(c=>stage.classList.remove(c));stage.classList.add(b.dataset.b);document.querySelectorAll('.bp:not(.cp):not(.ep)').forEach(x=>x.classList.toggle('on',x===b));}));
 $('topicBtn').addEventListener('click',()=>{dayIdx=(dayIdx+1)%7;applyTopic();toast(dayIdx===todayIdx?'오늘의 주제로 돌아왔어요':DAYS[dayIdx]+'요일 주제로 연습해요 · 나에게만 바뀌어요');});
