@@ -1522,7 +1522,7 @@ $('mSpeak').addEventListener('click',async()=>{const note=$('mNote'),btn=$('mSpe
   if(heard==null){showRes('',null);note.textContent='이번엔 점수를 못 매겼어요. 내 목소리는 들어 볼 수 있어요.';track('cafe_mic_error',{e:'stt'});return;}
   heard=clean(heard.replace(/[.!?,]+$/,''));if(!heard){showRes('',null);note.textContent='말소리를 알아듣지 못해 이번엔 점수가 없어요. 조금 더 또박또박 말해 보세요.';return;}
   const sc=sim(mPick[0],heard);track('cafe_mic_try',{score:sc});say(me,heard,'',3000);applause(sc);showRes(heard,sc);};
- btn._stop=stop;btn.textContent='지금 말해 보세요 · 다 말하면 누르기';btn.classList.add('rec');haptic();
+ btn._stop=stop;btn.textContent='듣고 있어요';btn.classList.add('rec');haptic();
  timer=setTimeout(stop,9000);});
 function openMic(){track('cafe_mic_open');situ='stage';me.walk=false;me.x=STAGE.x;me.z=STAGE.z+5;me.ang=Math.PI;spot.intensity=2.2;mPick=null;$('mRes').hidden=true;renderMic();open('sheetMic');camFocus=new THREE.Vector3(STAGE.x,0,STAGE.z-60);camDist=380;yaw=Math.PI;pitch=.32;
  const crowd=people.filter(p=>!p.me&&!p.real&&!p.seat).slice(0,4);crowd.forEach((p,i)=>{p.tx=STAGE.x-120+i*80;p.tz=STAGE.z-120-(i%2)*30;});toast('무대에 올라왔어요! 손님들이 모여요');}
