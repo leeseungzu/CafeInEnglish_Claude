@@ -1162,7 +1162,7 @@ function tvStop(){if(tvAudio){tvAudio.onended=null;tvAudio.onerror=null;try{tvAu
 function tvSkip(){const c=tvStop();if(c)c();}
 function tvPlay(v,text,cb){tvStop();const list=v==='w'?TVW:TVL[v];const i=list?list.indexOf(text):-1;let done=false;const go=()=>{if(done)return;done=true;if(tvCb===go)tvCb=null;cb();};tvCb=go;
  const fb=()=>setTimeout(go,Math.max(1300,text.length*60));if(v==='w'&&i<0&&sound&&typeof VOICES!=='undefined'&&VOICES[text]){speak(text,'me',go);return;}if(!tvOn||!sound||i<0){fb();return;}
- const a=vAudio('tv/'+v+'_'+i+'.mp3');a.playbackRate=1;tvAudio=a;duck(true);a.onended=()=>{if(tvAudio===a){tvAudio=null;duck(false);}setTimeout(go,250);};a.onerror=()=>{if(tvAudio===a){tvAudio=null;duck(false);}fb();};a.play().catch(()=>{if(tvAudio===a){tvAudio=null;duck(false);}fb();});}
+ const a=vAudio('tv/'+v+'_'+i+'.mp3?v=2');a.playbackRate=1;tvAudio=a;duck(true);a.onended=()=>{if(tvAudio===a){tvAudio=null;duck(false);}setTimeout(go,250);};a.onerror=()=>{if(tvAudio===a){tvAudio=null;duck(false);}fb();};a.play().catch(()=>{if(tvAudio===a){tvAudio=null;duck(false);}fb();});}
 function startChat(i){track('cafe_table_chat',{topic:TOPIC.en});const id=++chatId,q=TOPIC.q[i],ms=mates();$('sheetTable').classList.add('chatting');$('tblList').hidden=true;$('tblChat').hidden=false;$('log').innerHTML='';setOpts('듣는 중',[],()=>{});
  const ok=()=>id===chatId,later=(fn,t)=>setTimeout(()=>{if(ok())fn();},t);
  addMsg('나 · '+me.ko,q.en,q.ko,true,sound);tsay(me,q.en,q.ko);
