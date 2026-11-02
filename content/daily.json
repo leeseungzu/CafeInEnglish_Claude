@@ -418,5 +418,17 @@
     "en": "Text me when you get home.",
     "ko": "집에 도착하면 문자해",
     "desc": "home 앞에는 to를 쓰지 않아요. go home, get home처럼 동사 뒤에 바로 붙여요."
+  },
+  {
+    "post": "no-worries",
+    "en": "No worries.",
+    "ko": "괜찮아, 신경 쓰지 마",
+    "desc": "고맙다는 말에도 미안하다는 말에도 쓰는 가벼운 대답. No worry가 아니라 꼭 복수 worries예요."
+  },
+  {
+    "post": "fun-vs-funny",
+    "en": "It was really fun.",
+    "ko": "정말 재미있었어",
+    "desc": "즐거웠다는 fun, 웃겼다는 funny. funny에는 '이상하다'는 뜻도 있어요."
   }
 ]

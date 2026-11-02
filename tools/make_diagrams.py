@@ -703,6 +703,49 @@ def go_home():
     c.save("go-home-no-to.png")
 
 
+def no_worries():
+    c = Canvas("고맙다는 말, 미안하다는 말에", "어울리는 대답이 조금 달라요")
+    def replies(rows):
+        def body(x, r):
+            for en, ko in rows:
+                w = c.hl(x, c.y, en, F(52, 800)); c.y += int(52 * 1.3)
+                c.text(x, ko, F(38, 700), MUTED, 1.55)
+        return body
+    c.dark(["Thanks for your help!"], 54, "도와줘서 고마워!")
+    c.card(replies([("You're welcome.", "어디서나 무난하게"), ("My pleasure.", "조금 더 정중하게"),
+                    ("No problem. / No worries.", "친구·동료 사이에 가볍게")]))
+    c.dark(["Sorry I'm late!"], 54, "늦어서 미안해!")
+    c.card(replies([("No worries.", "괜찮아, 신경 쓰지 마"), ("That's okay.", "괜찮아"),
+                    ("Don't worry about it.", "마음 쓰지 마")]))
+    c.note("Sorry에는 You're welcome을 쓰지 않아요", 40)
+    c.save("no-worries-replies.png")
+
+
+def fun_funny():
+    c = Canvas("'재미있다'를 영어로 말할 때", "즐거우면 fun, 웃기거나 이상하면 funny")
+    rows = [("fun", "즐거웠다", "It was really fun.", "정말 재미있었어."),
+            ("funny ①", "웃음이 나온다", "That's so funny!", "진짜 웃기다!"),
+            ("funny ②", "이상하다, 갸우뚱", "That's funny...", "이상하네...")]
+    for word, when, en, ko in rows:
+        def body(x, r, word=word, when=when, en=en, ko=ko):
+            w, h = c.pill(x, c.y, word, F(38, 800), bg=LIME, fg=INK)
+            c.d.text((x + w + 20, c.y + h / 2), when, font=F(40, 700), fill=MUTED, anchor="lm"); c.y += 88
+            c.text(x, en, F(58, 800), INK, 1.3)
+            c.text(x, ko, F(42, 700), MUTED, 1.2)
+        c.card(body)
+    def wrong(x, r):
+        c.pill(x, c.y, "재미있게 놀아!", F(36, 700), bg=SOFT, fg=INK); c.y += 84
+        c.hl(x, c.y, "Have fun!", F(56, 800)); c.y += int(56 * 1.45)
+        en = "Have a funny time!"
+        w = c.d.textlength(en, font=F(50, 700))
+        c.d.text((x, c.y), en, font=F(50, 700), fill=MUTED)
+        c.d.line((x - 4, c.y + 32, x + w + 4, c.y + 32), fill="#E5484D", width=5)
+        c.y += int(50 * 1.45)
+    c.card(wrong)
+    c.note("very fun보다 really fun, so much fun이 안전해요", 40)
+    c.save("fun-funny-split.png")
+
+
 if __name__ == "__main__":
-    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps, long_story_short, almost_most, fingers_crossed, go_home):
+    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps, long_story_short, almost_most, fingers_crossed, go_home, no_worries, fun_funny):
         fn()

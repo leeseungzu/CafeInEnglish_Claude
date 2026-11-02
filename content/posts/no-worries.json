@@ -1,0 +1,73 @@
+{
+  "id": "no-worries",
+  "cat": "expr",
+  "sub": "비슷한 표현",
+  "level": "기초",
+  "date": "2026-11-02",
+  "title": "\"No worries\", '괜찮아, 신경 쓰지 마'를 가볍게",
+  "seo_title": "No worries 뜻 - '괜찮아요' 영어로, No problem과 차이",
+  "lead": "고맙다는 말에도, 미안하다는 말에도 통하는 한마디",
+  "description": "No worries는 '괜찮아, 신경 쓰지 마'라는 뜻이에요. 고마울 때·미안할 때·부탁받을 때 쓰는 법, You're welcome과 어울리는 자리의 차이, No worry라고 하면 안 되는 이유를 정리했어요.",
+  "og": {
+    "en": "No worries.",
+    "ko": "'괜찮아, 신경 쓰지 마'를 한마디로"
+  },
+  "icon": "relieved-face",
+  "chat": {
+    "q": "Sorry, I'm five minutes late!",
+    "a": "No worries. I just got here too.",
+    "key": "No worries",
+    "ko": "괜찮아. 나도 방금 왔어."
+  },
+  "thumb": {
+    "text": "No worries.",
+    "key": "worries",
+    "ko": "괜찮아, 신경 쓰지 마"
+  },
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "동료가 \"Thanks for covering for me today.\"라고 했을 때 \"No worries.\"의 뜻은?",
+      "sub": "",
+      "options": [
+        "나 요즘 걱정이 많아",
+        "괜찮아, 별거 아니야",
+        "다음엔 네가 해 줘",
+        "고마워할 필요는 있어"
+      ],
+      "answer": 1,
+      "explain": "고맙다는 말에 '별거 아니니 마음 쓰지 마'라고 가볍게 답하는 말이에요.",
+      "mnemonic": "걱정거리(worries)가 0개, 그러니 괜찮아"
+    },
+    {
+      "tag": "표현",
+      "q": "다음 중 틀린 문장은?",
+      "sub": "",
+      "options": [
+        "No worries.",
+        "No worries at all.",
+        "No worry.",
+        "Yeah, no worries."
+      ],
+      "answer": 2,
+      "explain": "이 표현은 늘 복수형 No worries로 써요. No worry라고 하면 어색하게 들려요.",
+      "mnemonic": "걱정거리가 하나도 없으니 s까지 한 덩어리"
+    },
+    {
+      "tag": "뉘앙스",
+      "q": "\"Sorry I broke your mug.\"에 대한 대답으로 가장 어색한 것은?",
+      "sub": "",
+      "options": [
+        "No worries.",
+        "Don't worry about it.",
+        "You're welcome.",
+        "That's okay."
+      ],
+      "answer": 2,
+      "explain": "You're welcome은 고맙다는 말에 하는 대답이에요. 사과에는 No worries, That's okay, Don't worry about it이 어울려요.",
+      "mnemonic": "Thank you엔 You're welcome, Sorry엔 No worries"
+    }
+  ],
+  "body_html": "<p>\"Thank you\"를 들으면 You're welcome이 바로 나오는데, \"Sorry\"를 들으면 뭐라고 해야 할지 잠깐 멈추게 돼요. 두 상황 모두에 쓸 수 있는 짧은 대답이 있어요. 먼저 상황별로 어울리는 대답을 표로 보고, 그다음 오늘의 주인공 <b>No worries</b>를 자세히 볼게요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>상황</th><th>이런 말을 들으면</th><th>이렇게 대답해요</th></tr></thead><tbody><tr><td>감사</td><td>Thanks for your help.</td><td>No worries. / No problem. / You're welcome.</td></tr><tr><td>사과</td><td>Sorry I'm late.</td><td>No worries. / That's okay. / Don't worry about it.</td></tr><tr><td>부탁</td><td>Can you send it by Friday?</td><td>Yeah, no worries. / Sure, no problem.</td></tr><tr><td>걱정</td><td>What if we're late for the movie?</td><td>No worries, the ads run for ten minutes.</td></tr></tbody></table></div>\n<h2>뜻</h2>\n<div class=\"box\"><b>No worries.</b> = 괜찮아, 신경 쓰지 마 / 문제없어</div>\n<p>표에서 보듯 No worries는 쓰임이 넓어요. 옥스퍼드 러너스 사전은 '문제 될 거 없어, 괜찮아'라는 뜻이며 고맙다는 말에 대한 대답으로 자주 쓴다고 풀이하고, 메리엄웹스터는 '걱정할 이유가 없다'고 말할 때 쓴다고 설명해요. 롱맨 사전에는 부탁을 받고 '그래, 문제없어' 하고 들어줄 때의 예문이 실려 있어요. 결국 핵심은 하나예요. <b>상대가 마음 쓸 필요가 없다</b>는 걸 가볍게 알려 주는 말이에요.</p>\n<p>사전마다 붙인 꼬리표도 눈여겨볼 만해요. 메리엄웹스터는 '주로 호주·영국, 비격식', 롱맨은 '영국 영어, 구어', 옥스퍼드는 '비격식'으로 표시해요. 꼬리표는 '주로'일 뿐이라 미국에서도 흔히 들을 수 있어요. 친구나 동료와 나누는 가벼운 대화에 어울리는 말이라는 뜻이에요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 걱정거리(worries)가 하나도(no) 없다! s까지 붙여서 한 덩어리로 기억해요.</div>\n<h2>You're welcome과 어울리는 자리가 달라요</h2>\n<figure class=\"fig\"><img src=\"/images/no-worries-replies.png\" alt=\"고맙다는 말에는 You're welcome(어디서나 무난), My pleasure(조금 더 정중하게), No problem·No worries(친구·동료 사이에 가볍게). 미안하다는 말에는 No worries, That's okay, Don't worry about it. Sorry에는 You're welcome을 쓰지 않아요\" width=\"1080\" height=\"1944\" loading=\"lazy\"><figcaption>고맙다는 말과 미안하다는 말, 어울리는 대답이 조금 달라요</figcaption></figure>\n<p>No problem과 No worries는 거의 같은 자리에 쓸 수 있어요. 메리엄웹스터도 No problem을 고맙다는 말, 미안하다는 말, 부탁에 대한 대답으로 모두 싣고 있어요. 둘 다 비격식이라 뜻은 똑같이 통하니, 귀에 익은 쪽을 고르면 돼요.</p>\n<p>You're welcome은 사정이 달라요. '천만에요'라는 뜻이라 고맙다는 말에만 어울리고, 미안하다는 말에 대답으로 쓰면 어색해요. 사과를 받았을 때 You're welcome이 튀어나오지 않게, 사과에는 No worries 하나만 먼저 입에 붙여 두면 편해요.</p>\n<h2>실제 대화 · 회의 자료를 부탁할 때</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Hey, could you send me the slides before the meeting?</span><span class=\"ko\">회의 전에 발표 자료 좀 보내 줄 수 있어?</span></li>\n<li class=\"me\"><span class=\"en\">Yeah, no worries. I'll send them in ten minutes.</span><span class=\"ko\">응, 문제없어. 10분 안에 보낼게.</span></li>\n<li class=\"them\"><span class=\"en\">Thanks a lot. Sorry for the short notice.</span><span class=\"ko\">정말 고마워. 갑자기 부탁해서 미안해.</span></li>\n<li class=\"me\"><span class=\"en\">No worries at all.</span><span class=\"ko\">전혀 신경 쓰지 마.</span></li>\n</ul>\n<p>한 대화 안에서 No worries가 두 번 나왔지만 역할이 달라요. 첫 번째는 부탁을 들어주는 '문제없어', 두 번째는 사과를 받아 주는 '신경 쓰지 마'예요. at all을 붙이면 '전혀'가 더해져 한층 따뜻하게 들려요.</p>\n<h2>왜 Don't worry가 아니라 worries일까</h2>\n<p>한국어 '걱정 마'를 그대로 옮기면 Don't worry가 먼저 떠올라요. Don't worry도 맞는 말이지만 '걱정하지 마'라는 명령문이라, 주로 불안해하는 상대를 다독일 때 써요. Don't worry, you'll do great.(걱정 마, 잘할 거야)처럼요. 사과에 답할 때는 about it을 붙인 Don't worry about it이 자연스럽고, 고맙다는 말에는 Don't worry를 쓰지 않아요. 두 상황 모두에 짧게 답하고 싶을 때 편한 게 No worries예요.</p>\n<p>또 하나 헷갈리는 건 worries의 s예요. 여기서 worry는 '걱정거리'를 뜻하는 셀 수 있는 명사라서, 사전에도 이 표현은 늘 no worries 형태로 올라 있어요. No worry라고 단수로 말하면 원어민 귀에는 어색하게 들려요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">친구가 늦어서 미안하다고 할 때</span><span class=\"no\">No worry.</span><span class=\"en\">No worries.</span><span class=\"ko\">괜찮아.</span><span class=\"why\"><b>왜?</b>이 표현은 항상 복수형 worries로 써요. s를 빼면 굳어진 표현이 아닌 어색한 말이 돼요.</span></li>\n<li><span class=\"ctx\">처음 연락하는 거래처 메일에서 감사 인사에 답할 때</span><span class=\"no\">No worries!</span><span class=\"en\">You're welcome. I'm glad I could help.</span><span class=\"ko\">천만에요. 도움이 되었다니 기뻐요.</span><span class=\"why\"><b>왜?</b>No worries는 사전에 '비격식'으로 표시된 말이에요. 틀린 말은 아니지만, 처음 연락하는 상대나 격식 있는 메일에서는 You're welcome이나 My pleasure가 더 무난해요.</span></li>\n</ul></div>\n<p>가볍게 사과할 때 쓰는 말은 <a href=\"/p/my-bad/\">My bad</a>, 상대 제안에 기분 좋게 동의할 때는 <a href=\"/p/sounds-good/\">Sounds good</a>도 함께 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Oxford Learner's Dictionaries 'worry'(no worries), Merriam-Webster 'no worries'·'no problem', Longman Dictionary of Contemporary English 'no worries'.</p>",
+  "related": []
+}

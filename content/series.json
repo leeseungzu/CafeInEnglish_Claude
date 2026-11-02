@@ -68,7 +68,8 @@
       "james-conversation",
       "im-beat",
       "long-story-short",
-      "fingers-crossed"
+      "fingers-crossed",
+      "no-worries"
     ],
     "thinks": [
       "james"
@@ -98,7 +99,8 @@
       "me-too-me-neither",
       "i-agree",
       "almost-vs-most",
-      "go-home"
+      "go-home",
+      "fun-vs-funny"
     ],
     "lead": "뜻이 반대로 전해지는 함정 표현 모음",
     "bg": "expr"
@@ -157,7 +159,8 @@
       "robot-origin",
       "quarantine-origin",
       "clue-origin",
-      "halloween-origin"
+      "halloween-origin",
+      "muscle-origin"
     ],
     "thinks": [],
     "lead": "매일 쓰는 단어의 숨은 역사"

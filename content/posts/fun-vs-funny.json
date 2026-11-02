@@ -1,0 +1,73 @@
+{
+  "id": "fun-vs-funny",
+  "cat": "tip",
+  "sub": "단어",
+  "level": "기초",
+  "date": "2026-11-02",
+  "title": "fun과 funny, '재미있다'를 영어로 말할 때",
+  "seo_title": "fun funny 차이 - '재미있다' 영어로, funny는 '이상하다'도",
+  "lead": "즐거우면 fun, 웃기면 funny, 이상해도 funny",
+  "description": "'여행 재미있었어'는 funny가 아니라 fun이에요. 즐거운 fun과 웃긴 funny의 차이, '이상하다'는 뜻의 That's funny와 feel funny, very fun을 써도 되는지까지 정리했어요.",
+  "og": {
+    "en": "fun ≠ funny",
+    "ko": "'재미있다'를 영어로 말할 때"
+  },
+  "icon": "face-with-tears-of-joy",
+  "chat": {
+    "q": "How was the camping trip?",
+    "a": "It was so much fun!",
+    "key": "so much fun",
+    "ko": "진짜 재미있었어!"
+  },
+  "thumb": {
+    "text": "fun vs funny",
+    "key": "funny",
+    "ko": "'재미있다'는 어느 쪽?"
+  },
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "\"Something smells funny in here.\"의 뜻은?",
+      "sub": "",
+      "options": [
+        "여기서 웃긴 냄새가 나",
+        "여기서 뭔가 이상한 냄새가 나",
+        "여기 냄새가 참 좋아",
+        "여기 재미있는 게 있어"
+      ],
+      "answer": 1,
+      "explain": "smell, noise처럼 냄새나 소리와 함께 쓴 funny는 '이상한'이라는 뜻이에요.",
+      "mnemonic": "코로 맡은 funny는 갸우뚱"
+    },
+    {
+      "tag": "표현",
+      "q": "'어제 파티 진짜 재미있었어'로 가장 자연스러운 문장은?",
+      "sub": "",
+      "options": [
+        "The party was really fun.",
+        "The party was very funny.",
+        "The party was a funny time.",
+        "The party had funny."
+      ],
+      "answer": 0,
+      "explain": "즐거웠다는 fun이에요. funny라고 하면 '파티가 웃겼다'거나 '좀 이상했다'로 들릴 수 있어요.",
+      "mnemonic": "즐거운 시간은 fun, 웃음이 터지면 funny"
+    },
+    {
+      "tag": "뉘앙스",
+      "q": "\"She's a fun person.\"이 뜻하는 것은?",
+      "sub": "",
+      "options": [
+        "같이 있으면 즐거운 사람",
+        "남을 잘 웃기는 사람",
+        "좀 이상한 사람",
+        "놀림을 받는 사람"
+      ],
+      "answer": 0,
+      "explain": "a fun person은 밝고 유쾌해서 함께 있으면 즐거운 사람이에요. 남을 웃기는 사람은 a funny person이에요.",
+      "mnemonic": "함께 놀면 fun, 듣다 웃으면 funny"
+    }
+  ],
+  "body_html": "<p>여행에서 돌아와 외국인 친구에게 \"The trip was very funny!\"라고 말하면, 친구는 \"Why? What happened?\"(왜? 무슨 일 있었어?) 하고 되물을 수도 있어요. 나는 '즐거웠다'고 말했는데, 친구 귀에는 '웃긴 일이 있었다'로 들렸기 때문이에요. 영어는 즐거움과 웃음을 다른 단어로 나눠요. 그림 한 장으로 먼저 볼게요.</p>\n<figure class=\"fig\"><img src=\"/images/fun-funny-split.png\" alt=\"'재미있다'를 영어로: 즐거웠다는 It was really fun(정말 재미있었어), 웃음이 나오면 That's so funny(진짜 웃기다), 이상하다는 That's funny(이상하네). 재미있게 놀아는 Have fun\" width=\"1080\" height=\"1822\" loading=\"lazy\"><figcaption>즐거우면 fun, 웃기거나 이상하면 funny</figcaption></figure>\n<h2>즐거우면 fun, 웃기면 funny</h2>\n<p>옥스퍼드 러너스 사전은 두 단어의 차이를 따로 정리해 두었어요. funny는 사람이나 일이 <b>웃음을 줄 때</b>, fun은 <b>하면서 즐거운 일</b>을 말할 때 써요. 롱맨 사전도 funny 항목에 '즐겁다'는 뜻으로 funny를 쓰지 말고 fun을 쓰라는 주의를 달아 두었어요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>하고 싶은 말</th><th>영어</th><th>핵심</th></tr></thead><tbody><tr><td>여행 정말 재미있었어</td><td>The trip was really fun.</td><td>즐거웠다</td></tr><tr><td>그 영화 진짜 웃겨</td><td>That movie is so funny.</td><td>웃음이 나온다</td></tr><tr><td>재미있게 놀아!</td><td>Have fun!</td><td>즐겁게 보내</td></tr><tr><td>걔 진짜 웃겨</td><td>He's really funny.</td><td>남을 웃기는 사람</td></tr><tr><td>걔랑 놀면 재미있어</td><td>He's so fun to hang out with.</td><td>함께 있으면 즐거운 사람</td></tr></tbody></table></div>\n<p>마지막 두 줄이 특히 헷갈려요. a funny person은 말이나 행동으로 남을 웃기는 사람이고, a fun person은 롱맨 사전 풀이처럼 밝고 유쾌해서 같이 있으면 즐거운 사람이에요. 농담을 잘 못해도 fun한 사람은 얼마든지 있어요.</p>\n<h2>That's funny가 '웃기네'가 아닐 때</h2>\n<p>funny에는 '웃긴' 말고 또 하나 자주 쓰는 뜻이 있어요. 메리엄웹스터와 롱맨 모두 funny를 <b>'이상한, 설명하기 어려운'</b>이라는 뜻으로도 싣고 있어요. 그래서 열쇠를 찾다가 \"That's funny.\"라고 하면 '웃기네'가 아니라 '이상하네'예요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">That's funny. I thought I left my keys here.</span><span class=\"ko\">이상하네. 열쇠를 여기 둔 줄 알았는데.</span></li>\n<li><span class=\"en\">Do you smell something funny?</span><span class=\"ko\">뭔가 이상한 냄새 안 나?</span></li>\n<li><span class=\"en\">The printer is making a funny noise again.</span><span class=\"ko\">프린터에서 또 이상한 소리가 나.</span></li>\n<li><span class=\"en\">I feel a little funny. I think I'll sit down.</span><span class=\"ko\">몸이 좀 이상해. 잠깐 앉아야겠어.</span></li>\n<li><span class=\"en\">Funny, I was just thinking about you.</span><span class=\"ko\">신기하다, 방금 네 생각 하고 있었는데.</span></li>\n</ul></div>\n<p>네 번째 문장의 feel funny는 메리엄웹스터와 롱맨 모두 '몸이 좀 안 좋다'는 뜻으로 싣고 있어요. 마지막 문장처럼 문장 맨 앞에 Funny,를 붙이면 '신기하네, 묘하네' 정도의 느낌이에요. 웃음과는 상관없으니, 대화에서 funny가 들리면 앞뒤 상황을 보고 '웃긴'인지 '이상한'인지 골라 들어야 해요.</p>\n<h2>very fun은 써도 될까</h2>\n<p>fun은 기본적으로 '재미, 즐거움'이라는 명사예요. Have fun, It was a lot of fun처럼 명사로 쓰는 게 가장 기본이에요. 지금은 a fun party처럼 형용사로도 널리 쓰이고, 메리엄웹스터와 옥스퍼드 모두 형용사 fun을 싣고 있어요. 다만 very fun에 대해서는 사전마다 태도가 달라요. 롱맨 사전은 very fun 대신 really fun이라고 말하라고 안내하고, 메리엄웹스터는 so fun, very fun을 피해야 한다는 사람이 점점 줄고 있다고 설명해요.</p>\n<p>그러니 가장 안전한 선택은 <b>really fun</b>, <b>so much fun</b>, <b>a lot of fun</b>이에요. 시험 답안이나 첨삭에서 지적받을 일도 없어요. 비교할 때도 마찬가지로, 메리엄웹스터는 funner보다 <b>more fun</b>이 여전히 일반적인 형태라고 설명해요.</p>\n<h2>실제 대화 · 주말 이야기를 나눌 때</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">How was your weekend?</span><span class=\"ko\">주말 어땠어?</span></li>\n<li class=\"me\"><span class=\"en\">It was really fun. We went to an escape room.</span><span class=\"ko\">진짜 재미있었어. 방탈출 카페에 갔거든.</span></li>\n<li class=\"them\"><span class=\"en\">Nice! Did you get out in time?</span><span class=\"ko\">좋다! 시간 안에 나왔어?</span></li>\n<li class=\"me\"><span class=\"en\">Nope. The funny thing is, the last clue was right in front of us.</span><span class=\"ko\">아니. 웃긴 건, 마지막 단서가 바로 눈앞에 있었다는 거야.</span></li>\n</ul>\n<p>주말 전체는 즐거웠으니 fun, 단서를 코앞에 두고 못 찾은 일은 웃음이 나니 funny예요. 한 대화 안에서 두 단어가 어떻게 갈리는지 보면 금방 감이 와요.</p>\n<h2>-y가 붙는다고 '즐거운'이 되지는 않아요</h2>\n<p>funny가 헷갈리는 데는 이런 이유도 있어요. 하나는 한국어 '재미있다'가 즐거움과 웃음을 한 단어에 담고 있다는 점이에요. 다른 하나는 모양이에요. rain → rainy, sun → sunny처럼 명사에 -y를 붙이면 형용사가 되니, fun의 형용사도 funny일 거라고 짐작하기 쉬워요. 하지만 funny는 '웃긴, 이상한'으로 뜻이 굳은 단어예요. '즐거운'을 말하고 싶다면 fun을 그대로 쓰면 돼요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">친구에게 여행 소감을 말할 때</span><span class=\"no\">The trip was very funny.</span><span class=\"en\">The trip was really fun.</span><span class=\"ko\">여행 진짜 재미있었어.</span><span class=\"why\"><b>왜?</b>즐거웠다는 fun이에요. funny라고 하면 '여행이 웃겼다'거나 '여행이 좀 이상했다'로 들릴 수 있어요.</span></li>\n<li><span class=\"ctx\">파티에 가는 친구에게 인사할 때</span><span class=\"no\">Have a funny time!</span><span class=\"en\">Have fun!</span><span class=\"ko\">재미있게 놀아!</span><span class=\"why\"><b>왜?</b>즐겁게 보내라는 인사는 Have fun!이에요. fun이 명사라서 have 바로 뒤에 붙어요.</span></li>\n</ul></div>\n<p>-ed와 -ing로 갈리는 형용사는 <a href=\"/p/bored-vs-boring/\">bored와 boring 차이</a>에서, 외국에서 잘 안 통하는 우리식 영어는 <a href=\"/p/konglish/\">콩글리시 정리</a>에서 이어서 볼 수 있어요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Oxford Learner's Dictionaries 'fun'(형용사, funny / fun 비교), Merriam-Webster 'funny'·'fun', Longman Dictionary of Contemporary English 'funny'·'fun'.</p>",
+  "related": []
+}
