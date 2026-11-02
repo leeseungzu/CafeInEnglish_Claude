@@ -175,6 +175,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .vol .tg{border:0;border-radius:99px;padding:5px 11px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;background:rgba(127,127,127,.18);color:var(--gt)}
 .vol .tg.on{background:var(--lime);color:#2B1D14}
 #mSpeak.rec{background:var(--lime)!important;color:#191F28!important;animation:recP 1.1s ease-in-out infinite}@keyframes recP{50%{box-shadow:0 0 0 6px rgba(205,235,91,.25)}}
+.again.on{background:#FFF6E6!important;color:#2B1D14!important}
 .vol.setp{width:min(300px,calc(100vw - 40px));gap:9px;max-height:calc(100% - 140px);overflow:auto}.sp-h b{font-size:15px}.sp-d{margin:-4px 0 2px;font-size:12px;opacity:.7}
 .sc{border:1px solid var(--gb);background:rgba(127,127,127,.1);border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}.sc-t{display:flex;flex-direction:column;gap:1px}.sc-t b{font-size:13.5px}.sc-t small{font-size:11px;opacity:.65;font-weight:500}
 .vol.fb{width:min(300px,calc(100vw - 40px));gap:9px}.fb .fbs{margin:0;font-size:12px;opacity:.75;line-height:1.45}
@@ -493,7 +494,7 @@ body{padding:0!important;background:#140E0A}
     <div class="sheet glass" id="sheetOrder" role="dialog" aria-label="주문하기">
       <button class="x" data-close>✕</button>
       <div class="bsitu" id="bSitu"></div>
-      <div class="say"><div style="flex:1;min-width:0"><div class="en" id="bEn"></div><div class="ko" id="bKo"></div></div><button class="again" id="again"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>다시 듣기</button></div>
+      <div class="say"><div style="flex:1;min-width:0"><div class="en" id="bEn"></div><div class="ko" id="bKo"></div></div><button class="again" id="again"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>다시 듣기</button><button class="again" id="slowBtn" aria-pressed="false" aria-label="말 속도" title="말 속도" style="padding-left:12px;padding-right:12px">1×</button></div>
       <div class="tip" id="bTip" hidden></div>
       <div class="choices" id="bChoices"></div>
       <p class="small">바리스타 말은 음성으로 나와요. 앱에서는 내가 직접 말해서 답해요.</p>
@@ -710,10 +711,11 @@ function setMute(m){MUTE=m;try{const o=JSON.parse(localStorage.getItem('kycafe')
 function pickVoices(){if(!synth)return;const v=synth.getVoices().filter(x=>/^en[-_]/i.test(x.lang));const us=v.filter(x=>/US/i.test(x.lang));const pool=us.length?us:v;
  const f=re=>pool.find(x=>re.test(x.name));VB=f(/Samantha|Ava|Allison|Jenny|Aria|Google US English|Zira|Female/i)||pool[0]||null;VM=f(/Alex|Daniel|Guy|David|Tom|Fred|Male/i)||pool.find(x=>x!==VB)||VB;}
 if(synth){pickVoices();synth.onvoiceschanged=pickVoices;}
+let VRATE=1;try{if(localStorage.getItem('kycafe.slow')==='1')VRATE=.8;}catch(_){}
 function speak(text,who,done){if(curAudio){curAudio.pause();curAudio=null;}if(synth)synth.cancel();let fired=false;duck(true);const fin=()=>{if(!fired){fired=true;duck(false);done&&done();}};
  if(!sound||MUTE){setTimeout(fin,500);return;}const src=VOICES[text]||CLIP[text];
- if(src){try{const au=vAudio(src);curAudio=au;au.onended=fin;au.onerror=fin;const pr=au.play();if(pr&&pr.catch)pr.catch(()=>setTimeout(fin,600));setTimeout(fin,7000);}catch(e){setTimeout(fin,400);}return;}
- if(!synth){setTimeout(fin,500);return;}try{const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.volume=VV;const v=who==='me'?VM:VB;if(v)u.voice=v;u.onend=fin;u.onerror=fin;synth.speak(u);setTimeout(fin,Math.max(1800,text.length*90));}catch(e){setTimeout(fin,400);}}
+ if(src){try{const au=vAudio(src);curAudio=au;try{au.preservesPitch=true;au.webkitPreservesPitch=true;au.playbackRate=VRATE;}catch(_){}au.onended=fin;au.onerror=fin;const pr=au.play();if(pr&&pr.catch)pr.catch(()=>setTimeout(fin,600));setTimeout(fin,7000);}catch(e){setTimeout(fin,400);}return;}
+ if(!synth){setTimeout(fin,500);return;}try{const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.volume=VV;u.rate=VRATE*.95;const v=who==='me'?VM:VB;if(v)u.voice=v;u.onend=fin;u.onerror=fin;synth.speak(u);setTimeout(fin,Math.max(1800,text.length*90));}catch(e){setTimeout(fin,400);}}
 function setSound(on){sound=on;const t=document.getElementById('voiceToggle');t.textContent=sound?'켜짐':'꺼짐';t.classList.toggle('on',sound);applyVV();if(!sound){if(synth)synth.cancel();if(curAudio)curAudio.pause();}}
 document.getElementById('soundBtn').addEventListener('click',e=>{e.stopPropagation();setMute(!MUTE);toast(MUTE?'모든 소리를 껐어요':'소리를 다시 켰어요');});
 document.getElementById('voiceToggle').addEventListener('click',()=>{if(!sound&&VV<.05)VV=1;setSound(!sound);syncVol();});
@@ -1487,6 +1489,8 @@ function showRes(heard,score){lastRes=[heard,score];const r=$('mRes');r.hidden=f
  const playNative=done=>{say(me,mPick[0],mPick[1],3000,true);speak(mPick[0],'me',done);};
  if(myVoice)mk('내 목소리 듣기',playMine);mk('원어민 듣기',playNative);if(!myVoice&&window.MediaRecorder&&navigator.mediaDevices){const rb=document.createElement('button');rb.textContent='내 목소리 녹음하기';rb.onclick=()=>{haptic();recordOnly(rb,()=>showRes(lastRes[0],lastRes[1]));};pl.appendChild(rb);}if(myVoice)mk('번갈아 듣기',done=>playNative(()=>setTimeout(()=>playMine(done),350)));
  r.appendChild(pl);}
+(()=>{const sb=document.getElementById('slowBtn');if(!sb)return;const sync=()=>{sb.classList.toggle('on',VRATE<1);sb.setAttribute('aria-pressed',VRATE<1);sb.textContent=VRATE<1?'0.8×':'1×';};sync();
+ sb.addEventListener('click',()=>{VRATE=VRATE<1?1:.8;try{localStorage.setItem('kycafe.slow',VRATE<1?'1':'0');}catch(_){}sync();haptic();toast(VRATE<1?'바리스타가 천천히 말해요':'보통 속도로 말해요');const a=document.getElementById('again');if(a)a.click();});})();
 $('mListen').addEventListener('click',()=>{speak(mPick[0],'me');say(me,mPick[0],mPick[1],3000,true);});
 let micBusy=false;
 const BADW=/\b(piss\w*|shit\w*|fuck\w*|damn|bitch\w*|ass|asshole|dick|crap)\b/gi;const clean=t=>t.replace(BADW,m=>m[0]+'*'.repeat(m.length-1));
@@ -1582,7 +1586,7 @@ function rtSend(o){try{if(RT.ws&&RT.ws.readyState===1)RT.ws.send(JSON.stringify(
 function rtQC(en){if(DAILY&&en===DAILY.en){rtSend({t:'qc',i:59});return;}const i=QC_ALL.findIndex(x=>x[0]===en);if(i>=0)rtSend({t:'qc',i});}
 const rmArr=(a,x)=>{const i=a.indexOf(x);if(i>=0)a.splice(i,1);};
 function rtSeat(p,seat){p.seat=null;if(!seat)return;const [zid,ix]=seat.split(':');const z=ZONES.find(o=>o.id===zid);const i=+ix;if(!z||!z.spots[i])return;
- people.forEach(q=>{if(!q.real&&!q.me&&q.seat&&q.seat[0]===zid&&q.seat[1]===i){q.seat=null;q.tx=q.x+40;q.tz=q.z+40;}});p.seat=[zid,i];p.x=z.spots[i].x;p.z=z.spots[i].z;p.tx=p.x;p.tz=p.z;}
+ people.forEach(q=>{if(!q.real&&!q.me&&q.seat&&q.seat[0]===zid&&q.seat[1]===i){const used=people.filter(o=>o!==q&&o.seat&&o.seat[0]===zid).map(o=>o.seat[1]).concat(me.seat&&me.seat[0]===zid?[me.seat[1]]:[],[i]);const j=z.spots.findIndex((sp,k)=>!used.includes(k));if(j>=0){q.seat=[zid,j];q.x=z.spots[j].x;q.z=z.spots[j].z;q.tx=q.x;q.tz=q.z;q.moving=false;}else if(!(seated&&seated.id===zid)){q.seat=null;q.tx=q.x+40;q.tz=q.z+40;}}});p.seat=[zid,i];p.x=z.spots[i].x;p.z=z.spots[i].z;p.tx=p.x;p.tz=p.z;}
 function rtAdd(d,enter){if(RT.peers.has(d.id)||!RT_ADJ[d.adj]||!RT_DRINK[d.drink])return;
  const p={id:'r'+d.id,real:true,ko:RT_ADJ[d.adj][0]+' '+RT_DRINK[d.drink][0],en:RT_ADJ[d.adj][1]+' '+RT_DRINK[d.drink][1],col:'#F4E7D3',ang:0,ph:Math.random()*6,vx:0,vz:1};
  p.x=enter?Math.random()*40-20:(d.x||0);p.z=enter?530:(d.z||300);p.tx=d.x||Math.random()*160-80;p.tz=d.z||380;
