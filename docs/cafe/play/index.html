@@ -844,13 +844,15 @@ function mugMesh(p){const wrap=new THREE.Group(),g=new THREE.Group();const bm=MU
  const sm=new THREE.Mesh(G_SMILE,em);sm.rotation.z=Math.PI;sm.position.set(0,12.3,12.75);g.add(sm);
  [-1,1].forEach(s=>{const b=new THREE.Mesh(G_BLUSH,blM);b.position.set(s*7.6,12.4,11.15);b.rotation.y=s*.58;g.add(b);});
  g.add(body,h);
- if(p.barista){const apM=new THREE.MeshStandardMaterial({color:ESP,roughness:.8,side:THREE.DoubleSide});const ap=new THREE.Mesh(new THREE.CylinderGeometry(12.95,12.65,9,40,1,true,-1.1,2.2),apM);ap.position.y=6;g.add(ap);
-  const tie=new THREE.Mesh(new THREE.CylinderGeometry(13.05,13.05,1.2,40,1,true),new THREE.MeshBasicMaterial({color:LIME}));tie.position.y=10.8;g.add(tie);
-  const pk=new THREE.Mesh(new THREE.PlaneGeometry(5,1),new THREE.MeshBasicMaterial({color:LIME}));pk.position.set(0,7,13.1);g.add(pk);
-  const capM=new THREE.MeshStandardMaterial({color:ESP,roughness:.7});const cap=new THREE.Mesh(new THREE.SphereGeometry(10.2,24,12,0,Math.PI*2,0,Math.PI/2),capM);cap.scale.y=.55;cap.position.y=24.2;g.add(cap);
-  const brim=new THREE.Mesh(new THREE.CylinderGeometry(6.5,6.5,1,24,1,false,-Math.PI/2,Math.PI),capM);brim.position.set(0,24.6,7.5);g.add(brim);
-  const band=new THREE.Mesh(new THREE.CylinderGeometry(10.3,10.3,1.4,32,1,true),new THREE.MeshBasicMaterial({color:LIME}));band.position.y=24.8;g.add(band);
-  const dot=new THREE.Mesh(G_DOT,limeM);dot.position.set(0,30.6,0);g.add(dot);}
+ if(p.barista){const S=(c,r)=>new THREE.MeshStandardMaterial({color:c,roughness:r||.85,side:THREE.DoubleSide});
+  const ap=new THREE.Mesh(new THREE.CylinderGeometry(13.05,12.75,8.6,40,1,true,-1.15,2.3),S(ESP));ap.position.y=4.9;g.add(ap);
+  const tie=new THREE.Mesh(new THREE.CylinderGeometry(13.1,13.0,.9,40,1,true),S('#1A110B',.7));tie.position.y=9.2;g.add(tie);
+  [-1,1].forEach(sg=>{const st=new THREE.Mesh(new THREE.BoxGeometry(1.2,15,.6),S('#1A110B',.7));const a=sg*.95;st.position.set(Math.sin(a)*13.2,16.7,Math.cos(a)*13.2);st.rotation.y=a;g.add(st);});
+  {const a=-4.2/13;const pk=new THREE.Mesh(new THREE.BoxGeometry(5,3.6,.5),S('#3A281C',.8));pk.position.set(Math.sin(a)*13.25,5.2,Math.cos(a)*13.25);pk.rotation.y=a;g.add(pk);}
+  {const c=document.createElement('canvas');c.width=128;c.height=64;const t=c.getContext('2d');t.fillStyle='#FFF6E6';t.beginPath();t.roundRect(0,0,128,64,14);t.fill();t.fillStyle='#2B1D14';t.font='900 46px sans-serif';t.textAlign='center';t.textBaseline='middle';t.fillText('C',56,34);t.fillStyle=LIME;t.beginPath();t.arc(86,46,8,0,7);t.fill();
+   const a=4.2/13,m=new THREE.Mesh(new THREE.PlaneGeometry(4,2),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(c),transparent:true}));m.position.set(Math.sin(a)*13.4,5.8,Math.cos(a)*13.4);m.rotation.y=a;g.add(m);}
+  const br=new THREE.Mesh(new THREE.SphereGeometry(12.6,32,16),S(ESP,.9));br.scale.set(1,.32,1);br.position.set(-1,24.6,-.5);br.rotation.z=.16;g.add(br);
+  const nub=new THREE.Mesh(new THREE.CylinderGeometry(.6,.9,1.8,10),S('#1A110B'));nub.position.set(-1.8,28.4,-.5);nub.rotation.z=.16;g.add(nub);}
  wrap.add(g);if(p.barista)wrap.scale.setScalar(1.4);
  if(p.me){const r=new THREE.Mesh(new THREE.RingGeometry(15,18.5,40),limeM);r.rotation.x=-Math.PI/2;r.position.y=2.2;wrap.add(r);}
  scene.add(wrap);p.wrap=wrap;p.g=g;}
