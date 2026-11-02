@@ -10,14 +10,14 @@
 <meta property="og:description" content="바리스타에게 영어로 주문하고, 테이블에서 원어민 손님들과 영어로 수다 떠는 3D 카페.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.cafeinenglish.com/cafe/play/">
-<meta property="og:image" content="https://www.cafeinenglish.com/cafe/play/og-cafe.png?v=7">
+<meta property="og:image" content="https://www.cafeinenglish.com/cafe/play/og-cafe.png?v=9">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#140E0A">
-<link rel="icon" href="/cafe/play/cafe-icon-48.png?v=6" sizes="48x48" type="image/png">
-<link rel="icon" href="/cafe/play/cafe-icon-32.png?v=6" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="/cafe/play/cafe-icon-180.png?v=6">
+<link rel="icon" href="/cafe/play/cafe-icon-48.png?v=8" sizes="48x48" type="image/png">
+<link rel="icon" href="/cafe/play/cafe-icon-32.png?v=8" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/cafe/play/cafe-icon-180.png?v=8">
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-ZTK7QZC3NK');addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id=G-ZTK7QZC3NK';document.head.appendChild(s)},1500)});</script>
 <style>[hidden]{display:none!important}</style>
 </head>
@@ -817,15 +817,15 @@ const zoneFx=ZONES.map(z=>{const g=new THREE.Group();
 let pendingSit=null;
 const mugPts=[[0,0],[9.6,0],[11.6,1.1],[12.3,3.4],[12.7,19],[13,23],[12.4,24.6],[11.2,24.6],[11,23],[0,23]].map(p=>new THREE.Vector2(p[0],p[1]));
 const G_MUG=new THREE.LatheGeometry(mugPts,40),G_FOAM=new THREE.SphereGeometry(11,32,10,0,Math.PI*2,0,Math.PI/2),G_HANDLE=new THREE.TorusGeometry(5.8,2.1,12,24,Math.PI),
- G_EYE=new THREE.SphereGeometry(1.75,16,12),G_DOT=new THREE.SphereGeometry(2.6,16,12),G_BLUSH=new THREE.CircleGeometry(2.3,16),G_SMILE=new THREE.TorusGeometry(1.7,.5,6,14,Math.PI);
+ G_EYE=new THREE.SphereGeometry(1.75,16,12),G_DOT=new THREE.SphereGeometry(2.6,16,12),G_BLUSH=new THREE.CircleGeometry(2.3,16),G_SMILE=new THREE.TorusGeometry(1.7,.5,6,14,Math.PI),G_HL=new THREE.SphereGeometry(.55,10,8);const hlM=new THREE.MeshBasicMaterial({color:'#FFFFFF'});
 const eyeM=new THREE.MeshBasicMaterial({color:'#191F28'}),eyeB=new THREE.MeshBasicMaterial({color:CREAM}),limeM=new THREE.MeshBasicMaterial({color:LIME}),blM=new THREE.MeshBasicMaterial({color:'#FF9AAA',transparent:true,opacity:.6});
 const ceramicMats=[];
-function mugMesh(p){const wrap=new THREE.Group(),g=new THREE.Group();const bm=new THREE.MeshStandardMaterial({color:p.col,roughness:.4});ceramicMats.push(bm);
+function mugMesh(p){const wrap=new THREE.Group(),g=new THREE.Group();const bm=new THREE.MeshStandardMaterial({color:p.col,roughness:p.me?.38:.4});if(!p.me)ceramicMats.push(bm);
  const body=new THREE.Mesh(G_MUG,bm);body.castShadow=true;
- const foam=new THREE.Mesh(G_FOAM,M(p.barista?'crema':'foam',{color:p.barista?'#E9C79A':CREAM,roughness:.9}));foam.scale.y=.32;foam.position.y=22.6;
- const dot=new THREE.Mesh(G_DOT,limeM);dot.position.set(5.5,25.4,-1.5);
+ const foam=new THREE.Mesh(G_FOAM,p.me?M('espTop',{color:'#2B1D14',roughness:.35}):M(p.barista?'crema':'foam',{color:p.barista?'#E9C79A':CREAM,roughness:.9}));foam.scale.y=p.me?.22:.32;foam.position.y=p.me?22.4:22.6;if(p.me){const cr=new THREE.Mesh(new THREE.TorusGeometry(10.3,.7,8,48),M('cremaRing',{color:'#C9955E',roughness:.5}));cr.rotation.x=Math.PI/2;cr.position.y=22.9;g.add(cr);}
+ const dot=new THREE.Mesh(G_DOT,limeM);if(p.me){dot.scale.set(1.05,.55,1.05);dot.position.set(3.8,24.2,3.2);}else dot.position.set(5.5,25.4,-1.5);
  const h=new THREE.Mesh(G_HANDLE,bm);h.rotation.z=-Math.PI/2;h.position.set(12.4,12.5,0);h.castShadow=true;
- const em=eyeM;[-4.3,4.3].forEach(x=>{const e=new THREE.Mesh(G_EYE,em);e.scale.z=.45;e.position.set(x,15.2,12.55);g.add(e);});
+ const em=eyeM;[-4.3,4.3].forEach(x=>{const e=new THREE.Mesh(G_EYE,em);e.scale.z=.45;e.position.set(x,15.2,12.55);g.add(e);const hl=new THREE.Mesh(G_HL,hlM);hl.position.set(x-.55,15.85,13.3);g.add(hl);});
  const sm=new THREE.Mesh(G_SMILE,em);sm.rotation.z=Math.PI;sm.position.set(0,12.3,12.75);g.add(sm);
  [-1,1].forEach(s=>{const b=new THREE.Mesh(G_BLUSH,blM);b.position.set(s*7.6,12.4,11.15);b.rotation.y=s*.58;g.add(b);});
  g.add(body,foam,dot,h);
