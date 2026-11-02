@@ -171,7 +171,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .chip b{font-weight:800}
 .vol{position:absolute;right:14px;top:62px;border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-width:210px;pointer-events:auto;z-index:5}
 .vol .row{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;font-weight:700}
-.vol input[type=range]{width:100%;accent-color:var(--lime)}
+.vol input[type=range]{width:100%;accent-color:var(--lime)}.vol input[type=range].off{accent-color:#8a7f76;opacity:.55}
 .vol .tg{border:0;border-radius:99px;padding:5px 11px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;background:rgba(127,127,127,.18);color:var(--gt)}
 .vol .tg.on{background:var(--lime);color:#2B1D14}
 .vol.setp{width:min(300px,calc(100vw - 40px));gap:9px;max-height:calc(100% - 140px);overflow:auto}.sp-h b{font-size:15px}.sp-d{margin:-4px 0 2px;font-size:12px;opacity:.7}
@@ -715,8 +715,8 @@ function speak(text,who,done){if(curAudio){curAudio.pause();curAudio=null;}if(sy
  if(!synth){setTimeout(fin,500);return;}try{const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.volume=VV;const v=who==='me'?VM:VB;if(v)u.voice=v;u.onend=fin;u.onerror=fin;synth.speak(u);setTimeout(fin,Math.max(1800,text.length*90));}catch(e){setTimeout(fin,400);}}
 function setSound(on){sound=on;const t=document.getElementById('voiceToggle');t.textContent=sound?'켜짐':'꺼짐';t.classList.toggle('on',sound);applyVV();if(!sound){if(synth)synth.cancel();if(curAudio)curAudio.pause();}}
 document.getElementById('soundBtn').addEventListener('click',e=>{e.stopPropagation();setMute(!MUTE);toast(MUTE?'모든 소리를 껐어요':'소리를 다시 켰어요');});
-document.getElementById('voiceToggle').addEventListener('click',()=>setSound(!sound));
-document.getElementById('vvol').addEventListener('input',e=>{VV=e.target.value/100;if(!sound&&VV>0)setSound(true);applyVV();[curAudio,typeof tvAudio!=='undefined'?tvAudio:null].forEach(a=>{if(a&&!a._g)a.volume=VV;});try{const o=JSON.parse(localStorage.getItem('kycafe')||'{}');o.vv=VV;localStorage.setItem('kycafe',JSON.stringify(o));}catch(_){}});
+document.getElementById('voiceToggle').addEventListener('click',()=>{if(!sound&&VV<.05)VV=1;setSound(!sound);syncVol();});
+document.getElementById('vvol').addEventListener('input',e=>{VV=e.target.value/100;if(!sound&&VV>0)setSound(true);if(sound&&VV===0)setSound(false);syncVol();applyVV();[curAudio,typeof tvAudio!=='undefined'?tvAudio:null].forEach(a=>{if(a&&!a._g)a.volume=VV;});try{const o=JSON.parse(localStorage.getItem('kycafe')||'{}');o.vv=VV;localStorage.setItem('kycafe',JSON.stringify(o));}catch(_){}});
 function pfs(on){stage.classList.toggle('pfs',on);document.body.style.overflow=on?'hidden':'';setTimeout(size,60);}
 document.getElementById('fsBtn').addEventListener('click',()=>{if(stage.classList.contains('pfs')){pfs(false);return;}if(document.fullscreenElement){document.exitFullscreen().catch(()=>{});return;}
  const req=stage.requestFullscreen||stage.webkitRequestFullscreen;let ok=false;try{const r=req&&req.call(stage);ok=!!req;if(r&&r.catch)r.catch(()=>pfs(true));}catch(e){ok=false;}if(!ok)pfs(true);});
@@ -1518,16 +1518,16 @@ function checkRoom(){const now=me.x>BX+10&&me.z<AZ1;if(now===inStudy)return;inSt
  if(musicOn&&!MUTE){fadeA(trk(!now),0,1200);fadeA(trk(now),tv(),1800);}
  toast(now?'스터디룸이에요. 공부 음악: '+STUDY_TRACKS[studyTrack][0]:'카페로 돌아왔어요');
  const l=$('musicLabel');if(l)l.textContent=now?'스터디룸 음악':'카페 음악';syncVolSlider();}
-function syncVol(){const t=$('musicToggle');t.textContent=musicOn?'켜짐':'꺼짐';t.classList.toggle('on',musicOn);$('vvol').value=Math.round(VV*100);$('sfxv').value=Math.round(SFXV*100);const f=$('sfxToggle');f.textContent=SFXON?'켜짐':'꺼짐';f.classList.toggle('on',SFXON);syncVolSlider();}
+function syncVol(){const t=$('musicToggle');t.textContent=musicOn?'켜짐':'꺼짐';t.classList.toggle('on',musicOn);$('vvol').value=sound?Math.round(VV*100):0;$('sfxv').value=SFXON?Math.round(SFXV*100):0;$('vvol').classList.toggle('off',!sound);$('sfxv').classList.toggle('off',!SFXON);const f=$('sfxToggle');f.textContent=SFXON?'켜짐':'꺼짐';f.classList.toggle('on',SFXON);syncVolSlider();}
 $('musicBtn').addEventListener('click',e=>{e.stopPropagation();const v=$('volPop');v.hidden=!v.hidden;$('fbPop').hidden=true;syncVol();});
 if(MUTE)setTimeout(()=>setMute(true),0);
 $('setX').addEventListener('click',()=>{$('volPop').hidden=true;});
 const savePx=()=>{try{const o=JSON.parse(localStorage.getItem('kycafe')||'{}');o.sfxv=SFXV;o.sfxon=SFXON;localStorage.setItem('kycafe',JSON.stringify(o));}catch(_){}};
-$('sfxToggle').addEventListener('click',()=>{SFXON=!SFXON;savePx();syncVol();});
-$('sfxv').addEventListener('input',e=>{SFXV=e.target.value/100;if(!SFXON&&SFXV>0)SFXON=true;savePx();syncVol();});
-$('musicToggle').addEventListener('click',()=>{setMusic(!musicOn);syncVol();});
-$('vol').addEventListener('input',e=>{const v=e.target.value/100;if(!musicOn&&v>0){setMusic(true);syncVol();}if(inStudy){SVOL=v;try{savePrefs();}catch(_){}}else MV=v;if(musicOn&&!MUTE){const a=trk(inStudy);clearInterval(a._f);setV(a,tv());}});
-function syncVolSlider(){$('vol').value=Math.round(tv()*100);}
+$('sfxToggle').addEventListener('click',()=>{if(!SFXON&&SFXV<.05)SFXV=.8;SFXON=!SFXON;savePx();syncVol();});
+$('sfxv').addEventListener('input',e=>{SFXV=e.target.value/100;if(!SFXON&&SFXV>0)SFXON=true;if(SFXV===0)SFXON=false;savePx();syncVol();});
+$('musicToggle').addEventListener('click',()=>{if(!musicOn&&tv()<.05){if(inStudy)SVOL=.3;else MV=.3;}setMusic(!musicOn);syncVol();});
+$('vol').addEventListener('input',e=>{const v=e.target.value/100;if(!musicOn&&v>0){setMusic(true);syncVol();}if(musicOn&&v===0){setMusic(false);syncVol();}if(inStudy){SVOL=v;try{savePrefs();}catch(_){}}else MV=v;if(musicOn&&!MUTE){const a=trk(inStudy);clearInterval(a._f);setV(a,tv());}});
+function syncVolSlider(){$('vol').value=musicOn?Math.round(tv()*100):0;$('vol').classList.toggle('off',!musicOn);}
 cv.addEventListener('pointerdown',()=>{$('volPop').hidden=true;$('fbPop').hidden=true;});
 /* 의견 보내기: 메일 앱으로 (서버 저장 없음) */
 {const FB_MAIL='leeseungzu0609@gmail.com';let fbK='좋았던 점';
