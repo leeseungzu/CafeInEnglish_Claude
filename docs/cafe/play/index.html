@@ -1500,8 +1500,8 @@ $('mSpeak').addEventListener('click',async()=>{if(micBusy)return;const note=$('m
  function finish(){if(done)return;done=true;micBusy=false;btn.textContent='말하기';btn.classList.remove('rec');micQuiet(false);
   if(gotRes)showRes(gotRes[0],gotRes[1]);else if(myVoice){showRes('',null);note.textContent=srFail||'말소리를 알아듣지 못해 이번엔 점수가 없어요. 조금 더 또박또박 말해 보세요.';}else note.textContent=srFail||'소리가 안 들렸어요. 한 번 더 눌러 말해 보세요.';}
  const stopAll=()=>{try{if(mr&&mr.state!=='inactive')mr.stop();else{if(st)st.getTracks().forEach(x=>x.stop());finish();}}catch(_){finish();}};
- if(mr){mr.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};mr.onstop=()=>{st.getTracks().forEach(x=>x.stop());if(chunks.length)myVoice=URL.createObjectURL(new Blob(chunks,{type:mr.mimeType||'audio/webm'}));finish();};}
- let live=false;const goLive=()=>{if(live||done)return;live=true;try{if(mr&&mr.state==='inactive')mr.start();}catch(_){}btn.textContent='지금 말해 보세요';btn.classList.add('rec');haptic();};
+ if(mr){mr.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};mr.onstop=()=>{st.getTracks().forEach(x=>x.stop());if(chunks.length)myVoice=URL.createObjectURL(new Blob(chunks,{type:mr.mimeType||'audio/webm'}));finish();};try{mr.start();}catch(_){mr=null;}}
+ let live=false;const goLive=()=>{if(live||done)return;live=true;btn.textContent='지금 말해 보세요';btn.classList.add('rec');haptic();};
  btn.textContent='잠깐만요…';
  if(SR){const rec=new SR();rec.lang='en-US';rec.interimResults=false;rec.maxAlternatives=5;rec.onaudiostart=()=>setTimeout(goLive,150);
   rec.onresult=e=>{const alts=[...e.results[0]].map(a=>a.transcript);let heard=alts[0],sc=sim(mPick[0],heard);alts.forEach(a=>{const x=sim(mPick[0],a);if(x>sc){sc=x;heard=a;}});heard=clean(heard);gotRes=[heard,sc];track('cafe_mic_try',{score:sc});say(me,heard,'',3000);applause(sc);};
