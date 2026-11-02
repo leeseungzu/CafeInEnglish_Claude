@@ -1526,6 +1526,8 @@ function rtConnect(){if(!/cafeinenglish\.com$/.test(location.hostname)&&!/[?&]rt
  let ws;try{ws=new WebSocket(RT_URL);}catch(e){return;}RT.ws=ws;
  ws.onmessage=e=>{try{rtMsg(JSON.parse(e.data));}catch(err){}};
  ws.onclose=()=>{if(RT.ws!==ws)return;RT.on=false;RT.ws=null;[...RT.peers.keys()].forEach(rtDel);applyNpc();rtCount();RT.retry=Math.min(RT.retry+1,6);setTimeout(rtConnect,1000*Math.pow(2,RT.retry));};}
+setInterval(()=>{try{if(RT.ws&&RT.ws.readyState===1)RT.ws.send('ping');}catch(e){}},20000);
+addEventListener('pagehide',()=>{try{RT.ws&&RT.ws.close();}catch(e){}});
 setInterval(()=>{if(!RT.on)return;const seat=me.seat?me.seat[0]+':'+me.seat[1]:'';const mv=Math.hypot(me.x-RT.last.x,me.z-RT.last.z);if(seat!==RT.last.seat||(!seat&&mv>12)){RT.last={x:me.x,z:me.z,seat};rtSend({t:'pos',x:me.x,z:me.z,seat:seat||null});}},500);
 rtConnect();
 document.querySelectorAll('.skb').forEach(b=>b.addEventListener('click',()=>{skyMode=b.dataset.sk;document.querySelectorAll('.skb').forEach(x=>x.classList.toggle('on',x===b));skyCur='';updSky();}));

@@ -57,24 +57,37 @@ export class Lobby extends DurableObject {
 
 // 한 호점(방)
 export class Room extends DurableObject {
+  constructor(ctx, env) { super(ctx, env); ctx.setWebSocketAutoResponse(new WebSocketRequestResponsePair("ping", "pong")); }
+  alive(w, now) { // 마지막 신호가 60초 안에 있었던 연결만 살아 있는 사람으로 본다
+    const a = w.deserializeAttachment() || {}; const ts = Math.max(a.t || 0, a.c || 0, (this.ctx.getWebSocketAutoResponseTimestamp(w) || new Date(0)).getTime());
+    return now - ts < 60000;
+  }
+  live(gone) { const now = Date.now(); return this.ctx.getWebSockets().filter((w) => w !== gone && this.alive(w, now)); }
+  async alarm() { // 30초마다 끊긴 연결 정리
+    const now = Date.now(); let changed = false;
+    for (const w of this.ctx.getWebSockets()) if (!this.alive(w, now)) { const a = w.deserializeAttachment(); try { w.close(1001, "stale"); } catch (e) {} if (a && a.p) this.bcast({ t: "leave", id: a.id }, w); changed = true; }
+    if (changed) await this.report();
+    if (this.ctx.getWebSockets().length) await this.ctx.storage.setAlarm(Date.now() + 30000);
+  }
   async fetch(req) {
     const room = Number(new URL(req.url).searchParams.get("room")) || 1;
     await this.ctx.storage.put("room", room);
     const [client, server] = Object.values(new WebSocketPair());
     const id = crypto.randomUUID().slice(0, 8);
     this.ctx.acceptWebSocket(server); // 하이버네이션: 조용할 땐 비용 없음
-    server.serializeAttachment({ id, p: null, t: 0, n: 0 });
+    server.serializeAttachment({ id, p: null, t: 0, n: 0, c: Date.now() });
     server.send(JSON.stringify({ t: "welcome", id, room, others: this.peers(server) }));
     await this.report();
+    if (!(await this.ctx.storage.getAlarm())) await this.ctx.storage.setAlarm(Date.now() + 30000);
     return new Response(null, { status: 101, webSocket: client });
   }
   peers(except) {
-    return this.ctx.getWebSockets().filter((w) => w !== except).map((w) => w.deserializeAttachment()).filter((a) => a && a.p).map((a) => ({ id: a.id, ...a.p }));
+    return this.live(except).map((w) => w.deserializeAttachment()).filter((a) => a && a.p).map((a) => ({ id: a.id, ...a.p }));
   }
   bcast(msg, except) { const s = JSON.stringify(msg); for (const w of this.ctx.getWebSockets()) if (w !== except) { try { w.send(s); } catch (e) {} } }
-  async report() {
+  async report(gone) {
     const room = (await this.ctx.storage.get("room")) || 1;
-    const count = this.ctx.getWebSockets().length;
+    const count = this.live(gone).filter((w) => (w.deserializeAttachment() || {}).p).length;
     await this.env.LOBBY.get(this.env.LOBBY.idFromName("main")).fetch("https://lobby/report", { method: "POST", body: JSON.stringify({ room, count }) });
     this.bcast({ t: "count", room, count });
   }
@@ -88,6 +101,7 @@ export class Room extends DurableObject {
       a.p = { adj: m.adj, drink: m.drink, x: 0, z: 0, seat: null };
       ws.serializeAttachment(a);
       this.bcast({ t: first ? "join" : "upd", id: a.id, ...a.p }, ws);
+      if (first) await this.report();
     } else if (!a.p) { ws.serializeAttachment(a); return; }
     else if (m.t === "pos" && num(m.x, 3000) && num(m.z, 3000)) {
       a.p.x = Math.round(m.x); a.p.z = Math.round(m.z);
@@ -98,6 +112,6 @@ export class Room extends DurableObject {
     else if (m.t === "emo" && int(m.i, N_EMO)) { ws.serializeAttachment(a); this.bcast({ t: "emo", id: a.id, i: m.i }, ws); }
     else ws.serializeAttachment(a);
   }
-  async webSocketClose(ws) { const a = ws.deserializeAttachment(); try { ws.close(); } catch (e) {} if (a && a.p) this.bcast({ t: "leave", id: a.id }, ws); await this.report(); }
+  async webSocketClose(ws) { const a = ws.deserializeAttachment(); try { ws.close(); } catch (e) {} if (a && a.p) this.bcast({ t: "leave", id: a.id }, ws); await this.report(ws); }
   async webSocketError(ws) { await this.webSocketClose(ws); }
 }
