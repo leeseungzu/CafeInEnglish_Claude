@@ -17,6 +17,7 @@ export default {
     if (!okOrigin(req.headers.get("origin"))) return new Response("forbidden", { status: 403 });
     const lobby = env.LOBBY.get(env.LOBBY.idFromName("main"));
     if (url.pathname === "/stats") return lobby.fetch("https://lobby/stats");
+    if (url.pathname === "/feedback") return feedback(req, env);
     if (url.pathname === "/ws") {
       if (req.headers.get("upgrade") !== "websocket") return new Response("expected websocket", { status: 426 });
       const room = await (await lobby.fetch("https://lobby/assign")).text();
@@ -27,6 +28,27 @@ export default {
     return new Response("kayoung realtime ok");
   },
 };
+
+// 의견 보내기: 카페 → 이 서버 → 승주님 Google Apps Script(MailApp) → Gmail
+// FEEDBACK_URL, FEEDBACK_TOKEN 은 Cloudflare 대시보드의 비밀 변수(Secrets)에 둬요(저장소에 안 올라감).
+const KINDS = ["좋았던 점", "불편한 점", "오류 신고", "아이디어"];
+const fbSeen = new Map();
+async function feedback(req, env) {
+  const cors = { "access-control-allow-origin": req.headers.get("origin") || "*", "access-control-allow-methods": "POST, OPTIONS", "access-control-allow-headers": "content-type" };
+  if (req.method === "OPTIONS") return new Response(null, { headers: cors });
+  if (req.method !== "POST") return new Response("method", { status: 405, headers: cors });
+  const ip = req.headers.get("cf-connecting-ip") || "?"; const now = Date.now();
+  const last = fbSeen.get(ip) || 0; if (now - last < 20000) return new Response(JSON.stringify({ ok: false, why: "wait" }), { status: 429, headers: cors });
+  let d; try { d = await req.json(); } catch (e) { return new Response("bad", { status: 400, headers: cors }); }
+  const text = String(d.text || "").trim().slice(0, 1000); const kind = KINDS.includes(d.kind) ? d.kind : "의견";
+  if (!text) return new Response(JSON.stringify({ ok: false, why: "empty" }), { status: 400, headers: cors });
+  fbSeen.set(ip, now); if (fbSeen.size > 500) fbSeen.clear();
+  if (!env.FEEDBACK_URL) return new Response(JSON.stringify({ ok: false, why: "setup" }), { status: 503, headers: cors });
+  const info = [String(d.dev || "").slice(0, 10), String(d.name || "").slice(0, 30), String(d.ua || "").slice(0, 160), new Date(now + 9 * 3600e3).toISOString().slice(0, 16).replace("T", " ") + " KST"].join(" · ");
+  const r = await fetch(env.FEEDBACK_URL, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ token: env.FEEDBACK_TOKEN || "", kind, text, info }), redirect: "manual" });
+  const ok = r.status < 400;
+  return new Response(JSON.stringify({ ok }), { status: ok ? 200 : 502, headers: { ...cors, "content-type": "application/json" } });
+}
 
 // 방별 인원 집계 + 배정
 export class Lobby extends DurableObject {
