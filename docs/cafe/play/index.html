@@ -251,6 +251,10 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 @keyframes chipPulse{50%{box-shadow:0 0 0 8px rgba(255,246,230,.18),0 8px 24px rgba(0,0,0,.35)}}
 .stage.exB .sheet .leaverow{position:sticky;bottom:-16px;margin:12px -16px -16px;padding:12px 16px 16px;background:var(--g);border-top:1px solid var(--gb);z-index:2}
 .stage.exB.night .sheet .leaverow{background:rgba(30,22,16,.98)}
+@media (max-width:640px){#sheetOrder{max-height:42%}#sheetOrder .say{margin-bottom:8px}#sheetOrder .say .en{font-size:15.5px}#sheetOrder .small{display:none}#sheetOrder .tip{margin-bottom:8px;padding:6px 10px}
+ #sheetOrder .choices{flex-direction:row;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;gap:8px;margin:0 -14px;padding:2px 14px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ #sheetOrder .choices::-webkit-scrollbar{display:none}
+ #sheetOrder .choice{flex:0 0 76%;scroll-snap-align:start;scroll-margin-left:14px;min-height:62px}}
 @media (max-width:640px){.stage.exB .sheet .leaverow{bottom:calc(-14px - env(safe-area-inset-bottom,0px));margin:12px -14px calc(-14px - env(safe-area-inset-bottom,0px));padding:12px 14px calc(14px + env(safe-area-inset-bottom,0px))}.standchip{bottom:84px}}
 .fzdots{display:flex;gap:6px;margin:12px 0 8px}.fzdots i{flex:1;height:5px;border-radius:9px;background:rgba(127,127,127,.25)}.fzdots i.ok{background:#CDEB5B}.fzdots i.ng{background:#E8846B}.fzdots i.cur{background:rgba(255,246,230,.7)}
 .fzq{font-size:19px;font-weight:800;line-height:1.4;margin:4px 0 10px}.fzq small{display:block;font-size:12px;font-weight:600;opacity:.6;margin-bottom:2px}
@@ -1194,7 +1198,7 @@ $('leaveS').addEventListener('click',()=>{if(!seated)return;const z=seated;delet
 
 document.getElementById('leave').addEventListener('click',()=>{if(!seated)return;chatId++;tHushAll();const z=seated;delete me.seat;seated=null;tEnd=0;clearInterval(tInt);if(z.type==='bar'){me.x=-330;}else{me.z=z.z+(z.r||40)+60;me.x=z.x;}collide(me);closeAll();});
 actBtn.addEventListener('click',()=>{if(seated){standUp();return;}if(situ){exitSitu();return;}if(!near){walkTo(COUNTER.x,COUNTER.z+8);return;}
- if(near.k==='counter'){order={item:'',size:'',said:[],extra:[]};SCN=ORDERS[dayIdx];track('cafe_order_start',{scenario:SCN.name});$('bSitu').textContent=DAYS[dayIdx]+'요일 주문 상황 · '+SCN.name;me.walk=false;me.x=COUNTER.x;me.z=COUNTER.z;me.ang=Math.PI;open('sheetOrder');camFocus=new THREE.Vector3(COUNTER.x,0,(COUNTER.z+barista.z)/2+30);camDist=300;node('start');}
+ if(near.k==='counter'){order={item:'',size:'',said:[],extra:[]};SCN=ORDERS[dayIdx];track('cafe_order_start',{scenario:SCN.name});$('bSitu').textContent=DAYS[dayIdx]+'요일 주문 상황 · '+SCN.name;me.walk=false;me.x=COUNTER.x;me.z=COUNTER.z;me.ang=Math.PI;open('sheetOrder');camFocus=new THREE.Vector3(COUNTER.x,0,(COUNTER.z+barista.z)/2+(innerWidth<=640?52:30));camDist=innerWidth<=640?400:300;node('start');}
  else if(near.k==='wall')openWall();else if(near.k==='stage')openMic();else if(near.k==='fire')openFire();
  else sit(near.z);});
 
