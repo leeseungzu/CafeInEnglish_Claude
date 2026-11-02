@@ -847,12 +847,12 @@ function mugMesh(p){const wrap=new THREE.Group(),g=new THREE.Group();const bm=MU
  if(p.barista){const S=(c,r)=>new THREE.MeshStandardMaterial({color:c,roughness:r||.85,side:THREE.DoubleSide});
   const ap=new THREE.Mesh(new THREE.CylinderGeometry(13.05,12.75,8.6,40,1,true,-1.15,2.3),S(ESP));ap.position.y=4.9;g.add(ap);
   const tie=new THREE.Mesh(new THREE.CylinderGeometry(13.1,13.0,.9,40,1,true),S('#1A110B',.7));tie.position.y=9.2;g.add(tie);
-  [-1,1].forEach(sg=>{const st=new THREE.Mesh(new THREE.BoxGeometry(1.2,15,.6),S('#1A110B',.7));const a=sg*.95;st.position.set(Math.sin(a)*13.2,16.7,Math.cos(a)*13.2);st.rotation.y=a;g.add(st);});
   {const a=-4.2/13;const pk=new THREE.Mesh(new THREE.BoxGeometry(5,3.6,.5),S('#3A281C',.8));pk.position.set(Math.sin(a)*13.25,5.2,Math.cos(a)*13.25);pk.rotation.y=a;g.add(pk);}
   {const c=document.createElement('canvas');c.width=128;c.height=64;const t=c.getContext('2d');t.fillStyle='#FFF6E6';t.beginPath();t.roundRect(0,0,128,64,14);t.fill();t.fillStyle='#2B1D14';t.font='900 46px sans-serif';t.textAlign='center';t.textBaseline='middle';t.fillText('C',56,34);t.fillStyle=LIME;t.beginPath();t.arc(86,46,8,0,7);t.fill();
    const a=4.2/13,m=new THREE.Mesh(new THREE.PlaneGeometry(4,2),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(c),transparent:true}));m.position.set(Math.sin(a)*13.4,5.8,Math.cos(a)*13.4);m.rotation.y=a;g.add(m);}
-  const br=new THREE.Mesh(new THREE.SphereGeometry(12.6,32,16),S(ESP,.9));br.scale.set(1,.32,1);br.position.set(-1,24.6,-.5);br.rotation.z=.16;g.add(br);
-  const nub=new THREE.Mesh(new THREE.CylinderGeometry(.6,.9,1.8,10),S('#1A110B'));nub.position.set(-1.8,28.4,-.5);nub.rotation.z=.16;g.add(nub);}
+  const bg=new THREE.Group();const br=new THREE.Mesh(new THREE.SphereGeometry(13,36,18),S('#2A1C13',.95));br.scale.set(1,.3,1);bg.add(br);
+  const nub=new THREE.Mesh(new THREE.CylinderGeometry(.5,.8,1.8,10),S('#1A110B'));nub.position.y=4.3;bg.add(nub);
+  bg.position.set(-2.6,26.3,.3);bg.rotation.set(-.05,0,.24);g.add(bg);}
  wrap.add(g);if(p.barista)wrap.scale.setScalar(1.4);
  if(p.me){const r=new THREE.Mesh(new THREE.RingGeometry(15,18.5,40),limeM);r.rotation.x=-Math.PI/2;r.position.y=2.2;wrap.add(r);}
  scene.add(wrap);p.wrap=wrap;p.g=g;}
