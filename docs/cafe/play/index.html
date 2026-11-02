@@ -299,12 +299,15 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .badge{font-size:11px;font-weight:800;background:var(--lime);color:var(--espresso);border-radius:99px;padding:2px 8px}
 .ch p{margin:0;font-size:13.5px;color:var(--sub)}
 .ch b{color:var(--ink)}
+@media (max-width:480px){#topicBtn{display:none!important}#fsBtn{display:none!important}}
 @media (prefers-reduced-motion:reduce){.sheet,.modal,.bub,.hint{transition:none}}
 @media (max-width:640px){
  .stage{height:min(80vh,760px);border-radius:22px}
  .top{left:10px;right:10px;top:10px;gap:6px}.top>div{gap:6px}
  .chip{font-size:12px;padding:7px 10px;gap:6px}.chip.ic{padding:7px 8px}.chip svg{width:16px;height:16px}
  #topicBtn>span:first-child,.chip .n{display:none}
+ .top>div{flex-wrap:nowrap!important;min-width:0}.top>div:first-child{flex:1 1 auto;overflow:hidden}.top>div:last-child{flex:0 0 auto}
+ #topicBtn{min-width:0;overflow:hidden}#topicBtn b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
  .chip .n.live{display:inline}.chip .n.live .livechip{gap:4px}
  .dock{left:8px;right:8px;transform:none;bottom:calc(8px + env(safe-area-inset-bottom,0px));justify-content:space-between;gap:2px;padding:5px}
  .dock button:not(.main){min-width:0;flex:1;padding:6px 0;font-size:10.5px}
