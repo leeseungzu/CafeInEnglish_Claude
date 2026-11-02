@@ -1495,7 +1495,7 @@ function micQuiet(on){try{if(on){if(typeof tvStop==='function')tvStop();if(synth
 const STT_URL=()=>RT_URL.replace('wss://','https://').replace(/\/ws$/,'/stt');
 $('mSpeak').addEventListener('click',async()=>{const note=$('mNote'),btn=$('mSpeak');
  if(micBusy){if(btn._stop)btn._stop();return;}
- if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.MediaRecorder){say(me,mPick[0],mPick[1],3200);showRes('',100);applause(100);return;}
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){say(me,mPick[0],mPick[1],3200);showRes('',100);applause(100);return;}
  micBusy=true;btn.textContent='마이크 준비 중…';note.textContent='';$('mRes').hidden=true;let st=null,gErr=null;
  const gum=async()=>{if(!IOS){try{return await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:true}});}catch(e){if(e&&(e.name==='NotAllowedError'||e.name==='SecurityError'))throw e;}}return navigator.mediaDevices.getUserMedia({audio:true});};
  try{st=await gum();}catch(e){gErr=e;}
@@ -1503,22 +1503,25 @@ $('mSpeak').addEventListener('click',async()=>{const note=$('mNote'),btn=$('mSpe
  if(!st){const en=gErr&&gErr.name;micBusy=false;btn.textContent='말하기';
   note.textContent=en==='NotFoundError'?'마이크를 찾을 수 없어요. 마이크가 연결돼 있는지 확인해 주세요.':en==='NotAllowedError'||en==='SecurityError'?(IOS?'마이크가 허용되지 않았어요. 주소창의 "가가"(aA) → 웹 사이트 설정 → 마이크를 "허용"으로 바꾼 뒤 다시 눌러 주세요.':'마이크 권한이 꺼져 있어요. 주소창 왼쪽 아이콘(사이트 설정)에서 마이크를 "허용"으로 바꾼 뒤 다시 눌러 주세요.'):'마이크를 잠깐 쓸 수 없었어요. 통화나 다른 앱이 마이크를 쓰고 있지 않은지 확인하고 다시 눌러 주세요. ('+(en||'오류')+')';track('cafe_mic_error',{e:en||'gum'});return;}
  if(myVoice){URL.revokeObjectURL(myVoice);myVoice=null;}
- duck(true);let chunks=[],mr;try{mr=new MediaRecorder(st);}catch(e){st.getTracks().forEach(x=>x.stop());micBusy=false;btn.textContent='말하기';duck(false);note.textContent='이 브라우저에서는 녹음을 할 수 없어요.';return;}
- let stopped=false,timer=null,poll=null,an=null,srcN=null;
- const stop=()=>{if(stopped)return;stopped=true;clearTimeout(timer);clearInterval(poll);try{srcN&&srcN.disconnect();}catch(_){}try{if(mr.state!=='inactive')mr.stop();}catch(_){}};btn._stop=stop;
- mr.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
- mr.onstop=async()=>{st.getTracks().forEach(x=>x.stop());duck(false);btn.classList.remove('rec');btn._stop=null;
-  const blob=chunks.length?new Blob(chunks,{type:mr.mimeType||(IOS?'audio/mp4':'audio/webm')}):null;
-  if(!blob||blob.size<1200){micBusy=false;btn.textContent='말하기';note.textContent='소리가 안 들렸어요. 마이크에 조금 더 가까이 대고 다시 말해 보세요.';return;}
-  myVoice=URL.createObjectURL(blob);btn.textContent='채점 중…';
-  let heard=null;try{const ctl=new AbortController();setTimeout(()=>ctl.abort(),12000);const r=await fetch(STT_URL(),{method:'POST',body:blob,headers:{'content-type':blob.type||'application/octet-stream'},signal:ctl.signal});const d=await r.json();if(d&&d.ok)heard=d.text||'';}catch(_){}
+ duck(true);const c=AC();if(!c){st.getTracks().forEach(x=>x.stop());micBusy=false;btn.textContent='말하기';duck(false);note.textContent='이 브라우저에서는 녹음을 할 수 없어요.';return;}
+ try{await c.resume();}catch(_){}
+ const srcN=c.createMediaStreamSource(st),proc=c.createScriptProcessor(4096,1,1),mute=c.createGain();mute.gain.value=0;
+ const bufs=[];let stopped=false,timer=null,spoke=false,t0=performance.now(),lastLoud=0,peak=0;
+ proc.onaudioprocess=e=>{if(stopped)return;const d=e.inputBuffer.getChannelData(0);bufs.push(new Float32Array(d));let s2=0;for(let k=0;k<d.length;k+=4)s2+=d[k]*d[k];const rms=Math.sqrt(s2/(d.length/4)),now=performance.now();if(rms>peak)peak=rms;if(rms>.02){spoke=true;lastLoud=now;}if(spoke&&now-lastLoud>1400)stop();else if(!spoke&&now-t0>6000)stop();};
+ srcN.connect(proc);proc.connect(mute);mute.connect(c.destination);
+ const toWav=()=>{const sr=c.sampleRate,tgt=16000,ratio=sr/tgt;let n=0;bufs.forEach(b=>n+=b.length);const all=new Float32Array(n);let o=0;bufs.forEach(b=>{all.set(b,o);o+=b.length;});
+  const m=Math.floor(n/ratio),pcm=new Int16Array(m);for(let k=0;k<m;k++){const a=Math.floor(k*ratio),bnd=Math.min(n,Math.floor((k+1)*ratio));let sum=0,cnt=0;for(let q=a;q<bnd;q++){sum+=all[q];cnt++;}let v=cnt?sum/cnt:0;v=Math.max(-1,Math.min(1,v*1.6));pcm[k]=v<0?v*32768:v*32767;}
+  const hd=new DataView(new ArrayBuffer(44)),w=(off,str)=>{for(let k=0;k<str.length;k++)hd.setUint8(off+k,str.charCodeAt(k));};w(0,'RIFF');hd.setUint32(4,36+m*2,true);w(8,'WAVE');w(12,'fmt ');hd.setUint32(16,16,true);hd.setUint16(20,1,true);hd.setUint16(22,1,true);hd.setUint32(24,tgt,true);hd.setUint32(28,tgt*2,true);hd.setUint16(32,2,true);hd.setUint16(34,16,true);w(36,'data');hd.setUint32(40,m*2,true);
+  return new Blob([hd,pcm],{type:'audio/wav'});};
+ const stop=async()=>{if(stopped)return;stopped=true;clearTimeout(timer);btn._stop=null;try{srcN.disconnect();proc.disconnect();mute.disconnect();}catch(_){}st.getTracks().forEach(x=>x.stop());duck(false);btn.classList.remove('rec');
+  if(!spoke||peak<.012){micBusy=false;btn.textContent='말하기';note.textContent='소리가 안 들렸어요. 마이크에 조금 더 가까이 대고 다시 말해 보세요.';return;}
+  const blob=toWav();myVoice=URL.createObjectURL(blob);btn.textContent='채점 중…';
+  let heard=null;try{const ctl=new AbortController();setTimeout(()=>ctl.abort(),12000);const r=await fetch(STT_URL(),{method:'POST',body:blob,headers:{'content-type':'audio/wav'},signal:ctl.signal});const d=await r.json();if(d&&d.ok)heard=d.text||'';}catch(_){}
   micBusy=false;btn.textContent='말하기';
   if(heard==null){showRes('',null);note.textContent='이번엔 점수를 못 매겼어요. 내 목소리는 들어 볼 수 있어요.';track('cafe_mic_error',{e:'stt'});return;}
   heard=clean(heard.replace(/[.!?,]+$/,''));if(!heard){showRes('',null);note.textContent='말소리를 알아듣지 못해 이번엔 점수가 없어요. 조금 더 또박또박 말해 보세요.';return;}
   const sc=sim(mPick[0],heard);track('cafe_mic_try',{score:sc});say(me,heard,'',3000);applause(sc);showRes(heard,sc);};
- mr.start(250);btn.textContent='지금 말해 보세요 · 다 말하면 누르기';btn.classList.add('rec');haptic();
- try{const c=AC();if(c){if(c.state!=='running')c.resume();an=c.createAnalyser();an.fftSize=1024;srcN=c.createMediaStreamSource(st);srcN.connect(an);const d=new Float32Array(an.fftSize);let spoke=false,t0=performance.now(),lastLoud=0;
-  poll=setInterval(()=>{an.getFloatTimeDomainData(d);let s=0;for(let i=0;i<d.length;i++)s+=d[i]*d[i];const rms=Math.sqrt(s/d.length),now=performance.now();if(rms>.02){spoke=true;lastLoud=now;}if(spoke&&now-lastLoud>1400)stop();if(!spoke&&now-t0>6000)stop();},100);}}catch(_){}
+ btn._stop=stop;btn.textContent='지금 말해 보세요 · 다 말하면 누르기';btn.classList.add('rec');haptic();
  timer=setTimeout(stop,9000);});
 function openMic(){track('cafe_mic_open');situ='stage';me.walk=false;me.x=STAGE.x;me.z=STAGE.z+5;me.ang=Math.PI;spot.intensity=2.2;mPick=null;$('mRes').hidden=true;renderMic();open('sheetMic');camFocus=new THREE.Vector3(STAGE.x,0,STAGE.z-60);camDist=380;yaw=Math.PI;pitch=.32;
  const crowd=people.filter(p=>!p.me&&!p.real&&!p.seat).slice(0,4);crowd.forEach((p,i)=>{p.tx=STAGE.x-120+i*80;p.tz=STAGE.z-120-(i%2)*30;});toast('무대에 올라왔어요! 손님들이 모여요');}
