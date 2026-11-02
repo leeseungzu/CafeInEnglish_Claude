@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>카영카페, 영어 한 잔 하고 가요</title>
-<meta name="description" content="영어로 하는 카페, 카영카페. 바리스타에게 주문하고 테이블에 앉아 오늘의 주제로 영어 대화를 연습해요.">
-<meta property="og:title" content="카영카페, 영어 한 잔 하고 가요">
-<meta property="og:description" content="바리스타에게 주문하고, 테이블에 앉아 오늘의 주제로 영어 대화를 연습해요.">
+<title>카영, 영어 한 잔 하고 가요</title>
+<meta name="description" content="카페인영어의 3D 영어 카페, 카영. 바리스타에게 주문하고 테이블에 앉아 오늘의 주제로 영어 대화를 연습해요.">
+<meta property="og:title" content="카영, 영어 한 잔 하고 가요">
+<meta property="og:description" content="바리스타에게 영어로 주문하고, 테이블에서 원어민 손님들과 영어로 수다 떠는 3D 카페.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.cafeinenglish.com/cafe/play/">
-<meta property="og:image" content="https://www.cafeinenglish.com/cafe/play/og-cafe.png?v=3">
+<meta property="og:image" content="https://www.cafeinenglish.com/cafe/play/og-cafe.png?v=4">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -355,7 +355,7 @@ body{padding:0!important;background:#140E0A}
     <div class="top">
       <div>
         <a class="chip glass ic exit" href="/" aria-label="카페인영어 홈으로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h5v16h-5"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h10"/></svg></a>
-        <button class="chip glass" id="branchBtn"><span class="d"></span><span id="branchName">카영카페</span><span class="n" id="countTxt">베타</span></button>
+        <button class="chip glass" id="branchBtn"><span class="d"></span><span id="branchName">카영</span><span class="n" id="countTxt">베타</span></button>
         <button class="chip glass" id="topicBtn" title="다른 요일 주제 미리보기"><span style="opacity:.7;font-weight:600">오늘의 주제</span><b id="topicName"></b></button>
       </div>
       <div>
@@ -479,11 +479,11 @@ body{padding:0!important;background:#140E0A}
       </div>
     </div>
 
-    <div class="modal" id="modalHi" role="dialog" aria-label="카영카페 안내">
+    <div class="modal" id="modalHi" role="dialog" aria-label="카영 안내">
       <div class="card glass hi">
         <button class="x" data-close>✕</button>
         <div class="hitag">BETA</div>
-        <h3>카영카페에 오신 걸 환영해요</h3>
+        <h3>카영에 오신 걸 환영해요</h3>
         <p class="small" style="margin:4px 0 12px;font-size:13.5px">영어로 주문하고, 대화하고, 소리 내어 말해 보는 연습 카페예요.</p>
         <ol class="histeps"><li><b>걷기</b>바닥을 누르면 걸어가고, 끌어서 둘러봐요.</li><li><b>주문하기</b>바리스타 카영이에게 주문해요. 요일마다 상황이 달라요.</li><li><b>말해 보기</b>테이블 대화, 모닥불 퀴즈, 테라스 오픈마이크, 스터디룸이 있어요.</li></ol>
         <p class="hinote">카페 손님들은 연습을 도와주는 캐릭터예요. 아직 다른 이용자와 실제로 연결되지는 않아요. 내 목소리는 저장되거나 전송되지 않아요.</p>
@@ -1112,7 +1112,7 @@ document.querySelectorAll('.fset .tg').forEach(b=>b.addEventListener('click',()=
  b.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();step();hold=setTimeout(()=>{rep=setInterval(step,90);},450);});
  const end=()=>{clearTimeout(hold);clearInterval(rep);};['pointerup','pointerleave','pointercancel'].forEach(t=>b.addEventListener(t,end));b.addEventListener('click',e=>e.preventDefault());});
 $('fInput').addEventListener('change',e=>setMin(e.target.value));
-function updPhone(){const a=$('fPhone');if(isAndroid){a.hidden=false;a.href='intent:#Intent;action=android.intent.action.SET_TIMER;i.android.intent.extra.alarm.LENGTH='+(fMin*60)+';S.android.intent.extra.alarm.MESSAGE=카영카페 집중;B.android.intent.extra.alarm.SKIP_UI=true;end';}
+function updPhone(){const a=$('fPhone');if(isAndroid){a.hidden=false;a.href='intent:#Intent;action=android.intent.action.SET_TIMER;i.android.intent.extra.alarm.LENGTH='+(fMin*60)+';S.android.intent.extra.alarm.MESSAGE=카영 집중;B.android.intent.extra.alarm.SKIP_UI=true;end';}
  $('fNote').textContent=isAndroid?'화면을 켜 두면 끝날 때 소리와 진동으로 알려요. 화면을 꺼도 받으려면 아래 버튼으로 휴대폰 타이머도 같이 맞춰 두세요.':isIOS?'화면을 켜 두면 끝날 때 소리로 알려요. 화면을 끄거나 다른 앱으로 가면 아이폰이 웹 알람을 막아요. 그럴 땐 시계 앱 타이머도 같은 시간으로 맞춰 두세요.':'끝나면 소리와 함께 컴퓨터 알림으로 알려요. 다른 탭에 있어도 알림이 떠요.';}
 updPhone();
 /* 집중 중 화면 꺼짐 방지, 백그라운드에서도 정확한 시간 */
@@ -1138,7 +1138,7 @@ $('alTest').addEventListener('click',()=>playAlarm($('alSound').value,false));
 $('sVol').addEventListener('input',e=>{SVOL=e.target.value/100;if(inStudy)$('vol').value=e.target.value;savePrefs();if(musicOn&&inStudy){const a=trk(true);clearInterval(a._f);a.volume=SVOL;}});
 $('sMusic').addEventListener('click',()=>{setMusic(!musicOn);syncVol();syncAlarmUI();});
 function focusAlarm(){if(alarmOn){playAlarm(alarmSound,true);try{navigator.vibrate&&navigator.vibrate([300,150,300,150,600]);}catch(e){}}
- if(document.hidden){try{if('Notification' in window&&Notification.permission==='granted')new Notification('카영카페 · 집중 완료',{body:fMin+'분 집중을 마쳤어요. 잠깐 쉬어 가요!',icon:'/assets/icon-192.png'});}catch(e){}
+ if(document.hidden){try{if('Notification' in window&&Notification.permission==='granted')new Notification('카영 · 집중 완료',{body:fMin+'분 집중을 마쳤어요. 잠깐 쉬어 가요!',icon:'/assets/icon-192.png'});}catch(e){}
   let on=false;titleT=setInterval(()=>{on=!on;document.title=on?'⏰ 집중 끝!':baseTitle;},900);}
  keepAwake(false);}
 let fLast='';setInterval(()=>focusTick(),200);
