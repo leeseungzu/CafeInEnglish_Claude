@@ -207,6 +207,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .sheet{z-index:6}.vol{z-index:7!important}.modal{z-index:8}.toast{position:relative;z-index:9}
 .fv-cr{font-size:11px;color:#8B7A6B;margin:0;line-height:1.5}
 .fv-ic.fv-v{width:auto;padding:0 14px;border-radius:99px;font:inherit;font-size:12.5px;font-weight:700}
+body.fv-on .dock{visibility:hidden}
 .fv-mini{position:absolute;left:50%;top:68px;transform:translateX(-50%);z-index:5;display:flex;align-items:center;gap:8px;border:1px solid rgba(255,246,230,.18);background:rgba(26,18,12,.82);backdrop-filter:blur(10px);color:#F4E6D2;border-radius:99px;padding:9px 16px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;pointer-events:auto;box-shadow:0 8px 24px rgba(0,0,0,.3)}.fv-mini[hidden]{display:none}.fv-mini b{font-size:16px;color:#fff;font-variant-numeric:tabular-nums}.fv-mini .d{width:8px;height:8px;border-radius:50%;background:#CDEB5B}
 @media (max-height:700px){.fv-who{display:none}.fv-time{font-size:64px}}
 .vol.setp{width:min(300px,calc(100vw - 40px));gap:9px;max-height:calc(100% - 140px);overflow:auto}.sp-h b{font-size:15px}.sp-d{margin:-4px 0 2px;font-size:12px;opacity:.7}
@@ -486,8 +487,8 @@ body{padding:0!important;background:#140E0A}
       </div>
       <div class="fv-bot">
         <div class="fv-who"><div class="h">지금 같이 있는 손님</div><div class="av" id="fvWho"></div></div>
-        <div class="fv-snd"><button id="fvMusic"><i>♫</i>공부 음악</button><button id="fvRain"><i>☂</i>빗소리</button><button id="fvLounge"><i>☕</i>라운지</button></div>
-        <div class="fv-st"><div><b id="fvToday">0분</b><span>오늘 공부</span></div><div><b id="fvStreak">1일</b><span>연속 출석</span></div><div><b id="fvStamp">☕ 0</b><span>커피 도장</span></div></div>
+        <div class="fv-snd"><button id="fvMusic"><i>♫</i>공부 음악</button><button id="fvRain"><i>☂</i>빗소리</button><button id="fvLounge"><i>⌂</i>라운지</button></div>
+        <div class="fv-st"><div><b id="fvToday">0분</b><span>오늘 공부</span></div><div><b id="fvStreak">1일</b><span>연속 출석</span></div><div><b id="fvStamp">0회</b><span>집중 완료</span></div></div>
       </div>
       <div class="fv-pan" id="fvPan" hidden><div class="fv-pc"><div class="fv-ph"><b>소리 설정</b><button class="fv-ic" id="fvPanX" aria-label="닫기">✕</button></div>
         <div class="fv-pl">배경 소리</div><div class="fv-seg" id="fvMode"><button data-v="music">공부 음악</button><button data-v="rain">빗소리</button><button data-v="both">함께</button><button data-v="off">끄기</button></div>
@@ -1295,7 +1296,7 @@ function focusAlarm(){if(alarmOn){playAlarm(alarmSound,true);try{navigator.vibra
 let fLast='';setInterval(()=>focusTick(),200);
 function fText(ms){const sec=Math.ceil(ms/1000);return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');}
 function focusTick(){if(!fEnd)return;const ms=Math.max(0,fEnd-Date.now()),t=fText(ms);if(t!==fLast){fLast=t;$('ftime').textContent=t;drawFocusBoard('FOCUS '+t);}
- if(!ms){fEnd=0;fLast='';$('fstart').textContent='집중 시작';drawFocusBoard();hush(me);addStamp();focusAlarm();track('cafe_focus_done',{min:fMin});toast(fMin+'분 집중 완료! 쿠폰 도장 +1');try{fvBreak();}catch(_){}}}
+ if(!ms){fEnd=0;fLast='';$('fstart').textContent='집중 시작';drawFocusBoard();hush(me);addStamp();focusAlarm();track('cafe_focus_done',{min:fMin});toast(fMin+'분 집중 완료! 수고했어요');try{fvBreak();}catch(_){}}}
 $('fstart').addEventListener('click',()=>{if(!fEnd)track('cafe_focus_start',{min:fMin});if(fEnd){fEnd=0;fLast='';$('fstart').textContent='집중 시작';$('ftime').textContent=fmt(fMin*60000);drawFocusBoard();hush(me);keepAwake(false);return;}
  setMin($('fInput').value);if(!isMobile&&'Notification' in window&&Notification.permission==='default'){try{Notification.requestPermission();}catch(e){}}keepAwake(true);if(SX)SX.resume();
  fEnd=Date.now()+fMin*60000;fLast='';$('fstart').textContent='그만하기';say(me,'Focus mode ✍︎','집중 중',0,true);sfx('pop');focusTick();});
@@ -1561,16 +1562,16 @@ function stGet(){let o={};try{o=JSON.parse(localStorage.getItem('kycafe.study')|
 function stSave(o){try{localStorage.setItem('kycafe.study',JSON.stringify(o));}catch(_){}}
 function stVisit(){const o=stGet(),k=dkey();if(o.last!==k){const y=new Date(Date.now()+9*3600e3-864e5).toISOString().slice(0,10);o.streak=(o.last===y?(o.streak||0)+1:1);o.last=k;if(o.d!==k){o.d=k;o.m=0;}stSave(o);}return o;}
 function stAdd(min){const o=stVisit();if(o.d!==dkey()){o.d=dkey();o.m=0;}o.m=(o.m||0)+min;stSave(o);fvStats();}
-function fvStats(){const o=stGet();const m=o.d===dkey()?(o.m||0):0;$('fvToday').textContent=m>=60?Math.floor(m/60)+'시간 '+(m%60)+'분':m+'분';$('fvStreak').textContent=(o.streak||1)+'일';$('fvStamp').textContent='☕ '+(typeof stampsN!=='undefined'?stampsN:0);}
+function fvStats(){const o=stGet();const m=o.d===dkey()?(o.m||0):0;$('fvToday').textContent=m>=60?Math.floor(m/60)+'시간 '+(m%60)+'분':m+'분';$('fvStreak').textContent=(o.streak||1)+'일';$('fvStamp').textContent=(o.n||0)+'회';}
 function fvWho(){const box=$('fvWho');box.innerHTML='';const ps=people.filter(p=>p.seat&&p.seat[0][0]==='s');$('fvNow').textContent=ps.length+'명 함께 집중 중';ps.slice(0,6).forEach(p=>{const s=document.createElement('span');s.className=p.me&&!fEnd?'':'f';s.textContent='● '+(p.me?'나 · ':'')+(p.ko||'');box.appendChild(s);});if(ps.length>6){const s=document.createElement('span');s.textContent='+'+(ps.length-6);box.appendChild(s);}}
 function fvRender(){if($('fv').hidden)return;const run=!!fEnd;$('fvLab').textContent=run?'FOCUS':'READY';$('fvTime').textContent=$('ftime').textContent;$('fvGo').textContent=run?'그만하기':'집중 시작';$('fvGo').classList.toggle('run',run);$('fvMins').style.visibility=run?'hidden':'visible';
  $('fvBar').style.width=run?Math.min(100,100-(fEnd-Date.now())/(fMin*600)).toFixed(1)+'%':'0%';document.querySelectorAll('#fvMins button[data-m]').forEach(b=>b.classList.toggle('on',+b.dataset.m===fMin));
  $('fvMusic').classList.toggle('on',BGM==='music'||BGM==='both');$('fvRain').classList.toggle('on',BGM==='rain'||BGM==='both');}
 let fvT=null;
-function miniFV(){$('fv').hidden=true;$('fvMini').hidden=false;$('fvMiniT').textContent=$('ftime').textContent;haptic();}
-function backFV(){$('fvMini').hidden=true;$('fv').hidden=false;fvRender();fvWho();haptic();}
-function openFV(){stVisit();$('fv').hidden=false;$('fvPan').hidden=true;setTimeout(()=>{try{applyBg();}catch(_){}},300);$('fvMain').hidden=false;$('fvBrk').hidden=true;fvStats();fvWho();fvRender();clearInterval(fvT);fvT=setInterval(()=>{if(!seated||seated.type!=='study'){if(fEnd){const left=Math.max(0,fEnd-Date.now());const done=Math.floor((fMin*60000-left)/60000);if(done>0)stAdd(done);$('fstart').click();}closeFV();return;}if(!$('fvMini').hidden)$('fvMiniT').textContent=$('ftime').textContent;fvRender();fvWho();},1000);keepAwake(true);}
-function closeFV(){$('fv').hidden=true;$('fvMini').hidden=true;try{if(rainA)fadeA(rainA,0,500);}catch(_){}clearInterval(fvT);clearInterval(FV.brkInt);if(!fEnd)keepAwake(false);}
+function miniFV(){$('fv').hidden=true;document.body.classList.remove('fv-on');$('fvMini').hidden=false;$('fvMiniT').textContent=$('ftime').textContent;haptic();}
+function backFV(){$('fvMini').hidden=true;$('fv').hidden=false;document.body.classList.add('fv-on');fvRender();fvWho();haptic();}
+function openFV(){stVisit();$('fv').hidden=false;document.body.classList.add('fv-on');$('fvPan').hidden=true;setTimeout(()=>{try{applyBg();}catch(_){}},300);$('fvMain').hidden=false;$('fvBrk').hidden=true;fvStats();fvWho();fvRender();clearInterval(fvT);fvT=setInterval(()=>{if(!seated||seated.type!=='study'){if(fEnd){const left=Math.max(0,fEnd-Date.now());const done=Math.floor((fMin*60000-left)/60000);if(done>0)stAdd(done);$('fstart').click();}closeFV();return;}if(!$('fvMini').hidden)$('fvMiniT').textContent=$('ftime').textContent;fvRender();fvWho();},1000);keepAwake(true);}
+function closeFV(){$('fv').hidden=true;document.body.classList.remove('fv-on');$('fvMini').hidden=true;try{if(rainA)fadeA(rainA,0,500);}catch(_){}clearInterval(fvT);clearInterval(FV.brkInt);if(!fEnd)keepAwake(false);}
 $('fvGo').addEventListener('click',()=>{haptic();if(fEnd){const left=Math.max(0,fEnd-Date.now());const done=Math.floor((fMin*60000-left)/60000);if(done>0)stAdd(done);}$('fstart').click();fvRender();});
 document.querySelectorAll('#fvMins button[data-m]').forEach(b=>b.addEventListener('click',()=>{setMin(b.dataset.m);fvRender();haptic();}));
 [['fvMinus',-5],['fvPlus',5]].forEach(([id,d])=>$(id).addEventListener('click',()=>{if(fEnd)return;let m=Math.round(fMin/5)*5+d;if(fMin%5&&d<0)m=Math.floor(fMin/5)*5;m=Math.max(5,Math.min(180,m));setMin(m);fvRender();haptic();}));
@@ -1596,7 +1597,7 @@ $('fvAl').addEventListener('click',()=>{const b=$('alOn');if(b)b.click();fvPanel
 document.querySelectorAll('#fvAlist button').forEach(b=>b.addEventListener('click',()=>{alarmSound=b.dataset.a;try{savePrefs();syncAlarmUI();}catch(_){}fvPanelSync();try{playAlarm(alarmSound,false);}catch(_){}haptic();}));
 $('fvPanX').addEventListener('click',()=>{$('fvPan').hidden=true;});
 $('fvPan').addEventListener('click',e=>{if(e.target.id==='fvPan')$('fvPan').hidden=true;});
-function fvBreak(){if($('fv').hidden)return;stAdd(fMin);$('fvMain').hidden=true;$('fvBrk').hidden=false;const it=(typeof DAILY!=='undefined'&&DAILY)?[DAILY.en,DAILY.ko]:(TOPIC.expr||['Does that make sense?','이해되나요?']);$('fvEn').textContent=it[0];$('fvKo').textContent=it[1];
+function fvBreak(){if($('fv').hidden)return;{const o=stGet();o.n=(o.n||0)+1;stSave(o);}stAdd(fMin);$('fvMain').hidden=true;$('fvBrk').hidden=false;const it=(typeof DAILY!=='undefined'&&DAILY)?[DAILY.en,DAILY.ko]:(TOPIC.expr||['Does that make sense?','이해되나요?']);$('fvEn').textContent=it[0];$('fvKo').textContent=it[1];
  FV.brkEnd=Date.now()+5*60000;clearInterval(FV.brkInt);const tick=()=>{const ms=Math.max(0,FV.brkEnd-Date.now());$('fvBt').textContent='BREAK · '+fmt(ms);if(!ms){clearInterval(FV.brkInt);}};tick();FV.brkInt=setInterval(tick,1000);fvStats();}
 $('fvListen').addEventListener('click',()=>{haptic();speak($('fvEn').textContent,'me');});
 $('fvSay').addEventListener('click',()=>{haptic();mPick=[$('fvEn').textContent,$('fvKo').textContent];if(typeof renderMic==='function')renderMic();open('sheetMic');});
