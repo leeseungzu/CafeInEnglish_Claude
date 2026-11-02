@@ -700,7 +700,7 @@ function vbus(){const c=AC();if(!c)return null;if(!VBUS){VBUS=c.createGain();VBU
 function routeA(a,voice){if(a._g!==undefined)return a;a._g=null;try{const c=AC();if(c){const src=c.createMediaElementSource(a);const g=c.createGain();g.gain.value=a._v!=null?a._v:1;src.connect(g);g.connect(voice?vbus():c.destination);a._g=g;a.volume=1;}}catch(e){a._g=null;}if(!a._g&&voice)a.volume=sound?VV:0;return a;}
 function setV(a,v){a._v=v;if(a._g)a._g.gain.value=v;else a.volume=v;}
 function getV(a){return a._v!=null?a._v:a.volume;}
-function vAudio(src){return routeA(new Audio(src),true);}
+function vAudio(src){const a=new Audio(src);const c=AC();if(c&&c.state!=='running'){try{c.resume();}catch(_){}a._g=null;a.volume=(sound&&!MUTE)?VV:0;return a;}return routeA(a,true);}
 function applyVV(){if(VBUS)VBUS.gain.value=(sound&&!MUTE)?VV:0;}
 let MUTE=false,SFXON=true,SFXV=.8;try{const st=JSON.parse(localStorage.getItem('kycafe')||'{}');if(st.mute)MUTE=true;if(typeof st.sfxv==='number')SFXV=st.sfxv;if(st.sfxon===false)SFXON=false;}catch(e){}
 const sfxG=()=>(SFXON&&!MUTE)?SFXV:0;
@@ -1495,9 +1495,9 @@ $('mSpeak').addEventListener('click',async()=>{if(micBusy)return;const note=$('m
  if(!st&&gErr&&SR&&!['NotAllowedError','NotFoundError','SecurityError'].includes(gErr.name)){track('cafe_mic_error',{e:gErr.name+'_sronly'});gErr=null;}
  if(gErr){const e=gErr;micBusy=false;btn.textContent='말하기';
   const en=e&&e.name,ios=/iP(hone|ad|od)/.test(navigator.userAgent);note.textContent=en==='NotFoundError'?'마이크를 찾을 수 없어요. 마이크가 연결돼 있는지 확인해 주세요.':en==='NotAllowedError'||en==='SecurityError'?(ios?'마이크가 허용되지 않았어요. 주소창의 "가가"(aA) → 웹 사이트 설정 → 마이크를 "허용"으로 바꾼 뒤 다시 눌러 주세요.':'마이크 권한이 꺼져 있어요. 주소창 왼쪽 아이콘(사이트 설정)에서 마이크를 "허용"으로 바꾼 뒤 다시 눌러 주세요.'):'마이크를 잠깐 쓸 수 없었어요. 통화나 다른 앱이 마이크를 쓰고 있지 않은지 확인하고 다시 눌러 주세요. ('+(en||'오류')+')';track('cafe_mic_error',{e:(e&&e.name)||'gum'});return;}
- micQuiet(true);if(myVoice){URL.revokeObjectURL(myVoice);myVoice=null;}
+ duck(true);if(myVoice){URL.revokeObjectURL(myVoice);myVoice=null;}
  let chunks=[],gotRes=null,srFail=null,done=false,t=null;let mr=null;try{mr=(st&&window.MediaRecorder)?new MediaRecorder(st):null;}catch(_){mr=null;}
- function finish(){if(done)return;done=true;micBusy=false;btn.textContent='말하기';btn.classList.remove('rec');micQuiet(false);
+ function finish(){if(done)return;done=true;micBusy=false;btn.textContent='말하기';btn.classList.remove('rec');duck(false);
   if(gotRes)showRes(gotRes[0],gotRes[1]);else if(myVoice){showRes('',null);note.textContent=srFail||'말소리를 알아듣지 못해 이번엔 점수가 없어요. 조금 더 또박또박 말해 보세요.';}else note.textContent=srFail||'소리가 안 들렸어요. 한 번 더 눌러 말해 보세요.';}
  const stopAll=()=>{try{if(mr&&mr.state!=='inactive')mr.stop();else{if(st)st.getTracks().forEach(x=>x.stop());finish();}}catch(_){finish();}};
  if(mr){mr.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};mr.onstop=()=>{st.getTracks().forEach(x=>x.stop());if(chunks.length)myVoice=URL.createObjectURL(new Blob(chunks,{type:mr.mimeType||'audio/webm'}));finish();};try{mr.start();}catch(_){mr=null;}}
