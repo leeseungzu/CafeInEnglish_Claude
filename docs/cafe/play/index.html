@@ -17,7 +17,7 @@
 <meta name="theme-color" content="#140E0A">
 <link rel="icon" href="/cafe/play/cafe-icon-48.png?v=9" sizes="48x48" type="image/png">
 <link rel="icon" href="/cafe/play/cafe-icon-32.png?v=9" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="/cafe/play/cafe-app-180.png?v=1">
+<link rel="apple-touch-icon" href="/cafe/play/cafe-app-180.png?v=2">
 <link rel="manifest" href="/cafe/play/manifest.webmanifest?v=1">
 <meta name="apple-mobile-web-app-title" content="카영">
 <meta name="application-name" content="카영">
@@ -174,6 +174,8 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offse
 .vol input[type=range]{width:100%;accent-color:var(--lime)}
 .vol .tg{border:0;border-radius:99px;padding:5px 11px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;background:rgba(127,127,127,.18);color:var(--gt)}
 .vol .tg.on{background:var(--lime);color:#2B1D14}
+.vol.setp{width:min(300px,calc(100vw - 40px));gap:9px;max-height:calc(100% - 140px);overflow:auto}.sp-h b{font-size:15px}.sp-d{margin:-4px 0 2px;font-size:12px;opacity:.7}
+.sc{border:1px solid var(--gb);background:rgba(127,127,127,.1);border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}.sc-t{display:flex;flex-direction:column;gap:1px}.sc-t b{font-size:13.5px}.sc-t small{font-size:11px;opacity:.65;font-weight:500}
 .vol.fb{width:min(300px,calc(100vw - 40px));gap:9px}.fb .fbs{margin:0;font-size:12px;opacity:.75;line-height:1.45}
 .fbk{display:grid;grid-template-columns:1fr 1fr;gap:6px}.fbk button{border:1px solid var(--gb);background:rgba(127,127,127,.12);color:var(--gt);border-radius:99px;padding:6px 10px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}.fbk button.on{background:var(--lime);color:#2B1D14;border-color:transparent}
 .fb textarea{width:100%;box-sizing:border-box;border-radius:12px;border:1px solid var(--gb);background:rgba(255,255,255,.92);color:#191F28;font:inherit;font-size:13.5px;padding:9px 10px;resize:none}
@@ -381,26 +383,27 @@ body{padding:0!important;background:#140E0A}
       </div>
       <div>
         <button class="chip glass ic" id="fbBtn" aria-label="의견 보내기" title="의견 보내기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></button>
-        <button class="chip glass ic" id="musicBtn" aria-label="카페 음악 켜기" title="카페 음악"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/><path id="mslash" d="M3 3l18 18"/></svg></button>
-        <button class="chip glass ic" id="soundBtn" aria-label="소리 끄기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path id="sw1" d="M15.5 8.5a5 5 0 0 1 0 7"/><path id="sw2" d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></button>
+        
+        <button class="chip glass ic" id="soundBtn" aria-label="소리 끄기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path id="sw1" d="M15.5 8.5a5 5 0 0 1 0 7"/><path id="sw2" d="M18.5 5.5a9 9 0 0 1 0 13"/><path id="sx" d="M16 9l5 6M21 9l-5 6" style="display:none"/></svg></button>
+        <button class="chip glass ic" id="musicBtn" aria-label="소리 설정" title="소리 설정"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/><path id="mslash" d="M0 0" style="display:none"/></svg></button>
         <button class="chip glass ic" id="fsBtn" hidden aria-label="전체 화면"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
       </div>
     </div>
-    <div class="vol glass" id="volPop" hidden>
-      <div class="row"><span id="musicLabel">카페 음악</span><button class="tg" id="musicToggle">켜기</button></div>
-      <input type="range" id="vol" min="0" max="100" value="32" aria-label="음악 음량">
+    <div class="vol glass setp" id="volPop" hidden>
+      <div class="row sp-h"><b>소리 설정</b><button class="tg" id="setX" aria-label="닫기">✕</button></div>
+      <p class="sp-d">나에게만 적용돼요.</p>
+      <div class="sc"><div class="row"><span class="sc-t"><b id="musicLabel">카페 음악</b><small>잔잔한 재즈</small></span><button class="tg" id="musicToggle">켜기</button></div><input type="range" id="vol" min="0" max="100" value="32" aria-label="음악 음량"></div>
+      <div class="sc"><div class="row"><span class="sc-t"><b>목소리</b><small>바리스타·손님·내 목소리</small></span><button class="tg on" id="voiceToggle">켜짐</button></div><input type="range" id="vvol" min="0" max="100" value="100" aria-label="목소리 음량"></div>
+      <div class="sc"><div class="row"><span class="sc-t"><b>효과음</b><small>짠·인사·박수 소리</small></span><button class="tg on" id="sfxToggle">켜짐</button></div><input type="range" id="sfxv" min="0" max="100" value="80" aria-label="효과음 음량"></div>
     </div>
-    <div class="vol glass" id="voicePop" hidden>
-      <div class="row"><span>목소리</span><button class="tg on" id="voiceToggle">끄기</button></div>
-      <input type="range" id="vvol" min="0" max="100" value="100" aria-label="목소리 음량">
-    </div>
+    <div id="voicePop" hidden></div>
     <div class="vol glass fb" id="fbPop" hidden>
       <div class="row"><span>의견 보내기</span><button class="tg" id="fbX" aria-label="닫기">✕</button></div>
       <p class="fbs">한 줄도 좋아요. 카영을 더 좋게 만들게요.</p>
       <div class="fbk" id="fbKind"><button class="on" data-k="좋았던 점">😊 좋았어요</button><button data-k="불편한 점">😕 불편해요</button><button data-k="오류 신고">🐞 오류</button><button data-k="아이디어">💡 아이디어</button></div>
       <textarea id="fbText" rows="3" maxlength="1000" placeholder="어떤 점이 그랬는지 적어 주세요"></textarea>
-      <button class="fbgo" id="fbSend">메일로 보내기</button>
-      <div class="fbm"><span>메일 앱이 안 열리면</span><button class="tg" id="fbCopy">주소 복사</button></div>
+      <button class="fbgo" id="fbSend">보내기</button>
+      <div class="fbm"><span>메일로 직접: leeseungzu0609@gmail.com</span><button class="tg" id="fbCopy">복사</button></div>
     </div>
     <div class="toasts" id="toasts"></div>
     <div class="hint glass" id="hint">바닥을 눌러 걷고, 끌어서 둘러보세요</div>
@@ -519,8 +522,8 @@ body{padding:0!important;background:#140E0A}
         <div class="hitag">BETA</div>
         <h3>카영에 오신 걸 환영해요</h3>
         <p class="small" style="margin:4px 0 12px;font-size:13.5px">영어로 주문하고, 대화하고, 소리 내어 말해 보는 연습 카페예요.</p>
-        <ol class="histeps"><li><b>걷기</b>바닥을 누르면 걸어가고, 끌어서 둘러봐요.</li><li><b>주문하기</b>바리스타 카영이에게 주문해요. 요일마다 상황이 달라요.</li><li><b>말해 보기</b>테이블 대화, 모닥불 퀴즈, 테라스 오픈마이크, 스터디룸이 있어요.</li></ol>
-        <p class="hinote">카페 손님들은 연습을 도와주는 캐릭터예요. 아직 다른 이용자와 실제로 연결되지는 않아요. 내 목소리는 저장되거나 전송되지 않아요.</p>
+        <ol class="histeps"><li><b>걷기</b>바닥을 누르면 걸어가고, 끌어서 둘러봐요.</li><li><b>주문하기</b>바리스타 카영이에게 주문하고 오늘의 표현도 연습해요.</li><li><b>말해 보기</b>테이블 대화, 모닥불 퀴즈, 테라스 오픈마이크, 스터디룸이 있어요.</li></ol>
+        <p class="hinote">지금 접속한 실제 손님들과 함께해요. 손님이 적을 땐 연습 캐릭터가 채워 줘요. 내 목소리는 저장되거나 전송되지 않아요.</p>
         <button class="btn dark" id="hiGo" style="width:100%;margin-top:12px">입장하기</button>
       </div>
     </div>
@@ -697,17 +700,21 @@ function routeA(a,voice){if(a._g!==undefined)return a;a._g=null;try{const c=AC()
 function setV(a,v){a._v=v;if(a._g)a._g.gain.value=v;else a.volume=v;}
 function getV(a){return a._v!=null?a._v:a.volume;}
 function vAudio(src){return routeA(new Audio(src),true);}
-function applyVV(){if(VBUS)VBUS.gain.value=sound?VV:0;}
+function applyVV(){if(VBUS)VBUS.gain.value=(sound&&!MUTE)?VV:0;}
+let MUTE=false,SFXON=true,SFXV=.8;try{const st=JSON.parse(localStorage.getItem('kycafe')||'{}');if(st.mute)MUTE=true;if(typeof st.sfxv==='number')SFXV=st.sfxv;if(st.sfxon===false)SFXON=false;}catch(e){}
+const sfxG=()=>(SFXON&&!MUTE)?SFXV:0;
+function setMute(m){MUTE=m;try{const o=JSON.parse(localStorage.getItem('kycafe')||'{}');o.mute=m;localStorage.setItem('kycafe',JSON.stringify(o));}catch(_){}['sw1','sw2'].forEach(id=>document.getElementById(id).style.display=m?'none':'');document.getElementById('sx').style.display=m?'':'none';document.getElementById('soundBtn').setAttribute('aria-label',m?'소리 켜기':'모든 소리 끄기');applyVV();
+ if(m){if(synth)synth.cancel();if(curAudio)curAudio.pause();if(typeof bgm!=='undefined'){fadeA(bgm,0,300);fadeA(bgmS,0,300);}}else if(typeof musicOn!=='undefined'&&musicOn)fadeA(trk(inStudy),tv(),700);}
 ['pointerdown','touchend','keydown'].forEach(t=>addEventListener(t,()=>{const c=AC();if(c&&c.state!=='running')c.resume();},{capture:true,passive:true}));
 function pickVoices(){if(!synth)return;const v=synth.getVoices().filter(x=>/^en[-_]/i.test(x.lang));const us=v.filter(x=>/US/i.test(x.lang));const pool=us.length?us:v;
  const f=re=>pool.find(x=>re.test(x.name));VB=f(/Samantha|Ava|Allison|Jenny|Aria|Google US English|Zira|Female/i)||pool[0]||null;VM=f(/Alex|Daniel|Guy|David|Tom|Fred|Male/i)||pool.find(x=>x!==VB)||VB;}
 if(synth){pickVoices();synth.onvoiceschanged=pickVoices;}
 function speak(text,who,done){if(curAudio){curAudio.pause();curAudio=null;}if(synth)synth.cancel();let fired=false;duck(true);const fin=()=>{if(!fired){fired=true;duck(false);done&&done();}};
- if(!sound){setTimeout(fin,500);return;}const src=VOICES[text]||CLIP[text];
+ if(!sound||MUTE){setTimeout(fin,500);return;}const src=VOICES[text]||CLIP[text];
  if(src){try{const au=vAudio(src);curAudio=au;au.onended=fin;au.onerror=fin;const pr=au.play();if(pr&&pr.catch)pr.catch(()=>setTimeout(fin,600));setTimeout(fin,7000);}catch(e){setTimeout(fin,400);}return;}
  if(!synth){setTimeout(fin,500);return;}try{const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.volume=VV;const v=who==='me'?VM:VB;if(v)u.voice=v;u.onend=fin;u.onerror=fin;synth.speak(u);setTimeout(fin,Math.max(1800,text.length*90));}catch(e){setTimeout(fin,400);}}
-function setSound(on){sound=on;['sw1','sw2'].forEach(id=>document.getElementById(id).style.opacity=sound?1:0);const b=document.getElementById('soundBtn');b.setAttribute('aria-label',sound?'목소리 음량':'목소리 켜기');const t=document.getElementById('voiceToggle');t.textContent=sound?'끄기':'켜기';t.classList.toggle('on',sound);applyVV();if(!sound){if(synth)synth.cancel();if(curAudio)curAudio.pause();}}
-document.getElementById('soundBtn').addEventListener('click',e=>{e.stopPropagation();const v=document.getElementById('voicePop');v.hidden=!v.hidden;document.getElementById('volPop').hidden=true;document.getElementById('fbPop').hidden=true;document.getElementById('vvol').value=Math.round(VV*100);});
+function setSound(on){sound=on;const t=document.getElementById('voiceToggle');t.textContent=sound?'켜짐':'꺼짐';t.classList.toggle('on',sound);applyVV();if(!sound){if(synth)synth.cancel();if(curAudio)curAudio.pause();}}
+document.getElementById('soundBtn').addEventListener('click',e=>{e.stopPropagation();setMute(!MUTE);toast(MUTE?'모든 소리를 껐어요':'소리를 다시 켰어요');});
 document.getElementById('voiceToggle').addEventListener('click',()=>setSound(!sound));
 document.getElementById('vvol').addEventListener('input',e=>{VV=e.target.value/100;if(!sound&&VV>0)setSound(true);applyVV();[curAudio,typeof tvAudio!=='undefined'?tvAudio:null].forEach(a=>{if(a&&!a._g)a.volume=VV;});try{const o=JSON.parse(localStorage.getItem('kycafe')||'{}');o.vv=VV;localStorage.setItem('kycafe',JSON.stringify(o));}catch(_){}});
 function pfs(on){stage.classList.toggle('pfs',on);document.body.style.overflow=on?'hidden':'';setTimeout(size,60);}
@@ -1138,7 +1145,7 @@ function showTable(){$('tblTitle').textContent=seated.name+' · '+$('branchName'
  if(!tEnd)tEnd=Date.now()+15*60000;clearInterval(tInt);const tick=()=>{const ms=Math.max(0,tEnd-Date.now());$('tblTimer').textContent=String(Math.floor(ms/60000)).padStart(2,'0')+':'+String(Math.floor(ms/1000)%60).padStart(2,'0');$('steam').style.opacity=.25+.75*ms/900000;};tick();tInt=setInterval(tick,1000);
  open('sheetTable');camFocus=new THREE.Vector3(seated.type==='round'?(seated.x+me.x)/2:me.x,0,seated.type==='round'?(seated.z+me.z)/2:me.z);camDist=seated.type==='round'?330:280;if(seated.type==='bar')yaw=Math.PI/2+.35;}
 const pitchOf=n=>{let h=0;for(const c of n)h=(h*31+c.charCodeAt(0))>>>0;return 480+(h%9)*55;};
-function blips(name,text){try{if(!sound)return;if(!SX)SX=new (window.AudioContext||window.webkitAudioContext)();SX.resume();const base=pitchOf(name)*1.6,t=SX.currentTime+.02;
+function blips(name,text){try{if(!sound||MUTE)return;if(!SX)SX=new (window.AudioContext||window.webkitAudioContext)();SX.resume();const base=pitchOf(name)*1.6,t=SX.currentTime+.02;
  [[base,0,.05],[base*1.5,.07,.04]].forEach(([f,d,v])=>{const o=SX.createOscillator(),g=SX.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,t+d);g.gain.linearRampToValueAtTime(v,t+d+.008);g.gain.exponentialRampToValueAtTime(.0001,t+d+.22);o.connect(g);g.connect(SX.destination);o.start(t+d);o.stop(t+d+.25);});}catch(e){}}
 function addMsg(who,en,ko,mine,quiet){if(seated&&!quiet)blips(who,en);const m=document.createElement('div');m.className='msg'+(mine?' me':'');const w=document.createElement('div');w.className='who';w.textContent=who;const b=document.createElement('div');b.className='b';b.append(Object.assign(document.createElement('b'),{textContent:en}));if(ko)b.append(Object.assign(document.createElement('small'),{textContent:ko}));m.append(w,b);const log=$('log');log.appendChild(m);log.scrollTop=log.scrollHeight;}
 function setOpts(label,list,fn){$('myTurn').textContent=label;const box=$('myOpts');box.innerHTML='';list.forEach(o=>{const b=document.createElement('button');b.className='qc'+(o.next?' next':'');b.append(document.createTextNode(o[0]||o.label));if(o[1])b.append(Object.assign(document.createElement('span'),{className:'ko',textContent:o[1]}));b.addEventListener('click',()=>fn(o));box.appendChild(b);});}
@@ -1203,7 +1210,7 @@ try{const st=JSON.parse(localStorage.getItem('kycafe')||'{}');if(typeof st.alarm
 function savePrefs(){try{localStorage.setItem('kycafe',JSON.stringify({alarmOn,alarmSound,svol:SVOL,track:studyTrack}));}catch(e){}}
 $('sTrack').addEventListener('change',e=>{studyTrack=e.target.value;savePrefs();if(bgmS){const old=bgmS;fadeA(old,0,500);bgmS=null;}if(musicOn&&inStudy)fadeA(trk(true),SVOL,1200);toast('공부 음악: '+STUDY_TRACKS[studyTrack][0]);});
 function tone(f,t,d,v,type){const o=SX.createOscillator(),g=SX.createGain();o.type=type||'sine';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.008);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(SX.destination);o.start(t);o.stop(t+d+.05);}
-function playAlarm(kind,full){try{if(!SX)SX=new (window.AudioContext||window.webkitAudioContext)();SX.resume();const t0=SX.currentTime+.05,R=full?3:1;
+function playAlarm(kind,full){try{if(MUTE)return;if(!SX)SX=new (window.AudioContext||window.webkitAudioContext)();SX.resume();const t0=SX.currentTime+.05,R=full?3:1;
  for(let r=0;r<R;r++){const t=t0+r*1.6;
   if(kind==='chime'){[[1046.5,0],[1318.5,.18],[1568,.36]].forEach(([f,d])=>{tone(f,t+d,1.4,.12);tone(f*2,t+d,.6,.03);});}
   else if(kind==='marimba'){[523.25,659.25,783.99,1046.5,783.99].forEach((f,i)=>{tone(f,t+i*.13,.35,.16,'triangle');tone(f*4,t+i*.13,.08,.03);});}
@@ -1279,7 +1286,7 @@ const toastsEl=$('toasts');
 function toast(t){const e=document.createElement('div');e.className='toast glass';e.textContent=t;toastsEl.appendChild(e);requestAnimationFrame(()=>e.classList.add('show'));setTimeout(()=>{e.classList.remove('show');setTimeout(()=>e.remove(),350);},2800);while(toastsEl.children.length>3)toastsEl.firstChild.remove();}
 let SX=null;function sfx(kind){try{if(!SX)SX=new (window.AudioContext||window.webkitAudioContext)();SX.resume();const t=SX.currentTime;
  const parts=kind==='clink'?[[2093,.22,.9],[3136,.12,.6],[4186,.07,.35]]:[[880,.08,.18],[1320,.05,.14]];
- parts.forEach(([f,v,d])=>{const o=SX.createOscillator(),g=SX.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v*(sound?1:0),t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(SX.destination);o.start(t);o.stop(t+d+.05);});}catch(e){}}
+ parts.forEach(([f,v,d])=>{const o=SX.createOscillator(),g=SX.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v*sfxG(),t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(SX.destination);o.start(t);o.stop(t+d+.05);});}catch(e){}}
 function nod(p,delay){setTimeout(()=>{p.anim={type:'nod',t0:performance.now(),dur:650};},delay||0);}
 function spark(a,b){tmp.set((a.x+b.x)/2,44+((a.py||0)+(b.py||0))/2,(a.z+b.z)/2).project(cam);const r=stage.getBoundingClientRect();const e=document.createElement('div');e.className='spark';e.textContent='✦';e.style.left=((tmp.x+1)/2*r.width)+'px';e.style.top=((1-tmp.y)/2*r.height)+'px';ov.appendChild(e);requestAnimationFrame(()=>{e.style.transform='translate(-50%,-150%) scale(1.6)';e.style.opacity=0;});setTimeout(()=>e.remove(),800);}
 function nearest(maxD){let best=null,bd=maxD;people.forEach(p=>{if(p.me)return;const d=Math.hypot(p.x-me.x,p.z-me.z);if(d<bd){bd=d;best=p;}});return best;}
@@ -1504,26 +1511,38 @@ function trk(st){if(st){if(!bgmS){bgmS=new Audio(STUDY_TRACKS[studyTrack][1]);bg
 function fadeA(a,v,ms){if(!a)return;clearInterval(a._f);const st=getV(a),t0=performance.now();if(v>0&&a.paused){const pr=a.play();if(pr&&pr.catch)pr.catch(()=>{});}a._f=setInterval(()=>{const k=Math.min(1,(performance.now()-t0)/ms);setV(a,Math.max(0,Math.min(1,st+(v-st)*k)));if(k>=1){clearInterval(a._f);if(v===0)a.pause();}},40);}
 const tv=()=>inStudy?SVOL:MV;
 function fadeTo(v,ms){fadeA(trk(inStudy),v,ms);}
-function setMusic(on){musicOn=on;$('mslash').style.opacity=on?0:1;$('musicBtn').setAttribute('aria-label',on?'카페 음악 끄기':'카페 음악 켜기');
- if(on){fadeA(trk(inStudy),tv(),1500);}else{fadeA(bgm,0,600);fadeA(bgmS,0,600);}}
-function duck(on){if(!musicOn)return;fadeA(trk(inStudy),on?Math.min(MD,tv()):tv(),250);}
+function setMusic(on){musicOn=on;$('mslash').style.opacity=on?0:1;
+ if(on){if(!MUTE)fadeA(trk(inStudy),tv(),1500);}else{fadeA(bgm,0,600);fadeA(bgmS,0,600);}}
+function duck(on){if(!musicOn||MUTE)return;fadeA(trk(inStudy),on?Math.min(MD,tv()):tv(),250);}
 function checkRoom(){const now=me.x>BX+10&&me.z<AZ1;if(now===inStudy)return;inStudy=now;
- if(musicOn){fadeA(trk(!now),0,1200);fadeA(trk(now),tv(),1800);}
+ if(musicOn&&!MUTE){fadeA(trk(!now),0,1200);fadeA(trk(now),tv(),1800);}
  toast(now?'스터디룸이에요. 공부 음악: '+STUDY_TRACKS[studyTrack][0]:'카페로 돌아왔어요');
  const l=$('musicLabel');if(l)l.textContent=now?'스터디룸 음악':'카페 음악';syncVolSlider();}
-function syncVol(){const t=$('musicToggle');t.textContent=musicOn?'끄기':'켜기';t.classList.toggle('on',musicOn);}
-$('musicBtn').addEventListener('click',e=>{e.stopPropagation();const v=$('volPop');v.hidden=!v.hidden;$('voicePop').hidden=true;$('fbPop').hidden=true;if(!v.hidden&&!musicOn)setMusic(true);syncVol();});
+function syncVol(){const t=$('musicToggle');t.textContent=musicOn?'켜짐':'꺼짐';t.classList.toggle('on',musicOn);$('vvol').value=Math.round(VV*100);$('sfxv').value=Math.round(SFXV*100);const f=$('sfxToggle');f.textContent=SFXON?'켜짐':'꺼짐';f.classList.toggle('on',SFXON);syncVolSlider();}
+$('musicBtn').addEventListener('click',e=>{e.stopPropagation();const v=$('volPop');v.hidden=!v.hidden;$('fbPop').hidden=true;syncVol();});
+if(MUTE)setTimeout(()=>setMute(true),0);
+$('setX').addEventListener('click',()=>{$('volPop').hidden=true;});
+const savePx=()=>{try{const o=JSON.parse(localStorage.getItem('kycafe')||'{}');o.sfxv=SFXV;o.sfxon=SFXON;localStorage.setItem('kycafe',JSON.stringify(o));}catch(_){}};
+$('sfxToggle').addEventListener('click',()=>{SFXON=!SFXON;savePx();syncVol();});
+$('sfxv').addEventListener('input',e=>{SFXV=e.target.value/100;if(!SFXON&&SFXV>0)SFXON=true;savePx();syncVol();});
 $('musicToggle').addEventListener('click',()=>{setMusic(!musicOn);syncVol();});
-$('vol').addEventListener('input',e=>{const v=e.target.value/100;if(inStudy){SVOL=v;try{savePrefs();}catch(_){}}else MV=v;if(musicOn){const a=trk(inStudy);clearInterval(a._f);setV(a,tv());}});
+$('vol').addEventListener('input',e=>{const v=e.target.value/100;if(!musicOn&&v>0){setMusic(true);syncVol();}if(inStudy){SVOL=v;try{savePrefs();}catch(_){}}else MV=v;if(musicOn&&!MUTE){const a=trk(inStudy);clearInterval(a._f);setV(a,tv());}});
 function syncVolSlider(){$('vol').value=Math.round(tv()*100);}
-cv.addEventListener('pointerdown',()=>{$('volPop').hidden=true;$('voicePop').hidden=true;$('fbPop').hidden=true;});
+cv.addEventListener('pointerdown',()=>{$('volPop').hidden=true;$('fbPop').hidden=true;});
 /* 의견 보내기: 메일 앱으로 (서버 저장 없음) */
 {const FB_MAIL='leeseungzu0609@gmail.com';let fbK='좋았던 점';
  $('fbBtn').addEventListener('click',e=>{e.stopPropagation();const p=$('fbPop');p.hidden=!p.hidden;$('volPop').hidden=true;$('voicePop').hidden=true;if(!p.hidden)track('cafe_feedback_open');});
  $('fbX').addEventListener('click',()=>{$('fbPop').hidden=true;});
  $('fbKind').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;fbK=b.dataset.k;[...$('fbKind').children].forEach(x=>x.classList.toggle('on',x===b));});
  $('fbSend').addEventListener('click',()=>{const t=$('fbText').value.trim();const info='\n\n---\n'+(innerWidth<=640?'모바일':'PC')+' · '+navigator.userAgent.slice(0,120)+'\n'+new Date().toLocaleString('ko-KR');
-  location.href='mailto:'+FB_MAIL+'?subject='+encodeURIComponent('[카영 의견] '+fbK)+'&body='+encodeURIComponent((t||'(내용을 적어 주세요)')+info);track('cafe_feedback_send',{kind:fbK});setTimeout(()=>toast('보내 주셔서 고마워요! 꼭 읽어 볼게요'),600);});
+  const mail=()=>{location.href='mailto:'+FB_MAIL+'?subject='+encodeURIComponent('[카영 의견] '+fbK)+'&body='+encodeURIComponent((t||'(내용을 적어 주세요)')+info);};
+  if(!t){toast('한 줄만 적어 주세요');$('fbText').focus();return;}
+  const btn=$('fbSend');btn.disabled=true;btn.textContent='보내는 중…';
+  fetch(RT_URL.replace('wss:','https:').replace(/\/ws$/,'/feedback'),{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({kind:fbK,text:t,dev:innerWidth<=640?'모바일':'PC',name:me.ko,ua:navigator.userAgent})})
+   .then(r=>r.json().catch(()=>({})).then(j=>({ok:r.ok&&j.ok,why:j.why})))
+   .then(r=>{if(r.ok){toast('보냈어요! 꼭 읽어 볼게요');$('fbText').value='';$('fbPop').hidden=true;track('cafe_feedback_send',{kind:fbK});}else if(r.why==='wait'){toast('잠시 후에 다시 보내 주세요');}else{toast('메일 앱으로 보낼게요');mail();}})
+   .catch(()=>{toast('메일 앱으로 보낼게요');mail();})
+   .finally(()=>{btn.disabled=false;btn.textContent='보내기';});});
  $('fbCopy').addEventListener('click',()=>{try{navigator.clipboard.writeText(FB_MAIL);toast('메일 주소를 복사했어요');}catch(e){}});}
 let firstTouch=false;stage.addEventListener('pointerdown',e=>{if(e.target.closest('#musicBtn,#volPop,#soundBtn,#voicePop,#fbBtn,#fbPop')){firstTouch=true;return;}if(!firstTouch){firstTouch=true;if(!musicOn){setMusic(true);syncVol();}}},{capture:true});
 /* 오늘의 1일 1영: 사이트 daily.json과 같은 계산 → 카톡·홈·카페가 같은 문장 */

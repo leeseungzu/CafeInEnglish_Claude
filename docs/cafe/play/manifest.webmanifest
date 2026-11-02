@@ -8,15 +8,15 @@
  "theme_color": "#2B1D14",
  "icons": [
   {
-   "src": "/cafe/play/cafe-app-192.png?v=1",
+   "src": "/cafe/play/cafe-app-192.png?v=2",
    "sizes": "192x192",
    "type": "image/png"
   },
   {
-   "src": "/cafe/play/cafe-app-512.png?v=1",
+   "src": "/cafe/play/cafe-app-512.png?v=2",
    "sizes": "512x512",
    "type": "image/png",
-   "purpose": "any maskable"
+   "purpose": "any"
   }
  ]
 }
