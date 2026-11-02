@@ -1488,14 +1488,18 @@ function micQuiet(on){try{if(on){if(typeof tvStop==='function')tvStop();if(synth
  else if(typeof musicOn!=='undefined'&&musicOn&&!MUTE)fadeA(trk(inStudy),tv(),900);}catch(_){}}
 $('mSpeak').addEventListener('click',async()=>{if(micBusy)return;const note=$('mNote'),btn=$('mSpeak');
  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){say(me,mPick[0],mPick[1],3200);showRes('',100);applause(100);return;}
- micBusy=true;btn.textContent='마이크 준비 중…';note.textContent='';let st;micQuiet(true);
- try{st=await navigator.mediaDevices.getUserMedia({audio:true});}catch(e){micBusy=false;btn.textContent='말하기';micQuiet(false);
-  const en=e&&e.name,ios=/iP(hone|ad|od)/.test(navigator.userAgent);note.textContent=en==='NotFoundError'?'마이크를 찾을 수 없어요. 마이크가 연결돼 있는지 확인해 주세요.':en==='NotAllowedError'||en==='SecurityError'?(ios?'마이크가 허용되지 않았어요. 주소창의 "가가"(aA) → 웹 사이트 설정 → 마이크를 "허용"으로 바꾼 뒤 다시 눌러 주세요.':'마이크 권한이 꺼져 있어요. 주소창 왼쪽 아이콘(사이트 설정)에서 마이크를 "허용"으로 바꾼 뒤 다시 눌러 주세요.'):'마이크를 잠깐 쓸 수 없었어요. 통화나 다른 앱이 마이크를 쓰고 있지 않은지 확인하고 다시 눌러 주세요.';track('cafe_mic_error',{e:(e&&e.name)||'gum'});return;}
- if(myVoice){URL.revokeObjectURL(myVoice);myVoice=null;}
- let chunks=[],gotRes=null,srFail=null,done=false,t=null;const mr=window.MediaRecorder?new MediaRecorder(st):null;
+ micBusy=true;btn.textContent='마이크 준비 중…';note.textContent='';let st=null,gErr=null;
+ const gum=()=>navigator.mediaDevices.getUserMedia({audio:true});
+ try{st=await gum();}catch(e){gErr=e;}
+ if(!st&&gErr&&!['NotAllowedError','NotFoundError','SecurityError'].includes(gErr.name)){await new Promise(r=>setTimeout(r,600));try{st=await gum();gErr=null;}catch(e){gErr=e;}}
+ if(!st&&gErr&&SR&&!['NotAllowedError','NotFoundError','SecurityError'].includes(gErr.name)){track('cafe_mic_error',{e:gErr.name+'_sronly'});gErr=null;}
+ if(gErr){const e=gErr;micBusy=false;btn.textContent='말하기';
+  const en=e&&e.name,ios=/iP(hone|ad|od)/.test(navigator.userAgent);note.textContent=en==='NotFoundError'?'마이크를 찾을 수 없어요. 마이크가 연결돼 있는지 확인해 주세요.':en==='NotAllowedError'||en==='SecurityError'?(ios?'마이크가 허용되지 않았어요. 주소창의 "가가"(aA) → 웹 사이트 설정 → 마이크를 "허용"으로 바꾼 뒤 다시 눌러 주세요.':'마이크 권한이 꺼져 있어요. 주소창 왼쪽 아이콘(사이트 설정)에서 마이크를 "허용"으로 바꾼 뒤 다시 눌러 주세요.'):'마이크를 잠깐 쓸 수 없었어요. 통화나 다른 앱이 마이크를 쓰고 있지 않은지 확인하고 다시 눌러 주세요. ('+(en||'오류')+')';track('cafe_mic_error',{e:(e&&e.name)||'gum'});return;}
+ micQuiet(true);if(myVoice){URL.revokeObjectURL(myVoice);myVoice=null;}
+ let chunks=[],gotRes=null,srFail=null,done=false,t=null;let mr=null;try{mr=(st&&window.MediaRecorder)?new MediaRecorder(st):null;}catch(_){mr=null;}
  function finish(){if(done)return;done=true;micBusy=false;btn.textContent='말하기';btn.classList.remove('rec');micQuiet(false);
   if(gotRes)showRes(gotRes[0],gotRes[1]);else if(myVoice){showRes('',null);note.textContent=srFail||'말소리를 알아듣지 못해 이번엔 점수가 없어요. 조금 더 또박또박 말해 보세요.';}else note.textContent=srFail||'소리가 안 들렸어요. 한 번 더 눌러 말해 보세요.';}
- const stopAll=()=>{try{if(mr&&mr.state!=='inactive')mr.stop();else{st.getTracks().forEach(x=>x.stop());finish();}}catch(_){finish();}};
+ const stopAll=()=>{try{if(mr&&mr.state!=='inactive')mr.stop();else{if(st)st.getTracks().forEach(x=>x.stop());finish();}}catch(_){finish();}};
  if(mr){mr.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};mr.onstop=()=>{st.getTracks().forEach(x=>x.stop());if(chunks.length)myVoice=URL.createObjectURL(new Blob(chunks,{type:mr.mimeType||'audio/webm'}));finish();};}
  let live=false;const goLive=()=>{if(live||done)return;live=true;try{if(mr&&mr.state==='inactive')mr.start();}catch(_){}btn.textContent='지금 말해 보세요';btn.classList.add('rec');haptic();};
  btn.textContent='잠깐만요…';
