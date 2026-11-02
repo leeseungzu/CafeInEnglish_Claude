@@ -990,7 +990,7 @@ function open(id){startMove();closeAll(true);document.getElementById(id).classLi
 function closeAll(keep){if(!keep&&typeof spot!=='undefined')spot.intensity=0;document.querySelectorAll('.sheet.open,.modal.open').forEach(e=>e.classList.remove('open'));if(!keep){camFocus=null;camDist=null;hush(barista);if(synth)synth.cancel();}}
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{const sh=b.closest('.sheet');const id=sh&&sh.id;closeAll();afterClose(id);}));
 let exitMode='M';
-let situ=null;const SITU={stage:{x:()=>STAGE.x,z:()=>STAGE.z,r:150,label:'무대에서 내려가기',out:()=>[STAGE.x,STAGE.z-170]},fire:{x:()=>FIRE.x,z:()=>FIRE.z,r:190,label:'불가에서 일어나기',out:()=>[FIRE.x,FIRE.z+150]}};
+let situ=null;const SITU={stage:{x:()=>STAGE.x,z:()=>STAGE.z,r:150,label:'무대에서 내려가기',out:()=>[STAGE.x,STAGE.z-170]},fire:{x:()=>FIRE.x,z:()=>FIRE.z,r:190,label:'일어나기',out:()=>[FIRE.x,FIRE.z+150]}};
 function exitSitu(){const o=SITU[situ].out();closeAll();situ=null;actBtn.dataset.key='';haptic();walkTo(o[0],o[1]);}
 let seatHint=false;function popMain(){actBtn.classList.remove('pop');void actBtn.offsetWidth;actBtn.classList.add('pop');try{navigator.vibrate&&navigator.vibrate(12);}catch(e){}}
 let chipT=0;
@@ -1153,7 +1153,7 @@ function renderFire(){const d=$('fzDots');d.innerHTML='';fzQs.forEach((q,i)=>{co
  if(fzI>=fzQs.length){track('cafe_quiz_done',{score:fzScore});$('fzQ').innerHTML='';const r=$('fzRes');r.hidden=false;r.innerHTML='';const b=document.createElement('b');b.textContent=fzScore+' / '+fzQs.length+(fzScore===fzQs.length?' · 다 맞혔어요!':' 맞혔어요');r.appendChild(b);
   const s=document.createElement('div');s.className='small';s.textContent=fzScore===fzQs.length?'쿠폰 도장 +1 · 손님들이 박수를 쳐요':'다시 하면 다른 문제가 나와요';r.appendChild(s);
   const row=document.createElement('div');row.className='btnrow';const again=Object.assign(document.createElement('button'),{className:'btn',textContent:'다시 하기'});again.onclick=()=>{fzQs=buildQuiz();fzI=0;fzScore=0;renderFire();};
-  const done=Object.assign(document.createElement('button'),{className:'btn dark',textContent:'불가에서 일어나기'});done.onclick=()=>exitSitu();row.append(again,done);r.appendChild(row);
+  const done=Object.assign(document.createElement('button'),{className:'btn dark',textContent:'일어나기'});done.onclick=()=>exitSitu();row.append(again,done);r.appendChild(row);
   if(fzScore===fzQs.length){addStamp();fzCrowd.forEach((p,i)=>setTimeout(()=>{nod(p);say(p,['Bravo!','You nailed it!','Wow, perfect!'][i%3],'',2200,true);},200+i*250));sfx('clink');}
   return;}
  const q=fzQs[fzI];$('fzQ').innerHTML='';const sm=document.createElement('small');sm.textContent=q.tag;$('fzQ').append(sm,document.createTextNode(q.ko));
