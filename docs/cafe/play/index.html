@@ -368,6 +368,10 @@ body{padding:0!important;background:#140E0A}
       <div class="row"><span id="musicLabel">카페 음악</span><button class="tg" id="musicToggle">켜기</button></div>
       <input type="range" id="vol" min="0" max="100" value="32" aria-label="음악 음량">
     </div>
+    <div class="vol glass" id="voicePop" hidden>
+      <div class="row"><span>목소리</span><button class="tg on" id="voiceToggle">끄기</button></div>
+      <input type="range" id="vvol" min="0" max="100" value="100" aria-label="목소리 음량">
+    </div>
     <div class="toasts" id="toasts"></div>
     <div class="hint glass" id="hint">바닥을 눌러 걷고, 끌어서 둘러보세요</div>
             <div class="dock glass">
@@ -648,14 +652,28 @@ function hush(p){p.bubEl.style.opacity=0;p.until=0;}
 
 /* 음성 */
 let sound=true,VB=null,VM=null;const synth=window.speechSynthesis;
+/* 소리 엔진: iOS는 audio.volume을 바꿀 수 없어서 Web Audio 게인으로 음량을 조절 */
+let VV=1;try{const st=JSON.parse(localStorage.getItem('kycafe')||'{}');if(typeof st.vv==='number')VV=st.vv;}catch(e){}
+try{if(navigator.audioSession)navigator.audioSession.type='playback';}catch(e){}
+let AC_=null,VBUS=null;function AC(){if(!AC_){try{AC_=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}return AC_;}
+function vbus(){const c=AC();if(!c)return null;if(!VBUS){VBUS=c.createGain();VBUS.gain.value=sound?VV:0;VBUS.connect(c.destination);}return VBUS;}
+function routeA(a,voice){if(a._g!==undefined)return a;a._g=null;try{const c=AC();if(c){const src=c.createMediaElementSource(a);const g=c.createGain();g.gain.value=a._v!=null?a._v:1;src.connect(g);g.connect(voice?vbus():c.destination);a._g=g;a.volume=1;}}catch(e){a._g=null;}if(!a._g&&voice)a.volume=sound?VV:0;return a;}
+function setV(a,v){a._v=v;if(a._g)a._g.gain.value=v;else a.volume=v;}
+function getV(a){return a._v!=null?a._v:a.volume;}
+function vAudio(src){return routeA(new Audio(src),true);}
+function applyVV(){if(VBUS)VBUS.gain.value=sound?VV:0;}
+['pointerdown','touchend','keydown'].forEach(t=>addEventListener(t,()=>{const c=AC();if(c&&c.state!=='running')c.resume();},{capture:true,passive:true}));
 function pickVoices(){if(!synth)return;const v=synth.getVoices().filter(x=>/^en[-_]/i.test(x.lang));const us=v.filter(x=>/US/i.test(x.lang));const pool=us.length?us:v;
  const f=re=>pool.find(x=>re.test(x.name));VB=f(/Samantha|Ava|Allison|Jenny|Aria|Google US English|Zira|Female/i)||pool[0]||null;VM=f(/Alex|Daniel|Guy|David|Tom|Fred|Male/i)||pool.find(x=>x!==VB)||VB;}
 if(synth){pickVoices();synth.onvoiceschanged=pickVoices;}
 function speak(text,who,done){if(curAudio){curAudio.pause();curAudio=null;}if(synth)synth.cancel();let fired=false;duck(true);const fin=()=>{if(!fired){fired=true;duck(false);done&&done();}};
  if(!sound){setTimeout(fin,500);return;}const src=VOICES[text];
- if(src){try{const au=new Audio(src);curAudio=au;au.onended=fin;au.onerror=fin;const pr=au.play();if(pr&&pr.catch)pr.catch(()=>setTimeout(fin,600));setTimeout(fin,7000);}catch(e){setTimeout(fin,400);}return;}
- if(!synth){setTimeout(fin,500);return;}try{const u=new SpeechSynthesisUtterance(text);u.lang='en-US';const v=who==='me'?VM:VB;if(v)u.voice=v;u.onend=fin;u.onerror=fin;synth.speak(u);setTimeout(fin,Math.max(1800,text.length*90));}catch(e){setTimeout(fin,400);}}
-document.getElementById('soundBtn').addEventListener('click',e=>{sound=!sound;['sw1','sw2'].forEach(id=>document.getElementById(id).style.opacity=sound?1:0);e.currentTarget.setAttribute('aria-label',sound?'소리 끄기':'소리 켜기');if(!sound){if(synth)synth.cancel();if(curAudio)curAudio.pause();}});
+ if(src){try{const au=vAudio(src);curAudio=au;au.onended=fin;au.onerror=fin;const pr=au.play();if(pr&&pr.catch)pr.catch(()=>setTimeout(fin,600));setTimeout(fin,7000);}catch(e){setTimeout(fin,400);}return;}
+ if(!synth){setTimeout(fin,500);return;}try{const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.volume=VV;const v=who==='me'?VM:VB;if(v)u.voice=v;u.onend=fin;u.onerror=fin;synth.speak(u);setTimeout(fin,Math.max(1800,text.length*90));}catch(e){setTimeout(fin,400);}}
+function setSound(on){sound=on;['sw1','sw2'].forEach(id=>document.getElementById(id).style.opacity=sound?1:0);const b=document.getElementById('soundBtn');b.setAttribute('aria-label',sound?'목소리 음량':'목소리 켜기');const t=document.getElementById('voiceToggle');t.textContent=sound?'끄기':'켜기';t.classList.toggle('on',sound);applyVV();if(!sound){if(synth)synth.cancel();if(curAudio)curAudio.pause();}}
+document.getElementById('soundBtn').addEventListener('click',e=>{e.stopPropagation();const v=document.getElementById('voicePop');v.hidden=!v.hidden;document.getElementById('volPop').hidden=true;document.getElementById('vvol').value=Math.round(VV*100);});
+document.getElementById('voiceToggle').addEventListener('click',()=>setSound(!sound));
+document.getElementById('vvol').addEventListener('input',e=>{VV=e.target.value/100;if(!sound&&VV>0)setSound(true);applyVV();[curAudio,typeof tvAudio!=='undefined'?tvAudio:null].forEach(a=>{if(a&&!a._g)a.volume=VV;});try{const o=JSON.parse(localStorage.getItem('kycafe')||'{}');o.vv=VV;localStorage.setItem('kycafe',JSON.stringify(o));}catch(_){}});
 function pfs(on){stage.classList.toggle('pfs',on);document.body.style.overflow=on?'hidden':'';setTimeout(size,60);}
 document.getElementById('fsBtn').addEventListener('click',()=>{if(stage.classList.contains('pfs')){pfs(false);return;}if(document.fullscreenElement){document.exitFullscreen().catch(()=>{});return;}
  const req=stage.requestFullscreen||stage.webkitRequestFullscreen;let ok=false;try{const r=req&&req.call(stage);ok=!!req;if(r&&r.catch)r.catch(()=>pfs(true));}catch(e){ok=false;}if(!ok)pfs(true);});
@@ -1099,7 +1117,7 @@ function tvStop(){if(tvAudio){tvAudio.onended=null;tvAudio.onerror=null;try{tvAu
 function tvSkip(){const c=tvStop();if(c)c();}
 function tvPlay(v,text,cb){tvStop();const list=v==='w'?TVW:TVL[v];const i=list?list.indexOf(text):-1;let done=false;const go=()=>{if(done)return;done=true;if(tvCb===go)tvCb=null;cb();};tvCb=go;
  const fb=()=>setTimeout(go,Math.max(1300,text.length*60));if(v==='w'&&i<0&&sound&&typeof VOICES!=='undefined'&&VOICES[text]){speak(text,'me',go);return;}if(!tvOn||!sound||i<0){fb();return;}
- const a=new Audio('tv/'+v+'_'+i+'.mp3');a.playbackRate=1;tvAudio=a;duck(true);a.onended=()=>{if(tvAudio===a){tvAudio=null;duck(false);}setTimeout(go,250);};a.onerror=()=>{if(tvAudio===a){tvAudio=null;duck(false);}fb();};a.play().catch(()=>{if(tvAudio===a){tvAudio=null;duck(false);}fb();});}
+ const a=vAudio('tv/'+v+'_'+i+'.mp3');a.playbackRate=1;tvAudio=a;duck(true);a.onended=()=>{if(tvAudio===a){tvAudio=null;duck(false);}setTimeout(go,250);};a.onerror=()=>{if(tvAudio===a){tvAudio=null;duck(false);}fb();};a.play().catch(()=>{if(tvAudio===a){tvAudio=null;duck(false);}fb();});}
 function startChat(i){track('cafe_table_chat',{topic:TOPIC.en});const id=++chatId,q=TOPIC.q[i],ms=mates();$('sheetTable').classList.add('chatting');$('tblList').hidden=true;$('tblChat').hidden=false;$('log').innerHTML='';setOpts('듣는 중',[],()=>{});
  const ok=()=>id===chatId,later=(fn,t)=>setTimeout(()=>{if(ok())fn();},t);
  addMsg('나 · '+me.ko,q.en,q.ko,true,sound);tsay(me,q.en,q.ko);
@@ -1157,7 +1175,7 @@ function syncAlarmUI(){$('sTrack').value=studyTrack;$('alOn').textContent=alarmO
 $('alOn').addEventListener('click',()=>{alarmOn=!alarmOn;savePrefs();syncAlarmUI();});
 $('alSound').addEventListener('change',e=>{alarmSound=e.target.value;savePrefs();playAlarm(alarmSound,false);});
 $('alTest').addEventListener('click',()=>playAlarm($('alSound').value,false));
-$('sVol').addEventListener('input',e=>{SVOL=e.target.value/100;if(inStudy)$('vol').value=e.target.value;savePrefs();if(musicOn&&inStudy){const a=trk(true);clearInterval(a._f);a.volume=SVOL;}});
+$('sVol').addEventListener('input',e=>{SVOL=e.target.value/100;if(inStudy)$('vol').value=e.target.value;savePrefs();if(musicOn&&inStudy){const a=trk(true);clearInterval(a._f);setV(a,SVOL);}});
 $('sMusic').addEventListener('click',()=>{setMusic(!musicOn);syncVol();syncAlarmUI();});
 function focusAlarm(){if(alarmOn){playAlarm(alarmSound,true);try{navigator.vibrate&&navigator.vibrate([300,150,300,150,600]);}catch(e){}}
  if(document.hidden){try{if('Notification' in window&&Notification.permission==='granted')new Notification('카영 · 집중 완료',{body:fMin+'분 집중을 마쳤어요. 잠깐 쉬어 가요!',icon:'/assets/icon-192.png'});}catch(e){}
@@ -1413,7 +1431,7 @@ function showRes(heard,score){const r=$('mRes');r.hidden=false;r.innerHTML='';r.
   hw.forEach(w=>{const sp=document.createElement('span');sp.className=tw.has(nw(w))?'ok':'extra';sp.textContent=w;cmp.append(sp,' ');});r.appendChild(cmp);}
  const pl=document.createElement('div');pl.className='plays';
  const mk=(t,fn)=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>{haptic();pl.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');fn(()=>b.classList.remove('on'));};pl.appendChild(b);return b;};
- const playMine=done=>{if(!myVoice){done();return;}try{if(myAudio)myAudio.pause();myAudio=new Audio(myVoice);duck(true);myAudio.onended=()=>{duck(false);done();};myAudio.play().catch(()=>{duck(false);done();});}catch(e){done();}};
+ const playMine=done=>{if(!myVoice){done();return;}try{if(myAudio)myAudio.pause();myAudio=vAudio(myVoice);duck(true);myAudio.onended=()=>{duck(false);done();};myAudio.play().catch(()=>{duck(false);done();});}catch(e){done();}};
  const playNative=done=>{say(me,mPick[0],mPick[1],3000,true);speak(mPick[0],'me',done);};
  if(myVoice)mk('내 목소리 듣기',playMine);mk('원어민 듣기',playNative);if(myVoice)mk('번갈아 듣기',done=>playNative(()=>setTimeout(()=>playMine(done),350)));
  r.appendChild(pl);}
@@ -1444,8 +1462,8 @@ function applyTopic(){TOPIC=TOPICS[dayIdx];$('topicName').textContent=(dayIdx===
 /* 카페 음악: ElevenLabs로 만든 카페 재즈·보사노바 연주곡(가사 없음), 반복 재생 */
 let musicOn=false,bgm=null,bgmS=null,inStudy=false;let MV=.32,SVOL=.24;const MD=.1;try{const st=JSON.parse(localStorage.getItem('kycafe')||'{}');if(typeof st.svol==='number')SVOL=st.svol;}catch(e){}
 const STUDY_TRACKS={gymnopedie:['짐노페디 1번 · 사티','study-gymnopedie.mp3'],clair:['달빛 · 드뷔시','study-clairdelune.mp3'],nocturne:['녹턴 Op.9 No.2 · 쇼팽','study-nocturne.mp3']};let studyTrack='gymnopedie';try{const st=JSON.parse(localStorage.getItem('kycafe')||'{}');if(STUDY_TRACKS[st.track])studyTrack=st.track;}catch(e){}
-function trk(st){if(st){if(!bgmS){bgmS=new Audio(STUDY_TRACKS[studyTrack][1]);bgmS.loop=true;bgmS.volume=0;}return bgmS;}if(!bgm){bgm=new Audio('cafe-music.mp3');bgm.loop=true;bgm.volume=0;}return bgm;}
-function fadeA(a,v,ms){if(!a)return;clearInterval(a._f);const st=a.volume,t0=performance.now();if(v>0&&a.paused){const pr=a.play();if(pr&&pr.catch)pr.catch(()=>{});}a._f=setInterval(()=>{const k=Math.min(1,(performance.now()-t0)/ms);a.volume=Math.max(0,Math.min(1,st+(v-st)*k));if(k>=1){clearInterval(a._f);if(v===0)a.pause();}},40);}
+function trk(st){if(st){if(!bgmS){bgmS=new Audio(STUDY_TRACKS[studyTrack][1]);bgmS.loop=true;bgmS._v=0;bgmS.volume=0;routeA(bgmS);}return bgmS;}if(!bgm){bgm=new Audio('cafe-music.mp3');bgm.loop=true;bgm._v=0;bgm.volume=0;routeA(bgm);}return bgm;}
+function fadeA(a,v,ms){if(!a)return;clearInterval(a._f);const st=getV(a),t0=performance.now();if(v>0&&a.paused){const pr=a.play();if(pr&&pr.catch)pr.catch(()=>{});}a._f=setInterval(()=>{const k=Math.min(1,(performance.now()-t0)/ms);setV(a,Math.max(0,Math.min(1,st+(v-st)*k)));if(k>=1){clearInterval(a._f);if(v===0)a.pause();}},40);}
 const tv=()=>inStudy?SVOL:MV;
 function fadeTo(v,ms){fadeA(trk(inStudy),v,ms);}
 function setMusic(on){musicOn=on;$('mslash').style.opacity=on?0:1;$('musicBtn').setAttribute('aria-label',on?'카페 음악 끄기':'카페 음악 켜기');
@@ -1456,12 +1474,12 @@ function checkRoom(){const now=me.x>BX+10&&me.z<AZ1;if(now===inStudy)return;inSt
  toast(now?'스터디룸이에요. 공부 음악: '+STUDY_TRACKS[studyTrack][0]:'카페로 돌아왔어요');
  const l=$('musicLabel');if(l)l.textContent=now?'스터디룸 음악':'카페 음악';syncVolSlider();}
 function syncVol(){const t=$('musicToggle');t.textContent=musicOn?'끄기':'켜기';t.classList.toggle('on',musicOn);}
-$('musicBtn').addEventListener('click',e=>{e.stopPropagation();const v=$('volPop');v.hidden=!v.hidden;if(!v.hidden&&!musicOn)setMusic(true);syncVol();});
+$('musicBtn').addEventListener('click',e=>{e.stopPropagation();const v=$('volPop');v.hidden=!v.hidden;$('voicePop').hidden=true;if(!v.hidden&&!musicOn)setMusic(true);syncVol();});
 $('musicToggle').addEventListener('click',()=>{setMusic(!musicOn);syncVol();});
-$('vol').addEventListener('input',e=>{const v=e.target.value/100;if(inStudy){SVOL=v;try{savePrefs();}catch(_){}}else MV=v;if(musicOn){const a=trk(inStudy);clearInterval(a._f);a.volume=tv();}});
+$('vol').addEventListener('input',e=>{const v=e.target.value/100;if(inStudy){SVOL=v;try{savePrefs();}catch(_){}}else MV=v;if(musicOn){const a=trk(inStudy);clearInterval(a._f);setV(a,tv());}});
 function syncVolSlider(){$('vol').value=Math.round(tv()*100);}
-cv.addEventListener('pointerdown',()=>{$('volPop').hidden=true;});
-let firstTouch=false;stage.addEventListener('pointerdown',e=>{if(e.target.closest('#musicBtn,#volPop')){firstTouch=true;return;}if(!firstTouch){firstTouch=true;if(!musicOn){setMusic(true);syncVol();}}},{capture:true});
+cv.addEventListener('pointerdown',()=>{$('volPop').hidden=true;$('voicePop').hidden=true;});
+let firstTouch=false;stage.addEventListener('pointerdown',e=>{if(e.target.closest('#musicBtn,#volPop,#soundBtn,#voicePop')){firstTouch=true;return;}if(!firstTouch){firstTouch=true;if(!musicOn){setMusic(true);syncVol();}}},{capture:true});
 document.querySelectorAll('.skb').forEach(b=>b.addEventListener('click',()=>{skyMode=b.dataset.sk;document.querySelectorAll('.skb').forEach(x=>x.classList.toggle('on',x===b));skyCur='';updSky();}));
 function haptic(){try{navigator.vibrate&&navigator.vibrate(12);}catch(e){}}
 {const SHORT={'바리스타에게 주문하기':'주문하기','오픈마이크 올라가기':'무대 오르기','모닥불 퀴즈 하기':'모닥불 퀴즈','포스트잇 벽 보기':'포스트잇 벽'};const fit=()=>{if(innerWidth<=640){const m=SHORT[actBtn.textContent];if(m)actBtn.textContent=m;}};new MutationObserver(fit).observe(actBtn,{childList:true,characterData:true,subtree:true});fit();addEventListener('resize',()=>{actBtn.dataset.key='';});}
