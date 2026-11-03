@@ -388,7 +388,7 @@ body.fv-on .dock{visibility:hidden}
 .top .chip{white-space:nowrap}.top .livechip{gap:9px!important;margin-left:6px}.top .livechip i{width:8px;height:8px}
 .top .chip.exit::after{content:"";position:absolute;right:0;top:28%;bottom:28%;width:1px;background:currentColor;opacity:.22}
 @media (max-width:480px){.top .chip{font-size:15px;padding:9px 12px}.top .chip.ic{padding:9px 11px}.top .chip svg{width:21px;height:21px}}
-.rl{display:flex;flex-direction:column;gap:6px}.rl .br{display:flex;justify-content:space-between;align-items:center;font-size:14px}.rl .br span{font-size:13px;opacity:.75;font-variant-numeric:tabular-nums}.rl-hi{align-self:flex-start;margin-top:2px}
+.rmlist{display:flex;flex-direction:column;gap:6px}.rmlist .br{display:flex;justify-content:space-between;align-items:center;font-size:14px}.rmlist .br span{font-size:13px;opacity:.75;font-variant-numeric:tabular-nums}.rm-hi{align-self:flex-start;margin-top:2px}
 #branchBtn .cv{width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-3px);opacity:.6;margin-left:2px}
 @media (max-width:480px){#roomPop{left:10px!important;top:52px}}
 </style>
@@ -439,8 +439,8 @@ body{padding:0!important;background:#140E0A}
     <div class="vol glass setp" id="roomPop" hidden style="left:14px;right:auto">
       <div class="row sp-h"><b>방 고르기</b><button class="tg" id="roomX" aria-label="닫기">✕</button></div>
       <p class="sp-d">한 방에 40명까지 같이 있어요. 나에게만 적용돼요.</p>
-      <div class="rl" id="roomList"></div>
-      <button class="tg rl-hi" id="roomHi">카영 소개 다시 보기</button>
+      <div class="rmlist" id="roomList"></div>
+      <button class="tg rm-hi" id="roomHi">카영 소개 다시 보기</button>
     </div>
     <div class="vol glass setp" id="volPop" hidden>
       <div class="row sp-h"><b>소리 설정</b><button class="tg" id="setX" aria-label="닫기">✕</button></div>
