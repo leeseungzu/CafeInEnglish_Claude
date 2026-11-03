@@ -385,6 +385,7 @@ body.fv-on .dock{visibility:hidden}
 .top .chip.glass{background:transparent!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 .top .chip{font-size:16px;padding:10px 14px;gap:8px}.top .chip.ic{padding:10px 13px}.top .chip svg{width:22px;height:22px}
 .top>div:first-child{flex:0 1 auto!important}
+.top .chip{white-space:nowrap}.top .livechip{gap:9px!important;margin-left:6px}.top .livechip i{width:8px;height:8px}
 .top .chip.exit::after{content:"";position:absolute;right:0;top:28%;bottom:28%;width:1px;background:currentColor;opacity:.22}
 @media (max-width:480px){.top .chip{font-size:15px;padding:9px 12px}.top .chip.ic{padding:9px 11px}.top .chip svg{width:21px;height:21px}}
 .rl{display:flex;flex-direction:column;gap:6px}.rl .br{display:flex;justify-content:space-between;align-items:center;font-size:14px}.rl .br span{font-size:13px;opacity:.75;font-variant-numeric:tabular-nums}.rl-hi{align-self:flex-start;margin-top:2px}
@@ -752,12 +753,11 @@ const RT_DRINK=[['라떼','Latte'],['아메리카노','Americano'],['에스프�
 const MY_NAME=(()=>{let n=null;try{n=JSON.parse(localStorage.getItem('kycafe')||'{}').nm;}catch(e){}if(!n||!RT_ADJ[n[0]]||!RT_DRINK[n[1]]){n=[Math.floor(Math.random()*RT_ADJ.length),Math.floor(Math.random()*RT_DRINK.length)];try{const o=JSON.parse(localStorage.getItem('kycafe')||'{}');o.nm=n;localStorage.setItem('kycafe',JSON.stringify(o));}catch(e){}}return n;})();
 const me={id:'me',ko:RT_ADJ[MY_NAME[0]][0]+' '+RT_DRINK[MY_NAME[1]][0],en:RT_ADJ[MY_NAME[0]][1]+' '+RT_DRINK[MY_NAME[1]][1],x:60,z:380,col:'#F4E7D3',me:true};
 CLIP["It's "+me.en+'.']='nm/'+MY_NAME[0]+'_'+MY_NAME[1]+'.mp3?v=2';
-const people=[me,
- {ko:'졸린 아메리카노',col:'#CFE3FF',seat:['t2',0]},{ko:'진한 에스프레소',col:'#C9A27E',seat:['t2',1]},{ko:'포근한 카푸치노',col:'#FBD9DF',seat:['t2',3]},
- {ko:'상큼한 레몬티',col:'#E8F5B8',seat:['bar',1]},{ko:'달콤한 머핀',col:'#D5F0E3',seat:['lounge',0]},
- {ko:'바삭한 크루아상',col:'#FFE1B3',x:60,z:120},{ko:'느긋한 스콘',col:'#F4E7D3',x:-60,z:330},{ko:'고소한 라떼',col:'#E3D9FF',x:220,z:60},
- {ko:'성실한 콜드브루',col:'#D9E8FF',seat:['s1',0]},{ko:'차분한 얼그레이',col:'#F3E3FF',seat:['s1',4]},{ko:'열공하는 마카롱',col:'#FFE0E6',seat:['s1',8]},{ko:'꾸준한 녹차라떼',col:'#DDF2D0',seat:['s1',15]}];
-people.forEach((p,i)=>{p.id=p.id||'n'+i;if(p.seat){const z=ZONES.find(t=>t.id===p.seat[0]);const s=z.spots[p.seat[1]];p.x=s.x;p.z=s.z;}p.tx=p.x;p.tz=p.z;p.ang=0;p.ph=Math.random()*6;p.vx=0;p.vz=1;});
+const people=[me, /* 연습 손님: 테이블마다 1명 (카페 6 + 스터디룸 1), 실제 손님 5명 이상이면 사라짐 */
+ {ko:'졸린 아메리카노',col:'#CFE3FF',seat:['t1',0]},{ko:'진한 에스프레소',col:'#C9A27E',seat:['t2',1]},{ko:'포근한 카푸치노',col:'#FBD9DF',seat:['t3',0]},
+ {ko:'바삭한 크루아상',col:'#FFE1B3',seat:['t4',1]},{ko:'상큼한 레몬티',col:'#E8F5B8',seat:['bar',1]},{ko:'달콤한 머핀',col:'#D5F0E3',seat:['lounge',0]},
+ {ko:'성실한 콜드브루',col:'#D9E8FF',seat:['s1',4]}];
+people.forEach((p,i)=>{p.id=p.id||'n'+i;if(p.seat)p.home=p.seat.slice();if(p.seat){const z=ZONES.find(t=>t.id===p.seat[0]);const s=z.spots[p.seat[1]];p.x=s.x;p.z=s.z;}p.tx=p.x;p.tz=p.z;p.ang=0;p.ph=Math.random()*6;p.vx=0;p.vz=1;});
 const barista={id:'b',ko:'바리스타 카영이',x:-75,z:-500,col:'#FFFFFF',barista:true,ang:0,ph:0};
 const all=[...people,barista];
 const QC_BASE=[['Hey! Mind if I join you?','안녕하세요! 같이 앉아도 될까요?'],['This place has such a cozy vibe.','여기 분위기 진짜 아늑하다.'],['Ooh, what are you drinking?','오, 뭐 마셔요?'],['Sorry, could you say that again?','미안해요, 다시 말해 줄래요?'],['No way, that\'s awesome!','헐, 대박이다!'],['Haha, I feel that.','하하, 무슨 말인지 알아요.'],['Okay, I gotta run. See ya!','이제 가 봐야 해요. 또 봐요!']];
@@ -1733,9 +1733,9 @@ function rtAdd(d,enter){if(RT.peers.has(d.id)||!RT_ADJ[d.adj]||!RT_DRINK[d.drink
  actorDom(p);p.tagEl.classList.add('rl');charMesh(p);people.push(p);all.push(p);RT.peers.set(d.id,p);if(d.seat)rtSeat(p,d.seat);
  if(enter){toast('☕ '+p.ko+'님이 들어왔어요');setTimeout(()=>nod(p),1500);}applyNpc();}
 function rtDel(id){const p=RT.peers.get(id);if(!p)return;RT.peers.delete(id);rmArr(people,p);rmArr(all,p);scene.remove(p.wrap);p.tagEl.remove();p.bubEl.remove();applyNpc();}
-function applyNpc(){const real=RT.peers.size;const want=(RT.on&&(RT.count||real+1)>=5)?0:Math.min(5,NPC_POOL.length); /* 연습 손님: 실제 손님 5명 미만일 때만 5명 */const vis=NPC_POOL.filter(p=>!p.off);
+function applyNpc(){const real=RT.peers.size;const want=(RT.on&&(RT.count||real+1)>=5)?0:NPC_POOL.length; /* 연습 손님: 실제 손님 5명 미만일 때만 테이블마다 1명 */const vis=NPC_POOL.filter(p=>!p.off);
  if(vis.length>want){vis.filter(p=>!(seated&&p.seat&&p.seat[0]===seated.id)).sort((a,b)=>(a.seat?1:0)-(b.seat?1:0)).slice(0,vis.length-want).forEach(p=>{p.off=true;p.seat=null;rmArr(people,p);rmArr(all,p);p.wrap.visible=false;p.tagEl.style.display='none';hush(p);});}
- else if(vis.length<want){NPC_POOL.filter(p=>p.off).slice(0,want-vis.length).forEach(p=>{p.off=false;p.wrap.visible=true;p.x=Math.random()*40-20;p.z=530;p.tx=Math.random()*160-80;p.tz=400;people.push(p);all.splice(all.length-1,0,p);});}
+ else if(vis.length<want){NPC_POOL.filter(p=>p.off).slice(0,want-vis.length).forEach(p=>{p.off=false;p.wrap.visible=true;p.tagEl.style.display='';if(p.home&&!people.some(q=>q.seat&&q.seat[0]===p.home[0]&&q.seat[1]===p.home[1])){const z=ZONES.find(t=>t.id===p.home[0]);const sp=z.spots[p.home[1]];p.seat=p.home.slice();p.x=p.tx=sp.x;p.z=p.tz=sp.z;}else{p.x=Math.random()*40-20;p.z=530;p.tx=Math.random()*160-80;p.tz=400;}people.push(p);all.splice(all.length-1,0,p);});}
  NPC_POOL.forEach(p=>p.tagEl.classList.toggle('np',RT.on));}
 function rtCount(){const c=$('countTxt');if(!c)return;c.classList.toggle('live',RT.on);if(RT.on){c.innerHTML='<span class="livechip"><i></i>'+RT.count+'/40</span>';$('branchName').textContent='카영 '+RT.room;}else{c.textContent=RT.full?'만석':'베타';$('branchName').textContent='카영 '+RT.want;}}
 
