@@ -13,12 +13,6 @@
     "ko": "영어가 입에서 안 나올 때"
   },
   "icon": "speaking-head",
-  "chat": {
-    "q": "Hi! Can I help you?",
-    "a": "Yes! Do you have this in a bigger size?",
-    "key": "Do you have this in a bigger size?",
-    "ko": "네! 이거 더 큰 사이즈 있어요?"
-  },
   "thumb": {
     "ko": "영어가 입에서 안 나올 때",
     "text": "Do you have this?",
@@ -226,5 +220,6 @@
       "href": "/p/jennie-vs-rose-english-interview/"
     }
   ],
-  "updated": "2026-11-03"
+  "updated": "2026-11-03",
+  "video": "zEJ1OFNgf4w"
 }
