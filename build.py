@@ -56,9 +56,19 @@ e = lambda s: html.escape(str(s), quote=True)
 
 try:
     import segno
-except ImportError:  # QR 없이도 빌드는 됩니다
-    segno = None
-    print("⚠️  segno 가 없어 출력물 QR 코드를 건너뜁니다 (pip install segno)")
+except ImportError:  # 새 작업 환경엔 segno가 없어 앱 설치 페이지·출력물 QR이 빈 칸이 된 적 있음 → 자동 설치
+    import subprocess, sys, site, importlib
+    for _args in (["--user"], ["--user", "--break-system-packages"]):
+        if subprocess.run([sys.executable, "-m", "pip", "install", "-q", *_args, "segno"]).returncode == 0:
+            break
+    try:
+        importlib.invalidate_caches()
+        if site.getusersitepackages() not in sys.path:
+            sys.path.append(site.getusersitepackages())
+        import segno
+    except ImportError:
+        segno = None
+        print("\n" + "⚠️ " * 10 + "\n⚠️  segno 설치 실패: /app/ 설치 QR과 출력물 QR이 빠진 채로 빌드됩니다 (pip install segno)\n" + "⚠️ " * 10 + "\n")
 
 
 def qr_svg(url):
