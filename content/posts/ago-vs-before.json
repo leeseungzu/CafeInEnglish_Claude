@@ -1,0 +1,73 @@
+{
+  "id": "ago-vs-before",
+  "cat": "tip",
+  "sub": "단어",
+  "level": "기초",
+  "date": "2026-11-03",
+  "title": "'3일 전에'는 before three days? ago와 before 구별하기",
+  "seo_title": "ago before 차이 - '~ 전에' 영어로, three days ago와 before",
+  "lead": "'전에'를 영어로 옮기기 전에, 어디서부터 셀지 먼저 정해요",
+  "description": "'3일 전에'는 three days ago예요. ago는 지금부터, before는 과거의 어느 때부터 거꾸로 세요. ago와 현재완료·since를 같이 쓰지 않는 이유와 before 쓰는 법을 정리했어요.",
+  "og": {
+    "en": "three days ago",
+    "ko": "'~ 전에'를 영어로, ago와 before"
+  },
+  "icon": "hourglass",
+  "chat": {
+    "q": "When did you get back from Jeju?",
+    "a": "I got back three days ago.",
+    "key": "three days ago",
+    "ko": "3일 전에 돌아왔어."
+  },
+  "thumb": {
+    "text": "three days ago",
+    "key": "ago",
+    "ko": "'3일 전에'를 영어로"
+  },
+  "quiz": [
+    {
+      "tag": "작문",
+      "q": "'일주일 전에 그 책을 다 읽었어'를 영어로 바르게 말한 것은?",
+      "sub": "",
+      "options": [
+        "I finished the book before a week.",
+        "I finished the book a week ago.",
+        "I have finished the book a week ago.",
+        "I finished the book since a week."
+      ],
+      "answer": 1,
+      "explain": "지금부터 거꾸로 세는 '~ 전에'는 시간 길이 + ago, 그리고 단순 과거와 함께 써요. 현재완료나 since와는 같이 쓰지 않아요.",
+      "mnemonic": "숫자 먼저, ago는 꼬리에"
+    },
+    {
+      "tag": "빈칸",
+      "q": "When I called her on Monday, she had left two days ___.",
+      "sub": "월요일에 전화했을 때, 그녀는 (그보다) 이틀 전에 이미 떠났었다",
+      "options": [
+        "ago",
+        "since",
+        "before",
+        "after"
+      ],
+      "answer": 2,
+      "explain": "기준이 지금이 아니라 '월요일에 전화한 그때'예요. 과거의 어느 때부터 거꾸로 셀 때는 before를 써요.",
+      "mnemonic": "지금 기준은 ago, 그때 기준은 before"
+    },
+    {
+      "tag": "빈칸",
+      "q": "Have we met ___? You look familiar.",
+      "sub": "우리 전에 만난 적 있나요? 낯이 익어서요",
+      "options": [
+        "ago",
+        "before",
+        "since",
+        "a ago"
+      ],
+      "answer": 1,
+      "explain": "정해진 때 없이 '전에, 이전에'라고 할 때는 before를 혼자 써요. ago는 늘 앞에 시간 길이가 붙어서 혼자 쓰지 않고, since는 '~ 이후로'라 이 문장의 뜻과 맞지 않아요.",
+      "mnemonic": "ago는 혼자 못 다녀요, 늘 숫자와 함께"
+    }
+  ],
+  "body_html": "<p>먼저 문제 하나 풀고 시작할게요. '3일 전에 그를 만났어'를 영어로 옮긴 세 문장 중 자연스러운 것은 무엇일까요?</p>\n<div class=\"box\"><p><b>①</b> I met him before three days.<br><b>②</b> I met him three days before.<br><b>③</b> I met him three days ago.</p></div>\n<p>정답은 ③이에요. ①은 '3일 전에'를 한 단어씩 옮긴 문장이라 원어민은 이렇게 말하지 않아요. ②는 문법은 맞지만 뜻이 달라요. '(어떤 과거 시점보다) 3일 전에'라는 뜻이라, 그 기준이 되는 때가 앞에 나와 있어야 해요. 두 단어 모두 '전에'로 옮겨지지만, 영어는 <b>어디서부터 거꾸로 세는지</b>로 둘을 나눠요.</p>\n<h2>ago는 지금에서, before는 그때에서</h2>\n<figure class=\"fig\"><img src=\"/images/ago-before-timeline.png\" alt=\"'~ 전에'를 영어로: 지금부터 거꾸로 세면 ago(I met him three days ago), 과거의 그때부터 거꾸로 세면 before(She had left three days before), 정해진 때 없이 '전에'는 before(I think we've met before). I met him before three days, I have met him three days ago, since two years ago는 쓰지 않아요\" width=\"1080\" height=\"1864\" loading=\"lazy\"><figcaption>기준이 지금이면 ago, 과거의 어느 때면 before</figcaption></figure>\n<p>옥스퍼드 러너스 사전은 ago를 '단순 과거와 함께 시간 표현에 써서, 어떤 일이 얼마나 먼 과거에 일어났는지 나타내는 말'로 풀이해요. 메리엄웹스터의 풀이도 '현재보다 이전'이에요. 즉 ago의 출발선은 언제나 <b>말하고 있는 지금</b>이에요.</p>\n<p>before를 부사로 쓰면 '더 이른 때에, 이전에'라는 뜻이에요. 옥스퍼드 러너스 사전에는 the week before를 '그 전 주'로 풀이한 예문이 있어요. 이야기 속의 어떤 과거 시점을 기준으로 '그보다 일주일 전'이라는 뜻이에요. 기준이 지금이 아니라 <b>이야기 속의 그때</b>라는 점이 ago와 달라요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>하고 싶은 말</th><th>영어</th><th>기준</th></tr></thead><tbody><tr><td>3일 전에 그를 만났어</td><td>I met him three days ago.</td><td>지금</td></tr><tr><td>오래전에</td><td>a long time ago</td><td>지금</td></tr><tr><td>그 전 주에는 날씨가 좋았어</td><td>The weather had been nice the week before.</td><td>이야기 속 과거</td></tr><tr><td>우리 전에 만난 적 있어요</td><td>I think we've met before.</td><td>정해진 때 없음</td></tr><tr><td>그저께</td><td>the day before yesterday</td><td>어제</td></tr></tbody></table></div>\n<p>세 번째 줄처럼 과거의 그때보다 더 앞선 일을 말할 때는 had been, had left 같은 과거완료가 자주 함께 나와요. 네 번째 줄의 before는 기준 시점도, 시간 길이도 없이 '전에, 이미'라는 뜻이에요. 반면 ago는 늘 two weeks ago, a long time ago처럼 앞에 시간 길이가 붙어요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> a<b>go</b> = 이미 지나가 버린(gone) 시간. 실제로 ago는 '지나간'이라는 뜻의 옛말 agone에서 왔어요. be<b>fore</b>는 기준이 되는 때의 앞(fore)을 가리켜요.</div>\n<h2>발음과 억양</h2>\n<p>ago는 <b>\"어고우\"</b>에 가깝게 들려요. 첫 a는 힘을 빼고 짧게 '어', 강세는 뒤의 <b>go</b>에 와요. three days ago는 \"쓰리 데이즈 어고우\"를 끊지 않고 \"쓰리 데이저고우\"처럼 이어서 말해요. 문장 안에서는 three days에 힘이 실리고, ago는 가볍게 붙어요. before도 \"비<b>포</b>어\"처럼 뒤에 강세가 있어서 be-는 짧고 약하게 지나가요. the day before yesterday는 \"더 데이 비포어 예스터데이\"를 한 호흡에 이어 말해요.</p>\n<h2>실제 대화 · 낯익은 얼굴을 만났을 때</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Have we met before? You look familiar.</span><span class=\"ko\">우리 전에 만난 적 있나요? 낯이 익어서요.</span></li>\n<li class=\"me\"><span class=\"en\">I think so. We met at a workshop about two years ago.</span><span class=\"ko\">그런 것 같아요. 2년쯤 전에 워크숍에서 만났어요.</span></li>\n<li class=\"them\"><span class=\"en\">Oh, right! I'd only joined the company a month before.</span><span class=\"ko\">아, 맞다! 그때 입사한 지 겨우 한 달 됐을 때였어요.</span></li>\n<li class=\"me\"><span class=\"en\">That's right. You were new back then.</span><span class=\"ko\">맞아요. 그때 신입이셨죠.</span></li>\n</ul>\n<p>짧은 대화에 '전'을 뜻하는 말이 세 번(before, ago, before) 나오는데 모두 기준이 달라요. 첫 줄의 before는 정해진 때 없이 '전에', 두 번째 줄의 ago는 지금부터 2년 전, 세 번째 줄의 before는 워크숍이 열린 그때보다 한 달 전이에요.</p>\n<h2>ago 앞뒤에 붙이지 않는 것들</h2>\n<p>롱맨 사전은 ago 항목에 따로 문법 설명을 달아 두었어요. 한국인이 자주 틀리는 부분과 거의 그대로 겹쳐요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>규칙</th><th>이렇게 말해요</th></tr></thead><tbody><tr><td>현재완료가 아니라 단순 과거와 함께</td><td>I started a new job two weeks ago.</td></tr><tr><td>since, before와 같이 쓰지 않기</td><td>I came to Seoul two months ago.</td></tr><tr><td>at, in, on을 앞에 붙이지 않기</td><td>They met fifteen years ago.</td></tr></tbody></table></div>\n<p>옥스퍼드 러너스 사전도 It's not long ago since they met은 틀린 문장이라며, ago를 빼고 It's not long since they met이라고 써야 한다고 짚어요. ago가 이미 '지금부터 얼마 전'이라는 시점을 콕 집기 때문에, 기간을 말하는 현재완료나 since와는 어울리지 않아요. '~한 지 2주 됐어'처럼 기간을 말하고 싶다면 ago 대신 for나 since를 써서 I've been here for two weeks라고 해요.</p>\n<h2>'전에'라는 말 하나가 두 가지 일을 해서</h2>\n<p>한국어에서는 '3일 전에', '식사 전에', '전에 가 봤어'를 모두 같은 '전에'로 말해요. 그래서 '전 = before'로 외워 두면 '3일 전에'도 before three days로 옮기게 돼요. 하지만 영어에서 before 뒤에는 before dinner, before the meeting처럼 <b>기준이 되는 일이나 때</b>가 와요. 그 자리에 three days라는 시간 길이를 넣으면 기준이 사라져서 어색한 문장이 돼요.</p>\n<p>미래 쪽에도 똑같은 짝이 있어요. 지금부터 10분 뒤는 after 10 minutes가 아니라 in 10 minutes라고 하죠. 정리하면 지금 기준 미래는 in, 지금 기준 과거는 ago예요. 이 짝은 <a href=\"/p/in-vs-after/\">in과 after 구별하기</a>에서 자세히 다뤘어요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">'2년 전에 서울로 이사했어'를 말할 때</span><span class=\"no\">I moved to Seoul before two years.</span><span class=\"en\">I moved to Seoul two years ago.</span><span class=\"ko\">2년 전에 서울로 이사했어.</span><span class=\"why\"><b>왜?</b>지금부터 거꾸로 세는 '~ 전에'는 시간 길이 뒤에 ago를 붙여요. before 뒤에는 시간 길이가 아니라 기준이 되는 일이나 때가 와요.</span></li>\n<li><span class=\"ctx\">이 영화를 3년 전에 봤다고 말할 때</span><span class=\"no\">I have seen this movie three years ago.</span><span class=\"en\">I saw this movie three years ago.</span><span class=\"ko\">이 영화 3년 전에 봤어.</span><span class=\"why\"><b>왜?</b>ago는 끝난 과거의 한 시점을 가리켜서 단순 과거와 함께 써요. 언제인지 말하지 않고 경험만 말할 때는 I've seen this movie before.</span></li>\n<li><span class=\"ctx\">'여기 온 지 2주 됐어'를 말할 때</span><span class=\"no\">I'm here since two weeks ago.</span><span class=\"en\">I've been here for two weeks.</span><span class=\"ko\">여기 온 지 2주 됐어.</span><span class=\"why\"><b>왜?</b>ago와 since는 함께 쓰지 않아요. 기간을 말할 땐 현재완료 + for, 온 시점을 말할 땐 I came here two weeks ago.</span></li>\n</ul></div>\n<p>'이번 주'와 '다음 주'처럼 날짜를 헷갈리기 쉬운 표현은 <a href=\"/p/this-vs-next/\">this와 next 구별하기</a>도 함께 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Oxford Learner's Dictionaries 'ago'·'before'(부사), Longman Dictionary of Contemporary English 'ago'(문법 설명), Merriam-Webster 'ago'.</p>",
+  "related": []
+}

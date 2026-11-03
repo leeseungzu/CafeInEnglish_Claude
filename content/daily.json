@@ -430,5 +430,17 @@
     "en": "It was really fun.",
     "ko": "정말 재미있었어",
     "desc": "즐거웠다는 fun, 웃겼다는 funny. funny에는 '이상하다'는 뜻도 있어요."
+  },
+  {
+    "post": "not-my-cup-of-tea",
+    "en": "It's not really my cup of tea.",
+    "ko": "내 취향은 별로 아니야",
+    "desc": "싫다고 딱 자르는 대신 '내 취향과 안 맞아'로 돌려 말하는 표현. 대부분 not과 함께 써요."
+  },
+  {
+    "post": "ago-vs-before",
+    "en": "I got back three days ago.",
+    "ko": "3일 전에 돌아왔어",
+    "desc": "지금부터 거꾸로 셀 땐 시간 길이 + ago, 그리고 단순 과거. before three days라고 하지 않아요."
   }
 ]

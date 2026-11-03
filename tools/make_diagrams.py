@@ -746,6 +746,58 @@ def fun_funny():
     c.save("fun-funny-split.png")
 
 
+def cup_of_tea():
+    c = Canvas("'별로야'를 말하는 두 가지 방법", "같은 마음이라도 말투가 달라져요")
+    def strong(x, r):
+        c.pill(x, c.y, "딱 잘라 말하기", F(36, 700), bg=SOFT, fg=INK); c.y += 84
+        for en, ko in (("I hate hiking.", "등산 진짜 싫어."), ("I don't like hiking.", "등산 안 좋아해.")):
+            c.text(x, en, F(54, 800), INK, 1.3)
+            c.text(x, ko, F(40, 700), MUTED, 1.5)
+    c.card(strong)
+    def soft(x, r):
+        c.pill(x, c.y, "돌려서 부드럽게", F(36, 700), bg=LIME, fg=INK); c.y += 84
+        for en, ko in (("Hiking isn't really my cup of tea.", "등산은 내 취향이 별로 아니야."),
+                       ("Hiking isn't really my thing.", "등산은 별로 내 스타일이 아니야.")):
+            sz = 54
+            while c.d.textlength(en, font=F(sz, 800)) > r - x - 12 and sz > 40:
+                sz -= 2
+            c.hl(x, c.y, en, F(sz, 800)); c.y += int(sz * 1.3)
+            c.text(x, ko, F(40, 700), MUTED, 1.5)
+    c.card(soft)
+    c.note("대상이 아니라 '내 취향'을 말하니까 덜 딱딱해요", 40)
+    c.save("cup-of-tea-soft.png")
+
+
+def ago_before():
+    c = Canvas("'~ 전에', 어디서부터 셀까?", "기준이 지금이면 ago, 과거의 그때면 before")
+    rows = [("ago", "지금부터 거꾸로", "I met him three days ago.", "(지금부터) 3일 전에 그를 만났어."),
+            ("before", "과거의 그때부터 거꾸로", "She had left three days before.", "(그때보다) 3일 전에 그녀는 떠났었어."),
+            ("before", "정해진 때 없이 '전에'", "I think we've met before.", "우리 전에 만난 적 있는 것 같아요.")]
+    for word, when, en, ko in rows:
+        def body(x, r, word=word, when=when, en=en, ko=ko):
+            w, h = c.pill(x, c.y, word, F(38, 800), bg=LIME, fg=INK)
+            c.d.text((x + w + 20, c.y + h / 2), when, font=F(40, 700), fill=MUTED, anchor="lm"); c.y += 88
+            sz = 54
+            while c.d.textlength(en, font=F(sz, 800)) > r - x - 12 and sz > 40:
+                sz -= 2
+            c.text(x, en, F(sz, 800), INK, 1.3)
+            c.text(x, ko, F(40, 700), MUTED, 1.2)
+        c.card(body)
+    def wrong(x, r):
+        c.pill(x, c.y, "이렇게 쓰지 마세요", F(36, 700), bg=SOFT, fg=INK); c.y += 84
+        for en in ("I met him before three days.", "I have met him three days ago.", "since two years ago"):
+            sz = 50
+            while c.d.textlength(en, font=F(sz, 700)) > r - x - 12 and sz > 40:
+                sz -= 2
+            w = c.d.textlength(en, font=F(sz, 700))
+            c.d.text((x, c.y), en, font=F(sz, 700), fill=MUTED)
+            c.d.line((x - 4, c.y + 32, x + w + 4, c.y + 32), fill="#E5484D", width=5)
+            c.y += int(50 * 1.45)
+    c.card(wrong)
+    c.note("ago는 숫자 뒤에, 그리고 단순 과거와 함께", 40)
+    c.save("ago-before-timeline.png")
+
+
 if __name__ == "__main__":
-    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps, long_story_short, almost_most, fingers_crossed, go_home, no_worries, fun_funny):
+    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps, long_story_short, almost_most, fingers_crossed, go_home, no_worries, fun_funny, cup_of_tea, ago_before):
         fn()

@@ -1,5 +1,117 @@
 [
  {
+  "en": "Can I get a blanket, please?",
+  "ko": "담요 좀 주시겠어요?",
+  "desc": "기내에서 필요한 건 Can I get ~? 하나로 다 돼요. 물, 베개, 펜까지!",
+  "url": "https://www.cafeinenglish.com/p/in-flight/",
+  "au": "/audio/8e860412dd29.mp3"
+ },
+ {
+  "en": "Put him on speaker.",
+  "ko": "스피커폰으로 돌려 줘",
+  "desc": "전화 속 사람을 스피커 위에 올려놓는 느낌! 여럿이 같이 들을 때 써요.",
+  "url": "https://www.cafeinenglish.com/p/jensen-trump-call/",
+  "au": "/audio/934b756f0d69.mp3"
+ },
+ {
+  "en": "right off the bat",
+  "ko": "처음부터 바로, 대뜸",
+  "desc": "야구공이 배트에 맞자마자 튀어 나가듯, 시작하자마자!",
+  "url": "https://www.cafeinenglish.com/p/james-conversation/",
+  "au": "/audio/fa51f9642006.mp3"
+ },
+ {
+  "en": "Is there a ~ around here?",
+  "ko": "이 근처에 ~ 있나요?",
+  "desc": "길 물을 땐 Do you have the time? 대신 이 한마디로 대화를 시작해 보세요.",
+  "url": "https://www.cafeinenglish.com/p/james-conversation/",
+  "au": "/audio/c91233e47e6c.mp3"
+ },
+ {
+  "en": "I'd like to open an account.",
+  "ko": "계좌를 개설하고 싶어요",
+  "desc": "I want보다 정중한 I'd like to. 은행, 병원 창구에서 첫마디로 딱이에요.",
+  "url": "https://www.cafeinenglish.com/p/id-like-to/",
+  "au": "/audio/71e6ef4768ce.mp3"
+ },
+ {
+  "en": "I'm on it.",
+  "ko": "바로 할게요, 제가 처리할게요",
+  "desc": "일을 부탁받았을 때 OK보다 훨씬 믿음직한 대답이에요.",
+  "url": "https://www.cafeinenglish.com/p/im-on-it/",
+  "au": "/audio/b465293dc14f.mp3"
+ },
+ {
+  "en": "a dream come true",
+  "ko": "꿈이 이루어진 것, 꿈만 같은 일",
+  "desc": "젠슨 황은 '나는 부모님의 꿈이 이루어진 모습'이라고 말했어요.",
+  "url": "https://www.cafeinenglish.com/p/jensen/",
+  "au": "/audio/52e9e8c9c13e.mp3"
+ },
+ {
+  "en": "I'm craving pizza.",
+  "ko": "피자가 너무 당겨",
+  "desc": "crave는 '간절히 원하다'. want보다 훨씬 생생한 '당긴다'예요.",
+  "url": "https://www.cafeinenglish.com/p/craving/",
+  "au": "/audio/df9f1bd40538.mp3"
+ },
+ {
+  "en": "My bad.",
+  "ko": "내 실수야, 미안",
+  "desc": "작은 실수에 가볍게 하는 사과예요. 상사나 고객에겐 I apologize가 좋아요.",
+  "url": "https://www.cafeinenglish.com/p/my-bad/",
+  "au": "/audio/2d4e9b2513b5.mp3"
+ },
+ {
+  "en": "give back",
+  "ko": "받은 걸 돌려주다, 보답하다",
+  "desc": "받은 걸 다시(back) 주다(give)! 손흥민은 팬들에게 돌려주고 싶다고 했어요.",
+  "url": "https://www.cafeinenglish.com/p/son/",
+  "au": "/audio/92aa68cd5ca9.mp3"
+ },
+ {
+  "en": "Does that make sense?",
+  "ko": "제 설명, 이해되세요?",
+  "desc": "Do you understand?보다 부드러워요. 상대가 아니라 내 설명을 묻는 말이거든요.",
+  "url": "https://www.cafeinenglish.com/p/make-sense/",
+  "au": "/audio/4ba4a394a6f2.mp3"
+ },
+ {
+  "en": "It's on me.",
+  "ko": "내가 낼게, 내가 쏠게",
+  "desc": "계산서가 내 위에(on me)! I'll shoot이라고 하면 안 통해요.",
+  "url": "https://www.cafeinenglish.com/p/its-on-me/",
+  "au": "/audio/48971b2806f8.mp3"
+ },
+ {
+  "en": "find one's footing",
+  "ko": "자리를 잡다, 적응하다",
+  "desc": "미끄러운 바닥에서 발 디딜 곳(footing)을 찾는 모습을 떠올려 보세요.",
+  "url": "https://www.cafeinenglish.com/p/pichai/",
+  "au": "/audio/a69dc64e6b6b.mp3"
+ },
+ {
+  "en": "Keep me posted.",
+  "ko": "진행되는 대로 계속 알려줘",
+  "desc": "한 번이면 Let me know, 계속이면 Keep me posted예요.",
+  "url": "https://www.cafeinenglish.com/p/keep-me-posted/",
+  "au": "/audio/c329640bea2f.mp3"
+ },
+ {
+  "en": "For here or to go?",
+  "ko": "드시고 가세요, 가져가세요?",
+  "desc": "'퍼히어러 투고?'로 붙어서 들려요. 가져갈 땐 To go, please.",
+  "url": "https://www.cafeinenglish.com/p/travel-cafe/",
+  "au": "/audio/504bb2f05df0.mp3"
+ },
+ {
+  "en": "How many in your party?",
+  "ko": "몇 분이세요?",
+  "desc": "party는 '파티'가 아니라 같이 온 '일행'이에요.",
+  "url": "https://www.cafeinenglish.com/p/travel-restaurant/",
+  "au": "/audio/d634987c1c4c.mp3"
+ },
+ {
   "en": "I'm just looking, thanks.",
   "ko": "그냥 둘러보는 거예요",
   "desc": "점원이 도와준다고 할 때 부드럽게 거절하는 한마디예요.",
@@ -217,6 +329,20 @@
   "au": "/audio/8635212b9459.mp3"
  },
  {
+  "en": "I got back three days ago.",
+  "ko": "3일 전에 돌아왔어",
+  "desc": "지금부터 거꾸로 셀 땐 시간 길이 + ago, 그리고 단순 과거. before three days라고 하지 않아요.",
+  "url": "https://www.cafeinenglish.com/p/ago-vs-before/",
+  "au": "/audio/ff18ef7146da.mp3"
+ },
+ {
+  "en": "It's not really my cup of tea.",
+  "ko": "내 취향은 별로 아니야",
+  "desc": "싫다고 딱 자르는 대신 '내 취향과 안 맞아'로 돌려 말하는 표현. 대부분 not과 함께 써요.",
+  "url": "https://www.cafeinenglish.com/p/not-my-cup-of-tea/",
+  "au": "/audio/a5f4f53ddf19.mp3"
+ },
+ {
   "en": "Long story short, we got home a day late.",
   "ko": "간단히 말하면, 하루 늦게 집에 왔어",
   "desc": "긴 사정은 접고 결과로 건너뛸 때 쓰는 편한 말. 뒤에는 결론을 한 문장으로 말해요.",
@@ -390,117 +516,5 @@
   "desc": "call A B에서 모르는 건 이름(B)이라 What으로 물어요.",
   "url": "https://www.cafeinenglish.com/p/what-do-you-call/",
   "au": "/audio/fbec9c56330e.mp3"
- },
- {
-  "en": "Can I get a blanket, please?",
-  "ko": "담요 좀 주시겠어요?",
-  "desc": "기내에서 필요한 건 Can I get ~? 하나로 다 돼요. 물, 베개, 펜까지!",
-  "url": "https://www.cafeinenglish.com/p/in-flight/",
-  "au": "/audio/8e860412dd29.mp3"
- },
- {
-  "en": "Put him on speaker.",
-  "ko": "스피커폰으로 돌려 줘",
-  "desc": "전화 속 사람을 스피커 위에 올려놓는 느낌! 여럿이 같이 들을 때 써요.",
-  "url": "https://www.cafeinenglish.com/p/jensen-trump-call/",
-  "au": "/audio/934b756f0d69.mp3"
- },
- {
-  "en": "right off the bat",
-  "ko": "처음부터 바로, 대뜸",
-  "desc": "야구공이 배트에 맞자마자 튀어 나가듯, 시작하자마자!",
-  "url": "https://www.cafeinenglish.com/p/james-conversation/",
-  "au": "/audio/fa51f9642006.mp3"
- },
- {
-  "en": "Is there a ~ around here?",
-  "ko": "이 근처에 ~ 있나요?",
-  "desc": "길 물을 땐 Do you have the time? 대신 이 한마디로 대화를 시작해 보세요.",
-  "url": "https://www.cafeinenglish.com/p/james-conversation/",
-  "au": "/audio/c91233e47e6c.mp3"
- },
- {
-  "en": "I'd like to open an account.",
-  "ko": "계좌를 개설하고 싶어요",
-  "desc": "I want보다 정중한 I'd like to. 은행, 병원 창구에서 첫마디로 딱이에요.",
-  "url": "https://www.cafeinenglish.com/p/id-like-to/",
-  "au": "/audio/71e6ef4768ce.mp3"
- },
- {
-  "en": "I'm on it.",
-  "ko": "바로 할게요, 제가 처리할게요",
-  "desc": "일을 부탁받았을 때 OK보다 훨씬 믿음직한 대답이에요.",
-  "url": "https://www.cafeinenglish.com/p/im-on-it/",
-  "au": "/audio/b465293dc14f.mp3"
- },
- {
-  "en": "a dream come true",
-  "ko": "꿈이 이루어진 것, 꿈만 같은 일",
-  "desc": "젠슨 황은 '나는 부모님의 꿈이 이루어진 모습'이라고 말했어요.",
-  "url": "https://www.cafeinenglish.com/p/jensen/",
-  "au": "/audio/52e9e8c9c13e.mp3"
- },
- {
-  "en": "I'm craving pizza.",
-  "ko": "피자가 너무 당겨",
-  "desc": "crave는 '간절히 원하다'. want보다 훨씬 생생한 '당긴다'예요.",
-  "url": "https://www.cafeinenglish.com/p/craving/",
-  "au": "/audio/df9f1bd40538.mp3"
- },
- {
-  "en": "My bad.",
-  "ko": "내 실수야, 미안",
-  "desc": "작은 실수에 가볍게 하는 사과예요. 상사나 고객에겐 I apologize가 좋아요.",
-  "url": "https://www.cafeinenglish.com/p/my-bad/",
-  "au": "/audio/2d4e9b2513b5.mp3"
- },
- {
-  "en": "give back",
-  "ko": "받은 걸 돌려주다, 보답하다",
-  "desc": "받은 걸 다시(back) 주다(give)! 손흥민은 팬들에게 돌려주고 싶다고 했어요.",
-  "url": "https://www.cafeinenglish.com/p/son/",
-  "au": "/audio/92aa68cd5ca9.mp3"
- },
- {
-  "en": "Does that make sense?",
-  "ko": "제 설명, 이해되세요?",
-  "desc": "Do you understand?보다 부드러워요. 상대가 아니라 내 설명을 묻는 말이거든요.",
-  "url": "https://www.cafeinenglish.com/p/make-sense/",
-  "au": "/audio/4ba4a394a6f2.mp3"
- },
- {
-  "en": "It's on me.",
-  "ko": "내가 낼게, 내가 쏠게",
-  "desc": "계산서가 내 위에(on me)! I'll shoot이라고 하면 안 통해요.",
-  "url": "https://www.cafeinenglish.com/p/its-on-me/",
-  "au": "/audio/48971b2806f8.mp3"
- },
- {
-  "en": "find one's footing",
-  "ko": "자리를 잡다, 적응하다",
-  "desc": "미끄러운 바닥에서 발 디딜 곳(footing)을 찾는 모습을 떠올려 보세요.",
-  "url": "https://www.cafeinenglish.com/p/pichai/",
-  "au": "/audio/a69dc64e6b6b.mp3"
- },
- {
-  "en": "Keep me posted.",
-  "ko": "진행되는 대로 계속 알려줘",
-  "desc": "한 번이면 Let me know, 계속이면 Keep me posted예요.",
-  "url": "https://www.cafeinenglish.com/p/keep-me-posted/",
-  "au": "/audio/c329640bea2f.mp3"
- },
- {
-  "en": "For here or to go?",
-  "ko": "드시고 가세요, 가져가세요?",
-  "desc": "'퍼히어러 투고?'로 붙어서 들려요. 가져갈 땐 To go, please.",
-  "url": "https://www.cafeinenglish.com/p/travel-cafe/",
-  "au": "/audio/504bb2f05df0.mp3"
- },
- {
-  "en": "How many in your party?",
-  "ko": "몇 분이세요?",
-  "desc": "party는 '파티'가 아니라 같이 온 '일행'이에요.",
-  "url": "https://www.cafeinenglish.com/p/travel-restaurant/",
-  "au": "/audio/d634987c1c4c.mp3"
  }
 ]

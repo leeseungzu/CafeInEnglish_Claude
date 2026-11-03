@@ -69,7 +69,8 @@
       "im-beat",
       "long-story-short",
       "fingers-crossed",
-      "no-worries"
+      "no-worries",
+      "not-my-cup-of-tea"
     ],
     "thinks": [
       "james"
@@ -100,7 +101,8 @@
       "i-agree",
       "almost-vs-most",
       "go-home",
-      "fun-vs-funny"
+      "fun-vs-funny",
+      "ago-vs-before"
     ],
     "lead": "뜻이 반대로 전해지는 함정 표현 모음",
     "bg": "expr"
