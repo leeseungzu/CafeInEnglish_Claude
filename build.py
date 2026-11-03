@@ -921,10 +921,14 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
     ga = (f"<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag('js',new Date());gtag('config','{e(SITE['ga_id'])}');"
           f"addEventListener('load',function(){{setTimeout(function(){{var s=document.createElement('script');s.async=1;s.src='https://www.googletagmanager.com/gtag/js?id={e(SITE['ga_id'])}';document.head.appendChild(s)}},1500)}});</script>"
           if SITE.get("ga_id") else "")
-    # 첫 화면 큰 이미지를 head에서 가장 먼저 요청 (그다음 글꼴)
-    font_head = (preload + f'<link rel="preload" href="/assets/pretendard-subset.woff2?v={FONT_V}" as="font" type="font/woff2" crossorigin>'
-                 f"<style>@font-face{{font-family:'Pretendard Variable';font-weight:400 800;font-style:normal;font-display:swap;"
-                 f"src:url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2-variations'),url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2')}}</style>"
+    # 첫 화면 큰 이미지를 head에서 가장 먼저 요청
+    # 글꼴(160KB)은 첫 방문 때 페이지가 다 뜬 뒤(load) 불러와요 (2026-11-04, 모바일 성능 79 → 글꼴 preload가 첫 화면 그리기를 막고 있었음).
+    # 그 전엔 기기 기본 글꼴로 먼저 보이고, 한 번 받은 뒤(재방문·다음 페이지)는 캐시에서 바로 Pretendard로 그려요.
+    _ff = (f"@font-face{{font-family:'Pretendard Variable';font-weight:400 800;font-style:normal;font-display:swap;"
+           f"src:url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2-variations'),url('/assets/pretendard-subset.woff2?v={FONT_V}') format('woff2')}}")
+    font_head = (preload + "<script>(function(){var c=\"" + _ff + "\",d=document;function f(){if(f.x)return;f.x=1;var s=d.createElement('style');s.textContent=c;d.head.appendChild(s);if(d.fonts)d.fonts.load(\"700 16px 'Pretendard Variable'\").then(function(){dispatchEvent(new Event('resize'))});"
+                 "try{localStorage.setItem('pf','" + FONT_V + "')}catch(e){}}var k;try{k=localStorage.getItem('pf')}catch(e){}"
+                 "if(k==='" + FONT_V + "')f();else{addEventListener('load',f);setTimeout(f,4000)}})();</script>"
                  if FONT_V else '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">')
     navlinks = f'<a href="/"{" class=on" if path == "/" else ""}>홈</a>' + "".join(
         f'<a href="{h}"{" class=on" if nav in ks else ""}><span class="nl-l">{l}</span><span class="nl-s">{s}</span></a>' for g, h, l, s, ks in NAV_GROUPS)
