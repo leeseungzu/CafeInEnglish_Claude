@@ -1696,9 +1696,10 @@ cv.addEventListener('pointerdown',()=>{$('volPop').hidden=true;$('fbPop').hidden
    .finally(()=>{btn.disabled=false;btn.textContent='보내기';});});
  $('fbCopy').addEventListener('click',()=>{try{navigator.clipboard.writeText(FB_MAIL);toast('메일 주소를 복사했어요');}catch(e){}});}
 let firstTouch=false;stage.addEventListener('pointerdown',e=>{if(e.target.closest('#musicBtn,#volPop,#soundBtn,#voicePop,#fbBtn,#fbPop')){firstTouch=true;return;}if(!firstTouch){firstTouch=true;if(!musicOn){setMusic(true);syncVol();}}},{capture:true});
-/* 오늘의 1일 1영: 사이트 daily.json과 같은 계산 → 카톡·홈·카페가 같은 문장 */
-(async()=>{if(!/cafeinenglish\.com$/.test(location.hostname)&&!/[?&]rt=1/.test(location.search))return;try{const L=await fetch('/daily.json',{cache:'no-cache'}).then(r=>r.json());if(!L||!L.length)return;
- const it=L[Math.floor((Date.now()/1000+9*3600)/86400)%L.length];DAILY=it;if(it.au)CLIP[it.en]=it.au;buildQC();try{drawBoards(THEMES[theme]);}catch(e){}
+/* 오늘의 1일 1영: 카톡과 같은 날짜별 일정(/today.json)을 먼저, 없으면 daily.json 순번 */
+(async()=>{if(!/cafeinenglish\.com$/.test(location.hostname)&&!/[?&]rt=1/.test(location.search))return;try{const K=new Date(Math.floor((Date.now()/1000+9*3600)/86400)*864e5).toISOString().slice(0,10);
+ let it=null;try{const T=await fetch('/today.json',{cache:'no-cache'}).then(r=>r.json());it=T&&T.days&&T.days[K];}catch(e){}
+ if(!it){const L=await fetch('/daily.json',{cache:'no-cache'}).then(r=>r.json());if(!L||!L.length)return;it=L[Math.floor((Date.now()/1000+9*3600)/86400)%L.length];}DAILY=it;if(it.au)CLIP[it.en]=it.au;buildQC();try{drawBoards(THEMES[theme]);}catch(e){}
  setTimeout(()=>toast('☕ 오늘의 1일 1영 · '+it.en),3200);}catch(e){}})();
 /* 실시간 같이 있기 (Cloudflare Workers) */
 const RT_URL='wss://kayoung-realtime.leeseungzu0609.workers.dev/ws';

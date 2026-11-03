@@ -1,5 +1,5 @@
 {
- "_note": "1일 1영·홈 '오늘의 한 잔'·카영 카페가 같은 날 같은 표현을 쓰도록 날짜별로 고정한 일정. 지난 날짜는 실제로 보낸 표현(기록). build.py가 앞으로 7일을 '아직 안 쓴 표현 중 가장 최근에 추가된 것'부터 자동으로 채워요. 직접 고르고 싶으면 날짜에 en을 적으면 돼요.",
+ "_note": "1일 1영·홈 '오늘의 한 잔'·카영 카페가 같은 날 같은 표현을 쓰도록 날짜별로 고정한 일정. 지난 날짜는 실제로 보낸 표현(기록). build.py가 앞으로 7일을 '아직 안 쓴 표현 중 가장 최근에 추가된 것'부터 자동으로 채워요. 직접 고르고 싶으면 날짜에 en을 적으면 돼요. 지난 날짜는 카톡으로 실제 보낸 표현이 기준이에요(카페·홈도 그날 카톡과 같아야 해요).",
  "plan": {
   "2026-10-03": "give back",
   "2026-10-04": "Does that make sense?",
@@ -31,13 +31,20 @@
   "2026-10-31": "Please raise your glass to our team!",
   "2026-11-01": "The view took my breath away.",
   "2026-11-02": "Could somebody pass me the salt?",
-  "2026-11-03": "I'm on the fence.",
-  "2026-11-04": "No worries.",
-  "2026-11-05": "Let's call it a day.",
-  "2026-11-06": "It was really fun.",
-  "2026-11-07": "Text me when you get home.",
-  "2026-11-08": "Fingers crossed!",
-  "2026-11-09": "Most of my friends live in Seoul.",
-  "2026-11-10": "I got back three days ago."
+  "2026-11-03": "I put in 30 minutes every morning.",
+  "2026-11-04": "I'm on the fence.",
+  "2026-11-05": "No worries.",
+  "2026-11-06": "Let's call it a day.",
+  "2026-11-07": "It was really fun.",
+  "2026-11-08": "Text me when you get home.",
+  "2026-11-09": "Fingers crossed!",
+  "2026-11-10": "Most of my friends live in Seoul.",
+  "2026-11-11": "I got back three days ago.",
+  "2026-11-12": "It's not really my cup of tea.",
+  "2026-11-13": "Long story short, we got home a day late.",
+  "2026-11-14": "It feels like a journal.",
+  "2026-11-15": "I couldn't agree more.",
+  "2026-11-16": "I'm beat.",
+  "2026-11-17": "We really speak the same language."
  }
 }

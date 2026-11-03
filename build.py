@@ -195,6 +195,107 @@ def og_chat(name, chip, en, ko, chat, icon, key_id):
     return f"/og/{name}.png"
 
 
+def og_list(name, chip, en, ko, label, items, icon, key_id, foot="cafeinenglish.com"):
+    """영상 글·사유의 문장 공유 이미지(1200×630, 2026-11-03): 표현 글(og_chat)과 같은 C안 그라데이션
+    + 왼쪽 큰 영어 + 오른쪽 '이 영상에서 배우는 표현' 카드 + 3D 아이콘. items=[(영어, 한국어)] 최대 3개."""
+    if not (Image and FONT.exists()):
+        return "/assets/og-home-2.png"
+    from PIL import ImageFilter
+    import re as _re
+    W, H, PAD = 1200, 630, 72
+    INK, BODY, MUTED, LIME = "#191F28", "#333D4B", "#6B7684", "#CDEB5B"
+    c1, c2 = OG_BG[int(hashlib.md5(key_id.encode()).hexdigest(), 16) % len(OG_BG)]
+    hx = lambda c: tuple(int(c[i:i + 2], 16) for i in (1, 3, 5))
+    g = Image.new("RGB", (2, 2)); g.putdata([hx(c1), hx(c1), hx(c1), hx(c2)])
+    im = g.resize((W, H), Image.BILINEAR).convert("RGBA")
+    glow = Image.new("RGBA", (W, H), (255, 255, 255, 0))
+    ImageDraw.Draw(glow).ellipse((560, -220, 1260, 380), fill=(255, 255, 255, 170))
+    im = Image.alpha_composite(im, glow.filter(ImageFilter.GaussianBlur(90)))
+    d = ImageDraw.Draw(im)
+    enf = lambda sz: ImageFont.truetype(str(EN_FONT), sz) if EN_FONT.exists() else _font(sz, 800)
+    d.rounded_rectangle((PAD, 56, PAD + 52, 108), 14, fill="#2A1A12")
+    d.text((PAD + 12, 82), "C", font=_font(36, 800), fill="#F4EEE4", anchor="lm")
+    d.ellipse((PAD + 35, 88, PAD + 43, 96), fill=LIME)
+    d.text((PAD + 68, 82), "카페인영어 CafeInEnglish", font=_font(26, 700), fill=INK, anchor="lm")
+    cf = _font(22, 700)
+    maxw = 470
+    while d.textlength(chip, font=cf) > maxw and len(chip) > 4:
+        chip = chip[:-2].rstrip() + "…"
+    cw = d.textlength(chip, font=cf)
+    d.rounded_rectangle((PAD, 150, PAD + cw + 32, 190), 20, fill=(255, 255, 255, 200))
+    d.text((PAD + 16, 170), chip, font=cf, fill=BODY, anchor="lm")
+    for size in range(84, 36, -4):
+        bf = enf(size); lines = _wrap(d, en, bf, maxw)
+        if len(lines) <= 3 and all(d.textlength(l, font=bf) <= maxw for l in lines) and len(lines) * size * 1.15 <= 250:
+            break
+    lh = int(size * 1.15); y = 222 + (250 - len(lines) * lh) // 2
+    for i, l in enumerate(lines):
+        lw = d.textlength(l, font=bf)
+        if i == len(lines) - 1:
+            d.rectangle((PAD - 4, y + int(size * .78), PAD + lw + 4, y + int(size * 1.02)), fill=LIME)
+        d.text((PAD, y), l, font=bf, fill=INK)
+        y += lh
+    for ksz in range(32, 25, -2):
+        kf = _font(ksz, 700)
+        if d.textlength(ko, font=kf) <= maxw:
+            break
+    while d.textlength(ko, font=kf) > maxw and len(ko) > 4:
+        ko = ko[:-2].rstrip() + "…"
+    d.text((PAD, 492), ko, font=kf, fill=BODY)
+    d.text((PAD, 560), foot, font=_font(24, 600), fill=MUTED)
+    # 오른쪽 카드: 표현 목록 (긴 문장은 두 줄)
+    clean = lambda t: _re.sub(r"\s*\([^)]*[^\x00-\x7f][^)]*\)", "", t).strip()
+    rows = [(clean(a), b) for a, b in items if a][:3]
+    cx0, cx1 = 600, 1140
+    rw = cx1 - cx0 - 72 - 48
+    laid = []
+    for a, b in rows:
+        mk = (lambda sz: enf(sz)) if a.isascii() else (lambda sz: _font(sz, 800))
+        f1 = mk(30)
+        if d.textlength(a, font=f1) <= rw:
+            ls, af = [a], f1
+        else:
+            af = mk(25); ls = _wrap(d, a, af, rw)
+            if len(ls) > 2:
+                ls = ls[:2]
+                while d.textlength(ls[1] + "…", font=af) > rw and len(ls[1]) > 4:
+                    ls[1] = ls[1][:-2].rstrip()
+                ls[1] += "…"
+        lh2 = 40 if af is f1 else 33
+        laid.append((ls, af, lh2, b, 18 + len(ls) * lh2 + 34))
+    ch = 36 + 34 + 20 + sum(r[4] + 14 for r in laid) + 22
+    cy0 = max(96, (H - ch) // 2 + 10)
+    cy1 = cy0 + ch
+    sh = Image.new("RGBA", (W, H), (30, 40, 70, 0))
+    ImageDraw.Draw(sh).rounded_rectangle((cx0 + 24, cy0 + 40, cx1 - 24, cy1 + 24), 36, fill=(30, 40, 70, 30))
+    im = Image.alpha_composite(im, sh.filter(ImageFilter.GaussianBlur(22)))
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((cx0, cy0, cx1, cy1), 36, fill=(255, 255, 255, 235))
+    d.text((cx0 + 36, cy0 + 36), label, font=_font(20, 600), fill="#8B95A1")
+    y = cy0 + 36 + 34 + 20
+    bf2 = _font(20, 600)
+    for k, (ls, af, lh2, b, rh) in enumerate(laid):
+        d.rounded_rectangle((cx0 + 36, y, cx1 - 36, y + rh), 22, fill="#F2F4F6" if k else INK)
+        for j, l in enumerate(ls):
+            d.text((cx0 + 60, y + 14 + j * lh2), l, font=af, fill=LIME if k == 0 else INK)
+        while d.textlength(b, font=bf2) > rw and len(b) > 4:
+            b = b[:-2].rstrip() + "…"
+        d.text((cx0 + 60, y + rh - 32), b, font=bf2, fill="#C9CED6" if k == 0 else MUTED)
+        y += rh + 14
+    ip = ASSETS / "icons" / f"{icon}.webp"
+    if icon and ip.exists():
+        ic = Image.open(ip).convert("RGBA").resize((128, 128), Image.LANCZOS)
+        ix, iy = cx1 - 118, max(4, cy0 - 66)
+        shd = Image.new("RGBA", (W, H), (30, 40, 60, 0))
+        shd.paste((30, 40, 60, 255), (ix + 6, iy + 14), ic.split()[3].point(lambda v: v * .28))
+        im = Image.alpha_composite(im, shd.filter(ImageFilter.GaussianBlur(10)))
+        im.alpha_composite(ic, (ix, iy))
+    out = OUT / "og" / f"{name}.png"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    im.convert("RGB").save(out, optimize=True)
+    return f"/og/{name}.png"
+
+
 def _cursive_font(size):
     """필기체 공유 이미지용: assets/fonts 의 woff2 → TTF (fontTools)"""
     try:
@@ -1278,6 +1379,12 @@ def page_post(p):
         en = (p.get("thumb") or {}).get("text") or og.get("en") or p["title"]
         ver = hashlib.md5(json.dumps([c, en, p.get("icon"), "og2"], ensure_ascii=False).encode()).hexdigest()[:6]
         img = og_chat(f"p-{p['id']}-{ver}", CATS[p["cat"]] + " · " + p.get("sub", ""), en, c.get("ko", ""), c, p.get("icon", ""), p["id"])
+    elif p.get("cat") == "video" and p.get("expressions"):
+        en = og.get("en") or xs[0].get("en") or p["title"]
+        items = [(x.get("en", ""), x.get("ko", "")) for x in p["expressions"]]
+        ver = hashlib.md5(json.dumps([en, items, og.get("ko"), p.get("sub"), "ogl3"], ensure_ascii=False).encode()).hexdigest()[:6]
+        img = og_list(f"p-{p['id']}-{ver}", CATS[p["cat"]] + " · " + p.get("sub", ""), en, og.get("ko") or p.get("lead", ""),
+                      f"이 영상에서 배우는 표현 {len(items)}개", items, "headphone", p["id"])
     else:
         img = og_image("p-" + p["id"], CATS[p["cat"]], og.get("en") or xs[0].get("en") or p["title"],
                        og.get("ko") or p.get("lead", ""))
@@ -1341,7 +1448,10 @@ def page_think(t):
     data["share"] = og.get("en") or shortest
     tq = t.get("thumb") or {"text": og.get("en") or shortest, "key": ""}
     thumb_image("th-t-" + t["id"], "olive", tq.get("ko", ""), tq["text"], tq["key"])
-    img = og_image("t-" + t["id"], "사유의 문장 · 필사", og.get("en") or shortest, og.get("ko") or t["title"], "듣고 · 따라 쓰고 · 빈칸으로 복기")
+    t_items = [(q["en"], q.get("ko", "")) for q in sorted(t["quotes"], key=lambda q: len(q["en"]))]
+    t_ver = hashlib.md5(json.dumps([og, t_items, t.get("speaker"), "ogl3"], ensure_ascii=False).encode()).hexdigest()[:6]
+    img = og_list(f"t-{t['id']}-{t_ver}", "사유의 문장 · " + (t.get("speaker") or "필사"), og.get("en") or shortest, og.get("ko") or t["title"],
+                  f"따라 쓰는 문장 {len(t['quotes'])}개", t_items, "light-bulb", t["id"])
     ld = ld_article(t["title"], t.get("description", ""), url, img, t.get("date", ""), t["_mod"], "사유의 문장",
                     [("홈", "/"), ("사유의 문장", "/category/think/"), (t["title"], url)])
     return layout(t["title"] + " - 필사하기", t.get("description", ""), url, body, "think", data, "article", aside, og_img=img,
@@ -1517,7 +1627,7 @@ def daily_index(n):
 # content/daily_plan.json {plan: {날짜: en}} 에 날짜별 표현을 고정하고, 목록을 '(한국 날짜 일수) % 길이' 자리에
 # 그날 표현이 오도록 다시 배열해요. 그래서 기존 계산식(day % len)을 쓰는 홈·app.js·today.js·카톡 작업이 그대로 맞아요.
 PLAN_FILE = CONTENT / "daily_plan.json"
-PLAN_AHEAD = 7
+PLAN_AHEAD = 14
 
 
 def _kday():
@@ -1573,7 +1683,8 @@ def plan_order(items, key="en"):
     for it in items:
         by.setdefault(it[key], it)
     slot, used = {}, set()
-    for d in range(start, start + n):
+    # 같은 표현이 두 날짜에 있으면(다시 보낸 경우) 오늘에 가까운 날짜가 우선
+    for d in sorted(range(start, start + n), key=lambda x: abs(x - today)):
         en = plan.get(_dstr(d))
         if en in by and en not in used:
             slot[d] = by[en]
@@ -1615,6 +1726,16 @@ def page_home():
     (OUT / "daily.json").write_text(json.dumps(
         [{"en": d["en"], "ko": d["ko"], "desc": d.get("desc", ""), "url": DOMAIN + d["url"], **({"au": "/audio/" + AUDIO[d["en"]]} if d["en"] in AUDIO else {})} for d in daily],
         ensure_ascii=False, indent=1), "utf-8")
+    # 날짜로 바로 찾는 일정표 (2026-11-03): 카톡 1일 1영 작업과 카영 카페가 '날짜 → 표현'으로 읽어요.
+    # 순번 계산(day % len)은 목록 길이가 바뀌면 어긋날 수 있어서, 이 파일을 먼저 쓰고 없을 때만 순번을 써요.
+    plan = json.loads(PLAN_FILE.read_text("utf-8")).get("plan", {}) if PLAN_FILE.exists() else {}
+    by_en = {d["en"]: d for d in daily}
+    days = {}
+    for dd in range(_kday() - 3, _kday() + PLAN_AHEAD + 1):
+        k = _dstr(dd); d = by_en.get(plan.get(k))
+        if d:
+            days[k] = {"en": d["en"], "ko": d["ko"], "desc": d.get("desc", ""), "url": DOMAIN + d["url"], **({"au": "/audio/" + AUDIO[d["en"]]} if d["en"] in AUDIO else {})}
+    (OUT / "today.json").write_text(json.dumps({"days": days}, ensure_ascii=False, indent=1), "utf-8")
     today = daily[daily_index(len(daily))] if daily else (SITE.get("today") or {})
     tp = POST_BY_ID.get(today.get("post")) or next((p for p in POSTS if p["cat"] == "expr"), POSTS[0])
     t_en = today.get("en") or tp["title"]
