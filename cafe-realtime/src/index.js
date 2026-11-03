@@ -1,9 +1,9 @@
 // 카영 실시간 "같이 있기" 서버 (Cloudflare Workers + Durable Objects)
 // - 자유 입력 없음: 이름·퀵챗·리액션은 모두 번호로만 주고받는다.
-// - 한 방 최대 20명, 꽉 차면 다음 호점으로 자동 배정.
+// - 한 방 최대 40명, 방은 5개(1~5호점). 꽉 차면 다음 호점, 5곳 모두 차면 만석 안내.
 import { DurableObject } from "cloudflare:workers";
 
-const ROOM_MAX = 20;
+const ROOM_MAX = 40, ROOM_N = 5;
 const ORIGINS = [/^https:\/\/(www\.)?cafeinenglish\.com$/, /^http:\/\/localhost(:\d+)?$/, /^http:\/\/127\.0\.0\.1(:\d+)?$/];
 const N_ADJ = 40, N_DRINK = 12, N_QC = 60, N_EMO = 6; // 클라이언트 목록 길이 상한
 const okOrigin = (o) => !o || ORIGINS.some((r) => r.test(o));
@@ -22,6 +22,11 @@ export default {
     if (url.pathname === "/ws") {
       if (req.headers.get("upgrade") !== "websocket") return new Response("expected websocket", { status: 426 });
       const room = await (await lobby.fetch("https://lobby/assign")).text();
+      if (room === "0") { // 만석: 연결을 받아 안내만 보내고 닫아요 (클라이언트는 혼자 둘러보기로)
+        const [c, srv] = Object.values(new WebSocketPair());
+        srv.accept(); srv.send(JSON.stringify({ t: "full" })); srv.close(1000, "full");
+        return new Response(null, { status: 101, webSocket: c });
+      }
       const stub = env.ROOM.get(env.ROOM.idFromName("room-" + room));
       const u = new URL(req.url); u.searchParams.set("room", room);
       return stub.fetch(new Request(u, req));
@@ -83,7 +88,8 @@ export class Lobby extends DurableObject {
     await this.load();
     const p = new URL(req.url).pathname;
     if (p === "/assign") {
-      let n = 1; while ((this.counts[n] || 0) >= ROOM_MAX) n++;
+      let n = 1; while (n <= ROOM_N && (this.counts[n] || 0) >= ROOM_MAX) n++;
+      if (n > ROOM_N) return new Response("0");
       this.counts[n] = (this.counts[n] || 0) + 1; // 입장 예약, 방에서 정확한 수로 다시 보고
       await this.ctx.storage.put("counts", this.counts);
       return new Response(String(n));

@@ -380,6 +380,13 @@ body.fv-on .dock{visibility:hidden}
  #sheetTable #myOpts{display:flex;flex-wrap:nowrap;overflow-x:auto;max-height:none;gap:6px;padding-bottom:4px;-webkit-overflow-scrolling:touch}
  #sheetTable #myOpts .qc{flex:0 0 auto;width:auto;max-width:74%;white-space:normal;padding:8px 12px;font-size:13.5px}
 }
+/* 상단 아이콘 묶음 (2026-11-03, 산사처럼 왼쪽·오른쪽 한 덩어리) */
+.top>div{background:var(--g);border:1px solid var(--gb);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-radius:99px;padding:4px;gap:0;align-items:center;pointer-events:auto;flex:0 0 auto;min-width:0;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+.top .chip.glass{background:transparent!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.top .chip{font-size:16px;padding:10px 14px;gap:8px}.top .chip.ic{padding:10px 13px}.top .chip svg{width:22px;height:22px}
+.top>div:first-child{flex:0 1 auto!important}
+.top .chip.exit::after{content:"";position:absolute;right:0;top:28%;bottom:28%;width:1px;background:currentColor;opacity:.22}
+@media (max-width:480px){.top .chip{font-size:15px;padding:9px 12px}.top .chip.ic{padding:9px 11px}.top .chip svg{width:21px;height:21px}}
 </style>
 <style>
 /* 사이트 공개용(/cafe/play/): A안 고정, 화면 가득 */
@@ -1048,7 +1055,7 @@ function applyTheme(k){theme=k;const t=THEMES[k];
  const sw=document.getElementById('thSw');sw.innerHTML='';t.swatch.forEach(c=>{const i=document.createElement('i');i.style.background=c;sw.appendChild(i);});}
 
 /* 카메라 · 입력 */
-let yaw=.3,pitch=.8,dist=560;const focus=new THREE.Vector3(me.x,0,me.z);let camFocus=null,camDist=null;
+let yaw=.3,pitch=.8,dist=430;const focus=new THREE.Vector3(me.x,0,me.z);let camFocus=null,camDist=null;
 function size(){const r=stage.getBoundingClientRect();if(!r.width)return;renderer.setPixelRatio(Math.min(2,window.devicePixelRatio||1));renderer.setSize(r.width,r.height,false);cam.aspect=r.width/r.height;cam.fov=cam.aspect<.8?52:40;cam.updateProjectionMatrix();}
 window.addEventListener('resize',size);document.addEventListener('fullscreenchange',()=>setTimeout(size,50));
 const ray=new THREE.Raycaster(),v2=new THREE.Vector2();let drag=null;
@@ -1717,13 +1724,14 @@ function rtAdd(d,enter){if(RT.peers.has(d.id)||!RT_ADJ[d.adj]||!RT_DRINK[d.drink
  actorDom(p);p.tagEl.classList.add('rl');charMesh(p);people.push(p);all.push(p);RT.peers.set(d.id,p);if(d.seat)rtSeat(p,d.seat);
  if(enter){toast('☕ '+p.ko+'님이 들어왔어요');setTimeout(()=>nod(p),1500);}applyNpc();}
 function rtDel(id){const p=RT.peers.get(id);if(!p)return;RT.peers.delete(id);rmArr(people,p);rmArr(all,p);scene.remove(p.wrap);p.tagEl.remove();p.bubEl.remove();applyNpc();}
-function applyNpc(){const real=RT.peers.size;const want=!RT.on?NPC_POOL.length:(real>5?0:Math.max(3,NPC_POOL.length-real*2));const vis=NPC_POOL.filter(p=>!p.off);
+function applyNpc(){const real=RT.peers.size;const want=(RT.on&&(RT.count||real+1)>=5)?0:Math.min(5,NPC_POOL.length); /* 연습 손님: 실제 손님 5명 미만일 때만 5명 */const vis=NPC_POOL.filter(p=>!p.off);
  if(vis.length>want){vis.filter(p=>!(seated&&p.seat&&p.seat[0]===seated.id)).sort((a,b)=>(a.seat?1:0)-(b.seat?1:0)).slice(0,vis.length-want).forEach(p=>{p.off=true;p.seat=null;rmArr(people,p);rmArr(all,p);p.wrap.visible=false;p.tagEl.style.display='none';hush(p);});}
  else if(vis.length<want){NPC_POOL.filter(p=>p.off).slice(0,want-vis.length).forEach(p=>{p.off=false;p.wrap.visible=true;p.x=Math.random()*40-20;p.z=530;p.tx=Math.random()*160-80;p.tz=400;people.push(p);all.splice(all.length-1,0,p);});}
  NPC_POOL.forEach(p=>p.tagEl.classList.toggle('np',RT.on));}
-function rtCount(){const c=$('countTxt');if(!c)return;c.classList.toggle('live',RT.on);if(RT.on){c.innerHTML='<span class="livechip"><i></i>'+(innerWidth<=640?'':'지금 ')+RT.count+'명</span>';$('branchName').textContent=RT.room>1?'카영 '+RT.room+'호점':'카영';}else{c.textContent='베타';$('branchName').textContent='카영';}}
-function rtMsg(m){if(m.t==='welcome'){RT.on=true;RT.retry=0;RT.room=m.room;RT.peers.forEach((p,id)=>rtDel(id));(m.others||[]).forEach(d=>rtAdd(d,false));rtSend({t:'hello',adj:MY_NAME[0],drink:MY_NAME[1]});RT.last={x:1e9,z:1e9,seat:'?'};applyNpc();rtCount();track('cafe_live',{room:m.room});}
- else if(m.t==='count'){RT.count=m.count;rtCount();}
+function rtCount(){const c=$('countTxt');if(!c)return;c.classList.toggle('live',RT.on);if(RT.on){c.innerHTML='<span class="livechip"><i></i>'+RT.count+'/40</span>';$('branchName').textContent=RT.room>1?'카영 '+RT.room+'호점':'카영';}else{c.textContent=RT.full?'만석':'베타';$('branchName').textContent='카영';}}
+
+function rtMsg(m){if(m.t==='full'){RT.full=true;rtCount();toast('지금 카영 방 5곳이 모두 가득 찼어요. 혼자 둘러보다가 자리가 나면 자동으로 들어가요');return;}if(m.t==='welcome'){RT.full=false;RT.on=true;RT.retry=0;RT.room=m.room;RT.peers.forEach((p,id)=>rtDel(id));(m.others||[]).forEach(d=>rtAdd(d,false));rtSend({t:'hello',adj:MY_NAME[0],drink:MY_NAME[1]});RT.last={x:1e9,z:1e9,seat:'?'};applyNpc();rtCount();track('cafe_live',{room:m.room});}
+ else if(m.t==='count'){RT.count=m.count;rtCount();applyNpc();}
  else if(m.t==='join')rtAdd(m,true);
  else if(m.t==='leave')rtDel(m.id);
  else{const p=RT.peers.get(m.id);if(!p)return;
@@ -1736,6 +1744,7 @@ function rtConnect(){if(!/cafeinenglish\.com$/.test(location.hostname)&&!/[?&]rt
  ws.onmessage=e=>{try{rtMsg(JSON.parse(e.data));}catch(err){}};
  ws.onclose=()=>{if(RT.ws!==ws)return;RT.on=false;RT.ws=null;[...RT.peers.keys()].forEach(rtDel);applyNpc();rtCount();RT.retry=Math.min(RT.retry+1,6);setTimeout(rtConnect,1000*Math.pow(2,RT.retry));};}
 setInterval(()=>{try{if(RT.ws&&RT.ws.readyState===1)RT.ws.send('ping');}catch(e){}},20000);
+try{applyNpc();}catch(e){}
 addEventListener('pagehide',()=>{try{RT.ws&&RT.ws.close();}catch(e){}});
 setInterval(()=>{if(!RT.on)return;const seat=me.seat?me.seat[0]+':'+me.seat[1]:'';const mv=Math.hypot(me.x-RT.last.x,me.z-RT.last.z);if(seat!==RT.last.seat||(!seat&&mv>12)){RT.last={x:me.x,z:me.z,seat};rtSend({t:'pos',x:me.x,z:me.z,seat:seat||null});}},500);
 rtConnect();
