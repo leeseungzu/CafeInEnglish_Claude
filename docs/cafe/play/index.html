@@ -387,6 +387,9 @@ body.fv-on .dock{visibility:hidden}
 .top>div:first-child{flex:0 1 auto!important}
 .top .chip.exit::after{content:"";position:absolute;right:0;top:28%;bottom:28%;width:1px;background:currentColor;opacity:.22}
 @media (max-width:480px){.top .chip{font-size:15px;padding:9px 12px}.top .chip.ic{padding:9px 11px}.top .chip svg{width:21px;height:21px}}
+.rl{display:flex;flex-direction:column;gap:6px}.rl .br{display:flex;justify-content:space-between;align-items:center;font-size:14px}.rl .br span{font-size:13px;opacity:.75;font-variant-numeric:tabular-nums}.rl-hi{align-self:flex-start;margin-top:2px}
+#branchBtn .cv{width:9px;height:9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-3px);opacity:.6;margin-left:2px}
+@media (max-width:480px){#roomPop{left:10px!important;top:52px}}
 </style>
 <style>
 /* 사이트 공개용(/cafe/play/): A안 고정, 화면 가득 */
@@ -421,7 +424,7 @@ body{padding:0!important;background:#140E0A}
     <div class="top">
       <div>
         <a class="chip glass ic exit" href="/" aria-label="카페인영어 홈으로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h5v16h-5"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h10"/></svg></a>
-        <button class="chip glass" id="branchBtn"><span class="d"></span><span id="branchName">카영</span><span class="n" id="countTxt">베타</span></button>
+        <button class="chip glass" id="branchBtn"><span class="d"></span><span id="branchName">카영</span><span class="n" id="countTxt">베타</span><span class="cv"></span></button>
         <button class="chip glass" id="topicBtn" title="눌러서 다른 요일 주제로 연습하기 (나에게만 적용)"><span style="opacity:.7;font-weight:600">오늘의 주제</span><b id="topicName"></b></button>
       </div>
       <div>
@@ -431,6 +434,12 @@ body{padding:0!important;background:#140E0A}
         <button class="chip glass ic" id="musicBtn" aria-label="소리 설정" title="소리 설정"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/><path id="mslash" d="M0 0" style="display:none"/></svg></button>
         <button class="chip glass ic" id="fsBtn" hidden aria-label="전체 화면"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
       </div>
+    </div>
+    <div class="vol glass setp" id="roomPop" hidden style="left:14px;right:auto">
+      <div class="row sp-h"><b>방 고르기</b><button class="tg" id="roomX" aria-label="닫기">✕</button></div>
+      <p class="sp-d">한 방에 40명까지 같이 있어요. 나에게만 적용돼요.</p>
+      <div class="rl" id="roomList"></div>
+      <button class="tg rl-hi" id="roomHi">카영 소개 다시 보기</button>
     </div>
     <div class="vol glass setp" id="volPop" hidden>
       <div class="row sp-h"><b>소리 설정</b><button class="tg" id="setX" aria-label="닫기">✕</button></div>
@@ -1355,7 +1364,7 @@ function renderFire(){const d=$('fzDots');d.innerHTML='';fzQs.forEach((q,i)=>{co
 const BR=[['1호점',24],['2호점',38],['3호점',50],['4호점',15],['5호점',44],['6호점',6]];let curBr=0;
 function renderBr(){const box=document.getElementById('branches');box.innerHTML='';BR.forEach((b,i)=>{const e=document.createElement('button');const full=b[1]>=50&&i!==curBr;e.className='br'+(i===curBr?' cur':'')+(full?' full':'');e.append(Object.assign(document.createElement('b'),{textContent:'카영 카페 '+b[0]}),Object.assign(document.createElement('span'),{textContent:full?'만석 · 50/50명':b[1]+'/50명'}));
  if(!full)e.addEventListener('click',()=>{curBr=i;document.getElementById('branchName').textContent='카영 카페 '+b[0];document.getElementById('countTxt').textContent=b[1]+'/50';closeAll();});box.appendChild(e);});}
-$('branchBtn').addEventListener('pointerdown',e=>e.stopPropagation());document.getElementById('branchBtn').addEventListener('click',()=>{open('modalHi');});
+$('branchBtn').addEventListener('pointerdown',e=>e.stopPropagation());document.getElementById('branchBtn').addEventListener('click',()=>{openRooms();return;open('modalHi');});
 
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===b));const k=b.dataset.t;
  document.getElementById('cafeView').hidden=k==='ch';document.getElementById('charView').hidden=k!=='ch';if(k!=='ch'){applyTheme(k);size();}}));
@@ -1712,7 +1721,7 @@ let firstTouch=false;stage.addEventListener('pointerdown',e=>{if(e.target.closes
 const RT_URL='wss://kayoung-realtime.leeseungzu0609.workers.dev/ws';
 const QC_ALL=[...QC_BASE,...TOPICS.flatMap(t=>[[t.qc[0],t.qc[1]],...t.q.map(x=>[x.en,x.ko]),...(t.chat||[])])];
 const NPC_POOL=people.filter(p=>!p.me);
-const RT={ws:null,on:false,room:1,count:0,peers:new Map(),last:{x:1e9,z:1e9,seat:'?'},retry:0};
+const RT={want:(()=>{try{const n=+localStorage.getItem('kycafe.room');return n>=1&&n<=5?n:1;}catch(e){return 1;}})(),ws:null,on:false,room:1,count:0,peers:new Map(),last:{x:1e9,z:1e9,seat:'?'},retry:0};
 function rtSend(o){try{if(RT.ws&&RT.ws.readyState===1)RT.ws.send(JSON.stringify(o));}catch(e){}}
 function rtQC(en){if(DAILY&&en===DAILY.en){rtSend({t:'qc',i:59});return;}const i=QC_ALL.findIndex(x=>x[0]===en);if(i>=0)rtSend({t:'qc',i});}
 const rmArr=(a,x)=>{const i=a.indexOf(x);if(i>=0)a.splice(i,1);};
@@ -1728,9 +1737,9 @@ function applyNpc(){const real=RT.peers.size;const want=(RT.on&&(RT.count||real+
  if(vis.length>want){vis.filter(p=>!(seated&&p.seat&&p.seat[0]===seated.id)).sort((a,b)=>(a.seat?1:0)-(b.seat?1:0)).slice(0,vis.length-want).forEach(p=>{p.off=true;p.seat=null;rmArr(people,p);rmArr(all,p);p.wrap.visible=false;p.tagEl.style.display='none';hush(p);});}
  else if(vis.length<want){NPC_POOL.filter(p=>p.off).slice(0,want-vis.length).forEach(p=>{p.off=false;p.wrap.visible=true;p.x=Math.random()*40-20;p.z=530;p.tx=Math.random()*160-80;p.tz=400;people.push(p);all.splice(all.length-1,0,p);});}
  NPC_POOL.forEach(p=>p.tagEl.classList.toggle('np',RT.on));}
-function rtCount(){const c=$('countTxt');if(!c)return;c.classList.toggle('live',RT.on);if(RT.on){c.innerHTML='<span class="livechip"><i></i>'+RT.count+'/40</span>';$('branchName').textContent=RT.room>1?'카영 '+RT.room+'호점':'카영';}else{c.textContent=RT.full?'만석':'베타';$('branchName').textContent='카영';}}
+function rtCount(){const c=$('countTxt');if(!c)return;c.classList.toggle('live',RT.on);if(RT.on){c.innerHTML='<span class="livechip"><i></i>'+RT.count+'/40</span>';$('branchName').textContent='카영 '+RT.room;}else{c.textContent=RT.full?'만석':'베타';$('branchName').textContent='카영 '+RT.want;}}
 
-function rtMsg(m){if(m.t==='full'){RT.full=true;rtCount();toast('지금 카영 방 5곳이 모두 가득 찼어요. 혼자 둘러보다가 자리가 나면 자동으로 들어가요');return;}if(m.t==='welcome'){RT.full=false;RT.on=true;RT.retry=0;RT.room=m.room;RT.peers.forEach((p,id)=>rtDel(id));(m.others||[]).forEach(d=>rtAdd(d,false));rtSend({t:'hello',adj:MY_NAME[0],drink:MY_NAME[1]});RT.last={x:1e9,z:1e9,seat:'?'};applyNpc();rtCount();track('cafe_live',{room:m.room});}
+function rtMsg(m){if(m.t==='full'){RT.full=true;rtCount();toast('카영 '+(m.room||RT.want)+' 방은 지금 가득 찼어요. 다른 방을 골라 주세요');setTimeout(openRooms,600);return;}if(m.t==='welcome'){RT.full=false;RT.on=true;RT.retry=0;RT.room=m.room;RT.peers.forEach((p,id)=>rtDel(id));(m.others||[]).forEach(d=>rtAdd(d,false));rtSend({t:'hello',adj:MY_NAME[0],drink:MY_NAME[1]});RT.last={x:1e9,z:1e9,seat:'?'};applyNpc();rtCount();track('cafe_live',{room:m.room});}
  else if(m.t==='count'){RT.count=m.count;rtCount();applyNpc();}
  else if(m.t==='join')rtAdd(m,true);
  else if(m.t==='leave')rtDel(m.id);
@@ -1740,11 +1749,24 @@ function rtMsg(m){if(m.t==='full'){RT.full=true;rtCount();toast('지금 카영 �
   else if(m.t==='qc'&&QC_ALL[m.i])say(p,QC_ALL[m.i][0],QC_ALL[m.i][1],4200);
   else if(m.t==='emo'){if(m.i===0){nod(p);say(p,'Hi!','안녕하세요!',1800);}else if(m.i===2){say(p,'Cheers!','짠!',1800);if(Math.hypot(p.x-me.x,p.z-me.z)<120){sfx('clink');spark(me,p);}}}}}
 function rtConnect(){if(!/cafeinenglish\.com$/.test(location.hostname)&&!/[?&]rt=1/.test(location.search))return;
- let ws;try{ws=new WebSocket(RT_URL);}catch(e){return;}RT.ws=ws;
+ let ws;try{ws=new WebSocket(RT_URL+'?room='+RT.want);}catch(e){return;}RT.ws=ws;
  ws.onmessage=e=>{try{rtMsg(JSON.parse(e.data));}catch(err){}};
- ws.onclose=()=>{if(RT.ws!==ws)return;RT.on=false;RT.ws=null;[...RT.peers.keys()].forEach(rtDel);applyNpc();rtCount();RT.retry=Math.min(RT.retry+1,6);setTimeout(rtConnect,1000*Math.pow(2,RT.retry));};}
+ ws.onclose=()=>{if(RT.ws!==ws)return;RT.on=false;RT.ws=null;[...RT.peers.keys()].forEach(rtDel);applyNpc();rtCount();if(RT.full)return;RT.retry=Math.min(RT.retry+1,6);setTimeout(rtConnect,1000*Math.pow(2,RT.retry));};}
 setInterval(()=>{try{if(RT.ws&&RT.ws.readyState===1)RT.ws.send('ping');}catch(e){}},20000);
 try{applyNpc();}catch(e){}
+/* 방 고르기: 카영 1~5, 한 방 40명 (자동 배정 없이 직접 선택) */
+function openRooms(){const pop=$('roomPop');if(!pop.hidden){pop.hidden=true;return;}$('volPop').hidden=true;const box=$('roomList');
+ const draw=R=>{box.innerHTML='';for(let i=1;i<=5;i++){const n=R?(R[i]||0):null,cur=RT.on?RT.room===i:RT.want===i,full=n!=null&&n>=40&&!cur;const b=document.createElement('button');b.className='br'+(cur?' cur':'')+(full?' full':'');
+  b.append(Object.assign(document.createElement('b'),{textContent:'카영 '+i}),Object.assign(document.createElement('span'),{textContent:n==null?'-/40':full?'만석 · 40/40':n+'/40'}));
+  if(!full)b.addEventListener('click',()=>pickRoom(i));box.appendChild(b);}};
+ draw(null);pop.hidden=false;
+ if(/cafeinenglish\.com$/.test(location.hostname)||/[?&]rt=1/.test(location.search))fetch(RT_URL.replace('wss:','https:').replace(/\/ws$/,'/stats'),{cache:'no-store'}).then(r=>r.json()).then(d=>{if(!pop.hidden)draw(d.rooms);}).catch(()=>{});}
+function pickRoom(i){$('roomPop').hidden=true;try{localStorage.setItem('kycafe.room',i);}catch(e){}
+ if(RT.on&&RT.room===i)return;RT.want=i;RT.full=false;RT.retry=0;const old=RT.ws;RT.ws=null;RT.on=false;try{old&&old.close();}catch(e){}
+ [...RT.peers.keys()].forEach(rtDel);applyNpc();rtCount();toast('카영 '+i+' 방으로 옮겼어요');rtConnect();}
+$('roomX').addEventListener('click',()=>{$('roomPop').hidden=true;});$('roomHi').addEventListener('click',()=>{$('roomPop').hidden=true;open('modalHi');});
+$('roomPop').addEventListener('pointerdown',e=>e.stopPropagation());
+try{rtCount();}catch(e){}
 addEventListener('pagehide',()=>{try{RT.ws&&RT.ws.close();}catch(e){}});
 setInterval(()=>{if(!RT.on)return;const seat=me.seat?me.seat[0]+':'+me.seat[1]:'';const mv=Math.hypot(me.x-RT.last.x,me.z-RT.last.z);if(seat!==RT.last.seat||(!seat&&mv>12)){RT.last={x:me.x,z:me.z,seat};rtSend({t:'pos',x:me.x,z:me.z,seat:seat||null});}},500);
 rtConnect();

@@ -1,6 +1,6 @@
 // 카영 실시간 "같이 있기" 서버 (Cloudflare Workers + Durable Objects)
 // - 자유 입력 없음: 이름·퀵챗·리액션은 모두 번호로만 주고받는다.
-// - 한 방 최대 40명, 방은 5개(1~5호점). 꽉 차면 다음 호점, 5곳 모두 차면 만석 안내.
+// - 방은 5개(카영 1~5), 한 방 최대 40명. 손님이 방을 직접 고르고, 꽉 찬 방이면 만석 안내.
 import { DurableObject } from "cloudflare:workers";
 
 const ROOM_MAX = 40, ROOM_N = 5;
@@ -21,12 +21,14 @@ export default {
     if (url.pathname === "/stt") return stt(req, env);
     if (url.pathname === "/ws") {
       if (req.headers.get("upgrade") !== "websocket") return new Response("expected websocket", { status: 426 });
-      const room = await (await lobby.fetch("https://lobby/assign")).text();
-      if (room === "0") { // 만석: 연결을 받아 안내만 보내고 닫아요 (클라이언트는 혼자 둘러보기로)
+      const want = Math.min(ROOM_N, Math.max(1, parseInt(url.searchParams.get("room"), 10) || 1));
+      const ok = await (await lobby.fetch("https://lobby/reserve?room=" + want)).text();
+      if (ok !== "ok") { // 만석: 연결을 받아 안내만 보내고 닫아요 (클라이언트가 다른 방을 고르게)
         const [c, srv] = Object.values(new WebSocketPair());
-        srv.accept(); srv.send(JSON.stringify({ t: "full" })); srv.close(1000, "full");
+        srv.accept(); srv.send(JSON.stringify({ t: "full", room: want })); srv.close(1000, "full");
         return new Response(null, { status: 101, webSocket: c });
       }
+      const room = String(want);
       const stub = env.ROOM.get(env.ROOM.idFromName("room-" + room));
       const u = new URL(req.url); u.searchParams.set("room", room);
       return stub.fetch(new Request(u, req));
@@ -87,6 +89,13 @@ export class Lobby extends DurableObject {
   async fetch(req) {
     await this.load();
     const p = new URL(req.url).pathname;
+    if (p === "/reserve") {
+      const n = Number(new URL(req.url).searchParams.get("room")) || 1;
+      if ((this.counts[n] || 0) >= ROOM_MAX) return new Response("full");
+      this.counts[n] = (this.counts[n] || 0) + 1; // 입장 예약, 방에서 정확한 수로 다시 보고
+      await this.ctx.storage.put("counts", this.counts);
+      return new Response("ok");
+    }
     if (p === "/assign") {
       let n = 1; while (n <= ROOM_N && (this.counts[n] || 0) >= ROOM_MAX) n++;
       if (n > ROOM_N) return new Response("0");
@@ -102,7 +111,8 @@ export class Lobby extends DurableObject {
     }
     if (p === "/stats") {
       const total = Object.values(this.counts).reduce((a, b) => a + b, 0);
-      return json({ total, rooms: Object.keys(this.counts).length });
+      const rooms = {}; for (let i = 1; i <= ROOM_N; i++) rooms[i] = this.counts[i] || 0;
+      return json({ total, rooms, max: ROOM_MAX });
     }
     return new Response("nf", { status: 404 });
   }
