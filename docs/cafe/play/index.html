@@ -946,8 +946,8 @@ const zoneFx=ZONES.map(z=>{const g=new THREE.Group();
  const dots=z.spots.map((s,i)=>{const h=z.type==='round'||z.type==='study'?24.5:z.type==='bar'?27:(i<3?31:23.5);const d=new THREE.Mesh(new THREE.CircleGeometry(5,24),fxMat);d.rotation.x=-Math.PI/2;d.position.set(s.x,h,s.z);g.add(d);return d;});
  g.visible=false;scene.add(g);return {z,g,dots};});
 let pendingSit=null;
-const MR=y=>{const t=Math.max(0,Math.min(1,(y-3)/21));return 6.6+6.2*Math.pow(Math.sin(Math.PI/2*t),.6);};
-const mugPts=[[0,3],[5.6,3],[6.4,3.4]];for(let i=1;i<=24;i++){const y=3+21*i/24;mugPts.push([MR(y),y]);}
+const MR=y=>{const t=Math.max(0,Math.min(1,(y-3)/21));return 6.6+6.2*Math.pow(Math.sin(Math.PI/2*t),.6)+1.0*Math.pow(Math.sin(Math.PI*t),1.3)+.5*(1-t);};
+const mugPts=[[0,3],[6.2,3],[6.9,3.4]];for(let i=1;i<=24;i++){const y=3+21*i/24;mugPts.push([MR(y),y]);}
 [[13.1,24.5],[12.7,25.2],[11.9,25.2],[11.4,24.2],[11.2,23.2],[0,23.2]].forEach(q=>mugPts.push(q));
 for(let i=0;i<mugPts.length;i++)mugPts[i]=new THREE.Vector2(mugPts[i][0],mugPts[i][1]);
 const G_MUG=new THREE.LatheGeometry(mugPts,48),G_FOOT=new THREE.SphereGeometry(3.4,16,12),G_SCL=new THREE.SphereGeometry(1,20,14),G_FOAM=new THREE.SphereGeometry(11,32,10,0,Math.PI*2,0,Math.PI/2),G_HANDLE=new THREE.TorusGeometry(5,2.3,12,28,Math.PI*1.3),
@@ -975,15 +975,15 @@ function drinkTop(p,g){if(p.barista){const t=new THREE.Mesh(G_FOAM,M('foam',{col
 function mugMesh(p){const wrap=new THREE.Group(),g=new THREE.Group();const bm=MUG_M;
  const body=new THREE.Mesh(G_MUG,bm);body.castShadow=true;
  const foam=drinkTop(p,g);
- const h=new THREE.Mesh(G_HANDLE,bm);h.rotation.z=-Math.PI*.62;h.position.set(12.6,14.5,0);h.castShadow=true;
+ const h=new THREE.Mesh(G_HANDLE,bm);h.rotation.z=-Math.PI*.62;h.position.set(MR(14.5)-.2,14.5,0);h.castShadow=true;
  const onS=(x,y,o)=>{const r=MR(y)+o;return Math.sqrt(Math.max(1,r*r-x*x));};
  [-4.8,4.8].forEach(x=>{const y=17.2,z=onS(x,y,0),ry=Math.asin(x/MR(y));
   const e=new THREE.Mesh(G_SCL,SCL_M);e.scale.set(2.9,3.4,1.1);e.position.set(x,y,z);e.rotation.y=ry;g.add(e);
   const pu=new THREE.Mesh(G_SCL,PUP_M);pu.scale.set(1.8,2.15,.7);pu.position.set(x*1.04+.3,y-.3,z+.75);pu.rotation.y=ry;g.add(pu);
   const hl=new THREE.Mesh(G_HL,hlM);hl.position.set(x*1.04+.95,y+.6,z+1.4);g.add(hl);});
  const sm=new THREE.Mesh(G_SMILE,PUP_M);sm.scale.setScalar(.75);sm.rotation.z=Math.PI;sm.position.set(0,13.1,onS(0,13.1,.25));g.add(sm);
- [-1,1].forEach(s=>{const b=new THREE.Mesh(G_BLUSH,blM);const x=s*8,y=13.6;b.position.set(x,y,onS(x,y,.15));b.rotation.y=Math.asin(x/MR(y));g.add(b);
-  const f=new THREE.Mesh(G_FOOT,bm);f.scale.set(1,.72,1.2);f.position.set(s*4.3,2.3,2.2);f.castShadow=true;g.add(f);});
+ [-1,1].forEach(s=>{const x=s*7.2,y=13.4;const b=new THREE.Mesh(G_SCL,blM);b.scale.set(2.2,1.6,.6);b.position.set(x,y,onS(x,y,-.05));b.rotation.y=Math.asin(x/MR(y));g.add(b);
+  const f=new THREE.Mesh(G_FOOT,bm);f.scale.set(1,.72,1.2);f.position.set(s*4.8,2.3,3.0);f.castShadow=true;g.add(f);});
  g.add(body,h);
  if(p.barista){const S=(c,r)=>new THREE.MeshStandardMaterial({color:c,roughness:r||.85,side:THREE.DoubleSide});
   const ap=new THREE.Mesh(new THREE.LatheGeometry(Array.from({length:9},(_,i)=>{const y=4.4+i*.6+i*i*.0;return new THREE.Vector2(MR(y)+.3,y);}),40,-1.15,2.3),S(ESP));g.add(ap);
