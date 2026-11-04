@@ -442,5 +442,17 @@
     "en": "I got back three days ago.",
     "ko": "3일 전에 돌아왔어",
     "desc": "지금부터 거꾸로 셀 땐 시간 길이 + ago, 그리고 단순 과거. before three days라고 하지 않아요."
+  },
+  {
+    "post": "bear-with-me",
+    "en": "Bear with me a second.",
+    "ko": "잠깐만 기다려 주세요",
+    "desc": "무언가를 찾거나 확인하는 동안 상대에게 양해를 구하는 말. bare가 아니라 '참다'의 bear예요."
+  },
+  {
+    "post": "nice-to-meet-vs-see",
+    "en": "Good to see you again.",
+    "ko": "다시 만나서 반가워요",
+    "desc": "이미 아는 사람을 다시 만나면 meet 대신 see. Nice to meet you는 처음 만날 때 하는 인사예요."
   }
 ]

@@ -1,0 +1,73 @@
+{
+  "id": "bear-with-me",
+  "cat": "expr",
+  "sub": "새 표현",
+  "level": "실전",
+  "date": "2026-11-04",
+  "title": "\"Bear with me\", '잠시만 기다려 주세요'를 정중하게",
+  "seo_title": "Bear with me 뜻 - '잠시만 기다려 주세요' 영어로, bare with me와 차이",
+  "lead": "곰이 아니라 '참다'의 bear, 전화와 회의에서 매일 들리는 한마디",
+  "description": "Bear with me는 '잠시만 기다려 주세요'라는 뜻이에요. Hang on·Hold on과의 차이, Thanks for bearing with me로 마무리하는 법, bare로 잘못 쓰는 실수를 정리했어요.",
+  "og": {
+    "en": "Bear with me.",
+    "ko": "'잠시만 기다려 주세요'를 정중하게"
+  },
+  "icon": "hourglass",
+  "chat": {
+    "q": "Can you find the file I sent yesterday?",
+    "a": "Sure, bear with me a second.",
+    "key": "bear with me",
+    "ko": "그럼요, 잠깐만 기다려 주세요."
+  },
+  "thumb": {
+    "text": "Bear with me.",
+    "key": "Bear",
+    "ko": "잠시만 기다려 주세요"
+  },
+  "related": [],
+  "quiz": [
+    {
+      "tag": "표현",
+      "q": "전화 중 자료를 찾는 동안 손님에게 할 말로 가장 자연스러운 것은?",
+      "sub": "",
+      "options": [
+        "Bear with me a moment.",
+        "Bare with me a moment.",
+        "Bear me a moment.",
+        "Bear for me a moment."
+      ],
+      "answer": 0,
+      "explain": "'잠시만 기다려 주세요'는 bear with me예요. bare는 '벌거벗은'이고, with를 빼거나 for로 바꾸면 뜻이 통하지 않아요.",
+      "mnemonic": "곰 말고 짐을 같이 지는 bear, 그리고 with"
+    },
+    {
+      "tag": "뜻",
+      "q": "Bear with me에서 bear의 뜻은?",
+      "sub": "",
+      "options": [
+        "곰",
+        "참다, 견디다",
+        "드러내다",
+        "낳다"
+      ],
+      "answer": 1,
+      "explain": "I can't bear it.(못 참겠어)의 bear예요. '나와 함께 참아 주세요', 곧 '잠시만 기다려 주세요'가 돼요.",
+      "mnemonic": "can't bear it의 bear = 참다"
+    },
+    {
+      "tag": "상황",
+      "q": "기다려 준 상대에게 마지막에 할 말로 맞는 것은?",
+      "sub": "",
+      "options": [
+        "Thanks for bearing with me.",
+        "Thanks for bear with me.",
+        "Thanks for your bearing.",
+        "Thanks to bear me."
+      ],
+      "answer": 0,
+      "explain": "for 뒤에는 -ing가 와서 bearing with me가 돼요. Thank you for your patience.도 같은 뜻이에요.",
+      "mnemonic": "부탁은 Bear with me, 인사는 Thanks for bearing with me"
+    }
+  ],
+  "body_html": "<p>회사로 걸려 온 전화를 받았는데, 상대가 물어본 내용을 바로 찾을 수 없을 때가 있어요. 그럴 때 원어민 직원은 이렇게 말해요.</p>\n<h2>실제 대화 · 주문 확인 전화를 받을 때</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Hi, I'm calling about my order. It hasn't arrived yet.</span><span class=\"ko\">안녕하세요, 주문 건으로 전화드렸어요. 아직 안 왔어요.</span></li>\n<li class=\"me\"><span class=\"en\">I'm sorry about that. Can I have your order number?</span><span class=\"ko\">죄송합니다. 주문 번호를 알려 주시겠어요?</span></li>\n<li class=\"them\"><span class=\"en\">Sure. It's 48215.</span><span class=\"ko\">네. 48215예요.</span></li>\n<li class=\"me\"><span class=\"en\">Thank you. Bear with me a moment while I check.</span><span class=\"ko\">감사합니다. 확인하는 동안 잠시만 기다려 주세요.</span></li>\n<li class=\"me\"><span class=\"en\">Thanks for bearing with me. It's on its way and should arrive tomorrow.</span><span class=\"ko\">기다려 주셔서 감사해요. 배송 중이고 내일 도착할 거예요.</span></li>\n</ul>\n<p>대화에서 두 번 나온 말이 오늘의 표현이에요. 확인하기 전에 <b>Bear with me</b>, 확인을 마친 뒤에 <b>Thanks for bearing with me</b>. 기다려 달라고 부탁하고, 기다려 줘서 고맙다고 인사하는 짝이에요.</p>\n<h2>뜻</h2>\n<div class=\"box\"><b>Bear with me.</b> = 잠시만 기다려 주세요 / 조금만 참고 들어 주세요</div>\n<p>메리엄웹스터 사전은 bear with를 '누군가에게 너그럽게, 참을성 있게 대하다'로 풀이해요. 롱맨 사전은 이 표현을 말할 때 쓰는 표현으로 분류하고, 내가 정보를 찾거나 하던 일을 마치는 동안 상대에게 <b>정중하게 기다려 달라고 부탁할 때</b> 쓴다고 설명해요. 그냥 '기다려'가 아니라 '제가 지금 뭔가 하고 있으니 조금만 양해해 주세요'라는 마음이 함께 담겨 있어요.</p>\n<p>여기서 bear는 동물 곰이 아니에요. I can't bear it.(못 참겠어)의 bear, 곧 '참다, 견디다'예요. 직역하면 '나와 함께 참아 주세요'가 돼요. Etymonline에 따르면 이 동사는 고대 영어 beran '나르다, 지다'에서 왔고, 동물 곰 bear와는 뿌리가 다른 단어예요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 무거운 짐을 지는(bear) 모습. \"기다리는 수고, 잠깐만 나랑 같이 져 줘요.\"</div>\n<h2>기다려 달라는 말, 자리에 맞게 고르기</h2>\n<figure class=\"fig\"><img src=\"/images/bear-with-me-wait.png\" alt=\"기다려 달라는 영어: 친구 사이에는 Hang on a sec(잠깐만), 전화 연결 중에는 Can you hold on?(끊지 말고 잠시만요), 정중하게 양해를 구할 때는 Bear with me a moment(확인하는 동안 잠시만 기다려 주세요)\" width=\"1080\" height=\"1454\" loading=\"lazy\"><figcaption>기다린 뒤에는 Thanks for bearing with me로 마무리해요</figcaption></figure>\n<p>옥스퍼드 러너스 사전은 Hang on을 비격식 표현으로 표시하고, 메리엄웹스터도 Just a sec의 sec를 비격식으로 분류해요. 친구에게는 이런 짧은 말이 잘 어울려요. Hold on은 전화에서 \"Can you hold on?\"처럼 '끊지 말고 기다려 달라'고 할 때 자주 써요. Bear with me는 이보다 공손해서 손님, 고객, 처음 대하는 사람에게도 편하게 쓸 수 있어요. 회사나 가게를 대표해서 말할 때는 Please bear with us처럼 us를 써요.</p>\n<h2>설명이 길어질 때도 Bear with me</h2>\n<p>이 표현은 몸으로 기다리게 할 때만 쓰지 않아요. 옥스퍼드 러너스 사전 예문에는 '조금만 더 참고 들어 주면 질문에 답하겠다'는 문장이 나와요. 이야기가 길어지거나 복잡해질 것 같을 때, 상대에게 미리 양해를 구하는 말로도 쓰여요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Bear with me, this part is a little complicated.</span><span class=\"ko\">조금만 참고 들어 줘, 이 부분이 좀 복잡해.</span></li>\n<li><span class=\"en\">Please bear with me while I find the file.</span><span class=\"ko\">파일 찾는 동안 잠시만 기다려 주세요.</span></li>\n<li><span class=\"en\">Please bear with us while we update our website.</span><span class=\"ko\">홈페이지를 업데이트하는 동안 양해 부탁드립니다.</span></li>\n<li><span class=\"en\">Thanks for bearing with me.</span><span class=\"ko\">기다려 줘서 고마워요.</span></li>\n</ul></div>\n<p>발표하다가 화면이 멈췄을 때, 회의에서 숫자를 찾을 때, 화상회의 연결이 늦을 때 모두 같은 한마디로 해결돼요.</p>\n<h2>발음과 억양</h2>\n<p>한글로 적으면 <b>\"베어 위드미\"</b>에 가까워요. bear는 미국식으로 [ber], 영국식으로 [beə]라서 '베어'를 두 박자로 끊지 말고 한 번에 '베얼'처럼 이어 말해요. with의 th는 혀끝을 윗니에 살짝 댔다 떼며 짧게 지나가고, 바로 me와 붙어 '위드미'처럼 한 덩어리가 돼요. 힘은 <b>bear</b>에 주고 with me는 가볍게 낮춰요. a moment를 붙이면 \"베어 위드미 어<b>모</b>먼\"처럼 moment의 첫소리에 다시 힘이 실리고 끝의 t는 거의 들리지 않아요. 끝을 부드럽게 내리면 공손하게 들려요.</p>\n<h2>bare와 bear, 소리는 같고 뜻은 정반대</h2>\n<p>메리엄웹스터 사전을 보면 bear와 bare는 발음이 똑같아요. 그래서 원어민도 문자나 이메일에서 Bare with me라고 잘못 쓰는 일이 드물지 않아요. 하지만 bare는 '벌거벗은, 드러내다'라는 뜻이라 Bare with me는 엉뚱한 말이 돼요. 말할 때는 아무 문제 없지만, 업무 메일에 쓸 때는 철자를 한 번 더 확인하세요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">고객에게 이메일로 잠시 기다려 달라고 쓸 때</span><span class=\"no\">Please bare with me.</span><span class=\"en\">Please bear with me.</span><span class=\"ko\">잠시만 기다려 주세요.</span><span class=\"why\"><b>왜?</b>bare는 '벌거벗은, 드러내다'예요. '참다, 견디다'는 bear라서 철자가 바뀌면 뜻이 완전히 달라져요.</span></li>\n<li><span class=\"ctx\">기다려 준 상대에게 고맙다고 할 때</span><span class=\"no\">Thank you for your bearing.</span><span class=\"en\">Thank you for bearing with me.</span><span class=\"ko\">기다려 주셔서 감사해요.</span><span class=\"why\"><b>왜?</b>bear with가 한 덩어리라 with를 빼면 뜻이 전해지지 않아요. Thank you for your patience.라고 해도 좋아요.</span></li>\n</ul></div>\n<p>기다리게 한 뒤 진행 상황을 계속 알려 달라고 할 땐 <a href=\"/p/keep-me-posted/\">Keep me posted</a>를, 복잡한 설명을 차근차근 부탁할 땐 <a href=\"/p/walk-me-through/\">Could you walk me through it?</a>을 함께 써 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Merriam-Webster 'bear with'·'bear'·'bare'·'sec', Oxford Learner's Dictionaries 'bear with'·'hang on', Longman 'bear with'·'hold on', Etymonline 'bear (v.)'.</p>"
+}

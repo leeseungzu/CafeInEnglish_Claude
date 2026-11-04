@@ -1,0 +1,73 @@
+{
+  "id": "turkey-origin",
+  "cat": "story",
+  "sub": "단어의 유래",
+  "level": "기초",
+  "date": "2026-11-04",
+  "title": "칠면조는 왜 turkey일까? 남의 나라 이름을 얻은 새",
+  "seo_title": "turkey 어원 - 칠면조가 터키라는 이름을 얻은 이유, cold turkey 뜻까지",
+  "lead": "추수감사절 식탁의 주인공, 그런데 이름은 엉뚱한 새에게서 물려받았어요",
+  "description": "칠면조 turkey는 원래 터키를 거쳐 들어온 아프리카 뿔닭의 이름이었어요. 이름이 아메리카 새로 옮겨 간 사연, 나라 이름 Türkiye, cold turkey·talk turkey 쓰는 법을 정리했어요.",
+  "og": {
+    "en": "turkey ≠ Turkey",
+    "ko": "칠면조가 나라 이름을 얻은 사연"
+  },
+  "icon": "turkey",
+  "chat": {
+    "q": "Any plans for Thanksgiving?",
+    "a": "Just dinner. My mom is roasting a turkey.",
+    "key": "roasting a turkey",
+    "ko": "그냥 저녁 먹어. 엄마가 칠면조를 구우셔."
+  },
+  "thumb": {
+    "text": "turkey",
+    "key": "turkey",
+    "ko": "칠면조는 왜 터키일까?"
+  },
+  "related": [],
+  "quiz": [
+    {
+      "tag": "유래",
+      "q": "영어에서 turkey라는 이름이 처음(1540년대) 가리킨 새는?",
+      "sub": "",
+      "options": [
+        "아메리카 칠면조",
+        "아프리카 뿔닭(guinea fowl)",
+        "인도 공작",
+        "남아메리카 콘도르"
+      ],
+      "answer": 1,
+      "explain": "Etymonline에 따르면 turkey는 먼저 터키를 거쳐 들어온 뿔닭을 가리켰고, 1550년대부터 아메리카 새에도 쓰였어요.",
+      "mnemonic": "이름은 뿔닭이 먼저, 칠면조는 물려받았을 뿐"
+    },
+    {
+      "tag": "표현",
+      "q": "\"I quit coffee cold turkey.\"의 뜻은?",
+      "sub": "",
+      "options": [
+        "커피를 차갑게 마시기 시작했다",
+        "커피를 한 번에 딱 끊었다",
+        "커피를 조금씩 줄였다",
+        "커피와 칠면조를 같이 먹었다"
+      ],
+      "answer": 1,
+      "explain": "cold turkey는 서서히 줄이지 않고 한 번에 딱 끊는 것을 말해요.",
+      "mnemonic": "준비 없이 차갑게(cold), 한 번에 딱"
+    },
+    {
+      "tag": "문법",
+      "q": "칠면조 고기를 저녁으로 먹었다고 할 때 가장 자연스러운 문장은?",
+      "sub": "",
+      "options": [
+        "I ate a turkey for dinner.",
+        "I had turkey for dinner.",
+        "I had turkeys for dinner.",
+        "I ate Turkey for dinner."
+      ],
+      "answer": 1,
+      "explain": "고기로 먹는 칠면조는 a 없이 turkey예요. a turkey는 한 마리, 대문자 Turkey는 나라 이름이에요.",
+      "mnemonic": "chicken처럼 고기는 a 없이"
+    }
+  ],
+  "body_html": "<p>2022년 6월 1일, 유엔은 터키 외교장관이 보낸 서한을 받고 그날부터 이 나라를 <b>Türkiye</b>로 부르기 시작했어요. 튀르키예 정부가 밝힌 이유는 나라의 문화와 정체성을 더 잘 드러내는 이름을 쓰겠다는 것이었어요. 여기에 CBS 뉴스 등 여러 외신은 나라 이름을 새 turkey와 거기 따라붙는 부정적인 뜻에서 떼어 내려는 뜻도 있다고 보도했어요. 영어 turkey에는 실제로 '실패작'이라는 속어 뜻도 있거든요. 그런데 거꾸로 물어볼 수 있어요. 애초에 이 새는 왜 나라 이름으로 불리게 됐을까요?</p>\n<p>칠면조의 고향은 터키가 아니에요. National Geographic과 Smithsonian Magazine에 따르면 지금 우리가 먹는 칠면조는 멕시코와 중앙아메리카에서 2천 년도 더 전에 길들여졌고, 1500년대 초에 스페인 사람들이 유럽으로 실어 날랐어요. 터키와는 바다 건너 정반대 쪽 새예요.</p>\n<figure class=\"fig\"><img src=\"/images/story-turkey-audubon.webp\" alt=\"오듀본의 판화 「Wild Turkey」. 대나무와 풀 사이에 선 수컷 야생 칠면조가 고개를 들고 있고, 아래에 학명 Meleagris gallopavo가 적혀 있다\" width=\"671\" height=\"1000\" loading=\"lazy\"><figcaption>존 제임스 오듀본 『미국의 새(The Birds of America)』(1827~1838)의 첫 번째 판화 「Wild Turkey」. 피츠버그 대학교 소장, 퍼블릭 도메인</figcaption></figure>\n<h2>처음 turkey라고 불린 새는 따로 있었어요</h2>\n<p>어원 사전 Etymonline에 따르면 영어에서 turkey라는 이름은 1540년대에 먼저 <b>뿔닭(guinea fowl)</b>을 가리켰어요. 뿔닭은 아프리카 새인데, 이 사전은 뿔닭이 터키를 거쳐 유럽에 들어왔다고 설명해요. 당시 영어의 Turkey는 오늘날의 나라 하나보다 훨씬 넓게, 오스만 제국의 땅이나 막연한 '동방'을 가리키는 말이기도 했어요. 멀리서 들여온 낯선 새에 '그쪽에서 온 새'라는 이름을 붙인 셈이에요.</p>\n<h2>아메리카 새가 이름을 물려받기까지</h2>\n<p>그리고 곧 이 이름은 아메리카에서 건너온 새에게도 쓰이기 시작했어요. Etymonline은 turkey가 1550년대부터 이 북아메리카 새를 가리키는 데 쓰였다고 적고, 메리엄웹스터 사전은 이 뜻의 첫 기록을 1555년으로 잡아요. 메리엄웹스터의 설명은 짧아요. 터키 땅에서 들여온다고 여겨진 <b>뿔닭과 헷갈려서</b> 붙은 이름이라는 거예요. 처음에는 두 새가 같은 종류로 여겨졌고, 나중에 서로 다른 새라는 걸 알게 된 뒤에도 turkey라는 이름은 아메리카 새에 그대로 남았어요.</p>\n<p>이 착각의 흔적은 학명에도 남아 있어요. 위 그림 아래쪽에 적힌 칠면조의 학명은 <b>Meleagris gallopavo</b>예요. 그런데 meleagris는 원래 고대 그리스 사람들이 뿔닭을 부르던 이름이에요. Etymonline은 린네가 이 아프리카 새의 옛 이름을 아메리카 새의 속명으로 가져다 쓴 것을 두고 '안타깝게도'라는 말을 붙였어요. 이름이 한 번 더 엉뚱한 새에게 건너간 거예요.</p>\n<h2>다른 나라 말에서도 '먼 나라 새'</h2>\n<p>칠면조를 엉뚱한 지명으로 부른 건 영어만이 아니에요. 다른 언어의 이름을 나란히 놓으면 재미있는 그림이 나와요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>언어</th><th>칠면조</th><th>이름 속에 든 곳</th></tr></thead><tbody><tr><td>영어</td><td>turkey</td><td>터키(지금의 튀르키예)</td></tr><tr><td>튀르키예어</td><td>hindi</td><td>인도</td></tr><tr><td>프랑스어</td><td>dinde</td><td>인도(poulet d'Inde '인도 닭'이 줄어든 말)</td></tr></tbody></table></div>\n<p>영어는 터키라고 부르는데, 정작 튀르키예 사람들은 '인도 새'라고 불러요. Etymonline은 hindi와 dinde에 '인도'가 들어간 이유를, 사람들이 새로 닿은 아메리카를 아시아 동쪽 끝, 곧 '인도' 쪽으로 여겼던 생각과 연결해요. 저마다 먼 곳의 이름을 붙였을 뿐, 어느 쪽도 이 새의 진짜 고향을 가리키지 않아요.</p>\n<h2>지금은 이렇게 써요</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">We're having turkey for Thanksgiving.</span><span class=\"ko\">추수감사절에 칠면조를 먹을 거야.</span></li>\n<li><span class=\"en\">Can I get a turkey sandwich?</span><span class=\"ko\">칠면조 샌드위치 하나 주시겠어요?</span></li>\n<li><span class=\"en\">I quit smoking cold turkey.</span><span class=\"ko\">담배를 한 번에 딱 끊었어.</span></li>\n<li><span class=\"en\">All right, let's talk turkey.</span><span class=\"ko\">좋아, 이제 터놓고 이야기해 보자.</span></li>\n<li><span class=\"en\">That movie was a real turkey.</span><span class=\"ko\">그 영화는 완전 망작이었어.</span></li>\n</ul></div>\n<p>고기로 먹는 칠면조는 chicken처럼 a 없이 turkey라고 써요. 미국에서는 11월 넷째 목요일 추수감사절 식탁의 주인공이라 이날을 Turkey Day라고 부르기도 해요. 메리엄웹스터 사전에도 Thanksgiving Day를 뜻하는 말로 올라 있어요. 2026년 추수감사절은 11월 26일이에요.</p>\n<p><b>cold turkey</b>는 술, 담배처럼 끊기 힘든 습관을 서서히 줄이지 않고 한 번에 딱 끊는 것을 말해요. <b>talk turkey</b>는 메리엄웹스터 풀이로 '솔직하게, 단도직입적으로 말하다'예요. 협상이나 거래에서 '이제 본론으로 들어가자'라는 느낌으로 들려요. 마지막 문장의 turkey는 크게 실패한 영화나 공연을 가리키는 비격식 속어예요.</p>\n<h2>실제 대화 · 추수감사절 계획을 물을 때</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Any plans for Thanksgiving?</span><span class=\"ko\">추수감사절에 계획 있어?</span></li>\n<li class=\"me\"><span class=\"en\">Just dinner with my family. My mom is roasting a turkey.</span><span class=\"ko\">그냥 가족이랑 저녁 먹어. 엄마가 칠면조를 구우셔.</span></li>\n<li class=\"them\"><span class=\"en\">Nice. Did you know turkeys aren't from Turkey?</span><span class=\"ko\">좋겠다. 칠면조가 터키에서 온 새가 아닌 거 알았어?</span></li>\n<li class=\"me\"><span class=\"en\">Really? Then why are they called that?</span><span class=\"ko\">정말? 그럼 왜 그렇게 불러?</span></li>\n</ul>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">저녁에 칠면조 고기를 먹었다고 말할 때</span><span class=\"no\">I ate a turkey for dinner.</span><span class=\"en\">I had turkey for dinner.</span><span class=\"ko\">저녁으로 칠면조를 먹었어.</span><span class=\"why\"><b>왜?</b>a turkey는 칠면조 한 마리예요. 고기로 먹은 이야기라면 chicken처럼 a 없이 turkey라고 해요.</span></li>\n<li><span class=\"ctx\">담배를 한 번에 끊었다고 말할 때</span><span class=\"no\">I quit smoking cold.</span><span class=\"en\">I quit smoking cold turkey.</span><span class=\"ko\">담배를 한 번에 딱 끊었어.</span><span class=\"why\"><b>왜?</b>cold turkey가 한 덩어리 표현이에요. cold만 쓰면 '한 번에 끊었다'는 뜻이 전해지지 않아요.</span></li>\n</ul></div>\n<p>음식 이름 속에 숨은 이야기는 <a href=\"/p/sandwich-origin/\">샌드위치와 백작 이야기</a>에서, 동물이 숨은 단어는 <a href=\"/p/muscle-origin/\">muscle 속 생쥐 이야기</a>에서 이어서 볼 수 있어요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Etymonline 'turkey'·'cold turkey', Merriam-Webster 'turkey'·'cold turkey'·'talk turkey'·'Turkey Day', National Geographic 'Fowl Play: The Twisted Linguistics of Turkey', Smithsonian Magazine 'Your Thanksgiving Turkey Is a Quintessentially American Bird: An Immigrant', CBS News·Euronews(2022년 6월 보도), 존 제임스 오듀본 『The Birds of America』 Plate 1(피츠버그 대학교, Wikimedia Commons).</p>"
+}

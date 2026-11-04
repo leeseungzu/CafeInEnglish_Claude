@@ -798,6 +798,45 @@ def ago_before():
     c.save("ago-before-timeline.png")
 
 
+def bear_with_me():
+    c = Canvas("'기다려 주세요'를 영어로", "자리에 맞는 한마디를 골라요")
+    rows = [("친구 사이 가볍게", "Hang on a sec.", "잠깐만.", False),
+            ("전화를 끊지 말아 달라고", "Can you hold on?", "끊지 말고 잠시만요.", False),
+            ("정중하게 양해를 구할 때", "Bear with me a moment.", "확인하는 동안 잠시만 기다려 주세요.", True)]
+    for tag, en, ko, key in rows:
+        def body(x, r, tag=tag, en=en, ko=ko, key=key):
+            c.pill(x, c.y, tag, F(36, 700), bg=LIME if key else SOFT, fg=INK); c.y += 84
+            sz = 56
+            while c.d.textlength(en, font=F(sz, 800)) > r - x - 12 and sz > 40:
+                sz -= 2
+            if key:
+                c.hl(x, c.y, en, F(sz, 800)); c.y += int(sz * 1.3)
+            else:
+                c.text(x, en, F(sz, 800), INK, 1.3)
+            c.text(x, ko, F(40, 700), MUTED, 1.2)
+        c.card(body)
+    c.note("기다려 준 뒤에는 Thanks for bearing with me.", 40)
+    c.save("bear-with-me-wait.png")
+
+
+def meet_see():
+    c = Canvas("처음엔 meet, 다시 만나면 see", "만남의 순서에 따라 인사가 바뀌어요")
+    rows = [("① 처음 소개받을 때", "Nice to meet you.", "만나서 반가워요."),
+            ("② 첫 만남 뒤 헤어질 때", "It was nice meeting you.", "만나서 반가웠어요."),
+            ("③ 다시 만났을 때", "Nice to see you again.", "다시 만나서 반가워요.")]
+    for tag, en, ko in rows:
+        def body(x, r, tag=tag, en=en, ko=ko):
+            c.pill(x, c.y, tag, F(36, 700), bg=SOFT, fg=INK); c.y += 84
+            sz = 56
+            while c.d.textlength(en, font=F(sz, 800)) > r - x - 12 and sz > 40:
+                sz -= 2
+            c.hl(x, c.y, en, F(sz, 800)); c.y += int(sz * 1.3)
+            c.text(x, ko, F(40, 700), MUTED, 1.2)
+        c.card(body)
+    c.note("이미 아는 사이라면 meet 대신 see", 40)
+    c.save("meet-see-timeline.png")
+
+
 if __name__ == "__main__":
-    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps, long_story_short, almost_most, fingers_crossed, go_home, no_worries, fun_funny, cup_of_tea, ago_before):
+    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps, long_story_short, almost_most, fingers_crossed, go_home, no_worries, fun_funny, cup_of_tea, ago_before, bear_with_me, meet_see):
         fn()
