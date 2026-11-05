@@ -454,5 +454,17 @@
     "en": "Good to see you again.",
     "ko": "다시 만나서 반가워요",
     "desc": "이미 아는 사람을 다시 만나면 meet 대신 see. Nice to meet you는 처음 만날 때 하는 인사예요."
+  },
+  {
+    "post": "take-your-time",
+    "en": "Sure, take your time.",
+    "ko": "물론이죠, 천천히 하세요",
+    "desc": "상대를 재촉하지 않고 여유를 줄 때 쓰는 말. '천천히'를 slowly로 옮기면 속도를 늦추라는 지시처럼 들려요."
+  },
+  {
+    "post": "wear-vs-put-on",
+    "en": "Can I try this on?",
+    "ko": "이거 입어 봐도 돼요?",
+    "desc": "가게에서 맞는지 입어 볼 땐 try on. 입고 있는 상태는 wear, 입는 동작은 put on이에요."
   }
 ]

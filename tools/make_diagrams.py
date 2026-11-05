@@ -837,6 +837,39 @@ def meet_see():
     c.save("meet-see-timeline.png")
 
 
+def wear_put_on():
+    c = Canvas("영어는 wear 하나로 말해요", "입다·신다·쓰다·끼다·차다, 걸치고 있으면 모두 wear")
+    rows = [("코트를 입다", "wear a coat"), ("신발을 신다", "wear shoes"), ("안경을 쓰다", "wear glasses"),
+            ("반지를 끼다", "wear a ring"), ("시계를 차다", "wear a watch")]
+    def body(x, r):
+        for i, (ko, en) in enumerate(rows):
+            if i:
+                c.d.line((x, c.y - 18, r, c.y - 18), fill=LINE, width=3)
+            y0 = c.y
+            c.d.text((x, y0), ko, font=F(46, 700), fill=MUTED)
+            rest = en[4:]
+            fr = F(52, 800)
+            wr = c.d.textlength(rest, font=fr)
+            ww = c.d.textlength("wear", font=fr)
+            xs = r - wr - ww
+            c.hl(xs, y0 - 3, "wear", fr)
+            c.d.text((xs + ww, y0 - 3), rest, font=fr, fill=INK)
+            c.y += 104
+        c.y -= 20
+    c.card(body)
+    pairs = [("wear", "입고 있는 상태", "I'm wearing a jacket.", "재킷을 입고 있어."),
+             ("put on", "입는 동작, 그 순간", "Put on your jacket.", "재킷 입어.")]
+    for word, when, en, ko in pairs:
+        def b2(x, r, word=word, when=when, en=en, ko=ko):
+            w, h = c.pill(x, c.y, word, F(38, 800), bg=LIME, fg=INK)
+            c.d.text((x + w + 20, c.y + h / 2), when, font=F(40, 700), fill=MUTED, anchor="lm"); c.y += 88
+            c.text(x, en, F(54, 800), INK, 1.3)
+            c.text(x, ko, F(40, 700), MUTED, 1.2)
+        c.card(b2)
+    c.note("벗을 때는 take off, 맞는지 입어 볼 때는 try on", 40)
+    c.save("wear-put-on.png")
+
+
 if __name__ == "__main__":
-    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps, long_story_short, almost_most, fingers_crossed, go_home, no_worries, fun_funny, cup_of_tea, ago_before, bear_with_me, meet_see):
+    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps, long_story_short, almost_most, fingers_crossed, go_home, no_worries, fun_funny, cup_of_tea, ago_before, bear_with_me, meet_see, wear_put_on):
         fn()

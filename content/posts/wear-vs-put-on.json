@@ -1,0 +1,73 @@
+{
+  "id": "wear-vs-put-on",
+  "cat": "tip",
+  "sub": "단어",
+  "level": "기초",
+  "date": "2026-11-05",
+  "title": "입다·신다·쓰다는 wear 하나, put on과 다른 점",
+  "seo_title": "wear put on 차이 - '입다·신다·쓰다' 영어로 한 번에",
+  "lead": "영어는 물건이 아니라 '입고 있는 상태'와 '입는 동작'으로 나눠요",
+  "description": "한국어는 입다·신다·쓰다·끼다·차다로 나누지만 영어는 대부분 wear 하나로 말해요. 입고 있는 상태 wear와 입는 동작 put on의 차이, try on·take off까지 도식과 대화, 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Put on a jacket.",
+    "ko": "입고 있으면 wear, 입는 순간은 put on"
+  },
+  "icon": "t-shirt",
+  "chat": {
+    "q": "It's freezing outside.",
+    "a": "Then put on a jacket.",
+    "key": "put on",
+    "ko": "그럼 재킷 입어."
+  },
+  "thumb": {
+    "text": "Put on a jacket.",
+    "key": "Put on",
+    "ko": "wear와 put on, 뭐가 다를까?"
+  },
+  "quiz": [
+    {
+      "tag": "단어",
+      "q": "'그는 늘 시계를 차고 다녀'로 가장 자연스러운 문장은?",
+      "sub": "",
+      "options": [
+        "He always wears a watch.",
+        "He always ties a watch.",
+        "He always hangs a watch.",
+        "He always kicks a watch."
+      ],
+      "answer": 0,
+      "explain": "시계, 반지, 안경, 신발처럼 몸에 착용하고 있는 것은 wear로 말해요.",
+      "mnemonic": "몸에 걸치고 있으면 wear"
+    },
+    {
+      "tag": "상태·동작",
+      "q": "현관에서 '잠깐, 재킷 입고 갈게'라고 할 때 빈칸에 가장 자연스러운 말은? \"Wait, let me ___ my jacket.\"",
+      "sub": "",
+      "options": [
+        "take off",
+        "put on",
+        "try on",
+        "wear off"
+      ],
+      "answer": 1,
+      "explain": "지금 재킷을 걸치는 동작이라 put on이에요. wear는 이미 입고 있는 상태를 말해요.",
+      "mnemonic": "입는 순간은 put on"
+    },
+    {
+      "tag": "표현",
+      "q": "옷가게에서 '이거 입어 봐도 돼요?'로 알맞은 것은?",
+      "sub": "",
+      "options": [
+        "Can I take this off?",
+        "Can I try this on?",
+        "Can I wear off this?",
+        "Can I put this away?"
+      ],
+      "answer": 1,
+      "explain": "사기 전에 맞는지 입어 보는 건 try on이에요. take off는 벗기, put away는 치우기예요.",
+      "mnemonic": "가게에서는 try on, 시험 삼아(try) 입어 보기"
+    }
+  ],
+  "body_html": "<p>한국어는 걸치는 물건마다 동사가 달라요. 옷은 입고, 신발은 신고, 안경은 쓰고, 반지는 끼고, 시계는 차요. 그래서 영어로 말할 때도 물건마다 다른 동사를 찾게 되는데, 영어는 오히려 단순해요.</p>\n<figure class=\"fig\"><img src=\"/images/wear-put-on.png\" alt=\"한국어 입다·신다·쓰다·끼다·차다가 영어에서는 모두 wear: wear a coat, wear shoes, wear glasses, wear a ring, wear a watch. 입고 있는 상태는 wear(I'm wearing a jacket), 입는 동작은 put on(Put on your jacket)\" width=\"1080\" height=\"1754\" loading=\"lazy\"><figcaption>몸에 걸치고 있으면 대부분 wear, 걸치는 순간의 동작은 put on</figcaption></figure>\n<h2>몸에 걸치고 있으면 대부분 wear</h2>\n<p>Cambridge와 Longman 사전은 wear를 '옷, 신발, 장신구 같은 것을 몸에 걸치거나 착용하고 있다'로 풀이해요. 그래서 코트도, 신발도, 안경도, 반지도 모두 wear 하나로 말해요. 사전 예문을 보면 안전벨트를 맨 것도 wear a seat belt라고 하고, 머리 모양을 어떻게 하고 다니는지도 wear로 말해요. 또 Longman은 일상 대화에서는 is wearing 대신 <b>has something on</b>도 많이 쓴다고 덧붙여요. She had a black dress on.(그녀는 검은 원피스를 입고 있었어)처럼요. 단, '우산을 쓰다'는 몸에 걸치는 게 아니라 손에 드는 거라 wear가 아니라 use an umbrella처럼 말해요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">She's wearing a red coat.</span><span class=\"ko\">그녀는 빨간 코트를 입고 있어.</span></li>\n<li><span class=\"en\">I wear glasses for reading.</span><span class=\"ko\">나는 책 읽을 때 안경을 써.</span></li>\n<li><span class=\"en\">He always wears a watch.</span><span class=\"ko\">그는 늘 시계를 차고 다녀.</span></li>\n<li><span class=\"en\">Please wear your seat belt.</span><span class=\"ko\">안전벨트를 꼭 매고 계세요.</span></li>\n<li><span class=\"en\">She usually wears her hair short.</span><span class=\"ko\">그녀는 보통 머리를 짧게 하고 다녀.</span></li>\n</ul></div>\n<h2>wear는 상태, put on은 동작</h2>\n<p>한국어 '입다'에는 '입고 있다'와 '입는다'가 둘 다 들어 있어요. 영어는 이 둘을 다른 말로 나눠요. 이미 몸에 걸치고 있는 <b>상태</b>는 wear, 몸에 걸치는 <b>동작</b>은 put on이에요. Longman은 put on의 반대말로 take off를 적어 두었고, 가게에서 맞는지 보려고 입어 보는 건 try on이라고 해요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>표현</th><th>뜻</th><th>예</th></tr></thead><tbody><tr><td>wear</td><td>걸치고 있는 상태</td><td>I'm wearing a jacket.</td></tr><tr><td>put on</td><td>걸치는 동작</td><td>Put on your jacket.</td></tr><tr><td>take off</td><td>벗는 동작</td><td>Take off your shoes.</td></tr><tr><td>try on</td><td>맞는지 입어 보기</td><td>Can I try this on?</td></tr></tbody></table></div>\n<p>목적어가 it이나 them이면 put과 on 사이에 넣어요. Put it on.(그거 입어), Can I try it on?(입어 봐도 돼요?)처럼요. Put on it처럼 it을 뒤에 두지 않아요.</p>\n<h2>실제 대화 · 외출하기 전 현관에서</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Are you ready? We're going to be late.</span><span class=\"ko\">준비됐어? 늦겠다.</span></li>\n<li class=\"me\"><span class=\"en\">Almost. I just need to put on my shoes.</span><span class=\"ko\">거의 다 됐어. 신발만 신으면 돼.</span></li>\n<li class=\"them\"><span class=\"en\">It's cold out. Are you wearing a scarf?</span><span class=\"ko\">밖에 추워. 목도리 했어?</span></li>\n<li class=\"me\"><span class=\"en\">No, I'll put one on now.</span><span class=\"ko\">아니, 지금 할게.</span></li>\n<li class=\"them\"><span class=\"en\">Good. And don't forget your gloves.</span><span class=\"ko\">좋아. 장갑도 잊지 말고.</span></li>\n</ul>\n<p>대화 속 동사를 보면 규칙이 그대로 보여요. 지금 신으려는 신발은 put on, 이미 했는지 묻는 목도리는 wearing이에요.</p>\n<h2>발음과 억양</h2>\n<p>wear는 <b>\"웨어\"</b>예요. Cambridge 사전 기준 영국식은 /weər/, 미국식은 /wer/로, '어디'를 뜻하는 where와 보통 똑같이 소리 나서 문맥으로 구별해요. put on은 따로 '풋 온'이라고 끊지 않아요. 미국 영어에서는 모음 사이의 t가 부드러워지고 on도 '안'에 가깝게 소리 나서 <b>\"푸란\"</b>처럼 들리고, put it on은 <b>\"푸리란\"</b>에 가까워져요(영국식은 \"푸론\"에 가까워요). on은 put보다 세게 들리지만, Put on your jacket처럼 뒤에 명사가 오면 가장 큰 힘은 jacket에 가요. take off는 <b>\"테이커프\"</b>, try on은 <b>\"트라이안\"</b>처럼 이어서 말해요.</p>\n<h2>'입고 있다'가 putting on이 되는 이유</h2>\n<p>한국인이 자주 하는 실수 중 하나는 '입고 있다'를 is putting on으로 옮기는 거예요. '입다 + 있다'를 그대로 '동작 + 진행형'으로 바꾸기 때문이에요. 하지만 She's putting on a coat.는 \"지금 코트에 팔을 끼우는 중이야\"라는 장면이에요. 사진 속 사람처럼 이미 입은 모습을 말할 때는 She's wearing a coat.예요. 하나 더, put on은 옷 말고 다른 뜻도 있어요. Longman과 Merriam-Webster에는 <b>put on weight</b>가 '살이 찌다'로 실려 있어서, I've put on a few kilos.는 \"몇 킬로 쪘어\"라는 말이에요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">사진 속 친구의 옷차림을 설명할 때</span><span class=\"no\">She is putting on a white dress.</span><span class=\"en\">She's wearing a white dress.</span><span class=\"ko\">그녀는 흰 원피스를 입고 있어.</span><span class=\"why\"><b>왜?</b>사진 속 모습은 이미 입고 있는 상태라 wear예요. putting on은 지금 입는 동작을 하는 중이라는 뜻이에요.</span></li>\n<li><span class=\"ctx\">옷가게에서 맞는지 입어 보고 싶을 때</span><span class=\"no\">Can I wear this?</span><span class=\"en\">Can I try this on?</span><span class=\"ko\">이거 입어 봐도 돼요?</span><span class=\"why\"><b>왜?</b>Can I wear this?는 '이거 입고 다녀도 돼?'에 가까워 어색해요. 사기 전에 맞는지 볼 때는 try on이에요.</span></li>\n</ul></div>\n<p>가게에서 입어 본 다음 계산할 때 쓰는 말은 <a href=\"/p/shopping-checkout/\">계산대에서 얼지 않는 쇼핑 영어</a>에서, 한국어 한 단어가 영어 두 단어로 갈리는 다른 예는 <a href=\"/p/borrow-vs-lend/\">borrow와 lend</a>에서 이어서 볼 수 있어요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Cambridge Dictionary 'wear', Longman Dictionary of Contemporary English 'wear'·'put on'·'try on', Merriam-Webster 'wear'·'put on'·'try on'·'have on'.</p>",
+  "related": []
+}

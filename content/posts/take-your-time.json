@@ -1,0 +1,73 @@
+{
+  "id": "take-your-time",
+  "cat": "expr",
+  "sub": "새 표현",
+  "level": "기초",
+  "date": "2026-11-05",
+  "title": "\"Take your time\", '천천히 해, 서두르지 마'를 한마디로",
+  "seo_title": "Take your time 뜻 - '천천히 하세요' 영어로, 비꼬는 뜻까지",
+  "lead": "상대를 재촉하지 않고 마음을 편하게 해 주는 한마디",
+  "description": "Take your time은 '천천히 해, 서두르지 마'라는 뜻이에요. No rush와 비교, 늦은 사람에게 쓰면 핀잔이 되는 경우, take your times 같은 실수를 표와 대화, 퀴즈로 정리했어요.",
+  "og": {
+    "en": "Take your time.",
+    "ko": "'천천히 해, 서두르지 마'를 한마디로"
+  },
+  "icon": "turtle",
+  "chat": {
+    "q": "Can I get back to you tomorrow?",
+    "a": "Sure, take your time.",
+    "key": "take your time",
+    "ko": "물론이죠, 천천히 하세요."
+  },
+  "thumb": {
+    "text": "Take your time.",
+    "key": "time",
+    "ko": "'천천히 해'를 영어로?"
+  },
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "동료가 \"Can I send it to you this afternoon?\"이라고 물을 때 \"Sure, take your time.\"의 뜻은?",
+      "sub": "",
+      "options": [
+        "서둘러 주세요",
+        "물론이죠, 천천히 하세요",
+        "시간 좀 내 주세요",
+        "시간 날 때 쉬세요"
+      ],
+      "answer": 1,
+      "explain": "Take your time은 '서두르지 말고 필요한 만큼 시간을 써'라는 뜻이에요. 상대를 재촉하지 않을 때 써요.",
+      "mnemonic": "모래시계를 상대 손에 쥐여 주기"
+    },
+    {
+      "tag": "뉘앙스",
+      "q": "약속에 40분 늦게 온 친구에게 \"Well, you took your time!\"이라고 했다면 어떤 뜻일까요?",
+      "sub": "",
+      "options": [
+        "천천히 와서 다행이야",
+        "참 빨리도 왔다 (늦었다는 핀잔)",
+        "시간 내 줘서 고마워",
+        "다음엔 천천히 와도 돼"
+      ],
+      "answer": 1,
+      "explain": "이미 늦은 사람에게 took your time이라고 하면 '너무 느렸다'는 불만이에요. 사전에도 이 뜻이 따로 실려 있어요.",
+      "mnemonic": "권하면 배려, 지난 일에 쓰면 핀잔"
+    },
+    {
+      "tag": "표현",
+      "q": "'급한 거 아니니까 금요일까지만 알려 줘'로 가장 자연스러운 것은?",
+      "sub": "",
+      "options": [
+        "No rush, just let me know by Friday.",
+        "Slowly, tell me Friday.",
+        "Take your times until Friday.",
+        "Hurry up by Friday."
+      ],
+      "answer": 0,
+      "explain": "No rush는 '급한 거 아니야'라는 가벼운 말이에요. time에는 s를 붙이지 않고, slowly는 속도를 늦추라는 말이에요.",
+      "mnemonic": "No rush = 급한 거 없음"
+    }
+  ],
+  "body_html": "<p>서두르지 말라는 말은 영어에 몇 가지가 있어요. 오늘은 그중 가장 많이 쓰는 <b>Take your time</b>을 중심으로, 비슷한 말과 어떻게 다른지 먼저 한눈에 보고 시작할게요.</p>\n<h2>'서두르지 마'를 말하는 세 가지</h2>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>표현</th><th>느낌</th><th>잘 어울리는 때</th></tr></thead><tbody><tr><td>Take your time.</td><td>천천히 해, 시간 충분히 써</td><td>상대가 하고 있는 일 자체에 여유를 줄 때</td></tr><tr><td>No rush.</td><td>급한 거 아니야</td><td>짧고 가볍게, 말로도 문자로도</td></tr><tr><td>There's no hurry.</td><td>서두를 필요 없어</td><td>시간이 넉넉하다는 사실을 알려 줄 때</td></tr></tbody></table></div>\n<p>세 표현은 함께 쓰는 일도 많아요. There's no rush, take your time.처럼 '급하지 않다'는 사실과 '천천히 하라'는 배려를 한 번에 전하는 식이에요.</p>\n<h2>뜻</h2>\n<div class=\"box\"><b>Take your time.</b> = 천천히 해, 서두르지 마 / 필요한 만큼 시간을 써</div>\n<p>Oxford Learner's Dictionaries와 Longman 사전은 take your time을 '서두르지 않고 필요한 만큼 시간을 쓰다'로 풀이해요. 직역하면 '네 시간을 가져'인데, 상대에게 시간을 넉넉히 내어 준다는 느낌이에요. 그래서 상대가 미안해하거나 조급해 보일 때 마음을 편하게 해 주는 한마디가 돼요. 무엇을 천천히 하는지 덧붙이고 싶으면 뒤에 with the report처럼 대상을 붙이거나, and think it over처럼 할 일을 이어 붙여요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 모래시계를 상대 손에 쥐여 주는 모습. \"이 시간은 네 거야(your time), 천천히 써.\"</div>\n<h2>예문</h2>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Take your time. I'm not in a hurry.</span><span class=\"ko\">천천히 해. 나 안 급해.</span></li>\n<li><span class=\"en\">Take your time with the report.</span><span class=\"ko\">보고서는 천천히 해도 돼요.</span></li>\n<li><span class=\"en\">Take your time and think it over.</span><span class=\"ko\">천천히 잘 생각해 봐.</span></li>\n<li><span class=\"en\">There's no rush. We have plenty of time.</span><span class=\"ko\">급할 거 없어. 시간 충분해.</span></li>\n<li><span class=\"en\">No rush, just let me know by Friday.</span><span class=\"ko\">급한 거 아니니까 금요일까지만 알려 줘.</span></li>\n</ul></div>\n<h2>\"You took your time!\"은 칭찬이 아니에요</h2>\n<p>같은 표현이 정반대 뜻이 될 때가 있어요. Oxford Learner's Dictionaries에는 '누군가 늦었거나 너무 느리다고 생각할 때' 쓰는 뜻이 따로 실려 있고, Longman도 '적당하다 싶은 것보다 더 느리게 하다'라는 뜻을 함께 적어 두었어요. 약속에 한참 늦게 온 친구에게 <b>Well, you took your time!</b>이라고 하면 \"참 빨리도 왔다\"라는 핀잔이 돼요. 일을 붙잡고 있는 동료에게 <b>You're taking your time with that.</b>이라고 하면 \"그거 꽤 오래 걸리네\"라는 불만이 섞여요.</p>\n<p>구별하는 요령은 간단해요. 상대에게 권하는 <b>Take your time.</b>은 대부분 친절한 말이고(다만 꾸물거리는 사람에게 비꼬는 말투로 하면 이것도 핀잔이 돼요), 이미 벌어진 일을 두고 하는 took your time, taking your time은 말투에 따라 불만이 될 수 있어요. 그래서 내가 쓸 때는 권하는 형태로만 써도 충분해요.</p>\n<h2>실제 대화 · 동료가 답을 하루 미뤄도 되냐고 물을 때</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">I need to check a few numbers first. Can I get back to you tomorrow?</span><span class=\"ko\">확인할 숫자가 몇 개 있어서요. 내일 다시 연락드려도 될까요?</span></li>\n<li class=\"me\"><span class=\"en\">Sure, take your time.</span><span class=\"ko\">물론이죠, 천천히 하세요.</span></li>\n<li class=\"them\"><span class=\"en\">Thanks. I just want to make sure it's right.</span><span class=\"ko\">고마워요. 정확하게 하고 싶어서요.</span></li>\n<li class=\"me\"><span class=\"en\">No rush. The meeting isn't until Friday.</span><span class=\"ko\">급할 거 없어요. 회의는 금요일에나 있어요.</span></li>\n</ul>\n<h2>발음과 억양</h2>\n<p>Take your time은 세 단어를 따로 끊지 않아요. take의 끝소리 k가 your에 붙고, your는 약하게 줄어서 전체가 <b>\"테이켜 타임\"</b>처럼 들려요. 힘은 마지막 <b>time</b>에 줘요. 끝을 부드럽게 내리면서 말하면 여유를 주는 따뜻한 말투가 돼요. No rush는 <b>\"노 러쉬\"</b>인데, rush의 r은 혀끝을 입천장에 닿지 않게 살짝 말아서 내고 힘은 rush에 둬요. There's no hurry는 <b>\"데어즈 노 허리\"</b>처럼 이어지고 hurry에 힘이 실려요.</p>\n<h2>'천천히 해'를 slowly로 옮기면</h2>\n<p>한국어 '천천히 해'는 대부분 속도 이야기가 아니에요. \"급하지 않으니 부담 갖지 마\"라는 마음이죠. 그런데 이 말을 단어 그대로 옮기면 slowly가 먼저 떠올라요. slowly는 실제 움직임이나 말의 속도를 늦추라는 말이라서, Speak slowly, please.(천천히 말해 주세요)처럼 쓰면 딱 맞지만, 동료에게 Do it slowly.라고 하면 \"느릿느릿 해\"라는 이상한 지시처럼 들려요. 속도를 늦춰 달라는 부탁에는 slowly, 상대를 재촉하지 않는다는 배려에는 take your time. 이렇게 두 칸으로 나눠 두면 헷갈리지 않아요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">동료가 \"Sorry, this is taking a while.\"이라며 미안해할 때</span><span class=\"no\">Do it slowly.</span><span class=\"en\">Take your time.</span><span class=\"ko\">천천히 하세요.</span><span class=\"why\"><b>왜?</b>Do it slowly는 속도를 늦추라는 지시로 들려요. 재촉하지 않는다는 마음은 Take your time이에요.</span></li>\n<li><span class=\"ctx\">친구에게 서두르지 말라고 할 때</span><span class=\"no\">Take your times.</span><span class=\"en\">Take your time.</span><span class=\"ko\">천천히 해.</span><span class=\"why\"><b>왜?</b>여기서 time은 셀 수 없는 '시간'이라 s를 붙이지 않아요. times는 '몇 번'이나 '시대'라는 뜻이 돼요.</span></li>\n</ul></div>\n<p>반대로 내가 상대에게 잠시 기다려 달라고 부탁할 때는 <a href=\"/p/bear-with-me/\">Bear with me</a>를, 약속에 늦을 것 같을 때는 <a href=\"/p/running-late/\">I'm running late</a>를 써 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Oxford Learner's Dictionaries 'time'(take your time), Longman Dictionary of Contemporary English 'take your time'·'rush'·'hurry', Merriam-Webster 'take one's time'.</p>",
+  "related": []
+}
