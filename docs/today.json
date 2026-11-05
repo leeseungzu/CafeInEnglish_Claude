@@ -1,12 +1,5 @@
 {
  "days": {
-  "2026-11-01": {
-   "en": "The view took my breath away.",
-   "ko": "경치가 숨이 멎을 만큼 멋졌어요",
-   "desc": "젠슨 황 수상 소감에 나온 표현, 숨이 멎을 만큼 감동했을 때 써요.",
-   "url": "https://www.cafeinenglish.com/p/jensen-van-fleet-speech/",
-   "au": "/audio/ce912a409069.mp3"
-  },
   "2026-11-02": {
    "en": "Could somebody pass me the salt?",
    "ko": "누가 소금 좀 건네주실래요?",
@@ -125,6 +118,13 @@
    "desc": "상대가 don't, can't처럼 부정으로 말했을 때의 '나도'. 긍정이면 Me too.",
    "url": "https://www.cafeinenglish.com/p/me-too-me-neither/",
    "au": "/audio/b8bbcbddb748.mp3"
+  },
+  "2026-11-19": {
+   "en": "Good to see you again.",
+   "ko": "다시 만나서 반가워요",
+   "desc": "이미 아는 사람을 다시 만나면 meet 대신 see. Nice to meet you는 처음 만날 때 하는 인사예요.",
+   "url": "https://www.cafeinenglish.com/p/nice-to-meet-vs-see/",
+   "au": "/audio/ed6b14fc2c42.mp3"
   }
  }
 }
