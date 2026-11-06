@@ -870,6 +870,44 @@ def wear_put_on():
     c.save("wear-put-on.png")
 
 
+def big_deal():
+    c = Canvas("big deal, 쓰는 자리에 따라 세 갈래", "같은 말인데 뜻이 거의 반대가 되기도 해요")
+    rows = [("a big deal", "중요한 일, 큰일", "This interview is a big deal for me.", "이번 면접은 나한테 큰일이야.", False),
+            ("no big deal", "별거 아닌 일", "It's no big deal. Don't worry.", "별거 아니야. 걱정 마.", True),
+            ("Big deal.", "혼자 쓰면 비꼬는 말", "\u201cYou broke it!\u201d \u201cBig deal.\u201d", "\u201c네가 망가뜨렸잖아!\u201d \u201c그게 뭐 대수야.\u201d", False)]
+    for word, when, en, ko, key in rows:
+        def body(x, r, word=word, when=when, en=en, ko=ko, key=key):
+            w, h = c.pill(x, c.y, word, F(38, 800), bg=LIME if key else SOFT, fg=INK)
+            c.d.text((x + w + 20, c.y + h / 2), when, font=F(40, 700), fill=MUTED, anchor="lm"); c.y += 88
+            sz = 52
+            while c.d.textlength(en, font=F(sz, 800)) > r - x - 12 and sz > 40:
+                sz -= 2
+            c.text(x, en, F(sz, 800), INK, 1.3)
+            c.text(x, ko, F(40, 700), MUTED, 1.2)
+        c.card(body)
+    c.note("not을 쓰면 It's not a big deal, a를 꼭 붙여요", 40)
+    c.save("big-deal-three.png")
+
+
+def weight_words():
+    c = Canvas("살 이야기, 이 네 마디면 돼요", "숫자는 동사 바로 뒤에: lost three kilos")
+    rows = [("살이 빠지다", "lose weight", "I've lost three kilos."),
+            ("살이 찌다", "put on weight", "I've put on some weight."),
+            ("다이어트 중이다", "be on a diet", "I'm on a diet."),
+            ("운동하다", "work out", "I work out three times a week.")]
+    for ko, key, en in rows:
+        def body(x, r, ko=ko, key=key, en=en):
+            w, h = c.pill(x, c.y, ko, F(36, 700), bg=SOFT, fg=INK); c.y += 84
+            c.hl(x, c.y, key, F(56, 800)); c.y += int(56 * 1.3)
+            sz = 42
+            while c.d.textlength(en, font=F(sz, 700)) > r - x - 12 and sz > 36:
+                sz -= 2
+            c.text(x, en, F(sz, 700), MUTED, 1.2)
+        c.card(body)
+    c.note("I'm diet, lose my weight는 쓰지 않아요", 40)
+    c.save("weight-words.png")
+
+
 if __name__ == "__main__":
-    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps, long_story_short, almost_most, fingers_crossed, go_home, no_worries, fun_funny, cup_of_tea, ago_before, bear_with_me, meet_see, wear_put_on):
+    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps, long_story_short, almost_most, fingers_crossed, go_home, no_worries, fun_funny, cup_of_tea, ago_before, bear_with_me, meet_see, wear_put_on, big_deal, weight_words):
         fn()

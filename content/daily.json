@@ -466,5 +466,17 @@
     "en": "Can I try this on?",
     "ko": "이거 입어 봐도 돼요?",
     "desc": "가게에서 맞는지 입어 볼 땐 try on. 입고 있는 상태는 wear, 입는 동작은 put on이에요."
+  },
+  {
+    "post": "no-big-deal",
+    "en": "It's no big deal.",
+    "ko": "별거 아니야",
+    "desc": "상대가 작은 실수를 미안해할 때 건네는 말. no 없이 Big deal만 툭 던지면 '그래서 뭐?'처럼 들려요."
+  },
+  {
+    "post": "lose-weight-english",
+    "en": "I'm on a diet.",
+    "ko": "나 다이어트 중이야",
+    "desc": "diet는 명사라 '다이어트 중'은 be on a diet. I'm diet라고 하지 않아요."
   }
 ]
