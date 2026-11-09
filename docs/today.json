@@ -1,26 +1,5 @@
 {
  "days": {
-  "2026-11-03": {
-   "en": "I put in 30 minutes every morning.",
-   "ko": "매일 아침 30분씩 들여요",
-   "desc": "듀오링고 CEO가 말한 put in, 시간이나 노력을 들일 때 써요.",
-   "url": "https://www.cafeinenglish.com/p/duolingo-500-hours/",
-   "au": "/audio/f0b543404e92.mp3"
-  },
-  "2026-11-04": {
-   "en": "I'm on the fence.",
-   "ko": "아직 고민 중이야",
-   "desc": "울타리 위에 앉아 어느 쪽으로도 못 내려간 마음. about + -ing로 무엇을 고민하는지 붙여요.",
-   "url": "https://www.cafeinenglish.com/p/on-the-fence/",
-   "au": "/audio/fc94bd5bcde1.mp3"
-  },
-  "2026-11-05": {
-   "en": "No worries.",
-   "ko": "괜찮아, 신경 쓰지 마",
-   "desc": "고맙다는 말에도 미안하다는 말에도 쓰는 가벼운 대답. No worry가 아니라 꼭 복수 worries예요.",
-   "url": "https://www.cafeinenglish.com/p/no-worries/",
-   "au": "/audio/2c04180db4ef.mp3"
-  },
   "2026-11-06": {
    "en": "Let's call it a day.",
    "ko": "오늘은 여기까지 하자",
@@ -125,6 +104,27 @@
    "desc": "가게에서 맞는지 입어 볼 땐 try on. 입고 있는 상태는 wear, 입는 동작은 put on이에요.",
    "url": "https://www.cafeinenglish.com/p/wear-vs-put-on/",
    "au": "/audio/146285a938a0.mp3"
+  },
+  "2026-11-21": {
+   "en": "I hope you feel better soon.",
+   "ko": "얼른 낫길 바라",
+   "desc": "나을 수 있는 일을 바랄 땐 hope. I wish you get better처럼 wish 뒤에 문장을 쓰지 않아요.",
+   "url": "https://www.cafeinenglish.com/p/hope-vs-wish/",
+   "au": "/audio/7875f2b5258e.mp3"
+  },
+  "2026-11-22": {
+   "en": "I'm a bit under the weather.",
+   "ko": "몸이 좀 안 좋아",
+   "desc": "컨디션이 별로인 날 증상 대신 건네는 한마디. 날씨가 아니라 몸 이야기이고, '살짝' 안 좋은 정도예요.",
+   "url": "https://www.cafeinenglish.com/p/under-the-weather/",
+   "au": "/audio/e4d3b846df0e.mp3"
+  },
+  "2026-11-23": {
+   "en": "I'm on a diet.",
+   "ko": "나 다이어트 중이야",
+   "desc": "diet는 명사라 '다이어트 중'은 be on a diet. I'm diet라고 하지 않아요.",
+   "url": "https://www.cafeinenglish.com/p/lose-weight-english/",
+   "au": "/audio/8b4d71d98c75.mp3"
   }
  }
 }

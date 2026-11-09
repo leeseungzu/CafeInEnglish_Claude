@@ -1,0 +1,73 @@
+{
+  "id": "hope-vs-wish",
+  "cat": "tip",
+  "sub": "단어",
+  "level": "기초",
+  "date": "2026-11-09",
+  "title": "\"I wish you pass\"는 틀려요, hope와 wish 차이",
+  "seo_title": "hope wish 차이 - '바라다' 영어로, I hope you와 I wish I 구별",
+  "lead": "이루어질 수 있는 바람과 현실과 다른 바람",
+  "description": "hope와 wish는 둘 다 '바라다'지만 가능한 일은 hope, 현실과 다른 일은 wish예요. wish 뒤 시제, Wish me luck처럼 괜찮은 쓰임, 발음까지 그림과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "I hope you pass!",
+    "ko": "'I wish you pass'는 틀려요"
+  },
+  "icon": "shooting-star",
+  "chat": {
+    "q": "My test is tomorrow.",
+    "a": "I hope you pass!",
+    "key": "I hope",
+    "ko": "꼭 붙길 바라!"
+  },
+  "thumb": {
+    "text": "hope vs wish",
+    "key": "hope",
+    "ko": "'붙길 바라'는 어느 쪽?"
+  },
+  "quiz": [
+    {
+      "tag": "표현",
+      "q": "내일 면접 보는 친구에게 할 말로 자연스러운 것은?",
+      "sub": "",
+      "options": [
+        "I wish you get the job.",
+        "I hope you get the job.",
+        "I hope you got the job tomorrow.",
+        "I wish you will get the job."
+      ],
+      "answer": 1,
+      "explain": "합격할 가능성이 열려 있는 일이라 hope를 써요. 앞으로의 일이라도 hope 뒤에는 현재형을 많이 쓰고, I hope you'll get the job처럼 will도 괜찮아요.",
+      "mnemonic": "문이 열려 있으면 hope"
+    },
+    {
+      "tag": "문법",
+      "q": "빈칸에 알맞은 말은? \"I wish I ___ drive.\"",
+      "sub": "",
+      "options": [
+        "can",
+        "could",
+        "will",
+        "am"
+      ],
+      "answer": 1,
+      "explain": "운전을 못하는 지금 현실과 다른 일을 바라니까 한 칸 과거인 could를 써요. 롱맨 사전도 I wish I can이라고 하지 말라고 짚어요.",
+      "mnemonic": "wish 뒤는 한 칸 과거로"
+    },
+    {
+      "tag": "뉘앙스",
+      "q": "다음 중 wish를 자연스럽게 쓴 문장은?",
+      "sub": "",
+      "options": [
+        "I wish it doesn't rain tomorrow.",
+        "I wish you feel better soon.",
+        "Wish me luck!",
+        "I wish you will win the game."
+      ],
+      "answer": 2,
+      "explain": "wish + 사람 + 명사(Wish me luck!)는 행운을 빌어 주는 인사라 자연스러워요. 비, 회복, 경기 승리처럼 가능한 일은 hope로 말해요(I hope you win the game).",
+      "mnemonic": "wish + 사람 + 명사는 선물 건네기"
+    }
+  ],
+  "body_html": "<p>내일 시험을 보는 친구에게 영어로 응원 메시지를 보냈다고 해 볼게요. 친구가 고맙다며 한 줄을 살짝 고쳐 준다면, 어디가 문제였을까요?</p>\n<div class=\"box\"><p><b>나</b> Good luck tomorrow! I wish you pass! <span style=\"color:#8B95A1\">(내일 잘 봐! 꼭 붙길 바라!)</span></p><p><b>친구</b> Thanks! Just so you know, it's \"I hope you pass.\" <span style=\"color:#8B95A1\">(고마워! 참고로 \"I hope you pass\"라고 해.)</span></p></div>\n<p>한국어로는 둘 다 '바라다'인데, 영어에서는 바라는 일이 <b>이루어질 수 있는 일인지</b>에 따라 단어가 갈려요. 내일 시험은 붙을 수도 있는 일이라 hope예요. 이 기준 하나만 잡으면 나머지는 거의 저절로 정리돼요.</p>\n<h2>hope는 가능성이 열려 있을 때</h2>\n<p>롱맨 사전은 hope를 '어떤 일이 일어나길 바라면서, 그 일이 가능하거나 그럴 것 같다고 믿는 것'으로 풀어요. Oxford Learner's 사전도 '일어나길 바라고, 가능하다고 생각하는 것'이라고 적어요. 시험 결과, 내일 날씨, 친구의 회복처럼 <b>아직 정해지지 않았고 그렇게 될 수도 있는 일</b>이 hope의 자리예요.</p>\n<p>hope 뒤에는 앞으로의 일이라도 현재형을 쓰는 경우가 많아요. 롱맨은 I hope that the rain stops soon.처럼 현재형 예문과 will을 쓴 예문을 함께 싣고, 말할 때는 that을 자주 뺀다고 설명해요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">I hope you pass the test.</span><span class=\"ko\">시험 붙길 바라.</span></li>\n<li><span class=\"en\">I hope it doesn't rain tomorrow.</span><span class=\"ko\">내일 비 안 오면 좋겠다.</span></li>\n<li><span class=\"en\">I hope you feel better soon.</span><span class=\"ko\">얼른 낫길 바라.</span></li>\n<li><span class=\"en\">I hope to see you soon.</span><span class=\"ko\">곧 보면 좋겠어요.</span></li>\n</ul></div>\n<p>마지막 문장처럼 내가 할 일을 바랄 땐 hope to 뒤에 동사원형을 써요. 롱맨은 I hope see you soon처럼 to를 빼지 말라고 짚어 줘요. \"그랬으면 좋겠다\"고 짧게 받을 땐 I hope so, \"안 그랬으면 좋겠다\"는 I hope not이에요.</p>\n<figure class=\"fig\"><img src=\"/images/hope-vs-wish.png\" alt=\"hope와 wish 비교: hope는 이루어질 수 있는 일(I hope you pass. 붙길 바라. / I hope it doesn't rain. 비가 안 오면 좋겠다), wish는 지금이나 과거와 다른 일(I wish I could speak Spanish. 스페인어를 할 줄 알면 좋을 텐데. / I wish I had studied harder. 공부 좀 더 할걸). wish + 사람 + 명사는 괜찮아요: Wish me luck!\" width=\"1080\" height=\"1490\" loading=\"lazy\"><figcaption>가능한 일은 hope, 현실과 다른 일은 wish</figcaption></figure>\n<h2>wish 뒤에는 한 칸 과거로</h2>\n<p>영국문화원(British Council)의 문법 설명은 wish를 '지금이나 과거가 달랐으면 하는 것'에 쓴다고 정리해요. 현실과 다른 일을 말하니까 시제를 한 칸 뒤로 보내요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>아쉬운 것</th><th>모양</th><th>예문</th></tr></thead><tbody><tr><td>지금의 현실</td><td>wish + 과거형</td><td>I wish I could speak Spanish.</td></tr><tr><td>이미 지난 일</td><td>wish + had p.p.</td><td>I wish I had studied harder.</td></tr><tr><td>남의 행동이 거슬릴 때</td><td>wish + would</td><td>I wish you wouldn't do that.</td></tr></tbody></table></div>\n<p>롱맨은 I wish I can speak Spanish라고 하지 말고 could를 쓰라고 분명히 적어요. 또 '내가 ~라면 좋을 텐데'에서 I wish I was와 I wish I were는 둘 다 써요. 롱맨과 Oxford Learner's는 일상 회화에서는 was도 흔하고, 격식 있는 말에서는, 특히 미국 영어에서 were를 많이 쓴다고 설명해요.</p>\n<h2>wish가 hope처럼 쓰이는 두 자리</h2>\n<p>그렇다고 wish가 늘 '이루지 못할 바람'만 말하는 건 아니에요. 첫째, <b>wish + 사람 + 명사</b>는 상대에게 좋은 일을 빌어 주는 인사예요. 롱맨은 We wish you a Merry Christmas, Oxford는 I wished her a happy birthday를, 두 사전 모두 Wish me luck!을 예문으로 실어요. 둘째, <b>wish to</b>는 '~하고 싶다'의 격식 있는 말이에요. Oxford는 I wish to speak to the manager.를 예로 들고, 롱맨은 일상에서는 보통 want를 쓴다고 덧붙여요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">Wish me luck!</span><span class=\"ko\">행운을 빌어 줘!</span></li>\n<li><span class=\"en\">We wish you all the best.</span><span class=\"ko\">모든 일이 잘되길 바랄게요.</span></li>\n<li><span class=\"en\">I wish I had more time.</span><span class=\"ko\">시간이 더 있으면 좋을 텐데.</span></li>\n</ul></div>\n<h2>실제 대화 · 운전면허 시험 전날</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">My driving test is tomorrow. I'm so nervous.</span><span class=\"ko\">내일 운전면허 시험이야. 너무 떨려.</span></li>\n<li class=\"me\"><span class=\"en\">You'll be fine. I hope you pass!</span><span class=\"ko\">잘할 거야. 꼭 붙길 바라!</span></li>\n<li class=\"them\"><span class=\"en\">Thanks. I wish I had practiced more, though.</span><span class=\"ko\">고마워. 근데 연습 좀 더 할걸 그랬어.</span></li>\n<li class=\"me\"><span class=\"en\">Don't worry. Let me know how it goes.</span><span class=\"ko\">걱정 마. 어떻게 됐는지 알려 줘.</span></li>\n</ul>\n<p>내일 결과는 아직 열려 있으니 hope, 지나간 연습은 되돌릴 수 없으니 wish. 한 대화 안에서 둘이 어떻게 갈리는지 보이죠.</p>\n<h2>'바라다' 하나를 그대로 옮기면</h2>\n<p>한국어 '바라다'는 될 법한 일에도, 안 될 일에도 똑같이 써요. \"붙길 바라\"와 \"키가 컸으면 좋겠다\"가 모두 바람이죠. 그래서 '바라다 = wish'로 외워 두면 I wish you pass처럼 hope 자리에 wish를 넣게 돼요. 생일 카드의 We wish you a happy birthday처럼 wish가 자연스럽게 쓰이는 문장도 헷갈림을 키워요. 이건 wish + 사람 + 명사 모양이라 괜찮은 거예요. wish 뒤에 문장(주어 + 동사)이 올 때만 '현실과 다른 일'이라고 기억하면 대부분 정리돼요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">시험 보는 친구를 응원할 때</span><span class=\"no\">I wish you pass the test.</span><span class=\"en\">I hope you pass the test.</span><span class=\"ko\">시험 붙길 바라.</span><span class=\"why\"><b>왜?</b>붙을 가능성이 열려 있는 일이라 hope예요. wish 뒤에 문장을 쓰면 '현실과 다른 일'을 바라는 말이 돼요.</span></li>\n<li><span class=\"ctx\">스페인어를 못해서 아쉬울 때</span><span class=\"no\">I wish I can speak Spanish.</span><span class=\"en\">I wish I could speak Spanish.</span><span class=\"ko\">스페인어를 할 줄 알면 좋을 텐데.</span><span class=\"why\"><b>왜?</b>지금 현실과 다른 일을 바라니까 can을 한 칸 과거인 could로 바꿔요.</span></li>\n<li><span class=\"ctx\">아픈 친구에게</span><span class=\"no\">I wish you get better soon.</span><span class=\"en\">I hope you feel better soon.</span><span class=\"ko\">얼른 낫길 바라.</span><span class=\"why\"><b>왜?</b>나을 수 있는 일이라 hope예요. wish + 사람 + 명사 모양으로 I wish you a speedy recovery.(빠른 회복을 빌어요)라고 하는 건 괜찮아요.</span></li>\n</ul></div>\n<h2>발음과 억양</h2>\n<p>hope는 <b>\"호웁\"</b>이에요. o를 '오우'로 길게 끌고, 끝의 p는 입술만 닫고 터뜨리지 않는 경우가 많아요. I hope you는 p와 you가 붙어 <b>\"아이 호퓨\"</b>처럼 들려요. wish는 짧게 <b>\"위시\"</b>, 끝 sh는 바람 소리만 내요. I wish I could는 sh와 I가 이어져 <b>\"아이 위샤이 쿳\"</b>처럼 들리고, 강조하고 싶은 말에 힘이 가요. I hope you <b>PASS</b>!처럼 바라는 내용의 핵심 단어에 강세가 가요.</p>\n<p>결과를 기다리는 친구에게 한마디 더 붙이고 싶다면 <a href=\"/p/fingers-crossed/\">Fingers crossed</a>를, 기대되는 일을 말할 땐 <a href=\"/p/looking-forward-to/\">looking forward to 뒤의 -ing</a>도 함께 확인해 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Longman Dictionary of Contemporary English 'hope'·'wish', Oxford Learner's Dictionaries 'hope'·'wish', British Council LearnEnglish 'Wishes: wish and if only'.</p>",
+  "related": []
+}

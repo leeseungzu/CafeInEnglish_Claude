@@ -908,6 +908,45 @@ def weight_words():
     c.save("weight-words.png")
 
 
+def under_weather():
+    c = Canvas("몸 상태, 정도에 따라 골라요", "under the weather는 '좀 안 좋은' 쪽이에요")
+    rows = [("살짝 안 좋음", "under the weather", "I'm a bit under the weather.", True),
+            ("병이 시작될 때", "come down with", "I think I'm coming down with a cold.", False),
+            ("아픈 상태 (미국 영어에서 흔히)", "sick", "She's sick today.", False)]
+    for ko, key, en, on in rows:
+        def body(x, r, ko=ko, key=key, en=en, on=on):
+            w, h = c.pill(x, c.y, ko, F(36, 700), bg=LIME if on else SOFT, fg=INK); c.y += 84
+            c.text(x, key, F(58, 800), INK, 1.3)
+            sz = 42
+            while c.d.textlength(en, font=F(sz, 700)) > r - x - 12 and sz > 36:
+                sz -= 2
+            c.text(x, en, F(sz, 700), MUTED, 1.2)
+        c.card(body)
+    c.note("be sick은 '토하다'라는 뜻으로도 써요", 40)
+    c.save("under-the-weather-scale.png")
+
+
+def hope_wish():
+    c = Canvas("hope와 wish, 가능성으로 나눠요", "이루어질 수 있으면 hope, 지금과 달랐으면 하면 wish")
+    rows = [("hope", "이루어질 수 있는 일", [("I hope you pass.", "붙길 바라."), ("I hope it doesn't rain.", "비가 안 오면 좋겠다.")], True),
+            ("wish", "지금이나 과거와 다른 일", [("I wish I could speak Spanish.", "스페인어를 할 줄 알면 좋을 텐데."), ("I wish I had studied harder.", "공부 좀 더 할걸.")], False)]
+    for word, when, exs, on in rows:
+        def body(x, r, word=word, when=when, exs=exs, on=on):
+            w, h = c.pill(x, c.y, word, F(40, 800), bg=LIME if on else SOFT, fg=INK)
+            c.d.text((x + w + 20, c.y + h / 2), when, font=F(40, 700), fill=MUTED, anchor="lm"); c.y += 96
+            for i, (en, ko) in enumerate(exs):
+                if i:
+                    c.y += 8; c.d.line((x, c.y, r, c.y), fill=LINE, width=3); c.y += 30
+                sz = 50
+                while c.d.textlength(en, font=F(sz, 800)) > r - x - 12 and sz > 38:
+                    sz -= 2
+                c.text(x, en, F(sz, 800), INK, 1.3)
+                c.text(x, ko, F(40, 700), MUTED, 1.4)
+        c.card(body)
+    c.note("wish + 사람 + 명사는 괜찮아요: Wish me luck!", 40)
+    c.save("hope-vs-wish.png")
+
+
 if __name__ == "__main__":
-    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps, long_story_short, almost_most, fingers_crossed, go_home, no_worries, fun_funny, cup_of_tea, ago_before, bear_with_me, meet_see, wear_put_on, big_deal, weight_words):
+    for fn in (negative_question, in_after_within, excuse_sorry, would_you_mind, doctor, im_good, keep_posted, konglish, linking, ed_sounds, appointment_promise, fair_enough, up_to_you, slipped_mind, rain_check, bored_boring, borrow_lend, running_late, no_prep_verbs, can_cant, me_too_neither, im_beat, agree_preps, long_story_short, almost_most, fingers_crossed, go_home, no_worries, fun_funny, cup_of_tea, ago_before, bear_with_me, meet_see, wear_put_on, big_deal, weight_words, under_weather, hope_wish):
         fn()

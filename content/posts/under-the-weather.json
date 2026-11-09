@@ -1,0 +1,73 @@
+{
+  "id": "under-the-weather",
+  "cat": "expr",
+  "sub": "새 표현",
+  "level": "기초",
+  "date": "2026-11-09",
+  "title": "\"I'm under the weather\", 날씨 말고 '몸이 좀 안 좋아'",
+  "seo_title": "under the weather 뜻 - '몸이 좀 안 좋아' 영어로, 예문과 발음",
+  "lead": "컨디션이 별로인 날, 증상 대신 건네는 한마디",
+  "description": "under the weather는 날씨가 아니라 '몸이 좀 안 좋은' 상태를 말해요. sick, come down with와의 정도 차이, 발음, the를 빼는 실수까지 예문과 퀴즈로 정리했어요.",
+  "og": {
+    "en": "I'm under the weather.",
+    "ko": "날씨 말고 '몸이 좀 안 좋아'"
+  },
+  "icon": "face-with-thermometer",
+  "chat": {
+    "q": "You look tired. Are you okay?",
+    "a": "I'm a bit under the weather.",
+    "key": "under the weather",
+    "ko": "몸이 좀 안 좋아."
+  },
+  "thumb": {
+    "text": "under the weather",
+    "key": "weather",
+    "ko": "날씨 이야기가 아니라고?"
+  },
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "\"I'm a bit under the weather.\"의 뜻은?",
+      "sub": "",
+      "options": [
+        "날씨 때문에 기분이 우울해",
+        "몸이 좀 안 좋아",
+        "비를 맞아서 젖었어",
+        "일기예보를 못 봤어"
+      ],
+      "answer": 1,
+      "explain": "under the weather는 '몸이 좀 안 좋은, 컨디션이 별로인' 상태예요. 날씨나 기분 이야기가 아니에요.",
+      "mnemonic": "먹구름 아래(under) 몸이 무거운 날"
+    },
+    {
+      "tag": "뉘앙스",
+      "q": "under the weather를 쓰기 가장 어색한 상황은?",
+      "sub": "",
+      "options": [
+        "감기 기운이 있어 약속을 미룰 때",
+        "컨디션이 별로라 재택을 알릴 때",
+        "가족이 큰 수술을 받고 입원했을 때",
+        "피곤해 보이는 친구에게 괜찮냐고 물을 때"
+      ],
+      "answer": 2,
+      "explain": "under the weather는 '살짝' 안 좋은 상태예요. 큰 수술이나 입원처럼 심각한 상황엔 seriously ill처럼 분명하게 말해요.",
+      "mnemonic": "가벼운 날엔 weather, 큰 병엔 ill"
+    },
+    {
+      "tag": "표현",
+      "q": "'감기 걸리려나 봐'를 영어로 하면?",
+      "sub": "",
+      "options": [
+        "I think I'm coming down with a cold.",
+        "I think I'm coming up a cold.",
+        "I think I'm under a cold.",
+        "I think I'm going down a cold."
+      ],
+      "answer": 0,
+      "explain": "병에 걸리기 시작할 때는 come down with를 써요. 롱맨 사전도 I think I'm coming down with a cold.를 예로 들어요.",
+      "mnemonic": "감기가 몸에 내려앉는(come down) 느낌"
+    }
+  ],
+  "body_html": "<p>아침에 동료에게서 이런 메시지가 왔다고 해 볼게요. 날씨 이야기처럼 보이지만, 사실은 몸 상태를 알리는 말이에요.</p>\n<h2>실제 대화 · 아침에 온 동료의 메시지</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Morning! I'm feeling a bit under the weather, so I'll work from home today.</span><span class=\"ko\">좋은 아침! 몸이 좀 안 좋아서 오늘은 재택할게.</span></li>\n<li class=\"me\"><span class=\"en\">Oh no. Take care of yourself.</span><span class=\"ko\">저런. 몸 잘 챙겨.</span></li>\n<li class=\"them\"><span class=\"en\">Thanks. I think I'm coming down with a cold.</span><span class=\"ko\">고마워. 감기 걸리려나 봐.</span></li>\n<li class=\"me\"><span class=\"en\">Get some rest. I hope you feel better soon.</span><span class=\"ko\">푹 쉬어. 얼른 낫길 바라.</span></li>\n</ul>\n<h2>날씨가 아니라 몸 이야기</h2>\n<div class=\"box\"><b>under the weather</b> = 몸이 좀 안 좋은, 컨디션이 별로인</div>\n<p>Oxford Learner's 사전은 under the weather를 '평소보다 몸이 좀 안 좋은' 상태로, 롱맨 사전은 '살짝 아픈' 상태로 풀어요. 두 사전 모두 informal(일상적인 말)로 표시해요. 앓아누울 만큼 아픈 게 아니라 '오늘 컨디션이 별로다, 몸이 좀 처진다' 정도를 부드럽게 말할 때 딱 맞아요.</p>\n<p>그래서 회사에 연락하거나 약속을 미룰 때 자세한 증상을 늘어놓지 않고 한마디로 상황을 전하기 좋아요. 듣는 사람도 \"많이 아픈 건 아니구나\" 하고 받아들이는 경우가 많아요. 참고로 메리엄웹스터에는 '술에 취한'이라는 뜻도 함께 실려 있지만, Oxford와 롱맨은 '몸이 좀 안 좋은'만 싣고 있어요. 일상 대화에서는 몸 상태 이야기로 받아들이면 돼요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">You look a little under the weather. Are you okay?</span><span class=\"ko\">너 좀 안 좋아 보여. 괜찮아?</span></li>\n<li><span class=\"en\">I've been under the weather all week.</span><span class=\"ko\">일주일 내내 컨디션이 별로였어.</span></li>\n<li><span class=\"en\">Sorry, I can't make it tonight. I'm a bit under the weather.</span><span class=\"ko\">미안, 오늘 밤엔 못 가겠어. 몸이 좀 안 좋아.</span></li>\n<li><span class=\"en\">I hear you've been a bit under the weather. Are you feeling better now?</span><span class=\"ko\">요즘 몸이 좀 안 좋았다며. 이제 좀 괜찮아?</span></li>\n</ul></div>\n<h2>얼마나 아픈 걸까</h2>\n<figure class=\"fig\"><img src=\"/images/under-the-weather-scale.png\" alt=\"몸 상태를 말하는 세 표현: 살짝 안 좋음 under the weather(I'm a bit under the weather), 병이 시작될 때 come down with(I think I'm coming down with a cold), 아픈 상태 sick(She's sick today). be sick은 '토하다'라는 뜻으로도 써요\" width=\"1080\" height=\"1469\" loading=\"lazy\"><figcaption>under the weather는 셋 중 가장 가벼운 쪽이에요</figcaption></figure>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>표현</th><th>뜻</th><th>쓰는 때</th></tr></thead><tbody><tr><td>under the weather</td><td>몸이 좀 안 좋은</td><td>가볍게 컨디션을 알릴 때</td></tr><tr><td>come down with ~</td><td>(병에) 걸리기 시작하다</td><td>감기 기운이 올 때</td></tr><tr><td>sick</td><td>아픈</td><td>롱맨은 '아프다'는 뜻을 특히 미국 영어로 표시</td></tr><tr><td>call in sick</td><td>아프다고 전화로 알리다</td><td>회사에 못 간다고 연락할 때</td></tr></tbody></table></div>\n<p>롱맨 사전은 come down with를 '병에 걸리다'로 풀고 I think I'm coming down with a cold.를 예로 들어요. 그리고 be sick은 '토하다'라는 뜻으로도 쓰여서, I think I'm going to be sick.은 \"토할 것 같아\"에 가까워요. 미국 영어에서 I'm sick은 '아파'라는 평범한 말이지만, going to be sick처럼 쓰면 토할 것 같다는 말로 들리니 맥락을 조심하세요. 가볍게 컨디션이 별로라고 할 땐 under the weather나 I'm not feeling well이 무난해요.</p>\n<h2>발음과 억양</h2>\n<p>under the weather는 <b>\"언더 더 웨더\"</b>처럼 한 덩어리로 이어 말해요. 미국식으로는 under 끝의 r 소리가 살짝 남아 \"언더r 더\"처럼 들려요. the는 자음 앞이라 짧게 \"더\", 힘은 weather의 첫 음절 <b>'웨'</b>에 가장 크게 실려요. weather의 th는 혀끝을 윗니에 살짝 대고 목을 울리는 소리라서 '데'보다 부드러운 \"더\"예요. 문장으로 말할 땐 I'm a bit <b>UN</b>der the <b>WEA</b>ther처럼 under와 weather에 강세가 오고, a bit under는 미국식으로 t가 부드러워져 \"어비런더\"처럼 이어지기도 해요.</p>\n<h2>'날씨 탓'으로 읽으면 생기는 오해</h2>\n<p>한국인이 이 표현을 처음 보면 weather라는 단어 때문에 \"날씨 때문에 기분이 꿀꿀하다\"로 읽기 쉬워요. 하지만 사전 뜻은 모두 몸 상태예요. 비 오는 날 우울하다는 말로 쓰면 듣는 사람은 \"어디 아파?\" 하고 걱정할 수 있어요.</p>\n<p>또 하나, 이 표현이 어디서 왔는지는 배 위의 선원 이야기 등 여러 설명이 돌지만, 이번에 확인한 사전들(Oxford Learner's, 롱맨, 메리엄웹스터)은 유래를 따로 밝히지 않아요. 그래서 유래를 외우기보다 <b>\"몸이 좀 안 좋다\"</b>는 한 덩어리로 기억하는 게 정확하고 빨라요.</p>\n<div class=\"memo\"><b class=\"lbl\">연상법</b> 먹구름 아래(under) 서 있는 것처럼 몸이 살짝 무거운 날, I'm a bit under the weather.</div>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">몸이 좀 안 좋다고 말할 때</span><span class=\"no\">I'm under weather.</span><span class=\"en\">I'm a bit under the weather.</span><span class=\"ko\">몸이 좀 안 좋아.</span><span class=\"why\"><b>왜?</b>under the weather는 the까지 한 덩어리로 굳은 표현이에요. the를 빼면 어색하게 들려요.</span></li>\n<li><span class=\"ctx\">입원할 만큼 많이 아프다고 말할 때</span><span class=\"no\">My grandfather is under the weather in the hospital.</span><span class=\"en\">My grandfather is seriously ill.</span><span class=\"ko\">할아버지가 많이 편찮으세요.</span><span class=\"why\"><b>왜?</b>under the weather는 '살짝' 안 좋은 상태라서, 큰 병에 쓰면 상황을 너무 가볍게 말하는 것처럼 들려요.</span></li>\n</ul></div>\n<p>증상을 자세히 설명해야 한다면 <a href=\"/p/doctor/\">병원·약국에서 증상 말하는 영어</a>를, 지친 상태를 말하고 싶다면 <a href=\"/p/im-beat/\">I'm beat</a>를 함께 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Oxford Learner's Dictionaries 'weather'(under the weather), Longman Dictionary of Contemporary English 'under the weather'·'sick'·'be sick'·'come down with'·'call in sick', Merriam-Webster 'under the weather'·'come down with'.</p>",
+  "related": []
+}

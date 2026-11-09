@@ -1,0 +1,73 @@
+{
+  "id": "jumbo-origin",
+  "cat": "story",
+  "sub": "단어의 유래",
+  "level": "기초",
+  "date": "2026-11-09",
+  "title": "jumbo는 원래 코끼리 이름이었다, 런던을 울린 코끼리 점보 이야기",
+  "seo_title": "jumbo 뜻과 어원 - 점보 사이즈는 코끼리 이름에서 왔다",
+  "lead": "1882년 런던 동물원의 코끼리가 '아주 큰'이라는 말이 되기까지",
+  "description": "'아주 큰'이라는 jumbo는 1882년 바넘에게 팔려 간 런던 동물원 코끼리 이름에서 왔어요. 이름이 형용사가 된 과정, 아직 모르는 이름의 뿌리, jumbo 쓰는 법을 정리했어요.",
+  "og": {
+    "en": "Jumbo",
+    "ko": "'점보'는 원래 코끼리 이름이었어요"
+  },
+  "icon": "elephant",
+  "chat": {
+    "q": "Regular or jumbo?",
+    "a": "Let's get the jumbo pack.",
+    "key": "jumbo",
+    "ko": "대용량으로 사자."
+  },
+  "thumb": {
+    "text": "Jumbo",
+    "key": "Jumbo",
+    "ko": "점보는 누구의 이름일까?"
+  },
+  "quiz": [
+    {
+      "tag": "영어 이야기",
+      "q": "jumbo라는 말이 널리 퍼지게 된 계기는?",
+      "sub": "",
+      "options": [
+        "1882년 바넘에게 팔려 간 런던 동물원 코끼리",
+        "1960년대에 처음 나온 대형 여객기",
+        "디즈니 영화 속 아기 코끼리",
+        "영국의 대형 시가 상표"
+      ],
+      "answer": 0,
+      "explain": "런던 동물원의 코끼리 Jumbo가 1882년 미국 흥행사 바넘에게 팔리며 큰 화제가 됐고, 그 무렵부터 jumbo가 '아주 큰'이라는 뜻으로 쓰였어요. 여객기와 영화는 그보다 훨씬 뒤예요.",
+      "mnemonic": "코끼리가 먼저, 점보제트기는 나중"
+    },
+    {
+      "tag": "표현",
+      "q": "jumbo를 가장 자연스럽게 쓴 문장은?",
+      "sub": "",
+      "options": [
+        "This box is so jumbo.",
+        "We bought a jumbo pack of paper towels.",
+        "He's very jumbo.",
+        "The pizza looks jumbo-ly."
+      ],
+      "answer": 1,
+      "explain": "jumbo는 a jumbo pack처럼 명사 앞에 붙여 써요. be 동사 뒤에서 '크다'고 할 땐 huge, enormous가 자연스러워요.",
+      "mnemonic": "점보는 이름표처럼 명사 앞에 붙여요"
+    },
+    {
+      "tag": "뜻",
+      "q": "\"It was all legal mumbo jumbo.\"의 뜻은?",
+      "sub": "",
+      "options": [
+        "전부 아주 큰 소송이었어",
+        "전부 알아듣기 힘든 법률 용어였어",
+        "전부 합법적인 일이었어",
+        "전부 코끼리 이야기였어"
+      ],
+      "answer": 1,
+      "explain": "mumbo jumbo는 '알아듣기 힘든 복잡한 말'이에요. jumbo가 들어 있어도 크다는 뜻은 없어요.",
+      "mnemonic": "점보가 들어 있어도 크기와는 상관없는, 뭔 소린지 모를 말"
+    }
+  ],
+  "body_html": "<p>피자 가게의 점보 사이즈, 마트의 점보 새우, 공항의 점보제트기. '아주 큰'이라는 뜻으로 붙는 <b>jumbo</b>는 원래 형용사가 아니라 이름이었어요. 140여 년 전 런던 사람들이 아끼던 코끼리 한 마리의 이름이요.</p>\n<figure class=\"fig\"><img src=\"/images/story-jumbo-1882-sheet-music.webp\" alt=\"1882년 미국에서 나온 악보 'JUMBO' 표지. 큰 코끼리가 등 위 안장에 아이들을 태우고 동물원 길을 걷고, 발밑에는 아기 코끼리가 따라온다. 맨 위에 P. T. 바넘에게 바친다는 문구가 있다\" width=\"755\" height=\"1000\" loading=\"lazy\"><figcaption>1882년 보스턴의 Oliver Ditson & Co.가 펴낸 악보 'Jumbo' 표지. 맨 위에 'P. T. 바넘에게 바친다'고 적혀 있어요 (미국 의회도서관 소장, 퍼블릭 도메인).</figcaption></figure>\n<h2>아이들을 태우던 런던의 코끼리</h2>\n<p>점보는 아프리카에서 태어난 코끼리예요. 태어난 곳은 자료마다 조금 달라서 위키백과는 지금의 수단 지역으로, Etymonline은 아비시니아(지금의 에티오피아 일대)에서 붙잡혔다고 적어요. 어릴 때 붙잡혀 유럽으로 팔려 왔고, 파리를 거쳐 1865년 런던 동물원(런던 동물학회 동물원)에 들어왔어요.</p>\n<p>런던에서 점보는 몸집이 계속 커지면서 동물원의 대표 스타가 됐어요. 등에 안장을 얹고 아이들을 태워 다니며 특히 어린이들에게 사랑받았다고 기록돼 있어요. 위 악보 표지에도 아이들을 잔뜩 태운 점보가 그려져 있죠.</p>\n<h2>1882년, 영국이 들썩인 판매</h2>\n<p>1882년, 런던 동물원은 점보를 미국의 흥행사 <b>P. T. 바넘</b>에게 1만 달러에 팔았어요. 소식이 알려지자 영국에서는 큰 반발이 일었어요. 항의 편지가 쏟아졌고, 신문사가 나서서 점보를 되찾을 방법을 바넘에게 묻기도 했고, 판매를 막으려는 법정 다툼까지 벌어졌어요. 하지만 법원은 판매를 그대로 인정했고, 점보는 그해 배를 타고 미국으로 건너갔어요.</p>\n<p>Etymonline은 이 소동을 바넘 자신이 부채질했다고 적어요. 그해 미국 보스턴에서는 '바넘에게 바친다'는 문구를 단 점보 악보까지 나왔을 만큼 화제였어요. 미국에서 점보는 바넘 서커스의 간판이 됐고, 이름은 그 자체로 '엄청 큰 것'을 떠올리게 하는 말이 됐어요.</p>\n<p>점보의 삶은 길지 않았어요. 1885년 9월 15일, 캐나다 온타리오주 세인트토머스의 철로 근처에서 화물열차에 치여 죽었어요. 박제는 미국 터프츠대학에 기증돼 오래 전시되다 1975년 화재로 사라졌지만, 점보는 지금도 터프츠대학의 마스코트예요.</p>\n<h2>이름이 '크다'는 말이 되기까지</h2>\n<p>사전에 따르면 jumbo가 '아주 큰, 특대의'라는 뜻으로 쓰인 기록은 바로 1880년대 초부터 보여요. Etymonline은 형용사 뜻을 1882년으로, 메리엄웹스터는 '아주 큰 것'이라는 명사 뜻을 1883년으로 적어요. 판매 소동이 한창이던 때와 겹치죠. Etymonline에는 1886년에 이미 시가(담배) 크기를 jumbo라고 부른 기록이 있고, 1960년대에는 대형 여객기를 가리키는 <b>jumbo jet</b>까지 나왔어요.</p>\n<p>재미있는 연결도 하나 있어요. Etymonline은 1941년 디즈니 영화 속 귀가 큰 아기 코끼리 <b>Dumbo</b>의 이름을 Jumbo를 비튼 놀림 별명으로 설명해요. 한 마리의 이름이 한 세기가 넘도록 '코끼리처럼 큰 것'을 대표해 온 셈이에요.</p>\n<h2>Jumbo라는 이름은 어디서 왔을까</h2>\n<p>정작 코끼리에게 왜 Jumbo라는 이름을 붙였는지는 확실하지 않아요. Etymonline은 1823년 기록에 이미 jumbo가 '덩치 크고 굼뜬 사람'이라는 속어로 보인다고 하고, 이 말이 서아프리카 언어의 '코끼리'를 뜻하는 단어와 관련 있을 수 있다고 조심스럽게 적어요. 또 Etymonline이 인용한 옥스퍼드 영어사전(OED)과 롱맨 사전은 <b>mumbo jumbo</b>에서 왔을 가능성도 소개해요. 어느 쪽도 '아마도'라는 말을 달고 있어서, 이름의 뿌리는 열린 질문으로 남겨 두는 게 정확해요.</p>\n<p>참고로 mumbo jumbo는 지금 '알아듣기 힘든 복잡한 말, 뜬구름 잡는 소리'라는 뜻이에요. 크다는 뜻은 전혀 없으니 jumbo와 섞어 쓰지 않도록 조심하세요.</p>\n<h2>지금은 이렇게 써요</h2>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>표현</th><th>뜻</th></tr></thead><tbody><tr><td>jumbo shrimp</td><td>왕새우, 큰 새우</td></tr><tr><td>a jumbo pack</td><td>대용량 묶음</td></tr><tr><td>jumbo-sized</td><td>특대 크기의</td></tr><tr><td>a jumbo jet</td><td>점보제트기, 대형 여객기</td></tr><tr><td>mumbo jumbo</td><td>알아듣기 힘든 말 (크다는 뜻 아님)</td></tr></tbody></table></div>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">We ordered a jumbo pizza for the party.</span><span class=\"ko\">파티용으로 점보 피자를 시켰어요.</span></li>\n<li><span class=\"en\">The jumbo pack is cheaper per roll.</span><span class=\"ko\">대용량 묶음이 한 롤당 더 싸요.</span></li>\n<li><span class=\"en\">The contract was full of legal mumbo jumbo.</span><span class=\"ko\">계약서가 알아듣기 힘든 법률 용어투성이였어요.</span></li>\n</ul></div>\n<h2>실제 대화 · 마트 휴지 코너에서</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Should we get the regular pack or the jumbo pack?</span><span class=\"ko\">보통 묶음 살까, 대용량 살까?</span></li>\n<li class=\"me\"><span class=\"en\">Let's get the jumbo one. It's cheaper per roll.</span><span class=\"ko\">대용량 사자. 한 롤당 더 싸.</span></li>\n<li class=\"them\"><span class=\"en\">Will it fit in the car, though?</span><span class=\"ko\">근데 차에 들어갈까?</span></li>\n<li class=\"me\"><span class=\"en\">It's huge, but I think so.</span><span class=\"ko\">엄청 크긴 한데, 들어갈 것 같아.</span></li>\n</ul>\n<p>발음은 '점보'보다 <b>\"점보우\"</b>에 가까워요. 앞 '점'에 힘을 주고, 끝 o는 '오우'처럼 살짝 미끄러지듯 끝내요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">상자가 엄청 크다고 말할 때</span><span class=\"no\">This box is so jumbo.</span><span class=\"en\">This box is huge.</span><span class=\"ko\">이 상자 진짜 크다.</span><span class=\"why\"><b>왜?</b>롱맨 사전은 jumbo를 명사 앞에만 쓰는 말로 표시해요. a jumbo box처럼 앞에 붙이고, be 동사 뒤에서 '크다'고 말할 땐 huge나 enormous를 써요.</span></li>\n</ul></div>\n<p>사람이나 동물 이름이 단어가 된 이야기는 또 있어요. <a href=\"/p/sandwich-origin/\">샌드위치는 사람 이름이었다?</a>와 나라 이름을 얻은 새 이야기 <a href=\"/p/turkey-origin/\">칠면조는 왜 turkey일까</a>도 함께 읽어 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Etymonline 'jumbo'·'dumbo'·'mumbo jumbo', Merriam-Webster 'jumbo'·'mumbo jumbo', Longman Dictionary of Contemporary English 'jumbo'·'mumbo-jumbo', Canada's History 'Jumbo in the New World', Tufts Journal(2001년 10월), St. Thomas Railway City Tourism 'The Story of Jumbo', 위키백과 'Jumbo', 미국 의회도서관 악보 표지(LC 디지털 자료 cph.3a39223, 위키미디어 공용).</p>",
+  "related": []
+}

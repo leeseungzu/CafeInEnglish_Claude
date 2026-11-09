@@ -478,5 +478,17 @@
     "en": "I'm on a diet.",
     "ko": "나 다이어트 중이야",
     "desc": "diet는 명사라 '다이어트 중'은 be on a diet. I'm diet라고 하지 않아요."
+  },
+  {
+    "post": "under-the-weather",
+    "en": "I'm a bit under the weather.",
+    "ko": "몸이 좀 안 좋아",
+    "desc": "컨디션이 별로인 날 증상 대신 건네는 한마디. 날씨가 아니라 몸 이야기이고, '살짝' 안 좋은 정도예요."
+  },
+  {
+    "post": "hope-vs-wish",
+    "en": "I hope you feel better soon.",
+    "ko": "얼른 낫길 바라",
+    "desc": "나을 수 있는 일을 바랄 땐 hope. I wish you get better처럼 wish 뒤에 문장을 쓰지 않아요."
   }
 ]
