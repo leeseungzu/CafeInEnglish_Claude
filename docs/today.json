@@ -1,12 +1,5 @@
 {
  "days": {
-  "2026-11-06": {
-   "en": "Let's call it a day.",
-   "ko": "오늘은 여기까지 하자",
-   "desc": "하던 일을 그날은 마무리하자는 말. 밤에 끝낼 땐 call it a night.",
-   "url": "https://www.cafeinenglish.com/p/call-it-a-day/",
-   "au": "/audio/f57fe0a2feeb.mp3"
-  },
   "2026-11-07": {
    "en": "It was really fun.",
    "ko": "정말 재미있었어",
@@ -125,6 +118,13 @@
    "desc": "diet는 명사라 '다이어트 중'은 be on a diet. I'm diet라고 하지 않아요.",
    "url": "https://www.cafeinenglish.com/p/lose-weight-english/",
    "au": "/audio/8b4d71d98c75.mp3"
+  },
+  "2026-11-24": {
+   "en": "You understood the assignment.",
+   "ko": "뭘 해야 하는지 제대로 알았네",
+   "desc": "기대에 딱 맞게 해냈을 때 하는 요즘 칭찬. 원래 뜻은 '과제를 제대로 이해했다'예요.",
+   "url": "https://www.cafeinenglish.com/p/wes-moore-have-faith-not-fear/",
+   "au": "/audio/4e4997a1deb5.mp3"
   }
  }
 }

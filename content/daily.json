@@ -490,5 +490,17 @@
     "en": "I hope you feel better soon.",
     "ko": "얼른 낫길 바라",
     "desc": "나을 수 있는 일을 바랄 땐 hope. I wish you get better처럼 wish 뒤에 문장을 쓰지 않아요."
+  },
+  {
+    "post": "wes-moore-have-faith-not-fear",
+    "en": "Take ownership of your mistakes.",
+    "ko": "네 실수는 네가 책임져",
+    "desc": "남의 일이 아니라 내 일로 맡아 책임질 때 take ownership. 웨스 무어는 애국을 이렇게 정의했어요."
+  },
+  {
+    "post": "wes-moore-have-faith-not-fear",
+    "en": "You understood the assignment.",
+    "ko": "뭘 해야 하는지 제대로 알았네",
+    "desc": "기대에 딱 맞게 해냈을 때 하는 요즘 칭찬. 원래 뜻은 '과제를 제대로 이해했다'예요."
   }
 ]

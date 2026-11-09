@@ -1,19 +1,5 @@
 [
  {
-  "en": "My bad.",
-  "ko": "내 실수야, 미안",
-  "desc": "작은 실수에 가볍게 하는 사과예요. 상사나 고객에겐 I apologize가 좋아요.",
-  "url": "https://www.cafeinenglish.com/p/my-bad/",
-  "au": "/audio/2d4e9b2513b5.mp3"
- },
- {
-  "en": "Nothing to declare.",
-  "ko": "신고할 거 없어요",
-  "desc": "declare는 '선언하다'. 세관 앞에서 '이거 있어요' 하고 밝히는 거예요.",
-  "url": "https://www.cafeinenglish.com/p/baggage-customs/",
-  "au": "/audio/6669bad1fe29.mp3"
- },
- {
   "en": "I'll call you back later.",
   "ko": "이따 다시 전화할게",
   "desc": "back이 붙으면 '되걸다'. 바쁠 때 전화 끊기 전 마지막 한마디예요.",
@@ -243,6 +229,20 @@
   "desc": "diet는 명사라 '다이어트 중'은 be on a diet. I'm diet라고 하지 않아요.",
   "url": "https://www.cafeinenglish.com/p/lose-weight-english/",
   "au": "/audio/8b4d71d98c75.mp3"
+ },
+ {
+  "en": "You understood the assignment.",
+  "ko": "뭘 해야 하는지 제대로 알았네",
+  "desc": "기대에 딱 맞게 해냈을 때 하는 요즘 칭찬. 원래 뜻은 '과제를 제대로 이해했다'예요.",
+  "url": "https://www.cafeinenglish.com/p/wes-moore-have-faith-not-fear/",
+  "au": "/audio/4e4997a1deb5.mp3"
+ },
+ {
+  "en": "Take ownership of your mistakes.",
+  "ko": "네 실수는 네가 책임져",
+  "desc": "남의 일이 아니라 내 일로 맡아 책임질 때 take ownership. 웨스 무어는 애국을 이렇게 정의했어요.",
+  "url": "https://www.cafeinenglish.com/p/wes-moore-have-faith-not-fear/",
+  "au": "/audio/03197a754042.mp3"
  },
  {
   "en": "It's no big deal.",
@@ -572,5 +572,19 @@
   "desc": "예약 장부의 이름 '아래(under)'에 내 예약이 있다고 기억해요.",
   "url": "https://www.cafeinenglish.com/p/hotel-check-in/",
   "au": "/audio/57e51910c406.mp3"
+ },
+ {
+  "en": "My bad.",
+  "ko": "내 실수야, 미안",
+  "desc": "작은 실수에 가볍게 하는 사과예요. 상사나 고객에겐 I apologize가 좋아요.",
+  "url": "https://www.cafeinenglish.com/p/my-bad/",
+  "au": "/audio/2d4e9b2513b5.mp3"
+ },
+ {
+  "en": "Nothing to declare.",
+  "ko": "신고할 거 없어요",
+  "desc": "declare는 '선언하다'. 세관 앞에서 '이거 있어요' 하고 밝히는 거예요.",
+  "url": "https://www.cafeinenglish.com/p/baggage-customs/",
+  "au": "/audio/6669bad1fe29.mp3"
  }
 ]
