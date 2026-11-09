@@ -3106,7 +3106,7 @@ def page_tool_compare():
 
 # ── 영어 시험 일정 (2026-10-24): 토익·토익스피킹·오픽 다음 시험 D-day + 서류 마감에서 거꾸로 ─────────────
 # 데이터: content/exam_schedule.json (토익 회차표·토익스피킹 주말 일정은 공식 일정을 옮겨 적고, 오픽은 규칙으로 계산)
-# 2027년 토익 일정이 발표되면 toeic 목록에 회차를 더하고 toeic_year, checked 를 바꿔요.
+# 다음 해 토익 일정이 발표되면 toeic 목록에 회차를 더하고 toeic_year, checked 를 바꿔요. (2027년 일정 2026-11-09 반영, 토익스피킹은 2027-06-27까지)
 EXAM_FILE = ROOT / "content" / "exam_schedule.json"
 EXAM = json.loads(EXAM_FILE.read_text("utf-8")) if EXAM_FILE.exists() else {"toeic": [], "tos": [], "opic": {"close_days": 2, "open_days": 32, "score_days": 5}}
 SRC_TOEIC_SCH = ("YBM 한국TOEIC위원회, TOEIC 정기시험 일정", "https://exam.toeic.co.kr/receipt/examSchList.php")
@@ -3156,7 +3156,7 @@ def _schedule_page(focus):
                 f'<p class="ex-td"><span>{d.month}.{d.day}</span><small>{"월화수목금토일"[d.weekday()]}요일</small></p><dl>{kv}</dl></li>')
 
     def _grid(kind, items, rows, head):
-        more = '<button type="button" class="ex-more" hidden>일정 더 보기</button>' if kind == "tos" else ""
+        more = '<button type="button" class="ex-more" hidden>일정 더 보기</button>' if kind in ("tos", "toeic") else ""
         return f'<ul class="ex-grid ex-g-{kind}">' + "".join(_tile(kind, t, rows(t), head(t)) for t in items) + "</ul>" + more
 
     leg = lambda items: '<div class="ex-leg">' + "".join(f"<span><b>{k}</b>{v}</span>" for k, v in items) + "</div>"
@@ -3166,7 +3166,7 @@ def _schedule_page(focus):
 {leg([("시험", "오전 9:20"), ("정기접수", "오전 10시 마감"), ("특별추가", "오후 1시 마감"), ("성적", "낮 12시")])}
 {_grid("toeic", EXAM["toeic"], lambda t: [("정기접수", t["reg"][1]), ("특별추가", t["add"][1]), ("성적 발표", t["score"])], lambda t: f'제{t["n"]}회')}""",
         "tos": f"""<h2>{y}년 토익스피킹 시험 일정</h2>
-<p>토익스피킹은 매주 토요일과 일요일에 봐요. 접수 마감은 시험 3일 전 오전 10시(토요일 시험은 수요일, 일요일 시험은 목요일), 성적 발표는 5일 뒤 낮 12시예요.</p>
+<p>토익스피킹은 매주 토요일과 일요일에 봐요(설 연휴 같은 명절에는 평일로 옮겨지기도 해요). 접수 마감은 시험 3일 전 오전 10시(토요일 시험은 수요일, 일요일 시험은 목요일), 성적 발표는 5일 뒤 낮 12시예요.</p>
 {leg([("접수", "시험 3일 전 오전 10시 마감"), ("성적", "5일 뒤 낮 12시")])}
 {_grid("tos", EXAM["tos"], lambda t: [("접수 마감", t["reg"][1]), ("성적 발표", t["score"])], lambda t: "")}""",
         "opic": f"""<h2>오픽 시험 일정</h2>
