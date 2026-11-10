@@ -3077,3 +3077,12 @@ html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
   .tdg:not(.norv) #past .pt-t{grid-column:1;grid-row:2}
 }
 @media (min-width:900px) and (hover:hover){.tdg:not(.norv) #past .pt-li a:hover{background:#F2F4F6}}
+
+/* 소개 · 운영자 정보 (2026-11-10) */
+.abo-facts{list-style:none;margin:-16px 0 30px;padding:6px 22px;background:#FBF7F2;border-radius:20px}
+.abo-facts li{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:12px 0;border-top:1px solid #EFE6DA;font-size:14.5px;line-height:1.65}
+.abo-facts li:first-child{border-top:0}
+.abo-facts b{color:#2A1A12;font-weight:700}
+.abo-facts span{color:#4E5968}
+.abo-facts a{color:#3182F6;text-decoration:none;font-weight:600}
+@media (max-width:600px){.abo-facts{padding:2px 18px}.abo-facts li{grid-template-columns:1fr;gap:2px}}

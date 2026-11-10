@@ -557,9 +557,9 @@ def thumb_num(p):
 
 
 AUTHOR_NAME = "카영 스터디언"
-AUTHOR_BIO = "미국 이민을 앞두고 온 가족이 영어를 공부하고 있습니다. 직접 공부하며 이해한 것들을 하나씩 정리해 나누고 있어요. 저도 여전히 배우는 중이라 부족한 부분이 있을 수 있습니다. 틀린 내용은 편하게 짚어주시고, 궁금한 점도 함께 나눠주세요. 혼자 공부할 때보다 함께할 때 더 멀리 갈 수 있다고 믿습니다."
 ORG = {"@type": "Organization", "name": "카페인영어 CafeInEnglish", "url": DOMAIN + "/",
-       "logo": {"@type": "ImageObject", "url": DOMAIN + "/assets/icon-512.png"}}
+       "logo": {"@type": "ImageObject", "url": DOMAIN + "/assets/icon-512.png"},
+       "sameAs": [u for u in (SITE.get("youtube"), SITE.get("instagram")) if u]}
 
 
 def ld_html(objs):
@@ -2230,9 +2230,17 @@ ABOUT = f"""
 <div><b>예문과 음성</b><span>예문은 직접 쓰고, 음성은 원어민 억양의 AI 음성이에요.</span></div>
 <div><b>틀리면 고쳐요</b><span>오류는 <a href="/contact/">문의</a>로 알려 주세요. 고친 글엔 수정일을 남겨요.</span></div>
 </div>
-<h2>운영자</h2>
-<div class="abo"><img src="/assets/icon-192.png" alt="" width="56" height="56"><div><b>카영 스터디언</b><small>유튜브 카페인영어 운영 · 2026년 9월부터 사이트 운영<br>오류 제보와 제안은 언제든 환영해요.</small>
+<h2>운영자 소개</h2>
+<p class="about-sub">카페인영어는 유튜브 채널 '카페인영어 CafeInEnglish'를 운영하는 사람이 직접 만들고 관리해요.</p>
+<div class="abo"><img src="/assets/icon-192.png" alt="" width="56" height="56"><div><b>카영 스터디언</b><small>유튜브 카페인영어 운영자<br>채널 2025년 6월 · 사이트 2026년 9월 시작<br>오류 제보와 제안은 언제든 환영해요.</small>
 <div class="lk"><a href="/contact/">문의하기</a>{f'<a href="{e(_yt)}" target="_blank" rel="noopener">유튜브</a>' if _yt else ""}{f'<a href="{e(_ig)}" target="_blank" rel="noopener">인스타그램</a>' if _ig else ""}</div></div></div>
+<ul class="abo-facts">
+<li><b>유튜브 채널</b><span>카페인영어 CafeInEnglish (@CAFEINENGLISH) · 구독자 2만+ · 영상 160편+</span></li>
+<li><b>만드는 영상</b><span>리더와 셀럽의 연설·인터뷰를 자막 없이 듣고, 장면별 표현을 해설한 뒤 한영 자막으로 다시 듣는 [한영자막] 롱폼과 1분 쇼츠</span></li>
+<li><b>영상과 사이트</b><span>영상에서 다룬 장면의 표현·예문 음성·퀴즈를 이 사이트의 <a href="/category/video/">영상</a> 글로 정리해, 영상을 본 뒤 복습할 수 있게 해요. 표현·꿀팁·영어 이야기 글은 영상 밖에서 자주 묻는 내용을 사전으로 확인해 정리한 글이에요.</span></li>
+<li><b>함께하는 곳</b><span>인스타그램 @cafe_in_english, 카카오톡 1일 1영(매일 아침 7시)</span></li>
+<li><b>연락</b><span><a href="/contact/">문의하기</a>로 오류 제보·제안·협업 문의를 받아요. 확인한 오류는 고치고 글에 수정일을 남겨요.</span></li>
+</ul>
 {_about_kakao()}
 """
 PRIVACY = f"""
