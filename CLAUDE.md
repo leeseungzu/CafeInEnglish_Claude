@@ -108,6 +108,7 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 - 카테고리 페이지 검색 제목·설명은 build.py `CAT_SEO`에서 관리. 카테고리별 OG 이미지(`og/c-<cat>.png`)와 CollectionPage·Breadcrumb 구조화 데이터 자동 생성.
 - 한 페이지에 h1은 하나. 홈 h1은 화면에 안 보이는 사이트 소개 문장, 오늘의 표현은 p. 목록 카드 제목은 카테고리 페이지에선 h2, 홈·관련 글에선 h3.
 - 내 공부방(/notes/)은 noindex (개인 기록이라 검색 노출 X).
+- 애드센스 2차 거절 대응(2026-11-10): 사유의 문장(/think/ 11쪽 + /category/think/)은 영상 글과 인용이 겹쳐 noindex·사이트맵 제외(build.py THINK_NOINDEX). 글 JSON에 "noindex": true를 넣으면 그 글도 noindex·사이트맵·RSS 제외(james-conversation: 다른 강사 강의 요약형).
 - 글 seo_title은 "핵심 표현 뜻 - 한국어 설명" 형식, description은 70~120자.
 - (2026-10-22 사용자 결정) 영상 글(cat video)의 seo_title은 숙어 하나를 앞세우지 않고 모두 같은 형식: "<인물> <행사> 영어 <연설/인터뷰/축사/강의> - 영어표현 N개 한영 해설". 영어표현·꿀팁 글만 "○○ 뜻"을 앞에 둔다.
 

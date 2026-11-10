@@ -1406,12 +1406,17 @@ def page_post(p):
     ld = ld_article(p["title"], desc, url, img, p.get("date", ""), p["_mod"], CATS[p["cat"]],
                     [("홈", "/"), (CATS[p["cat"]], f"/category/{p['cat']}/"), (p["title"], url)])
     return layout(p["title"], desc, url, "\n".join(parts), p["cat"], data, "article", aside, og_img=img,
-                  seo_title=p.get("seo_title"), ld=ld)
+                  seo_title=p.get("seo_title"), ld=ld, robots="noindex,follow" if p.get("noindex") else "")
 
 
 def q_end(q):
     """끝 시간이 없으면 단어 수로 대략 계산 (초당 2.4단어 + 여유 1.2초)"""
     return q.get("end") or round(q["t"] + len(q["en"].split()) / 2.4 + 1.2, 1)
+
+
+# 애드센스 2차 거절 대응(2026-11-10): 사유의 문장은 영상 글과 인용이 겹쳐서 검색에서 빼요(기능은 그대로).
+# 글 JSON에 "noindex": true 가 있으면 그 글도 검색·사이트맵·RSS에서 빠져요.
+THINK_NOINDEX = True
 
 
 def page_think(t):
@@ -1469,7 +1474,7 @@ def page_think(t):
     ld = ld_article(t["title"], t.get("description", ""), url, img, t.get("date", ""), t["_mod"], "사유의 문장",
                     [("홈", "/"), ("사유의 문장", "/category/think/"), (t["title"], url)])
     return layout(t["title"] + " - 필사하기", t.get("description", ""), url, body, "think", data, "article", aside, og_img=img,
-                  seo_title=t.get("seo_title"), ld=ld)
+                  seo_title=t.get("seo_title"), ld=ld, robots="noindex,follow" if THINK_NOINDEX else "")
 
 
 
@@ -1609,7 +1614,8 @@ def page_category(cat):
               {"@type": "ListItem", "position": 1, "name": "홈", "item": DOMAIN + "/"},
               {"@type": "ListItem", "position": 2, "name": CATS[cat], "item": DOMAIN + url}]}]
     img = og_image("c-" + cat, "카테고리", CATS[cat], CAT_LEAD[cat], "읽고 · 듣고 · 퀴즈로 확인")
-    return layout(CATS[cat], seo_d, url, body, cat, wide=True, seo_title=seo_t, ld=ld, og_img=img)
+    return layout(CATS[cat], seo_d, url, body, cat, wide=True, seo_title=seo_t, ld=ld, og_img=img,
+                  robots="noindex,follow" if (cat == "think" and THINK_NOINDEX) else "")
 
 
 SERIES = json.loads((CONTENT / "series.json").read_text("utf-8")) if (CONTENT / "series.json").exists() else []
@@ -3613,11 +3619,17 @@ def build():
     pages = ["/"]
     write("/", page_home())
     for p in POSTS:
-        write(post_url(p), page_post(p)); pages.append(post_url(p))
+        write(post_url(p), page_post(p))
+        if not p.get("noindex"):
+            pages.append(post_url(p))
     for t in THINKS:
-        write(think_url(t), page_think(t)); pages.append(think_url(t))
+        write(think_url(t), page_think(t))
+        if not THINK_NOINDEX:
+            pages.append(think_url(t))
     for c in CATS:
-        write(f"/category/{c}/", page_category(c)); pages.append(f"/category/{c}/")
+        write(f"/category/{c}/", page_category(c))
+        if not (c == "think" and THINK_NOINDEX):
+            pages.append(f"/category/{c}/")
     LASTMOD["/category/study/"] = max([p["_mod"] for p in POSTS if p["cat"] in STUDY_CATS] or [newest])
     write("/category/study/", page_study()); pages.append("/category/study/")
     LASTMOD["/category/watch/"] = max([p["_mod"] for p in POSTS if p["cat"] == "video"] + [t["_mod"] for t in THINKS] or [newest])
@@ -3665,7 +3677,7 @@ def build():
     def _rfc(d):
         try: return _eu.format_datetime(_dt.datetime.fromisoformat(d[:10] + "T09:00:00+09:00"))
         except Exception: return ""
-    _items = sorted(POSTS, key=lambda p: (p.get("date", ""), p["id"]), reverse=True)[:30]
+    _items = sorted([p for p in POSTS if not p.get("noindex")], key=lambda p: (p.get("date", ""), p["id"]), reverse=True)[:30]
     (OUT / "rss.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel>'
         f'<title>카페인영어 CafeInEnglish</title><link>{DOMAIN}/</link><description>{e(SITE.get("description", ""))}</description><language>ko</language>'

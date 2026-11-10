@@ -157,5 +157,6 @@
       "mnemonic": "alone(혼자)으로 leave(남겨 둬)!"
     }
   ],
-  "updated": "2026-10-18"
+  "updated": "2026-10-18",
+  "noindex": true
 }
