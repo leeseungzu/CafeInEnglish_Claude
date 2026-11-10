@@ -2107,6 +2107,18 @@ def page_today_old():
             '<title>오늘의 한 잔 | 카페인영어</title></head><body><a href="/today/">오늘의 한 잔으로 이동</a></body></html>')
 
 
+# 합친 글의 옛 주소 → 합친 글 (content/moved.json, 2026-11-10 애드센스 2차 대응). 옛 글 JSON은 content/merged/에 보관.
+MOVED = json.loads((CONTENT / "moved.json").read_text("utf-8")) if (CONTENT / "moved.json").exists() else {}
+
+
+def page_moved(old, new):
+    to = post_url(POST_BY_ID[new])
+    t = POST_BY_ID[new]["title"]
+    return ('<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex">'
+            f'<link rel="canonical" href="{DOMAIN}{to}"><meta http-equiv="refresh" content="0;url={to}">'
+            f'<title>{e(t)} | 카페인영어</title></head><body><a href="{to}">{e(t)}(으)로 이동</a></body></html>')
+
+
 def daily_routine():
     """오늘의 한 잔 목록 (홈과 같은 순서) + 음성"""
     out = []
@@ -3639,6 +3651,9 @@ def build():
     write("/notes/", page_notes())
     write("/today/", page_today()); pages.append("/today/")
     write("/tools/today-english/", page_today_old())
+    for old, new in MOVED.items():
+        if old not in POST_BY_ID and new in POST_BY_ID:
+            write(f"/p/{old}/", page_moved(old, new))
     (OUT / "manifest.webmanifest").write_text(json.dumps({
         "name": "카페인영어 - 오늘의 5분", "short_name": "카페인영어", "lang": "ko", "start_url": "/notes/?src=app", "scope": "/",
         "display": "standalone", "background_color": "#FFFFFF", "theme_color": "#FFFFFF",
