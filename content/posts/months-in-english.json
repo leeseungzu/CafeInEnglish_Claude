@@ -1,0 +1,73 @@
+{
+  "id": "months-in-english",
+  "cat": "story",
+  "sub": "단어의 유래",
+  "level": "기초",
+  "date": "2026-11-11",
+  "title": "December는 왜 12월일까, 열두 달 영어 이름에 남은 로마 달력",
+  "seo_title": "1월부터 12월까지 영어로 - 월 이름 뜻과 December가 12월인 이유",
+  "lead": "10을 뜻하는 이름이 왜 열두 번째 달에 붙어 있을까",
+  "description": "December의 decem은 10인데 왜 12월일까요? 3월에 시작하던 로마 달력, 7·8월이 끼어들었다는 설이 틀린 이유, 열두 달 이름의 뿌리와 in·on, 날짜 읽는 법을 정리했어요.",
+  "og": {
+    "en": "December",
+    "ko": "10이 들어간 이름이 왜 12월일까"
+  },
+  "icon": "calendar",
+  "chat": {
+    "q": "When's your birthday?",
+    "a": "It's in December.",
+    "key": "in December",
+    "ko": "12월이야."
+  },
+  "thumb": {
+    "text": "December",
+    "key": "December",
+    "ko": "10이 왜 12월이 됐을까?"
+  },
+  "quiz": [
+    {
+      "tag": "영어 이야기",
+      "q": "October의 octo는 8을 뜻하는데, 10월의 이름이 된 가장 큰 이유는?",
+      "sub": "",
+      "options": [
+        "처음 로마 달력은 1년이 3월에 시작했기 때문",
+        "아우구스투스가 새 달 두 개를 끼워 넣었기 때문",
+        "1752년 영국이 달의 순서를 바꿨기 때문",
+        "octo가 원래 10을 뜻했기 때문"
+      ],
+      "answer": 0,
+      "explain": "옛 로마 달력은 3월이 첫 달이라 October가 여덟째 달이었어요. 기원전 153년부터 1월이 한 해의 시작이 됐지만 이름은 그대로 남았어요. 7·8월은 새로 끼운 달이 아니라 이름만 바꾼 달이에요.",
+      "mnemonic": "3월을 1번으로 세면 October는 딱 8번"
+    },
+    {
+      "tag": "표현",
+      "q": "빈칸에 알맞은 말은? \"My birthday is ___ December 3rd.\"",
+      "sub": "",
+      "options": [
+        "in",
+        "on",
+        "at",
+        "to"
+      ],
+      "answer": 1,
+      "explain": "날짜까지 말하면 on이에요. 날짜 없이 달만 말할 땐 My birthday is in December처럼 in을 써요.",
+      "mnemonic": "달은 넓으니 in, 날짜는 콕 집어 on"
+    },
+    {
+      "tag": "영어 이야기",
+      "q": "July(7월)의 원래 이름 Quintilis는 무슨 뜻이었을까?",
+      "sub": "",
+      "options": [
+        "다섯째",
+        "일곱째",
+        "한여름",
+        "카이사르의 달"
+      ],
+      "answer": 0,
+      "explain": "Quintilis는 '다섯째 (달)'이에요. 3월부터 세면 7월이 다섯째라서 딱 맞아요. 기원전 44년 율리우스 카이사르를 기려 Julius로 이름이 바뀌었어요.",
+      "mnemonic": "다섯 명이 연주하는 퀸텟(quintet)처럼 quint는 5"
+    }
+  ],
+  "body_html": "<p>octopus는 다리가 여덟 개인 문어, octagon은 팔각형이에요. 둘 다 라틴어로 8을 뜻하는 <b>octo</b>에서 왔어요. 그런데 같은 octo가 들어간 <b>October</b>는 8월이 아니라 10월이에요. 달력을 다시 보면 이상한 점이 더 있어요. 한 해의 마지막 넉 달 이름이 모두 숫자에서 두 칸씩 밀려 있거든요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>영어</th><th>라틴어 뿌리</th><th>이름 속 숫자</th><th>지금</th></tr></thead><tbody><tr><td>September</td><td>septem</td><td>7</td><td>9월</td></tr><tr><td>October</td><td>octo</td><td>8</td><td>10월</td></tr><tr><td>November</td><td>novem</td><td>9</td><td>11월</td></tr><tr><td>December</td><td>decem</td><td>10</td><td>12월</td></tr></tbody></table></div>\n<p>이 어긋남을 따라가면 2천 년 넘게 이어진 달력의 역사가 나오고, 흔히 듣는 설명 두 가지가 사실과 다르다는 것도 보여요. 끝에는 월 이름을 영어로 쓰고 읽을 때 자주 틀리는 부분까지 정리했어요.</p>\n<h2>1년이 3월에 시작하던 로마</h2>\n<p>어원 사전 Etymonline은 December를 이렇게 풀이해요.</p>\n<div class=\"box\"><p><b>\"tenth month of the old Roman calendar, which began with March\"</b><br><span style=\"color:#8B95A1\">3월에 시작하던 옛 로마 달력의 열 번째 달</span></p></div>\n<p>열쇠는 '3월에 시작하던'이에요. 로마 전승에 따르면 가장 오래된 로마 달력은 3월부터 12월까지 열 달, 304일뿐이었고 한겨울 두 달 남짓은 달 이름 없이 지나갔다고 해요. 1월(January)과 2월(February)은 그 뒤 누마 왕이 더했다고 전해져요. 둘 다 전설 속 왕들의 이야기라 언제였는지 콕 집어 말할 수는 없지만, 3월이 첫 달이었다는 점은 어원 사전과 달력 연구서가 같은 목소리로 설명해요.</p>\n<p>1월이 공식적인 한 해의 시작이 된 때는 기원전 153년이에요. 브리태니커와 시카고대학의 로마 백과(Encyclopaedia Romana)에 따르면 그전까지 3월 15일에 취임하던 로마의 집정관(최고 관직)이 이해부터 1월 1일에 임기를 시작했어요. 나랏일의 한 해가 1월에 열리면서 달력의 첫 달도 1월이 된 거예요.</p>\n<p>그런데 순서가 바뀐 뒤에도 이름은 그대로 남았어요. '일곱째 달'이던 September가 아홉 번째 자리로 옮겨 가서도 이름표를 바꾸지 않은 거예요. 오래 불러 온 이름은 숫자의 뜻이 흐려진 채 그 달을 가리키는 이름으로 굳어요. 지금 우리가 October를 들으며 8을 떠올리지 않는 것처럼요.</p>\n<figure class=\"fig\"><img src=\"/images/story-december-tres-riches-heures.webp\" alt=\"15세기 프랑스 기도서의 12월 그림. 위쪽 파란 반원 달력 안에 라틴어 달 이름 decembris와 궁수자리·염소자리가 그려져 있고, 아래에는 숲속에서 사냥개들이 멧돼지를 둘러싼 사냥 장면과 멀리 성이 보인다\" width=\"582\" height=\"1000\" loading=\"lazy\"><figcaption>15세기 프랑스 기도서 『베리 공작의 매우 호화로운 기도서』의 12월 그림. 위쪽 반원 안에 라틴어 달 이름 decembris가 적혀 있어요 (프랑스 샹티이 콩데 미술관 소장, 퍼블릭 도메인).</figcaption></figure>\n<p>로마가 사라진 뒤에도 유럽은 라틴어 달 이름을 계속 썼어요. 위 그림처럼 서로마 제국이 무너지고 천 년 가까이 흐른 15세기 기도서의 달력에도 12월은 여전히 '열 번째'라는 이름을 달고 있어요.</p>\n<h2>7월과 8월이 끼어들어서 밀렸다? 자주 듣는 두 가지 설</h2>\n<p>이 이야기에 꼭 따라붙는 설명이 있어요. 율리우스 카이사르와 아우구스투스가 자기 이름을 붙인 7월(July)과 8월(August)을 새로 끼워 넣는 바람에 뒤의 달들이 두 칸 밀렸다는 거예요. 그럴듯하지만 사실과 달라요.</p>\n<p>두 달은 새로 생긴 달이 아니라 원래 있던 달의 이름을 바꾼 거예요. 브리태니커에 따르면 기원전 44년 다섯째 달 <b>Quintilis</b>가 카이사르를 기려 Julius(July)가 됐고, 기원전 8년에는 여섯째 달 <b>Sextilis</b>가 Augustus(August)로 바뀌었어요. Etymonline도 August를 'Sextilis(문자 그대로 여섯째)에서 이름을 바꾼 달'로 적어요.</p>\n<p>여기서 재미있는 점이 하나 보여요. Quintilis는 '다섯째', Sextilis는 '여섯째'인데, 3월부터 세면 정확히 맞아요. 3월이 첫째, 4월 둘째, 5월 셋째, 6월 넷째, 그다음이 다섯째(지금의 7월)와 여섯째(8월)예요. 이름을 바꾸기 전 로마 달력에는 5부터 10까지 숫자 이름이 나란히 이어져 있었던 셈이에요. 7월과 8월은 밀어낸 범인이 아니라, 3월에 시작하던 달력을 오히려 또렷하게 보여 주는 증거예요.</p>\n<p>두 번째 설은 아우구스투스가 자기 달이 카이사르의 달보다 짧은 게 싫어서 2월에서 하루를 가져와 8월을 31일로 만들었다는 이야기예요. 달력 연구자 클라우스 퇴네링(Claus Tøndering)의 달력 FAQ는 이 이야기를 이렇게 정리해요.</p>\n<div class=\"box\"><p><b>\"It is a fabrication, possibly invented by the English-French scholar Johannes de Sacrobosco in the 13th century.\"</b><br><span style=\"color:#8B95A1\">지어낸 이야기이며, 13세기 학자 요하네스 데 사크로보스코가 만들어 냈을 가능성이 있다.</span></p></div>\n<p>과학 매체 라이브사이언스도 이 이야기의 뿌리를 13세기 파리의 학자 사크로보스코의 글로 짚어요. 브리태니커는 아우구스투스 때 2월이 28일로 줄었다고 적으면서도 그 동기에는 '아마도'를 붙이고, 카이사르 때부터 2월이 28일이었다고 보는 학자들도 있다고 덧붙여요. 달력 연구자와 과학 매체는 근거 없는 이야기로 보고, 백과사전도 이견을 함께 싣는 셈이에요. 적어도 '8월이 하루를 빼앗아 왔다'는 이야기를 확실한 역사처럼 말할 수는 없어요.</p>\n<h2>잉글랜드의 법적 새해는 1752년까지 3월 25일이었다</h2>\n<p>한 해가 언제 시작하느냐는 생각보다 최근까지도 지역마다 달랐어요. 영국의 1750년 달력법(Calendar (New Style) Act 1750) 앞부분에는 그때까지 잉글랜드의 법적인 한 해가 언제 시작했는지 이렇게 적혀 있어요.</p>\n<div class=\"box\"><p><b>\"...beginneth on the twenty-fifth day of March\"</b><br><span style=\"color:#8B95A1\">(법적인 한 해는) 3월 25일에 시작한다</span></p></div>\n<p>이 법에 따라 잉글랜드의 법적인 새해 첫날은 1752년부터 1월 1일이 됐어요(스코틀랜드는 이미 1600년부터 1월 1일에 새해를 시작했어요). 그전까지 잉글랜드의 법적 문서에서는 1월 1일부터 3월 24일까지가 아직 '지난해'에 속해서, 1750/51처럼 두 해를 함께 적는 일도 있었어요. 로마가 1월로 새해를 옮기고 1,900년이 지나서야 잉글랜드의 법도 같은 날로 맞춘 셈이에요.</p>\n<h2>열두 달 이름의 뿌리</h2>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>달</th><th>영어</th><th>이름의 뿌리</th></tr></thead><tbody><tr><td>1월</td><td>January</td><td>문과 시작(그리고 끝)의 신 야누스(Janus)의 달</td></tr><tr><td>2월</td><td>February</td><td>정화 의식을 뜻하는 라틴어 februa</td></tr><tr><td>3월</td><td>March</td><td>전쟁의 신 마르스(Mars)의 달</td></tr><tr><td>4월</td><td>April</td><td>확실하지 않음. '열다'(aperire)와 잇는 건 오래된 민간어원이에요</td></tr><tr><td>5월</td><td>May</td><td>로마 여신 마이아(Maia)와 관련 있다는 설</td></tr><tr><td>6월</td><td>June</td><td>여신 유노(Juno)와 관련 있다고 봐요</td></tr><tr><td>7월</td><td>July</td><td>율리우스 카이사르 (원래 이름 Quintilis, 다섯째)</td></tr><tr><td>8월</td><td>August</td><td>아우구스투스 황제 (원래 이름 Sextilis, 여섯째)</td></tr><tr><td>9~12월</td><td>September ~ December</td><td>7·8·9·10을 뜻하는 septem·octo·novem·decem</td></tr></tbody></table></div>\n<p>신의 이름, 축제, 사람, 숫자가 뒤섞여 있어요. 그중 사람 이름 두 달과 숫자 이름 네 달이 나란히 붙은 7월부터 12월까지가 바로 3월에 시작하던 달력의 흔적이에요. 4월·5월·6월처럼 사전도 '아마도'를 붙이는 달은 한 가지 설만 정답처럼 외우지 않는 게 정확해요.</p>\n<h2>월 이름, 이렇게 쓰고 읽어요</h2>\n<p>월 이름을 영어로 쓸 때 자주 틀리는 건 세 가지예요.</p>\n<p><b>첫째, 늘 대문자로 시작해요.</b> 월 이름은 고유명사라서 문장 가운데서도 december가 아니라 December라고 써요. 영국문화원(British Council)도 april이 아니라 April이라고 쓰라고 짚어요.</p>\n<p><b>둘째, 달에는 in, 날짜에는 on.</b> 달 전체를 말할 땐 in December, 날짜까지 말할 땐 on December 25th처럼 써요. 한국어로는 '12월에', '12월 25일에' 모두 '에'라서 둘이 섞이기 쉬워요. 범위가 넓은 달에는 in, 하루를 콕 집는 날짜에는 on이라고 기억하면 돼요.</p>\n<p><b>셋째, 날짜는 미국과 영국의 순서가 달라요.</b> 미국은 보통 December 25라고 쓰고 \"December twenty-fifth\"라고 읽어요. 영국은 25 December처럼 날짜를 먼저 쓰고 \"the twenty-fifth of December\"라고 읽는 경우가 많아요. 숫자로 쓰더라도 읽을 때는 twenty-five가 아니라 <b>twenty-fifth</b>처럼 서수로 읽는다는 점이 핵심이에요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">My birthday is in December.</span><span class=\"ko\">내 생일은 12월이야.</span></li>\n<li><span class=\"en\">The store closes early on December 24th.</span><span class=\"ko\">그 가게는 12월 24일에 일찍 문을 닫아요.</span></li>\n<li><span class=\"en\">We're moving to Busan in March.</span><span class=\"ko\">우리 3월에 부산으로 이사 가요.</span></li>\n<li><span class=\"en\">The deadline is February 28th.</span><span class=\"ko\">마감은 2월 28일이에요.</span></li>\n</ul></div>\n<p>줄여 쓸 때도 기준이 있어요. 미국 언론이 따르는 AP 스타일에서는 날짜와 함께 쓸 때 Jan., Feb., Aug., Sept., Oct., Nov., Dec.만 줄이고, March부터 July까지 다섯 달은 줄이지 않아요. 날짜 없이 달 이름만 쓸 때는 모두 풀어 쓰고, Dec. 24처럼 숫자 뒤에 th를 붙이지 않아요. 일상 메시지에서는 December 24th처럼 써도 자연스러워요.</p>\n<h2>실제 대화 · 생일을 물어볼 때</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">When's your birthday?</span><span class=\"ko\">생일이 언제야?</span></li>\n<li class=\"me\"><span class=\"en\">It's in December. December 3rd, to be exact.</span><span class=\"ko\">12월이야. 정확히는 12월 3일.</span></li>\n<li class=\"them\"><span class=\"en\">Oh, that's coming up soon!</span><span class=\"ko\">오, 금방이네!</span></li>\n<li class=\"me\"><span class=\"en\">I know. It's only a few weeks away.</span><span class=\"ko\">그러니까. 몇 주밖에 안 남았어.</span></li>\n</ul>\n<p>달만 말할 때는 in December, 날짜를 덧붙일 때는 December 3rd처럼 서수로 말하는 흐름이 한 대화에 다 들어 있어요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">'12월 25일에 만나자'를 말할 때</span><span class=\"no\">Let's meet in December 25th.</span><span class=\"en\">Let's meet on December 25th.</span><span class=\"ko\">12월 25일에 만나자.</span><span class=\"why\"><b>왜?</b>날짜까지 말하면 on을 써요. in은 날짜 없이 달 전체를 말할 때예요.</span></li>\n<li><span class=\"ctx\">'3월에 졸업했어'를 말할 때</span><span class=\"no\">I graduated on March.</span><span class=\"en\">I graduated in March.</span><span class=\"ko\">3월에 졸업했어.</span><span class=\"why\"><b>왜?</b>날짜 없이 달만 말할 때는 in이에요. on March 2nd처럼 날짜가 붙을 때만 on으로 바뀌어요.</span></li>\n<li><span class=\"ctx\">메시지에 날짜를 적을 때</span><span class=\"no\">See you on october 3.</span><span class=\"en\">See you on October 3rd.</span><span class=\"ko\">10월 3일에 봐요.</span><span class=\"why\"><b>왜?</b>월 이름은 고유명사라 늘 대문자로 시작해요. 숫자는 3으로 써도 되지만 말할 때는 third라고 읽어요.</span></li>\n</ul></div>\n<h2>발음과 억양</h2>\n<p>February는 사전이 두 가지 발음을 함께 올려요. 메리엄웹스터는 첫 r을 빼고 <b>\"페뷰웨리\"</b>에 가깝게 읽는 발음을 먼저 싣고, r을 살린 \"페브러웨리\"도 함께 적어요. 비슷한 소리가 가까이 두 번 나오면 하나를 빼고 말하는 경향 때문에 생긴 발음이라 둘 다 널리 받아들여진다고 설명해요. 강세는 둘 다 맨 앞 <b>Feb</b>에 와요.</p>\n<p>9월부터 12월까지는 모두 둘째 음절에 힘을 줘요. Sep<b>tem</b>ber \"셉<b>템</b>버\", Oc<b>to</b>ber \"악<b>토</b>우버\", No<b>vem</b>ber \"노우<b>벰</b>버\", De<b>cem</b>ber \"디<b>셈</b>버\"처럼요. July도 뒤에 강세가 있어서 \"줄<b>라</b>이\"로 뒤를 세게 말하고, January는 \"<b>재</b>뉴에리\"처럼 맨 앞에 힘을 줘요. on December 3rd는 \"안 디셈버 써드\"를 단어마다 끊지 않고 한 호흡에 이어 말해요. 강세는 셈과 써드에 와요.</p>\n<p>날짜와 함께 헷갈리기 쉬운 '이번 주·다음 주'는 <a href=\"/p/this-vs-next/\">this와 next 구별하기</a>에서, 10월 마지막 밤의 이름에 숨은 이야기는 <a href=\"/p/halloween-origin/\">Halloween은 원래 '모든 성인의 날 전야'였다</a>에서 이어서 읽어 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Etymonline 'January'·'February'·'March'·'April'·'May'·'June'·'July'·'August'·'September'·'October'·'November'·'December', Merriam-Webster 'December'·'February'(발음 설명), Encyclopaedia Britannica 'Calendar: The Western calendar and calendar reforms'·'January'·'April', Encyclopaedia Romana(시카고대학) 'Consuls', Claus Tøndering 'The Roman calendar'(Calendar FAQ), Live Science 'How the calendar got its months', legislation.gov.uk 'Calendar (New Style) Act 1750', History.co.uk 'The calendar riots of 1752', British Council LearnEnglish 'When: time, dates'·'Capital letters and apostrophes', British Council IELTS 'How to write the date in English', UCLA Alumni 'AP Style', 12월 그림 『베리 공작의 매우 호화로운 기도서』(콩데 미술관, 위키미디어 공용).</p>",
+  "related": []
+}

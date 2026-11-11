@@ -1,12 +1,5 @@
 {
  "days": {
-  "2026-11-07": {
-   "en": "It was really fun.",
-   "ko": "정말 재미있었어",
-   "desc": "즐거웠다는 fun, 웃겼다는 funny. funny에는 '이상하다'는 뜻도 있어요.",
-   "url": "https://www.cafeinenglish.com/p/fun-vs-funny/",
-   "au": "/audio/48cdfc08944a.mp3"
-  },
   "2026-11-08": {
    "en": "Text me when you get home.",
    "ko": "집에 도착하면 문자해",
@@ -125,6 +118,13 @@
    "desc": "기대에 딱 맞게 해냈을 때 하는 요즘 칭찬. 원래 뜻은 '과제를 제대로 이해했다'예요.",
    "url": "https://www.cafeinenglish.com/p/wes-moore-have-faith-not-fear/",
    "au": "/audio/4e4997a1deb5.mp3"
+  },
+  "2026-11-25": {
+   "en": "Take ownership of your mistakes.",
+   "ko": "네 실수는 네가 책임져",
+   "desc": "남의 일이 아니라 내 일로 맡아 책임질 때 take ownership. 웨스 무어는 애국을 이렇게 정의했어요.",
+   "url": "https://www.cafeinenglish.com/p/wes-moore-have-faith-not-fear/",
+   "au": "/audio/03197a754042.mp3"
   }
  }
 }
