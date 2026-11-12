@@ -1,12 +1,5 @@
 {
  "days": {
-  "2026-11-08": {
-   "en": "Text me when you get home.",
-   "ko": "집에 도착하면 문자해",
-   "desc": "home 앞에는 to를 쓰지 않아요. go home, get home처럼 동사 뒤에 바로 붙여요.",
-   "url": "https://www.cafeinenglish.com/p/go-home/",
-   "au": "/audio/f810c0cb4670.mp3"
-  },
   "2026-11-09": {
    "en": "Fingers crossed!",
    "ko": "잘되길 빌게!",
@@ -125,6 +118,13 @@
    "desc": "남의 일이 아니라 내 일로 맡아 책임질 때 take ownership. 웨스 무어는 애국을 이렇게 정의했어요.",
    "url": "https://www.cafeinenglish.com/p/wes-moore-have-faith-not-fear/",
    "au": "/audio/03197a754042.mp3"
+  },
+  "2026-11-26": {
+   "en": "It's no big deal.",
+   "ko": "별거 아니야",
+   "desc": "상대가 작은 실수를 미안해할 때 건네는 말. no 없이 Big deal만 툭 던지면 '그래서 뭐?'처럼 들려요.",
+   "url": "https://www.cafeinenglish.com/p/no-big-deal/",
+   "au": "/audio/b32a27aa6d92.mp3"
   }
  }
 }

@@ -1,0 +1,73 @@
+{
+  "id": "days-of-the-week-english",
+  "cat": "story",
+  "sub": "단어의 유래",
+  "level": "기초",
+  "date": "2026-11-12",
+  "title": "Thursday는 왜 목요일일까, 한국어 요일로 풀리는 영어 요일 이름",
+  "seo_title": "요일 영어로 - 월요일부터 일요일까지 이름의 유래와 쓰는 법",
+  "lead": "화요일과 Tuesday, 목요일과 Thursday는 같은 별을 부르고 있었다",
+  "description": "Sunday는 일요일, Saturday는 토요일인데 Thursday는 왜 목요일일까요? 로마의 일곱 천체와 북유럽 신, 한국어 요일이 짝을 이루는 이유와 on Mondays, next Monday 쓰는 법을 정리했어요.",
+  "og": {
+    "en": "Thursday",
+    "ko": "목요일과 같은 별을 부르는 이름"
+  },
+  "icon": "ringed-planet",
+  "chat": {
+    "q": "Does Tuesday work for you?",
+    "a": "Sorry, I have classes on Tuesdays.",
+    "key": "on Tuesdays",
+    "ko": "미안, 화요일마다 수업이 있어."
+  },
+  "thumb": {
+    "text": "Thursday",
+    "key": "Thursday",
+    "ko": "왜 목요일이 됐을까?"
+  },
+  "quiz": [
+    {
+      "tag": "영어 이야기",
+      "q": "목요일(木曜日)과 Thursday, 두 이름이 거슬러 올라가는 같은 천체는?",
+      "sub": "",
+      "options": [
+        "목성",
+        "화성",
+        "금성",
+        "토성"
+      ],
+      "answer": 0,
+      "explain": "라틴어 dies Iovis는 '유피테르(목성)의 날'이에요. 게르만 사람들은 이 자리에 천둥의 신 토르를 넣어 Thursday를 만들었고, 한국어 목요일은 같은 목성(木星)을 그대로 불러요.",
+      "mnemonic": "목성 = 천둥 치는 신들의 왕 = Thor"
+    },
+    {
+      "tag": "표현",
+      "q": "'다음 주 월요일에 봐요'를 영어로 할 때 빈칸에 알맞은 말은? \"See you ___ Monday.\"",
+      "sub": "",
+      "options": [
+        "on next",
+        "next",
+        "in next",
+        "at next"
+      ],
+      "answer": 1,
+      "explain": "next, last, this, every가 붙으면 on을 쓰지 않아요. 그냥 next Monday라고 해요. 다만 next Monday를 '돌아오는 월요일'로 듣는 사람도 있으니 중요한 약속이면 날짜를 함께 말해요.",
+      "mnemonic": "next가 오면 on은 자리를 비켜 준다"
+    },
+    {
+      "tag": "표현",
+      "q": "'저는 화요일마다 요가를 해요'에 맞는 말은? \"I do yoga ___.\"",
+      "sub": "",
+      "options": [
+        "in Tuesdays",
+        "on Tuesdays",
+        "at Tuesdays",
+        "to Tuesdays"
+      ],
+      "answer": 1,
+      "explain": "요일 앞에는 on을 써요. 매주 반복되는 일이면 요일 뒤에 s를 붙여 on Tuesdays라고 해요. in은 달·연도, at은 시각 앞에 쓰는 말이라 요일과는 어울리지 않아요.",
+      "mnemonic": "s가 붙으면 매주, 화요일이 여러 번"
+    }
+  ],
+  "body_html": "<p>휴대폰 달력을 영어로 바꾸면 맨 위 줄이 Sun, Mon, Tue, Wed, Thu, Fri, Sat로 바뀌어요. 이 중 세 개는 한국어 요일과 뜻이 그대로 겹쳐요. <b>Sunday</b>는 해(日)의 날, <b>Monday</b>는 달(月)의 날, <b>Saturday</b>는 토성(Saturn)의 날이에요. 일요일, 월요일, 토요일과 같은 천체예요.</p>\n<p>나머지 넷인 Tuesday, Wednesday, Thursday, Friday도 사실은 화·수·목·금요일과 같은 천체에서 출발했어요. 영어가 중간에 별 이름을 북유럽 신의 이름으로 바꿔 끼워서 겉으로 안 보일 뿐이에요. 그래서 영어 요일의 유래는 우리가 매일 쓰는 한국어 요일로 풀 수 있어요.</p>\n<h2>한국어 요일에 이미 답이 있다</h2>\n<p>일·월·화·수·목·금·토는 해, 달, 그리고 맨눈으로 보이는 다섯 행성인 화성·수성·목성·금성·토성이에요. 동아시아에서는 다섯 행성을 오행(불·물·나무·쇠·흙)의 글자로 불렀고, 해와 달과 다섯 행성을 묶어 칠요(七曜)라고 했어요. 曜는 '빛나는 천체'라는 뜻이고, 요일(曜日)의 요가 바로 이 글자예요.</p>\n<p>로마 사람들도 같은 일곱 천체에 날을 하나씩 맡겼어요. 해의 날(dies Solis), 달의 날(dies Lunae), 마르스의 날(dies Martis), 메르쿠리우스의 날(dies Mercurii), 유피테르의 날(dies Iovis), 베누스의 날(dies Veneris), 사투르누스의 날(dies Saturni)이에요. 로마에서는 행성 이름이 곧 신의 이름이라 화성은 전쟁의 신 마르스, 목성은 신들의 왕 유피테르, 금성은 사랑의 여신 베누스였어요.</p>\n<p>순서도 같아요. 우연이 아니라 같은 체계가 동서로 퍼졌기 때문이에요. 중국 사전 『사해(辭海)』는 칠요로 날을 세는 역법이 바빌로니아(또는 이집트)에서 비롯되어, 8세기에 마니교도들이 중앙아시아의 강국(康國)에서 중국으로 전했다고 설명해요. 다섯 행성의 이름은 그보다 훨씬 오래됐지만, 그 이름을 일곱 날에 차례로 붙이는 방식은 서쪽에서 건너온 거예요.</p>\n<h2>영어는 별 대신 신을 바꿔 끼웠다</h2>\n<p>라틴어 요일 이름은 로마와 맞닿아 있던 게르만 사람들에게도 건너갔어요. 이때 소리를 그대로 가져가지 않고 뜻을 옮겼어요. 어원 사전 Etymonline은 Sunday를 이렇게 풀이해요.</p>\n<div class=\"box\"><p><b>\"A Germanic loan-translation of Latin dies solis\"</b><br><span style=\"color:#8B95A1\">라틴어 dies solis(해의 날)를 게르만어로 옮긴 말</span></p></div>\n<p>해와 달은 '해의 날', '달의 날'로 옮기면 그만이었어요. 문제는 마르스나 유피테르 같은 로마의 신이었어요. 게르만 사람들은 그 자리에 성격이 비슷한 자기들의 신을 넣었어요. Etymonline의 week 항목도 게르만 부족들이 로마의 신 자리에 자기 신들을 넣었다고 적어요. 한국어 요일 옆에 놓으면 짝이 한눈에 보여요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>요일 · 천체</th><th>라틴어 dies ~</th><th>영어와 이름의 주인</th></tr></thead><tbody>\n<tr><td>일 · 해</td><td>Solis</td><td>Sunday · 해</td></tr>\n<tr><td>월 · 달</td><td>Lunae</td><td>Monday · 달</td></tr>\n<tr><td>화 · 화성</td><td>Martis</td><td>Tuesday · 전쟁의 신 티우(Tiw)</td></tr>\n<tr><td>수 · 수성</td><td>Mercurii</td><td>Wednesday · 최고신 워든(Woden, 오딘)</td></tr>\n<tr><td>목 · 목성</td><td>Iovis</td><td>Thursday · 천둥의 신 토르(Thor)</td></tr>\n<tr><td>금 · 금성</td><td>Veneris</td><td>Friday · 오딘의 아내 프리그(Frigg)</td></tr>\n<tr><td>토 · 토성</td><td>Saturni</td><td>Saturday · 토성(사투르누스) 그대로</td></tr>\n</tbody></table></div>\n<p>짝을 지은 기준은 신의 성격이에요. 전쟁의 신 마르스 자리에는 게르만의 전쟁 신 티우가 들어갔어요. 하늘의 신이자 번개를 다루는 유피테르 자리에는 천둥의 신 토르가 들어갔고, 옛 영어로 목요일은 þunresdæg, '토르(천둥)의 날'이었어요. 베누스 자리에는 결혼한 사랑의 여신 프리그가 들어갔는데, Etymonline은 성격만 보면 '북쪽의 베누스'라 불리는 프레이야가 더 가깝다고 덧붙여요.</p>\n<p>메르쿠리우스와 오딘의 짝은 설명이 엇갈려요. Etymonline은 이 짝이 로마 역사가 타키투스의 글에 나오지만 역사가들을 어리둥절하게 해 왔다고 적고, 옥스퍼드 영어사전(OED)은 둘 다 말솜씨의 신이었기 때문일 것이라고 본다고 소개해요. 토요일은 아예 바꾸지 않았어요. Etymonline은 영어 요일 가운데 Saturday만 게르만 신으로 바꾸지 않았다며, 북유럽 신들 중에 사투르누스와 짝이 될 신이 없었기 때문일 것이라고 추측해요.</p>\n<figure class=\"fig\"><img src=\"/images/story-thor-winge.webp\" alt=\"두 마리 염소가 끄는 수레를 탄 토르가 망치를 높이 들고 먹구름 속에서 거인들과 싸우는 장면. 번개가 치는 하늘 아래 쓰러진 거인들이 보인다\" width=\"691\" height=\"1000\" loading=\"lazy\"><figcaption>스웨덴 화가 모르텐 에스킬 빙에의 「거인들과 싸우는 토르」(1872). Thursday라는 이름의 주인인 천둥의 신이에요 (스웨덴 국립미술관 소장, 퍼블릭 도메인).</figcaption></figure>\n<p>정리하면 일·월·토 세 요일은 한국어와 영어가 같은 천체를 그대로 부르고, 화·수·목·금 네 요일은 '천체 → 로마 신 → 게르만 신'으로 한 번 더 건너갔어요. 영어 요일이 헷갈릴 때는 이렇게 한국어 요일을 다리로 쓰면 돼요.</p>\n<div class=\"keypt\"><b>한국어 요일로 외우는 영어 요일</b><ol>\n<li><b>Tuesday</b>: 화성 = 전쟁의 신 마르스 → 전쟁의 신 티우의 날</li>\n<li><b>Wednesday</b>: 수성 = 메르쿠리우스 → 최고신 워든(오딘)의 날</li>\n<li><b>Thursday</b>: 목성 = 번개를 다루는 유피테르 → 천둥의 신 토르의 날</li>\n<li><b>Friday</b>: 금성 = 사랑의 여신 베누스 → 여신 프리그의 날</li>\n</ol></div>\n<h2>왜 하필 이 순서일까</h2>\n<p>해·달·화·수·목·금·토는 하늘에서 보이는 거리 순서도, 밝기 순서도 아니에요. 2~3세기 로마의 원로원 의원이자 역사가인 카시우스 디오는 그리스어로 쓴 『로마사』 37권에서, 날을 행성에 맡기는 관습은 이집트 사람들이 시작했고 그 순서에 대해 들은 설명이 두 가지 있다고 적어요. 그중 하나가 하루의 시간마다 행성을 하나씩 맡기는 방식이에요.</p>\n<div class=\"box\"><p><b>\"assigning the first to Saturn, the next to Jupiter, the third to Mars...\"</b><br><span style=\"color:#8B95A1\">첫 시간은 토성에, 다음은 목성에, 셋째는 화성에 맡기고…</span></p></div>\n<p>옛사람들은 행성이 지구에서 먼 순서를 토성, 목성, 화성, 해, 금성, 수성, 달로 생각했어요. 이 순서대로 하루 24시간을 하나씩 돌아가며 맡기면 일곱 개가 세 바퀴를 돌고 세 시간이 남아요(24 = 7 × 3 + 3). 그래서 다음 날 첫 시간은 세 칸 앞으로 간 자리, 곧 둘을 건너뛴 넷째 천체가 맡아요. 토성이 첫 시간을 맡은 날 다음 날은 해, 그다음은 달, 화성, 수성, 목성, 금성 순서가 돼요. 그날 첫 시간을 맡은 천체를 그날의 이름으로 삼으면 지금의 요일 순서가 그대로 나와요.</p>\n<p>다만 기원은 아직 확실하지 않아요. 브리태니커는 날마다 행성 이름을 붙인 것이 바빌로니아에서 시작해 로마로 이어졌다고 설명하고, 디오는 이집트를 꼽았어요. 달력 연구자 클라우스 퇴네링의 달력 FAQ는 7일 주기의 기원에 대해 확실히 말할 수 있는 게 없다고 하면서, 이 시간 계산도 '한 가지 이론'으로 소개한 뒤 우연일 수도 있다고 덧붙여요. 확실한 역사라기보다 옛날부터 전해 오는 가장 그럴듯한 설명이라고 보면 돼요.</p>\n<h2>요일 앞의 on, 쓸까 말까</h2>\n<p>이름의 유래를 알았으니 이제 문장 속에서 써 볼 차례예요. 요일은 고유명사라 문장 가운데서도 늘 대문자로 시작하고(monday가 아니라 Monday), 앞에 붙는 말에 따라 뜻이 달라져요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>이렇게 쓰면</th><th>뜻</th></tr></thead><tbody>\n<tr><td>on Monday</td><td>가장 가까운 월요일 하루 (보통 돌아오는 월요일, 과거 시제면 지난 월요일)</td></tr>\n<tr><td>on Mondays</td><td>월요일마다, 매주 월요일</td></tr>\n<tr><td>next Monday</td><td>다음 (주) 월요일. 앞에 on을 쓰지 않아요</td></tr>\n<tr><td>Monday morning</td><td>월요일 아침. 쓸 때는 on Monday morning</td></tr>\n</tbody></table></div>\n<p>옥스퍼드 학습자 사전은 We'll meet on Monday를 '다음 월요일', The museum is closed on Mondays를 '매주 월요일'로 풀이해요. 미국 영어나 편한 말에서는 See you Monday처럼 on을 빼기도 해요. next, last, this, every가 붙을 때는 on을 쓰지 않는데, '언제'를 이미 그 말이 알려 준다고 기억하면 쉬워요.</p>\n<p>next Monday에는 함정이 하나 더 있어요. 원어민 사이에서도 '돌아오는 월요일'로 듣는 사람과 '다음 주 월요일'로 듣는 사람이 갈려요. 헷갈리지 않으려면 Monday next week처럼 주를 붙이거나 날짜를 함께 말해요. 이 차이는 <a href=\"/p/this-vs-next/\">this와 next 구별하기</a>에서 자세히 다뤘어요.</p>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">'다음 주 월요일에 봐요'를 말할 때</span><span class=\"no\">See you on next Monday.</span><span class=\"en\">See you next Monday.</span><span class=\"ko\">다음 주 월요일에 봐요.</span><span class=\"why\"><b>왜?</b>next, last, this, every가 붙으면 on을 쓰지 않아요.</span></li>\n<li><span class=\"ctx\">'월요일에 시험이 있어'를 말할 때</span><span class=\"no\">I have a test in Monday.</span><span class=\"en\">I have a test on Monday.</span><span class=\"ko\">월요일에 시험이 있어.</span><span class=\"why\"><b>왜?</b>달에는 in, 요일과 날짜에는 on이에요. 한국어로는 둘 다 '에'라서 섞이기 쉬워요.</span></li>\n<li><span class=\"ctx\">'월요일 아침에 전화할게'를 말할 때</span><span class=\"no\">I'll call you in Monday morning.</span><span class=\"en\">I'll call you on Monday morning.</span><span class=\"ko\">월요일 아침에 전화할게.</span><span class=\"why\"><b>왜?</b>in the morning은 in이지만, 앞에 요일이 붙으면 그 하루를 가리키니 on으로 바뀌어요.</span></li>\n</ul></div>\n<p>줄여 쓸 때는 사전마다 두 가지를 함께 올리는 요일이 있어요. 옥스퍼드 학습자 사전 기준으로 Mon., Fri., Sat., Sun.은 하나씩이지만 화요일은 Tue./Tues., 수요일은 Wed./Weds., 목요일은 Thur./Thurs.예요. 달력 앱처럼 세 글자로 맞출 때는 Thu.도 흔히 보여요. 회사 일정표의 '월~금'은 Monday to Friday, 미국에서는 Monday through Friday라고도 해요.</p>\n<h2>실제 대화 · 회의 날짜 옮기기</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Can we move our meeting to next week?</span><span class=\"ko\">우리 회의 다음 주로 옮길 수 있을까요?</span></li>\n<li class=\"me\"><span class=\"en\">Sure. Does Tuesday work for you?</span><span class=\"ko\">그럼요. 화요일 괜찮으세요?</span></li>\n<li class=\"them\"><span class=\"en\">I have classes on Tuesdays. How about Wednesday?</span><span class=\"ko\">화요일마다 수업이 있어서요. 수요일은 어때요?</span></li>\n<li class=\"me\"><span class=\"en\">Wednesday works. See you at ten, then.</span><span class=\"ko\">수요일 좋아요. 그럼 그날 10시에 봬요.</span></li>\n</ul>\n<p>Does Tuesday work for you?는 요일을 주어로 세워 상대 일정을 묻는 말이라 on이 필요 없어요. 매주 반복되는 수업은 on Tuesdays로 말하고, 날짜가 정해진 뒤에는 next Wednesday를 반복하지 않고 See you at ten, then처럼 then으로 받아요. 약속 잡는 짧은 대화에 요일을 쓰는 방식이 거의 다 들어 있어요.</p>\n<h2>발음과 억양</h2>\n<p>강세는 일곱 요일 모두 맨 앞에 와요. <b>Mon</b>day, <b>Tues</b>day, <b>Wednes</b>day처럼 앞을 세게, -day는 가볍게 말해요. 끝의 -day는 메리엄웹스터와 옥스퍼드 학습자 사전 모두 두 가지 발음을 올려서, Monday를 \"먼데이\"로도 \"먼디\"로도 읽어요.</p>\n<p><b>Wednesday</b>는 보통 d를 읽지 않고 \"웬즈데이\"라고 해요. 메리엄웹스터는 이 발음을 먼저 올리고, 영국에서 d를 살려 읽는 발음도 함께 적어요. 철자에 남은 d는 옛 영어 wodnesdæg('워든의 날')의 흔적이고, Etymonline에 따르면 줄여 읽은 발음은 15세기부터 기록에 나와요.</p>\n<p><b>Tuesday</b>는 미국에서는 \"투즈데이\", 영국에서는 \"튜즈데이\"에 가깝게 읽어요. <b>Thursday</b>는 혀끝을 윗니에 살짝 대는 th 소리로 시작해서 \"써즈데이\"에 가까워요. 두 요일을 모두 \"투즈데이\"처럼 말하면 듣는 사람이 헷갈리니 첫소리를 꼭 구별하세요. Does Tuesday work for you?는 \"더즈 <b>투</b>즈데이 <b>워</b>크 포 유\"처럼 Tues와 work에 힘을 주고 나머지는 이어서 말해요.</p>\n<p>열두 달 이름에 남은 로마 달력 이야기는 <a href=\"/p/months-in-english/\">December는 왜 12월일까</a>에서, 별 이름이 단어 속에 남은 또 다른 이야기는 <a href=\"/p/disaster-origin/\">disaster는 원래 '나쁜 별'이었다</a>에서 이어서 읽어 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Etymonline 'Sunday'·'Monday'·'Tuesday'·'Wednesday'·'Thursday'·'Friday'·'Saturday'·'week', Encyclopaedia Britannica 'Week'·'Jupiter (Roman god)', Claus Tøndering 'The Week'(Calendar FAQ), Cassius Dio 『Roman History』 37.18–19 (Loeb Classical Library 1914, LacusCurtius), 『사해(辭海)』 '七曜曆' 항목(cjvlang.com 'Days of the Week in Japanese'·'in Chinese' 인용), Oxford Learner's Dictionaries 'Monday'·'Tuesday'·'Wednesday'·'Thursday'·'on', Merriam-Webster 'Monday'·'Tuesday'·'Wednesday', test-english.com 'At, in, on: Prepositions of time', 그림 Mårten Eskil Winge 「Tor's Fight with the Giants」(1872, Nationalmuseum Stockholm, 위키미디어 공용).</p>\n",
+  "related": []
+}
