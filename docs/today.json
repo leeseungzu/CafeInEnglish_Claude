@@ -1,12 +1,5 @@
 {
  "days": {
-  "2026-11-09": {
-   "en": "Fingers crossed!",
-   "ko": "잘되길 빌게!",
-   "desc": "결과를 기다리는 친구에게 건네는 짧은 응원. 상대를 위해 빌 땐 I'll keep my fingers crossed for you.",
-   "url": "https://www.cafeinenglish.com/p/fingers-crossed/",
-   "au": "/audio/9f9e08837bf4.mp3"
-  },
   "2026-11-10": {
    "en": "Most of my friends live in Seoul.",
    "ko": "내 친구들은 대부분 서울에 살아",
@@ -125,6 +118,13 @@
    "desc": "상대가 작은 실수를 미안해할 때 건네는 말. no 없이 Big deal만 툭 던지면 '그래서 뭐?'처럼 들려요.",
    "url": "https://www.cafeinenglish.com/p/no-big-deal/",
    "au": "/audio/b32a27aa6d92.mp3"
+  },
+  "2026-11-27": {
+   "en": "I really appreciate it.",
+   "ko": "정말 고마워요",
+   "desc": "방금 받은 도움을 it으로 받아 고마움을 한 번 더 눌러 말해요. appreciate는 동사라 I'm을 붙이지 않아요.",
+   "url": "https://www.cafeinenglish.com/p/thank-appreciate-grateful/",
+   "au": "/audio/ec736a126306.mp3"
   }
  }
 }

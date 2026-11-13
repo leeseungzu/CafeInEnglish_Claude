@@ -1,5 +1,61 @@
 [
  {
+  "en": "I'm down.",
+  "ko": "좋아, 나도 낄래!",
+  "desc": "친구가 뭔가 하자고 할 때 하는 대답이에요. 우울하다는 뜻이 아니에요.",
+  "url": "https://www.cafeinenglish.com/p/im-down/",
+  "au": "/audio/ca36403540ab.mp3"
+ },
+ {
+  "en": "How hard could it be?",
+  "ko": "뭐 얼마나 어렵겠어?",
+  "desc": "만만하게 보고 하는 말. 뒤에 It turns out(알고 보니)이 오면 반전이 시작돼요.",
+  "url": "https://www.cafeinenglish.com/p/jensen/",
+  "au": "/audio/a77bd9401d74.mp3"
+ },
+ {
+  "en": "Sounds good!",
+  "ko": "좋아요, 그렇게 해요",
+  "desc": "제안이나 약속에 동의할 때 OK보다 자연스러운 한마디예요.",
+  "url": "https://www.cafeinenglish.com/p/sounds-good/",
+  "au": "/audio/55e0a18c009a.mp3"
+ },
+ {
+  "en": "Do you mean this Friday or next Friday?",
+  "ko": "이번 주 금요일 말하는 거야, 다음 주 금요일 말하는 거야?",
+  "desc": "next Friday는 원어민도 헷갈려서 날짜로 확인하는 게 가장 확실해요.",
+  "url": "https://www.cafeinenglish.com/p/this-vs-next/",
+  "au": "/audio/cc10ef8f4c89.mp3"
+ },
+ {
+  "en": "Can you drop me off here?",
+  "ko": "여기서 내려 주시겠어요?",
+  "desc": "drop은 '떨어뜨리다'. 차에서 나를 여기 내려놔 달라는 느낌이에요.",
+  "url": "https://www.cafeinenglish.com/p/transportation/",
+  "au": "/audio/99a38778ff2e.mp3"
+ },
+ {
+  "en": "I have a reservation under Kim.",
+  "ko": "김 이름으로 예약했어요",
+  "desc": "예약 장부의 이름 '아래(under)'에 내 예약이 있다고 기억해요.",
+  "url": "https://www.cafeinenglish.com/p/hotel-check-in/",
+  "au": "/audio/57e51910c406.mp3"
+ },
+ {
+  "en": "My bad.",
+  "ko": "내 실수야, 미안",
+  "desc": "작은 실수에 가볍게 하는 사과예요. 상사나 고객에겐 I apologize가 좋아요.",
+  "url": "https://www.cafeinenglish.com/p/my-bad/",
+  "au": "/audio/2d4e9b2513b5.mp3"
+ },
+ {
+  "en": "Nothing to declare.",
+  "ko": "신고할 거 없어요",
+  "desc": "declare는 '선언하다'. 세관 앞에서 '이거 있어요' 하고 밝히는 거예요.",
+  "url": "https://www.cafeinenglish.com/p/baggage-customs/",
+  "au": "/audio/6669bad1fe29.mp3"
+ },
+ {
   "en": "I'll call you back later.",
   "ko": "이따 다시 전화할게",
   "desc": "back이 붙으면 '되걸다'. 바쁠 때 전화 끊기 전 마지막 한마디예요.",
@@ -250,6 +306,13 @@
   "desc": "상대가 작은 실수를 미안해할 때 건네는 말. no 없이 Big deal만 툭 던지면 '그래서 뭐?'처럼 들려요.",
   "url": "https://www.cafeinenglish.com/p/no-big-deal/",
   "au": "/audio/b32a27aa6d92.mp3"
+ },
+ {
+  "en": "I really appreciate it.",
+  "ko": "정말 고마워요",
+  "desc": "방금 받은 도움을 it으로 받아 고마움을 한 번 더 눌러 말해요. appreciate는 동사라 I'm을 붙이지 않아요.",
+  "url": "https://www.cafeinenglish.com/p/thank-appreciate-grateful/",
+  "au": "/audio/ec736a126306.mp3"
  },
  {
   "en": "Sure, take your time.",
@@ -530,61 +593,5 @@
   "desc": "swamp는 '늪'. 일이 늪처럼 밀려와 허우적대는 느낌이라 busy보다 훨씬 생생해요.",
   "url": "https://www.cafeinenglish.com/p/swamped/",
   "au": "/audio/23b24c05e31e.mp3"
- },
- {
-  "en": "I'm down.",
-  "ko": "좋아, 나도 낄래!",
-  "desc": "친구가 뭔가 하자고 할 때 하는 대답이에요. 우울하다는 뜻이 아니에요.",
-  "url": "https://www.cafeinenglish.com/p/im-down/",
-  "au": "/audio/ca36403540ab.mp3"
- },
- {
-  "en": "How hard could it be?",
-  "ko": "뭐 얼마나 어렵겠어?",
-  "desc": "만만하게 보고 하는 말. 뒤에 It turns out(알고 보니)이 오면 반전이 시작돼요.",
-  "url": "https://www.cafeinenglish.com/p/jensen/",
-  "au": "/audio/a77bd9401d74.mp3"
- },
- {
-  "en": "Sounds good!",
-  "ko": "좋아요, 그렇게 해요",
-  "desc": "제안이나 약속에 동의할 때 OK보다 자연스러운 한마디예요.",
-  "url": "https://www.cafeinenglish.com/p/sounds-good/",
-  "au": "/audio/55e0a18c009a.mp3"
- },
- {
-  "en": "Do you mean this Friday or next Friday?",
-  "ko": "이번 주 금요일 말하는 거야, 다음 주 금요일 말하는 거야?",
-  "desc": "next Friday는 원어민도 헷갈려서 날짜로 확인하는 게 가장 확실해요.",
-  "url": "https://www.cafeinenglish.com/p/this-vs-next/",
-  "au": "/audio/cc10ef8f4c89.mp3"
- },
- {
-  "en": "Can you drop me off here?",
-  "ko": "여기서 내려 주시겠어요?",
-  "desc": "drop은 '떨어뜨리다'. 차에서 나를 여기 내려놔 달라는 느낌이에요.",
-  "url": "https://www.cafeinenglish.com/p/transportation/",
-  "au": "/audio/99a38778ff2e.mp3"
- },
- {
-  "en": "I have a reservation under Kim.",
-  "ko": "김 이름으로 예약했어요",
-  "desc": "예약 장부의 이름 '아래(under)'에 내 예약이 있다고 기억해요.",
-  "url": "https://www.cafeinenglish.com/p/hotel-check-in/",
-  "au": "/audio/57e51910c406.mp3"
- },
- {
-  "en": "My bad.",
-  "ko": "내 실수야, 미안",
-  "desc": "작은 실수에 가볍게 하는 사과예요. 상사나 고객에겐 I apologize가 좋아요.",
-  "url": "https://www.cafeinenglish.com/p/my-bad/",
-  "au": "/audio/2d4e9b2513b5.mp3"
- },
- {
-  "en": "Nothing to declare.",
-  "ko": "신고할 거 없어요",
-  "desc": "declare는 '선언하다'. 세관 앞에서 '이거 있어요' 하고 밝히는 거예요.",
-  "url": "https://www.cafeinenglish.com/p/baggage-customs/",
-  "au": "/audio/6669bad1fe29.mp3"
  }
 ]

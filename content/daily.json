@@ -502,5 +502,11 @@
     "en": "You understood the assignment.",
     "ko": "뭘 해야 하는지 제대로 알았네",
     "desc": "기대에 딱 맞게 해냈을 때 하는 요즘 칭찬. 원래 뜻은 '과제를 제대로 이해했다'예요."
+  },
+  {
+    "post": "thank-appreciate-grateful",
+    "en": "I really appreciate it.",
+    "ko": "정말 고마워요",
+    "desc": "방금 받은 도움을 it으로 받아 고마움을 한 번 더 눌러 말해요. appreciate는 동사라 I'm을 붙이지 않아요."
   }
 ]
