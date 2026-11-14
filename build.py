@@ -562,6 +562,11 @@ ORG = {"@type": "Organization", "name": "카페인영어 CafeInEnglish", "url": 
        "sameAs": [u for u in (SITE.get("youtube"), SITE.get("instagram")) if u]}
 
 
+# 네이버 서치어드바이저 '사이트 연관 채널'용: @graph 없이 단독 Organization 스크립트 (홈에만)
+NAVER_CHANNEL_LD = ('<script type="application/ld+json">' + json.dumps(
+    {"@context": "http://schema.org", "@type": "Organization", "name": ORG["name"], "url": ORG["url"], "sameAs": ORG["sameAs"]},
+    ensure_ascii=False).replace("</", "<\\/") + "</script>") if ORG["sameAs"] else ""
+
 def ld_html(objs):
     """구글 구조화 데이터 (JSON-LD)"""
     if not objs:
@@ -954,7 +959,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="{DOMAIN}{og_img}{_og_v(og_img)}">
 {f'<meta name="google-site-verification" content="{e(SITE["google_verify"])}">' if SITE.get("google_verify") else ""}{f'<meta name="naver-site-verification" content="{e(SITE["naver_verify"])}">' if SITE.get("naver_verify") else ""}
-{ld_html(ld)}
+{ld_html(ld)}{NAVER_CHANNEL_LD if path == "/" else ""}
 <link rel="icon" href="/assets/favicon.svg?v=3" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png?v=3" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=3">
