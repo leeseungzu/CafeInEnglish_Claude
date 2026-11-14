@@ -1734,6 +1734,57 @@ def notice_html(n=None):
             f'<span class="nt-body"><b>{e(n["title"])}</b><span>{e(n.get("sub", ""))}</span></span>'
             f'<span class="nt-go" aria-hidden="true">›</span></a>')
 
+def _share_slug(en):
+    s = re.sub(r"[^a-z0-9]+", "-", en.lower().replace("'", "").replace("\u2019", "")).strip("-")
+    return (s[:60].rstrip("-") or hashlib.md5(en.encode()).hexdigest()[:8])
+
+
+def share_pages(daily):
+    """오늘의 한 잔 표현마다 카톡 공유용 짧은 페이지 /d/<표현>/ (2026-11-14).
+    글 주소를 그대로 보내면 카톡 미리보기에 글 대표 표현(예: 영상 글 첫 표현)이 떠서 오늘 표현과 달라 보였어요.
+    이 페이지는 그 표현으로 만든 미리보기 이미지·제목만 갖고, 열면 바로 글의 해당 표현 위치(#xN)로 넘어가요.
+    검색 노출은 막아요(noindex, canonical=글)."""
+    out, seen = {}, {}
+    for it in daily:
+        p = POST_BY_ID.get(it.get("post"))
+        if not p or it["en"] in out:
+            continue
+        slug = _share_slug(it["en"])
+        if slug in seen and seen[slug] != it["en"]:
+            slug += "-" + hashlib.md5(it["en"].encode()).hexdigest()[:4]
+        seen[slug] = it["en"]
+        xs = p.get("expressions") or []
+        norm = lambda t: re.sub(r"[^a-z0-9]", "", (t or "").lower())
+        idx = next((i for i, x in enumerate(xs) if norm(x.get("en")) == norm(it["en"])), None)
+        to = post_url(p) + (f"#x{idx + 1}" if idx is not None else "")
+        if p.get("cat") == "video" and xs:
+            rows = [(it["en"], it["ko"])] + [(x.get("en", ""), x.get("ko", "")) for i, x in enumerate(xs) if i != idx]
+            label = f"이 영상에서 배우는 표현 {len(xs)}개"
+        else:
+            sib = [(d["en"], d["ko"]) for d in daily if d.get("post") == it.get("post") and d["en"] != it["en"]]
+            rows = [(it["en"], it["ko"])] + sib
+            label = "오늘 배우는 표현"
+        chip = "오늘의 한 잔 · " + CATS[p["cat"]] + (" · " + p["sub"] if p.get("sub") else "")
+        ver = hashlib.md5(json.dumps([it["en"], it["ko"], rows[:3], chip, "d1"], ensure_ascii=False).encode()).hexdigest()[:6]
+        img = og_list(f"d-{slug}-{ver}", chip, it["en"], it["ko"], label, rows, p.get("icon") or ("headphone" if p.get("cat") == "video" else ""), p["id"])
+        title = f"{it['en']} - {it['ko']}"
+        desc = it.get("desc") or p.get("description", p.get("lead", ""))
+        imgu = DOMAIN + img + _og_v(img)
+        page = ('<!doctype html><html lang="ko"><head><meta charset="utf-8">'
+                '<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,follow">'
+                f'<title>{e(title)} | 카페인영어</title><meta name="description" content="{e(desc)}">'
+                f'<link rel="canonical" href="{DOMAIN}{post_url(p)}">'
+                f'<meta property="og:type" content="article"><meta property="og:site_name" content="{e(SITE["name"])}">'
+                f'<meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}">'
+                f'<meta property="og:url" content="{DOMAIN}/d/{slug}/"><meta property="og:image" content="{imgu}">'
+                '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
+                f'<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{imgu}">'
+                f'<script>location.replace({json.dumps(to)})</script></head>'
+                f'<body style="font-family:sans-serif;padding:24px"><a href="{e(to)}">{e(it["en"])} 배우러 가기</a></body></html>')
+        write(f"/d/{slug}/", page)
+        out[it["en"]] = f"/d/{slug}/"
+    return out
+
 def page_home():
     daily = []
     if (CONTENT / "daily.json").exists():
@@ -1742,9 +1793,10 @@ def page_home():
             if p:
                 daily.append({**it, "url": post_url(p), "cat": CATS[p["cat"]]})
     daily = plan_order(daily)
+    share = share_pages(daily)  # 카톡용 표현별 미리보기 주소 (2026-11-14)
     # 카톡 '오늘의 한 잔' 예약 작업이 읽는 공개 목록 (홈과 같은 순서·같은 날짜 계산)
     (OUT / "daily.json").write_text(json.dumps(
-        [{"en": d["en"], "ko": d["ko"], "desc": d.get("desc", ""), "url": DOMAIN + d["url"], **({"au": "/audio/" + AUDIO[d["en"]]} if d["en"] in AUDIO else {})} for d in daily],
+        [{"en": d["en"], "ko": d["ko"], "desc": d.get("desc", ""), "url": DOMAIN + d["url"], **({"share": DOMAIN + share[d["en"]]} if d["en"] in share else {}), **({"au": "/audio/" + AUDIO[d["en"]]} if d["en"] in AUDIO else {})} for d in daily],
         ensure_ascii=False, indent=1), "utf-8")
     # 날짜로 바로 찾는 일정표 (2026-11-03): 카톡 1일 1영 작업과 카영 카페가 '날짜 → 표현'으로 읽어요.
     # 순번 계산(day % len)은 목록 길이가 바뀌면 어긋날 수 있어서, 이 파일을 먼저 쓰고 없을 때만 순번을 써요.
@@ -1754,7 +1806,7 @@ def page_home():
     for dd in range(_kday() - 3, _kday() + PLAN_AHEAD + 1):
         k = _dstr(dd); d = by_en.get(plan.get(k))
         if d:
-            days[k] = {"en": d["en"], "ko": d["ko"], "desc": d.get("desc", ""), "url": DOMAIN + d["url"], **({"au": "/audio/" + AUDIO[d["en"]]} if d["en"] in AUDIO else {})}
+            days[k] = {"en": d["en"], "ko": d["ko"], "desc": d.get("desc", ""), "url": DOMAIN + d["url"], **({"share": DOMAIN + share[d["en"]]} if d["en"] in share else {}), **({"au": "/audio/" + AUDIO[d["en"]]} if d["en"] in AUDIO else {})}
     (OUT / "today.json").write_text(json.dumps({"days": days}, ensure_ascii=False, indent=1), "utf-8")
     today = daily[daily_index(len(daily))] if daily else (SITE.get("today") or {})
     tp = POST_BY_ID.get(today.get("post")) or next((p for p in POSTS if p["cat"] == "expr"), POSTS[0])
