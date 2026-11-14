@@ -1,0 +1,73 @@
+{
+  "id": "black-friday-origin",
+  "cat": "story",
+  "sub": "단어의 유래",
+  "level": "기초",
+  "date": "2026-11-14",
+  "title": "블랙프라이데이의 black은 흑자일까? 경찰이 붙인 '최악의 금요일'",
+  "seo_title": "블랙프라이데이 뜻과 유래 - Black Friday의 black은 흑자가 아니었다",
+  "lead": "1869년 금값 폭락일에서 필라델피아 교통경찰의 별명까지, 그리고 in the black을 제대로 쓰는 법",
+  "description": "Black Friday의 black은 흑자에서 왔다는 설명은 1980년대에 붙은 해석이에요. 1869년 금값 폭락일, 필라델피아 경찰의 별명, in the black·in the red 쓰는 법을 근거와 함께 정리했어요.",
+  "og": {
+    "en": "Black Friday",
+    "ko": "black은 흑자가 아니었어요"
+  },
+  "icon": "shopping-bags",
+  "chat": {
+    "q": "How's your shop doing these days?",
+    "a": "We're finally in the black.",
+    "key": "in the black",
+    "ko": "드디어 흑자야."
+  },
+  "thumb": {
+    "text": "Black Friday",
+    "key": "Black",
+    "ko": "black은 흑자라는 뜻일까?"
+  },
+  "quiz": [
+    {
+      "tag": "영어 이야기",
+      "q": "추수감사절 다음 날을 Black Friday라고 부른 기록 중 가장 앞선 쪽은?",
+      "sub": "",
+      "options": [
+        "매출이 흑자로 바뀌어 기뻐한 백화점 상인들",
+        "교통 체증 속에 12시간씩 일한 필라델피아 경찰",
+        "1869년 금 시장을 움직인 월가 투자자들",
+        "1990년대 미국 TV 쇼핑 광고"
+      ],
+      "answer": 1,
+      "explain": "1950년대 말~1960년대 초 필라델피아 경찰이 쇼핑객과 미식축구 관중으로 막히는 이날을 Black Friday라고 불렀어요. 흑자 설명은 1980년대에 붙었고, 1869년은 쇼핑과 상관없는 금값 폭락일이에요.",
+      "mnemonic": "블프의 첫 주인공은 지갑이 아니라 호루라기"
+    },
+    {
+      "tag": "표현",
+      "q": "\"우리 가게가 드디어 흑자를 냈어\"를 가장 자연스럽게 말한 것은?",
+      "sub": "",
+      "options": [
+        "Our shop is finally black.",
+        "Our shop is finally in the black.",
+        "Our shop is finally on the black.",
+        "Our shop finally blacked."
+      ],
+      "answer": 1,
+      "explain": "흑자는 be in the black이에요. in the를 빼면 색깔 이야기가 되고, on이나 동사 blacked는 이 뜻으로 쓰지 않아요.",
+      "mnemonic": "장부 '안에' 검은 잉크, in the black"
+    },
+    {
+      "tag": "뜻",
+      "q": "\"My bank account is in the red again.\"의 뜻은?",
+      "sub": "",
+      "options": [
+        "통장이 또 마이너스예요",
+        "통장에 돈이 또 들어왔어요",
+        "통장이 또 정지됐어요",
+        "통장 비밀번호를 또 바꿨어요"
+      ],
+      "answer": 0,
+      "explain": "in the red는 번 것보다 많이 써서 빚진 상태, 즉 적자예요. 통장이면 잔고가 마이너스라는 뜻이에요.",
+      "mnemonic": "빨간 숫자는 마이너스"
+    }
+  ],
+  "body_html": "<p>11월 말이 되면 쇼핑 앱마다 '블프' 알림이 쏟아져요. 미국에서는 추수감사절 다음 날인 금요일, 올해로 치면 11월 27일이 <b>Black Friday</b>예요. 이름의 뜻을 검색하면 거의 같은 설명이 나와요. 이날 매출 덕분에 가게 장부가 적자(빨간색)에서 흑자(검은색)로 바뀌어서 black이라는 거죠.</p>\n<p>그럴듯하지만, 기록을 거슬러 올라가 보면 순서가 거꾸로예요. 이 이름을 처음 퍼뜨린 사람들은 장사가 잘돼 웃는 상인이 아니라 하루 종일 꽉 막힌 길에 서 있던 경찰이었어요. 그리고 그보다 한 세기 가까이 전에는 Black Friday가 아예 다른 날을 가리켰어요.</p>\n<h2>1869년, 금값이 무너진 금요일</h2>\n<figure class=\"fig\"><img src=\"/images/story-black-friday-1869-gold-room-board.webp\" alt=\"1869년 9월 24일 뉴욕 금 거래소 시세판 사진. 맨 위에 BLACK FRIDAY라는 큰 글자가 붙어 있고, 검은 칠판에 시각별 금 시세가 손글씨로 빼곡히 적혀 있다. 160을 넘던 숫자가 오후로 갈수록 133 안팎으로 떨어진다\" width=\"1146\" height=\"1000\" loading=\"lazy\"><figcaption>1869년 9월 24일 뉴욕 금 거래소(Gold Room)의 시세판 사진. 아래에 의회 은행·통화위원회에 증거로 제출됐다는 손글씨 설명이 붙어 있어요 (미국 의회도서관 소장, 퍼블릭 도메인).</figcaption></figure>\n<p>영어에서 Black Friday는 원래 '재앙이 닥친 금요일'이었어요. 가장 유명한 건 1869년 9월 24일 미국 월가의 금융 공황이에요. 브리태니커에 따르면 투자자 제이 굴드(Jay Gould)와 제임스 피스크(James Fisk)가 금을 사들여 값을 끌어올리려 했고, 그랜트 대통령이 정부 금 400만 달러어치를 시장에 풀라고 하면서 계획이 무너졌어요. 금화 100달러어치를 사는 데 지폐로 160달러까지 치솟았던 값이 정부 발표 몇 분 만에 133달러로 곤두박질쳤고, 그 충격이 증권 시장까지 번졌어요. 위 사진의 숫자가 바로 그날 오르내린 금 시세예요.</p>\n<p>그보다 앞선 1866년 5월 11일 런던의 금융 공황도 당시 신문들이 Black Friday라고 불렀어요. 여기서 black은 색깔이 아니라 '불길한, 최악의'라는 느낌이에요. 쇼핑과는 전혀 상관없이, 사람들이 떠올리기 싫은 날에 붙이던 이름이었죠.</p>\n<h2>필라델피아 교통경찰이 붙인 별명</h2>\n<p>이 '최악의 날'이라는 느낌을 그대로 가져다 쓴 사람들이 1950년대 말~1960년대 초 미국 필라델피아의 경찰이에요. 추수감사절 다음 날이면 도심은 연말 쇼핑을 시작하는 사람들로 붐볐고, 대개 바로 다음 날 토요일에는 필라델피아에서 열리던 육군·해군 사관학교 미식축구 경기를 보러 외지 사람들까지 몰려들었어요. 당시 필라델피아 기자 조지프 배럿이 1994년에 쓴 회고(언어학자 벤 지머 인용)에 따르면 교통경찰은 이날 12시간씩 근무해야 했고, 그래서 이날을 Black Friday라고 불렀어요.</p>\n<p>사실 추수감사절 다음 날을 Black Friday라고 부른 더 이른 기록도 하나 있어요. 1951년 한 공장 경영 잡지가 연휴 사이에 낀 이날 아픈 척하고 결근하는 직원이 많다며 그렇게 불렀어요. 다만 이 쓰임은 거기서 끝났고, 지금의 쇼핑 뜻으로 이어진 건 필라델피아 쪽이에요.</p>\n<p>상인들은 이 이름을 싫어했어요. 1961년에는 Black Friday 대신 <b>Big Friday</b>로 바꿔 부르자는 움직임까지 있었지만 자리 잡지 못했어요. 인쇄된 기록으로는 1960년 11월 패션 업계지 Women's Wear Daily가 가장 이르고, 메리엄웹스터 사전은 이 뜻이 처음 쓰인 해를 1961년으로 적어요. 이름은 한동안 필라델피아의 지역 말로 남아 있다가 1970~80년대부터 다른 도시 신문에도 보이기 시작했고, 1990년대에는 미국 전역에서 쓰는 말이 됐어요.</p>\n<h2>흑자 이야기는 나중에 붙은 해석</h2>\n<p>'적자에서 흑자로'라는 설명은 이름이 전국으로 퍼지던 1980년대에 등장해요. 1987년 캘리포니아의 오렌지카운티 레지스터는 쇼핑몰 선물 가게 주인의 말을 빌려 이날을 가게들이 '빨간 잉크에서 흑자(the black)로' 넘어가는 날이라고 소개했어요. 이 설명은 이름과 함께 1990년대 이후 널리 퍼졌고, 지금은 가장 흔한 답이 됐어요.</p>\n<p>메리엄웹스터는 두 설명을 모두 소개하면서 유래가 확실하지 않다고 적어요. 다만 기록이 남은 순서로 보면 경찰의 별명이 먼저이고, 브리태니커도 흑자설은 진짜 유래가 아니라고 설명해요. 그러니 <b>Black Friday의 black은 원래 '돈을 번 날'이 아니라 '고생한 날'이었고, 흑자라는 뜻은 이름이 유명해진 뒤에 덧입혀진 거예요.</b></p>\n<h2>in the black과 in the red는 이렇게 써요</h2>\n<p>흑자설이 쉽게 믿긴 건 영어에 실제로 '흑자'와 '적자'를 색깔로 말하는 표현이 있기 때문이에요. 아메리칸 헤리티지 숙어 사전은 장부에 나간 돈(차변)은 빨간 잉크로, 들어온 돈(대변)은 검은 잉크로 적던 습관에서 나온 말이라고 설명해요. 장부를 컴퓨터로 쓰는 지금도 표현은 그대로 남았어요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>표현</th><th>뜻</th><th>이렇게 써요</th></tr></thead><tbody><tr><td>be in the black</td><td>흑자다, 돈을 벌고 있다</td><td>회사·가게·사업이 이익을 낼 때</td></tr><tr><td>be in the red</td><td>적자다, 번 것보다 많이 쓰고 빚졌다</td><td>회사 실적, 마이너스 통장 잔고</td></tr><tr><td>Black Friday</td><td>추수감사절 다음 금요일, 연말 쇼핑 시작일</td><td>고유명사라 B와 F를 대문자로</td></tr></tbody></table></div>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">After two tough years, the bakery is finally in the black.</span><span class=\"ko\">힘든 2년을 보내고 그 빵집이 드디어 흑자를 냈어요.</span></li>\n<li><span class=\"en\">The airline slipped into the red this quarter.</span><span class=\"ko\">그 항공사는 이번 분기에 적자로 돌아섰어요.</span></li>\n<li><span class=\"en\">My bank account is in the red again.</span><span class=\"ko\">통장이 또 마이너스예요.</span></li>\n<li><span class=\"en\">After a rough start, the company is back in the black.</span><span class=\"ko\">출발은 힘들었지만 회사가 다시 흑자로 돌아섰어요.</span></li>\n</ul></div>\n<p>black과 red는 혼자 쓰면 그냥 색깔이에요. 돈 이야기로 쓸 때는 꼭 <b>the</b>를 붙여 in the black, in the red로 쓰고, 상태가 바뀔 때는 slip into the red, get out of the red, back in the black처럼 앞의 전치사만 바꿔요. 메리엄웹스터와 옥스퍼드 학습자 사전 모두 in the black, in the red 형태로 실어요.</p>\n<h2>실제 대화 · 블프 세일을 기다리는 동료에게</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Are you doing any Black Friday shopping this year?</span><span class=\"ko\">올해 블프 때 뭐 살 거야?</span></li>\n<li class=\"me\"><span class=\"en\">Just a few things. I've been waiting for a deal on headphones.</span><span class=\"ko\">몇 개만. 헤드폰 할인을 기다리고 있었거든.</span></li>\n<li class=\"them\"><span class=\"en\">Did you know the name wasn't about stores getting into the black?</span><span class=\"ko\">그 이름이 가게들이 흑자 나는 거랑 상관없었다는 거 알아?</span></li>\n<li class=\"me\"><span class=\"en\">Really? I always thought it was.</span><span class=\"ko\">진짜? 난 늘 그런 줄 알았는데.</span></li>\n<li class=\"them\"><span class=\"en\">Philadelphia police started calling it that because of the traffic.</span><span class=\"ko\">필라델피아 경찰이 교통 체증 때문에 그렇게 부르기 시작했대.</span></li>\n<li class=\"me\"><span class=\"en\">That makes sense. Downtown must have been a nightmare.</span><span class=\"ko\">그럴 만하네. 도심이 완전 난리였겠다.</span></li>\n</ul>\n<h2>흑자, 적자를 말할 때 걸리는 두 곳</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">우리 회사가 올해 흑자라고 말할 때</span><span class=\"no\">Our company is black this year.</span><span class=\"en\">Our company is in the black this year.</span><span class=\"ko\">우리 회사는 올해 흑자예요.</span><span class=\"why\"><b>왜?</b>black만 쓰면 돈 이야기로 들리지 않고, 색이나 인종 이야기로 오해될 수도 있어요. 흑자·적자는 the를 붙인 in the black, in the red로 써요.</span></li>\n<li><span class=\"ctx\">블프 세일 때 샀다고 말할 때</span><span class=\"no\">I bought it in Black Friday.</span><span class=\"en\">I bought it on Black Friday.</span><span class=\"ko\">그거 블랙프라이데이 때 샀어.</span><span class=\"why\"><b>왜?</b>Black Friday도 결국 '그 금요일'이라는 특정한 날이라 요일처럼 on을 써요. 세일 기간 전체를 말할 땐 during the Black Friday sale도 자연스러워요.</span></li>\n</ul></div>\n<h2>발음과 억양</h2>\n<p><b>Black Friday</b>는 '블랙 프라이데이'를 끊지 말고 한 이름처럼 이어서 말해요. black은 '블'에 모음을 넣지 말고, b를 내기 전에 혀끝을 미리 윗잇몸에 대 두었다가 입술을 떼자마자 l로 넘어가요. 끝의 k는 거의 터뜨리지 않아요. 가장 큰 힘은 Friday의 FRI에 실려 'Black FRI-day'처럼 들려요.</p>\n<p><b>in the black</b>, <b>in the red</b>는 '인 더 블랙'처럼 세 박자로 끊지 않아요. in the는 약하고 빠르게 '인더'로 붙이고, 힘은 마지막 black, red에 실어요. 흑자인지 적자인지가 이 문장의 핵심이라 그 단어가 가장 크게 들려요.</p>\n<p>요일 이름이 어디서 왔는지 궁금하다면 <a href=\"/p/days-of-the-week-english/\">Thursday는 왜 목요일일까</a>를, 블프 바로 전날인 추수감사절 이야기는 <a href=\"/p/turkey-origin/\">칠면조는 왜 turkey일까</a>를 함께 읽어 보세요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Merriam-Webster 'Black Friday'·'in the black'·'in the red', Oxford Learner's Dictionaries 'be in the red', The American Heritage Idioms Dictionary 'in the red'(Dictionary.com), Encyclopaedia Britannica 'Black Friday', History.com 'The Black Friday Gold Scandal'(Evan Andrews)·'Black Friday: Origins and History', 뉴욕 연방준비은행 Liberty Street Economics 'Crisis Chronicles: The Gold Panic of 1869'(2016), 영란은행 Quarterly Bulletin 'The demise of Overend Gurney'(2016), Ben Zimmer 'Back in Black: On the Origins of Black Friday'(Vocabulary.com), Mark Liberman 'Black Friday'(Language Log, 2012), David Wilton 'Black Friday / Cyber Monday'(Wordorigins.org), NPR Morning Edition(2011), 미국 의회도서관 'New York Gold Room bulletin board on Black Friday, Sept. 24, 1869'(LCCN 2006685436, 위키미디어 공용).</p>",
+  "related": []
+}
