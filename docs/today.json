@@ -1,13 +1,5 @@
 {
  "days": {
-  "2026-11-11": {
-   "en": "I got back three days ago.",
-   "ko": "3일 전에 돌아왔어",
-   "desc": "지금부터 거꾸로 셀 땐 시간 길이 + ago, 그리고 단순 과거. before three days라고 하지 않아요.",
-   "url": "https://www.cafeinenglish.com/p/ago-vs-before/",
-   "share": "https://www.cafeinenglish.com/d/i-got-back-three-days-ago/",
-   "au": "/audio/ff18ef7146da.mp3"
-  },
   "2026-11-12": {
    "en": "It's not really my cup of tea.",
    "ko": "내 취향은 별로 아니야",
@@ -143,6 +135,14 @@
    "url": "https://www.cafeinenglish.com/p/take-your-time/",
    "share": "https://www.cafeinenglish.com/d/sure-take-your-time/",
    "au": "/audio/0e6afd9aa290.mp3"
+  },
+  "2026-11-29": {
+   "en": "Thanks, you too!",
+   "ko": "고마워, 너도!",
+   "desc": "Happy Thanksgiving 같은 인사를 받았을 때 그대로 돌려주는 말. '나도'라고 Me too라고 하지 않아요.",
+   "url": "https://www.cafeinenglish.com/p/happy-thanksgiving-reply/",
+   "share": "https://www.cafeinenglish.com/d/thanks-you-too/",
+   "au": "/audio/c9f632e8e961.mp3"
   }
  }
 }

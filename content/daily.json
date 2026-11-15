@@ -508,5 +508,11 @@
     "en": "I really appreciate it.",
     "ko": "정말 고마워요",
     "desc": "방금 받은 도움을 it으로 받아 고마움을 한 번 더 눌러 말해요. appreciate는 동사라 I'm을 붙이지 않아요."
+  },
+  {
+    "post": "happy-thanksgiving-reply",
+    "en": "Thanks, you too!",
+    "ko": "고마워, 너도!",
+    "desc": "Happy Thanksgiving 같은 인사를 받았을 때 그대로 돌려주는 말. '나도'라고 Me too라고 하지 않아요."
   }
 ]
