@@ -1,13 +1,5 @@
 {
  "days": {
-  "2026-11-12": {
-   "en": "It's not really my cup of tea.",
-   "ko": "내 취향은 별로 아니야",
-   "desc": "싫다고 딱 자르는 대신 '내 취향과 안 맞아'로 돌려 말하는 표현. 대부분 not과 함께 써요.",
-   "url": "https://www.cafeinenglish.com/p/not-my-cup-of-tea/",
-   "share": "https://www.cafeinenglish.com/d/its-not-really-my-cup-of-tea/",
-   "au": "/audio/a5f4f53ddf19.mp3"
-  },
   "2026-11-13": {
    "en": "Long story short, we got home a day late.",
    "ko": "간단히 말하면, 하루 늦게 집에 왔어",
@@ -143,6 +135,14 @@
    "url": "https://www.cafeinenglish.com/p/happy-thanksgiving-reply/",
    "share": "https://www.cafeinenglish.com/d/thanks-you-too/",
    "au": "/audio/c9f632e8e961.mp3"
+  },
+  "2026-11-30": {
+   "en": "How did the exam go?",
+   "ko": "시험 어떻게 봤어?",
+   "desc": "시험이 끝난 사람에게 건네는 첫마디. '잘 봤어?'를 see로 옮기지 않고, 시험이 어떻게 흘러갔는지 go로 물어요.",
+   "url": "https://www.cafeinenglish.com/p/take-an-exam/",
+   "share": "https://www.cafeinenglish.com/d/how-did-the-exam-go/",
+   "au": "/audio/0f3d0999fc24.mp3"
   }
  }
 }
