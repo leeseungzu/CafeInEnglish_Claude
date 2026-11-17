@@ -520,5 +520,11 @@
     "en": "How did the exam go?",
     "ko": "시험 어떻게 봤어?",
     "desc": "시험이 끝난 사람에게 건네는 첫마디. '잘 봤어?'를 see로 옮기지 않고, 시험이 어떻게 흘러갔는지 go로 물어요."
+  },
+  {
+    "post": "few-vs-a-few",
+    "en": "There are a few left, but not many.",
+    "ko": "몇 개 남았는데 많지는 않아.",
+    "desc": "아직 남아 있다는 건 a few로 알리고, 넉넉하지 않다는 건 not many로 덧붙여요. a를 빼면 '거의 없다'가 돼요."
   }
 ]

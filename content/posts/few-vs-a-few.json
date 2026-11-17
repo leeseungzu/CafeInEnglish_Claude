@@ -1,0 +1,73 @@
+{
+  "id": "few-vs-a-few",
+  "cat": "tip",
+  "sub": "단어",
+  "level": "기초",
+  "date": "2026-11-17",
+  "title": "few와 a few, a 하나로 '있다'와 '없다'가 갈리는 이유",
+  "seo_title": "few a few 차이 - '좀 있다'와 '거의 없다' 구별법",
+  "lead": "숫자는 같아도, a 하나가 말하는 사람의 기분을 바꿔요",
+  "description": "a few는 '좀 있다', few는 '거의 없다'예요. 처칠 연설의 so few로 차이를 보고, 회화에서 쓰는 not many, 거꾸로 느껴지는 quite a few, little과 a little까지 정리했어요.",
+  "og": {
+    "en": "a few vs few",
+    "ko": "a 하나로 '있다'와 '없다'가 갈려요"
+  },
+  "icon": "seat",
+  "chat": {
+    "q": "Are there still tickets for Saturday?",
+    "a": "Yeah, there are a few left!",
+    "key": "a few",
+    "ko": "응, 몇 장 남았어!"
+  },
+  "thumb": {
+    "text": "a few",
+    "key": "a",
+    "ko": "'좀 있다'와 '거의 없다'"
+  },
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "There are few seats left. 이 말을 들은 사람이 떠올릴 뜻으로 가장 알맞은 것은?",
+      "sub": "",
+      "options": [
+        "자리가 좀 남아 있으니 여유 있게 와도 돼",
+        "자리가 거의 없어",
+        "자리가 꽤 많이 남아 있어",
+        "자리가 하나도 남지 않았어"
+      ],
+      "answer": 1,
+      "explain": "a 없는 few는 '많지 않은, 거의 없는'으로 수가 적다는 쪽에 무게를 둬요. 하나도 없다는 none, 꽤 많다는 quite a few예요.",
+      "mnemonic": "a가 있으면 '있네!', a가 없으면 '없네…'"
+    },
+    {
+      "tag": "빈칸",
+      "q": "I've been to that café quite ___ times.",
+      "sub": "그 카페 꽤 여러 번 가 봤어",
+      "options": [
+        "few",
+        "a little",
+        "a few",
+        "little"
+      ],
+      "answer": 2,
+      "explain": "'꽤 많이, 꽤 여러 번'은 quite a few로 한 덩어리예요. times는 셀 수 있어서 little은 쓰지 않아요.",
+      "mnemonic": "quite a few = 생각보다 많다, a까지 한 세트"
+    },
+    {
+      "tag": "작문",
+      "q": "'물 조금만 더 주실 수 있어요?'를 영어로 가장 자연스럽게 말한 것은?",
+      "sub": "",
+      "options": [
+        "Can I have a few more water?",
+        "Can I have few more water?",
+        "Can I have a little more water?",
+        "Can I have little more water?"
+      ],
+      "answer": 2,
+      "explain": "water는 셀 수 없어서 few가 아니라 little을 써요. '조금 있다' 쪽이니 a를 붙인 a little이에요.",
+      "mnemonic": "셀 수 있으면 few, 셀 수 없으면 little, '있다'면 a"
+    }
+  ],
+  "body_html": "<p>1940년 8월 20일, 영국 하원. 윈스턴 처칠은 영국 본토 하늘을 지키던 공군 조종사와 승무원들을 두고 이렇게 말했어요.</p>\n<div class=\"box\"><p><b>\"Never in the field of human conflict was so much owed by so many to so few.\"</b><br>인류의 전쟁사에서 이토록 많은 사람이, 이토록 적은 이들에게, 이토록 큰 빚을 진 적은 없었습니다.</p></div>\n<p>이 연설 뒤로 영국 본토 항공전에 나선 공군은 지금까지 'the Few'라고 불려요. 문장 끝의 so few를 a few로 바꿔 보면 차이가 보여요. so가 빠지면서 so much, so many와 맞춘 리듬이 깨지고, '고작 이만큼'이라는 느낌도 함께 사라져요. a few는 '몇 사람이 있었다'를 알려 줄 뿐이지만, few는 <b>'겨우 이만큼밖에 없었다'</b>는 쪽에 무게를 둬요. 그 적은 수가 짊어진 무게를 보여 주려면 few여야 했어요. a 하나가 바꾸는 건 숫자가 아니라 <b>말하는 사람이 그 숫자를 보는 눈</b>이에요.</p>\n<h2>같은 두세 개, 다른 기분</h2>\n<p>롱맨 사전은 a few를 '적은 수, 예를 들어 두세 명이나 두세 개', few를 '많지 않은, 거의 없는'으로 풀이하고, few는 그 수가 얼마나 적은지를 강조한다고 덧붙여요. 옥스퍼드 러너스 사전도 a few는 '적은 수, 약간', few는 '많지 않은'으로 나눠요. 남은 자리가 똑같이 세 개여도 어느 쪽을 고르느냐에 따라 듣는 사람이 받는 메시지가 달라져요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>영어</th><th>듣는 사람에게 전해지는 말</th></tr></thead><tbody><tr><td>There are a few seats left.</td><td>자리가 좀 남아 있어. 지금 가면 앉을 수 있어.</td></tr><tr><td>There are few seats left.</td><td>자리가 거의 없어. 기대하지 않는 게 좋아.</td></tr><tr><td>I have a few close friends.</td><td>마음 터놓는 친구가 몇 명 있어.</td></tr><tr><td>He has few close friends.</td><td>그는 가까운 친구가 거의 없어.</td></tr></tbody></table></div>\n<p>He has few close friends는 글이나 조금 격식 있는 말에서 자연스럽고, 친구끼리 말할 땐 He doesn't have many close friends가 더 흔해요(아래에서 자세히 볼게요). 구별할 때는 문장을 듣고 상대가 <b>'있네!'</b> 쪽으로 기울면 a few, <b>'없네…'</b> 쪽으로 기울면 few예요. 한국어로 옮길 때도 a few는 '몇 개 있다, 좀 있다', few는 '거의 없다, 몇 개 안 된다'처럼 아예 다른 말로 옮기면 헷갈리지 않아요.</p>\n<h2>말할 때는 few 대신 not many</h2>\n<p>그런데 일상 대화에서 a 없는 few를 들을 일은 생각보다 많지 않아요. 롱맨 사전은 a 없이 쓰는 few를 격식 있는 영어로 설명하면서, 일상 영어에서는 보통 not many를 쓴다고 짚어요. 셀 수 없는 것에 쓰는 little도 같은 설명이 붙어 있고, 일상에서는 not much를 써요.</p>\n<ul class=\"ex\">\n<li><span class=\"en\">Not many people came to the meeting.</span><span class=\"ko\">회의에 사람이 별로 안 왔어.</span></li>\n<li><span class=\"en\">We don't have much time.</span><span class=\"ko\">우리 시간이 별로 없어.</span></li>\n</ul>\n<p>그러니 내가 말할 때는 '있다' 쪽이면 a few, '별로 없다' 쪽이면 not many로 정리해 두면 충분해요. 대신 기사나 연설, 책에서는 Few people know that… 같은 문장이 자주 나오니, 읽고 들을 때는 few를 '거의 없다'로 바로 알아봐야 해요. 처칠의 연설이 바로 그런 자리였어요.</p>\n<h2>quite a few는 '꽤 많이'</h2>\n<p>a few가 '조금'이니 quite a few는 '꽤 조금'일 것 같지만, 메리엄웹스터는 quite a few의 뜻을 한 단어로 many라고 풀이해요. 옥스퍼드 러너스 사전에도 Quite a few people are going to arrive early(꽤 많은 사람이 일찍 도착할 거예요)라는 예문이 있어요. 겉모습은 '조금'인데 실제로는 '생각보다 많다'는 뜻이라, 한국인이 듣기에 가장 거꾸로 느껴지는 표현이에요.</p>\n<ul class=\"ex\">\n<li><span class=\"en\">Quite a few people asked about the price.</span><span class=\"ko\">가격을 물어본 사람이 꽤 많았어.</span></li>\n<li><span class=\"en\">I've been there quite a few times.</span><span class=\"ko\">거기 꽤 여러 번 가 봤어.</span></li>\n</ul>\n<p>반대로 only를 붙인 only a few는 '몇 개뿐'이라는 뜻이 돼서 다시 아쉬운 쪽으로 기울어요. Only a few tickets are left는 '표가 몇 장밖에 안 남았어요'예요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>표현</th><th>느낌</th><th>예</th></tr></thead><tbody><tr><td>quite a few</td><td>생각보다 많다</td><td>quite a few times 꽤 여러 번</td></tr><tr><td>a few</td><td>좀 있다</td><td>a few minutes 몇 분</td></tr><tr><td>only a few</td><td>몇 개뿐이다</td><td>only a few left 몇 개밖에 안 남음</td></tr><tr><td>very few / few</td><td>거의 없다</td><td>very few mistakes 실수가 거의 없음</td></tr></tbody></table></div>\n<h2>셀 수 없을 땐 little과 a little</h2>\n<p>물, 시간, 돈처럼 셀 수 없는 것에는 few 대신 little을 쓰고, a가 하는 일은 똑같아요. 롱맨 사전은 a little을 '많지는 않지만 어느 정도', little을 '많지 않은'으로 풀이해요. Can I have a little water?는 '물 조금만 주실래요?'이고, There's little hope는 '희망이 거의 없어'예요. 셀 수 있는지 없는지를 먼저 보고 few와 little을 고른 다음, a를 붙일지는 '있다'와 '없다' 중 어느 쪽인지로 정해요. 수와 양을 다루는 비슷한 함정은 <a href=\"/p/almost-vs-most/\">almost와 most 구별하기</a>에도 정리해 두었어요.</p>\n<h2>실제 대화 · 공연 표를 예매할 때</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">Are there still tickets for Saturday?</span><span class=\"ko\">토요일 표 아직 있어?</span></li>\n<li class=\"me\"><span class=\"en\">Yeah, there are a few left, but not many.</span><span class=\"ko\">응, 몇 장 남았는데 많지는 않아.</span></li>\n<li class=\"them\"><span class=\"en\">Should we book now, then?</span><span class=\"ko\">그럼 지금 예매할까?</span></li>\n<li class=\"me\"><span class=\"en\">I think so. Quite a few people are trying to get tickets for the weekend show.</span><span class=\"ko\">그게 좋겠어. 주말 표 구하려는 사람이 꽤 많거든.</span></li>\n</ul>\n<p>두 번째 줄 하나에 a few와 not many가 함께 들어 있어요. a few로 '아직 있다'는 사실을 먼저 알려 주고, but not many로 '그래도 서둘러야 한다'를 덧붙인 거예요. 일상 대화에서 '별로 없다'를 few 대신 not many로 말하는 모습이 그대로 보여요.</p>\n<h2>발음과 억양</h2>\n<p>few는 <b>\"퓨\"</b>예요. 발음기호는 /fjuː/라서 f 소리 뒤에 '으'를 넣지 말고 바로 '유'를 길게 붙여요. f는 윗니를 아랫입술에 살짝 대고 바람을 내보내요. a few는 a를 아주 약하게 '어'로 붙여 <b>\"어퓨\"</b>처럼 한 덩어리로 말해요. 이 '어'가 짧고 약해서 빠른 말에서는 놓치기 쉬운데, 바로 이 소리 하나로 '있다'와 '없다'가 갈리니 들을 때 귀를 기울여 보세요. quite a few는 미국 영어에서 t가 부드럽게 굴러 <b>\"콰이러퓨\"</b>처럼 이어지고, 강세는 few에 가장 세게, quite에 그다음으로 실려요. not many는 t를 거의 소리 내지 않고 살짝 멈춘 뒤 바로 m으로 넘어가 <b>\"낫매니\"</b>처럼 짧게 이어 말해요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">'나 그 동네에 친구 몇 명 있어'라고 말할 때</span><span class=\"no\">I have few friends in that town.</span><span class=\"en\">I have a few friends in that town.</span><span class=\"ko\">그 동네에 친구 몇 명 있어.</span><span class=\"why\"><b>왜?</b>a를 빼면 '친구가 거의 없다'는 쓸쓸한 말이 돼요. '있다' 쪽이면 a를 꼭 붙여요.</span></li>\n<li><span class=\"ctx\">식당에서 물을 조금 더 달라고 할 때</span><span class=\"no\">Can I have a few more water?</span><span class=\"en\">Can I have a little more water?</span><span class=\"ko\">물 조금 더 주실 수 있어요?</span><span class=\"why\"><b>왜?</b>water는 셀 수 없어서 few가 아니라 little과 함께 써요.</span></li>\n<li><span class=\"ctx\">'사람이 꽤 많이 왔어'라고 말할 때</span><span class=\"no\">Quite few people came.</span><span class=\"en\">Quite a few people came.</span><span class=\"ko\">사람이 꽤 많이 왔어.</span><span class=\"why\"><b>왜?</b>'꽤 많다'는 a까지 넣은 quite a few 한 덩어리로 써요. a가 빠진 quite few는 오히려 '꽤 적다' 쪽에 가까워져요.</span></li>\n</ul></div>\n<p>부정어가 들어가면 예·아니오가 뒤집히는 것처럼, 작은 말 하나로 뜻이 갈리는 다른 예는 <a href=\"/p/negative-question/\">\"Don't you like coffee?\"에 대답하기</a>에서 볼 수 있어요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Longman Dictionary of Contemporary English 'few'·'little'(문법 설명), Oxford Learner's Dictionaries 'few', Merriam-Webster 'few'·'quite a few', Oxford Learner's Dictionaries 'little'(한정사), 처칠 연설 원문은 UK Parliament Hansard(HC Deb 20 August 1940 vol 364)와 International Churchill Society 'The Few'.</p>",
+  "related": []
+}

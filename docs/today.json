@@ -1,13 +1,5 @@
 {
  "days": {
-  "2026-11-13": {
-   "en": "Long story short, we got home a day late.",
-   "ko": "간단히 말하면, 하루 늦게 집에 왔어",
-   "desc": "긴 사정은 접고 결과로 건너뛸 때 쓰는 편한 말. 뒤에는 결론을 한 문장으로 말해요.",
-   "url": "https://www.cafeinenglish.com/p/long-story-short/",
-   "share": "https://www.cafeinenglish.com/d/long-story-short-we-got-home-a-day-late/",
-   "au": "/audio/4421cff18b67.mp3"
-  },
   "2026-11-14": {
    "en": "It feels like a journal.",
    "ko": "꼭 일기장 같아요",
@@ -143,6 +135,14 @@
    "url": "https://www.cafeinenglish.com/p/take-an-exam/",
    "share": "https://www.cafeinenglish.com/d/how-did-the-exam-go/",
    "au": "/audio/0f3d0999fc24.mp3"
+  },
+  "2026-12-01": {
+   "en": "There are a few left, but not many.",
+   "ko": "몇 개 남았는데 많지는 않아.",
+   "desc": "아직 남아 있다는 건 a few로 알리고, 넉넉하지 않다는 건 not many로 덧붙여요. a를 빼면 '거의 없다'가 돼요.",
+   "url": "https://www.cafeinenglish.com/p/few-vs-a-few/",
+   "share": "https://www.cafeinenglish.com/d/there-are-a-few-left-but-not-many/",
+   "au": "/audio/a155a3f6c835.mp3"
   }
  }
 }
