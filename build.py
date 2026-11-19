@@ -875,21 +875,25 @@ self.addEventListener("fetch", e => {
 
 
 # ── 홈 화면 앱으로 열었을 때만 보이는 아래쪽 탭 바 ─────────────────────
-# 웹 브라우저에서는 숨김(검색·광고 영향 없음). 주소 끝에 ?app=1 을 붙이면 웹에서도 미리 볼 수 있어요.
+# 2026-11-19부터 휴대폰(900px 미만)은 웹에서도 보이는 떠 있는 알약 탭. PC 웹은 위쪽 메뉴 그대로.
 _TI = lambda d: f'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{d}</svg>'
 TABS = [("home", "/", "홈", _TI('<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>')),
         ("video", "/category/watch/", "영상", _TI('<rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/>')),
         ("study", "/category/study/", "공부", _TI('<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/>')),
-        ("tools", "/tools/", "도구", _TI('<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>'))]
+        ("tools", "/tools/", "도구", _TI('<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>')),
+        ("notes", "/notes/", "공부방", _TI('<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>'))]  # 내 공부방 (2026-11-19, 휴대폰은 위 버튼 대신 아래 탭)
 APP_HEAD_JS = ("<script>(function(){try{var q=/[?&]app=1/.test(location.search);if(q)sessionStorage.setItem('appPreview','1');"
                "if(q||sessionStorage.getItem('appPreview')||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone)"
                "document.documentElement.classList.add('is-app')}catch(e){}})();</script>")
 
 
+TAB_BADGE = '<b class="tab-badge" hidden></b>'
+
+
 def tabbar(nav):
     on = ' class="on" aria-current="page"'
     return ('<nav class="tabbar no-print" aria-label="앱 메뉴">' + "".join(
-        f'<a href="{h}"{on if k == nav_group(nav) else ""}>{ic}<span>{t}</span></a>' for k, h, t, ic in TABS) + '</nav>')
+        f'<a href="{h}"{on if k == nav_group(nav) else ""}>{ic}<span>{t}</span>{TAB_BADGE if k == "notes" else ""}</a>' for k, h, t, ic in TABS) + '</nav>')
 
 
 # '영상' 칸 안에서 영상으로 배우기 ↔ 사유의 문장 전환 (웹·앱 모두)
@@ -971,7 +975,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 {ads}{ga}
 </head>
 <body>
-<header class="top"><div class="top-in">
+<header class="top{" top-gray" if ("m-home" in body or "nb-band" in body[:600]) else ""}"><div class="top-in">
   <a class="logo" href="/"><img class="logo-mark" src="/assets/logo-mark.png?v=3" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
   <nav class="nav">{navlinks}<button class="srch-btn nav-srch" type="button" aria-label="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button></nav>
   {room}

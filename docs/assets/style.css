@@ -3086,3 +3086,26 @@ html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
 .abo-facts span{color:#4E5968}
 .abo-facts a{color:#3182F6;text-decoration:none;font-weight:600}
 @media (max-width:600px){.abo-facts{padding:2px 18px}.abo-facts li{grid-template-columns:1fr;gap:2px}}
+
+
+/* 휴대폰 알약 헤더 + 떠 있는 알약 탭 (2026-11-19, A-2안) — 900px 미만 웹·앱 공통, PC는 위쪽 메뉴 그대로 */
+@media screen and (max-width:899px){
+.top{--hbg:#fff;position:sticky;top:0;background:var(--hbg)!important;border-bottom:0!important;box-shadow:none!important;padding:8px 12px 0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.top.top-gray{--hbg:#F2F4F6}
+.top::after{content:"";position:absolute;left:0;right:0;top:100%;height:16px;background:linear-gradient(var(--hbg),rgba(255,255,255,0));opacity:0;transition:opacity .2s;pointer-events:none}
+.top.top-gray::after{background:linear-gradient(var(--hbg),rgba(242,244,246,0))}
+.top.scrolled::after{opacity:1}
+.top-in{flex-wrap:nowrap!important;background:rgba(255,255,255,.86)!important;-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);border:1px solid rgba(0,0,0,.06);border-radius:26px;box-shadow:0 6px 20px rgba(25,31,40,.10);padding-left:14px!important;padding-right:10px!important}
+.top .nav,.top .room{display:none!important}
+.top-in>.srch-btn{display:inline-flex!important;margin-left:auto!important}
+.top .logo i{display:inline!important}
+.tabbar{display:grid!important;grid-template-columns:repeat(5,1fr)!important;position:fixed!important;left:12px!important;right:12px!important;bottom:calc(10px + env(safe-area-inset-bottom))!important;width:auto!important;max-width:520px;margin:0 auto;transform:none!important;z-index:40;background:rgba(255,255,255,.86)!important;-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);border:1px solid rgba(0,0,0,.06)!important;border-radius:32px!important;padding:6px!important;box-shadow:0 8px 28px rgba(25,31,40,.14)}
+.tabbar a{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:26px;padding:7px 0 6px;font-size:11px;font-weight:600;color:#8B95A1;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.tabbar a svg{width:24px;height:24px}
+.tabbar a.on{background:#F2F4F6;color:#2B1D14;font-weight:800}
+.tabbar .tab-badge{position:absolute;top:2px;left:calc(50% + 5px);min-width:16px;height:16px;padding:0 4px;box-sizing:border-box;border-radius:8px;background:#CDEB5B;color:#2B1D14;font-size:10px;font-weight:800;line-height:16px;text-align:center}
+.tabbar .tab-badge[hidden]{display:none}
+body{padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
+.bk-toast{bottom:calc(100px + env(safe-area-inset-bottom))!important}
+.fab{bottom:calc(92px + env(safe-area-inset-bottom))!important}
+}

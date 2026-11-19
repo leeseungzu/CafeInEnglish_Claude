@@ -71,9 +71,10 @@
     $$(".gp-sw", gp).forEach(s => { s.onclick = swGo; s.onkeydown = e => { if (e.key === "Enter" || e.key === " ") swGo(e); }; });  // 카드(링크) 안에 있어도 이동 대신 목표 고르기로
   })();
   setTimeout(routineDot, 0);
+  (() => { const tp = $(".top"); if (!tp) return; const f = () => tp.classList.toggle("scrolled", scrollY > 4); addEventListener("scroll", f, { passive: true }); f(); })();  // 휴대폰 알약 헤더: 내리면 위쪽이 배경색으로 흐려짐
   function updateBadge() {
     const n = Object.keys(wrong.all()).length;
-    const b = $("#nav-badge"); if (b) { b.hidden = !n; b.textContent = n; }
+    $$("#nav-badge,.tab-badge").forEach(b => { b.hidden = !n; b.textContent = n > 99 ? "99+" : n; });
     $$(".js-notes-count").forEach(x => { x.textContent = n || ""; x.dataset.n = n; });
     if (typeof alignNav === "function") alignNav();
   }
