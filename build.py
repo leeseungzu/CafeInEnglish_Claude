@@ -887,7 +887,7 @@ TABS = [("home", "/", "홈", _TI('<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-
         ("tools", "/tools/", "도구", _TI('<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>')),
         ("notes", "/notes/", "공부방", _TI('<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>'))]  # 내 공부방 (2026-11-19, 휴대폰은 위 버튼 대신 아래 탭)
 THEME_HEAD_JS = ("<script>(function(){var d=document.documentElement,t;try{t=localStorage.getItem('theme')}catch(e){}"
-                 "var m=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)');if(t==='dark'||(t!=='light'&&m&&m.matches))d.classList.add('dark')})();</script>")  # 그리기 전에 모드를 정해 흰 화면 번쩍임 방지
+                 "var m=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)'),pc=window.matchMedia&&matchMedia('(min-width: 900px)').matches;if(!pc&&(t==='dark'||(t!=='light'&&m&&m.matches)))d.classList.add('dark')})();</script>")  # 그리기 전에 모드를 정해 흰 화면 번쩍임 방지. PC(900px 이상)는 항상 라이트 (2026-11-19)
 THEME_BTN = ('<button class="theme-btn" type="button" aria-label="화면 모드 바꾸기" title="라이트·다크 모드">'
              '<svg class="i-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>'
              '<svg class="i-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>')
@@ -988,7 +988,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <body>
 <header class="top{" top-gray" if ("m-home" in body or "nb-band" in body[:600]) else ""}"><div class="top-in">
   <a class="logo" href="/"><img class="logo-mark" src="/assets/logo-mark.png?v=3" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
-  <nav class="nav">{navlinks}<button class="srch-btn nav-srch" type="button" aria-label="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>{THEME_BTN}</nav>
+  <nav class="nav">{navlinks}<button class="srch-btn nav-srch" type="button" aria-label="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button></nav>
   {room}
 </div></header>
 <div class="wrap{" has-side" if aside else ""}{" wide" if wide else ""}">

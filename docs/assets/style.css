@@ -3119,3 +3119,4 @@ html.dark .theme-btn .i-sun{display:block}
 .th-seg{display:inline-flex;flex:none;gap:2px;padding:3px;background:#F2F4F6;border-radius:10px}
 .th-seg button{border:0;background:none;font:inherit;font-size:13px;font-weight:600;color:#8B95A1;padding:6px 11px;border-radius:8px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .th-seg button.on{background:#fff;color:#191F28;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+@media (min-width:900px){.th-seg{display:none}}  /* PC는 항상 라이트라 모드 선택 숨김 (2026-11-19) */

@@ -73,15 +73,17 @@
   setTimeout(routineDot, 0);
   (() => {  // 화면 모드: 자동(시스템) · 라이트 · 다크 (2026-11-19)
     const d = document.documentElement, mq = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : null;
+    const pcq = window.matchMedia ? matchMedia("(min-width: 900px)") : null;  // PC는 항상 라이트 (2026-11-19)
     const get = () => { try { return localStorage.getItem("theme") || "auto"; } catch (e) { return "auto"; } };
     const apply = () => {
-      const t = get(); d.classList.toggle("dark", t === "dark" || (t === "auto" && !!mq && mq.matches));
+      const t = get(); d.classList.toggle("dark", !(pcq && pcq.matches) && (t === "dark" || (t === "auto" && !!mq && mq.matches)));
       const tc = document.querySelector('meta[name="theme-color"]'), top = $(".top");
       if (tc) tc.content = top ? getComputedStyle(top).backgroundColor : (d.classList.contains("dark") ? "#101012" : "#FFFFFF");
       $$(".th-seg button").forEach(b => { const on = b.dataset.th === t; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
     };
     const set = t => { try { t === "auto" ? localStorage.removeItem("theme") : localStorage.setItem("theme", t); } catch (e) {} apply(); };
     if (mq) (mq.addEventListener ? mq.addEventListener("change", apply) : mq.addListener(apply));
+    if (pcq) (pcq.addEventListener ? pcq.addEventListener("change", apply) : pcq.addListener(apply));
     $$(".th-seg button").forEach(b => { b.onclick = () => set(b.dataset.th); });
     $$(".theme-btn").forEach(b => { b.onclick = () => set(d.classList.contains("dark") ? "light" : "dark"); });
     apply();
