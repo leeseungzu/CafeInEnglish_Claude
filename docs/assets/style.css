@@ -3088,14 +3088,11 @@ html.is-app .app-seg.tool-seg button{height:40px;font-size:15px}
 @media (max-width:600px){.abo-facts{padding:2px 18px}.abo-facts li{grid-template-columns:1fr;gap:2px}}
 
 
-/* 휴대폰 알약 헤더 + 떠 있는 알약 탭 (2026-11-19, A-2안) — 900px 미만 웹·앱 공통, PC는 위쪽 메뉴 그대로 */
+/* 휴대폰 토스형 헤더(배경과 같은 색, 떠 있지 않음) + 떠 있는 알약 탭 (2026-11-19) — 900px 미만 웹·앱 공통, PC는 위쪽 메뉴 그대로 */
 @media screen and (max-width:899px){
-.top{--hbg:#fff;position:sticky;top:0;background:var(--hbg)!important;border-bottom:0!important;box-shadow:none!important;padding:8px 12px 0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.top{--hbg:#fff;position:sticky;top:0;background:var(--hbg)!important;border-bottom:0!important;box-shadow:none!important;padding:0 6px!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 .top.top-gray{--hbg:#F2F4F6}
-.top::after{content:"";position:absolute;left:0;right:0;top:100%;height:16px;background:linear-gradient(var(--hbg),rgba(255,255,255,0));opacity:0;transition:opacity .2s;pointer-events:none}
-.top.top-gray::after{background:linear-gradient(var(--hbg),rgba(242,244,246,0))}
-.top.scrolled::after{opacity:1}
-.top-in{flex-wrap:nowrap!important;background:rgba(255,255,255,.86)!important;-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);border:1px solid rgba(0,0,0,.06);border-radius:26px;box-shadow:0 6px 20px rgba(25,31,40,.10);padding-left:14px!important;padding-right:10px!important}
+.top-in{flex-wrap:nowrap!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 .top .nav,.top .room{display:none!important}
 .top-in>.srch-btn{display:inline-flex!important;margin-left:auto!important}
 .top .logo i{display:inline!important}
