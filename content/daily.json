@@ -1,536 +1,548 @@
 [
-  {
-    "post": "swamped",
-    "en": "I'm swamped.",
-    "ko": "할 일이 산더미야, 정신없이 바빠",
-    "desc": "swamp는 '늪'. 일이 늪처럼 밀려와 허우적대는 느낌이라 busy보다 훨씬 생생해요."
-  },
-  {
-    "post": "pichai",
-    "en": "make-or-break",
-    "ko": "성패를 가르는, 결정적인",
-    "desc": "만들거나(make) 부서지거나(break), 결과가 둘 중 하나로 갈리는 순간이에요."
-  },
-  {
-    "post": "im-good",
-    "en": "I'm good, thanks.",
-    "ko": "괜찮아요, 됐어요",
-    "desc": "뭔가를 권할 때 나오는 I'm good은 '좋아요'가 아니라 정중한 거절이에요."
-  },
-  {
-    "post": "son",
-    "en": "since day one",
-    "ko": "처음부터, 첫날부터",
-    "desc": "손흥민이 처음부터 응원해 준 팬들을 이야기하며 쓴 표현이에요."
-  },
-  {
-    "post": "im-down",
-    "en": "I'm down.",
-    "ko": "좋아, 나도 낄래!",
-    "desc": "친구가 뭔가 하자고 할 때 하는 대답이에요. 우울하다는 뜻이 아니에요."
-  },
-  {
-    "post": "jensen",
-    "en": "How hard could it be?",
-    "ko": "뭐 얼마나 어렵겠어?",
-    "desc": "만만하게 보고 하는 말. 뒤에 It turns out(알고 보니)이 오면 반전이 시작돼요."
-  },
-  {
-    "post": "sounds-good",
-    "en": "Sounds good!",
-    "ko": "좋아요, 그렇게 해요",
-    "desc": "제안이나 약속에 동의할 때 OK보다 자연스러운 한마디예요."
-  },
-  {
-    "post": "my-bad",
-    "en": "My bad.",
-    "ko": "내 실수야, 미안",
-    "desc": "작은 실수에 가볍게 하는 사과예요. 상사나 고객에겐 I apologize가 좋아요."
-  },
-  {
-    "post": "pichai",
-    "en": "find one's footing",
-    "ko": "자리를 잡다, 적응하다",
-    "desc": "미끄러운 바닥에서 발 디딜 곳(footing)을 찾는 모습을 떠올려 보세요."
-  },
-  {
-    "post": "keep-me-posted",
-    "en": "Keep me posted.",
-    "ko": "진행되는 대로 계속 알려줘",
-    "desc": "한 번이면 Let me know, 계속이면 Keep me posted예요."
-  },
-  {
-    "post": "craving",
-    "en": "I'm craving pizza.",
-    "ko": "피자가 너무 당겨",
-    "desc": "crave는 '간절히 원하다'. want보다 훨씬 생생한 '당긴다'예요."
-  },
-  {
-    "post": "son",
-    "en": "give back",
-    "ko": "받은 걸 돌려주다, 보답하다",
-    "desc": "받은 걸 다시(back) 주다(give)! 손흥민은 팬들에게 돌려주고 싶다고 했어요."
-  },
-  {
-    "post": "make-sense",
-    "en": "Does that make sense?",
-    "ko": "제 설명, 이해되세요?",
-    "desc": "Do you understand?보다 부드러워요. 상대가 아니라 내 설명을 묻는 말이거든요."
-  },
-  {
-    "post": "its-on-me",
-    "en": "It's on me.",
-    "ko": "내가 낼게, 내가 쏠게",
-    "desc": "계산서가 내 위에(on me)! I'll shoot이라고 하면 안 통해요."
-  },
-  {
-    "post": "jensen",
-    "en": "a dream come true",
-    "ko": "꿈이 이루어진 것, 꿈만 같은 일",
-    "desc": "젠슨 황은 '나는 부모님의 꿈이 이루어진 모습'이라고 말했어요."
-  },
-  {
-    "post": "im-on-it",
-    "en": "I'm on it.",
-    "ko": "바로 할게요, 제가 처리할게요",
-    "desc": "일을 부탁받았을 때 OK보다 훨씬 믿음직한 대답이에요."
-  },
-  {
-    "post": "walk-me-through",
-    "en": "Could you walk me through it?",
-    "ko": "차근차근 설명해 주시겠어요?",
-    "desc": "처음 하는 절차 앞에서 '모르겠어요' 대신 쓰는 말이에요."
-  },
-  {
-    "post": "id-like-to",
-    "en": "I'd like to open an account.",
-    "ko": "계좌를 개설하고 싶어요",
-    "desc": "I want보다 정중한 I'd like to. 은행, 병원 창구에서 첫마디로 딱이에요."
-  },
-  {
-    "post": "james-conversation",
-    "en": "Is there a ~ around here?",
-    "ko": "이 근처에 ~ 있나요?",
-    "desc": "길 물을 땐 Do you have the time? 대신 이 한마디로 대화를 시작해 보세요."
-  },
-  {
-    "post": "james-conversation",
-    "en": "right off the bat",
-    "ko": "처음부터 바로, 대뜸",
-    "desc": "야구공이 배트에 맞자마자 튀어 나가듯, 시작하자마자!"
-  },
-  {
-    "post": "jensen-trump-call",
-    "en": "Put him on speaker.",
-    "ko": "스피커폰으로 돌려 줘",
-    "desc": "전화 속 사람을 스피커 위에 올려놓는 느낌! 여럿이 같이 들을 때 써요."
-  },
-  {
-    "post": "jensen-trump-call",
-    "en": "I'll call you back later.",
-    "ko": "이따 다시 전화할게",
-    "desc": "back이 붙으면 '되걸다'. 바쁠 때 전화 끊기 전 마지막 한마디예요."
-  },
-  {
-    "post": "in-flight",
-    "en": "Can I get a blanket, please?",
-    "ko": "담요 좀 주시겠어요?",
-    "desc": "기내에서 필요한 건 Can I get ~? 하나로 다 돼요. 물, 베개, 펜까지!"
-  },
-  {
-    "post": "baggage-customs",
-    "en": "Nothing to declare.",
-    "ko": "신고할 거 없어요",
-    "desc": "declare는 '선언하다'. 세관 앞에서 '이거 있어요' 하고 밝히는 거예요."
-  },
-  {
-    "post": "transportation",
-    "en": "Can you drop me off here?",
-    "ko": "여기서 내려 주시겠어요?",
-    "desc": "drop은 '떨어뜨리다'. 차에서 나를 여기 내려놔 달라는 느낌이에요."
-  },
-  {
-    "post": "hotel-check-in",
-    "en": "I have a reservation under Kim.",
-    "ko": "김 이름으로 예약했어요",
-    "desc": "예약 장부의 이름 '아래(under)'에 내 예약이 있다고 기억해요."
-  },
-  {
-    "post": "travel-cafe",
-    "en": "For here or to go?",
-    "ko": "드시고 가세요, 가져가세요?",
-    "desc": "'퍼히어러 투고?'로 붙어서 들려요. 가져갈 땐 To go, please."
-  },
-  {
-    "post": "travel-restaurant",
-    "en": "How many in your party?",
-    "ko": "몇 분이세요?",
-    "desc": "party는 '파티'가 아니라 같이 온 '일행'이에요."
-  },
-  {
-    "post": "shopping-checkout",
-    "en": "I'm just looking, thanks.",
-    "ko": "그냥 둘러보는 거예요",
-    "desc": "점원이 도와준다고 할 때 부드럽게 거절하는 한마디예요."
-  },
-  {
-    "post": "asking-directions",
-    "en": "You can't miss it.",
-    "ko": "금방 찾으실 거예요",
-    "desc": "놓칠 수가 없을 만큼 눈에 잘 띈다는 말이에요."
-  },
-  {
-    "post": "travel-trouble",
-    "en": "I think I left it in the taxi.",
-    "ko": "택시에 두고 내린 것 같아요",
-    "desc": "left는 leave(두고 오다)의 과거형. 물건을 어디 두고 왔을 때 써요."
-  },
-  {
-    "post": "looking-forward-to",
-    "en": "I'm looking forward to it.",
-    "ko": "기대하고 있어요",
-    "desc": "to는 방향 화살표라 뒤에 명사나 -ing가 와요."
-  },
-  {
-    "post": "what-do-you-call",
-    "en": "What do you call this in English?",
-    "ko": "이거 영어로 뭐라고 해요?",
-    "desc": "call A B에서 모르는 건 이름(B)이라 What으로 물어요."
-  },
-  {
-    "post": "this-vs-next",
-    "en": "Do you mean this Friday or next Friday?",
-    "ko": "이번 주 금요일 말하는 거야, 다음 주 금요일 말하는 거야?",
-    "desc": "next Friday는 원어민도 헷갈려서 날짜로 확인하는 게 가장 확실해요."
-  },
-  {
-    "post": "email-phrases",
-    "en": "Just following up on my last email.",
-    "ko": "지난번 메일 관련해서 다시 연락드려요",
-    "desc": "답이 없을 때 재촉하지 않고 부드럽게 다시 묻는 첫 문장이에요."
-  },
-  {
-    "post": "sorry-to-hear",
-    "en": "That sounds really tough.",
-    "ko": "정말 힘들었겠다",
-    "desc": "응원보다 먼저 건네는 공감 한마디예요."
-  },
-  {
-    "post": "lee-chey-gala-speech",
-    "en": "We're all in on this project.",
-    "ko": "우리 이 프로젝트에 올인했어",
-    "desc": "이재용 회장 축사에 나온 all in on, 뭔가에 전부 걸었을 때 써요."
-  },
-  {
-    "post": "lee-chey-gala-speech",
-    "en": "Please raise your glass to our team!",
-    "ko": "우리 팀을 위해 건배해요!",
-    "desc": "회식 건배사는 이 한 문장이면 충분해요."
-  },
-  {
-    "post": "jensen-van-fleet-speech",
-    "en": "The view took my breath away.",
-    "ko": "경치가 숨이 멎을 만큼 멋졌어요",
-    "desc": "젠슨 황 수상 소감에 나온 표현, 숨이 멎을 만큼 감동했을 때 써요."
-  },
-  {
-    "post": "jensen-van-fleet-speech",
-    "en": "Could somebody pass me the salt?",
-    "ko": "누가 소금 좀 건네주실래요?",
-    "desc": "젠슨 황이 무대에서 휴대폰을 달라고 할 때 쓴 부탁 표현이에요."
-  },
-  {
-    "post": "duolingo-500-hours",
-    "en": "I put in 30 minutes every morning.",
-    "ko": "매일 아침 30분씩 들여요",
-    "desc": "듀오링고 CEO가 말한 put in, 시간이나 노력을 들일 때 써요."
-  },
-  {
-    "post": "duolingo-500-hours",
-    "en": "Small goals keep me motivated.",
-    "ko": "작은 목표가 저를 계속 움직이게 해요",
-    "desc": "꾸준히 하는 비결을 말할 때 쓰는 keep someone motivated예요."
-  },
-  {
-    "post": "chung-euisun-put-down-roots",
-    "en": "We come to put down roots.",
-    "ko": "뿌리를 내리러 왔습니다",
-    "desc": "정의선 회장이 조지아 공장 준공식에서 한 말. 한곳에 오래 자리 잡겠다는 뜻이에요."
-  },
-  {
-    "post": "chung-euisun-put-down-roots",
-    "en": "First and foremost, thank you all for coming.",
-    "ko": "무엇보다 먼저, 와 주셔서 감사해요",
-    "desc": "발표나 인사말 첫머리에 '무엇보다 먼저'를 강조할 때 쓰는 first and foremost예요."
-  },
-  {
-    "post": "on-the-fence",
-    "en": "I'm on the fence.",
-    "ko": "아직 고민 중이야",
-    "desc": "울타리 위에 앉아 어느 쪽으로도 못 내려간 마음. about + -ing로 무엇을 고민하는지 붙여요."
-  },
-  {
-    "post": "deadline-origin",
-    "en": "I'm on a tight deadline.",
-    "ko": "마감이 빠듯해요",
-    "desc": "deadline은 원래 1864년 수용소의 '넘으면 총에 맞는 선'이었어요."
-  },
-  {
-    "post": "do-you-speak-english",
-    "en": "Do you speak English?",
-    "ko": "영어 하세요?",
-    "desc": "Can you는 실력을 묻는 느낌. 처음 보는 사람에게는 Do you로 물어요."
-  },
-  {
-    "post": "fair-enough",
-    "en": "Fair enough.",
-    "ko": "인정, 그럴 만하네",
-    "desc": "상대 이유가 납득될 때 하는 말. 기쁜 소식에 쓰면 시큰둥하게 들려요."
-  },
-  {
-    "post": "plans-appointment-promise",
-    "en": "I already have plans.",
-    "ko": "이미 약속이 있어",
-    "desc": "친구와의 약속은 promise가 아니라 plans예요."
-  },
-  {
-    "post": "its-up-to-you",
-    "en": "It's up to you.",
-    "ko": "네가 정해",
-    "desc": "Whatever만 툭 던지면 짜증처럼 들려요. 결정을 넘길 땐 이 말로."
-  },
-  {
-    "post": "kim-dongkwan-persuasive-english",
-    "en": "It is an honor to be here.",
-    "ko": "이 자리에 서게 되어 영광입니다",
-    "desc": "김동관 부회장이 P4G 정상회의 기조연설을 연 첫 문장. 발표·축사 첫인사로 가장 많이 써요."
-  },
-  {
-    "post": "kim-dongkwan-persuasive-english",
-    "en": "I've worked late three days running.",
-    "ko": "사흘 연속 야근했어요",
-    "desc": "숫자 + 기간 + running = '연속으로'. 김동관 부회장의 for 10 years running에서 건졌어요."
-  },
-  {
-    "post": "slipped-my-mind",
-    "en": "Sorry, it totally slipped my mind.",
-    "ko": "죄송해요, 완전히 깜빡했어요",
-    "desc": "I forgot보다 부드러운 사과. 잊힌 일이 주어라서 I slipped가 아니라 It slipped예요."
-  },
-  {
-    "post": "rain-check",
-    "en": "Can I take a rain check?",
-    "ko": "다음에 해도 될까?",
-    "desc": "초대를 거절하지만 다음엔 꼭 하고 싶을 때. 날짜를 같이 제안하면 진심이 전해져요."
-  },
-  {
-    "post": "borrow-vs-lend",
-    "en": "Can you lend me your pen?",
-    "ko": "펜 좀 빌려줄래?",
-    "desc": "borrow me는 틀려요. 상대가 빌려주는 거라면 lend me, 내가 빌리면 Can I borrow ~?"
-  },
-  {
-    "post": "jensen-huang-ai-five-layer-cake",
-    "en": "This is a big deal.",
-    "ko": "이건 정말 중요한 문제예요",
-    "desc": "젠슨 황이 'AI란 무엇인가'라는 질문 바로 뒤에 붙인 말. 반대로 It's not a big deal은 '별일 아니야'."
-  },
-  {
-    "post": "jensen-huang-ai-five-layer-cake",
-    "en": "It's not just a job. It's my passion.",
-    "ko": "그냥 일이 아니라, 제 열정이에요",
-    "desc": "not just = 단지 ~만이 아닌. 젠슨 황의 AI is not just software technology에서 건졌어요."
-  },
-  {
-    "post": "running-late",
-    "en": "Sorry, I'm running a little late.",
-    "ko": "미안, 조금 늦을 것 같아",
-    "desc": "가는 중에 미리 알리는 말. 도착해서 사과할 땐 Sorry I'm late."
-  },
-  {
-    "post": "all-ears",
-    "en": "Go ahead, I'm all ears.",
-    "ko": "말해 봐, 듣고 있어",
-    "desc": "온몸이 귀가 된 것처럼 집중해서 듣겠다는 말. ears의 s를 빼먹지 마세요."
-  },
-  {
-    "post": "discuss-about",
-    "en": "We need to discuss the budget.",
-    "ko": "예산을 논의해야 해요",
-    "desc": "discuss 뒤에는 about 없이 바로 내용이 와요. about을 쓰려면 talk about."
-  },
-  {
-    "post": "call-it-a-day",
-    "en": "Let's call it a day.",
-    "ko": "오늘은 여기까지 하자",
-    "desc": "하던 일을 그날은 마무리하자는 말. 밤에 끝낼 땐 call it a night."
-  },
-  {
-    "post": "me-too-me-neither",
-    "en": "Me neither.",
-    "ko": "나도 (안 그래)",
-    "desc": "상대가 don't, can't처럼 부정으로 말했을 때의 '나도'. 긍정이면 Me too."
-  },
-  {
-    "post": "lee-junseok-amcham-english-speech",
-    "en": "We really speak the same language.",
-    "ko": "우리 정말 말이 잘 통하네요",
-    "desc": "같은 언어를 쓴다는 말이 아니라 생각이 잘 맞는다는 뜻. language는 단수로 써요."
-  },
-  {
-    "post": "im-beat",
-    "en": "I'm beat.",
-    "ko": "완전 녹초야",
-    "desc": "하루를 다 써서 진이 빠졌을 때 친구에게 하는 말. You look beat.(지쳐 보이네)처럼도 써요."
-  },
-  {
-    "post": "i-agree",
-    "en": "I couldn't agree more.",
-    "ko": "전적으로 동의해요",
-    "desc": "부정문처럼 보여도 '더 동의할 수 없을 만큼' 완전히 동의한다는 뜻. agree 앞에 am은 붙이지 않아요."
-  },
-  {
-    "post": "jennie-vs-rose-english-interview",
-    "en": "It feels like a journal.",
-    "ko": "꼭 일기장 같아요",
-    "desc": "feels like 뒤에 명사를 붙이면 '꼭 ~ 같은 느낌'. 로제가 지난 앨범을 설명한 말이에요."
-  },
-  {
-    "post": "long-story-short",
-    "en": "Long story short, we got home a day late.",
-    "ko": "간단히 말하면, 하루 늦게 집에 왔어",
-    "desc": "긴 사정은 접고 결과로 건너뛸 때 쓰는 편한 말. 뒤에는 결론을 한 문장으로 말해요."
-  },
-  {
-    "post": "almost-vs-most",
-    "en": "Most of my friends live in Seoul.",
-    "ko": "내 친구들은 대부분 서울에 살아",
-    "desc": "'대부분'은 most of my friends. almost는 부사라 almost all of my friends처럼 all과 같이 써요."
-  },
-  {
-    "post": "fingers-crossed",
-    "en": "Fingers crossed!",
-    "ko": "잘되길 빌게!",
-    "desc": "결과를 기다리는 친구에게 건네는 짧은 응원. 상대를 위해 빌 땐 I'll keep my fingers crossed for you."
-  },
-  {
-    "post": "go-home",
-    "en": "Text me when you get home.",
-    "ko": "집에 도착하면 문자해",
-    "desc": "home 앞에는 to를 쓰지 않아요. go home, get home처럼 동사 뒤에 바로 붙여요."
-  },
-  {
-    "post": "no-worries",
-    "en": "No worries.",
-    "ko": "괜찮아, 신경 쓰지 마",
-    "desc": "고맙다는 말에도 미안하다는 말에도 쓰는 가벼운 대답. No worry가 아니라 꼭 복수 worries예요."
-  },
-  {
-    "post": "fun-vs-funny",
-    "en": "It was really fun.",
-    "ko": "정말 재미있었어",
-    "desc": "즐거웠다는 fun, 웃겼다는 funny. funny에는 '이상하다'는 뜻도 있어요."
-  },
-  {
-    "post": "not-my-cup-of-tea",
-    "en": "It's not really my cup of tea.",
-    "ko": "내 취향은 별로 아니야",
-    "desc": "싫다고 딱 자르는 대신 '내 취향과 안 맞아'로 돌려 말하는 표현. 대부분 not과 함께 써요."
-  },
-  {
-    "post": "ago-vs-before",
-    "en": "I got back three days ago.",
-    "ko": "3일 전에 돌아왔어",
-    "desc": "지금부터 거꾸로 셀 땐 시간 길이 + ago, 그리고 단순 과거. before three days라고 하지 않아요."
-  },
-  {
-    "post": "bear-with-me",
-    "en": "Bear with me a second.",
-    "ko": "잠깐만 기다려 주세요",
-    "desc": "무언가를 찾거나 확인하는 동안 상대에게 양해를 구하는 말. bare가 아니라 '참다'의 bear예요."
-  },
-  {
-    "post": "nice-to-meet-vs-see",
-    "en": "Good to see you again.",
-    "ko": "다시 만나서 반가워요",
-    "desc": "이미 아는 사람을 다시 만나면 meet 대신 see. Nice to meet you는 처음 만날 때 하는 인사예요."
-  },
-  {
-    "post": "take-your-time",
-    "en": "Sure, take your time.",
-    "ko": "물론이죠, 천천히 하세요",
-    "desc": "상대를 재촉하지 않고 여유를 줄 때 쓰는 말. '천천히'를 slowly로 옮기면 속도를 늦추라는 지시처럼 들려요."
-  },
-  {
-    "post": "wear-vs-put-on",
-    "en": "Can I try this on?",
-    "ko": "이거 입어 봐도 돼요?",
-    "desc": "가게에서 맞는지 입어 볼 땐 try on. 입고 있는 상태는 wear, 입는 동작은 put on이에요."
-  },
-  {
-    "post": "no-big-deal",
-    "en": "It's no big deal.",
-    "ko": "별거 아니야",
-    "desc": "상대가 작은 실수를 미안해할 때 건네는 말. no 없이 Big deal만 툭 던지면 '그래서 뭐?'처럼 들려요."
-  },
-  {
-    "post": "lose-weight-english",
-    "en": "I'm on a diet.",
-    "ko": "나 다이어트 중이야",
-    "desc": "diet는 명사라 '다이어트 중'은 be on a diet. I'm diet라고 하지 않아요."
-  },
-  {
-    "post": "under-the-weather",
-    "en": "I'm a bit under the weather.",
-    "ko": "몸이 좀 안 좋아",
-    "desc": "컨디션이 별로인 날 증상 대신 건네는 한마디. 날씨가 아니라 몸 이야기이고, '살짝' 안 좋은 정도예요."
-  },
-  {
-    "post": "hope-vs-wish",
-    "en": "I hope you feel better soon.",
-    "ko": "얼른 낫길 바라",
-    "desc": "나을 수 있는 일을 바랄 땐 hope. I wish you get better처럼 wish 뒤에 문장을 쓰지 않아요."
-  },
-  {
-    "post": "wes-moore-have-faith-not-fear",
-    "en": "Take ownership of your mistakes.",
-    "ko": "네 실수는 네가 책임져",
-    "desc": "남의 일이 아니라 내 일로 맡아 책임질 때 take ownership. 웨스 무어는 애국을 이렇게 정의했어요."
-  },
-  {
-    "post": "wes-moore-have-faith-not-fear",
-    "en": "You understood the assignment.",
-    "ko": "뭘 해야 하는지 제대로 알았네",
-    "desc": "기대에 딱 맞게 해냈을 때 하는 요즘 칭찬. 원래 뜻은 '과제를 제대로 이해했다'예요."
-  },
-  {
-    "post": "thank-appreciate-grateful",
-    "en": "I really appreciate it.",
-    "ko": "정말 고마워요",
-    "desc": "방금 받은 도움을 it으로 받아 고마움을 한 번 더 눌러 말해요. appreciate는 동사라 I'm을 붙이지 않아요."
-  },
-  {
-    "post": "happy-thanksgiving-reply",
-    "en": "Thanks, you too!",
-    "ko": "고마워, 너도!",
-    "desc": "Happy Thanksgiving 같은 인사를 받았을 때 그대로 돌려주는 말. '나도'라고 Me too라고 하지 않아요."
-  },
-  {
-    "post": "take-an-exam",
-    "en": "How did the exam go?",
-    "ko": "시험 어떻게 봤어?",
-    "desc": "시험이 끝난 사람에게 건네는 첫마디. '잘 봤어?'를 see로 옮기지 않고, 시험이 어떻게 흘러갔는지 go로 물어요."
-  },
-  {
-    "post": "few-vs-a-few",
-    "en": "There are a few left, but not many.",
-    "ko": "몇 개 남았는데 많지는 않아.",
-    "desc": "아직 남아 있다는 건 a few로 알리고, 넉넉하지 않다는 건 not many로 덧붙여요. a를 빼면 '거의 없다'가 돼요."
-  },
-  {
-    "post": "used-to-vs-be-used-to",
-    "en": "I'm still getting used to it.",
-    "ko": "아직 적응하는 중이야.",
-    "desc": "새 일이나 새 환경에 아직 적응하는 중이라고 할 때. get used to 뒤에는 동사원형이 아니라 명사나 -ing가 와요."
-  }
+ {
+  "post": "swamped",
+  "en": "I'm swamped.",
+  "ko": "할 일이 산더미야, 정신없이 바빠",
+  "desc": "swamp는 '늪'. 일이 늪처럼 밀려와 허우적대는 느낌이라 busy보다 훨씬 생생해요."
+ },
+ {
+  "post": "pichai",
+  "en": "make-or-break",
+  "ko": "성패를 가르는, 결정적인",
+  "desc": "만들거나(make) 부서지거나(break), 결과가 둘 중 하나로 갈리는 순간이에요."
+ },
+ {
+  "post": "im-good",
+  "en": "I'm good, thanks.",
+  "ko": "괜찮아요, 됐어요",
+  "desc": "뭔가를 권할 때 나오는 I'm good은 '좋아요'가 아니라 정중한 거절이에요."
+ },
+ {
+  "post": "son",
+  "en": "since day one",
+  "ko": "처음부터, 첫날부터",
+  "desc": "손흥민이 처음부터 응원해 준 팬들을 이야기하며 쓴 표현이에요."
+ },
+ {
+  "post": "im-down",
+  "en": "I'm down.",
+  "ko": "좋아, 나도 낄래!",
+  "desc": "친구가 뭔가 하자고 할 때 하는 대답이에요. 우울하다는 뜻이 아니에요."
+ },
+ {
+  "post": "jensen",
+  "en": "How hard could it be?",
+  "ko": "뭐 얼마나 어렵겠어?",
+  "desc": "만만하게 보고 하는 말. 뒤에 It turns out(알고 보니)이 오면 반전이 시작돼요."
+ },
+ {
+  "post": "sounds-good",
+  "en": "Sounds good!",
+  "ko": "좋아요, 그렇게 해요",
+  "desc": "제안이나 약속에 동의할 때 OK보다 자연스러운 한마디예요."
+ },
+ {
+  "post": "my-bad",
+  "en": "My bad.",
+  "ko": "내 실수야, 미안",
+  "desc": "작은 실수에 가볍게 하는 사과예요. 상사나 고객에겐 I apologize가 좋아요."
+ },
+ {
+  "post": "pichai",
+  "en": "find one's footing",
+  "ko": "자리를 잡다, 적응하다",
+  "desc": "미끄러운 바닥에서 발 디딜 곳(footing)을 찾는 모습을 떠올려 보세요."
+ },
+ {
+  "post": "keep-me-posted",
+  "en": "Keep me posted.",
+  "ko": "진행되는 대로 계속 알려줘",
+  "desc": "한 번이면 Let me know, 계속이면 Keep me posted예요."
+ },
+ {
+  "post": "craving",
+  "en": "I'm craving pizza.",
+  "ko": "피자가 너무 당겨",
+  "desc": "crave는 '간절히 원하다'. want보다 훨씬 생생한 '당긴다'예요."
+ },
+ {
+  "post": "son",
+  "en": "give back",
+  "ko": "받은 걸 돌려주다, 보답하다",
+  "desc": "받은 걸 다시(back) 주다(give)! 손흥민은 팬들에게 돌려주고 싶다고 했어요."
+ },
+ {
+  "post": "make-sense",
+  "en": "Does that make sense?",
+  "ko": "제 설명, 이해되세요?",
+  "desc": "Do you understand?보다 부드러워요. 상대가 아니라 내 설명을 묻는 말이거든요."
+ },
+ {
+  "post": "its-on-me",
+  "en": "It's on me.",
+  "ko": "내가 낼게, 내가 쏠게",
+  "desc": "계산서가 내 위에(on me)! I'll shoot이라고 하면 안 통해요."
+ },
+ {
+  "post": "jensen",
+  "en": "a dream come true",
+  "ko": "꿈이 이루어진 것, 꿈만 같은 일",
+  "desc": "젠슨 황은 '나는 부모님의 꿈이 이루어진 모습'이라고 말했어요."
+ },
+ {
+  "post": "im-on-it",
+  "en": "I'm on it.",
+  "ko": "바로 할게요, 제가 처리할게요",
+  "desc": "일을 부탁받았을 때 OK보다 훨씬 믿음직한 대답이에요."
+ },
+ {
+  "post": "walk-me-through",
+  "en": "Could you walk me through it?",
+  "ko": "차근차근 설명해 주시겠어요?",
+  "desc": "처음 하는 절차 앞에서 '모르겠어요' 대신 쓰는 말이에요."
+ },
+ {
+  "post": "id-like-to",
+  "en": "I'd like to open an account.",
+  "ko": "계좌를 개설하고 싶어요",
+  "desc": "I want보다 정중한 I'd like to. 은행, 병원 창구에서 첫마디로 딱이에요."
+ },
+ {
+  "post": "james-conversation",
+  "en": "Is there a ~ around here?",
+  "ko": "이 근처에 ~ 있나요?",
+  "desc": "길 물을 땐 Do you have the time? 대신 이 한마디로 대화를 시작해 보세요."
+ },
+ {
+  "post": "james-conversation",
+  "en": "right off the bat",
+  "ko": "처음부터 바로, 대뜸",
+  "desc": "야구공이 배트에 맞자마자 튀어 나가듯, 시작하자마자!"
+ },
+ {
+  "post": "jensen-trump-call",
+  "en": "Put him on speaker.",
+  "ko": "스피커폰으로 돌려 줘",
+  "desc": "전화 속 사람을 스피커 위에 올려놓는 느낌! 여럿이 같이 들을 때 써요."
+ },
+ {
+  "post": "jensen-trump-call",
+  "en": "I'll call you back later.",
+  "ko": "이따 다시 전화할게",
+  "desc": "back이 붙으면 '되걸다'. 바쁠 때 전화 끊기 전 마지막 한마디예요."
+ },
+ {
+  "post": "in-flight",
+  "en": "Can I get a blanket, please?",
+  "ko": "담요 좀 주시겠어요?",
+  "desc": "기내에서 필요한 건 Can I get ~? 하나로 다 돼요. 물, 베개, 펜까지!"
+ },
+ {
+  "post": "baggage-customs",
+  "en": "Nothing to declare.",
+  "ko": "신고할 거 없어요",
+  "desc": "declare는 '선언하다'. 세관 앞에서 '이거 있어요' 하고 밝히는 거예요."
+ },
+ {
+  "post": "transportation",
+  "en": "Can you drop me off here?",
+  "ko": "여기서 내려 주시겠어요?",
+  "desc": "drop은 '떨어뜨리다'. 차에서 나를 여기 내려놔 달라는 느낌이에요."
+ },
+ {
+  "post": "hotel-check-in",
+  "en": "I have a reservation under Kim.",
+  "ko": "김 이름으로 예약했어요",
+  "desc": "예약 장부의 이름 '아래(under)'에 내 예약이 있다고 기억해요."
+ },
+ {
+  "post": "travel-cafe",
+  "en": "For here or to go?",
+  "ko": "드시고 가세요, 가져가세요?",
+  "desc": "'퍼히어러 투고?'로 붙어서 들려요. 가져갈 땐 To go, please."
+ },
+ {
+  "post": "travel-restaurant",
+  "en": "How many in your party?",
+  "ko": "몇 분이세요?",
+  "desc": "party는 '파티'가 아니라 같이 온 '일행'이에요."
+ },
+ {
+  "post": "shopping-checkout",
+  "en": "I'm just looking, thanks.",
+  "ko": "그냥 둘러보는 거예요",
+  "desc": "점원이 도와준다고 할 때 부드럽게 거절하는 한마디예요."
+ },
+ {
+  "post": "asking-directions",
+  "en": "You can't miss it.",
+  "ko": "금방 찾으실 거예요",
+  "desc": "놓칠 수가 없을 만큼 눈에 잘 띈다는 말이에요."
+ },
+ {
+  "post": "travel-trouble",
+  "en": "I think I left it in the taxi.",
+  "ko": "택시에 두고 내린 것 같아요",
+  "desc": "left는 leave(두고 오다)의 과거형. 물건을 어디 두고 왔을 때 써요."
+ },
+ {
+  "post": "looking-forward-to",
+  "en": "I'm looking forward to it.",
+  "ko": "기대하고 있어요",
+  "desc": "to는 방향 화살표라 뒤에 명사나 -ing가 와요."
+ },
+ {
+  "post": "what-do-you-call",
+  "en": "What do you call this in English?",
+  "ko": "이거 영어로 뭐라고 해요?",
+  "desc": "call A B에서 모르는 건 이름(B)이라 What으로 물어요."
+ },
+ {
+  "post": "this-vs-next",
+  "en": "Do you mean this Friday or next Friday?",
+  "ko": "이번 주 금요일 말하는 거야, 다음 주 금요일 말하는 거야?",
+  "desc": "next Friday는 원어민도 헷갈려서 날짜로 확인하는 게 가장 확실해요."
+ },
+ {
+  "post": "email-phrases",
+  "en": "Just following up on my last email.",
+  "ko": "지난번 메일 관련해서 다시 연락드려요",
+  "desc": "답이 없을 때 재촉하지 않고 부드럽게 다시 묻는 첫 문장이에요."
+ },
+ {
+  "post": "sorry-to-hear",
+  "en": "That sounds really tough.",
+  "ko": "정말 힘들었겠다",
+  "desc": "응원보다 먼저 건네는 공감 한마디예요."
+ },
+ {
+  "post": "lee-chey-gala-speech",
+  "en": "We're all in on this project.",
+  "ko": "우리 이 프로젝트에 올인했어",
+  "desc": "이재용 회장 축사에 나온 all in on, 뭔가에 전부 걸었을 때 써요."
+ },
+ {
+  "post": "lee-chey-gala-speech",
+  "en": "Please raise your glass to our team!",
+  "ko": "우리 팀을 위해 건배해요!",
+  "desc": "회식 건배사는 이 한 문장이면 충분해요."
+ },
+ {
+  "post": "jensen-van-fleet-speech",
+  "en": "The view took my breath away.",
+  "ko": "경치가 숨이 멎을 만큼 멋졌어요",
+  "desc": "젠슨 황 수상 소감에 나온 표현, 숨이 멎을 만큼 감동했을 때 써요."
+ },
+ {
+  "post": "jensen-van-fleet-speech",
+  "en": "Could somebody pass me the salt?",
+  "ko": "누가 소금 좀 건네주실래요?",
+  "desc": "젠슨 황이 무대에서 휴대폰을 달라고 할 때 쓴 부탁 표현이에요."
+ },
+ {
+  "post": "duolingo-500-hours",
+  "en": "I put in 30 minutes every morning.",
+  "ko": "매일 아침 30분씩 들여요",
+  "desc": "듀오링고 CEO가 말한 put in, 시간이나 노력을 들일 때 써요."
+ },
+ {
+  "post": "duolingo-500-hours",
+  "en": "Small goals keep me motivated.",
+  "ko": "작은 목표가 저를 계속 움직이게 해요",
+  "desc": "꾸준히 하는 비결을 말할 때 쓰는 keep someone motivated예요."
+ },
+ {
+  "post": "chung-euisun-put-down-roots",
+  "en": "We come to put down roots.",
+  "ko": "뿌리를 내리러 왔습니다",
+  "desc": "정의선 회장이 조지아 공장 준공식에서 한 말. 한곳에 오래 자리 잡겠다는 뜻이에요."
+ },
+ {
+  "post": "chung-euisun-put-down-roots",
+  "en": "First and foremost, thank you all for coming.",
+  "ko": "무엇보다 먼저, 와 주셔서 감사해요",
+  "desc": "발표나 인사말 첫머리에 '무엇보다 먼저'를 강조할 때 쓰는 first and foremost예요."
+ },
+ {
+  "post": "on-the-fence",
+  "en": "I'm on the fence.",
+  "ko": "아직 고민 중이야",
+  "desc": "울타리 위에 앉아 어느 쪽으로도 못 내려간 마음. about + -ing로 무엇을 고민하는지 붙여요."
+ },
+ {
+  "post": "deadline-origin",
+  "en": "I'm on a tight deadline.",
+  "ko": "마감이 빠듯해요",
+  "desc": "deadline은 원래 1864년 수용소의 '넘으면 총에 맞는 선'이었어요."
+ },
+ {
+  "post": "do-you-speak-english",
+  "en": "Do you speak English?",
+  "ko": "영어 하세요?",
+  "desc": "Can you는 실력을 묻는 느낌. 처음 보는 사람에게는 Do you로 물어요."
+ },
+ {
+  "post": "fair-enough",
+  "en": "Fair enough.",
+  "ko": "인정, 그럴 만하네",
+  "desc": "상대 이유가 납득될 때 하는 말. 기쁜 소식에 쓰면 시큰둥하게 들려요."
+ },
+ {
+  "post": "plans-appointment-promise",
+  "en": "I already have plans.",
+  "ko": "이미 약속이 있어",
+  "desc": "친구와의 약속은 promise가 아니라 plans예요."
+ },
+ {
+  "post": "its-up-to-you",
+  "en": "It's up to you.",
+  "ko": "네가 정해",
+  "desc": "Whatever만 툭 던지면 짜증처럼 들려요. 결정을 넘길 땐 이 말로."
+ },
+ {
+  "post": "kim-dongkwan-persuasive-english",
+  "en": "It is an honor to be here.",
+  "ko": "이 자리에 서게 되어 영광입니다",
+  "desc": "김동관 부회장이 P4G 정상회의 기조연설을 연 첫 문장. 발표·축사 첫인사로 가장 많이 써요."
+ },
+ {
+  "post": "kim-dongkwan-persuasive-english",
+  "en": "I've worked late three days running.",
+  "ko": "사흘 연속 야근했어요",
+  "desc": "숫자 + 기간 + running = '연속으로'. 김동관 부회장의 for 10 years running에서 건졌어요."
+ },
+ {
+  "post": "slipped-my-mind",
+  "en": "Sorry, it totally slipped my mind.",
+  "ko": "죄송해요, 완전히 깜빡했어요",
+  "desc": "I forgot보다 부드러운 사과. 잊힌 일이 주어라서 I slipped가 아니라 It slipped예요."
+ },
+ {
+  "post": "rain-check",
+  "en": "Can I take a rain check?",
+  "ko": "다음에 해도 될까?",
+  "desc": "초대를 거절하지만 다음엔 꼭 하고 싶을 때. 날짜를 같이 제안하면 진심이 전해져요."
+ },
+ {
+  "post": "borrow-vs-lend",
+  "en": "Can you lend me your pen?",
+  "ko": "펜 좀 빌려줄래?",
+  "desc": "borrow me는 틀려요. 상대가 빌려주는 거라면 lend me, 내가 빌리면 Can I borrow ~?"
+ },
+ {
+  "post": "jensen-huang-ai-five-layer-cake",
+  "en": "This is a big deal.",
+  "ko": "이건 정말 중요한 문제예요",
+  "desc": "젠슨 황이 'AI란 무엇인가'라는 질문 바로 뒤에 붙인 말. 반대로 It's not a big deal은 '별일 아니야'."
+ },
+ {
+  "post": "jensen-huang-ai-five-layer-cake",
+  "en": "It's not just a job. It's my passion.",
+  "ko": "그냥 일이 아니라, 제 열정이에요",
+  "desc": "not just = 단지 ~만이 아닌. 젠슨 황의 AI is not just software technology에서 건졌어요."
+ },
+ {
+  "post": "running-late",
+  "en": "Sorry, I'm running a little late.",
+  "ko": "미안, 조금 늦을 것 같아",
+  "desc": "가는 중에 미리 알리는 말. 도착해서 사과할 땐 Sorry I'm late."
+ },
+ {
+  "post": "all-ears",
+  "en": "Go ahead, I'm all ears.",
+  "ko": "말해 봐, 듣고 있어",
+  "desc": "온몸이 귀가 된 것처럼 집중해서 듣겠다는 말. ears의 s를 빼먹지 마세요."
+ },
+ {
+  "post": "discuss-about",
+  "en": "We need to discuss the budget.",
+  "ko": "예산을 논의해야 해요",
+  "desc": "discuss 뒤에는 about 없이 바로 내용이 와요. about을 쓰려면 talk about."
+ },
+ {
+  "post": "call-it-a-day",
+  "en": "Let's call it a day.",
+  "ko": "오늘은 여기까지 하자",
+  "desc": "하던 일을 그날은 마무리하자는 말. 밤에 끝낼 땐 call it a night."
+ },
+ {
+  "post": "me-too-me-neither",
+  "en": "Me neither.",
+  "ko": "나도 (안 그래)",
+  "desc": "상대가 don't, can't처럼 부정으로 말했을 때의 '나도'. 긍정이면 Me too."
+ },
+ {
+  "post": "lee-junseok-amcham-english-speech",
+  "en": "We really speak the same language.",
+  "ko": "우리 정말 말이 잘 통하네요",
+  "desc": "같은 언어를 쓴다는 말이 아니라 생각이 잘 맞는다는 뜻. language는 단수로 써요."
+ },
+ {
+  "post": "im-beat",
+  "en": "I'm beat.",
+  "ko": "완전 녹초야",
+  "desc": "하루를 다 써서 진이 빠졌을 때 친구에게 하는 말. You look beat.(지쳐 보이네)처럼도 써요."
+ },
+ {
+  "post": "i-agree",
+  "en": "I couldn't agree more.",
+  "ko": "전적으로 동의해요",
+  "desc": "부정문처럼 보여도 '더 동의할 수 없을 만큼' 완전히 동의한다는 뜻. agree 앞에 am은 붙이지 않아요."
+ },
+ {
+  "post": "jennie-vs-rose-english-interview",
+  "en": "It feels like a journal.",
+  "ko": "꼭 일기장 같아요",
+  "desc": "feels like 뒤에 명사를 붙이면 '꼭 ~ 같은 느낌'. 로제가 지난 앨범을 설명한 말이에요."
+ },
+ {
+  "post": "long-story-short",
+  "en": "Long story short, we got home a day late.",
+  "ko": "간단히 말하면, 하루 늦게 집에 왔어",
+  "desc": "긴 사정은 접고 결과로 건너뛸 때 쓰는 편한 말. 뒤에는 결론을 한 문장으로 말해요."
+ },
+ {
+  "post": "almost-vs-most",
+  "en": "Most of my friends live in Seoul.",
+  "ko": "내 친구들은 대부분 서울에 살아",
+  "desc": "'대부분'은 most of my friends. almost는 부사라 almost all of my friends처럼 all과 같이 써요."
+ },
+ {
+  "post": "fingers-crossed",
+  "en": "Fingers crossed!",
+  "ko": "잘되길 빌게!",
+  "desc": "결과를 기다리는 친구에게 건네는 짧은 응원. 상대를 위해 빌 땐 I'll keep my fingers crossed for you."
+ },
+ {
+  "post": "go-home",
+  "en": "Text me when you get home.",
+  "ko": "집에 도착하면 문자해",
+  "desc": "home 앞에는 to를 쓰지 않아요. go home, get home처럼 동사 뒤에 바로 붙여요."
+ },
+ {
+  "post": "no-worries",
+  "en": "No worries.",
+  "ko": "괜찮아, 신경 쓰지 마",
+  "desc": "고맙다는 말에도 미안하다는 말에도 쓰는 가벼운 대답. No worry가 아니라 꼭 복수 worries예요."
+ },
+ {
+  "post": "fun-vs-funny",
+  "en": "It was really fun.",
+  "ko": "정말 재미있었어",
+  "desc": "즐거웠다는 fun, 웃겼다는 funny. funny에는 '이상하다'는 뜻도 있어요."
+ },
+ {
+  "post": "not-my-cup-of-tea",
+  "en": "It's not really my cup of tea.",
+  "ko": "내 취향은 별로 아니야",
+  "desc": "싫다고 딱 자르는 대신 '내 취향과 안 맞아'로 돌려 말하는 표현. 대부분 not과 함께 써요."
+ },
+ {
+  "post": "ago-vs-before",
+  "en": "I got back three days ago.",
+  "ko": "3일 전에 돌아왔어",
+  "desc": "지금부터 거꾸로 셀 땐 시간 길이 + ago, 그리고 단순 과거. before three days라고 하지 않아요."
+ },
+ {
+  "post": "bear-with-me",
+  "en": "Bear with me a second.",
+  "ko": "잠깐만 기다려 주세요",
+  "desc": "무언가를 찾거나 확인하는 동안 상대에게 양해를 구하는 말. bare가 아니라 '참다'의 bear예요."
+ },
+ {
+  "post": "nice-to-meet-vs-see",
+  "en": "Good to see you again.",
+  "ko": "다시 만나서 반가워요",
+  "desc": "이미 아는 사람을 다시 만나면 meet 대신 see. Nice to meet you는 처음 만날 때 하는 인사예요."
+ },
+ {
+  "post": "take-your-time",
+  "en": "Sure, take your time.",
+  "ko": "물론이죠, 천천히 하세요",
+  "desc": "상대를 재촉하지 않고 여유를 줄 때 쓰는 말. '천천히'를 slowly로 옮기면 속도를 늦추라는 지시처럼 들려요."
+ },
+ {
+  "post": "wear-vs-put-on",
+  "en": "Can I try this on?",
+  "ko": "이거 입어 봐도 돼요?",
+  "desc": "가게에서 맞는지 입어 볼 땐 try on. 입고 있는 상태는 wear, 입는 동작은 put on이에요."
+ },
+ {
+  "post": "no-big-deal",
+  "en": "It's no big deal.",
+  "ko": "별거 아니야",
+  "desc": "상대가 작은 실수를 미안해할 때 건네는 말. no 없이 Big deal만 툭 던지면 '그래서 뭐?'처럼 들려요."
+ },
+ {
+  "post": "lose-weight-english",
+  "en": "I'm on a diet.",
+  "ko": "나 다이어트 중이야",
+  "desc": "diet는 명사라 '다이어트 중'은 be on a diet. I'm diet라고 하지 않아요."
+ },
+ {
+  "post": "under-the-weather",
+  "en": "I'm a bit under the weather.",
+  "ko": "몸이 좀 안 좋아",
+  "desc": "컨디션이 별로인 날 증상 대신 건네는 한마디. 날씨가 아니라 몸 이야기이고, '살짝' 안 좋은 정도예요."
+ },
+ {
+  "post": "hope-vs-wish",
+  "en": "I hope you feel better soon.",
+  "ko": "얼른 낫길 바라",
+  "desc": "나을 수 있는 일을 바랄 땐 hope. I wish you get better처럼 wish 뒤에 문장을 쓰지 않아요."
+ },
+ {
+  "post": "wes-moore-have-faith-not-fear",
+  "en": "Take ownership of your mistakes.",
+  "ko": "네 실수는 네가 책임져",
+  "desc": "남의 일이 아니라 내 일로 맡아 책임질 때 take ownership. 웨스 무어는 애국을 이렇게 정의했어요."
+ },
+ {
+  "post": "wes-moore-have-faith-not-fear",
+  "en": "You understood the assignment.",
+  "ko": "뭘 해야 하는지 제대로 알았네",
+  "desc": "기대에 딱 맞게 해냈을 때 하는 요즘 칭찬. 원래 뜻은 '과제를 제대로 이해했다'예요."
+ },
+ {
+  "post": "thank-appreciate-grateful",
+  "en": "I really appreciate it.",
+  "ko": "정말 고마워요",
+  "desc": "방금 받은 도움을 it으로 받아 고마움을 한 번 더 눌러 말해요. appreciate는 동사라 I'm을 붙이지 않아요."
+ },
+ {
+  "post": "happy-thanksgiving-reply",
+  "en": "Thanks, you too!",
+  "ko": "고마워, 너도!",
+  "desc": "Happy Thanksgiving 같은 인사를 받았을 때 그대로 돌려주는 말. '나도'라고 Me too라고 하지 않아요."
+ },
+ {
+  "post": "take-an-exam",
+  "en": "How did the exam go?",
+  "ko": "시험 어떻게 봤어?",
+  "desc": "시험이 끝난 사람에게 건네는 첫마디. '잘 봤어?'를 see로 옮기지 않고, 시험이 어떻게 흘러갔는지 go로 물어요."
+ },
+ {
+  "post": "few-vs-a-few",
+  "en": "There are a few left, but not many.",
+  "ko": "몇 개 남았는데 많지는 않아.",
+  "desc": "아직 남아 있다는 건 a few로 알리고, 넉넉하지 않다는 건 not many로 덧붙여요. a를 빼면 '거의 없다'가 돼요."
+ },
+ {
+  "post": "used-to-vs-be-used-to",
+  "en": "I'm still getting used to it.",
+  "ko": "아직 적응하는 중이야.",
+  "desc": "새 일이나 새 환경에 아직 적응하는 중이라고 할 때. get used to 뒤에는 동사원형이 아니라 명사나 -ing가 와요."
+ },
+ {
+  "post": "kagan-would-you-want-to-live-forever",
+  "en": "I'm inclined to agree with you.",
+  "ko": "네 말에 동의하는 쪽이야.",
+  "desc": "단정하지 않고 내 생각을 부드럽게 밝힐 때. I agree보다 한 발 부드러워서 회의에서도 자연스러워요."
+ },
+ {
+  "post": "kagan-would-you-want-to-live-forever",
+  "en": "We've only scratched the surface.",
+  "ko": "아직 시작에 불과해요.",
+  "desc": "아직 할 게 훨씬 많다고 강조할 때. 표면만 긁었다는 말이라, 발표나 인터뷰에서 자주 들려요."
+ }
 ]
