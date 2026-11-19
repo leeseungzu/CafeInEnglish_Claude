@@ -526,5 +526,11 @@
     "en": "There are a few left, but not many.",
     "ko": "몇 개 남았는데 많지는 않아.",
     "desc": "아직 남아 있다는 건 a few로 알리고, 넉넉하지 않다는 건 not many로 덧붙여요. a를 빼면 '거의 없다'가 돼요."
+  },
+  {
+    "post": "used-to-vs-be-used-to",
+    "en": "I'm still getting used to it.",
+    "ko": "아직 적응하는 중이야.",
+    "desc": "새 일이나 새 환경에 아직 적응하는 중이라고 할 때. get used to 뒤에는 동사원형이 아니라 명사나 -ing가 와요."
   }
 ]

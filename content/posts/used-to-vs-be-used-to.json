@@ -1,0 +1,73 @@
+{
+  "id": "used-to-vs-be-used-to",
+  "cat": "tip",
+  "sub": "단어",
+  "level": "기초",
+  "date": "2026-11-19",
+  "title": "used to와 be used to, '예전엔'과 '익숙해' 구별하기",
+  "seo_title": "used to be used to 차이 - '예전엔'과 '익숙하다' 구별법",
+  "lead": "겉모습은 같아도, be 하나와 to 뒤 한 단어로 뜻이 갈려요",
+  "description": "used to + 동사원형은 '예전엔 ~했다', be used to + -ing는 '~에 익숙하다'예요. 웨스 무어 연설의 he used to say로 뉘앙스를 보고 get used to, 발음까지 정리했어요.",
+  "og": {
+    "en": "used to vs be used to",
+    "ko": "'예전엔'과 '익숙해'를 가르는 두 군데"
+  },
+  "icon": "house",
+  "chat": {
+    "q": "How's the new place?",
+    "a": "I'm still getting used to it.",
+    "key": "getting used to",
+    "ko": "아직 적응하는 중이야."
+  },
+  "thumb": {
+    "text": "I'm used to it",
+    "key": "used to",
+    "ko": "'예전엔'일까, '익숙해'일까?"
+  },
+  "quiz": [
+    {
+      "tag": "뜻",
+      "q": "I'm used to waking up early. 이 문장의 뜻으로 알맞은 것은?",
+      "sub": "",
+      "options": [
+        "예전엔 일찍 일어났어.",
+        "일찍 일어나는 게 익숙해.",
+        "일찍 일어나려고 노력 중이야.",
+        "일찍 일어나야 해."
+      ],
+      "answer": 1,
+      "explain": "used to 앞에 be동사('m)가 있고 뒤에 -ing가 오면 '~에 익숙하다'예요. '예전엔 일찍 일어났어'는 be 없이 I used to wake up early라고 해요.",
+      "mnemonic": "be가 있으면 지금 익숙, be가 없으면 예전 이야기"
+    },
+    {
+      "tag": "빈칸",
+      "q": "It was hard at first, but I got used to ___ on the left side of the road.",
+      "sub": "처음엔 힘들었지만 왼쪽 차선 운전에 익숙해졌어",
+      "options": [
+        "drive",
+        "driving",
+        "drove",
+        "be drive"
+      ],
+      "answer": 1,
+      "explain": "get used to의 to는 전치사라 뒤에 명사나 -ing가 와요. 그래서 driving이에요.",
+      "mnemonic": "익숙해지는 to 뒤엔 -ing"
+    },
+    {
+      "tag": "작문",
+      "q": "'우리 예전엔 정말 친했어(지금은 아니야)'를 영어로 가장 자연스럽게 말한 것은?",
+      "sub": "",
+      "options": [
+        "We are used to being really close.",
+        "We used to be really close.",
+        "We use to be really close.",
+        "We got used to be really close."
+      ],
+      "answer": 1,
+      "explain": "지금은 아닌 과거의 상태는 used to + 동사원형으로 말해요. be used to being은 '친한 게 익숙하다', use to는 did 없이 쓰면 틀린 철자예요.",
+      "mnemonic": "used to = 그땐 그랬지, 지금은 아니고"
+    }
+  ],
+  "related": [],
+  "body_html": "<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">How's the new place? Is the commute okay?</span><span class=\"ko\">새 집은 어때? 출퇴근은 괜찮아?</span></li>\n<li class=\"me\"><span class=\"en\">It's long. I used to walk to work, so I'm not used to the subway yet.</span><span class=\"ko\">길어. 전에는 걸어서 출근했거든. 그래서 아직 지하철이 익숙하지 않아.</span></li>\n<li class=\"them\"><span class=\"en\">Don't worry. You'll get used to it.</span><span class=\"ko\">걱정 마. 금방 적응할 거야.</span></li>\n<li class=\"me\"><span class=\"en\">I hope so. I'm slowly getting used to the early mornings.</span><span class=\"ko\">그러면 좋겠다. 일찍 일어나는 데 조금씩 적응하는 중이야.</span></li>\n</ul>\n<p>이사한 친구와 나눈 짧은 대화에 used to가 네 번 나와요. 그런데 뜻은 하나가 아니에요. 두 번째 줄 앞부분의 used to walk는 '예전에는 걸어 다녔다', 뒷부분의 not used to the subway는 '지하철이 익숙하지 않다', 세 번째 줄의 get used to it은 '익숙해지다'예요. 겉모습이 똑같아서 한국인이 자주 헷갈리는 짝이에요. 구별하는 자리는 두 군데예요. <b>used to 앞에 be나 get이 있는지</b>, 그리고 <b>to 뒤에 무엇이 오는지</b>예요.</p>\n<h2>앞에 be가 있나, 뒤에 동사원형이 오나</h2>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>모양</th><th>뜻</th><th>예문</th></tr></thead><tbody><tr><td>used to + 동사원형</td><td>예전에는 ~했다 (지금은 아님)</td><td>I used to live in London.</td></tr><tr><td>be used to + 명사 / -ing</td><td>~에 익숙하다</td><td>We're used to the noise from the traffic now.</td></tr><tr><td>get used to + 명사 / -ing</td><td>~에 익숙해지다</td><td>I got used to it.</td></tr></tbody></table></div>\n<p>표의 첫 두 예문은 옥스퍼드 러너스 사전, 마지막 예문은 VOA 러닝 잉글리시에 실린 문장이에요. 첫 줄의 used to는 혼자서 '과거의 습관이나 상태'를 나타내는 말이에요. 롱맨 사전은 '과거에 늘 일어났지만 지금은 일어나지 않는 일'로 풀이해요. 그래서 바로 뒤에 live, walk 같은 동사원형이 붙어요.</p>\n<p>둘째와 셋째 줄의 used는 성격이 달라요. 메리엄웹스터는 이 used를 형용사로 따로 싣고 '익숙해서 평범하고 늘 있는 일처럼 느껴지는'으로 풀이해요. tired, happy처럼 be 뒤에 오는 형용사라서 be used to가 '익숙한 상태', get used to가 '익숙해지는 과정'이 돼요. 이때 to는 '~에'를 뜻하는 전치사라 뒤에 명사나 -ing가 와요. 롱맨 사전은 아예 I'm used to live in Paris라고 말하지 말라고 짚어요.</p>\n<p>그러니 들을 때는 used to 바로 앞을 먼저 봐요. am, is, was, 'm 같은 be동사나 get, got, getting이 있으면 '익숙함' 이야기이고, 아무것도 없이 주어 바로 뒤에 붙으면 '예전 이야기'예요. 말할 때는 '예전엔 그랬는데'를 하고 싶은지, '이제 괜찮다'를 하고 싶은지부터 정하면 돼요.</p>\n<h2>'지금은 아니다'가 숨은 used to</h2>\n<p>롱맨과 옥스퍼드 모두 used to의 풀이에 '지금은 그렇지 않다'를 넣어요. 그래서 I used to drink coffee every day라고 하면 커피를 매일 마셨다는 사실에 <b>'지금은 안 마신다'</b>는 뜻까지 함께 전해져요. 단순 과거 I drank coffee every day는 그 시절의 사실만 전하고 지금 이야기는 하지 않는 것과 달라요.</p>\n<ul class=\"ex\">\n<li><span class=\"en\">I used to drink coffee every day.</span><span class=\"ko\">예전엔 매일 커피를 마셨어. (지금은 안 마셔)</span></li>\n<li><span class=\"en\">We used to be really close.</span><span class=\"ko\">우리 예전엔 정말 친했어. (지금은 아니야)</span></li>\n</ul>\n<p>두 번째 예문처럼 used to는 반복된 행동뿐 아니라 '예전에는 그런 상태였다'에도 써요. 롱맨 사전의 예문도 Jimmy used to be a friend of mine(지미는 예전에 내 친구였어)이에요.</p>\n<p>반대로 지금도 계속하는 습관에는 used to를 쓰지 않아요. VOA 러닝 잉글리시는 used to를 '과거형으로만 쓰는' 특이한 조동사라고 설명해요. '나 요즘 아침마다 운동해'처럼 현재의 습관은 usually나 현재형으로 말해요.</p>\n<ul class=\"ex\">\n<li><span class=\"en\">I usually work out in the morning.</span><span class=\"ko\">나는 보통 아침에 운동해.</span></li>\n<li><span class=\"en\">I'm used to working out in the morning.</span><span class=\"ko\">아침 운동이 몸에 익었어.</span></li>\n</ul>\n<h2>할아버지가 늘 하시던 말, he used to say</h2>\n<p>used to가 특히 따뜻하게 들리는 자리는 이제 곁에 없는 사람의 말을 옮길 때예요. 2026년 7월 4일, 미국 건국 250주년 연설에서 메릴랜드 주지사 웨스 무어는 돌아가신 할아버지를 이렇게 소개했어요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">In his endless humility, he used to say,</span><span class=\"ko\">한없이 겸손하셨던 할아버지는 늘 이렇게 말씀하셨어요.</span></li>\n<li><span class=\"en\">\"This country would be incomplete without me.\"</span><span class=\"ko\">\"내가 없으면 이 나라는 완전하지 않을 거야.\"</span></li>\n</ul></div>\n<p>he used to say는 '그분이 생전에 입버릇처럼 하시던 말'이에요. 한 번 한 말이면 he said로 충분하지만, used to say라고 하면 여러 번 되풀이하던 말이 되고 '지금은 아니다'라는 뜻이 함께 붙어요. 연설에서는 바로 앞에서 할아버지를 the late(고인이 된)라고 불러서, 이제는 더 들을 수 없는 말이라는 느낌까지 실려요. 옥스퍼드 사전에도 That's what my father always used to say(아버지가 늘 하시던 말이 바로 그거야)라는 예문이 있어요. 가족이 자주 하던 말을 꺼낼 때 잘 맞는 틀이에요. 이 장면은 <a href=\"/p/wes-moore-have-faith-not-fear/\">웨스 무어 건국 250주년 연설 글</a>에서 직접 들어 볼 수 있어요.</p>\n<p>'겸손하셨다'는 말 뒤에 '내가 없으면 이 나라가 완전하지 않다'는 큰소리가 이어져서 청중이 미소 짓게 되는 대목이에요. 같은 문장 안에 would가 있지만, 이 would는 '내가 없다면 ~일 것이다'라는 가정이라 과거 습관과는 상관이 없어요.</p>\n<p>과거 습관을 말할 때는 would를 쓰기도 해요. 옥스퍼드 러너스 사전은 would의 뜻 가운데 하나로 '과거에 자주 있었던 일'을 들고 used to를 동의어로 달아 두었어요. 스티브 잡스가 2005년 스탠퍼드 졸업 연설에서 대학 시절을 떠올리며 한 말이 좋은 예예요.</p>\n<div class=\"box\"><ul class=\"ex\">\n<li><span class=\"en\">\"I would walk the 7 miles across town every Sunday night to get one good meal a week at the Hare Krishna temple.\"</span><span class=\"ko\">\"일요일 밤마다 7마일을 걸어 시내를 가로질러 하레 크리슈나 사원에 가서 일주일에 한 번 제대로 된 밥을 먹곤 했어요.\"</span></li>\n</ul></div>\n<p>매주 되풀이하던 행동이라 would가 자연스럽게 쓰였어요. 다만 브리티시 카운슬은 would를 과거의 상태에는 보통 쓰지 않는다고 설명해요. 그래서 '예전엔 머리가 길었다', '우리 예전엔 친했다' 같은 상태는 used to로 말해요. 헷갈릴 때는 used to를 고르면 대부분 자연스러워요.</p>\n<h2>발음과 억양</h2>\n<p>used to는 <b>\"유스터\"</b>에 가깝게 들려요. 옥스퍼드 사전의 발음기호는 /ˈjuːst tə/라서 s는 '즈'가 아니라 '스'로 나고, d는 뒤의 t와 합쳐져 따로 들리지 않아요. 모음 앞이나 문장 끝에서는 to가 '투'에 가까워져요. be used to의 used to도 똑같이 \"유스터\"라서 I'm used to it은 <b>\"아임 유스터 잇\"</b>, I'm not used to it은 \"아임 낫 유스터 잇\"처럼 들려요. 강세는 used 쪽에 오고 to는 약하게 붙어요.</p>\n<p>메리엄웹스터는 말에서 d와 t가 하나로 합쳐져 들리기 때문에 use to와 used to는 소리로는 구별되지 않지만, 글에서 used to 자리에 use to를 쓰면 틀린다고 설명해요. 반대로 did가 들어간 부정문과 의문문에서는 use to가 맞아요. 옥스퍼드 사전의 예문도 Did she use to have long hair?(그녀는 예전에 머리가 길었어?)예요.</p>\n<h2>자주 하는 실수</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">'혼자 사는 게 익숙해'라고 말할 때</span><span class=\"no\">I'm used to live alone.</span><span class=\"en\">I'm used to living alone.</span><span class=\"ko\">혼자 사는 게 익숙해.</span><span class=\"why\"><b>왜?</b>be used to의 to는 전치사라 뒤에 동사원형이 아니라 -ing나 명사가 와요.</span></li>\n<li><span class=\"ctx\">'요즘 매일 아침 산책해'라고 말할 때</span><span class=\"no\">I used to take a walk every morning these days.</span><span class=\"en\">I take a walk every morning these days.</span><span class=\"ko\">요즘 매일 아침 산책해.</span><span class=\"why\"><b>왜?</b>used to는 지금은 하지 않는 과거의 습관이에요. 지금 하는 습관은 현재형으로 말해요.</span></li>\n<li><span class=\"ctx\">'너 예전에 축구했어?'라고 물을 때</span><span class=\"no\">Did you used to play soccer?</span><span class=\"en\">Did you use to play soccer?</span><span class=\"ko\">너 예전에 축구했어?</span><span class=\"why\"><b>왜?</b>did가 이미 과거를 나타내서 뒤에는 d 없는 use to를 써요. 소리는 같아도 글로 쓸 때 틀리기 쉬워요.</span></li>\n</ul></div>\n<p>'익숙하다'를 말하고 싶은데 be를 빼먹으면 '예전엔 그랬다'로 뜻이 바뀌어요. I used to the noise처럼 to 뒤에 명사를 바로 붙이면 문장이 성립하지 않으니, 명사가 오면 be used to인지 다시 확인해요. 시제 하나로 뜻이 달라지는 다른 예는 <a href=\"/p/ago-vs-before/\">ago와 before 구별하기</a>에도 정리해 두었어요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Oxford Learner's Dictionaries 'used to'·'would', Longman Dictionary of Contemporary English 'used to'(문법 설명), Merriam-Webster 'used to'와 'Is it used to or use to?', VOA Learning English 'The Difference: Used to, Be Used to, Get Used to'(2020), British Council LearnEnglish 'Different uses of used to'·'Past habits: used to, would and the past simple'. 인용: Governor Wes Moore, America's 250th 연설(2026.7.4), Stanford News 'You've got to find what you love, Jobs says'(2005.6.12).</p>"
+}

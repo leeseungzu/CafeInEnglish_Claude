@@ -1,13 +1,5 @@
 {
  "days": {
-  "2026-11-15": {
-   "en": "I couldn't agree more.",
-   "ko": "전적으로 동의해요",
-   "desc": "부정문처럼 보여도 '더 동의할 수 없을 만큼' 완전히 동의한다는 뜻. agree 앞에 am은 붙이지 않아요.",
-   "url": "https://www.cafeinenglish.com/p/i-agree/",
-   "share": "https://www.cafeinenglish.com/d/i-couldnt-agree-more/",
-   "au": "/audio/e1ed5d02805d.mp3"
-  },
   "2026-11-16": {
    "en": "I'm beat.",
    "ko": "완전 녹초야",
@@ -143,6 +135,14 @@
    "url": "https://www.cafeinenglish.com/p/bear-with-me/",
    "share": "https://www.cafeinenglish.com/d/bear-with-me-a-second/",
    "au": "/audio/d6808e2f014d.mp3"
+  },
+  "2026-12-03": {
+   "en": "I'm still getting used to it.",
+   "ko": "아직 적응하는 중이야.",
+   "desc": "새 일이나 새 환경에 아직 적응하는 중이라고 할 때. get used to 뒤에는 동사원형이 아니라 명사나 -ing가 와요.",
+   "url": "https://www.cafeinenglish.com/p/used-to-vs-be-used-to/",
+   "share": "https://www.cafeinenglish.com/d/im-still-getting-used-to-it/",
+   "au": "/audio/ddfb65275299.mp3"
   }
  }
 }
