@@ -85,7 +85,8 @@
     if (mq) (mq.addEventListener ? mq.addEventListener("change", apply) : mq.addListener(apply));
     if (pcq) (pcq.addEventListener ? pcq.addEventListener("change", apply) : pcq.addListener(apply));
     $$(".th-seg button").forEach(b => { b.onclick = () => set(b.dataset.th); });
-    $$(".theme-btn").forEach(b => { b.onclick = () => set(d.classList.contains("dark") ? "light" : "dark"); });
+    // 상단 달·해 버튼: 누를 때마다 반대 모드. 고른 모드가 시스템과 같아지면 다시 '자동'(시스템 따라가기)으로 (2026-11-20)
+    $$(".theme-btn").forEach(b => { b.onclick = () => { const nd = !d.classList.contains("dark"), sys = !!mq && mq.matches; set(nd === sys ? "auto" : (nd ? "dark" : "light")); }; });
     apply();
   })();
   (() => { const tp = $(".top"); if (!tp) return; const f = () => tp.classList.toggle("scrolled", scrollY > 4); addEventListener("scroll", f, { passive: true }); f(); })();  // 휴대폰 알약 헤더: 내리면 위쪽이 배경색으로 흐려짐
@@ -1130,3 +1131,100 @@ if ("serviceWorker" in navigator) addEventListener("load", () => navigator.servi
   btns.forEach(b => b.addEventListener("click", open));
   addEventListener("keydown", e => { if ((e.key === "/" && !/input|textarea/i.test(document.activeElement.tagName)) || (e.key === "k" && (e.metaKey || e.ctrlKey))) { e.preventDefault(); open(); } });
 })();
+
+/* 탭 전환 애니메이션 + 좌우로 쓸어 넘기기 (2026-11-20, 토스처럼)
+   - 하단 탭 · 영상/공부/도구 위쪽 칸 · 내 공부방 칸: 선택 표시가 이전 칸에서 새 칸으로 스르륵 이동
+   - 위쪽 칸이 있는 화면에서는 본문을 옆으로 쓸면 이웃 칸으로 넘어가고, 내용이 그 방향에서 밀려 들어옴 */
+(() => {
+  const SEL = ".tabbar, .app-seg, .nbt";
+  const KEY = "glide", now = () => Date.now();
+  const items = c => [...c.children].filter(x => /^(A|BUTTON)$/.test(x.tagName));
+  const idxOn = c => items(c).findIndex(x => x.classList.contains("on"));
+  const keyOf = c => c.classList.contains("tabbar") ? "tabbar" : (c.getAttribute("aria-label") || c.className);
+  const read = () => { try { const v = JSON.parse(sessionStorage.getItem(KEY) || "null"); sessionStorage.removeItem(KEY); return v && now() - v.t < 6000 ? v : null; } catch (e) { return null; } };
+  const save = v => { try { sessionStorage.setItem(KEY, JSON.stringify({ ...v, t: now() })); } catch (e) {} };
+  const pend = read();
+  const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function slideIn(c, dir) {  // 칸 아래 내용이 넘긴 방향에서 들어옴
+    if (reduce || !dir) return;
+    let el = c.nextElementSibling;
+    while (el && (el.hidden || getComputedStyle(el).display === "none")) el = el.nextElementSibling;
+    if (!el) return;
+    el.classList.remove("sl-l", "sl-r"); void el.offsetWidth; el.classList.add(dir > 0 ? "sl-r" : "sl-l");
+    el.addEventListener("animationend", () => el.classList.remove("sl-l", "sl-r"), { once: true });
+  }
+
+  function setup(c) {
+    if (c.dataset.gl || !items(c).length) return; c.dataset.gl = "1";
+    const g = document.createElement("span"); g.className = "glide"; g.setAttribute("aria-hidden", "true");
+    c.prepend(g);
+    const skin = () => {  // 선택 칸의 배경·그림자·모서리를 그대로 가져와 움직이는 표시로
+      c.classList.remove("gl-on");
+      const on = items(c)[idxOn(c)]; if (on) { const s = getComputedStyle(on); g.style.background = s.backgroundColor; g.style.boxShadow = s.boxShadow; g.style.borderRadius = s.borderRadius; }
+      c.classList.add("gl-on");
+    };
+    let busy = 0;
+    g.addEventListener("transitionend", e => { if (e.propertyName === "transform") busy = 0; });
+    const place = (i, anim) => {
+      const it = items(c)[i]; if (!it) { g.style.opacity = 0; return; }
+      if (!anim && busy && now() - busy < 500) return;  // 움직이는 중에는 글꼴·크기 맞춤으로 끊지 않기
+      if (anim) busy = now();
+      g.style.transition = anim && !reduce ? "" : "none";
+      g.style.opacity = 1; g.style.width = it.offsetWidth + "px"; g.style.height = it.offsetHeight + "px";
+      g.style.transform = `translate(${it.offsetLeft}px,${it.offsetTop}px)`;
+      if (!anim) void g.offsetWidth;
+    };
+    skin();
+    const cur = idxOn(c);
+    if (pend && pend.k === keyOf(c) && pend.from !== cur && items(c)[pend.from]) {
+      place(pend.from, false); busy = now(); requestAnimationFrame(() => requestAnimationFrame(() => place(cur, true)));
+      if (pend.slide) slideIn(c, pend.dir);
+    } else place(cur, false);
+    let last = cur;
+    new MutationObserver(() => { const i = idxOn(c); if (i !== last) { const dir = i > last ? 1 : -1; last = i; place(i, true); if (c.matches(".nbt, .app-seg") && !c.querySelector("a")) slideIn(c, dir); } })
+      .observe(c, { subtree: true, attributes: true, attributeFilter: ["class"] });
+    new MutationObserver(skin).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    addEventListener("resize", () => place(idxOn(c), false));
+    if (document.fonts) document.fonts.ready.then(() => place(idxOn(c), false));
+    // 다른 페이지로 가는 칸(링크)을 누르면 다음 페이지에서 이어서 움직이게 기록
+    c.addEventListener("click", e => {
+      const a = e.target.closest("a"); if (!a || !c.contains(a)) return;
+      const to = items(c).indexOf(a), from = idxOn(c);
+      if (to < 0 || to === from) return;
+      save({ k: keyOf(c), from, slide: !c.classList.contains("tabbar"), dir: to > from ? 1 : -1 });
+    });
+  }
+  const run = () => document.querySelectorAll(SEL).forEach(setup);
+  run(); setTimeout(run, 400); setTimeout(run, 1500);  // 공부방 칸은 늦게 그려질 수 있어요
+  addEventListener("pageshow", e => { if (e.persisted) document.querySelectorAll(SEL).forEach(c => { const g = c.querySelector(".glide"); if (g) g.style.transition = "none"; }); });
+
+  // 좌우로 쓸어 넘기기: 위쪽 칸이 있는 화면에서만
+  let sx = 0, sy = 0, st = 0, ok = false;
+  const segOf = () => [...document.querySelectorAll("main .nbt, main .app-seg")].find(c => c.offsetParent);
+  const blocked = t => {
+    if (t.closest("input, textarea, select, [contenteditable], iframe, video, .no-swipe, .tabbar, .top, .srch, .glide-skip")) return true;
+    for (let el = t; el && el !== document.body; el = el.parentElement) {
+      const s = getComputedStyle(el);
+      if (/(auto|scroll)/.test(s.overflowX) && el.scrollWidth > el.clientWidth + 2) return true;
+    }
+    return false;
+  };
+  addEventListener("touchstart", e => {
+    ok = false; if (e.touches.length !== 1) return;
+    const p = e.touches[0]; if (p.clientX < 24 || p.clientX > innerWidth - 24) return;  // 화면 가장자리는 브라우저 뒤로가기 몸짓
+    if (!segOf() || blocked(e.target) || (getSelection && String(getSelection()))) return;
+    sx = p.clientX; sy = p.clientY; st = now(); ok = true;
+  }, { passive: true });
+  addEventListener("touchend", e => {
+    if (!ok) return; ok = false;
+    const p = e.changedTouches[0], dx = p.clientX - sx, dy = p.clientY - sy;
+    if (now() - st > 700 || Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
+    const c = segOf(); if (!c) return;
+    const list = items(c), from = idxOn(c), to = from + (dx < 0 ? 1 : -1);
+    const it = list[to]; if (!it) return;
+    if (it.tagName === "A") { save({ k: keyOf(c), from, slide: true, dir: to > from ? 1 : -1 }); location.href = it.href; }
+    else it.click();
+  }, { passive: true });
+})();
+

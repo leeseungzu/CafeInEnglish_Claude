@@ -16,3 +16,7 @@ html.dark .theme-btn{color:#ECECEF}
 html.dark .btn.primary{background:#F4EEE4!important;color:#2A1A12!important}
 html.dark .btn.primary:hover{background:#E8DFD3!important}
 html.dark #notes-root .btn.primary{background:transparent!important;color:#ECECEF!important;border-color:#5A5A63!important}
+
+/* 2026-11-20 */
+html.dark body.pg-gray{background:#101012!important}
+html.dark .nbt button.on,html.dark .nbt [aria-selected="true"]{background:#3A3A43!important;color:#ECECEF!important}

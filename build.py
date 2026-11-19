@@ -953,7 +953,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
     navlinks = f'<a href="/"{" class=on" if path == "/" else ""}>홈</a>' + "".join(
         f'<a href="{h}"{" class=on" if nav in ks else ""}><span class="nl-l">{l}</span><span class="nl-s">{s}</span></a>' for g, h, l, s, ks in NAV_GROUPS)
     room = f'<a class="room{" on" if nav == "notes" else ""}" href="/notes/">내 공부방<span class="badge" id="nav-badge" hidden></span></a>'
-    room = ('<button class="srch-btn" type="button" aria-label="표현 검색" title="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>' + room)
+    room = ('<button class="srch-btn" type="button" aria-label="표현 검색" title="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>' + THEME_BTN.replace('class="theme-btn"', 'class="theme-btn m-theme"') + room)  # 휴대폰 상단: 다크·라이트 버튼 + 검색 (2026-11-20)
     pjson = json.dumps(data or {}, ensure_ascii=False).replace("</", "<\\/")
     pdata = '<script id="page-data" type="application/json">' + pjson + '</script>'
     return f"""<!doctype html>
@@ -985,7 +985,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <link rel="stylesheet" href="/assets/site.css?v={CSS_V}">
 {ads}{ga}
 </head>
-<body>
+<body{' class="pg-gray"' if "nb-band" in body[:600] else ""}>
 <header class="top{" top-gray" if ("m-home" in body or "nb-band" in body[:600]) else ""}"><div class="top-in">
   <a class="logo" href="/"><img class="logo-mark" src="/assets/logo-mark.png?v=3" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
   <nav class="nav">{navlinks}<button class="srch-btn nav-srch" type="button" aria-label="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button></nav>
@@ -2216,7 +2216,7 @@ def page_notes():
     goals = [{**{k: g[k] for k in ("id", "name", "short")}, "icon": f'/assets/icons/{g["icon"]}.webp?v={ASSET_V}'} for g in TODAY_GOALS if pool.get(g["id"])]
     ON = ' class="on"'
     tabs = [("today", "오늘", ""), ("wrong", "오답노트", '<i class="nbt-n js-tn-w" hidden></i>'), ("copy", "필사 노트", ""), ("log", "기록", "")]
-    body = ('<div class="nb-head"><h1>내 공부방</h1>' + THEME_SEG + '</div>'
+    body = ('<h1>내 공부방</h1>'
             '<div class="nb-band"><div class="nbt no-print" role="tablist" aria-label="내 공부방">'
             + "".join(f'<button type="button" role="tab" data-tab="{k}" aria-selected="{"true" if k == "today" else "false"}"{ON if k == "today" else ""}>{t}{c}</button>' for k, t, c in tabs)
             + '</div>'

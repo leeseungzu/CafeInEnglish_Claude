@@ -3120,3 +3120,22 @@ html.dark .theme-btn .i-sun{display:block}
 .th-seg button{border:0;background:none;font:inherit;font-size:13px;font-weight:600;color:#8B95A1;padding:6px 11px;border-radius:8px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .th-seg button.on{background:#fff;color:#191F28;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 @media (min-width:900px){.th-seg{display:none}}  /* PC는 항상 라이트라 모드 선택 숨김 (2026-11-19) */
+
+
+/* 2026-11-20: 휴대폰 상단 다크·라이트 버튼, 공부방 배경 통일, 탭 선택 표시 스르륵 + 쓸어 넘기기 */
+.m-theme{display:none}
+@media screen and (max-width:899px){
+.top-in>.m-theme{display:inline-flex!important;order:2;margin-left:auto!important}
+.top-in>.srch-btn{order:3;margin-left:0!important}
+body.pg-gray{background:#F2F4F6!important}
+}
+.th-seg{display:none!important}
+.tabbar,.app-seg,.nbt{position:relative}
+.glide{position:absolute;left:0;top:0;z-index:0;pointer-events:none;opacity:0;transition:transform .32s cubic-bezier(.22,.8,.24,1),width .32s cubic-bezier(.22,.8,.24,1),height .32s,opacity .15s}
+.gl-on>a,.gl-on>button{position:relative!important;z-index:1!important;transition:color .25s}
+.gl-on>a.on,.gl-on>button.on,html.is-app .gl-on>a.on,html.dark .gl-on>a.on,html.dark .gl-on>button.on{background:transparent!important;box-shadow:none!important}
+@keyframes slR{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+@keyframes slL{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:none}}
+.sl-r{animation:slR .28s cubic-bezier(.22,.8,.24,1)}
+.sl-l{animation:slL .28s cubic-bezier(.22,.8,.24,1)}
+@media (prefers-reduced-motion:reduce){.glide{transition:none}.sl-r,.sl-l{animation:none}}
