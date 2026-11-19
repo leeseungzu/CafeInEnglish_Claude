@@ -1164,21 +1164,26 @@ if ("serviceWorker" in navigator) addEventListener("load", () => navigator.servi
       const on = items(c)[idxOn(c)]; if (on) { const s = getComputedStyle(on); g.style.background = s.backgroundColor; g.style.boxShadow = s.boxShadow; g.style.borderRadius = s.borderRadius; }
       c.classList.add("gl-on");
     };
-    let busy = 0;
-    g.addEventListener("transitionend", e => { if (e.propertyName === "transform") busy = 0; });
-    const place = (i, anim) => {
+    // 움직임은 transform만 GPU(합성 스레드)에서 → 새 페이지가 그려지느라 바빠도 끊기지 않게 (2026-11-20)
+    let busy = 0, anim = null;
+    const pos = it => `translate3d(${it.offsetLeft}px,${it.offsetTop}px,0)`;
+    const place = (i, animate) => {
       const it = items(c)[i]; if (!it) { g.style.opacity = 0; return; }
-      if (!anim && busy && now() - busy < 500) return;  // 움직이는 중에는 글꼴·크기 맞춤으로 끊지 않기
-      if (anim) busy = now();
-      g.style.transition = anim && !reduce ? "" : "none";
+      if (!animate && busy && now() - busy < 450) return;  // 움직이는 중에는 글꼴·크기 맞춤으로 끊지 않기
+      const from = g.style.transform, to = pos(it);
       g.style.opacity = 1; g.style.width = it.offsetWidth + "px"; g.style.height = it.offsetHeight + "px";
-      g.style.transform = `translate(${it.offsetLeft}px,${it.offsetTop}px)`;
-      if (!anim) void g.offsetWidth;
+      g.style.transform = to;
+      if (animate && !reduce && from && from !== to && g.animate) {
+        if (anim) anim.cancel();
+        busy = now();
+        anim = g.animate([{ transform: from }, { transform: to }], { duration: 340, easing: "cubic-bezier(.22,.8,.24,1)" });
+        anim.onfinish = () => { busy = 0; anim = null; };
+      }
     };
     skin();
     const cur = idxOn(c);
     if (pend && pend.k === keyOf(c) && pend.from !== cur && items(c)[pend.from]) {
-      place(pend.from, false); busy = now(); requestAnimationFrame(() => requestAnimationFrame(() => place(cur, true)));
+      place(pend.from, false); busy = now(); requestAnimationFrame(() => place(cur, true));
       if (pend.slide) slideIn(c, pend.dir);
     } else place(cur, false);
     let last = cur;
