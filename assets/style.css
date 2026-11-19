@@ -3106,3 +3106,16 @@ body{padding-bottom:calc(96px + env(safe-area-inset-bottom))!important}
 .bk-toast{bottom:calc(100px + env(safe-area-inset-bottom))!important}
 .fab{bottom:calc(92px + env(safe-area-inset-bottom))!important}
 }
+
+
+/* 화면 모드 버튼 (2026-11-19) — PC는 위쪽 메뉴의 달·해 아이콘, 휴대폰은 내 공부방 제목 옆 자동·라이트·다크 */
+.theme-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;margin-left:2px;border:0;background:none;border-radius:10px;color:#4E5968;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.theme-btn:hover{background:#F2F4F6}
+.theme-btn .i-sun{display:none}
+html.dark .theme-btn .i-moon{display:none}
+html.dark .theme-btn .i-sun{display:block}
+.nb-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.nb-head h1{margin-right:auto}
+.th-seg{display:inline-flex;flex:none;gap:2px;padding:3px;background:#F2F4F6;border-radius:10px}
+.th-seg button{border:0;background:none;font:inherit;font-size:13px;font-weight:600;color:#8B95A1;padding:6px 11px;border-radius:8px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.th-seg button.on{background:#fff;color:#191F28;box-shadow:0 1px 3px rgba(0,0,0,.08)}

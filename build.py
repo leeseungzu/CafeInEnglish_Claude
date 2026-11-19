@@ -845,7 +845,11 @@ def _min_css(c):
     c = re.sub(r"\s*\n\s*", "", c)
     c = re.sub(r"\s*([{};])\s*", r"\1", c)
     return c.replace(";}", "}")
-STYLE_CSS = _min_css((ASSETS / "style.css").read_text("utf-8"))
+_LIGHT_CSS = _min_css((ASSETS / "style.css").read_text("utf-8"))
+# 다크 모드 (2026-11-19): 시스템 설정을 따르고, 사이트 안에서 직접 바꾸면 그 선택이 우선. tools/darkgen.py가 색을 바꾼 규칙을 만들고 assets/dark-fix.css로 손보정
+sys.path.insert(0, str(Path(__file__).resolve().parent / "tools"))
+from darkgen import make_dark
+STYLE_CSS = _LIGHT_CSS + _min_css(make_dark(_LIGHT_CSS) + (ASSETS / "dark-fix.css").read_text("utf-8"))
 CSS_V = hashlib.md5(STYLE_CSS.encode()).hexdigest()[:8]  # 디자인 파일은 /assets/site.css 로 따로 (페이지마다 넣지 않아 가볍고, 한 번 받으면 저장)
 
 
@@ -882,6 +886,13 @@ TABS = [("home", "/", "홈", _TI('<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-
         ("study", "/category/study/", "공부", _TI('<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/>')),
         ("tools", "/tools/", "도구", _TI('<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>')),
         ("notes", "/notes/", "공부방", _TI('<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>'))]  # 내 공부방 (2026-11-19, 휴대폰은 위 버튼 대신 아래 탭)
+THEME_HEAD_JS = ("<script>(function(){var d=document.documentElement,t;try{t=localStorage.getItem('theme')}catch(e){}"
+                 "var m=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)');if(t==='dark'||(t!=='light'&&m&&m.matches))d.classList.add('dark')})();</script>")  # 그리기 전에 모드를 정해 흰 화면 번쩍임 방지
+THEME_BTN = ('<button class="theme-btn" type="button" aria-label="화면 모드 바꾸기" title="라이트·다크 모드">'
+             '<svg class="i-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>'
+             '<svg class="i-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>')
+THEME_SEG = ('<div class="th-seg no-print" role="group" aria-label="화면 모드">'
+             '<button type="button" data-th="auto">자동</button><button type="button" data-th="light">라이트</button><button type="button" data-th="dark">다크</button></div>')
 APP_HEAD_JS = ("<script>(function(){try{var q=/[?&]app=1/.test(location.search);if(q)sessionStorage.setItem('appPreview','1');"
                "if(q||sessionStorage.getItem('appPreview')||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone)"
                "document.documentElement.classList.add('is-app')}catch(e){}})();</script>")
@@ -949,7 +960,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">{APP_HEAD_JS}
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">{APP_HEAD_JS}{THEME_HEAD_JS}
 <title>{e(full_title)}</title>
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{DOMAIN}{path}">{f'<meta name="robots" content="{robots}">' if robots else ""}
@@ -977,7 +988,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <body>
 <header class="top{" top-gray" if ("m-home" in body or "nb-band" in body[:600]) else ""}"><div class="top-in">
   <a class="logo" href="/"><img class="logo-mark" src="/assets/logo-mark.png?v=3" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
-  <nav class="nav">{navlinks}<button class="srch-btn nav-srch" type="button" aria-label="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button></nav>
+  <nav class="nav">{navlinks}<button class="srch-btn nav-srch" type="button" aria-label="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>{THEME_BTN}</nav>
   {room}
 </div></header>
 <div class="wrap{" has-side" if aside else ""}{" wide" if wide else ""}">
@@ -2205,7 +2216,7 @@ def page_notes():
     goals = [{**{k: g[k] for k in ("id", "name", "short")}, "icon": f'/assets/icons/{g["icon"]}.webp?v={ASSET_V}'} for g in TODAY_GOALS if pool.get(g["id"])]
     ON = ' class="on"'
     tabs = [("today", "오늘", ""), ("wrong", "오답노트", '<i class="nbt-n js-tn-w" hidden></i>'), ("copy", "필사 노트", ""), ("log", "기록", "")]
-    body = ('<h1>내 공부방</h1>'
+    body = ('<div class="nb-head"><h1>내 공부방</h1>' + THEME_SEG + '</div>'
             '<div class="nb-band"><div class="nbt no-print" role="tablist" aria-label="내 공부방">'
             + "".join(f'<button type="button" role="tab" data-tab="{k}" aria-selected="{"true" if k == "today" else "false"}"{ON if k == "today" else ""}>{t}{c}</button>' for k, t, c in tabs)
             + '</div>'

@@ -1,0 +1,18 @@
+/* 다크 모드 손보정 (2026-11-19) — tools/darkgen.py 자동 변환 위에 덮어써요 */
+html.dark{--hbg:#1C1C21}
+html.dark .top{--hbg:#1C1C21}html.dark .top.top-gray{--hbg:#101012}
+html.dark .hi-btn{background:#F4EEE4!important;color:#2A1A12!important;box-shadow:none!important}
+html.dark .hi-btn i{opacity:.5}
+html.dark .cmp th{background:#2C2C34!important;color:#ECECEF!important}
+html.dark .tabbar{background:rgba(36,36,42,.86)!important;border-color:rgba(255,255,255,.06)!important;box-shadow:0 8px 28px rgba(0,0,0,.5)!important}
+html.dark .tabbar a{color:#7E8590}
+html.dark .tabbar a.on{background:#33333B!important;color:#ECECEF!important}
+html.dark .m-home,html.dark .nb-band,html.dark .pc-band{background:#101012!important}
+/* 모드 버튼 */
+html.dark .th-seg{background:#26262D}
+html.dark .th-seg button.on{background:#3A3A43;color:#ECECEF}
+html.dark .theme-btn{color:#ECECEF}
+/* 주요 버튼: 홈 '1일 1영' 버튼과 같은 크림 + 에스프레소 */
+html.dark .btn.primary{background:#F4EEE4!important;color:#2A1A12!important}
+html.dark .btn.primary:hover{background:#E8DFD3!important}
+html.dark #notes-root .btn.primary{background:transparent!important;color:#ECECEF!important;border-color:#5A5A63!important}
