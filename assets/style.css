@@ -3140,12 +3140,4 @@ body.pg-gray{background:#F2F4F6!important}
 .sl-l{animation:slL .28s cubic-bezier(.22,.8,.24,1);will-change:transform,opacity}
 @media (prefers-reduced-motion:reduce){.glide{transition:none}.sl-r,.sl-l{animation:none}}
 
-/* 페이지 넘어갈 때 흰 화면 깜빡임 없이: 위·아래 바는 그대로 두고 본문만 짧게 겹쳐 바뀜 (휴대폰, 지원 브라우저만) (2026-11-20) */
-@media screen and (max-width:899px) and (prefers-reduced-motion:no-preference){
-@view-transition{navigation:auto}
-.tabbar{view-transition-name:cy-tabbar}
-.top{view-transition-name:cy-top}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.16s}
-::view-transition-group(cy-tabbar),::view-transition-group(cy-top),::view-transition-new(cy-tabbar),::view-transition-new(cy-top){animation:none}
-::view-transition-old(cy-tabbar),::view-transition-old(cy-top){display:none}
-}
+

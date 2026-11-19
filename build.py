@@ -849,7 +849,10 @@ _LIGHT_CSS = _min_css((ASSETS / "style.css").read_text("utf-8"))
 # 다크 모드 (2026-11-19): 시스템 설정을 따르고, 사이트 안에서 직접 바꾸면 그 선택이 우선. tools/darkgen.py가 색을 바꾼 규칙을 만들고 assets/dark-fix.css로 손보정
 sys.path.insert(0, str(Path(__file__).resolve().parent / "tools"))
 from darkgen import make_dark
-STYLE_CSS = _LIGHT_CSS + _min_css(make_dark(_LIGHT_CSS) + (ASSETS / "dark-fix.css").read_text("utf-8"))
+STYLE_CSS = _LIGHT_CSS
+# 다크 CSS는 따로 (2026-11-20, 모바일 성능): 시스템이 다크인 휴대폰에서만 먼저 받고, 라이트 사용자는 화면 그리기를 막지 않아요
+DARK_CSS = _min_css(make_dark(_LIGHT_CSS) + (ASSETS / "dark-fix.css").read_text("utf-8"))
+DARK_V = hashlib.md5(DARK_CSS.encode()).hexdigest()[:8]
 CSS_V = hashlib.md5(STYLE_CSS.encode()).hexdigest()[:8]  # 디자인 파일은 /assets/site.css 로 따로 (페이지마다 넣지 않아 가볍고, 한 번 받으면 저장)
 
 
@@ -869,11 +872,28 @@ self.addEventListener("fetch", e => {
   if (u.pathname.startsWith("/assets/") || u.pathname.startsWith("/audio/")) {
     e.respondWith(caches.open(C).then(c => c.match(e.request).then(r => r || fetch(e.request).then(n => { if (n.ok) c.put(e.request, n.clone()); return n; }))));
   } else if (e.request.mode === "navigate") {
-    e.respondWith(fetch(u.href, { cache: "no-cache", credentials: "same-origin" }).then(n => {
+    // 2026-11-20: 30분 안에 받아 둔 페이지는 바로 보여 주고(탭 이동이 즉시), 뒤에서 새로 받아 다음 방문에 반영. 오래된 저장본이면 서버 먼저
+    const net = fetch(u.href, { cache: "no-cache", credentials: "same-origin" }).then(n => {
       if (n.redirected) return Response.redirect(n.url, 302);
-      const cp = n.clone(); caches.open(C).then(c => c.put(e.request, cp)); return n;
-    }).catch(() => caches.match(e.request)));
+      if (n.ok) { const cp = n.clone(); caches.open(C).then(c => c.put(e.request.url, cp)); } return n;
+    });
+    e.respondWith(caches.match(e.request.url).then(hit => {
+      const age = hit ? Date.now() - Date.parse(hit.headers.get("date") || 0) : Infinity;
+      if (hit && age < 30 * 60 * 1000) { e.waitUntil(net.catch(() => {})); return hit; }
+      return net.catch(() => hit || caches.match(e.request.url));
+    }));
   }
+});
+// 탭·칸 페이지 미리 받기 (페이지가 보내 주는 주소만, 같은 사이트만)
+self.addEventListener("message", e => {
+  const urls = (e.data && e.data.prefetch) || [];
+  e.waitUntil(caches.open(C).then(c => Promise.all(urls.slice(0, 12).map(h => {
+    const url = new URL(h, location.origin); if (url.origin !== location.origin) return;
+    return c.match(url.href).then(hit => {
+      if (hit && Date.now() - Date.parse(hit.headers.get("date") || 0) < 10 * 60 * 1000) return;
+      return fetch(url.href, { cache: "no-cache", credentials: "same-origin" }).then(n => { if (n.ok && !n.redirected) return c.put(url.href, n); }).catch(() => {});
+    });
+  }))));
 });
 """
 
@@ -983,6 +1003,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="카페인영어"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 {font_head}
 <link rel="stylesheet" href="/assets/site.css?v={CSS_V}">
+<link rel="stylesheet" id="dark-css" href="/assets/dark.css?v={DARK_V}" media="(prefers-color-scheme: dark) and (max-width: 899px)"><script>(function(){{try{{var t=localStorage.getItem('theme'),l=document.getElementById('dark-css');if(t==='dark')l.media='(max-width: 899px)';else if(t==='light')l.media='not all'}}catch(e){{}}}})();</script>
 {ads}{ga}
 </head>
 <body{' class="pg-gray"' if "nb-band" in body[:600] else ""}>
@@ -3684,6 +3705,7 @@ def build():
     OUT.mkdir(exist_ok=True)
     shutil.copytree(ASSETS, OUT / "assets", dirs_exist_ok=True)
     (OUT / "assets" / "site.css").write_text(STYLE_CSS, "utf-8")
+    (OUT / "assets" / "dark.css").write_text(DARK_CSS, "utf-8")
     (OUT / "search.json").write_text(search_index(), "utf-8")
     if (ROOT / "images").exists():
         shutil.copytree(ROOT / "images", OUT / "images", dirs_exist_ok=True)

@@ -77,6 +77,8 @@
     const get = () => { try { return localStorage.getItem("theme") || "auto"; } catch (e) { return "auto"; } };
     const apply = () => {
       const t = get(); d.classList.toggle("dark", !(pcq && pcq.matches) && (t === "dark" || (t === "auto" && !!mq && mq.matches)));
+      const dl = document.getElementById("dark-css");  // 다크 CSS 파일: 고른 모드에 맞춰 받기
+      if (dl) dl.media = t === "dark" ? "(max-width: 899px)" : t === "light" ? "not all" : "(prefers-color-scheme: dark) and (max-width: 899px)";
       const tc = document.querySelector('meta[name="theme-color"]'), top = $(".top");
       if (tc) tc.content = top ? getComputedStyle(top).backgroundColor : (d.classList.contains("dark") ? "#101012" : "#FFFFFF");
       $$(".th-seg button").forEach(b => { const on = b.dataset.th === t; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
@@ -1192,12 +1194,16 @@ if ("serviceWorker" in navigator) addEventListener("load", () => navigator.servi
     new MutationObserver(skin).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     addEventListener("resize", () => place(idxOn(c), false));
     if (document.fonts) document.fonts.ready.then(() => place(idxOn(c), false));
-    // 다른 페이지로 가는 칸(링크)을 누르면 다음 페이지에서 이어서 움직이게 기록
+    // 다른 페이지로 가는 칸(링크): 누르는 순간 지금 화면에서 바로 미끄러지고, 그동안 새 페이지를 받아요 (2026-11-20)
+    c.go = to => {
+      const list = items(c), from = idxOn(c); if (to < 0 || to === from || !list[to]) return false;
+      list.forEach((x, k) => x.classList.toggle("on", k === to)); last = to; place(to, true);
+      return true;
+    };
     c.addEventListener("click", e => {
-      const a = e.target.closest("a"); if (!a || !c.contains(a)) return;
-      const to = items(c).indexOf(a), from = idxOn(c);
-      if (to < 0 || to === from) return;
-      save({ k: keyOf(c), from, slide: !c.classList.contains("tabbar"), dir: to > from ? 1 : -1 });
+      const a = e.target.closest("a"); if (!a || !c.contains(a) || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      const to = items(c).indexOf(a); if (to === idxOn(c)) return;
+      c.go(to);
     });
   }
   const run = () => document.querySelectorAll(SEL).forEach(setup);
@@ -1228,8 +1234,18 @@ if ("serviceWorker" in navigator) addEventListener("load", () => navigator.servi
     const c = segOf(); if (!c) return;
     const list = items(c), from = idxOn(c), to = from + (dx < 0 ? 1 : -1);
     const it = list[to]; if (!it) return;
-    if (it.tagName === "A") { save({ k: keyOf(c), from, slide: true, dir: to > from ? 1 : -1 }); location.href = it.href; }
+    if (it.tagName === "A") { if (c.go) c.go(to); location.href = it.href; }
     else it.click();
   }, { passive: true });
+})();
+
+/* 탭·칸 페이지 미리 받기 (2026-11-20): 화면이 다 뜬 뒤 한가할 때 + 손가락이 닿는 순간 → 누르면 바로 열림 */
+(() => {
+  if (!("serviceWorker" in navigator)) return;
+  const send = urls => navigator.serviceWorker.ready.then(r => { const w = navigator.serviceWorker.controller || r.active; if (w) w.postMessage({ prefetch: urls }); }).catch(() => {});
+  const links = () => [...document.querySelectorAll(".tabbar a, main .app-seg a")].map(a => a.getAttribute("href")).filter(h => h && h.startsWith("/") && h !== location.pathname);
+  const idle = window.requestIdleCallback || (f => setTimeout(f, 1200));
+  addEventListener("load", () => setTimeout(() => idle(() => { if (matchMedia("(max-width: 899px)").matches && !(navigator.connection && navigator.connection.saveData)) send([...new Set(links())]); }), 1500));
+  addEventListener("touchstart", e => { const a = e.target.closest && e.target.closest(".tabbar a, main .app-seg a"); if (a) send([a.getAttribute("href")]); }, { passive: true });
 })();
 
