@@ -725,7 +725,7 @@ ${my}
   initShare();
   initTocSpy();
   initDaily();
-  if (DATA.type === "post") {
+  if (DATA.type === "post" && DATA.quiz && DATA.quiz.length && $("#quiz")) {
     const items = DATA.quiz.map((q, i) => ({ id: `${DATA.id}:${i}`, ...q }));
     runQuiz($("#quiz"), items, { mode: "post" });
   }

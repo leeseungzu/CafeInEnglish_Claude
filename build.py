@@ -15,18 +15,18 @@ CONTENT, ASSETS, OUT = ROOT / "content", ROOT / "assets", ROOT / "docs"
 
 SITE = json.loads((CONTENT / "site.json").read_text("utf-8"))
 DOMAIN = SITE["domain"].rstrip("/")
-CATS = {"video": "영상으로 배우기", "expr": "영어표현", "tip": "영어꿀팁", "story": "영어 이야기", "think": "사유의 문장"}
+CATS = {"video": "영상으로 배우기", "expr": "영어표현", "tip": "영어꿀팁", "story": "영어 이야기", "journal": "카영 일지", "think": "사유의 문장"}
 NAV_CATS = ("video", "expr", "tip", "story")  # 카테고리 순서 (메뉴는 아래 NAV_GROUPS로 묶어서 보여 줘요)
 # 위쪽 메뉴 (2026-10-23 정리): 영상(영상으로 배우기·사유의 문장) · 영어 공부(표현·꿀팁·이야기) · 영어 도구
 NAV_GROUPS = [("video", "/category/watch/", "영상으로 배우기", "영상", ("watch", "video", "think")),
-              ("study", "/category/study/", "영어 공부", "공부", ("study", "expr", "tip", "story")),
+              ("study", "/category/study/", "영어 공부", "공부", ("study", "expr", "tip", "story", "journal")),
               ("tools", "/tools/", "영어 도구", "도구", ("tools",))]
-STUDY_CATS = ("expr", "tip", "story")
+STUDY_CATS = ("expr", "tip", "story", "journal")  # 카영 일지(2026-11-20): 운영자의 공부·제작 기록
 WATCH_VIEW = ("watch", "video", "think")  # 영상 칸 전환: 전체 · 영상으로 배우기 · 사유의 문장 (전체 = /category/watch/, 2026-10-24)
 STUDY_VIEW = ("study",) + STUDY_CATS  # 영어 공부 칸 전환: 전체 · 표현 · 꿀팁 · 이야기 (전체 = /category/study/, 2026-10-24)
 nav_group = lambda nav: next((g for g, h, l, s, ks in NAV_GROUPS if nav in ks), nav)
 TILE_SUB = {"video": "카영 영상 속 표현을 장면과 함께", "expr": "새 표현 · 비슷한 표현 · 헷갈리는 표현",
-            "tip": "여행 · 회화 · 단어 · 듣기 · 발음", "story": "매일 쓰는 단어에 숨은 역사", "think": "필사하고 빈칸으로 복기"}
+            "tip": "여행 · 회화 · 단어 · 듣기 · 발음", "story": "매일 쓰는 단어에 숨은 역사", "journal": "공부하고 만들며 쓰는 기록", "think": "필사하고 빈칸으로 복기"}
 CAT_SEO = {  # 카테고리 페이지 검색용 제목 · 설명
     "video": ("영상으로 배우는 영어 - 카페인영어 영상 속 표현 정리와 퀴즈",
               "카페인영어 유튜브 영상 한 편에서 실제로 쓰는 영어 표현을 뽑아 뜻, 예문, 발음과 함께 정리하고 퀴즈로 확인해요."),
@@ -36,6 +36,8 @@ CAT_SEO = {  # 카테고리 페이지 검색용 제목 · 설명
             "한국인이 자주 틀리는 영어 회화, 발음, 듣기, 콩글리시를 쉽게 풀어 정리했어요. 식당, 카페, 병원, 화상회의에서 바로 쓰는 문장과 퀴즈까지."),
     "story": ("영어 이야기 - 영어 단어 어원과 유래, 실제 기록과 사진으로 보는 영어의 역사",
               "hello, OK, deadline, bug처럼 매일 쓰는 영어 단어가 어디서 왔는지 실제 기록과 사진으로 따라가고, 지금 쓰는 법과 퀴즈까지 정리했어요."),
+    "journal": ("카영 일지 - 카페인영어 운영자의 영어 공부와 채널 제작 기록",
+                "영어를 다시 시작한 이유, 공부하며 틀린 표현, 영상과 사이트를 만들며 겪은 일을 카영 스터디언이 일기처럼 적어요."),
     "study": ("영어 공부 - 원어민 영어표현, 영어꿀팁, 영어 단어 이야기 한곳에",
               "원어민이 매일 쓰는 영어표현, 바로 써먹는 회화·여행·발음 꿀팁, 영어 단어의 유래까지 예문과 원어민 발음, 퀴즈로 함께 공부해요."),
     "watch": ("영상으로 배우는 영어 - 유명인 연설·인터뷰 영어표현과 영어 명언 필사",
@@ -49,7 +51,8 @@ CAT_LEAD = {  # 휴대폰(360px)에서도 한 줄에 들어가게 짧게
     "tip": "여행·발음·듣기, 바로 써먹는 영어 팁",
     "story": "매일 쓰는 단어에 숨은 역사",
     "think": "곱씹을 문장을 듣고, 쓰고, 떠올려요",
-    "study": "표현·꿀팁·이야기를 한곳에서",
+    "journal": "공부하고 만들며 쓰는 기록",
+    "study": "표현·꿀팁·이야기·일지를 한곳에서",
     "watch": "영상 속 표현과 곱씹을 문장을 한곳에서",
 }
 e = lambda s: html.escape(str(s), quote=True)
@@ -548,7 +551,7 @@ def thumb_image(name, theme, ko, text, key):
 
 def thumb_theme(p):
     """카테고리별 고정 색: 영어표현=에스프레소, 영어꿀팁=크림, 사유의 문장=올리브 (라임은 핵심 단어에만)"""
-    return {"expr": "dark", "tip": "cream"}.get(p["cat"], "dark")
+    return {"expr": "dark", "tip": "cream", "journal": "cream"}.get(p["cat"], "dark")
 
 
 def thumb_num(p):
@@ -934,7 +937,7 @@ APP_SEG = lambda cat: ('<div class="app-seg watch-seg no-print" role="tablist" a
                        + "".join(f'<a role="tab" href="/category/{k}/"{" class=on aria-selected=true" if k == cat else ""}>{"전체" if k == "watch" else CATS[k]}</a>' for k in WATCH_VIEW) + '</div>')
 APP_HEAD = lambda cat: (f'<h1 data-app="영상·문장"><span class="wt">{CATS[cat]}</span></h1>'
                         f'<p class="lead" data-app="영상 속 표현과 곱씹을 문장을 한곳에"><span class="wt">{CAT_LEAD[cat]}</span></p>')
-NAV_SHORT = {"study": "전체", "video": "영상", "expr": "표현", "tip": "꿀팁", "story": "이야기", "think": "문장"}  # 휴대폰 위쪽 메뉴는 짧은 이름 (앱 탭과 같게)
+NAV_SHORT = {"study": "전체", "video": "영상", "expr": "표현", "tip": "꿀팁", "story": "이야기", "journal": "일지", "think": "문장"}  # 휴대폰 위쪽 메뉴는 짧은 이름 (앱 탭과 같게)
 
 
 def _og_v(img):
@@ -1074,13 +1077,13 @@ def chat_bg(key):
     return CHAT_BG[int(hashlib.md5(key.encode()).hexdigest(), 16) % len(CHAT_BG)]
 
 
-def chat_html(q, a, key, ko, art="", bg="", big=False):
+def chat_html(q, a, key, ko, art="", bg="", big=False, label="실제 대화에선 이렇게"):
     """실제 대화 카드 (C안): 상대 말풍선 + 내 말풍선(핵심 표현 라임) + 작은 3D 아이콘"""
     ah = e(a)
     if key and e(key) in ah:
         ah = ah.replace(e(key), f"<b>{e(key)}</b>", 1)
     qh = f'<div class="cv-q">{e(q)}</div>' if q else ""
-    lbl = '<div class="cv-lbl">실제 대화에선 이렇게</div>' if big else ""
+    lbl = f'<div class="cv-lbl">{label}</div>' if big else ""
     koh = f'<div class="cv-ko">{e(ko)}</div>' if (big and ko) else ""
     return (f'<div class="chatv{" big" if big else ""}" style="background:{bg}" aria-hidden="true"><div class="cv-card">{lbl}{qh}'
             f'<div class="cv-a"><span>{ah}</span></div>{koh}</div>{art}</div>')
@@ -1115,11 +1118,18 @@ def level(p):
     return p.get("level") or ("실전" if p["cat"] == "video" or p["id"] in LEVEL_PRO else "기초")
 
 
+def read_min(p):  # 퀴즈 없는 글(카영 일지) 목록에 '읽는 데 N분' (한국어 약 500자/분)
+    return max(1, round(len(re.sub(r"<[^>]+>", "", p.get("body_html", ""))) / 500))
+
+
 def post_card(p, hl=3):
     th, play = post_thumb(p)
     lv = level(p)
+    if p["cat"] == "journal":
+        return card(post_url(p), [(p["cat"], CATS[p["cat"]]), (p["cat"], p.get("sub", ""))], p["title"],
+                    f"{p.get('lead', '')} · 읽는 데 {read_min(p)}분", th, play, thumb_alt(p.get("thumb")), hl, p.get("sub", ""))
     return card(post_url(p), [(p["cat"], CATS[p["cat"]]), (p["cat"], p.get("sub", ""))], p["title"],
-                f"{p.get('lead', '')} · 퀴즈 {len(p['quiz'])}문제", th, play, thumb_alt(p.get("thumb")), hl, p.get("sub", "")).replace(
+                f"{p.get('lead', '')} · " + (f"퀴즈 {len(p['quiz'])}문제" if p.get("quiz") else f"읽는 데 {read_min(p)}분"), th, play, thumb_alt(p.get("thumb")), hl, p.get("sub", "")).replace(
                     '</div><h', f'<span class="lv lv-{"pro" if lv == "실전" else "base"}">{lv}</span></div><h', 1).replace(' href=', f' data-lv="{lv}" href=', 1)
 
 
@@ -1328,13 +1338,13 @@ def page_post(p):
     url = post_url(p)
     video = p.get("video")
     _lv = level(p)
-    parts = [f'<span class="chip {p["cat"]}">{CATS[p["cat"]]}</span><span class="chip {p["cat"]}">{e(p.get("sub", ""))}</span><span class="lv lv-{"pro" if _lv == "실전" else "base"}" title="{"일·뉴스·연설, 뉘앙스까지" if _lv == "실전" else "처음 봐도 바로 쓰는 생활 표현"}">{_lv}</span>',
+    parts = [f'<span class="chip {p["cat"]}">{CATS[p["cat"]]}</span><span class="chip {p["cat"]}">{e(p.get("sub", ""))}</span>' + ("" if p["cat"] == "journal" else f'<span class="lv lv-{"pro" if _lv == "실전" else "base"}" title="{"일·뉴스·연설, 뉘앙스까지" if _lv == "실전" else "처음 봐도 바로 쓰는 생활 표현"}">{_lv}</span>'),
              f'<h1>{e(p["title"])}</h1><p class="lead">{e(p.get("lead", ""))}</p><p class="date-line">{e(p.get("date", ""))}{(" · " + e(p["updated"]) + " 수정") if p.get("updated") and p["updated"] != p.get("date") else ""}</p>']
     tint = re.search(r"#[0-9A-Fa-f]{6}", chat_bg(p["id"])).group(0)
     if not video and p.get("chat"):
         c = p["chat"]
         art = icon_img(p["icon"], lazy=False) if p.get("icon") else ""
-        parts.append('<div class="post-hero">' + chat_html(c["q"], c["a"], c.get("key", ""), c.get("ko", ""), art, chat_bg(p["id"]), big=True) + '</div>')
+        parts.append('<div class="post-hero">' + chat_html(c["q"], c["a"], c.get("key", ""), c.get("ko", ""), art, chat_bg(p["id"]), big=True, label="카영 일지에서 묻고 답하기" if p["cat"] == "journal" else "실제 대화에선 이렇게") + '</div>')
     toc_slot = len(parts)
     if video:
         parts.append(video_block(video, p["title"], "표현의 <b>듣기</b>·<b>3번 반복</b>으로 따라 말해 보세요"))
@@ -1378,7 +1388,9 @@ def page_post(p):
     if p.get("think") in THINK_BY_ID:
         parts.append(f'<div class="think-box"><b>이 영상 속 마음에 남는 문장</b>은 <a href="{think_url(THINK_BY_ID[p["think"]])}">사유의 문장</a>에서 필사하고 복기할 수 있어요.</div>')
     parts.append(post_say_block(p))
-    parts.append('<h2 class="quiz-h" id="quiz-sec">오늘 배운 거 확인하기</h2><div id="quiz"></div>')
+    has_quiz = bool(p.get("quiz"))
+    if has_quiz:
+        parts.append('<h2 class="quiz-h" id="quiz-sec">오늘 배운 거 확인하기</h2><div id="quiz"></div>')
     if p.get("note"):
         parts.append(f'<div class="study-note"><b class="lbl">스터디 노트</b> {p["note"]}</div>')
     parts.append(END_CTA)
@@ -1402,7 +1414,7 @@ def page_post(p):
         + "<br>" + "".join(f'<span class="o">{CIRC[k]} {e(o)}</span>' for k, o in enumerate(q["options"])) + "</div>"
         for i, q in enumerate(p["quiz"]))
     key = "".join(f'<li><b>{CIRC[q["answer"]]} {e(q["options"][q["answer"]])}</b> — {e(q["explain"])}<br>연상법 · {e(q["mnemonic"])}</li>' for q in p["quiz"])
-    parts.append(f"""<div class="print-only ws"><div style="break-before:page"></div>
+    if has_quiz: parts.append(f"""<div class="print-only ws"><div style="break-before:page"></div>
 {ws_head("확인 문제", p["title"], video, url)}
 <p style="font-size:13px">본문을 다시 읽은 뒤, 정답에 ○ 표시해 보세요. 정답과 연상법은 맨 아래에 있어요.</p>{qs}
 <h2>오늘의 표현, 직접 써 보기</h2><div class="ws-label">오늘 배운 표현으로 나만의 문장 2개 만들기</div>
@@ -1412,16 +1424,21 @@ def page_post(p):
     parts.append('<h2 class="rel-h no-print">같이 보면 좋은 글</h2><div class="cards rel list no-print">'
                  + "".join(post_card(o) for o in similar_posts(p, 4)) + "</div>")
     parts.append(AUTHOR_SIG)
-    parts.insert(toc_slot, f'<details class="toc-m no-print"><summary>목차 · 퀴즈 바로가기</summary>{toc_html(toc)}</details>')
+    if has_quiz:
+        parts.insert(toc_slot, f'<details class="toc-m no-print"><summary>목차 · 퀴즈 바로가기</summary>{toc_html(toc)}</details>')
     links = related_links(p)
     link_items = "".join('<li><a href="%s">%s</a></li>' % (l["href"], e(l["label"])) for l in links)
-    aside = (f'<div class="side-box"><h4>이 글의 목차</h4>{toc_html(toc)}</div>'
-             f'<div class="side-box"><h4>복습하기</h4><div class="acts">'
-             + act_row(SVG_QUIZ, "퀴즈 풀기", f"{len(p['quiz'])}문제 · 1분", href="#quiz-sec")
-             + act_row(SVG_BOOK, "내 공부방", "틀린 문제 다시 보기", href="/notes/#wrong", right='<span class="n-pill js-notes-count"></span>')
-             + act_row(SVG_PRINT, "출력 · PDF 저장", "A4 복습지", cls="js-print") + '</div></div>'
-             + (f'<div class="side-box"><h4>이어서 보기</h4><ul class="side-links">{link_items}</ul></div>' if links else "")
-             + side_common())
+    if not has_quiz:  # 카영 일지: 목차·퀴즈 없이 이어서 보기만
+        aside = ((f'<div class="side-box"><h4>이어서 보기</h4><ul class="side-links">{link_items}</ul></div>' if links else "")
+                 + side_common())
+    else:
+        aside = (f'<div class="side-box"><h4>이 글의 목차</h4>{toc_html(toc)}</div>'
+                 f'<div class="side-box"><h4>복습하기</h4><div class="acts">'
+                 + act_row(SVG_QUIZ, "퀴즈 풀기", f"{len(p['quiz'])}문제 · 1분", href="#quiz-sec")
+                 + act_row(SVG_BOOK, "내 공부방", "틀린 문제 다시 보기", href="/notes/#wrong", right='<span class="n-pill js-notes-count"></span>')
+                 + act_row(SVG_PRINT, "출력 · PDF 저장", "A4 복습지", cls="js-print") + '</div></div>'
+                 + (f'<div class="side-box"><h4>이어서 보기</h4><ul class="side-links">{link_items}</ul></div>' if links else "")
+                 + side_common())
     data = {"type": "post", "id": p["id"], "title": p["title"], "url": url, "cat": p["cat"], "catName": CATS[p["cat"]],
             "quiz": p["quiz"], "links": links, "kakao": SITE.get("kakao", ""), "audio": audio_map("\n".join(parts))}
     og = p.get("og") or {}
@@ -1533,6 +1550,9 @@ CAT_ABOUT = {
     "story": _about_box("영어 이야기는 이렇게 읽어요",
         "매일 쓰는 단어가 어디서 왔는지 옛 신문, 편지, 사진 같은 실제 기록으로 따라가요. 출처가 확인된 이야기만 쓰고, 잘못 알려진 설은 따로 구분해요.",
         [("light-bulb", "가볍게 읽고", "단어의 숨은 사연"), ("speech-balloon", "바로 써 보기", "지금 쓰는 예문"), ("check", "기억하기", "퀴즈 3문제")]),
+    "journal": _about_box("카영 일지는 이렇게 써요",
+        "카영 스터디언이 직접 영어를 공부하고, 영상과 사이트를 만들며 겪은 일을 적는 기록이에요. 잘된 것보다 헤맨 이야기가 더 많을 거예요. 글마다 오늘의 한 문장을 하나씩 남겨요.",
+        [("hot-beverage", "가볍게", "한 잔 하듯 읽기"), ("speech-balloon", "오늘의 한 문장", "소리 내어 말해 보기"), ("check", "같이 성장하기", "여러분의 이야기도")]),
     "study": _about_box("영어 공부는 이렇게 해요",
         "원어민이 매일 쓰는 표현, 바로 써먹는 꿀팁, 단어에 숨은 이야기를 한곳에 모았어요. 짧게 읽고, 소리 내어 말해 보고, 퀴즈로 확인해요.",
         [("speech-balloon", "처음이라면", "'기초' 글부터"), ("airplane", "여행 전이라면", "여행 시리즈부터"), ("check", "복습은", "내 공부방에 모여요")]),
