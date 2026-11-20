@@ -1,317 +1,5 @@
 [
  {
-  "en": "I've been really busy lately.",
-  "ko": "요즘 정말 바빴어.",
-  "desc": "오랜만에 연락할 때 근황을 전하는 한마디. lately는 '요즘'이라 I've been 같은 현재완료와 함께 써요.",
-  "url": "https://www.cafeinenglish.com/p/hard-vs-hardly/",
-  "share": "https://www.cafeinenglish.com/d/ive-been-really-busy-lately/",
-  "au": "/audio/3b37ee177d14.mp3"
- },
- {
-  "en": "I'm inclined to agree with you.",
-  "ko": "네 말에 동의하는 쪽이야.",
-  "desc": "단정하지 않고 내 생각을 부드럽게 밝힐 때. I agree보다 한 발 부드러워서 회의에서도 자연스러워요.",
-  "url": "https://www.cafeinenglish.com/p/kagan-would-you-want-to-live-forever/",
-  "share": "https://www.cafeinenglish.com/d/im-inclined-to-agree-with-you/",
-  "au": "/audio/f02b82692293.mp3"
- },
- {
-  "en": "We need to discuss the budget.",
-  "ko": "예산을 논의해야 해요",
-  "desc": "discuss 뒤에는 about 없이 바로 내용이 와요. about을 쓰려면 talk about.",
-  "url": "https://www.cafeinenglish.com/p/discuss-about/",
-  "share": "https://www.cafeinenglish.com/d/we-need-to-discuss-the-budget/",
-  "au": "/audio/d09df5bc1418.mp3"
- },
- {
-  "en": "Go ahead, I'm all ears.",
-  "ko": "말해 봐, 듣고 있어",
-  "desc": "온몸이 귀가 된 것처럼 집중해서 듣겠다는 말. ears의 s를 빼먹지 마세요.",
-  "url": "https://www.cafeinenglish.com/p/all-ears/",
-  "share": "https://www.cafeinenglish.com/d/go-ahead-im-all-ears/",
-  "au": "/audio/6c4d62cc0b67.mp3"
- },
- {
-  "en": "Sorry, I'm running a little late.",
-  "ko": "미안, 조금 늦을 것 같아",
-  "desc": "가는 중에 미리 알리는 말. 도착해서 사과할 땐 Sorry I'm late.",
-  "url": "https://www.cafeinenglish.com/p/running-late/",
-  "share": "https://www.cafeinenglish.com/d/sorry-im-running-a-little-late/",
-  "au": "/audio/496cab398295.mp3"
- },
- {
-  "en": "It's not just a job. It's my passion.",
-  "ko": "그냥 일이 아니라, 제 열정이에요",
-  "desc": "not just = 단지 ~만이 아닌. 젠슨 황의 AI is not just software technology에서 건졌어요.",
-  "url": "https://www.cafeinenglish.com/p/jensen-huang-ai-five-layer-cake/",
-  "share": "https://www.cafeinenglish.com/d/its-not-just-a-job-its-my-passion/",
-  "au": "/audio/7aee72345a0e.mp3"
- },
- {
-  "en": "This is a big deal.",
-  "ko": "이건 정말 중요한 문제예요",
-  "desc": "젠슨 황이 'AI란 무엇인가'라는 질문 바로 뒤에 붙인 말. 반대로 It's not a big deal은 '별일 아니야'.",
-  "url": "https://www.cafeinenglish.com/p/jensen-huang-ai-five-layer-cake/",
-  "share": "https://www.cafeinenglish.com/d/this-is-a-big-deal/",
-  "au": "/audio/583d656db2f4.mp3"
- },
- {
-  "en": "Can you lend me your pen?",
-  "ko": "펜 좀 빌려줄래?",
-  "desc": "borrow me는 틀려요. 상대가 빌려주는 거라면 lend me, 내가 빌리면 Can I borrow ~?",
-  "url": "https://www.cafeinenglish.com/p/borrow-vs-lend/",
-  "share": "https://www.cafeinenglish.com/d/can-you-lend-me-your-pen/",
-  "au": "/audio/5bce80177e67.mp3"
- },
- {
-  "en": "It is an honor to be here.",
-  "ko": "이 자리에 서게 되어 영광입니다",
-  "desc": "김동관 부회장이 P4G 정상회의 기조연설을 연 첫 문장. 발표·축사 첫인사로 가장 많이 써요.",
-  "url": "https://www.cafeinenglish.com/p/kim-dongkwan-persuasive-english/",
-  "share": "https://www.cafeinenglish.com/d/it-is-an-honor-to-be-here/",
-  "au": "/audio/6ba5f5deea55.mp3"
- },
- {
-  "en": "It's up to you.",
-  "ko": "네가 정해",
-  "desc": "Whatever만 툭 던지면 짜증처럼 들려요. 결정을 넘길 땐 이 말로.",
-  "url": "https://www.cafeinenglish.com/p/its-up-to-you/",
-  "share": "https://www.cafeinenglish.com/d/its-up-to-you/",
-  "au": "/audio/18507abc2a36.mp3"
- },
- {
-  "en": "I already have plans.",
-  "ko": "이미 약속이 있어",
-  "desc": "친구와의 약속은 promise가 아니라 plans예요.",
-  "url": "https://www.cafeinenglish.com/p/plans-appointment-promise/",
-  "share": "https://www.cafeinenglish.com/d/i-already-have-plans/",
-  "au": "/audio/a4c64571a6ac.mp3"
- },
- {
-  "en": "Fair enough.",
-  "ko": "인정, 그럴 만하네",
-  "desc": "상대 이유가 납득될 때 하는 말. 기쁜 소식에 쓰면 시큰둥하게 들려요.",
-  "url": "https://www.cafeinenglish.com/p/fair-enough/",
-  "share": "https://www.cafeinenglish.com/d/fair-enough/",
-  "au": "/audio/429576eecf97.mp3"
- },
- {
-  "en": "Do you speak English?",
-  "ko": "영어 하세요?",
-  "desc": "Can you는 실력을 묻는 느낌. 처음 보는 사람에게는 Do you로 물어요.",
-  "url": "https://www.cafeinenglish.com/p/do-you-speak-english/",
-  "share": "https://www.cafeinenglish.com/d/do-you-speak-english/",
-  "au": "/audio/0d84e7f15953.mp3"
- },
- {
-  "en": "I'm on a tight deadline.",
-  "ko": "마감이 빠듯해요",
-  "desc": "deadline은 원래 1864년 수용소의 '넘으면 총에 맞는 선'이었어요.",
-  "url": "https://www.cafeinenglish.com/p/deadline-origin/",
-  "share": "https://www.cafeinenglish.com/d/im-on-a-tight-deadline/",
-  "au": "/audio/bd020351f04f.mp3"
- },
- {
-  "en": "First and foremost, thank you all for coming.",
-  "ko": "무엇보다 먼저, 와 주셔서 감사해요",
-  "desc": "발표나 인사말 첫머리에 '무엇보다 먼저'를 강조할 때 쓰는 first and foremost예요.",
-  "url": "https://www.cafeinenglish.com/p/chung-euisun-put-down-roots/",
-  "share": "https://www.cafeinenglish.com/d/first-and-foremost-thank-you-all-for-coming/",
-  "au": "/audio/333277673dd7.mp3"
- },
- {
-  "en": "We come to put down roots.",
-  "ko": "뿌리를 내리러 왔습니다",
-  "desc": "정의선 회장이 조지아 공장 준공식에서 한 말. 한곳에 오래 자리 잡겠다는 뜻이에요.",
-  "url": "https://www.cafeinenglish.com/p/chung-euisun-put-down-roots/",
-  "share": "https://www.cafeinenglish.com/d/we-come-to-put-down-roots/",
-  "au": "/audio/9ea1a984240b.mp3"
- },
- {
-  "en": "Small goals keep me motivated.",
-  "ko": "작은 목표가 저를 계속 움직이게 해요",
-  "desc": "꾸준히 하는 비결을 말할 때 쓰는 keep someone motivated예요.",
-  "url": "https://www.cafeinenglish.com/p/duolingo-500-hours/",
-  "share": "https://www.cafeinenglish.com/d/small-goals-keep-me-motivated/",
-  "au": "/audio/33e5ff932a92.mp3"
- },
- {
-  "en": "We're all in on this project.",
-  "ko": "우리 이 프로젝트에 올인했어",
-  "desc": "이재용 회장 축사에 나온 all in on, 뭔가에 전부 걸었을 때 써요.",
-  "url": "https://www.cafeinenglish.com/p/lee-chey-gala-speech/",
-  "share": "https://www.cafeinenglish.com/d/were-all-in-on-this-project/",
-  "au": "/audio/c486dcdd7a73.mp3"
- },
- {
-  "en": "That sounds really tough.",
-  "ko": "정말 힘들었겠다",
-  "desc": "응원보다 먼저 건네는 공감 한마디예요.",
-  "url": "https://www.cafeinenglish.com/p/sorry-to-hear/",
-  "share": "https://www.cafeinenglish.com/d/that-sounds-really-tough/",
-  "au": "/audio/b4318a8188e1.mp3"
- },
- {
-  "en": "Just following up on my last email.",
-  "ko": "지난번 메일 관련해서 다시 연락드려요",
-  "desc": "답이 없을 때 재촉하지 않고 부드럽게 다시 묻는 첫 문장이에요.",
-  "url": "https://www.cafeinenglish.com/p/email-phrases/",
-  "share": "https://www.cafeinenglish.com/d/just-following-up-on-my-last-email/",
-  "au": "/audio/db0c6533a416.mp3"
- },
- {
-  "en": "What do you call this in English?",
-  "ko": "이거 영어로 뭐라고 해요?",
-  "desc": "call A B에서 모르는 건 이름(B)이라 What으로 물어요.",
-  "url": "https://www.cafeinenglish.com/p/what-do-you-call/",
-  "share": "https://www.cafeinenglish.com/d/what-do-you-call-this-in-english/",
-  "au": "/audio/fbec9c56330e.mp3"
- },
- {
-  "en": "Can I get a blanket, please?",
-  "ko": "담요 좀 주시겠어요?",
-  "desc": "기내에서 필요한 건 Can I get ~? 하나로 다 돼요. 물, 베개, 펜까지!",
-  "url": "https://www.cafeinenglish.com/p/in-flight/",
-  "share": "https://www.cafeinenglish.com/d/can-i-get-a-blanket-please/",
-  "au": "/audio/8e860412dd29.mp3"
- },
- {
-  "en": "Put him on speaker.",
-  "ko": "스피커폰으로 돌려 줘",
-  "desc": "전화 속 사람을 스피커 위에 올려놓는 느낌! 여럿이 같이 들을 때 써요.",
-  "url": "https://www.cafeinenglish.com/p/jensen-trump-call/",
-  "share": "https://www.cafeinenglish.com/d/put-him-on-speaker/",
-  "au": "/audio/934b756f0d69.mp3"
- },
- {
-  "en": "right off the bat",
-  "ko": "처음부터 바로, 대뜸",
-  "desc": "야구공이 배트에 맞자마자 튀어 나가듯, 시작하자마자!",
-  "url": "https://www.cafeinenglish.com/p/james-conversation/",
-  "share": "https://www.cafeinenglish.com/d/right-off-the-bat/",
-  "au": "/audio/fa51f9642006.mp3"
- },
- {
-  "en": "Is there a ~ around here?",
-  "ko": "이 근처에 ~ 있나요?",
-  "desc": "길 물을 땐 Do you have the time? 대신 이 한마디로 대화를 시작해 보세요.",
-  "url": "https://www.cafeinenglish.com/p/james-conversation/",
-  "share": "https://www.cafeinenglish.com/d/is-there-a-around-here/",
-  "au": "/audio/c91233e47e6c.mp3"
- },
- {
-  "en": "I'd like to open an account.",
-  "ko": "계좌를 개설하고 싶어요",
-  "desc": "I want보다 정중한 I'd like to. 은행, 병원 창구에서 첫마디로 딱이에요.",
-  "url": "https://www.cafeinenglish.com/p/id-like-to/",
-  "share": "https://www.cafeinenglish.com/d/id-like-to-open-an-account/",
-  "au": "/audio/71e6ef4768ce.mp3"
- },
- {
-  "en": "I'm on it.",
-  "ko": "바로 할게요, 제가 처리할게요",
-  "desc": "일을 부탁받았을 때 OK보다 훨씬 믿음직한 대답이에요.",
-  "url": "https://www.cafeinenglish.com/p/im-on-it/",
-  "share": "https://www.cafeinenglish.com/d/im-on-it/",
-  "au": "/audio/b465293dc14f.mp3"
- },
- {
-  "en": "a dream come true",
-  "ko": "꿈이 이루어진 것, 꿈만 같은 일",
-  "desc": "젠슨 황은 '나는 부모님의 꿈이 이루어진 모습'이라고 말했어요.",
-  "url": "https://www.cafeinenglish.com/p/jensen/",
-  "share": "https://www.cafeinenglish.com/d/a-dream-come-true/",
-  "au": "/audio/52e9e8c9c13e.mp3"
- },
- {
-  "en": "I'm craving pizza.",
-  "ko": "피자가 너무 당겨",
-  "desc": "crave는 '간절히 원하다'. want보다 훨씬 생생한 '당긴다'예요.",
-  "url": "https://www.cafeinenglish.com/p/craving/",
-  "share": "https://www.cafeinenglish.com/d/im-craving-pizza/",
-  "au": "/audio/df9f1bd40538.mp3"
- },
- {
-  "en": "give back",
-  "ko": "받은 걸 돌려주다, 보답하다",
-  "desc": "받은 걸 다시(back) 주다(give)! 손흥민은 팬들에게 돌려주고 싶다고 했어요.",
-  "url": "https://www.cafeinenglish.com/p/son/",
-  "share": "https://www.cafeinenglish.com/d/give-back/",
-  "au": "/audio/92aa68cd5ca9.mp3"
- },
- {
-  "en": "Does that make sense?",
-  "ko": "제 설명, 이해되세요?",
-  "desc": "Do you understand?보다 부드러워요. 상대가 아니라 내 설명을 묻는 말이거든요.",
-  "url": "https://www.cafeinenglish.com/p/make-sense/",
-  "share": "https://www.cafeinenglish.com/d/does-that-make-sense/",
-  "au": "/audio/4ba4a394a6f2.mp3"
- },
- {
-  "en": "It's on me.",
-  "ko": "내가 낼게, 내가 쏠게",
-  "desc": "계산서가 내 위에(on me)! I'll shoot이라고 하면 안 통해요.",
-  "url": "https://www.cafeinenglish.com/p/its-on-me/",
-  "share": "https://www.cafeinenglish.com/d/its-on-me/",
-  "au": "/audio/48971b2806f8.mp3"
- },
- {
-  "en": "find one's footing",
-  "ko": "자리를 잡다, 적응하다",
-  "desc": "미끄러운 바닥에서 발 디딜 곳(footing)을 찾는 모습을 떠올려 보세요.",
-  "url": "https://www.cafeinenglish.com/p/pichai/",
-  "share": "https://www.cafeinenglish.com/d/find-ones-footing/",
-  "au": "/audio/a69dc64e6b6b.mp3"
- },
- {
-  "en": "Keep me posted.",
-  "ko": "진행되는 대로 계속 알려줘",
-  "desc": "한 번이면 Let me know, 계속이면 Keep me posted예요.",
-  "url": "https://www.cafeinenglish.com/p/keep-me-posted/",
-  "share": "https://www.cafeinenglish.com/d/keep-me-posted/",
-  "au": "/audio/c329640bea2f.mp3"
- },
- {
-  "en": "For here or to go?",
-  "ko": "드시고 가세요, 가져가세요?",
-  "desc": "'퍼히어러 투고?'로 붙어서 들려요. 가져갈 땐 To go, please.",
-  "url": "https://www.cafeinenglish.com/p/travel-cafe/",
-  "share": "https://www.cafeinenglish.com/d/for-here-or-to-go/",
-  "au": "/audio/504bb2f05df0.mp3"
- },
- {
-  "en": "How many in your party?",
-  "ko": "몇 분이세요?",
-  "desc": "party는 '파티'가 아니라 같이 온 '일행'이에요.",
-  "url": "https://www.cafeinenglish.com/p/travel-restaurant/",
-  "share": "https://www.cafeinenglish.com/d/how-many-in-your-party/",
-  "au": "/audio/d634987c1c4c.mp3"
- },
- {
-  "en": "I'm just looking, thanks.",
-  "ko": "그냥 둘러보는 거예요",
-  "desc": "점원이 도와준다고 할 때 부드럽게 거절하는 한마디예요.",
-  "url": "https://www.cafeinenglish.com/p/shopping-checkout/",
-  "share": "https://www.cafeinenglish.com/d/im-just-looking-thanks/",
-  "au": "/audio/67378a34845a.mp3"
- },
- {
-  "en": "You can't miss it.",
-  "ko": "금방 찾으실 거예요",
-  "desc": "놓칠 수가 없을 만큼 눈에 잘 띈다는 말이에요.",
-  "url": "https://www.cafeinenglish.com/p/asking-directions/",
-  "share": "https://www.cafeinenglish.com/d/you-cant-miss-it/",
-  "au": "/audio/a5639e04d092.mp3"
- },
- {
-  "en": "I think I left it in the taxi.",
-  "ko": "택시에 두고 내린 것 같아요",
-  "desc": "left는 leave(두고 오다)의 과거형. 물건을 어디 두고 왔을 때 써요.",
-  "url": "https://www.cafeinenglish.com/p/travel-trouble/",
-  "share": "https://www.cafeinenglish.com/d/i-think-i-left-it-in-the-taxi/",
-  "au": "/audio/7efaf267b298.mp3"
- },
- {
   "en": "I'm swamped.",
   "ko": "할 일이 산더미야, 정신없이 바빠",
   "desc": "swamp는 '늪'. 일이 늪처럼 밀려와 허우적대는 느낌이라 busy보다 훨씬 생생해요.",
@@ -734,5 +422,325 @@
   "url": "https://www.cafeinenglish.com/p/kagan-would-you-want-to-live-forever/",
   "share": "https://www.cafeinenglish.com/d/weve-only-scratched-the-surface/",
   "au": "/audio/a18ab457aaf8.mp3"
+ },
+ {
+  "en": "Here's the thing.",
+  "ko": "그런데 중요한 건요",
+  "desc": "핵심을 꺼내기 직전에 붙이는 말. 이 한마디로 듣는 사람의 귀를 먼저 붙잡아요.",
+  "url": "https://www.cafeinenglish.com/p/subtitles-off-cant-hear/",
+  "share": "https://www.cafeinenglish.com/d/heres-the-thing/",
+  "au": "/audio/e804950cf3f6.mp3"
+ },
+ {
+  "en": "I've been really busy lately.",
+  "ko": "요즘 정말 바빴어.",
+  "desc": "오랜만에 연락할 때 근황을 전하는 한마디. lately는 '요즘'이라 I've been 같은 현재완료와 함께 써요.",
+  "url": "https://www.cafeinenglish.com/p/hard-vs-hardly/",
+  "share": "https://www.cafeinenglish.com/d/ive-been-really-busy-lately/",
+  "au": "/audio/3b37ee177d14.mp3"
+ },
+ {
+  "en": "I'm inclined to agree with you.",
+  "ko": "네 말에 동의하는 쪽이야.",
+  "desc": "단정하지 않고 내 생각을 부드럽게 밝힐 때. I agree보다 한 발 부드러워서 회의에서도 자연스러워요.",
+  "url": "https://www.cafeinenglish.com/p/kagan-would-you-want-to-live-forever/",
+  "share": "https://www.cafeinenglish.com/d/im-inclined-to-agree-with-you/",
+  "au": "/audio/f02b82692293.mp3"
+ },
+ {
+  "en": "We need to discuss the budget.",
+  "ko": "예산을 논의해야 해요",
+  "desc": "discuss 뒤에는 about 없이 바로 내용이 와요. about을 쓰려면 talk about.",
+  "url": "https://www.cafeinenglish.com/p/discuss-about/",
+  "share": "https://www.cafeinenglish.com/d/we-need-to-discuss-the-budget/",
+  "au": "/audio/d09df5bc1418.mp3"
+ },
+ {
+  "en": "Go ahead, I'm all ears.",
+  "ko": "말해 봐, 듣고 있어",
+  "desc": "온몸이 귀가 된 것처럼 집중해서 듣겠다는 말. ears의 s를 빼먹지 마세요.",
+  "url": "https://www.cafeinenglish.com/p/all-ears/",
+  "share": "https://www.cafeinenglish.com/d/go-ahead-im-all-ears/",
+  "au": "/audio/6c4d62cc0b67.mp3"
+ },
+ {
+  "en": "Sorry, I'm running a little late.",
+  "ko": "미안, 조금 늦을 것 같아",
+  "desc": "가는 중에 미리 알리는 말. 도착해서 사과할 땐 Sorry I'm late.",
+  "url": "https://www.cafeinenglish.com/p/running-late/",
+  "share": "https://www.cafeinenglish.com/d/sorry-im-running-a-little-late/",
+  "au": "/audio/496cab398295.mp3"
+ },
+ {
+  "en": "It's not just a job. It's my passion.",
+  "ko": "그냥 일이 아니라, 제 열정이에요",
+  "desc": "not just = 단지 ~만이 아닌. 젠슨 황의 AI is not just software technology에서 건졌어요.",
+  "url": "https://www.cafeinenglish.com/p/jensen-huang-ai-five-layer-cake/",
+  "share": "https://www.cafeinenglish.com/d/its-not-just-a-job-its-my-passion/",
+  "au": "/audio/7aee72345a0e.mp3"
+ },
+ {
+  "en": "This is a big deal.",
+  "ko": "이건 정말 중요한 문제예요",
+  "desc": "젠슨 황이 'AI란 무엇인가'라는 질문 바로 뒤에 붙인 말. 반대로 It's not a big deal은 '별일 아니야'.",
+  "url": "https://www.cafeinenglish.com/p/jensen-huang-ai-five-layer-cake/",
+  "share": "https://www.cafeinenglish.com/d/this-is-a-big-deal/",
+  "au": "/audio/583d656db2f4.mp3"
+ },
+ {
+  "en": "Can you lend me your pen?",
+  "ko": "펜 좀 빌려줄래?",
+  "desc": "borrow me는 틀려요. 상대가 빌려주는 거라면 lend me, 내가 빌리면 Can I borrow ~?",
+  "url": "https://www.cafeinenglish.com/p/borrow-vs-lend/",
+  "share": "https://www.cafeinenglish.com/d/can-you-lend-me-your-pen/",
+  "au": "/audio/5bce80177e67.mp3"
+ },
+ {
+  "en": "It is an honor to be here.",
+  "ko": "이 자리에 서게 되어 영광입니다",
+  "desc": "김동관 부회장이 P4G 정상회의 기조연설을 연 첫 문장. 발표·축사 첫인사로 가장 많이 써요.",
+  "url": "https://www.cafeinenglish.com/p/kim-dongkwan-persuasive-english/",
+  "share": "https://www.cafeinenglish.com/d/it-is-an-honor-to-be-here/",
+  "au": "/audio/6ba5f5deea55.mp3"
+ },
+ {
+  "en": "It's up to you.",
+  "ko": "네가 정해",
+  "desc": "Whatever만 툭 던지면 짜증처럼 들려요. 결정을 넘길 땐 이 말로.",
+  "url": "https://www.cafeinenglish.com/p/its-up-to-you/",
+  "share": "https://www.cafeinenglish.com/d/its-up-to-you/",
+  "au": "/audio/18507abc2a36.mp3"
+ },
+ {
+  "en": "I already have plans.",
+  "ko": "이미 약속이 있어",
+  "desc": "친구와의 약속은 promise가 아니라 plans예요.",
+  "url": "https://www.cafeinenglish.com/p/plans-appointment-promise/",
+  "share": "https://www.cafeinenglish.com/d/i-already-have-plans/",
+  "au": "/audio/a4c64571a6ac.mp3"
+ },
+ {
+  "en": "Fair enough.",
+  "ko": "인정, 그럴 만하네",
+  "desc": "상대 이유가 납득될 때 하는 말. 기쁜 소식에 쓰면 시큰둥하게 들려요.",
+  "url": "https://www.cafeinenglish.com/p/fair-enough/",
+  "share": "https://www.cafeinenglish.com/d/fair-enough/",
+  "au": "/audio/429576eecf97.mp3"
+ },
+ {
+  "en": "Do you speak English?",
+  "ko": "영어 하세요?",
+  "desc": "Can you는 실력을 묻는 느낌. 처음 보는 사람에게는 Do you로 물어요.",
+  "url": "https://www.cafeinenglish.com/p/do-you-speak-english/",
+  "share": "https://www.cafeinenglish.com/d/do-you-speak-english/",
+  "au": "/audio/0d84e7f15953.mp3"
+ },
+ {
+  "en": "I'm on a tight deadline.",
+  "ko": "마감이 빠듯해요",
+  "desc": "deadline은 원래 1864년 수용소의 '넘으면 총에 맞는 선'이었어요.",
+  "url": "https://www.cafeinenglish.com/p/deadline-origin/",
+  "share": "https://www.cafeinenglish.com/d/im-on-a-tight-deadline/",
+  "au": "/audio/bd020351f04f.mp3"
+ },
+ {
+  "en": "First and foremost, thank you all for coming.",
+  "ko": "무엇보다 먼저, 와 주셔서 감사해요",
+  "desc": "발표나 인사말 첫머리에 '무엇보다 먼저'를 강조할 때 쓰는 first and foremost예요.",
+  "url": "https://www.cafeinenglish.com/p/chung-euisun-put-down-roots/",
+  "share": "https://www.cafeinenglish.com/d/first-and-foremost-thank-you-all-for-coming/",
+  "au": "/audio/333277673dd7.mp3"
+ },
+ {
+  "en": "We come to put down roots.",
+  "ko": "뿌리를 내리러 왔습니다",
+  "desc": "정의선 회장이 조지아 공장 준공식에서 한 말. 한곳에 오래 자리 잡겠다는 뜻이에요.",
+  "url": "https://www.cafeinenglish.com/p/chung-euisun-put-down-roots/",
+  "share": "https://www.cafeinenglish.com/d/we-come-to-put-down-roots/",
+  "au": "/audio/9ea1a984240b.mp3"
+ },
+ {
+  "en": "Small goals keep me motivated.",
+  "ko": "작은 목표가 저를 계속 움직이게 해요",
+  "desc": "꾸준히 하는 비결을 말할 때 쓰는 keep someone motivated예요.",
+  "url": "https://www.cafeinenglish.com/p/duolingo-500-hours/",
+  "share": "https://www.cafeinenglish.com/d/small-goals-keep-me-motivated/",
+  "au": "/audio/33e5ff932a92.mp3"
+ },
+ {
+  "en": "We're all in on this project.",
+  "ko": "우리 이 프로젝트에 올인했어",
+  "desc": "이재용 회장 축사에 나온 all in on, 뭔가에 전부 걸었을 때 써요.",
+  "url": "https://www.cafeinenglish.com/p/lee-chey-gala-speech/",
+  "share": "https://www.cafeinenglish.com/d/were-all-in-on-this-project/",
+  "au": "/audio/c486dcdd7a73.mp3"
+ },
+ {
+  "en": "That sounds really tough.",
+  "ko": "정말 힘들었겠다",
+  "desc": "응원보다 먼저 건네는 공감 한마디예요.",
+  "url": "https://www.cafeinenglish.com/p/sorry-to-hear/",
+  "share": "https://www.cafeinenglish.com/d/that-sounds-really-tough/",
+  "au": "/audio/b4318a8188e1.mp3"
+ },
+ {
+  "en": "Just following up on my last email.",
+  "ko": "지난번 메일 관련해서 다시 연락드려요",
+  "desc": "답이 없을 때 재촉하지 않고 부드럽게 다시 묻는 첫 문장이에요.",
+  "url": "https://www.cafeinenglish.com/p/email-phrases/",
+  "share": "https://www.cafeinenglish.com/d/just-following-up-on-my-last-email/",
+  "au": "/audio/db0c6533a416.mp3"
+ },
+ {
+  "en": "What do you call this in English?",
+  "ko": "이거 영어로 뭐라고 해요?",
+  "desc": "call A B에서 모르는 건 이름(B)이라 What으로 물어요.",
+  "url": "https://www.cafeinenglish.com/p/what-do-you-call/",
+  "share": "https://www.cafeinenglish.com/d/what-do-you-call-this-in-english/",
+  "au": "/audio/fbec9c56330e.mp3"
+ },
+ {
+  "en": "Can I get a blanket, please?",
+  "ko": "담요 좀 주시겠어요?",
+  "desc": "기내에서 필요한 건 Can I get ~? 하나로 다 돼요. 물, 베개, 펜까지!",
+  "url": "https://www.cafeinenglish.com/p/in-flight/",
+  "share": "https://www.cafeinenglish.com/d/can-i-get-a-blanket-please/",
+  "au": "/audio/8e860412dd29.mp3"
+ },
+ {
+  "en": "Put him on speaker.",
+  "ko": "스피커폰으로 돌려 줘",
+  "desc": "전화 속 사람을 스피커 위에 올려놓는 느낌! 여럿이 같이 들을 때 써요.",
+  "url": "https://www.cafeinenglish.com/p/jensen-trump-call/",
+  "share": "https://www.cafeinenglish.com/d/put-him-on-speaker/",
+  "au": "/audio/934b756f0d69.mp3"
+ },
+ {
+  "en": "right off the bat",
+  "ko": "처음부터 바로, 대뜸",
+  "desc": "야구공이 배트에 맞자마자 튀어 나가듯, 시작하자마자!",
+  "url": "https://www.cafeinenglish.com/p/james-conversation/",
+  "share": "https://www.cafeinenglish.com/d/right-off-the-bat/",
+  "au": "/audio/fa51f9642006.mp3"
+ },
+ {
+  "en": "Is there a ~ around here?",
+  "ko": "이 근처에 ~ 있나요?",
+  "desc": "길 물을 땐 Do you have the time? 대신 이 한마디로 대화를 시작해 보세요.",
+  "url": "https://www.cafeinenglish.com/p/james-conversation/",
+  "share": "https://www.cafeinenglish.com/d/is-there-a-around-here/",
+  "au": "/audio/c91233e47e6c.mp3"
+ },
+ {
+  "en": "I'd like to open an account.",
+  "ko": "계좌를 개설하고 싶어요",
+  "desc": "I want보다 정중한 I'd like to. 은행, 병원 창구에서 첫마디로 딱이에요.",
+  "url": "https://www.cafeinenglish.com/p/id-like-to/",
+  "share": "https://www.cafeinenglish.com/d/id-like-to-open-an-account/",
+  "au": "/audio/71e6ef4768ce.mp3"
+ },
+ {
+  "en": "I'm on it.",
+  "ko": "바로 할게요, 제가 처리할게요",
+  "desc": "일을 부탁받았을 때 OK보다 훨씬 믿음직한 대답이에요.",
+  "url": "https://www.cafeinenglish.com/p/im-on-it/",
+  "share": "https://www.cafeinenglish.com/d/im-on-it/",
+  "au": "/audio/b465293dc14f.mp3"
+ },
+ {
+  "en": "a dream come true",
+  "ko": "꿈이 이루어진 것, 꿈만 같은 일",
+  "desc": "젠슨 황은 '나는 부모님의 꿈이 이루어진 모습'이라고 말했어요.",
+  "url": "https://www.cafeinenglish.com/p/jensen/",
+  "share": "https://www.cafeinenglish.com/d/a-dream-come-true/",
+  "au": "/audio/52e9e8c9c13e.mp3"
+ },
+ {
+  "en": "I'm craving pizza.",
+  "ko": "피자가 너무 당겨",
+  "desc": "crave는 '간절히 원하다'. want보다 훨씬 생생한 '당긴다'예요.",
+  "url": "https://www.cafeinenglish.com/p/craving/",
+  "share": "https://www.cafeinenglish.com/d/im-craving-pizza/",
+  "au": "/audio/df9f1bd40538.mp3"
+ },
+ {
+  "en": "give back",
+  "ko": "받은 걸 돌려주다, 보답하다",
+  "desc": "받은 걸 다시(back) 주다(give)! 손흥민은 팬들에게 돌려주고 싶다고 했어요.",
+  "url": "https://www.cafeinenglish.com/p/son/",
+  "share": "https://www.cafeinenglish.com/d/give-back/",
+  "au": "/audio/92aa68cd5ca9.mp3"
+ },
+ {
+  "en": "Does that make sense?",
+  "ko": "제 설명, 이해되세요?",
+  "desc": "Do you understand?보다 부드러워요. 상대가 아니라 내 설명을 묻는 말이거든요.",
+  "url": "https://www.cafeinenglish.com/p/make-sense/",
+  "share": "https://www.cafeinenglish.com/d/does-that-make-sense/",
+  "au": "/audio/4ba4a394a6f2.mp3"
+ },
+ {
+  "en": "It's on me.",
+  "ko": "내가 낼게, 내가 쏠게",
+  "desc": "계산서가 내 위에(on me)! I'll shoot이라고 하면 안 통해요.",
+  "url": "https://www.cafeinenglish.com/p/its-on-me/",
+  "share": "https://www.cafeinenglish.com/d/its-on-me/",
+  "au": "/audio/48971b2806f8.mp3"
+ },
+ {
+  "en": "find one's footing",
+  "ko": "자리를 잡다, 적응하다",
+  "desc": "미끄러운 바닥에서 발 디딜 곳(footing)을 찾는 모습을 떠올려 보세요.",
+  "url": "https://www.cafeinenglish.com/p/pichai/",
+  "share": "https://www.cafeinenglish.com/d/find-ones-footing/",
+  "au": "/audio/a69dc64e6b6b.mp3"
+ },
+ {
+  "en": "Keep me posted.",
+  "ko": "진행되는 대로 계속 알려줘",
+  "desc": "한 번이면 Let me know, 계속이면 Keep me posted예요.",
+  "url": "https://www.cafeinenglish.com/p/keep-me-posted/",
+  "share": "https://www.cafeinenglish.com/d/keep-me-posted/",
+  "au": "/audio/c329640bea2f.mp3"
+ },
+ {
+  "en": "For here or to go?",
+  "ko": "드시고 가세요, 가져가세요?",
+  "desc": "'퍼히어러 투고?'로 붙어서 들려요. 가져갈 땐 To go, please.",
+  "url": "https://www.cafeinenglish.com/p/travel-cafe/",
+  "share": "https://www.cafeinenglish.com/d/for-here-or-to-go/",
+  "au": "/audio/504bb2f05df0.mp3"
+ },
+ {
+  "en": "How many in your party?",
+  "ko": "몇 분이세요?",
+  "desc": "party는 '파티'가 아니라 같이 온 '일행'이에요.",
+  "url": "https://www.cafeinenglish.com/p/travel-restaurant/",
+  "share": "https://www.cafeinenglish.com/d/how-many-in-your-party/",
+  "au": "/audio/d634987c1c4c.mp3"
+ },
+ {
+  "en": "I'm just looking, thanks.",
+  "ko": "그냥 둘러보는 거예요",
+  "desc": "점원이 도와준다고 할 때 부드럽게 거절하는 한마디예요.",
+  "url": "https://www.cafeinenglish.com/p/shopping-checkout/",
+  "share": "https://www.cafeinenglish.com/d/im-just-looking-thanks/",
+  "au": "/audio/67378a34845a.mp3"
+ },
+ {
+  "en": "You can't miss it.",
+  "ko": "금방 찾으실 거예요",
+  "desc": "놓칠 수가 없을 만큼 눈에 잘 띈다는 말이에요.",
+  "url": "https://www.cafeinenglish.com/p/asking-directions/",
+  "share": "https://www.cafeinenglish.com/d/you-cant-miss-it/",
+  "au": "/audio/a5639e04d092.mp3"
+ },
+ {
+  "en": "I think I left it in the taxi.",
+  "ko": "택시에 두고 내린 것 같아요",
+  "desc": "left는 leave(두고 오다)의 과거형. 물건을 어디 두고 왔을 때 써요.",
+  "url": "https://www.cafeinenglish.com/p/travel-trouble/",
+  "share": "https://www.cafeinenglish.com/d/i-think-i-left-it-in-the-taxi/",
+  "au": "/audio/7efaf267b298.mp3"
  }
 ]

@@ -550,5 +550,11 @@
   "en": "I've been really busy lately.",
   "ko": "요즘 정말 바빴어.",
   "desc": "오랜만에 연락할 때 근황을 전하는 한마디. lately는 '요즘'이라 I've been 같은 현재완료와 함께 써요."
+ },
+ {
+  "post": "subtitles-off-cant-hear",
+  "en": "Here's the thing.",
+  "ko": "그런데 중요한 건요",
+  "desc": "핵심을 꺼내기 직전에 붙이는 말. 이 한마디로 듣는 사람의 귀를 먼저 붙잡아요."
  }
 ]
