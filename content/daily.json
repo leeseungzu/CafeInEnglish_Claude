@@ -556,5 +556,17 @@
   "en": "Here's the thing.",
   "ko": "그런데 중요한 건요",
   "desc": "핵심을 꺼내기 직전에 붙이는 말. 이 한마디로 듣는 사람의 귀를 먼저 붙잡아요."
+ },
+ {
+  "post": "great-speeches-first-sentence",
+  "en": "Truth be told, I'm a little nervous.",
+  "ko": "솔직히 말하면, 저 좀 떨려요.",
+  "desc": "털어놓기 어려운 말을 꺼낼 때 문장 맨 앞에 붙여요. 잡스가 졸업식 축사를 이렇게 시작했어요."
+ },
+ {
+  "post": "great-speeches-first-sentence",
+  "en": "I want to start by asking you a question.",
+  "ko": "질문 하나로 시작해 볼게요.",
+  "desc": "발표 첫 문장에 그대로 쓸 수 있는 틀. start by 뒤에는 ~ing가 와요."
  }
 ]
