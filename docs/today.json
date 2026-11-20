@@ -1,13 +1,5 @@
 {
  "days": {
-  "2026-11-16": {
-   "en": "I'm beat.",
-   "ko": "완전 녹초야",
-   "desc": "하루를 다 써서 진이 빠졌을 때 친구에게 하는 말. You look beat.(지쳐 보이네)처럼도 써요.",
-   "url": "https://www.cafeinenglish.com/p/im-beat/",
-   "share": "https://www.cafeinenglish.com/d/im-beat/",
-   "au": "/audio/5c057f2b9b33.mp3"
-  },
   "2026-11-17": {
    "en": "We really speak the same language.",
    "ko": "우리 정말 말이 잘 통하네요",
@@ -143,6 +135,14 @@
    "url": "https://www.cafeinenglish.com/p/used-to-vs-be-used-to/",
    "share": "https://www.cafeinenglish.com/d/im-still-getting-used-to-it/",
    "au": "/audio/ddfb65275299.mp3"
+  },
+  "2026-12-04": {
+   "en": "We've only scratched the surface.",
+   "ko": "아직 시작에 불과해요.",
+   "desc": "아직 할 게 훨씬 많다고 강조할 때. 표면만 긁었다는 말이라, 발표나 인터뷰에서 자주 들려요.",
+   "url": "https://www.cafeinenglish.com/p/kagan-would-you-want-to-live-forever/",
+   "share": "https://www.cafeinenglish.com/d/weve-only-scratched-the-surface/",
+   "au": "/audio/a18ab457aaf8.mp3"
   }
  }
 }

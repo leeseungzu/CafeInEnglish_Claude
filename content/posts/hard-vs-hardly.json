@@ -1,0 +1,73 @@
+{
+  "id": "hard-vs-hardly",
+  "cat": "tip",
+  "sub": "단어",
+  "level": "기초",
+  "date": "2026-11-20",
+  "title": "hard와 hardly는 다른 단어, -ly를 붙이면 뜻이 바뀌는 부사 4개",
+  "seo_title": "hardly 뜻 - hard와 hardly, late와 lately 차이",
+  "lead": "hard에 -ly 하나 붙였을 뿐인데, 전혀 다른 단어가 돼요",
+  "description": "hard는 '열심히', hardly는 '거의 ~않다'예요. late와 lately, near와 nearly, high와 highly까지 -ly를 붙일지 정하는 기준을 사전 설명과 오바마 연설로 정리했어요.",
+  "og": {
+    "en": "hard vs hardly",
+    "ko": "-ly를 붙이면 다른 단어가 돼요"
+  },
+  "icon": "flexed-biceps",
+  "chat": {
+    "q": "Have you been busy lately?",
+    "a": "Yeah, I've been working hard. I hardly get any sleep!",
+    "key": "hardly",
+    "ko": "응, 열심히 일하고 있어. 잠을 거의 못 자!"
+  },
+  "thumb": {
+    "text": "hard vs hardly",
+    "key": "hardly",
+    "ko": "-ly 하나로 뜻이 뒤집혀요"
+  },
+  "quiz": [
+    {
+      "tag": "빈칸",
+      "q": "I can ___ hear you. The music is too loud.",
+      "sub": "음악이 너무 커서 네 말이 거의 안 들려",
+      "options": [
+        "hard",
+        "hardly",
+        "harder",
+        "hardest"
+      ],
+      "answer": 1,
+      "explain": "'거의 ~않다(못 하다)'는 hardly예요. can 뒤, 본동사 hear 앞에 와요. hard는 '열심히, 세게'라서 여기에 맞지 않아요.",
+      "mnemonic": "hard에 ly가 붙으면 힘이 쭉 빠져서 '거의 못 해'"
+    },
+    {
+      "tag": "빈칸",
+      "q": "I've been really busy ___.",
+      "sub": "요즘 정말 바빴어",
+      "options": [
+        "late",
+        "lately",
+        "later",
+        "latest"
+      ],
+      "answer": 1,
+      "explain": "'최근에, 요즘'은 lately예요. 지금까지 이어지는 시간이라 I've been 같은 현재완료와 잘 어울려요. late는 '늦게', later는 '나중에'예요.",
+      "mnemonic": "late(늦게)에 ly가 붙으면 '늦게'가 아니라 '요즘'"
+    },
+    {
+      "tag": "뜻",
+      "q": "She speaks highly of you. 이 말의 뜻으로 알맞은 것은?",
+      "sub": "",
+      "options": [
+        "그분이 너에 대해 큰 소리로 말해",
+        "그분이 너를 아주 좋게 말해",
+        "그분이 너에 대해 거의 말을 안 해",
+        "그분이 너보다 높은 자리에서 말해"
+      ],
+      "answer": 1,
+      "explain": "speak highly of는 '~를 좋게 말하다, 칭찬하다'예요. highly는 실제 높이가 아니라 '높이 평가하여'라는 뜻이에요.",
+      "mnemonic": "highly = 한국어 '높이 산다'의 그 '높이'"
+    }
+  ],
+  "related": [],
+  "body_html": "<p>자기소개 메일에 '영어를 3년 동안 열심히 공부했어요'를 이렇게 쓴다고 해 볼게요.</p>\n<div class=\"box\"><p><b>I studied English hardly for three years.</b><br>쓴 사람의 뜻: 3년 동안 영어를 열심히 공부했어요.<br>읽는 사람에게는: 틀린 문장이에요. 게다가 hardly는 '거의 ~않다'라서 I hardly studied English(영어를 거의 공부하지 않았어요)로 오해받기 쉬워요.<br>바르게 쓰면: <b>I studied English hard for three years.</b></p></div>\n<p>'열심히'를 부사로 만들려고 hard 뒤에 -ly를 붙였는데, 그 -ly가 정반대 뜻의 단어를 불러온 거예요. 롱맨 사전은 hardly 항목에 아예 <b>\"Hardly is not the adverb of hard.\"</b>(hardly는 hard의 부사가 아니다)라고 적어 두었어요. 옥스퍼드 러너스 사전도 hard의 부사는 hard 그대로이고, hardly는 '거의 ~않다'라는 뜻이라 hard 대신 쓸 수 없다고 짚어요. quick → quickly처럼 '-ly를 붙이면 부사'라는 공식을 hard에도 그대로 적용하다 보니 생기는 실수예요.</p>\n<h2>-ly를 붙이면 다른 단어가 되는 넷</h2>\n<p>hard처럼 <b>-ly 없이도 이미 부사</b>인 단어가 있어요. 그런데 그중 몇 개는 -ly를 붙인 모양이 따로 있고, 그 뜻이 원래 단어와 거리가 멀어요. 회화에서 자주 부딪히는 건 아래 네 쌍이에요.</p>\n<div class=\"tbl\"><table class=\"cmp\"><thead><tr><th>-ly 없이</th><th>-ly를 붙이면</th></tr></thead><tbody><tr><td><b>hard</b> 열심히, 세게<br>work hard 열심히 일하다</td><td><b>hardly</b> 거의 ~않다<br>hardly sleep 거의 못 자다</td></tr><tr><td><b>late</b> 늦게<br>arrive late 늦게 도착하다</td><td><b>lately</b> 최근에, 요즘<br>busy lately 요즘 바쁜</td></tr><tr><td><b>near</b> 가까이, 가까워져<br>draw near 다가오다</td><td><b>nearly</b> 거의 (다 됐지만 아직)<br>nearly two years 거의 2년</td></tr><tr><td><b>high</b> 높이<br>jump high 높이 뛰다</td><td><b>highly</b> 매우, 높게 평가하여<br>highly recommend 강력 추천하다</td></tr></tbody></table></div>\n<p>왼쪽은 <b>형용사 뜻 그대로</b>예요. hard(힘든), late(늦은), near(가까운), high(높은)의 뜻을 부사 자리에서도 그대로 써요. 오른쪽은 뜻이 달라진 <b>별개의 단어</b>라서 '거의 ~않다, 요즘, 거의, 매우'처럼 정도나 시기를 나타내요.</p>\n<div class=\"keypt\"><b>-ly를 붙일까 말까, 이렇게 판단해요</b><ol>\n<li>말 그대로 '열심히·늦게·가까이·높이'라면 <b>-ly 없이</b> hard, late, near, high</li>\n<li>'거의 ~않다·요즘·거의·매우'라는 다른 뜻이라면 <b>-ly를 붙인</b> hardly, lately, nearly, highly</li>\n</ol></div>\n<h2>hardly, 부정어를 또 붙이지 않아요</h2>\n<p>hardly는 그 자체로 '거의 ~않다'라서 부정의 뜻이 이미 들어 있어요. 옥스퍼드 러너스 사전은 hardly, scarcely, barely가 부정어이므로 not 같은 다른 부정어와 함께 쓰지 않는다고 설명해요. 롱맨 사전도 There's hardly no milk라고 하지 말라고 적어 두었어요. '거의 없다'는 hardly any, '거의 안 한다'는 hardly ever로 짝을 지어요.</p>\n<ul class=\"ex\">\n<li><span class=\"en\">There's hardly any milk left.</span><span class=\"ko\">우유가 거의 안 남았어.</span></li>\n<li><span class=\"en\">She hardly ever calls me.</span><span class=\"ko\">걔는 나한테 전화를 거의 안 해.</span></li>\n<li><span class=\"en\">I can hardly keep my eyes open.</span><span class=\"ko\">졸려서 눈이 자꾸 감겨.</span></li>\n</ul>\n<p>세 번째 문장처럼 can 뒤에 오면 '하기가 너무 힘들다'는 느낌이 돼요. 자리도 중요해요. 롱맨 사전에 따르면 hardly는 보통 본동사 앞(He hardly said a word)에 오고, 조동사가 있으면 조동사 뒤에 와요. 그래서 I hardly can believe가 아니라 I can hardly believe예요. 메리엄웹스터는 can't hardly처럼 부정어와 함께 쓰는 말투가 미국 남부·미들랜드 지역의 비격식 구어에서 들린다고 소개하지만, 시험이나 글에서는 쓰지 않는 게 좋아요.</p>\n<p>반대로 '열심히'의 hard가 실제 연설에서 어떻게 들리는지도 볼게요. 버락 오바마 전 미국 대통령은 2013년 2월 12일 국정연설에서 미국을 세운 기본 약속을 이렇게 표현했어요.</p>\n<div class=\"box\"><p><b>\"...the idea that if you work hard and meet your responsibilities, you can get ahead...\"</b><br>열심히 일하고 자기 책임을 다하면 앞으로 나아갈 수 있다는 생각</p></div>\n<p>work hard는 '성실하게 노력하면'이라는 약속의 핵심이에요. 이 자리에 hardly를 넣어 if you hardly work라고 하면 '거의 일하지 않아도'라는 엉뚱한 약속이 돼요. 같은 연설에는 highly-skilled entrepreneurs and engineers(고도로 숙련된 창업가와 엔지니어)라는 말도 나오는데, 이 highly는 표 오른쪽의 '매우, 높은 수준으로'예요.</p>\n<h2>lately는 '늦게'가 아니라 '요즘'</h2>\n<p>옥스퍼드 러너스 사전은 late와 lately를 나란히 놓고, late는 형용사 late와 비슷한 뜻(늦게)으로 쓰지만 lately는 '최근에'라는 뜻만 있다고 설명해요. 그리고 lately는 보통 완료 시제와 함께 쓴다고 덧붙여요. 롱맨 사전은 더 구체적으로, I've been very busy lately는 맞지만 I was very busy lately라고 하지 말라고 적어요. '최근에'는 과거부터 지금까지 이어지는 시간이라, 지금과 연결된 현재완료가 자연스럽게 따라오는 거예요.</p>\n<ul class=\"ex\">\n<li><span class=\"en\">I've been really busy lately.</span><span class=\"ko\">요즘 정말 바빴어.</span></li>\n<li><span class=\"en\">Have you talked to him lately?</span><span class=\"ko\">최근에 그 사람이랑 얘기해 봤어?</span></li>\n<li><span class=\"en\">Sorry, I got home late last night.</span><span class=\"ko\">미안, 어젯밤에 늦게 들어왔어.</span></li>\n</ul>\n<h2>nearly는 '가까이'가 아니라 '거의'</h2>\n<p>nearly는 옥스퍼드 러너스 사전 풀이로 '거의, 완전히는 아닌'이에요. 거의 다 왔지만 아직 닿지 않은 느낌이라 숫자와 특히 잘 어울려요. 같은 사전은 almost와 nearly를 비교하면서 숫자와 함께 쓸 때는 nearly가 가장 흔하다고 설명해요. 거리나 시간이 '가까이, 가까워져'는 -ly 없는 near예요.</p>\n<ul class=\"ex\">\n<li><span class=\"en\">I've worked here for nearly two years.</span><span class=\"ko\">여기서 일한 지 거의 2년 됐어.</span></li>\n<li><span class=\"en\">Christmas is drawing near.</span><span class=\"ko\">크리스마스가 다가오고 있어.</span></li>\n<li><span class=\"en\">It's not nearly as cold as last year.</span><span class=\"ko\">작년보다 훨씬 덜 추워.</span></li>\n</ul>\n<p>세 번째 문장의 not nearly는 '거의 ~않다'가 아니라 <b>'~에 한참 못 미치다'</b>예요. 옥스퍼드 러너스 사전도 not nearly를 '훨씬 적은, 전혀 아닌'으로 따로 풀이해요. not nearly as ~ as는 '~만큼은 전혀 아니다', 곧 '훨씬 덜 ~하다'로 옮기면 자연스러워요. 그리고 nearly는 no, nothing 같은 부정어 앞에는 쓰지 않아요(롱맨). '거의 아무것도 모른다'는 I know almost nothing이에요. almost와 비슷한 단어끼리의 차이는 <a href=\"/p/almost-vs-most/\">almost와 most 구별하기</a>에서도 다뤘어요. 참고로 메리엄웹스터에는 near가 '거의'라는 뜻으로 쓰이는 풀이도 실려 있지만, 회화에서 '거의'를 말할 때는 nearly나 almost를 쓰는 게 자연스러워요.</p>\n<h2>highly는 높이가 아니라 정도와 평가</h2>\n<p>사전에 실린 highly의 풀이와 예문은 '매우'(It is highly unlikely 그럴 가능성은 매우 낮다), '높은 수준으로'(a highly paid job 보수가 높은 일), '좋게 평가하여'(speak highly of 좋게 말하다) 쪽에 모여 있어요. 몸이나 물건이 실제로 높이 올라가는 건 -ly 없는 high로 말해요. 옥스퍼드 러너스 사전의 high 부사 예문도 jump high, A plane flew high above(비행기가 높이 날아갔다)예요.</p>\n<ul class=\"ex\">\n<li><span class=\"en\">I highly recommend this book.</span><span class=\"ko\">이 책 강력 추천해요.</span></li>\n<li><span class=\"en\">She speaks highly of you.</span><span class=\"ko\">그분이 당신을 좋게 말해요.</span></li>\n<li><span class=\"en\">The kids jumped high on the trampoline.</span><span class=\"ko\">아이들이 트램펄린에서 높이 뛰었어.</span></li>\n</ul>\n<p>speak highly of와 think highly of(높이 평가하다)는 회사나 추천서에서 자주 만나는 말이에요. '높이 산다'는 한국어와 생각이 같아서 외우기 쉬워요.</p>\n<h2>-ly가 없어도 틀린 게 아니에요</h2>\n<p>여기까지 보면 '그럼 -ly 없는 부사는 다 예외인가?' 싶을 수 있어요. 메리엄웹스터는 -ly가 없는 부사를 flat adverb라고 부르며 영어에서 흔하다고 설명해요. see you soon의 soon, time goes so fast의 fast가 그런 예예요. hard, late, near, high도 같은 무리라서, -ly가 빠졌다고 문법이 틀린 게 아니에요. 오히려 다만 -ly를 붙이는 순간 다른 단어가 되는 짝이 있다는 것만 기억하면 돼요. 덤으로 하나 더 보면 free(공짜로)와 freely(자유롭게)도 이렇게 갈려요. 롱맨 사전 예문으로 Children under four can travel free는 '4세 미만은 무료로 탈 수 있다', travel freely between member states는 '회원국 사이를 자유롭게 오가다'예요.</p>\n<h2>실제 대화 · 오랜만에 만난 동료와</h2>\n<ul class=\"ex talk\">\n<li class=\"them\"><span class=\"en\">You look tired. Have you been sleeping okay lately?</span><span class=\"ko\">피곤해 보여. 요즘 잠은 잘 자?</span></li>\n<li class=\"me\"><span class=\"en\">Not really. I've been working hard on a big project, so I hardly get any sleep.</span><span class=\"ko\">별로. 큰 프로젝트를 열심히 하고 있어서 잠을 거의 못 자.</span></li>\n<li class=\"them\"><span class=\"en\">Is it almost done?</span><span class=\"ko\">거의 끝났어?</span></li>\n<li class=\"me\"><span class=\"en\">Nearly. My manager spoke highly of it, which was a relief.</span><span class=\"ko\">거의. 팀장님이 좋게 말해 줘서 한시름 놨어.</span></li>\n</ul>\n<p>두 번째 줄에 working hard와 hardly가 함께 들어 있어요. '열심히 일한다'와 '거의 못 잔다'가 한 문장에 나란히 있어서 둘의 차이가 그대로 보여요. 첫 줄의 lately에는 현재완료 Have you been이 붙어 있고요.</p>\n<h2>발음과 억양</h2>\n<p>네 단어 모두 강세는 <b>첫음절</b>에 있고, -ly는 약하게 '리'로 붙어요. hardly는 /ˈhɑːrdli/라서 미국 영어로 <b>\"하r들리\"</b>처럼 들려요. d를 또렷하게 터뜨리지 않고 혀끝만 윗잇몸에 댔다가 바로 l로 넘어가서, 빠르게 말하면 \"하r-리\"에 가깝게 들리기도 해요. 그래서 hard와 hardly를 귀로 가를 때는 끝의 '리' 소리를 잡는 게 핵심이에요. lately /ˈleɪtli/는 <b>\"레잇리\"</b>로, t를 거의 소리 내지 않고 살짝 멈췄다가 '리'를 붙여요. nearly /ˈnɪrli/는 <b>\"니어r리\"</b>, highly /ˈhaɪli/는 <b>\"하일리\"</b>예요. I highly recommend it은 highly와 recommend의 -mend에 힘이 실려 <b>\"아이 하일리 레커멘딧\"</b>처럼 이어져요.</p>\n<h2>이렇게 고쳐 써요</h2>\n<div class=\"box\"><ul class=\"ex fix\">\n<li><span class=\"ctx\">'시험 준비를 열심히 했어'라고 말할 때</span><span class=\"no\">I studied hardly for the test.</span><span class=\"en\">I studied hard for the test.</span><span class=\"ko\">시험 준비를 열심히 했어.</span><span class=\"why\"><b>왜?</b>'열심히'는 -ly 없는 hard예요. hardly를 쓰면 '거의 공부 안 했다'가 돼요.</span></li>\n<li><span class=\"ctx\">'요즘 좀 바빴어'라고 할 때</span><span class=\"no\">I was busy lately.</span><span class=\"en\">I've been busy lately.</span><span class=\"ko\">요즘 좀 바빴어.</span><span class=\"why\"><b>왜?</b>lately는 지금까지 이어지는 '최근'이라 보통 현재완료와 함께 써요. 미국 구어에서 과거형과 쓰는 경우도 있지만, 사전은 현재완료를 권해요.</span></li>\n<li><span class=\"ctx\">'우유가 거의 없어'라고 할 때</span><span class=\"no\">There's hardly no milk.</span><span class=\"en\">There's hardly any milk.</span><span class=\"ko\">우유가 거의 없어.</span><span class=\"why\"><b>왜?</b>hardly에 이미 부정의 뜻이 있어서 no를 또 붙이지 않고 any와 짝을 지어요.</span></li>\n<li><span class=\"ctx\">'그것에 대해 거의 아무것도 몰라'라고 할 때</span><span class=\"no\">I know nearly nothing about it.</span><span class=\"en\">I know almost nothing about it.</span><span class=\"ko\">그것에 대해 거의 아무것도 몰라.</span><span class=\"why\"><b>왜?</b>nothing, no 같은 부정어 앞의 '거의'는 nearly가 아니라 almost를 써요.</span></li>\n</ul></div>\n<p>a 하나로 '좀 있다'와 '거의 없다'가 갈리는 비슷한 함정은 <a href=\"/p/few-vs-a-few/\">few와 a few 구별하기</a>에 정리해 두었어요.</p>\n<p class=\"src\" style=\"font-size:13px;color:#8B95A1\">참고: Longman Dictionary of Contemporary English 'hardly'·'lately'·'nearly'·'highly'·'free'·'freely', Oxford Learner's Dictionaries 'hard'(Which Word? hard / hardly)·'hardly'·'late'(Grammar Point late / lately)·'lately'·'nearly'(Which Word? almost / nearly / practically)·'high'·'highly', Merriam-Webster 'hardly'·'near'·'nearly'·'highly'와 'Is it drive safe or drive safely?'(flat adverbs), 오바마 국정연설 원문은 The White House(President Obama archives) 2013년 2월 12일 State of the Union Address.</p>"
+}

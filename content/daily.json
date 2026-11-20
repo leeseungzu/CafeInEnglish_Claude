@@ -544,5 +544,11 @@
   "en": "We've only scratched the surface.",
   "ko": "아직 시작에 불과해요.",
   "desc": "아직 할 게 훨씬 많다고 강조할 때. 표면만 긁었다는 말이라, 발표나 인터뷰에서 자주 들려요."
+ },
+ {
+  "post": "hard-vs-hardly",
+  "en": "I've been really busy lately.",
+  "ko": "요즘 정말 바빴어.",
+  "desc": "오랜만에 연락할 때 근황을 전하는 한마디. lately는 '요즘'이라 I've been 같은 현재완료와 함께 써요."
  }
 ]
