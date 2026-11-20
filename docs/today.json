@@ -1,13 +1,5 @@
 {
  "days": {
-  "2026-11-17": {
-   "en": "We really speak the same language.",
-   "ko": "우리 정말 말이 잘 통하네요",
-   "desc": "같은 언어를 쓴다는 말이 아니라 생각이 잘 맞는다는 뜻. language는 단수로 써요.",
-   "url": "https://www.cafeinenglish.com/p/lee-junseok-amcham-english-speech/",
-   "share": "https://www.cafeinenglish.com/d/we-really-speak-the-same-language/",
-   "au": "/audio/9a67e790e3d5.mp3"
-  },
   "2026-11-18": {
    "en": "Me neither.",
    "ko": "나도 (안 그래)",
@@ -143,6 +135,14 @@
    "url": "https://www.cafeinenglish.com/p/kagan-would-you-want-to-live-forever/",
    "share": "https://www.cafeinenglish.com/d/weve-only-scratched-the-surface/",
    "au": "/audio/a18ab457aaf8.mp3"
+  },
+  "2026-12-05": {
+   "en": "Here's the thing.",
+   "ko": "그런데 중요한 건요",
+   "desc": "핵심을 꺼내기 직전에 붙이는 말. 이 한마디로 듣는 사람의 귀를 먼저 붙잡아요.",
+   "url": "https://www.cafeinenglish.com/p/subtitles-off-cant-hear/",
+   "share": "https://www.cafeinenglish.com/d/heres-the-thing/",
+   "au": "/audio/e804950cf3f6.mp3"
   }
  }
 }
