@@ -660,9 +660,9 @@ def yt_img(video, attrs):
                 f'sizes="(max-width:600px) 92vw, 480px" alt="" width="640" height="360" {attrs}>')
     return f'<img src="{src}" alt="" width="640" height="360" {attrs}>'
 
-def video_block(video, title, hint):
+def video_block(video, title, hint, vfrom=""):
     """썸네일만 먼저 보여주고, 누르면 그때 유튜브 플레이어를 불러옵니다 (페이지 속도 ↑)."""
-    return (f'<div class="video-slot no-print"><div class="video-embed" data-vid="{video}">'
+    return (f'<div class="video-slot no-print"><div class="video-embed" data-vid="{video}"' + (f' data-from="{e(vfrom)}"' if vfrom else '') + '>'
             f'<button class="v-facade" type="button" aria-label="{e(title)} 영상 재생">'
             + yt_img(video, 'fetchpriority="high"') +
             '<span class="v-play"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></button>'
@@ -1347,7 +1347,7 @@ def page_post(p):
         parts.append('<div class="post-hero">' + chat_html(c["q"], c["a"], c.get("key", ""), c.get("ko", ""), art, chat_bg(p["id"]), big=True, label="카영 일지에서 묻고 답하기" if p["cat"] == "journal" else "실제 대화에선 이렇게") + '</div>')
     toc_slot = len(parts)
     if video:
-        parts.append(video_block(video, p["title"], "표현의 <b>듣기</b>·<b>3번 반복</b>으로 따라 말해 보세요"))
+        parts.append(video_block(video, p["title"], "표현의 <b>듣기</b>·<b>3번 반복</b>으로 따라 말해 보세요", p.get("video_from", "")))
         parts.append(expr_strip(p))
     toc = []
     _body = post_dress(add_heading_ids(alt_chips(p.get("body_html", "")), toc), tint)

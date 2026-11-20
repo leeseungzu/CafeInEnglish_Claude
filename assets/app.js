@@ -409,10 +409,19 @@ ${my}
       });
     }
     function withPlayer(fn) {
+      if (soon()) { stopSeg(); box.classList.remove("nudge"); void box.offsetWidth; box.classList.add("nudge"); return; }
       if (ready) return fn();
       queued = fn;
       if (window.YT && YT.Player) create();
       else { loadAPI(); window.onYouTubeIframeAPIReady = create; }
+    }
+    // 공개 전 영상(video_from): 그때까진 썸네일만 보여 주고, 시간이 지나면 다시 빌드 없이 바로 재생돼요
+    const from = Date.parse(box.dataset.from || ""), soon = () => from && Date.now() < from;
+    if (soon()) {
+      box.classList.add("soon");
+      const s = document.createElement("span"); s.className = "v-soon";
+      s.textContent = new Date(from).toLocaleDateString("ko-KR", { month: "long", day: "numeric", weekday: "short", timeZone: "Asia/Seoul" }) + " 영상 공개 예정이에요";
+      facade.appendChild(s);
     }
     facade.onclick = () => withPlayer(() => player.playVideo());
 

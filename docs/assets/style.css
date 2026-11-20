@@ -3141,3 +3141,8 @@ body.pg-gray{background:#F2F4F6!important}
 @media (prefers-reduced-motion:reduce){.glide{transition:none}.sl-r,.sl-l{animation:none}}
 
 
+
+.video-embed .v-soon{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(25,31,40,.9);color:#fff;font-weight:700;font-size:14px;padding:8px 16px;border-radius:999px;white-space:nowrap;pointer-events:none}
+.video-embed.soon .v-play{display:none}
+.video-embed.nudge .v-soon{animation:vsoon .5s}
+@keyframes vsoon{0%,100%{transform:translate(-50%,-50%)}25%{transform:translate(calc(-50% - 6px),-50%)}75%{transform:translate(calc(-50% + 6px),-50%)}}
