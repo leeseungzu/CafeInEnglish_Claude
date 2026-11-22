@@ -568,5 +568,11 @@
   "en": "I want to start by asking you a question.",
   "ko": "질문 하나로 시작해 볼게요.",
   "desc": "발표 첫 문장에 그대로 쓸 수 있는 틀. start by 뒤에는 ~ing가 와요."
+ },
+ {
+  "post": "by-vs-until",
+  "en": "Can you let me know by Friday?",
+  "ko": "금요일까지 알려 줄 수 있어요?",
+  "desc": "마감이 있는 '까지'는 by. until을 쓰면 금요일까지 계속 알려 달라는 말처럼 들려요."
  }
 ]
