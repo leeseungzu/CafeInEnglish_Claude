@@ -1,13 +1,5 @@
 {
  "days": {
-  "2026-11-20": {
-   "en": "Can I try this on?",
-   "ko": "이거 입어 봐도 돼요?",
-   "desc": "가게에서 맞는지 입어 볼 땐 try on. 입고 있는 상태는 wear, 입는 동작은 put on이에요.",
-   "url": "https://www.cafeinenglish.com/p/wear-vs-put-on/",
-   "share": "https://www.cafeinenglish.com/d/can-i-try-this-on/",
-   "au": "/audio/146285a938a0.mp3"
-  },
   "2026-11-21": {
    "en": "I hope you feel better soon.",
    "ko": "얼른 낫길 바라",
@@ -143,6 +135,14 @@
    "url": "https://www.cafeinenglish.com/p/great-speeches-first-sentence/",
    "share": "https://www.cafeinenglish.com/d/i-want-to-start-by-asking-you-a-question/",
    "au": "/audio/02af114b0018.mp3"
+  },
+  "2026-12-08": {
+   "en": "It's like speaking a common language.",
+   "ko": "같은 언어를 쓰는 것과 같아요.",
+   "desc": "어려운 개념 뒤에 It's like ~ing로 쉬운 장면을 붙여요. 신현송 한은 총재가 돈을 설명한 문장이에요.",
+   "url": "https://www.cafeinenglish.com/p/bok-governors-english/",
+   "share": "https://www.cafeinenglish.com/d/its-like-speaking-a-common-language/",
+   "au": "/audio/084a573f381c.mp3"
   }
  }
 }
