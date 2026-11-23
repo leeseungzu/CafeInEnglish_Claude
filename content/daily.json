@@ -574,5 +574,11 @@
   "en": "Can you let me know by Friday?",
   "ko": "금요일까지 알려 줄 수 있어요?",
   "desc": "마감이 있는 '까지'는 by. until을 쓰면 금요일까지 계속 알려 달라는 말처럼 들려요."
+ },
+ {
+  "post": "word-of-the-year-2026-human",
+  "en": "Don't worry. We're only human.",
+  "ko": "괜찮아요. 우리도 사람인걸요.",
+  "desc": "실수한 사람을 다독일 때. only human은 '사람일 뿐이니 실수할 수 있다'는 뜻이에요."
  }
 ]
