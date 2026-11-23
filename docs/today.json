@@ -1,13 +1,5 @@
 {
  "days": {
-  "2026-11-19": {
-   "en": "Good to see you again.",
-   "ko": "다시 만나서 반가워요",
-   "desc": "이미 아는 사람을 다시 만나면 meet 대신 see. Nice to meet you는 처음 만날 때 하는 인사예요.",
-   "url": "https://www.cafeinenglish.com/p/nice-to-meet-vs-see/",
-   "share": "https://www.cafeinenglish.com/d/good-to-see-you-again/",
-   "au": "/audio/ed6b14fc2c42.mp3"
-  },
   "2026-11-20": {
    "en": "Can I try this on?",
    "ko": "이거 입어 봐도 돼요?",
@@ -143,6 +135,14 @@
    "url": "https://www.cafeinenglish.com/p/by-vs-until/",
    "share": "https://www.cafeinenglish.com/d/can-you-let-me-know-by-friday/",
    "au": "/audio/f7d26534cf63.mp3"
+  },
+  "2026-12-07": {
+   "en": "I want to start by asking you a question.",
+   "ko": "질문 하나로 시작해 볼게요.",
+   "desc": "발표 첫 문장에 그대로 쓸 수 있는 틀. start by 뒤에는 ~ing가 와요.",
+   "url": "https://www.cafeinenglish.com/p/great-speeches-first-sentence/",
+   "share": "https://www.cafeinenglish.com/d/i-want-to-start-by-asking-you-a-question/",
+   "au": "/audio/02af114b0018.mp3"
   }
  }
 }
