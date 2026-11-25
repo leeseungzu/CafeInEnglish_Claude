@@ -3609,3 +3609,57 @@ body.pg-gray{background:#F2F4F6!important}
 .nh-rows .nh-row{flex:1;padding:14px 0;border-bottom:1px solid #F2F4F6}
 .nh-cup .mqs{flex:1}
 @media (max-width:600px){.nh-cup .mq{background:#F9FAFB!important}}
+/* ===== 홈 3차 (2026-11-26, 토스피드 크기·배치 기준) ===== */
+/* 이어서 보기: 글 가운데 */
+.nh-more{left:50%!important;transform:translateX(-50%)}
+/* 영상 썸네일은 자르지 않음: 목록 칸은 16:9, 격자 카드는 검은 여백(시네마) */
+.nh-tile.yt{width:176px!important;height:99px!important;background:#000}
+.nh-tile.yt img{object-fit:contain!important}
+.nh-grid .card .thumb.vthumb{background:#000!important}
+.nh-grid .card .thumb.vthumb .th-bg{display:none!important}
+.nh-grid .card .thumb.vthumb img:not(.th-bg){object-fit:contain!important}
+/* 2단 섹션: 위 회색 줄 + 큰 제목 */
+@media (min-width:900px){
+  .nh h2,.nh .series .home-h{font-size:30px;letter-spacing:-.025em}
+  .nh .nh-sub{font-size:18px;color:#6B7684;margin:10px 0 26px}
+  .nh-2>section,.nh .nh-sr,.nh .nh-new{border-top:2px solid #E5E8EB;padding-top:30px}
+  .nh-pop ol,.nh-rows{border-top:0}
+  .nh-pop li a{gap:18px;padding:16px 0}
+  .nh-pop .pop-n{font-size:19px;width:22px;font-weight:600}
+  .nh-pop b{font-size:18px;font-weight:500;color:#333D4B}
+  .nh-pop small{display:none}
+  .nh-rows .nh-row{padding:18px 0;gap:28px;border-bottom:0}
+  .nh-rt b{font-size:21px;font-weight:700;line-height:1.45}
+  .nh-rt small{font-size:15px;margin-top:10px}
+  .nh-tile{width:192px!important;height:128px!important;border-radius:14px}
+  .nh-tile.yt{width:208px!important;height:117px!important}
+  .nh-tile img{width:72px;height:72px}
+  .nh-hd .nh-all{font-size:15px}
+}
+/* 시리즈: 토스 오리지널 시리즈처럼 4칸 · 정사각 그림 · 흰 카드 */
+.nh .nh-sr .sr-card.sr-more{display:none}
+.nh .nh-sr .sr-grid.all .sr-card.sr-more{display:block}
+@media (min-width:900px){
+  .nh .nh-sr .sr-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:40px 28px!important}
+  .nh .nh-sr .sr-card{background:#fff!important;border:1px solid #E5E8EB!important;border-radius:16px!important;overflow:hidden;padding:0!important;box-shadow:none!important}
+  .nh .nh-sr .sr-card:hover{transform:none;border-color:#D1D6DB!important}
+  .nh .nh-sr .sr-cover{aspect-ratio:1/1!important;border-radius:0!important;margin:0!important}
+  .nh .nh-sr .sr-cover img{width:28%!important}
+  .nh .nh-sr .sr-card h3{font-size:20px;font-weight:700;margin:20px 18px 8px;color:#191F28}
+  .nh .nh-sr .sr-card p{font-size:15px;line-height:1.65;color:#6B7684;margin:0 18px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .nh .nh-sr .sr-n{display:inline-block;margin:14px 18px 20px;background:#F2F4F6;border-radius:6px;padding:3px 7px;font-size:12px;font-weight:600;color:#4E5968}
+}
+/* 휴대폰 '방금 올라온 글': 제목 + 작은 정보 한 줄 + 오른쪽 썸네일 */
+@media (max-width:899px){
+  .nh-grid.cards.list .card p{display:none!important}
+  .nh-grid.cards.list .card .chips{order:2;margin:6px 0 0!important}
+  .nh-grid.cards.list .card .chips .chip,.nh-grid.cards.list .card .chips .lv{background:none!important;padding:0!important;font-size:13px!important;color:#8B95A1!important;font-weight:500!important;border:0!important}
+  .nh-grid.cards.list .card .chips .lv::before{content:"·";margin:0 5px;color:#B0B8C1;background:none!important;width:auto;height:auto;display:inline}
+  .nh-grid.cards.list .card{display:grid!important;grid-template-columns:1fr auto;column-gap:14px;align-items:center}
+  .nh-grid.cards.list .card h3{grid-column:1;grid-row:1;font-size:16.5px;line-height:1.5;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .nh-grid.cards.list .card .chips{grid-column:1;grid-row:2}
+  .nh-grid.cards.list .card .thumb{grid-column:2!important;grid-row:1/3!important;margin:0!important;align-self:center}
+}
+.nh-grid.cards.list .card.pg-hide{display:none!important}
+.nh .nh-sr .sr-n{width:max-content}
+@media (max-width:899px){.nh-tile.yt{width:128px!important;height:72px!important;border-radius:12px}}

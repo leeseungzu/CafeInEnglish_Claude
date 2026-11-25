@@ -69,3 +69,5 @@ html.dark .nh-intro b{color:#fff}html.dark .nh-intro span{color:#8B95A1}html.dar
 html.dark .mq-btn{background:#1E3A5F!important;color:#8EC0FF!important}html.dark .mq-btn:hover{background:#24466F!important}
 html.dark .nh-pop ol,html.dark .nh-rows{border-color:#2B2D33}html.dark .nh-rows .nh-row{border-color:#2B2D33}
 @media (max-width:600px){html.dark .nh-cup .mq{background:#22242A!important}}
+@media (min-width:900px){html.dark .nh-2>section,html.dark .nh .nh-sr,html.dark .nh .nh-new{border-color:#2B2D33}
+html.dark .nh .nh-sr .sr-card{background:#1C1C21!important;border-color:#3A3D45!important}html.dark .nh .nh-sr .sr-card h3{color:#fff}html.dark .nh .nh-sr .sr-n{background:#2B2D33;color:#B0B8C1}html.dark .nh-pop b{color:#E5E8EB}}

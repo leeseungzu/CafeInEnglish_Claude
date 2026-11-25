@@ -2093,7 +2093,7 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
 
     # ── 3. 아티클 시리즈 ──
     series_html = ""
-    for sr in SERIES:
+    for _si, sr in enumerate(SERIES):
         sp = [POST_BY_ID[i] for i in sr["posts"] if i in POST_BY_ID]
         icons = sr.get("icons") or [o["icon"] for o in sp if o.get("icon")][:3]
         if icons:
@@ -2102,7 +2102,7 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
             vids = [o for o in sp if o.get("video")]
             lazy = 'loading="lazy"'
             cover = ('<div class="sr-cover yt">' + yt_img(vids[0]["video"], lazy).replace("<img ", '<img aria-hidden="true" class="yt-bg" ', 1) + yt_img(vids[0]["video"], lazy).replace("<img ", '<img class="yt-fg" ', 1) + '</div>') if vids else '<div class="sr-cover"></div>'
-        series_html += (f'<a class="sr-card" href="/series/{sr["id"]}/">{cover}<h3>{e(sr["title"])}</h3>'
+        series_html += (f'<a class="sr-card{" sr-more" if _si >= 4 else ""}" href="/series/{sr["id"]}/">{cover}<h3>{e(sr["title"])}</h3>'
                         f'<p>{e(sr["desc"])}</p><span class="sr-n">글 {len(sp) + len(sr.get("thinks", []))}개</span></a>')
 
     # ── 2026-11-26 홈 새 구성 (토스피드 벤치마킹, 승주 확정) ──
@@ -2153,9 +2153,10 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
   <section><div class="nh-hd"><h2>{e((tr_sr or {}).get("title", "해외에서 살아남는 영어"))}</h2><a class="nh-all" href="/series/travel/">전체 보기 ›</a></div><p class="nh-sub">공항부터 호텔까지, 바로 쓰는 문장</p><div class="nh-rows">{tr_rows}</div></section>
 </div>
 {banner}
-<section class="series"><h2 class="home-h">시리즈</h2><div class="sr-grid">{series_html}</div></section>
+<section class="series nh-sr"><h2 class="home-h">시리즈</h2><p class="nh-sub">주제별로 묶어 차근차근 읽기</p><div class="sr-grid" id="nh-srg">{series_html}</div>{'<button type="button" class="nh-exp" id="nh-srb">전체 시리즈 보기</button>' if len(SERIES) > 4 else ""}</section>
 <section class="nh-new"><h2>방금 올라온 글</h2><p class="nh-sub">새로 올라온 표현과 영상 글</p><div class="cards list nh-grid" id="all-arts">{arts}</div>{more_btn}</section>
 </div>{hero_js}
+<script>(function(){{var s=document.getElementById("nh-srb");if(s)s.onclick=function(){{document.getElementById("nh-srg").classList.add("all");s.remove()}}}})();</script>
 <script>(function(){{var b=document.getElementById("nh-exp");if(!b)return;var pg=1;b.onclick=function(){{pg++;var h=document.querySelectorAll('#all-arts [data-pg="'+pg+'"]');[].forEach.call(h,function(c){{c.classList.remove("pg-hide")}});if(!document.querySelector('#all-arts .pg-hide'))b.remove()}}}})();</script>
 """
     vp = hv
