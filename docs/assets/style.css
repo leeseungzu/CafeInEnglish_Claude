@@ -3375,3 +3375,7 @@ body.pg-gray{background:#F2F4F6!important}
 @media (min-width:1180px){body.is-post .wrap.has-side>main>.pv2{position:relative}.rail{top:0!important}.rail-in{margin-top:0!important;top:84px!important}}
 /* 왼쪽 버튼 줄 · 목차 시작선을 글 제목(h1) 높이에 맞춤 (승주 요청 2026-11-26) */
 @media (min-width:1180px){.rail-in{margin-top:71px!important}body.is-post aside.side{padding-top:107px!important}}
+/* 헤더: 글 페이지에서 로고 왼쪽 = 왼쪽 버튼 줄, 내 공부방 오른쪽 = 목차 끝 (승주 요청 2026-11-26) */
+@media (min-width:1180px){body.is-post .top-in{max-width:1176px!important}}
+/* 지금 칸(굵게)도 마우스를 올리면 연회색 칸 + 파랑 */
+@media (min-width:900px){.top .nav a.on:hover,body.is-post .top .nav a.on:hover{background:#F2F4F6!important;color:#3182F6!important}}

@@ -44,3 +44,4 @@ html.dark .rail a:hover,html.dark .rail button:hover{background:#2B2D33;color:#f
 html.dark body.is-post aside.side .toc a{border-color:#3A3D45;color:#8B95A1!important}
 html.dark body.is-post aside.side .toc li.on a{border-color:#64A8FF;color:#64A8FF!important}
 html.dark .pv2 .pb .box .ex li:last-child{border-bottom-color:transparent!important}
+html.dark .top .nav a.on:hover,html.dark body.is-post .top .nav a.on:hover{background:#2B2D33!important;color:#64A8FF!important}
