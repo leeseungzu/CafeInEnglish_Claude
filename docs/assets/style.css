@@ -3373,3 +3373,5 @@ body.pg-gray{background:#F2F4F6!important}
 @media (min-width:900px){body.is-post aside.side .toc>li::before,body.is-post aside.side .toc>li::after{display:none!important;content:none!important}}
 /* 왼쪽 버튼 줄과 오른쪽 목차를 같은 높이에서 시작·고정 (승주 요청) */
 @media (min-width:1180px){body.is-post .wrap.has-side>main>.pv2{position:relative}.rail{top:0!important}.rail-in{margin-top:0!important;top:84px!important}}
+/* 왼쪽 버튼 줄 · 목차 시작선을 글 제목(h1) 높이에 맞춤 (승주 요청 2026-11-26) */
+@media (min-width:1180px){.rail-in{margin-top:71px!important}body.is-post aside.side{padding-top:107px!important}}
