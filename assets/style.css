@@ -3388,3 +3388,5 @@ body.pg-gray{background:#F2F4F6!important}
 }
 /* 출력·PDF: 진행 막대(제목 위 굵은 선으로 찍히던 것)와 화면용 버튼·카드 숨김 (2026-11-26) */
 @media print{#prog,.rail,.nxt,.fcta,.srbox{display:none!important}}
+/* PC 메뉴의 '오늘 루틴 남음' 점 숨김: 처음 온 사람에겐 늘 켜져 있어 장식처럼 보임 (2026-11-26) */
+@media (min-width:900px){.top .nav a.room .rt-dot{display:none!important}}
