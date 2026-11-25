@@ -1,7 +1,7 @@
 {
   "id": "jensen-huang-ai-five-layer-cake",
   "cat": "video",
-  "sub": "GTC 기조연설",
+  "sub": "연설",
   "date": "2026-10-24",
   "level": "실전",
   "title": "어려운 AI를 어떻게 쉽게 말할까? 젠슨 황의 다섯 층 케이크",
@@ -295,5 +295,6 @@
       460.3
     ]
   ],
-  "updated": "2026-11-25"
+  "updated": "2026-11-25",
+  "event": "GTC 기조연설"
 }

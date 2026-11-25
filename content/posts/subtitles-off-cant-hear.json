@@ -1,7 +1,7 @@
 {
   "id": "subtitles-off-cant-hear",
   "cat": "video",
-  "sub": "카영 이야기",
+  "sub": "카영 영상",
   "level": "기초",
   "date": "2026-11-20",
   "title": "자막을 끄면 왜 영어가 안 들릴까? 귀를 훈련하는 3번 듣기",
@@ -458,5 +458,6 @@
       "href": "/p/when-english-wont-come-out/"
     }
   ],
-  "updated": "2026-11-25"
+  "updated": "2026-11-25",
+  "event": "카영 이야기"
 }

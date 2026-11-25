@@ -15,7 +15,7 @@ CONTENT, ASSETS, OUT = ROOT / "content", ROOT / "assets", ROOT / "docs"
 
 SITE = json.loads((CONTENT / "site.json").read_text("utf-8"))
 DOMAIN = SITE["domain"].rstrip("/")
-CATS = {"video": "영상으로 배우기", "expr": "영어표현", "tip": "영어꿀팁", "story": "영어 이야기", "journal": "카영 일지", "think": "사유의 문장"}
+CATS = {"video": "영상으로 배우기", "expr": "영어 표현", "tip": "영어 꿀팁", "story": "영어 이야기", "journal": "카영 일지", "think": "사유의 문장"}
 NAV_CATS = ("video", "expr", "tip", "story")  # 카테고리 순서 (메뉴는 아래 NAV_GROUPS로 묶어서 보여 줘요)
 # 위쪽 메뉴 (2026-10-23 정리): 영상(영상으로 배우기·사유의 문장) · 영어 공부(표현·꿀팁·이야기) · 영어 도구
 NAV_GROUPS = [("video", "/category/watch/", "영상으로 배우기", "영상", ("watch", "video", "think")),
@@ -25,8 +25,8 @@ STUDY_CATS = ("expr", "tip", "story", "journal")  # 카영 일지(2026-11-20): �
 WATCH_VIEW = ("watch", "video", "think")  # 영상 칸 전환: 전체 · 영상으로 배우기 · 사유의 문장 (전체 = /category/watch/, 2026-10-24)
 STUDY_VIEW = ("study",) + STUDY_CATS  # 영어 공부 칸 전환: 전체 · 표현 · 꿀팁 · 이야기 (전체 = /category/study/, 2026-10-24)
 nav_group = lambda nav: next((g for g, h, l, s, ks in NAV_GROUPS if nav in ks), nav)
-TILE_SUB = {"video": "카영 영상 속 표현을 장면과 함께", "expr": "새 표현 · 비슷한 표현 · 헷갈리는 표현",
-            "tip": "여행 · 회화 · 단어 · 듣기 · 발음", "story": "매일 쓰는 단어에 숨은 역사", "journal": "공부하고 만들며 쓰는 기록", "think": "필사하고 빈칸으로 복기"}
+TILE_SUB = {"video": "카영 영상 속 표현을 장면과 함께", "expr": "새 표현 · 비슷한·헷갈리는 표현",
+            "tip": "여행 · 회화 · 단어 · 발음·듣기", "story": "매일 쓰는 단어에 숨은 역사", "journal": "공부하고 만들며 쓰는 기록", "think": "필사하고 빈칸으로 복기"}
 CAT_SEO = {  # 카테고리 페이지 검색용 제목 · 설명
     "video": ("영상으로 배우는 영어 - 카페인영어 영상 속 표현 정리와 퀴즈",
               "카페인영어 유튜브 영상 한 편에서 실제로 쓰는 영어 표현을 뽑아 뜻, 예문, 발음과 함께 정리하고 퀴즈로 확인해요."),
@@ -973,7 +973,8 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
                  "try{localStorage.setItem('pf','" + FONT_V + "')}catch(e){}}var k;try{k=localStorage.getItem('pf')}catch(e){}"
                  "if(k==='" + FONT_V + "')f();else{addEventListener('load',f);setTimeout(f,4000)}})();</script>"
                  if FONT_V else '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">')
-    navlinks = f'<a href="/"{" class=on" if path == "/" else ""}>홈</a>' + "".join(
+    navlinks = "".join(  # PC 메뉴 "홈" 뺌: 로고가 홈 (2026-11-26, 토스피드처럼)
+
         f'<a href="{h}"{" class=on" if nav in ks else ""}><span class="nl-l">{l}</span><span class="nl-s">{s}</span></a>' for g, h, l, s, ks in NAV_GROUPS)
     room = f'<a class="room{" on" if nav == "notes" else ""}" href="/notes/">내 공부방<span class="badge" id="nav-badge" hidden></span></a>'
     room = ('<button class="srch-btn" type="button" aria-label="표현 검색" title="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>' + THEME_BTN.replace('class="theme-btn"', 'class="theme-btn m-theme"') + room)  # 휴대폰 상단: 다크·라이트 버튼 + 검색 (2026-11-20)
@@ -986,7 +987,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">{APP_HEAD_JS}{THEME_HEAD_JS}
 <title>{e(full_title)}</title>
 <meta name="description" content="{e(desc)}">
-<link rel="canonical" href="{DOMAIN}{path}">{f'<meta name="robots" content="{robots}">' if robots else ""}
+<link rel="canonical" href="{DOMAIN}{"/category/watch/" if path == "/category/video/" else path}">{f'<meta name="robots" content="{robots}">' if robots else ""}
 <meta property="og:type" content="{og_type}">
 <meta property="og:site_name" content="{e(SITE['name'])}">
 <meta property="og:title" content="{e(title)}">
@@ -1402,7 +1403,7 @@ def page_post(p):
     url = post_url(p)
     video = p.get("video")
     _lv = level(p)
-    _kind = e(p.get("sub", "")) if p["cat"] in ("video", "story", "journal") else _lv
+    _kind = e(p.get("event") or p.get("sub", "")) if p["cat"] in ("video", "story", "journal") else _lv
     _mins = max(2, round(len(re.sub(r"<[^>]+>", "", p.get("body_html", ""))) / 600))
     _upd = (" · " + e(p["updated"].replace("-", ".")) + " 수정") if p.get("updated") and p["updated"] != p.get("date") else ""
     parts = [f'<div class="ph"><p class="ph-cat"><a href="/category/{p["cat"]}/">{CATS[p["cat"]]}</a> · {_kind}</p>'
@@ -1614,7 +1615,7 @@ def _about_box(title, para, items):
     tips = "".join(f'<li><img src="/assets/icons/{ic}.webp?v={ASSET_V}" alt="" width="28" height="28" loading="lazy"><span><b>{a}</b>{b}</span></li>' for ic, a, b in items)
     return f'<section class="cat-about"><h2>{title}</h2><p>{para}</p><ul class="ca-tips">{tips}</ul></section>'
 CAT_ABOUT = {
-    "expr": _about_box("영어표현은 이렇게 정리해요",
+    "expr": _about_box("영어 표현은 이렇게 정리해요",
         "원어민이 매일 쓰는 짧은 표현을 골라, 뉘앙스 → 비슷한 표현 비교 → 자주 하는 실수 → 퀴즈 순서로 정리해요.",
         [("speech-balloon", "처음이라면", "'기초'부터 보세요"), ("laptop", "회사·메일이라면", "'실전'을 골라요"), ("check", "복습은", "내 공부방에 모여요")]),
     "tip": _about_box("영어꿀팁에서는 이런 걸 다뤄요",
@@ -1657,7 +1658,7 @@ SERIES_ABOUT = {
 def view_card(cat):  # PC 오른쪽 '보기' 카드: 같은 탭 안의 칸 전환 (휴대폰에서는 숨기고 제목 아래 세그먼트 사용)
     group = WATCH_VIEW if cat in WATCH_VIEW else STUDY_VIEW
     nv = sum(1 for p in POSTS if p["cat"] == "video")
-    n = {k: (len(THINKS) if k == "think" else nv + len(THINKS) if k == "watch" else sum(1 for p in POSTS if (p["cat"] in STUDY_CATS if k == "study" else p["cat"] == k))) for k in group}
+    n = {k: (len(THINKS) if k == "think" else nv + len(THINKS) if k == "watch" else sum(1 for p in POSTS if (p["cat"] in STUDY_CATS and p["cat"] != "journal" if k == "study" else p["cat"] == k))) for k in group}
     lbl = lambda k: "전체" if k in ("study", "watch") else CATS[k]
     return ('<div class="sf-g sf-view" role="group" aria-label="보기"><div class="sf-h">보기</div>'
             + "".join(f'<a class="sf-a{" on" if k == cat else ""}{" sf-all" if k in ("study", "watch") else ""}" href="/category/{k}/"><span>{lbl(k)}</span><em>{n[k]}</em></a>' for k in group) + '</div>')
@@ -1665,7 +1666,7 @@ def view_card(cat):  # PC 오른쪽 '보기' 카드: 같은 탭 안의 칸 전�
 
 def page_study():  # 영어 공부 전체: 표현·꿀팁·이야기를 한 목록으로, 카드마다 난이도 옆에 종류 표시
     url = "/category/study/"
-    items = [p for p in POSTS if p["cat"] in STUDY_CATS]
+    items = [p for p in POSTS if p["cat"] in STUDY_CATS and p["cat"] != "journal"]  # 일지는 자기 칸에서만 (2026-11-26)
     cards = "".join(re.sub(r'(<span class="chip [a-z]+">)[^<]*(</span>)', lambda m: m.group(1) + NAV_SHORT[p["cat"]] + m.group(2), post_card(p, 2), 1) for p in items)
     filt = f'<aside class="subfilter sf-one sf-viewonly" aria-label="보기">{view_card("study")}</aside>'
     body = (f'<h1>영어 공부</h1><p class="lead">{CAT_LEAD["study"]}</p>' + STUDY_SEG("study") +
@@ -1721,7 +1722,7 @@ def page_category(cat):
                 f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     elif cat == "video":
         items = [p for p in POSTS if p["cat"] == cat]
-        kind = lambda sub: "강의" if "강의" in sub else "인터뷰" if "인터뷰" in sub else "대담" if "대담" in sub else "연설"
+        kind = lambda sub: sub  # 세부 분류: 연설 · 인터뷰·대담 · 강의 · 카영 영상 (2026-11-26 정리)
         kinds = [kind(p.get("sub", "")) for p in items]
         cards = "".join(re.sub(r' data-sub="[^"]*"', "", post_card(p, 2), 1).replace(' href=', f' data-sub="{k}" href=', 1) for p, k in zip(items, kinds))
         filt = f'<aside class="subfilter sf-one sf-viewonly" aria-label="보기">{view_card("video")}</aside>'  # 종류 필터는 2026-10-24에 뺌 (보기만)
@@ -1729,7 +1730,7 @@ def page_category(cat):
                 f'<div class="cat-grid has-filter"><div class="cards list">{cards}</div>{filt}</div>' + CAT_ABOUT.get(cat, ""))
     else:  # 영어표현 · 영어꿀팁 · 영어 이야기: 분류 하나만 (난이도 필터는 2026-10-24에 뺌, 카드의 점 표시로 충분)
         items = [p for p in POSTS if p["cat"] == cat]
-        merge = {"발음": "발음·듣기", "듣기": "발음·듣기"} if cat == "tip" else {}  # 꿀팁: 글이 적은 두 분류를 하나로
+        merge = {}  # 분류 합치기는 글 데이터에서 함 (2026-11-26)
         sub_of = lambda p: merge.get(p.get("sub", ""), p.get("sub", ""))
         cards = "".join(re.sub(r' data-sub="[^"]*"', f' data-sub="{e(sub_of(p))}"', post_card(p, 2), 1) for p in items) or '<div class="empty"><p>곧 첫 글이 올라와요.</p></div>'
         subs = [sub_of(p) for p in items]
@@ -1749,7 +1750,7 @@ def page_category(cat):
               {"@type": "ListItem", "position": 2, "name": CATS[cat], "item": DOMAIN + url}]}]
     img = og_image("c-" + cat, "카테고리", CATS[cat], CAT_LEAD[cat], "읽고 · 듣고 · 퀴즈로 확인")
     return layout(CATS[cat], seo_d, url, body, cat, wide=True, seo_title=seo_t, ld=ld, og_img=img,
-                  robots="noindex,follow" if (cat == "think" and THINK_NOINDEX) else "")
+                  robots="noindex,follow" if ((cat == "think" and THINK_NOINDEX) or cat == "video") else "")
 
 
 SERIES = json.loads((CONTENT / "series.json").read_text("utf-8")) if (CONTENT / "series.json").exists() else []
@@ -2069,7 +2070,7 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
 
     # ── 2. 전체 아티클 (8개씩 페이지) + 인기 있는 글 ──
     PER = 8
-    allitems = sorted([("p", p) for p in POSTS] + [("t", t) for t in THINKS],
+    allitems = sorted([("p", p) for p in POSTS if p["cat"] != "journal"] + [("t", t) for t in THINKS],  # 카영 일지는 방향 정할 때까지 홈 목록에서 뺌
                       key=lambda x: (x[1].get("date", ""), x[1]["id"]), reverse=True)
     arts = "".join((post_card(o) if k == "p" else think_card(o)).replace('<a class="card', f'<a data-pg="{n // PER + 1}" class="card' + (" pg-hide" if n >= PER else ""), 1)
                    for n, (k, o) in enumerate(allitems))
@@ -2369,7 +2370,7 @@ def _about_card():
 
 
 def _about_acts():
-    items = [("headphone", "영상으로 배우기", "셀럽 인터뷰·연설 장면을 구간별로 듣고 3번 반복", "/category/video/"),
+    items = [("headphone", "영상으로 배우기", "셀럽 인터뷰·연설 장면을 구간별로 듣고 3번 반복", "/category/watch/"),
              ("speech-balloon", "영어표현 · 영어꿀팁", "새 표현, 헷갈리는 표현, 생활 회화 요령", "/category/expr/"),
              ("world-map", "여행영어 무료 PDF", "공항부터 호텔까지 10가지 상황 · 7일 플랜", "/travel/"),
              ("check", "퀴즈와 내 공부방", "틀린 문제는 모였다가, 다시 맞히면 졸업", "/notes/")]
@@ -2442,7 +2443,7 @@ ABOUT = f"""
 <ul class="abo-facts">
 <li><b>유튜브 채널</b><span>카페인영어 CafeInEnglish (@CAFEINENGLISH) · 구독자 2만+ · 영상 160편+</span></li>
 <li><b>만드는 영상</b><span>리더와 셀럽의 연설·인터뷰를 자막 없이 듣고, 장면별 표현을 해설한 뒤 한영 자막으로 다시 듣는 [한영자막] 롱폼과 1분 쇼츠</span></li>
-<li><b>영상과 사이트</b><span>영상에서 다룬 장면의 표현·예문 음성·퀴즈를 이 사이트의 <a href="/category/video/">영상</a> 글로 정리해, 영상을 본 뒤 복습할 수 있게 해요. 표현·꿀팁·영어 이야기 글은 영상 밖에서 자주 묻는 내용을 사전으로 확인해 정리한 글이에요.</span></li>
+<li><b>영상과 사이트</b><span>영상에서 다룬 장면의 표현·예문 음성·퀴즈를 이 사이트의 <a href="/category/watch/">영상</a> 글로 정리해, 영상을 본 뒤 복습할 수 있게 해요. 표현·꿀팁·영어 이야기 글은 영상 밖에서 자주 묻는 내용을 사전으로 확인해 정리한 글이에요.</span></li>
 <li><b>함께하는 곳</b><span>인스타그램 @cafe_in_english, 카카오톡 1일 1영(매일 아침 7시)</span></li>
 <li><b>연락</b><span><a href="/contact/">문의하기</a>로 오류 제보·제안·협업 문의를 받아요. 확인한 오류는 고치고 글에 수정일을 남겨요.</span></li>
 </ul>
@@ -3164,7 +3165,7 @@ def page_tool_toeic():
 <div class="tl-tbl-w"><table class="tl-tbl"><thead><tr><th>기업</th><th>토익</th><th>토익스피킹</th></tr></thead><tbody>{hire}</tbody></table></div>
 <h2>자주 묻는 질문</h2>
 {tool_faq(faq)}
-{tool_reads("점수 올리는 데 도움 되는 카영 글", [("LC", None, lambda p: p.get("sub") == "듣기"), ("LC", None, lambda p: p.get("sub") == "발음"), ("LC", None, lambda p: p.get("sub") == "듣기"), ("RC", None, lambda p: p["id"] in next((s["posts"] for s in SERIES if s["id"] == "work"), []))])}
+{tool_reads("점수 올리는 데 도움 되는 카영 글", [("LC", None, lambda p: p.get("sub") == "발음·듣기"), ("LC", None, lambda p: p.get("sub") == "발음·듣기"), ("LC", None, lambda p: p.get("sub") == "발음·듣기"), ("RC", None, lambda p: p["id"] in next((s["posts"] for s in SERIES if s["id"] == "work"), []))])}
 {tool_src([SRC_TOEICSTORY, SRC_LINK])}
 <h2>다른 영어 도구</h2>
 {tool_cards("toeic", "시험")}
@@ -3214,7 +3215,7 @@ def page_tool_opic():
 </tbody></table></div>
 <h2>자주 묻는 질문</h2>
 {tool_faq(faq)}
-{tool_reads("말하기 등급 올리는 카영 글", [("말", None, lambda p: p.get("sub") == "회화"), ("말", None, lambda p: p.get("sub") == "회화"), ("말", None, lambda p: p.get("sub") == "발음")])}
+{tool_reads("말하기 등급 올리는 카영 글", [("말", None, lambda p: p.get("sub") == "회화"), ("말", None, lambda p: p.get("sub") == "회화"), ("말", None, lambda p: p.get("sub") == "발음·듣기")])}
 {tool_src([SRC_OPIC])}
 <h2>다른 영어 도구</h2>
 {tool_cards("opic", "시험")}
@@ -3260,7 +3261,7 @@ def page_tool_tos():
 <p>회사마다, 공고마다 기준이 달라요. 지원할 회사의 최신 공고를 꼭 확인하세요.</p>
 <h2>자주 묻는 질문</h2>
 {tool_faq(faq)}
-{tool_reads("말하기 점수 올리는 카영 글", [("말", None, lambda p: p.get("sub") == "회화"), ("말", None, lambda p: p.get("sub") == "발음"), ("말", None, lambda p: p.get("sub") == "회화")])}
+{tool_reads("말하기 점수 올리는 카영 글", [("말", None, lambda p: p.get("sub") == "회화"), ("말", None, lambda p: p.get("sub") == "발음·듣기"), ("말", None, lambda p: p.get("sub") == "회화")])}
 {tool_src([SRC_TOS, SRC_LINK])}
 <h2>다른 영어 도구</h2>
 {tool_cards("tos", "시험")}
@@ -3430,7 +3431,7 @@ def _schedule_page(focus):
 <div class="tl-note"><b>점수가 급할 때는 이렇게</b>서류 마감이 2주 안이면 오픽, 3주 안이면 토익스피킹, 한 달 넘게 남았으면 토익까지 볼 수 있어요. 지원하는 회사가 어떤 시험을 인정하는지 먼저 확인하세요.</div>
 <h2>자주 묻는 질문</h2>
 {tool_faq(faq)}
-{tool_reads("시험 준비에 도움 되는 카영 글", [("LC", None, lambda p: p.get("sub") == "듣기"), ("말", None, lambda p: p.get("sub") == "회화"), ("RC", None, lambda p: p["id"] in next((s["posts"] for s in SERIES if s["id"] == "work"), []))])}
+{tool_reads("시험 준비에 도움 되는 카영 글", [("LC", None, lambda p: p.get("sub") == "발음·듣기"), ("말", None, lambda p: p.get("sub") == "회화"), ("RC", None, lambda p: p["id"] in next((s["posts"] for s in SERIES if s["id"] == "work"), []))])}
 {tool_src(srcs)}
 <p class="tl-chk">{_exd(EXAM.get("checked", "2026-10-24"))} 공식 일정과 대조했어요. 카페인영어는 YBM·ACTFL과 관계없는 비공식 안내예요.</p>
 <h2>다른 영어 도구</h2>
@@ -3504,7 +3505,7 @@ def page_tool_number():
 <div class="tl-note"><b>해외 서류에는 달 이름을 쓰세요</b>03/04/2026은 미국에서는 3월 4일, 영국에서는 4월 3일이에요. 비자·항공권·해외직구처럼 틀리면 곤란한 곳에는 Mar 4, 2026처럼 달을 글자로 쓰면 헷갈리지 않아요.</div>
 <h2>자주 묻는 질문</h2>
 {tool_faq(faq)}
-{tool_reads("영어 숫자 감각 키우는 카영 글", [("말", None, lambda p: p.get("sub") == "회화"), ("귀", None, lambda p: p.get("sub") == "듣기"), ("말", None, lambda p: p.get("sub") == "회화")])}
+{tool_reads("영어 숫자 감각 키우는 카영 글", [("말", None, lambda p: p.get("sub") == "회화"), ("귀", None, lambda p: p.get("sub") == "발음·듣기"), ("말", None, lambda p: p.get("sub") == "회화")])}
 {tool_src([SRC_CAM_NUM, SRC_CAM_DATE])}
 <h2>다른 영어 도구</h2>
 {tool_cards("number", t["group"])}
@@ -3828,7 +3829,7 @@ def build():
             pages.append(think_url(t))
     for c in CATS:
         write(f"/category/{c}/", page_category(c))
-        if not (c == "think" and THINK_NOINDEX):
+        if not ((c == "think" and THINK_NOINDEX) or c == "video"):  # video = watch와 겹쳐서 색인은 watch만 (2026-11-26)
             pages.append(f"/category/{c}/")
     LASTMOD["/category/study/"] = max([p["_mod"] for p in POSTS if p["cat"] in STUDY_CATS] or [newest])
     write("/category/study/", page_study()); pages.append("/category/study/")

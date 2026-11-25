@@ -1,7 +1,7 @@
 {
   "id": "chung-euisun-put-down-roots",
   "cat": "video",
-  "sub": "HMGMA 준공식 연설",
+  "sub": "연설",
   "date": "2026-10-20",
   "level": "실전",
   "title": "\"뿌리를 내리러 왔습니다\", 정의선 회장은 왜 공장 대신 뿌리라고 했을까?",
@@ -300,5 +300,6 @@
       540.6
     ]
   ],
-  "updated": "2026-11-25"
+  "updated": "2026-11-25",
+  "event": "HMGMA 준공식 연설"
 }

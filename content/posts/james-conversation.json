@@ -1,7 +1,7 @@
 {
   "id": "james-conversation",
   "cat": "video",
-  "sub": "engVid James 강의",
+  "sub": "강의",
   "date": "2026-10-05",
   "title": "구독자 480만 캐나다 영어 선생님이 알려주는 원어민에게 말 거는 3단계",
   "seo_title": "engVid 제임스 영어 회화 강의 - 영어표현 5개 한영 해설",
@@ -158,5 +158,6 @@
     }
   ],
   "updated": "2026-10-18",
-  "noindex": true
+  "noindex": true,
+  "event": "engVid James 강의"
 }
