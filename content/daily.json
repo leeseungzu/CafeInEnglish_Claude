@@ -598,5 +598,11 @@
   "en": "Thank you for all your support this year.",
   "ko": "올 한 해 챙겨 주셔서 감사했어요.",
   "desc": "윗사람에게 하는 연말 '수고하셨습니다'. 상대의 수고를 매기기보다 받은 도움에 고마워해요."
+ },
+ {
+  "post": "come-vs-go-bring-vs-take",
+  "en": "Should I bring anything?",
+  "ko": "뭐 좀 가져갈까?",
+  "desc": "초대받았을 때 건네는 한마디. 물건이 상대에게 도착하니 take가 아니라 bring이에요."
  }
 ]

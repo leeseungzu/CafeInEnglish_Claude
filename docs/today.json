@@ -1,13 +1,5 @@
 {
  "days": {
-  "2026-11-21": {
-   "en": "I hope you feel better soon.",
-   "ko": "얼른 낫길 바라",
-   "desc": "나을 수 있는 일을 바랄 땐 hope. I wish you get better처럼 wish 뒤에 문장을 쓰지 않아요.",
-   "url": "https://www.cafeinenglish.com/p/hope-vs-wish/",
-   "share": "https://www.cafeinenglish.com/d/i-hope-you-feel-better-soon/",
-   "au": "/audio/7875f2b5258e.mp3"
-  },
   "2026-11-22": {
    "en": "I'm a bit under the weather.",
    "ko": "몸이 좀 안 좋아",
@@ -143,6 +135,14 @@
    "url": "https://www.cafeinenglish.com/p/bok-governors-english/",
    "share": "https://www.cafeinenglish.com/d/its-like-speaking-a-common-language/",
    "au": "/audio/084a573f381c.mp3"
+  },
+  "2026-12-09": {
+   "en": "Should I bring anything?",
+   "ko": "뭐 좀 가져갈까?",
+   "desc": "초대받았을 때 건네는 한마디. 물건이 상대에게 도착하니 take가 아니라 bring이에요.",
+   "url": "https://www.cafeinenglish.com/p/come-vs-go-bring-vs-take/",
+   "share": "https://www.cafeinenglish.com/d/should-i-bring-anything/",
+   "au": "/audio/a50d19b526d4.mp3"
   }
  }
 }

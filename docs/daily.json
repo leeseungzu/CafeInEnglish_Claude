@@ -1,45 +1,5 @@
 [
  {
-  "en": "I've been really busy lately.",
-  "ko": "요즘 정말 바빴어.",
-  "desc": "오랜만에 연락할 때 근황을 전하는 한마디. lately는 '요즘'이라 I've been 같은 현재완료와 함께 써요.",
-  "url": "https://www.cafeinenglish.com/p/hard-vs-hardly/",
-  "share": "https://www.cafeinenglish.com/d/ive-been-really-busy-lately/",
-  "au": "/audio/3b37ee177d14.mp3"
- },
- {
-  "en": "I'm inclined to agree with you.",
-  "ko": "네 말에 동의하는 쪽이야.",
-  "desc": "단정하지 않고 내 생각을 부드럽게 밝힐 때. I agree보다 한 발 부드러워서 회의에서도 자연스러워요.",
-  "url": "https://www.cafeinenglish.com/p/kagan-would-you-want-to-live-forever/",
-  "share": "https://www.cafeinenglish.com/d/im-inclined-to-agree-with-you/",
-  "au": "/audio/f02b82692293.mp3"
- },
- {
-  "en": "We need to discuss the budget.",
-  "ko": "예산을 논의해야 해요",
-  "desc": "discuss 뒤에는 about 없이 바로 내용이 와요. about을 쓰려면 talk about.",
-  "url": "https://www.cafeinenglish.com/p/discuss-about/",
-  "share": "https://www.cafeinenglish.com/d/we-need-to-discuss-the-budget/",
-  "au": "/audio/d09df5bc1418.mp3"
- },
- {
-  "en": "Go ahead, I'm all ears.",
-  "ko": "말해 봐, 듣고 있어",
-  "desc": "온몸이 귀가 된 것처럼 집중해서 듣겠다는 말. ears의 s를 빼먹지 마세요.",
-  "url": "https://www.cafeinenglish.com/p/all-ears/",
-  "share": "https://www.cafeinenglish.com/d/go-ahead-im-all-ears/",
-  "au": "/audio/6c4d62cc0b67.mp3"
- },
- {
-  "en": "Sorry, I'm running a little late.",
-  "ko": "미안, 조금 늦을 것 같아",
-  "desc": "가는 중에 미리 알리는 말. 도착해서 사과할 땐 Sorry I'm late.",
-  "url": "https://www.cafeinenglish.com/p/running-late/",
-  "share": "https://www.cafeinenglish.com/d/sorry-im-running-a-little-late/",
-  "au": "/audio/496cab398295.mp3"
- },
- {
   "en": "It's not just a job. It's my passion.",
   "ko": "그냥 일이 아니라, 제 열정이에요",
   "desc": "not just = 단지 ~만이 아닌. 젠슨 황의 AI is not just software technology에서 건졌어요.",
@@ -768,6 +728,14 @@
   "au": "/audio/084a573f381c.mp3"
  },
  {
+  "en": "Should I bring anything?",
+  "ko": "뭐 좀 가져갈까?",
+  "desc": "초대받았을 때 건네는 한마디. 물건이 상대에게 도착하니 take가 아니라 bring이에요.",
+  "url": "https://www.cafeinenglish.com/p/come-vs-go-bring-vs-take/",
+  "share": "https://www.cafeinenglish.com/d/should-i-bring-anything/",
+  "au": "/audio/a50d19b526d4.mp3"
+ },
+ {
   "en": "Thank you for all your support this year.",
   "ko": "올 한 해 챙겨 주셔서 감사했어요.",
   "desc": "윗사람에게 하는 연말 '수고하셨습니다'. 상대의 수고를 매기기보다 받은 도움에 고마워해요.",
@@ -798,5 +766,45 @@
   "url": "https://www.cafeinenglish.com/p/great-speeches-first-sentence/",
   "share": "https://www.cafeinenglish.com/d/truth-be-told-im-a-little-nervous/",
   "au": "/audio/c22da3f8e690.mp3"
+ },
+ {
+  "en": "I've been really busy lately.",
+  "ko": "요즘 정말 바빴어.",
+  "desc": "오랜만에 연락할 때 근황을 전하는 한마디. lately는 '요즘'이라 I've been 같은 현재완료와 함께 써요.",
+  "url": "https://www.cafeinenglish.com/p/hard-vs-hardly/",
+  "share": "https://www.cafeinenglish.com/d/ive-been-really-busy-lately/",
+  "au": "/audio/3b37ee177d14.mp3"
+ },
+ {
+  "en": "I'm inclined to agree with you.",
+  "ko": "네 말에 동의하는 쪽이야.",
+  "desc": "단정하지 않고 내 생각을 부드럽게 밝힐 때. I agree보다 한 발 부드러워서 회의에서도 자연스러워요.",
+  "url": "https://www.cafeinenglish.com/p/kagan-would-you-want-to-live-forever/",
+  "share": "https://www.cafeinenglish.com/d/im-inclined-to-agree-with-you/",
+  "au": "/audio/f02b82692293.mp3"
+ },
+ {
+  "en": "We need to discuss the budget.",
+  "ko": "예산을 논의해야 해요",
+  "desc": "discuss 뒤에는 about 없이 바로 내용이 와요. about을 쓰려면 talk about.",
+  "url": "https://www.cafeinenglish.com/p/discuss-about/",
+  "share": "https://www.cafeinenglish.com/d/we-need-to-discuss-the-budget/",
+  "au": "/audio/d09df5bc1418.mp3"
+ },
+ {
+  "en": "Go ahead, I'm all ears.",
+  "ko": "말해 봐, 듣고 있어",
+  "desc": "온몸이 귀가 된 것처럼 집중해서 듣겠다는 말. ears의 s를 빼먹지 마세요.",
+  "url": "https://www.cafeinenglish.com/p/all-ears/",
+  "share": "https://www.cafeinenglish.com/d/go-ahead-im-all-ears/",
+  "au": "/audio/6c4d62cc0b67.mp3"
+ },
+ {
+  "en": "Sorry, I'm running a little late.",
+  "ko": "미안, 조금 늦을 것 같아",
+  "desc": "가는 중에 미리 알리는 말. 도착해서 사과할 땐 Sorry I'm late.",
+  "url": "https://www.cafeinenglish.com/p/running-late/",
+  "share": "https://www.cafeinenglish.com/d/sorry-im-running-a-little-late/",
+  "au": "/audio/496cab398295.mp3"
  }
 ]
