@@ -66,3 +66,6 @@ html.dark .nh-intro b{color:#fff}html.dark .nh-intro span{color:#8B95A1}html.dar
 @media (max-width:600px){html.dark .nh-mh{background:linear-gradient(#101012 0,#101012 calc(100% - 64px),#1C1C21 100%)!important}html.dark .nh-mh .hi{background:#22242A!important}}
 /* 휴대폰 홈 다크: 라이트와 같은 구조 (헤더색 띠 + 바탕색 둥근 카드), 2026-11-26 */
 @media (max-width:600px){html.dark .nh-mh{background:linear-gradient(#101012 0,#101012 calc(100% - 64px),#1C1C21 100%)!important}html.dark .nh-mh .hi{background:#1C1C21!important;border:0!important;box-shadow:none!important}}
+html.dark .mq-btn{background:#1E3A5F!important;color:#8EC0FF!important}html.dark .mq-btn:hover{background:#24466F!important}
+html.dark .nh-pop ol,html.dark .nh-rows{border-color:#2B2D33}html.dark .nh-rows .nh-row{border-color:#2B2D33}
+@media (max-width:600px){html.dark .nh-cup .mq{background:#22242A!important}}

@@ -2146,11 +2146,11 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
 {hero_new}
 <div class="nh-2">
   <section class="nh-pop"><h2>지금 많이 보는 글</h2><p class="nh-sub">카영 독자들이 요즘 많이 읽어요</p><ol>{pop_html}</ol></section>
-  <section><h2>영상으로 배우기</h2><p class="nh-sub">카영 영상 속 장면을 글로 다시 보기</p>{vid_rows}<a class="nh-all" href="/category/watch/">영상 글 전체 보기 ›</a></section>
+  <section><div class="nh-hd"><h2>영상으로 배우기</h2><a class="nh-all" href="/category/watch/">전체 보기 ›</a></div><p class="nh-sub">카영 영상 속 장면을 글로 다시 보기</p><div class="nh-rows">{vid_rows}</div></section>
 </div>
 <div class="nh-2">
   <section class="nh-cup"><h2>오늘의 한 잔</h2><p class="nh-sub">하루에 한 문장씩, 내일 또 새 문장이 나와요</p>{mq}</section>
-  <section><h2>{e((tr_sr or {}).get("title", "해외에서 살아남는 영어"))}</h2><p class="nh-sub">공항부터 호텔까지, 바로 쓰는 문장</p>{tr_rows}<a class="nh-all" href="/series/travel/">시리즈 전체 보기 ›</a></section>
+  <section><div class="nh-hd"><h2>{e((tr_sr or {}).get("title", "해외에서 살아남는 영어"))}</h2><a class="nh-all" href="/series/travel/">전체 보기 ›</a></div><p class="nh-sub">공항부터 호텔까지, 바로 쓰는 문장</p><div class="nh-rows">{tr_rows}</div></section>
 </div>
 {banner}
 <section class="series"><h2 class="home-h">시리즈</h2><div class="sr-grid">{series_html}</div></section>
