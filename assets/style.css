@@ -3691,3 +3691,14 @@ body.pg-gray{background:#F2F4F6!important}
 }
 .nh-intro .ky,.fcta .ky{transition:transform .15s}
 .nh-intro a:active,.fcta a:active,.hi-btn:active{transform:translateY(0) scale(.98)}
+/* 이 주의 영상: 토스처럼 마우스 올리면 왼쪽 썸네일이 살짝 확대 (2026-11-26) */
+.nh-hv img{transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.nh-more{transition:background .15s}
+@media (hover:hover){
+  .nh-hero:has(.nh-hv:hover,.nh-ttl a:hover,.nh-more:hover) .nh-hv img{transform:scale(1.05)}
+  .nh-more:hover{background:#333D4B!important}
+  .nh-ttl a:hover{color:#333D4B}
+  .nh-row .nh-tile img{transition:transform .35s ease}
+  .nh-row:hover .nh-tile img{transform:scale(1.06)}
+  .nh-row:hover .nh-rt b{color:#333D4B}
+}
