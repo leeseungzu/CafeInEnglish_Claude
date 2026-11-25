@@ -73,3 +73,4 @@ html.dark .nh-pop ol,html.dark .nh-rows{border-color:#2B2D33}html.dark .nh-rows 
 html.dark .nh .nh-sr .sr-card{background:#1C1C21!important;border-color:#3A3D45!important}html.dark .nh .nh-sr .sr-card h3{color:#fff}html.dark .nh .nh-sr .sr-n{background:#2B2D33;color:#B0B8C1}html.dark .nh-pop b{color:#E5E8EB}}
 html.dark .nh-hero>.nh-intro{border-color:#3A3D45}
 @media (max-width:600px){html.dark .nh-mh{background:linear-gradient(#101012 0,#101012 calc(100% - 28px),#1C1C21 100%)!important}}
+@media (hover:hover){html.dark .nh-intro a:hover,html.dark .fcta a:hover{background:#523A28!important;box-shadow:0 6px 16px rgba(0,0,0,.4)}}

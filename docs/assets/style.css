@@ -3683,3 +3683,11 @@ body.pg-gray{background:#F2F4F6!important}
   .nh-2:has(.nh-cup) .nh-rows{flex:0 0 auto}
   .nh-2:has(.nh-cup) .nh-rows .nh-row{flex:0 0 auto;padding:14px 0}
 }
+/* 카톡 알약 버튼: 마우스 올리면 반응 (2026-11-26) */
+.nh-intro a,.fcta a,.hi-btn{transition:background .15s,transform .15s,box-shadow .15s}
+@media (hover:hover){
+  .nh-intro a:hover,.fcta a:hover,.hi-btn:hover{background:#4A3424!important;transform:translateY(-1px);box-shadow:0 6px 16px rgba(43,29,20,.22)}
+  .nh-intro a:hover .ky,.fcta a:hover .ky{transform:scale(1.08)}
+}
+.nh-intro .ky,.fcta .ky{transition:transform .15s}
+.nh-intro a:active,.fcta a:active,.hi-btn:active{transform:translateY(0) scale(.98)}
