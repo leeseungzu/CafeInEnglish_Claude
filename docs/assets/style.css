@@ -3227,3 +3227,6 @@ body.pg-gray{background:#F2F4F6!important}
 .pv2 .pb .mean-hi{padding:22px 22px 20px;margin:0 0 24px}
 .pv2 .pb .mean-hi b{font-size:24px;margin-bottom:6px}
 .pv2 .pb .mean-hi .m{font-size:16px;font-weight:500;color:#4E5968;line-height:1.6}
+.pv2 .sc-n,.pv2 .pb .sc-play{white-space:nowrap}
+.pv2 .sc-tip{display:none}
+.pv2 #sc1 .sc-tip{display:inline;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
