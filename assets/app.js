@@ -567,6 +567,18 @@ ${my}
 
   /* ---------- B안(2026-11-25): 예문·장면 문장을 누르면 그 줄을 들려줘요 (아이콘 대신) ---------- */
   function initTapSay() {
+    // 스피커 표시가 혼자 다음 줄로 떨어지지 않게 마지막 단어와 묶기
+    $$(".pv2 .ex li .en").forEach(en => {
+      const b = en.querySelector(":scope > .say-btn, :scope > .say-v"); if (!b) return;
+      const prev = b.previousSibling; if (!prev) return;
+      const w = document.createElement("span"); w.className = "nw";
+      if (prev.nodeType === 3) {
+        const t = prev.textContent.replace(/\s+$/, ""), k = t.lastIndexOf(" ");
+        prev.textContent = k >= 0 ? t.slice(0, k + 1) : "";
+        w.textContent = k >= 0 ? t.slice(k + 1) : t;
+      } else { en.insertBefore(w, prev); w.appendChild(prev); }
+      en.insertBefore(w, b); w.appendChild(b);
+    });
     $$(".pv2 .ex li").forEach(li => {
       if (!li.querySelector(".en")) return;
       li.tabIndex = 0; li.setAttribute("role", "button");

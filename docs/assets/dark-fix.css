@@ -28,3 +28,4 @@ html.dark .pv2 .ex li.speaking{background:#1E3A5F!important;box-shadow:0 0 0 8px
 html.dark .pv2 .ex li.playing .en,html.dark .pv2 .ex li.speaking .en{color:#64A8FF}
 html.dark .pv2 .ex.talk li.me .en{color:#fff}
 html.dark .pv2 .ex li .say-btn,html.dark .pv2 .ex li .say-v{color:#6B7280!important}
+html.dark .pv2 .ex li.speaking{box-shadow:none!important}
