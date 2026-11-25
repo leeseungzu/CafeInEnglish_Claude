@@ -592,7 +592,7 @@ ${my}
 
   /* ---------- C안 글 페이지 (2026-11-26): 읽은 만큼 차는 막대 · 다음 글 카드 · 왼쪽 저장 버튼 ---------- */
   function initReader() {
-    if (!document.body.classList.contains("is-post")) return;
+    if (!document.body.classList.contains("is-post") && !$("#prog")) return;  // 도구 페이지도 진행 막대 (2026-11-26)
     const bar = $("#prog"), top = $(".top"), nx = $(".nxt"), key = "nx-off:" + location.pathname;
     let off = false; try { off = sessionStorage.getItem(key) === "1"; } catch (e) {}
     const end = document.querySelector(".srbox") || document.querySelector(".end-row");

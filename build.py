@@ -1011,7 +1011,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <link rel="stylesheet" id="dark-css" href="/assets/dark.css?v={DARK_V}" media="(prefers-color-scheme: dark)"><script>(function(){{try{{var t=localStorage.getItem('theme'),l=document.getElementById('dark-css');if(t==='dark')l.media='all';else if(t==='light')l.media='not all'}}catch(e){{}}}})();</script>
 {ads}{ga}
 </head>
-<body{' class="pg-gray"' if "nb-band" in body[:600] else (' class="is-post"' if body.startswith('<div class="pv2">') else "")}>{'<div id="prog" aria-hidden="true"></div>' if body.startswith('<div class="pv2">') else ""}
+<body{' class="pg-gray"' if "nb-band" in body[:600] else (' class="is-post"' if body.startswith('<div class="pv2">') else "")}>{'<div id="prog" aria-hidden="true"></div>' if (body.startswith('<div class="pv2">') or path.startswith("/tools/")) else ""}
 <header class="top{" top-gray" if ("m-home" in body or "nb-band" in body[:600]) else ""}"><div class="top-in">
   <a class="logo" href="/"><img class="logo-mark" src="/assets/logo-mark.png?v=3" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
   <nav class="nav">{navlinks}<button class="srch-btn nav-srch" type="button" aria-label="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button></nav>
@@ -2138,12 +2138,13 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
     nt = SITE.get("notice")
     banner = (f'<a class="nh-ban" href="{e(nt["href"])}"><span><small>{e(nt.get("label", "공지"))}</small><b>{e(nt["title"])}</b><em>{e(nt.get("sub", ""))}</em></span>'
               f'<img src="/assets/icons/airplane.webp?v={ASSET_V}" alt="" width="80" height="80" loading="lazy"><span class="nh-btn">무료로 받기</span></a>') if nt else ""
+    intro_line = f'''<div class="nh-intro"><div><b>영상으로 배우는 진짜 영어표현</b><span>매일 조금씩, 깊게 스며드는 영어</span></div>{(f'<a href="{e(kk)}" target="_blank" rel="noopener"><span class="ky"><img src="/assets/kakao-talk.png" alt="" width="16" height="15"></span>매일 아침 1일 1영 받기 ›</a>' if kk else "")}</div>'''
+    hero_full = hero_new.replace('<section class="nh-hero">', '<section class="nh-hero">' + intro_line, 1)
     more_btn = '<button type="button" class="nh-exp" id="nh-exp">더 펼쳐보기</button>' if pages_n > 1 else ""
     body = f"""<h1 class="sr-only">카페인영어 CafeInEnglish - 매일 조금씩, 깊게 스며드는 영어 공부</h1>
 <div class="nh">
 <div class="m-home nh-mh">{intro}</div>
-<div class="nh-intro"><div><b>영상으로 배우는 진짜 영어표현</b><span>매일 조금씩, 깊게 스며드는 영어</span></div>{(f'<a href="{e(kk)}" target="_blank" rel="noopener"><span class="ky"><img src="/assets/kakao-talk.png" alt="" width="16" height="15"></span>매일 아침 1일 1영 받기 ›</a>' if kk else "")}</div>
-{hero_new}
+{hero_full}
 <div class="nh-2">
   <section class="nh-pop"><h2>지금 많이 보는 글</h2><p class="nh-sub">카영 독자들이 요즘 많이 읽어요</p><ol>{pop_html}</ol></section>
   <section><div class="nh-hd"><h2>영상으로 배우기</h2><a class="nh-all" href="/category/watch/">전체 보기 ›</a></div><p class="nh-sub">카영 영상 속 장면을 글로 다시 보기</p><div class="nh-rows">{vid_rows}</div></section>

@@ -71,3 +71,5 @@ html.dark .nh-pop ol,html.dark .nh-rows{border-color:#2B2D33}html.dark .nh-rows 
 @media (max-width:600px){html.dark .nh-cup .mq{background:#22242A!important}}
 @media (min-width:900px){html.dark .nh-2>section,html.dark .nh .nh-sr,html.dark .nh .nh-new{border-color:#2B2D33}
 html.dark .nh .nh-sr .sr-card{background:#1C1C21!important;border-color:#3A3D45!important}html.dark .nh .nh-sr .sr-card h3{color:#fff}html.dark .nh .nh-sr .sr-n{background:#2B2D33;color:#B0B8C1}html.dark .nh-pop b{color:#E5E8EB}}
+html.dark .nh-hero>.nh-intro{border-color:#3A3D45}
+@media (max-width:600px){html.dark .nh-mh{background:linear-gradient(#101012 0,#101012 calc(100% - 28px),#1C1C21 100%)!important}}

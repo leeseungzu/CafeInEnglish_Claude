@@ -3663,3 +3663,23 @@ body.pg-gray{background:#F2F4F6!important}
 .nh-grid.cards.list .card.pg-hide{display:none!important}
 .nh .nh-sr .sr-n{width:max-content}
 @media (max-width:899px){.nh-tile.yt{width:128px!important;height:72px!important;border-radius:12px}}
+/* PC: 한 줄 소개를 '이 주의 영상' 상자 맨 위 줄로 묶음 (2026-11-26) */
+.nh-hero>.nh-intro{grid-column:1/-1;margin:0!important;padding:0 4px 24px!important;border-bottom:1px solid #E5E8EB}
+@media (min-width:900px){.nh-hero{row-gap:28px}.nh{padding-top:36px}.nh-hero>.nh-intro b{font-size:24px}.nh-hero>.nh-intro span{font-size:17px}}
+/* 휴대폰: 소개 카드 위·아래 여백 같게 */
+@media (max-width:600px){.nh-mh{padding-bottom:20px!important;margin-bottom:12px!important;background:linear-gradient(#F2F4F6 0,#F2F4F6 calc(100% - 28px),#fff 100%)!important}}
+/* 홈 오늘의 한 잔(PC): 카드를 오른쪽 목록 높이까지 채우고 큰 글씨로 (2026-11-26) */
+@media (min-width:900px){
+  .nh-cup .mqs{display:flex!important;flex-direction:column;flex:1}
+  .nh-cup .mq-tr{flex:1;height:auto!important;align-items:stretch!important}
+  .nh-cup .mq-tr>.mq{display:flex!important;flex-direction:column;padding:34px 34px 30px!important;border-radius:22px!important}
+  .nh-cup .mq-k{font-size:14.5px!important}
+  .nh-cup .mq-h{font-size:34px!important;line-height:1.35!important;margin-top:14px!important}
+  .nh-cup .mq-ic{width:112px!important;height:112px!important;top:52px!important;right:30px!important}
+  .nh-cup .mq-chat{margin-top:auto!important;padding-top:28px}
+  .nh-cup .mq-q{font-size:16px!important;padding:12px 16px!important}
+  .nh-cup .mq-me{font-size:15.5px!important;padding:13px 20px!important}
+  .nh-cup .mq-dots{margin-top:16px}
+  .nh-2:has(.nh-cup) .nh-rows{flex:0 0 auto}
+  .nh-2:has(.nh-cup) .nh-rows .nh-row{flex:0 0 auto;padding:14px 0}
+}
