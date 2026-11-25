@@ -910,7 +910,7 @@ TABS = [("home", "/", "홈", _TI('<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-
         ("tools", "/tools/", "도구", _TI('<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>')),
         ("notes", "/notes/", "공부방", _TI('<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>'))]  # 내 공부방 (2026-11-19, 휴대폰은 위 버튼 대신 아래 탭)
 THEME_HEAD_JS = ("<script>(function(){var d=document.documentElement,t;try{t=localStorage.getItem('theme')}catch(e){}"
-                 "var m=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)'),pc=window.matchMedia&&matchMedia('(min-width: 900px)').matches;if(!pc&&(t==='dark'||(t!=='light'&&m&&m.matches)))d.classList.add('dark')})();</script>")  # 그리기 전에 모드를 정해 흰 화면 번쩍임 방지. PC(900px 이상)는 항상 라이트 (2026-11-19)
+                 "var m=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)'),pc=false;if(!pc&&(t==='dark'||(t!=='light'&&m&&m.matches)))d.classList.add('dark')})();</script>")  # 그리기 전에 모드를 정해 흰 화면 번쩍임 방지. PC(900px 이상)는 항상 라이트 (2026-11-19)
 THEME_BTN = ('<button class="theme-btn" type="button" aria-label="화면 모드 바꾸기" title="라이트·다크 모드">'
              '<svg class="i-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>'
              '<svg class="i-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>')
@@ -1006,10 +1006,10 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="카페인영어"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 {font_head}
 <link rel="stylesheet" href="/assets/site.css?v={CSS_V}">
-<link rel="stylesheet" id="dark-css" href="/assets/dark.css?v={DARK_V}" media="(prefers-color-scheme: dark) and (max-width: 899px)"><script>(function(){{try{{var t=localStorage.getItem('theme'),l=document.getElementById('dark-css');if(t==='dark')l.media='(max-width: 899px)';else if(t==='light')l.media='not all'}}catch(e){{}}}})();</script>
+<link rel="stylesheet" id="dark-css" href="/assets/dark.css?v={DARK_V}" media="(prefers-color-scheme: dark)"><script>(function(){{try{{var t=localStorage.getItem('theme'),l=document.getElementById('dark-css');if(t==='dark')l.media='all';else if(t==='light')l.media='not all'}}catch(e){{}}}})();</script>
 {ads}{ga}
 </head>
-<body{' class="pg-gray"' if "nb-band" in body[:600] else ""}>
+<body{' class="pg-gray"' if "nb-band" in body[:600] else (' class="is-post"' if body.startswith('<div class="pv2">') else "")}>{'<div id="prog" aria-hidden="true"></div>' if body.startswith('<div class="pv2">') else ""}
 <header class="top{" top-gray" if ("m-home" in body or "nb-band" in body[:600]) else ""}"><div class="top-in">
   <a class="logo" href="/"><img class="logo-mark" src="/assets/logo-mark.png?v=3" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
   <nav class="nav">{navlinks}<button class="srch-btn nav-srch" type="button" aria-label="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button></nav>
@@ -1340,6 +1340,47 @@ def scene_dress(body, p):
     return re.sub(r'<div class="box"><ul class="ex">(.*?)</ul></div>', box, body, flags=re.S)
 
 
+SVG_RAIL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+def post_rail(p):
+    """C안(2026-11-26, 토스피드형): PC 왼쪽에 따라오는 버튼 줄 (퀴즈·저장·공유·출력)"""
+    q = (f'<a href="#quiz-sec">{SVG_RAIL}<path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>퀴즈</a>' if p.get("quiz") else "")
+    return ('<nav class="rail no-print" aria-label="글 도구"><div class="rail-in">' + q
+            + f'<button type="button" class="js-rail-keep">{SVG_RAIL}<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>저장</button>'
+            + f'<button type="button" class="js-share">{SVG_RAIL}<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>공유</button>'
+            + f'<button type="button" class="js-print">{SVG_RAIL}<path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>출력</button></div></nav>')
+
+
+def kakao_band():
+    kk = SITE.get("kakao")
+    return (f'<div class="fcta no-print"><b>매일 아침 영어 문장 하나, 카톡으로 받아 보세요</b><a href="{e(kk)}" target="_blank" rel="noopener">1일 1영 받기</a></div>' if kk else "")
+
+
+def series_box(p):
+    """글 끝 시리즈 상자: 이 글이 든 시리즈에서 앞뒤 글 (새 글이 위)"""
+    sr = next((x for x in SERIES if p["id"] in x.get("posts", [])), None)
+    if not sr:
+        return "", None
+    ids = [i for i in sr["posts"] if i in POST_BY_ID]
+    k = ids.index(p["id"])
+    nxt = POST_BY_ID[ids[k + 1]] if k + 1 < len(ids) else (POST_BY_ID[ids[k - 1]] if k else None)
+    win = [j for j in range(max(0, k - 1), min(len(ids), k + 2))]
+    if len(win) < 3:
+        win = list(range(max(0, len(ids) - 3), len(ids))) if k >= len(ids) - 1 else list(range(0, min(3, len(ids))))
+    lis = "".join(f'<li{" class=cur" if ids[j] == p["id"] else ""}><span>{j + 1}</span><a href="{post_url(POST_BY_ID[ids[j]])}">{e(POST_BY_ID[ids[j]]["title"])}</a></li>'
+                  for j in sorted(win, reverse=True))
+    return (f'<section class="srbox no-print"><div class="sh"><small>카페인영어 시리즈 · 글 {len(ids)}개</small><h3>{e(sr["title"])}</h3><p>{e(sr.get("desc", ""))}</p></div>'
+            f'<ol>{lis}</ol><a class="all" href="/series/{sr["id"]}/">시리즈 전체보기</a></section>'), nxt
+
+
+def next_card(o):
+    if not o:
+        return ""
+    th = (f'<img src="/images/yt/{o["video"]}-400.webp" alt="" width="120" height="68" loading="lazy">' if o.get("video") and (ROOT / "images" / "yt" / f'{o["video"]}-400.webp').exists()
+          else (f'<span class="nx-ic">{icon_img(o["icon"])}</span>' if o.get("icon") else ""))
+    return (f'<div class="nxt no-print" hidden role="dialog" aria-label="다음 글">{th}<div class="t"><small>이 글도 흥미로우실 거예요</small><b>{e(o["title"])}</b></div>'
+            f'<button type="button" class="nx-c">닫기</button><a class="nx-r" href="{post_url(o)}">지금 읽기</a></div>')
+
+
 def study_steps(p):
     """B안(2026-11-25): 영상 아래 복습 순서. 롱폼 STEP 1(자막 없이 듣기) → 장면 읽기 → 연습·퀴즈"""
     prac = "#expr" if p.get("expressions") else "#quiz-sec"
@@ -1380,6 +1421,10 @@ def page_post(p):
     _body = post_dress(add_heading_ids(alt_chips(p.get("body_html", "")), toc), tint)
     if video:
         _body = scene_dress(_body, p)
+    _h2 = [m.start() for m in re.finditer(r"<h2[ >]", _body)]
+    if len(_h2) >= 4:  # 글 중간(가운데 소제목 앞)에 카톡 1일1영 띠 (PC는 떠 있고, 휴대폰은 제자리)
+        _m = _h2[len(_h2) // 2]
+        _body = _body[:_m] + kakao_band() + _body[_m:]
     parts.append('<div class="pb">' + _body + '</div>')
     if p.get("expressions"):
         toc.append(("expr", "소리 내어 연습하기"))
@@ -1421,6 +1466,9 @@ def page_post(p):
     parts.append(END_CTA)
     parts.append(post_tools(p))
     parts.append(share_block("이 글 출력 · 공유"))
+    _srb, _nx = series_box(p)
+    parts.append(_srb)
+    parts.append(next_card(_nx or (similar_posts(p, 1) or [None])[0]))
     tv_ids = [pid for _, _, pid in TRAVEL_SITUATIONS if pid in POST_BY_ID]
     if p["id"] in tv_ids:
         k = tv_ids.index(p["id"])
@@ -1488,7 +1536,7 @@ def page_post(p):
     desc = p.get("description", p.get("lead", ""))
     ld = ld_article(p["title"], desc, url, img, p.get("date", ""), p["_mod"], CATS[p["cat"]],
                     [("홈", "/"), (CATS[p["cat"]], f"/category/{p['cat']}/"), (p["title"], url)])
-    return layout(p["title"], desc, url, '<div class="pv2">' + "\n".join(parts) + '</div>', p["cat"], data, "article", aside, og_img=img,
+    return layout(p["title"], desc, url, '<div class="pv2">' + post_rail(p) + "\n".join(parts) + '</div>', p["cat"], data, "article", aside, og_img=img,
                   seo_title=p.get("seo_title"), ld=ld, robots="noindex,follow" if p.get("noindex") else "")
 
 

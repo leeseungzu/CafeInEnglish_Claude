@@ -3282,3 +3282,94 @@ body.pg-gray{background:#F2F4F6!important}
 .pv2 .pb .box>:first-child{margin-top:0}
 .pv2 .pb .box:has(>p),.pv2 .pb .box:has(>b){padding:18px 20px}
 .pv2 .pb .box>p{font-size:16px;line-height:1.7}
+
+/* ===== C안 (2026-11-26, 토스피드 벤치마킹 · 승주 확정): 진행 막대 · 3단 구도 · 목차 · 메뉴 · 본문 리듬 · 형광펜 · 사진 · 띠 · 끝 영역 ===== */
+#prog{position:fixed;left:0;top:56px;height:3px;width:0;background:#191F28;z-index:60;transition:width .1s linear;pointer-events:none}
+.m-theme{display:inline-flex}
+/* 위 메뉴(PC): 밑줄 없이 굵기로, 올리면 연회색 칸 + 파랑, 글 안에서는 표시 없음 */
+@media (min-width:900px){
+  .top .nav a{background:transparent!important;color:#333D4B!important;font-weight:500!important;border-radius:10px!important;padding:8px 12px!important;font-size:15px!important;box-shadow:none!important}
+  .top .nav a::after,.top .nav a::before{display:none!important}
+  .top .nav a:hover{background:#F2F4F6!important;color:#3182F6!important}
+  .top .nav a.on{font-weight:700!important;color:#191F28!important}
+  body.is-post .top .nav a.on{font-weight:500!important;color:#333D4B!important}
+  .top-in>.m-theme{display:inline-flex!important}
+}
+/* 본문 리듬 */
+.pv2 .pb p{margin:0 0 28px}
+.pv2 mark.hl2{background:#D2F4E8;color:inherit;padding:1px 0;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.pv2 figure.ph2{margin:8px 0 36px}
+.pv2 figure.ph2 img{width:100%;height:auto;border-radius:16px;display:block}
+.pv2 figure.ph2 figcaption{font-size:14px;color:#8B95A1;text-align:center;margin-top:10px;line-height:1.5}
+.pv2 .pb p a[href^="/p/"]{text-decoration-color:#B0B8C1;text-decoration-thickness:1px}
+.pv2 .pb p a[href^="/p/"]::after{content:""}
+/* 1일1영 띠: 휴대폰은 제자리 카드, PC는 화면 아래에 떠 있음 */
+.fcta{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#E8F3FF;border-radius:16px;padding:14px 14px 14px 18px;margin:8px 0 36px}
+.fcta b{font-size:15px;color:#333D4B;font-weight:600;line-height:1.45}
+.fcta a{flex:none;background:#3182F6;color:#fff!important;text-decoration:none!important;border-radius:12px;padding:10px 14px;font-size:14.5px;font-weight:600;white-space:nowrap}
+/* 시리즈 상자 */
+.srbox{border:1px solid #E5E8EB;border-radius:20px;overflow:hidden;margin:40px 0 24px}
+.srbox .sh{background:#F9FAFB;padding:22px 22px 18px;border-bottom:1px solid #E5E8EB}
+.srbox .sh small{font-size:13px;font-weight:700;color:#8B95A1}
+.srbox .sh h3{font-size:20px;margin:6px 0 6px;color:#191F28;line-height:1.4}
+.srbox .sh p{font-size:14.5px;color:#4E5968;margin:0;line-height:1.6}
+.srbox ol{list-style:none;margin:0;padding:14px 22px 4px}
+.srbox li{display:flex;gap:12px;align-items:baseline;padding:7px 0;font-size:16px;line-height:1.5}
+.srbox li span{flex:none;font-size:13.5px;color:#B0B8C1;width:20px}
+.srbox li a{color:#333D4B;text-decoration:underline;text-decoration-color:#D1D6DB;text-underline-offset:4px}
+.srbox li.cur a{color:#3182F6;text-decoration:none;font-weight:600}
+.srbox .all{display:block;width:max-content;margin:10px auto 20px;background:#3182F6;color:#fff!important;border-radius:10px;padding:9px 16px;font-size:14px;font-weight:600;text-decoration:none}
+/* 다음 글 카드: 글 끝에서 아래로부터 */
+.nxt{position:fixed;left:50%;bottom:96px;transform:translate(-50%,18px);width:min(700px,calc(100% - 24px));display:flex;align-items:center;gap:12px;background:#fff;border-radius:20px;padding:12px;box-shadow:0 12px 40px rgba(0,0,0,.16);z-index:55;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
+.nxt.show{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+.nxt img,.nxt .nx-ic{flex:none;width:84px;height:48px;object-fit:cover;border-radius:10px;background:#F2F4F6;display:grid;place-items:center}
+.nxt .nx-ic img{width:34px;height:34px}
+.nxt .t{flex:1;min-width:0}.nxt .t small{display:block;font-size:12.5px;color:#6B7684}
+.nxt .t b{display:block;font-size:14.5px;color:#191F28;line-height:1.4;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.nxt .nx-c{flex:none;border:0;background:#F2F4F6;color:#4E5968;border-radius:10px;padding:10px 12px;font:600 14px inherit;font-family:inherit;cursor:pointer}
+.nxt .nx-r{flex:none;background:#3182F6;color:#fff!important;border-radius:10px;padding:10px 12px;font-size:14px;font-weight:600;text-decoration:none}
+.rail{display:none}
+@media (max-width:420px){.nxt .nx-c{display:none}}
+@media (min-width:900px){
+  #prog{top:64px}
+  .pv2 .pb p{margin:0 0 30px}
+  .pv2 .pb p,.pv2 .pb li{line-height:1.7}
+  .pv2 h2{margin:72px 0 20px}
+  .pv2 .pb .box:has(>p){padding:30px 34px}
+  .pv2 .pb .keypt{padding:26px 30px;border-radius:20px}
+  .fcta{position:sticky;bottom:24px;z-index:20;box-shadow:0 10px 30px rgba(0,27,55,.12);padding:16px 16px 16px 24px}
+  .fcta b{font-size:16px}
+  .nxt{bottom:28px;padding:16px 18px;gap:18px}
+  .nxt img,.nxt .nx-ic{width:120px;height:68px;border-radius:12px}
+  .nxt .t small{font-size:14px}.nxt .t b{font-size:17px}
+  .nxt .nx-c,.nxt .nx-r{padding:12px 22px;font-size:15px;border-radius:12px}
+  .srbox .sh{padding:28px 32px 24px}.srbox ol{padding:20px 32px 8px}.srbox li{font-size:17px}.srbox .sh h3{font-size:22px}
+}
+/* 3단 구도(넓은 PC): 왼쪽 버튼 줄 · 700px 본문 · 목차 */
+@media (min-width:1180px){
+  body.is-post .wrap.has-side{grid-template-columns:64px minmax(0,700px) 220px!important;gap:72px!important;max-width:1280px!important}
+  body.is-post .wrap.has-side>main{grid-column:2;position:relative}
+  body.is-post aside.side{grid-column:3}
+  .rail{display:block;position:absolute;top:0;bottom:0;left:-136px;width:64px}
+  .rail-in{position:sticky;top:140px;display:flex;flex-direction:column;gap:8px;margin-top:150px}
+  .rail a,.rail button{all:unset;cursor:pointer;box-sizing:border-box;width:64px;height:64px;border:1px solid #E5E8EB;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#4E5968;font-size:12px;font-weight:600;background:#fff}
+  .rail a:hover,.rail button:hover{background:#F9FAFB;color:#191F28}
+  .rail svg{width:21px;height:21px}
+  body.is-post aside.side .side-box+.side-box{display:none}
+}
+/* 오른쪽 목차: 상자 없이 글자 + 일자 세로줄, 지금 읽는 곳만 파랑 */
+@media (min-width:900px){
+  body.is-post aside.side .side-box:first-child{background:none!important;border:0!important;padding:0!important;box-shadow:none!important}
+  body.is-post aside.side .side-box:first-child h4{display:none}
+  body.is-post aside.side .toc{list-style:none;padding:0;margin:0}
+  body.is-post aside.side .toc>li{margin:0 0 10px;padding:0;border:0!important}
+  body.is-post aside.side .toc>li>a::before{display:none!important;content:none!important}
+  body.is-post aside.side .toc a{display:block;border-left:2px solid #E5E8EB;border-radius:0!important;padding:3px 0 3px 16px;font-size:14px;line-height:1.45;font-weight:600;color:#4E5968!important;background:none!important}
+  body.is-post aside.side .toc li.on a{border-color:#3182F6;color:#3182F6!important}
+  body.is-post aside.side .toc li.q a{color:#4E5968!important}
+  body.is-post aside.side .toc li.q.on a{color:#3182F6!important}
+}
+.nxt .nx-ic img{position:static!important;width:34px!important;height:34px!important;filter:none!important;transform:none!important}
+@media (min-width:900px){body.is-post aside.side .toc>li::before,body.is-post aside.side .toc>li::after{display:none!important;content:none!important}}
+/* 왼쪽 버튼 줄과 오른쪽 목차를 같은 높이에서 시작·고정 (승주 요청) */
+@media (min-width:1180px){body.is-post .wrap.has-side>main>.pv2{position:relative}.rail{top:0!important}.rail-in{margin-top:0!important;top:84px!important}}

@@ -76,9 +76,9 @@
     const pcq = window.matchMedia ? matchMedia("(min-width: 900px)") : null;  // PC는 항상 라이트 (2026-11-19)
     const get = () => { try { return localStorage.getItem("theme") || "auto"; } catch (e) { return "auto"; } };
     const apply = () => {
-      const t = get(); d.classList.toggle("dark", !(pcq && pcq.matches) && (t === "dark" || (t === "auto" && !!mq && mq.matches)));
+      const t = get(); d.classList.toggle("dark", (t === "dark" || (t === "auto" && !!mq && mq.matches)));
       const dl = document.getElementById("dark-css");  // 다크 CSS 파일: 고른 모드에 맞춰 받기
-      if (dl) dl.media = t === "dark" ? "(max-width: 899px)" : t === "light" ? "not all" : "(prefers-color-scheme: dark) and (max-width: 899px)";
+      if (dl) dl.media = t === "dark" ? "all" : t === "light" ? "not all" : "(prefers-color-scheme: dark)";  // 2026-11-26: PC도 라이트·다크
       const tc = document.querySelector('meta[name="theme-color"]'), top = $(".top");
       if (tc) tc.content = top ? getComputedStyle(top).backgroundColor : (d.classList.contains("dark") ? "#101012" : "#FFFFFF");
       $$(".th-seg button").forEach(b => { const on = b.dataset.th === t; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
@@ -590,6 +590,30 @@ ${my}
     });
   }
 
+  /* ---------- C안 글 페이지 (2026-11-26): 읽은 만큼 차는 막대 · 다음 글 카드 · 왼쪽 저장 버튼 ---------- */
+  function initReader() {
+    if (!document.body.classList.contains("is-post")) return;
+    const bar = $("#prog"), top = $(".top"), nx = $(".nxt"), key = "nx-off:" + location.pathname;
+    let off = false; try { off = sessionStorage.getItem(key) === "1"; } catch (e) {}
+    const end = document.querySelector(".srbox") || document.querySelector(".end-row");
+    const tick = () => {
+      const d = document.documentElement, r = Math.min(1, scrollY / Math.max(1, d.scrollHeight - innerHeight));
+      if (bar) { bar.style.width = (r * 100) + "%"; if (top) bar.style.top = top.getBoundingClientRect().bottom + "px"; }
+      if (nx && !off) {
+        const show = end ? end.getBoundingClientRect().top < innerHeight * 0.9 : r > 0.85;
+        if (show) nx.hidden = false;
+        nx.classList.toggle("show", show);
+      }
+    };
+    addEventListener("scroll", () => requestAnimationFrame(tick), { passive: true }); addEventListener("resize", tick); tick();
+    if (nx) nx.querySelector(".nx-c").onclick = () => { off = true; nx.classList.remove("show"); try { sessionStorage.setItem(key, "1"); } catch (e) {} };
+    $$(".js-rail-keep").forEach(b => b.onclick = () => {
+      const k = $(".js-keep");
+      if (k) { k.hidden = false; k.scrollIntoView({ behavior: "smooth", block: "center" }); const btn = k.querySelector(".ec-b"); btn && !btn.disabled && setTimeout(() => btn.click(), 450); }
+      else location.href = "/notes/";
+    });
+  }
+
   /* ---------- 모바일 상단: '내 공부방' 가운데 = '사유의 문장' 가운데 ---------- */
   function alignNav() {
     const nav = $(".nav"), room = $(".room");
@@ -775,7 +799,7 @@ ${my}
     const items = DATA.quiz.map((q, i) => ({ id: `${DATA.id}:${i}`, ...q }));
     runQuiz($("#quiz"), items, { mode: "post" });
   }
-  initSpeak(); initTapSay();
+  initSpeak(); initTapSay(); initReader();
   if (DATA.type === "think") initThink();
   if (DATA.type === "notes") renderNotes($("#notes-root"));
   if ($("#copy-notes")) renderCopyNotes($("#copy-notes"));

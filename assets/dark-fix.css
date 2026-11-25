@@ -29,3 +29,18 @@ html.dark .pv2 .ex li.playing .en,html.dark .pv2 .ex li.speaking .en{color:#64A8
 html.dark .pv2 .ex.talk li.me .en{color:#fff}
 html.dark .pv2 .ex li .say-btn,html.dark .pv2 .ex li .say-v{color:#6B7280!important}
 html.dark .pv2 .ex li.speaking{box-shadow:none!important}
+/* C안 다크 (2026-11-26) */
+html.dark #prog{background:#fff}
+html.dark .top .nav a{color:#D1D6DB!important}
+html.dark .top .nav a:hover{background:#2B2D33!important;color:#64A8FF!important}
+html.dark .top .nav a.on{color:#fff!important}
+html.dark body.is-post .top .nav a.on{color:#D1D6DB!important}
+html.dark .pv2 mark.hl2{background:rgba(20,180,130,.28)}
+html.dark .fcta{background:#1E3A5F}html.dark .fcta b{color:#E5E8EB}
+html.dark .srbox{border-color:#3A3D45}html.dark .srbox .sh{background:#22242A;border-color:#3A3D45}html.dark .srbox .sh h3{color:#fff}html.dark .srbox .sh p{color:#B0B8C1}html.dark .srbox li a{color:#D1D6DB;text-decoration-color:#4E5968}
+html.dark .nxt{background:#22242A;box-shadow:0 12px 40px rgba(0,0,0,.5)}html.dark .nxt .t b{color:#fff}html.dark .nxt .t small{color:#8B95A1}html.dark .nxt .nx-c{background:#3A3D45;color:#D1D6DB}
+html.dark .rail a,html.dark .rail button{background:transparent;border-color:#3A3D45;color:#B0B8C1}
+html.dark .rail a:hover,html.dark .rail button:hover{background:#2B2D33;color:#fff}
+html.dark body.is-post aside.side .toc a{border-color:#3A3D45;color:#8B95A1!important}
+html.dark body.is-post aside.side .toc li.on a{border-color:#64A8FF;color:#64A8FF!important}
+html.dark .pv2 .pb .box .ex li:last-child{border-bottom-color:transparent!important}

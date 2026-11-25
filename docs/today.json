@@ -1,13 +1,5 @@
 {
  "days": {
-  "2026-11-22": {
-   "en": "I'm a bit under the weather.",
-   "ko": "몸이 좀 안 좋아",
-   "desc": "컨디션이 별로인 날 증상 대신 건네는 한마디. 날씨가 아니라 몸 이야기이고, '살짝' 안 좋은 정도예요.",
-   "url": "https://www.cafeinenglish.com/p/under-the-weather/",
-   "share": "https://www.cafeinenglish.com/d/im-a-bit-under-the-weather/",
-   "au": "/audio/e4d3b846df0e.mp3"
-  },
   "2026-11-23": {
    "en": "I'm on a diet.",
    "ko": "나 다이어트 중이야",
@@ -143,6 +135,14 @@
    "url": "https://www.cafeinenglish.com/p/come-vs-go-bring-vs-take/",
    "share": "https://www.cafeinenglish.com/d/should-i-bring-anything/",
    "au": "/audio/a50d19b526d4.mp3"
+  },
+  "2026-12-10": {
+   "en": "Thank you for all your support this year.",
+   "ko": "올 한 해 챙겨 주셔서 감사했어요.",
+   "desc": "윗사람에게 하는 연말 '수고하셨습니다'. 상대의 수고를 매기기보다 받은 도움에 고마워해요.",
+   "url": "https://www.cafeinenglish.com/p/thanks-for-your-hard-work/",
+   "share": "https://www.cafeinenglish.com/d/thank-you-for-all-your-support-this-year/",
+   "au": "/audio/49aeee692b64.mp3"
   }
  }
 }
