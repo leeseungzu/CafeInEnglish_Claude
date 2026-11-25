@@ -3734,3 +3734,23 @@ h1,h2,h3,.nxt .t b,.nh-rt b,.nh-pop b,.srbox li a,.card h3,.nh-ttl,.sr-card h3,.
 .sc-play svg,.sh-play svg{flex:none;display:block}
 /* 카톡 알약 버튼 마우스 반응 더 잘 보이게 */
 @media (hover:hover){.nh-intro a:hover,.fcta a:hover,.fcta:hover a{background:#5A4130!important}}
+/* ===== 홈 마우스 반응 (토스피드 방식, 2026-11-26) ===== */
+.nh-pop li a{padding-left:10px!important;padding-right:10px!important;transition:background .15s}
+.nh .nh-sr .sr-cover{overflow:hidden}
+.nh .nh-sr .sr-cover img{transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.nh .nh-sr .sr-card{transition:background .15s,border-color .15s}
+.nh-grid .card .thumb img{transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.nh-grid .card h3,.nh-rt b,.nh-pop b{transition:color .15s}
+@media (hover:hover){
+  /* 지금 많이 보는 글: 줄 전체 연회색 */
+  .nh-pop li a:hover{background:#F9FAFB}
+  /* 목록·카드 제목: 파랑 */
+  .nh-row:hover .nh-rt b,.nh-grid .card:hover h3{color:#3182F6!important}
+  /* 시리즈: 그림 확대 + 카드 연회색 */
+  .nh .nh-sr .sr-card:hover{background:#F9FAFB!important}
+  .nh .nh-sr .sr-card:hover .sr-cover img{transform:scale(1.08)}
+  /* 방금 올라온 글: 썸네일 확대 */
+  .nh-grid .card:hover .thumb img,.nh-grid .card:hover .thumb .chatv{transform:scale(1.04)}
+  .nh-grid .card .thumb .chatv{transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+  .nh-hd .nh-all:hover{color:#3182F6}
+}

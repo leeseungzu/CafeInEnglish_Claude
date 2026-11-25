@@ -79,3 +79,4 @@ html.dark .nh-hero>.nh-intro{border-color:#3A3D45}
 html.dark .theme-btn .i-sun{display:none!important}html.dark .theme-btn .i-moon{display:block!important}
 html.dark .theme-btn .i-moon path{fill:currentColor}
 @media (hover:hover){html.dark .nh-ban:hover{background:#24466F}}
+@media (hover:hover){html.dark .nh-pop li a:hover{background:#22242A}html.dark .nh-row:hover .nh-rt b,html.dark .nh-grid .card:hover h3{color:#64A8FF!important}html.dark .nh .nh-sr .sr-card:hover{background:#22242A!important}}
