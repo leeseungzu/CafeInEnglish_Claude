@@ -3230,3 +3230,15 @@ body.pg-gray{background:#F2F4F6!important}
 .pv2 .sc-n,.pv2 .pb .sc-play{white-space:nowrap}
 .pv2 .sc-tip{display:none}
 .pv2 #sc1 .sc-tip{display:inline;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+/* 홈 정리(2026-11-25): 휴대폰은 회색 판 아래 '지금 많이 보는 글' → 무료 자료 → 최신 글 */
+.notice.m-nt2{display:none}
+@media (max-width:999px){.home-grid{display:flex;flex-direction:column;gap:32px}.home-grid>.pop{order:-2}.home-grid>.m-nt2{order:-1}}
+@media (max-width:600px){
+  .home-grid>.pop{background:#fff!important;border:0;padding:0;border-radius:0}
+  .home-grid>.pop .pop-h{font-size:22px!important;margin:0 0 6px!important}
+  .home-grid>.pop a{padding:12px 0;border-bottom:1px solid #F2F4F6}
+  .home-grid>.pop li:last-child a{border-bottom:0}
+  .home-grid>.pop .pop-n{background:none;width:20px;color:#3182F6;font-size:16px;font-weight:800;justify-content:start}
+  .home-grid>.pop b{font-size:16px}
+  .home-grid>.notice.m-nt2{display:flex;margin:0!important;background:#F9FAFB;border:0;border-radius:20px;padding:16px 18px}
+}

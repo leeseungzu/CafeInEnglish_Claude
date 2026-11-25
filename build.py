@@ -1985,7 +1985,7 @@ def page_home():
              '<p class="hi-h">영상으로 배우는 <em>진짜 영어표현</em></p><span class="hi-s">하루 5분 · 가입 없이 무료</span></div>'
              + (f'<a class="hi-btn" href="{e(kk)}" target="_blank" rel="noopener"><img src="/assets/kakao-talk.png" alt="" width="24" height="22">매일 아침 1일 1영 받기<i>›</i></a>' if kk else "")
              + '</section>')
-    hero = '<div class="m-home">' + intro + picker + mq + notice_html().replace('class="notice"', 'class="notice m-nt"', 1) + '</div>' + f"""<section class="hs" aria-label="오늘의 한 잔">
+    hero = '<div class="m-home">' + intro + picker + mq + '</div>' + f"""<section class="hs" aria-label="오늘의 한 잔">
   <div class="hs-track" id="hs-track">{slides}</div>
   <div class="hs-ctl"><button type="button" class="hs-btn" id="hs-prev" aria-label="이전 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="hs-btn" id="hs-next" aria-label="다음 표현"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button><span class="hs-dots" id="hs-dots"></span><a class="hs-all" href="/today/">지난 한 잔 모두 보기 ›</a></div>
 </section>"""
@@ -2057,10 +2057,11 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
 <div class="pc-band">{hero}{hero_js}
 {notice_html()}</div>
 <div class="home-grid">
-  <section><h2 class="home-h">전체 아티클</h2><div class="cards list" id="all-arts">{arts}</div>{pager}</section>
-  <aside class="pop"><h2 class="pop-h">인기 있는 글</h2><ol>{pop_html}</ol></aside>
+  <section class="home-new"><h2 class="home-h">최신 글</h2><div class="cards list" id="all-arts">{arts}</div>{pager}</section>
+  <aside class="pop"><h2 class="pop-h">지금 많이 보는 글</h2><ol>{pop_html}</ol></aside>
+  {notice_html().replace('class="notice"', 'class="notice m-nt2"', 1)}
 </div>
-<section class="series"><h2 class="home-h">아티클 시리즈</h2><div class="sr-grid">{series_html}</div></section>
+<section class="series"><h2 class="home-h">시리즈</h2><div class="sr-grid">{series_html}</div></section>
 """
     vp = None
     ld = [{"@type": "WebSite", "name": "카페인영어 CafeInEnglish", "alternateName": "카페인영어", "url": DOMAIN + "/", "inLanguage": "ko"}, ORG]
