@@ -2136,7 +2136,8 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
     tr_posts = [POST_BY_ID[i] for i in (tr_sr or {}).get("posts", []) if i in POST_BY_ID][:3]
     tr_rows = "".join(_row(p, "여행 · 읽는 데 " + str(read_min(p)) + "분") for p in tr_posts)
     nt = SITE.get("notice")
-    banner = (f'<a class="nh-ban" href="{e(nt["href"])}"><span><small>{e(nt.get("label", "공지"))}</small><b>{e(nt["title"])}</b><em>{e(nt.get("sub", ""))}</em></span>'
+    _ntt = e(nt["title"]).replace(", ", ',<br class="mbr"> ', 1) if nt else ""
+    banner = (f'<a class="nh-ban" href="{e(nt["href"])}"><span><small>{e(nt.get("label", "공지"))}</small><b>{_ntt}</b><em>{e(nt.get("sub", ""))}</em></span>'
               f'<img src="/assets/icons/airplane.webp?v={ASSET_V}" alt="" width="80" height="80" loading="lazy"><span class="nh-btn">무료로 받기</span></a>') if nt else ""
     intro_line = f'''<div class="nh-intro"><div><b>영상으로 배우는 진짜 영어표현</b><span>매일 조금씩, 깊게 스며드는 영어</span></div>{(f'<a href="{e(kk)}" target="_blank" rel="noopener"><span class="ky"><img src="/assets/kakao-talk.png" alt="" width="16" height="15"></span>매일 아침 1일 1영 받기 ›</a>' if kk else "")}</div>'''
     hero_full = hero_new.replace('<section class="nh-hero">', '<section class="nh-hero">' + intro_line, 1)

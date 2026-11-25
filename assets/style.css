@@ -3724,3 +3724,13 @@ h1,h2,h3,.nxt .t b,.nh-rt b,.nh-pop b,.srbox li a,.card h3,.nh-ttl,.sr-card h3,.
 .nh-ban .nh-btn{padding:10px 16px;font-size:14.5px;border-radius:12px}
 @media (max-width:899px){.nh-ban{flex-wrap:nowrap!important;padding:14px 14px 14px 16px!important}.nh-ban img{width:40px!important;height:40px!important}.nh-ban b{font-size:15.5px!important}.nh-ban em{font-size:13px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nh-ban .nh-btn{width:auto!important;padding:9px 12px;font-size:13.5px}}
 @media (hover:hover){.nh-ban{transition:background .15s}.nh-ban:hover{background:#DCEBFF}.nh-ban:hover .nh-btn{background:#1B64DA}}
+/* 휴대폰 PDF 띠: 제목 한 줄 (아이콘 빼고 자리 확보) */
+@media (max-width:599px){.nh-ban img{display:none!important}.nh-ban b{white-space:nowrap;font-size:15.5px!important;overflow:hidden;text-overflow:ellipsis}}
+/* 휴대폰 PDF 띠: 의미 단위로 두 줄 (여행영어 PDF, / 공항부터 호텔까지) + 아이콘 유지 */
+.nh-ban .mbr{display:none}
+@media (max-width:599px){.nh-ban img{display:block!important}.nh-ban b{white-space:normal!important;overflow:visible}.nh-ban .mbr{display:inline}.nh-ban em{display:none!important}}
+/* 장면 듣기 버튼: 글자 세로 가운데 (줄높이 1 + 위아래 같은 여백) */
+.sc-play,.sh-play{line-height:1!important;height:34px!important;padding:0 14px 0 12px!important;display:inline-flex!important;align-items:center!important;gap:6px}
+.sc-play svg,.sh-play svg{flex:none;display:block}
+/* 카톡 알약 버튼 마우스 반응 더 잘 보이게 */
+@media (hover:hover){.nh-intro a:hover,.fcta a:hover,.fcta:hover a{background:#5A4130!important}}
