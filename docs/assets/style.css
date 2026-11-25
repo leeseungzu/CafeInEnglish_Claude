@@ -3277,3 +3277,8 @@ body.pg-gray{background:#F2F4F6!important}
 .pv2 .ex li:has(+ li.speaking){border-bottom-color:transparent!important}
 .pv2 .box.scene .sc-h{margin-bottom:6px}
 .pv2 .ex .en .nw{white-space:nowrap}
+/* 상자 안 마지막 문단의 아래 여백 때문에 상자가 떠 보이던 것 (2026-11-25) */
+.pv2 .pb .box>:last-child,.pv2 .pb .keypt>:last-child,.pv2 .pb .memo>:last-child,.pv2 .pb .mean-hi>:last-child{margin-bottom:0}
+.pv2 .pb .box>:first-child{margin-top:0}
+.pv2 .pb .box:has(>p),.pv2 .pb .box:has(>b){padding:18px 20px}
+.pv2 .pb .box>p{font-size:16px;line-height:1.7}
