@@ -75,3 +75,4 @@ html.dark .nh-hero>.nh-intro{border-color:#3A3D45}
 @media (max-width:600px){html.dark .nh-mh{background:linear-gradient(#101012 0,#101012 calc(100% - 28px),#1C1C21 100%)!important}}
 @media (hover:hover){html.dark .nh-intro a:hover,html.dark .fcta a:hover{background:#523A28!important;box-shadow:0 6px 16px rgba(0,0,0,.4)}}
 @media (hover:hover){html.dark .nh-more:hover{background:#6B7684!important}html.dark .nh-ttl a:hover,html.dark .nh-row:hover .nh-rt b{color:#D1D6DB}}
+@media (hover:hover){html.dark .fcta:hover{border-color:#4E5968}html.dark .fcta:hover a{background:#523A28!important}}
