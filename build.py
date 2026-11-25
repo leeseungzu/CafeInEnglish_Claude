@@ -2034,7 +2034,7 @@ def page_home():
           + '</div><div class="mq-dots" id="mq-dots"></div><a class="mq-all" href="/today/">지난 한 잔 모두 보기 ›</a></section>') if slides_data else ""
     kk = SITE.get("kakao", "")
     intro = ('<section class="hi" aria-label="카페인영어 소개"><div class="hi-t"><span class="hi-k">CafeInEnglish</span>'
-             '<p class="hi-h">영상으로 배우는 <em>진짜 영어표현</em></p><span class="hi-s">하루 5분 · 가입 없이 무료</span></div>'
+             '<p class="hi-h">영상으로 배우는 <em>진짜 영어표현</em></p><span class="hi-s">매일 조금씩, 깊게 스며드는 영어</span></div>'
              + (f'<a class="hi-btn" href="{e(kk)}" target="_blank" rel="noopener"><img src="/assets/kakao-talk.png" alt="" width="24" height="22">매일 아침 1일 1영 받기<i>›</i></a>' if kk else "")
              + '</section>')
     hero = '<div class="m-home">' + intro + picker + mq + '</div>' + f"""<section class="hs" aria-label="오늘의 한 잔">
@@ -2141,6 +2141,8 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
     more_btn = '<button type="button" class="nh-exp" id="nh-exp">더 펼쳐보기</button>' if pages_n > 1 else ""
     body = f"""<h1 class="sr-only">카페인영어 CafeInEnglish - 매일 조금씩, 깊게 스며드는 영어 공부</h1>
 <div class="nh">
+<div class="m-home nh-mh">{intro}</div>
+<div class="nh-intro"><div><b>영상으로 배우는 진짜 영어표현</b><span>매일 조금씩, 깊게 스며드는 영어</span></div>{(f'<a href="{e(kk)}" target="_blank" rel="noopener"><span class="ky"><img src="/assets/kakao-talk.png" alt="" width="16" height="15"></span>매일 아침 1일 1영 받기 ›</a>' if kk else "")}</div>
 {hero_new}
 <div class="nh-2">
   <section class="nh-pop"><h2>지금 많이 보는 글</h2><p class="nh-sub">카영 독자들이 요즘 많이 읽어요</p><ol>{pop_html}</ol></section>

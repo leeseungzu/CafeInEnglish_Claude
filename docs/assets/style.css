@@ -3536,3 +3536,13 @@ body.pg-gray{background:#F2F4F6!important}
 .nh-cup .mq-tr>.mq{flex:0 0 100%}
 }
 .nh-2>section{min-width:0}
+/* 홈 한 줄 소개 (A안, 2026-11-26): PC는 한 줄 + 카톡 알약, 휴대폰은 기존 소개 카드 */
+.nh-intro{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:8px 0 26px;padding:0 4px}
+.nh-intro b{font-size:26px;font-weight:700;color:#191F28;letter-spacing:-.02em}
+.nh-intro span{font-size:17px;color:#6B7684;margin-left:12px}
+.nh-intro a{display:inline-flex;align-items:center;gap:9px;background:#2B1D14;color:#fff!important;border-radius:999px;padding:9px 18px 9px 9px;font-size:15.5px;font-weight:600;text-decoration:none!important;white-space:nowrap}
+.nh-intro a span{margin:0}
+.nh-intro .ky{width:30px;height:30px;border-radius:50%;background:#FEE500;display:grid;place-items:center}.nh-intro .ky img{width:17px;height:auto}
+.nh-mh{display:none!important}
+@media (max-width:600px){.nh-intro{display:none}.nh-mh{display:block!important;margin-bottom:24px!important}.nh-mh .hi{margin:0}}
+@media (min-width:601px) and (max-width:899px){.nh-intro{flex-direction:column;align-items:flex-start}}

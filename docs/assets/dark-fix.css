@@ -62,3 +62,4 @@ html.dark .nh-exp{background:#2B2D33;color:#D1D6DB}html.dark .nh-all{color:#B0B8
 @media (max-width:899px){html.dark .nh-hero{background:none}html.dark .nh-ex::after{background:linear-gradient(rgba(23,23,28,0),var(--bg))}}
 @media (min-width:601px){html.dark .nh-cup .mq{background:#22242A}}
 html.dark .pv2 .box.mean-hi{background:#2B2D33!important}html.dark .pv2 .box.mean-hi b{color:#fff}html.dark .pv2 .box.mean-hi .m{color:#B0B8C1}
+html.dark .nh-intro b{color:#fff}html.dark .nh-intro span{color:#8B95A1}html.dark .nh-intro a{background:#3A2A1E}
