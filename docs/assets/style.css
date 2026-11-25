@@ -3379,3 +3379,12 @@ body.pg-gray{background:#F2F4F6!important}
 @media (min-width:1180px){body.is-post .top-in{max-width:1176px!important}}
 /* 지금 칸(굵게)도 마우스를 올리면 연회색 칸 + 파랑 */
 @media (min-width:900px){.top .nav a.on:hover,body.is-post .top .nav a.on:hover{background:#F2F4F6!important;color:#3182F6!important}}
+/* 내 공부방: 알약 버튼 대신 다른 메뉴와 같은 글자형 (2026-11-26) */
+@media (min-width:900px){
+  .top .nav a.room{border:0!important;background:transparent!important;gap:6px;margin:0!important}
+  .top .nav a.room.on{font-weight:700!important;color:#191F28!important}
+  .top .nav a.room:hover,.top .nav a.room.on:hover{background:#F2F4F6!important;color:#3182F6!important}
+  .top .nav a.room .rt-dot{box-shadow:none;width:6px;height:6px}
+}
+/* 출력·PDF: 진행 막대(제목 위 굵은 선으로 찍히던 것)와 화면용 버튼·카드 숨김 (2026-11-26) */
+@media print{#prog,.rail,.nxt,.fcta,.srbox{display:none!important}}

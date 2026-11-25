@@ -977,6 +977,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 
         f'<a href="{h}"{" class=on" if nav in ks else ""}><span class="nl-l">{l}</span><span class="nl-s">{s}</span></a>' for g, h, l, s, ks in NAV_GROUPS)
     room = f'<a class="room{" on" if nav == "notes" else ""}" href="/notes/">내 공부방<span class="badge" id="nav-badge" hidden></span></a>'
+    navlinks += room; room = ""  # PC: 내 공부방을 영어 도구 옆 메뉴로 (2026-11-26)
     room = ('<button class="srch-btn" type="button" aria-label="표현 검색" title="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>' + THEME_BTN.replace('class="theme-btn"', 'class="theme-btn m-theme"') + room)  # 휴대폰 상단: 다크·라이트 버튼 + 검색 (2026-11-20)
     pjson = json.dumps(data or {}, ensure_ascii=False).replace("</", "<\\/")
     pdata = '<script id="page-data" type="application/json">' + pjson + '</script>'
