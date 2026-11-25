@@ -1336,7 +1336,7 @@ def scene_dress(body, p):
                 txt += f'<button class="sh-play say-v" type="button" data-t="{h[0]}" data-end="{h[1]}" data-n="1" aria-label="영상에서 듣기">{SAY_V}</button>'
             return f'<span class="en">{txt}</span>'
         inner = re.sub(r'<span class="en">(.*?)</span>', line, inner)
-        return f'<div class="box scene" id="sc{n[0]}"><div class="sc-h"><span class="sc-n">SCENE {n[0]:02d}</span><span class="sc-tip">문장을 누르면 들려요</span>{btn}</div><ul class="ex">{inner}</ul></div>'
+        return f'<div class="box scene" id="sc{n[0]}"><div class="sc-h"><span class="sc-n">SCENE {n[0]:02d}</span><span class="sc-tip">문장 눌러 듣기</span>{btn}</div><ul class="ex">{inner}</ul></div>'
     return re.sub(r'<div class="box"><ul class="ex">(.*?)</ul></div>', box, body, flags=re.S)
 
 

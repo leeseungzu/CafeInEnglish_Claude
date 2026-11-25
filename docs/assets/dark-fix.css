@@ -20,3 +20,11 @@ html.dark #notes-root .btn.primary{background:transparent!important;color:#ECECE
 /* 2026-11-20 */
 html.dark body.pg-gray{background:#101012!important}
 html.dark .nbt button.on,html.dark .nbt [aria-selected="true"]{background:#3A3A43!important;color:#ECECEF!important}
+
+/* B안 카드·재생 표시 (2026-11-25) */
+html.dark .pv2 .pb .box:not(.mean-hi),html.dark .pv2 .pb .box.scene{background:#2B2D33!important}
+html.dark .pv2 .pb .box .ex li{border-bottom-color:#3A3D45!important}
+html.dark .pv2 .ex li.speaking{background:#1E3A5F!important;box-shadow:0 0 0 8px #1E3A5F}
+html.dark .pv2 .ex li.playing .en,html.dark .pv2 .ex li.speaking .en{color:#64A8FF}
+html.dark .pv2 .ex.talk li.me .en{color:#fff}
+html.dark .pv2 .ex li .say-btn,html.dark .pv2 .ex li .say-v{color:#6B7280!important}

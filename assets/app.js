@@ -425,7 +425,18 @@ ${my}
     }
     facade.onclick = () => withPlayer(() => player.playVideo());
 
+    function markLine(ct) {  // 장면 듣기 중: 지금 말하는 줄을 표시
+      const sc = seg && seg.btn && seg.btn.closest(".box.scene, .ex li");
+      const root = sc && (sc.matches("li") ? sc.closest(".ex") : sc);
+      if (!root) return;
+      root.querySelectorAll("li").forEach(li => {
+        const v = li.querySelector(".say-v");
+        const on = !!v && ct >= +v.dataset.t - 0.15 && ct < +v.dataset.end;
+        li.classList.toggle("speaking", on);
+      });
+    }
     function stopSeg() {
+      $$(".pv2 .ex li.speaking").forEach(x => x.classList.remove("speaking"));
       clearInterval(timer); timer = null; seg = null;
       $$(".sh-play.on").forEach(b => { b.classList.remove("on"); const c = b.querySelector(".cnt"); c && c.remove(); });
     }
@@ -444,6 +455,7 @@ ${my}
           if (!seg || Date.now() - seg.since < 700) return;          // 이동 직후엔 시간이 바로 안 바뀌어요
           if (player.getPlayerState() !== 1) return;                 // 재생 중일 때만 셉니다
           const ct = player.getCurrentTime();
+          markLine(ct);
           if (ct >= seg.end || ct < seg.t - 1.5) {
             seg.left--;
             if (seg.left > 0) { show(); seg.since = Date.now(); player.seekTo(seg.t, true); player.playVideo(); }

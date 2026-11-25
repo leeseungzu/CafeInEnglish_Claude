@@ -3255,3 +3255,20 @@ body.pg-gray{background:#F2F4F6!important}
   .cards.list .cthumb .chatv.cv-l .cv-card,.cards.list .cthumb .chatv.cv-xl .cv-card{transform:none}
   .cards.list .cthumb .chatv.cv-xl .cv-q{display:none}
 }
+/* B안 보완 2 (2026-11-25): 눌러서 듣는다는 표시 · 장면 재생 중 줄 표시 · 카드 배경 대비 */
+.pv2 .ex li .say-btn,.pv2 .ex li .say-v{position:static!important;display:inline-grid!important;place-items:center;width:22px!important;height:22px!important;margin:0 0 0 6px!important;padding:0!important;border:0!important;background:none!important;color:#B0B8C1!important;opacity:1;overflow:visible;pointer-events:none;vertical-align:-4px}
+.pv2 .ex li .say-btn svg,.pv2 .ex li .say-v svg{width:15px;height:15px}
+@media (hover:hover){.pv2 .ex li:hover .say-btn,.pv2 .ex li:hover .say-v{color:#3182F6!important}}
+.pv2 .ex li.playing .en,.pv2 .ex li.speaking .en{color:#3182F6}
+.pv2 .ex li.speaking{background:#E8F3FF!important;box-shadow:0 0 0 8px #E8F3FF;border-radius:6px}
+.pv2 .ex li.speaking .say-v{color:#3182F6!important}
+/* 대화 말풍선: 재생 중에도 글자색은 그대로, 테두리로 표시 */
+.pv2 .ex.talk li.playing .en,.pv2 .ex.talk li.speaking .en{color:inherit}
+.pv2 .ex.talk li.me.playing .en,.pv2 .ex.talk li.me .en{color:#fff}
+.pv2 .ex.talk li.playing .en{box-shadow:0 0 0 3px rgba(49,130,246,.35)}
+.pv2 .ex.talk li .say-btn{color:#8B95A1!important;vertical-align:-5px}
+.pv2 .ex.talk li.me .say-btn{color:rgba(255,255,255,.75)!important}
+.pv2 .ex.talk li.speaking{background:none!important;box-shadow:none}
+/* 카드 배경: 흰 바탕과 구분되게 */
+.pv2 .pb .box:not(.mean-hi),.pv2 .pb .box.scene{background:#F2F4F6!important}
+.pv2 .pb .box .ex li{border-bottom-color:#E5E8EB!important}
