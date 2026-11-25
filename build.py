@@ -1085,7 +1085,8 @@ def chat_html(q, a, key, ko, art="", bg="", big=False, label="실제 대화에�
     qh = f'<div class="cv-q">{e(q)}</div>' if q else ""
     lbl = f'<div class="cv-lbl">{label}</div>' if big else ""
     koh = f'<div class="cv-ko">{e(ko)}</div>' if (big and ko) else ""
-    return (f'<div class="chatv{" big" if big else ""}" style="background:{bg}" aria-hidden="true"><div class="cv-card">{lbl}{qh}'
+    ln = " cv-xl" if len(a) > 46 else (" cv-l" if len(a) > 34 else "")  # 긴 대답은 목록 썸네일에서 글자를 줄여 넘치지 않게 (2026-11-25)
+    return (f'<div class="chatv{" big" if big else ""}{ln}" style="background:{bg}" aria-hidden="true"><div class="cv-card">{lbl}{qh}'
             f'<div class="cv-a"><span>{ah}</span></div>{koh}</div>{art}</div>')
 
 

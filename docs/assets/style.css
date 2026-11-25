@@ -3242,3 +3242,9 @@ body.pg-gray{background:#F2F4F6!important}
   .home-grid>.pop b{font-size:16px}
   .home-grid>.notice.m-nt2{display:flex;margin:0!important;background:#F9FAFB;border:0;border-radius:20px;padding:16px 18px}
 }
+/* 목록 썸네일 말풍선: 긴 대답이 카드 밖으로 넘치지 않게 (2026-11-25) */
+.cards.list .cthumb .cv-a span{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.cards.list .cthumb .chatv.cv-l .cv-card{transform:translateY(-6%)}
+.cards.list .cthumb .chatv.cv-l .cv-a span{font-size:8.8cqw}
+.cards.list .cthumb .chatv.cv-xl .cv-card{transform:none}
+.cards.list .cthumb .chatv.cv-xl .cv-a span{font-size:7.8cqw;line-height:1.28}
