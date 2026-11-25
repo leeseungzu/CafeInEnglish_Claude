@@ -596,18 +596,18 @@ SNS_ICON = {
 
 def sns_fab():
     """우측 하단 버튼 하나 → 누르면 SNS 목록이 펼쳐짐 (주소가 있는 채널만)"""
-    items = [("youtube", "유튜브", SITE.get("youtube")), ("instagram", "인스타그램", SITE.get("instagram")),
-             ("kakao", "카카오톡 오픈채팅", SITE.get("kakao"))]
+    items = [("kakao", "카톡 1일 1영", SITE.get("kakao")), ("youtube", "유튜브", SITE.get("youtube")), ("instagram", "인스타그램", SITE.get("instagram"))]  # 카톡 먼저 (2026-11-26)
+    FAB_SUB = {"kakao": "매일 아침 7시 영어 한 문장", "youtube": "카페인영어 영상 보기", "instagram": "@cafe_in_english"}
     # 카카오는 채널 주소가 비어 있어도 보여 주고, 누르면 '곧 열려요' 안내 (site.json에 주소만 넣으면 바로 연결)
     links = "".join(
         (f'<a class="fab-item {k}" href="{e(u)}" target="_blank" rel="noopener" aria-label="{n}" title="{n}">' if u else f'<a class="fab-item {k} pending" href="#" aria-label="{n}" title="{n}">')
-        + f'<span class="fab-ic">{SNS_ICON[k]}</span></a>'
+        + f'<span class="fab-ic">{SNS_ICON[k]}</span><span class="fab-tx"><b>{n}</b><small>{FAB_SUB[k]}</small></span></a>'
         for k, n, u in items if u or k == "kakao")
     if not links:
         return ""
     return ('<div class="fab no-print" id="fab"><div class="fab-menu" id="fab-menu">' + links + '</div>'
             '<button class="fab-main" type="button" aria-expanded="false" aria-controls="fab-menu" aria-label="카페인영어 SNS 채널 보기">'
-            '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>'
+            '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>'
             '</button></div>')
 
 
@@ -1354,7 +1354,8 @@ def post_rail(p):
 
 def kakao_band():
     kk = SITE.get("kakao")
-    return (f'<div class="fcta no-print"><b>매일 아침 영어 문장 하나, 카톡으로 받아 보세요</b><a href="{e(kk)}" target="_blank" rel="noopener">1일 1영 받기</a></div>' if kk else "")
+    return (f'<div class="fcta no-print"><span class="fc-t"><b>매일 아침 7시, 영어 한 문장</b><small>카톡 \'1일 1영\'으로 무료로 받아 보세요</small></span>'
+            f'<a href="{e(kk)}" target="_blank" rel="noopener"><span class="ky"><img src="/assets/kakao-talk.png" alt="" width="16" height="15"></span>카톡으로 받기 ›</a></div>' if kk else "")  # 2026-11-26: 카톡 알약 버튼
 
 
 def series_box(p):
@@ -2044,7 +2045,7 @@ def page_home():
     hero_js = """<script>(function(){var L=%s,n=Math.min(7,L.length);if(!n)return;var day=Math.floor((Date.now()/1000+9*3600)/86400),i0=day%%L.length,tr=document.getElementById("hs-track");
 if(i0!==%d){var x=function(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
 var lab=function(k){if(!k)return"오늘의 한 잔";if(k===1)return"어제의 한 잔";var d=new Date((day-k)*86400000);return(d.getUTCMonth()+1)+"월 "+d.getUTCDate()+"일의 한 잔"};
-tr.innerHTML=Array.from({length:n},function(_,k){var it=L[((i0-k)%%L.length+L.length)%%L.length],w=it.en.split(" "),last=w.pop();
+if(tr)tr.innerHTML=Array.from({length:n},function(_,k){var it=L[((i0-k)%%L.length+L.length)%%L.length],w=it.en.split(" "),last=w.pop();
 return '<article class="hs-slide"><div class="hs-txt"><div class="a-kicker">'+lab(k)+' · '+x(it.cat)+'</div><p class="a-phrase'+(it.en.length>16?' long':'')+'">'+(w.length?x(w.join(" "))+" ":"")+'<span class="hl">'+x(last)+'</span></p><p class="a-mean">'+x(it.ko)+'</p><p class="a-desc">'+x(it.desc||"")+'</p><div class="hs-btns">'+(k?'':'<a class="btn hs-rt" href="/notes/#routine">5분 루틴으로 내 것 만들기 →</a>')+'<a class="btn ghost" href="'+it.url+'">글 읽고 퀴즈 풀기 →</a></div></div><a class="hs-art" href="'+it.url+'" tabindex="-1" aria-hidden="true">'+it.vis+'</a></article>'}).join("")}
 window.KY_W={L:L,i0:i0,day:day,n:n};var mt=document.getElementById("mq-tr");if(mt){var X=function(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})},
 SPK=mt.querySelector(".mq-sp").innerHTML,PL=mt.querySelector(".mq-pl").outerHTML,
@@ -2063,7 +2064,7 @@ mp();if(window.gtag)gtag("event","quiz_reveal",{days_ago:+c.getAttribute("data-k
 var md2=document.getElementById("mq-dots");md2.innerHTML=Array.from({length:n},function(){return"<i></i>"}).join("");
 var mp=function(){var w=mt.firstElementChild?mt.firstElementChild.offsetWidth+10:1,c=Math.round(mt.scrollLeft/w);[].forEach.call(md2.children,function(d,j){d.className=j===c?"on":""});var cc=mt.children[c];if(cc)mt.style.height=cc.offsetHeight+"px"};
 mt.addEventListener("scroll",function(){clearTimeout(mt._t);mt._t=setTimeout(mp,50)},{passive:true});mp();addEventListener("resize",mp);KY_W.fit=mp;if(window.ResizeObserver){var ro=new ResizeObserver(function(){mp()});[].forEach.call(mt.children,function(c){ro.observe(c)})}}
-var dots=document.getElementById("hs-dots");dots.innerHTML=Array.from({length:n},function(){return"<i></i>"}).join("");
+if(!tr)return;var dots=document.getElementById("hs-dots");dots.innerHTML=Array.from({length:n},function(){return"<i></i>"}).join("");
 var cur=function(){return Math.round(tr.scrollLeft/tr.clientWidth)},paint=function(){var c=cur();[].forEach.call(dots.children,function(d,j){d.className=j===c?"on":""});document.getElementById("hs-prev").disabled=c<=0;document.getElementById("hs-next").disabled=c>=n-1};
 var go=function(d){tr.scrollTo({left:(cur()+d)*tr.clientWidth,behavior:"smooth"})};
 document.getElementById("hs-prev").onclick=function(){go(-1)};document.getElementById("hs-next").onclick=function(){go(1)};
@@ -2104,17 +2105,58 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
         series_html += (f'<a class="sr-card" href="/series/{sr["id"]}/">{cover}<h3>{e(sr["title"])}</h3>'
                         f'<p>{e(sr["desc"])}</p><span class="sr-n">글 {len(sp) + len(sr.get("thinks", []))}개</span></a>')
 
+    # ── 2026-11-26 홈 새 구성 (토스피드 벤치마킹, 승주 확정) ──
+    vids_all = sorted([p for p in POSTS if p["cat"] == "video" and p.get("video")], key=lambda p: (p.get("date", ""), p["id"]), reverse=True)
+    hv = vids_all[0] if vids_all else None
+    def _paras(p, n=2):
+        out = []
+        for m in re.findall(r"<p>(.*?)</p>", p.get("body_html", ""), re.S):
+            t = re.sub(r"<[^>]+>", "", m).strip()
+            if len(t) > 60:
+                out.append(t)
+            if len(out) >= n:
+                break
+        return out
+    hero_new = ""
+    _hvimg = yt_img(hv["video"], "fetchpriority=high").replace('92vw, 480px', '92vw, 560px') if hv else ""
+    if hv:
+        hero_new = (f'<section class="nh-hero"><a class="nh-hv" href="{post_url(hv)}" aria-label="{e(hv["title"])}">{_hvimg}'
+                    '<span class="nh-play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="#fff"/></svg></span></a>'
+                    f'<div class="nh-ht"><em class="nh-k">이 주의 영상</em><h2 class="nh-ttl"><a href="{post_url(hv)}">{e(hv["title"])}</a></h2><p class="nh-ld">{e(hv.get("lead", ""))}</p>'
+                    '<div class="nh-ex">' + "".join(f"<p>{e(t)}</p>" for t in _paras(hv)) + f'</div><a class="nh-more" href="{post_url(hv)}">이어서 보기</a></div></section>')
+    def _tile(p):
+        if p.get("video"):
+            return f'<span class="nh-tile yt">{yt_img(p["video"], "loading=lazy")}</span>'
+        ic = f'<img src="/assets/icons/{p["icon"]}.webp?v={ASSET_V}" alt="" width="58" height="58" loading="lazy">' if p.get("icon") else ""
+        return f'<span class="nh-tile" style="background:{chat_bg(p["id"])}">{ic}</span>'
+    def _row(p, meta):
+        return f'<a class="nh-row" href="{post_url(p)}"><span class="nh-rt"><b>{e(p["title"])}</b><small>{e(meta)}</small></span>{_tile(p)}</a>'
+    vid_rows = "".join(_row(p, "영상 · " + p.get("sub", "")) for p in vids_all[1:4])
+    tr_sr = next((x for x in SERIES if x["id"] == "travel"), None)
+    tr_posts = [POST_BY_ID[i] for i in (tr_sr or {}).get("posts", []) if i in POST_BY_ID][:3]
+    tr_rows = "".join(_row(p, "여행 · 읽는 데 " + str(read_min(p)) + "분") for p in tr_posts)
+    nt = SITE.get("notice")
+    banner = (f'<a class="nh-ban" href="{e(nt["href"])}"><span><small>{e(nt.get("label", "공지"))}</small><b>{e(nt["title"])}</b><em>{e(nt.get("sub", ""))}</em></span>'
+              f'<img src="/assets/icons/airplane.webp?v={ASSET_V}" alt="" width="80" height="80" loading="lazy"><span class="nh-btn">무료로 받기</span></a>') if nt else ""
+    more_btn = '<button type="button" class="nh-exp" id="nh-exp">더 펼쳐보기</button>' if pages_n > 1 else ""
     body = f"""<h1 class="sr-only">카페인영어 CafeInEnglish - 매일 조금씩, 깊게 스며드는 영어 공부</h1>
-<div class="pc-band">{hero}{hero_js}
-{notice_html()}</div>
-<div class="home-grid">
-  <section class="home-new"><h2 class="home-h">최신 글</h2><div class="cards list" id="all-arts">{arts}</div>{pager}</section>
-  <aside class="pop"><h2 class="pop-h">지금 많이 보는 글</h2><ol>{pop_html}</ol></aside>
-  {notice_html().replace('class="notice"', 'class="notice m-nt2"', 1)}
+<div class="nh">
+{hero_new}
+<div class="nh-2">
+  <section class="nh-pop"><h2>지금 많이 보는 글</h2><p class="nh-sub">카영 독자들이 요즘 많이 읽어요</p><ol>{pop_html}</ol></section>
+  <section><h2>영상으로 배우기</h2><p class="nh-sub">카영 영상 속 장면을 글로 다시 보기</p>{vid_rows}<a class="nh-all" href="/category/watch/">영상 글 전체 보기 ›</a></section>
 </div>
+<div class="nh-2">
+  <section class="nh-cup"><h2>오늘의 한 잔</h2><p class="nh-sub">하루에 한 문장씩, 내일 또 새 문장이 나와요</p>{mq}</section>
+  <section><h2>{e((tr_sr or {}).get("title", "해외에서 살아남는 영어"))}</h2><p class="nh-sub">공항부터 호텔까지, 바로 쓰는 문장</p>{tr_rows}<a class="nh-all" href="/series/travel/">시리즈 전체 보기 ›</a></section>
+</div>
+{banner}
 <section class="series"><h2 class="home-h">시리즈</h2><div class="sr-grid">{series_html}</div></section>
+<section class="nh-new"><h2>방금 올라온 글</h2><p class="nh-sub">새로 올라온 표현과 영상 글</p><div class="cards list nh-grid" id="all-arts">{arts}</div>{more_btn}</section>
+</div>{hero_js}
+<script>(function(){{var b=document.getElementById("nh-exp");if(!b)return;var pg=1;b.onclick=function(){{pg++;var h=document.querySelectorAll('#all-arts [data-pg="'+pg+'"]');[].forEach.call(h,function(c){{c.classList.remove("pg-hide")}});if(!document.querySelector('#all-arts .pg-hide'))b.remove()}}}})();</script>
 """
-    vp = None
+    vp = hv
     ld = [{"@type": "WebSite", "name": "카페인영어 CafeInEnglish", "alternateName": "카페인영어", "url": DOMAIN + "/", "inLanguage": "ko"}, ORG]
     pre = ""
     p0 = POST_BY_ID.get(daily[i0]["post"]) if daily else None

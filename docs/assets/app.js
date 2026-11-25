@@ -982,7 +982,9 @@ ${my}
       const doneUI = (fresh) => {
         kc.classList.add("kept");
         kc.querySelector(".ec-t").textContent = fresh ? "담았어요 ✓ 내일 '오늘의 복습'에 나와요" : "이 글 문장은 복습에 담겨 있어요 ✓";
-        kc.querySelector(".ec-s").textContent = KL.map(x => x.en).join(" · ");
+        const es = kc.querySelector(".ec-s"); es.textContent = ""; es.classList.add("ec-lines");
+        KL.slice(0, 2).forEach(x => { const sp = document.createElement("span"); sp.textContent = x.en; es.appendChild(sp); });
+        if (KL.length > 2) { const m = document.createElement("em"); m.textContent = "외 " + (KL.length - 2) + "문장"; es.appendChild(m); }
         kc.querySelector(".ec-b").hidden = true; kc.querySelector(".ec-l").hidden = false;
       };
       kc.querySelector(".ec-s").textContent = "이 글의 핵심 문장 " + KL.length + "개를 담으면 1일 · 3일 · 7일 뒤에 다시 꺼내 줘요";

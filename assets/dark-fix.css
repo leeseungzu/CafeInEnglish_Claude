@@ -48,3 +48,17 @@ html.dark .top .nav a.on:hover,html.dark body.is-post .top .nav a.on:hover{backg
 html.dark .top .nav a.room{background:transparent!important}
 html.dark .top .nav a.room.on{color:#fff!important}
 html.dark .top .nav a.room:hover{background:#2B2D33!important;color:#64A8FF!important}
+html.dark .fcta{background:#22242A!important;border-color:#3A3D45}html.dark .fcta .fc-t b{color:#fff}html.dark .fcta .fc-t small{color:#8B95A1}
+html.dark .fcta a{background:#3A2A1E!important}
+html.dark .fab-menu{background:#22242A;box-shadow:0 12px 40px rgba(0,0,0,.5)}html.dark .fab-tx b{color:#fff}
+html.dark .fab-item:active,html.dark .fab-item:hover{background:#2B2D33}
+html.dark .fab-main{background:#3A2A1E!important}
+html.dark .nh h2,html.dark .nh .nh-ttl,html.dark .nh-rt b,html.dark .nh-ban b{color:#fff}
+html.dark .nh-hero{background:#22242A}html.dark .nh-ex::after{background:linear-gradient(rgba(34,36,42,0),#22242A)}
+html.dark .nh-ld{color:#B0B8C1}html.dark .nh-ex p{color:#8B95A1}
+html.dark .nh-pop li a{border-color:#2B2D33}html.dark .nh-pop b{color:#E5E8EB}
+html.dark .nh-ban{background:#1E3A5F}html.dark .nh-ban em{color:#B0B8C1}
+html.dark .nh-exp{background:#2B2D33;color:#D1D6DB}html.dark .nh-all{color:#B0B8C1}
+@media (max-width:899px){html.dark .nh-hero{background:none}html.dark .nh-ex::after{background:linear-gradient(rgba(23,23,28,0),var(--bg))}}
+@media (min-width:601px){html.dark .nh-cup .mq{background:#22242A}}
+html.dark .pv2 .box.mean-hi{background:#2B2D33!important}html.dark .pv2 .box.mean-hi b{color:#fff}html.dark .pv2 .box.mean-hi .m{color:#B0B8C1}
