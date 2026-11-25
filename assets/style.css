@@ -3711,3 +3711,16 @@ h1,h2,h3,.nxt .t b,.nh-rt b,.nh-pop b,.srbox li a,.card h3,.nh-ttl,.sr-card h3,.
 /* 1일1영 띠: 띠 전체도 마우스에 반응 */
 .fcta{transition:border-color .15s,box-shadow .15s}
 @media (hover:hover){.fcta:hover{border-color:#D1D6DB}.fcta:hover a{background:#4A3424!important}}
+/* 화면 모드 아이콘: 토스처럼 지금 모드를 보여 줌 (라이트=해, 다크=달), 2026-11-26 */
+.theme-btn .i-sun{display:block!important}.theme-btn .i-moon{display:none!important}
+.theme-btn .i-sun circle{fill:currentColor}
+/* 여행영어 PDF 띠: 얇게 (아이콘 왼쪽 · 두 줄 · 버튼) 2026-11-26 */
+.nh-ban{padding:16px 18px 16px 20px!important;gap:16px!important;border-radius:18px!important}
+.nh-ban>span:first-child{flex:1;min-width:0}
+.nh-ban img{order:-1;width:52px!important;height:52px!important;margin:0!important;display:block!important}
+.nh-ban small{display:none}
+.nh-ban b{font-size:17px!important;margin:0 0 3px!important}
+.nh-ban em{font-size:14px!important;display:block}
+.nh-ban .nh-btn{padding:10px 16px;font-size:14.5px;border-radius:12px}
+@media (max-width:899px){.nh-ban{flex-wrap:nowrap!important;padding:14px 14px 14px 16px!important}.nh-ban img{width:40px!important;height:40px!important}.nh-ban b{font-size:15.5px!important}.nh-ban em{font-size:13px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nh-ban .nh-btn{width:auto!important;padding:9px 12px;font-size:13.5px}}
+@media (hover:hover){.nh-ban{transition:background .15s}.nh-ban:hover{background:#DCEBFF}.nh-ban:hover .nh-btn{background:#1B64DA}}
