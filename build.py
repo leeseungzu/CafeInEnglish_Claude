@@ -1232,7 +1232,7 @@ def post_dress(html, tint):
                   lambda m: mean_card(m, tint), html, count=1, flags=re.S)
     def ic(m):
         txt = re.sub(r"<[^>]+>", "", m.group(2)).strip()
-        name = next((n for k, n in H2_ICON if txt == k or txt.startswith(k)), None)
+        name = None  # B안(2026-11-25): 소제목 아이콘 쓰지 않음
         if not name:
             return m.group(0)
         return f'<h2{m.group(1)} class="h-ic"><img src="/assets/icons/{name}.webp?v={ASSET_V}" alt="" width="28" height="28" loading="lazy">{m.group(2)}</h2>'
@@ -1322,8 +1322,17 @@ def scene_dress(body, p):
                 txt += f'<button class="sh-play say-v" type="button" data-t="{h[0]}" data-end="{h[1]}" data-n="1" aria-label="영상에서 듣기">{SAY_V}</button>'
             return f'<span class="en">{txt}</span>'
         inner = re.sub(r'<span class="en">(.*?)</span>', line, inner)
-        return f'<div class="box scene" id="sc{n[0]}"><div class="sc-h"><span class="sc-n">SCENE {n[0]:02d}</span>{btn}</div><ul class="ex">{inner}</ul></div>'
+        return f'<div class="box scene" id="sc{n[0]}"><div class="sc-h"><span class="sc-n">SCENE {n[0]:02d}</span><span class="sc-tip">문장을 누르면 들려요</span>{btn}</div><ul class="ex">{inner}</ul></div>'
     return re.sub(r'<div class="box"><ul class="ex">(.*?)</ul></div>', box, body, flags=re.S)
+
+
+def study_steps(p):
+    """B안(2026-11-25): 영상 아래 복습 순서. 롱폼 STEP 1(자막 없이 듣기) → 장면 읽기 → 연습·퀴즈"""
+    prac = "#expr" if p.get("expressions") else "#quiz-sec"
+    return ('<nav class="steps no-print" aria-label="복습 순서">'
+            '<a href="#top-video"><b>① 영상</b>자막 없이 듣기</a>'
+            '<a href="#s1"><b>② 장면 읽기</b>표현 이해</a>'
+            f'<a href="{prac}"><b>③ 연습</b>따라 말하기·퀴즈</a></nav>')
 
 
 def expr_strip(p):
@@ -1338,8 +1347,12 @@ def page_post(p):
     url = post_url(p)
     video = p.get("video")
     _lv = level(p)
-    parts = [f'<span class="chip {p["cat"]}">{CATS[p["cat"]]}</span><span class="chip {p["cat"]}">{e(p.get("sub", ""))}</span>' + ("" if p["cat"] == "journal" else f'<span class="lv lv-{"pro" if _lv == "실전" else "base"}" title="{"일·뉴스·연설, 뉘앙스까지" if _lv == "실전" else "처음 봐도 바로 쓰는 생활 표현"}">{_lv}</span>'),
-             f'<h1>{e(p["title"])}</h1><p class="lead">{e(p.get("lead", ""))}</p><p class="date-line">{e(p.get("date", ""))}{(" · " + e(p["updated"]) + " 수정") if p.get("updated") and p["updated"] != p.get("date") else ""}</p>']
+    _kind = e(p.get("sub", "")) if p["cat"] in ("video", "story", "journal") else _lv
+    _mins = max(2, round(len(re.sub(r"<[^>]+>", "", p.get("body_html", ""))) / 600))
+    _upd = (" · " + e(p["updated"].replace("-", ".")) + " 수정") if p.get("updated") and p["updated"] != p.get("date") else ""
+    parts = [f'<div class="ph"><p class="ph-cat"><a href="/category/{p["cat"]}/">{CATS[p["cat"]]}</a> · {_kind}</p>'
+             f'<h1>{e(p["title"])}</h1><p class="lead">{e(p.get("lead", ""))}</p>'
+             f'<p class="ph-meta">카영 스터디언 · {_mins}분 · {e(p.get("date", "").replace("-", "."))}{_upd}</p></div>']
     tint = re.search(r"#[0-9A-Fa-f]{6}", chat_bg(p["id"])).group(0)
     if not video and p.get("chat"):
         c = p["chat"]
@@ -1347,16 +1360,16 @@ def page_post(p):
         parts.append('<div class="post-hero">' + chat_html(c["q"], c["a"], c.get("key", ""), c.get("ko", ""), art, chat_bg(p["id"]), big=True, label="카영 일지에서 묻고 답하기" if p["cat"] == "journal" else "실제 대화에선 이렇게") + '</div>')
     toc_slot = len(parts)
     if video:
-        parts.append(video_block(video, p["title"], "표현의 <b>듣기</b>·<b>3번 반복</b>으로 따라 말해 보세요", p.get("video_from", "")))
-        parts.append(expr_strip(p))
+        parts.append('<span id="top-video"></span>' + video_block(video, p["title"], "표현의 <b>듣기</b>·<b>3번 반복</b>으로 따라 말해 보세요", p.get("video_from", "")))
+        parts.append(study_steps(p))
     toc = []
     _body = post_dress(add_heading_ids(alt_chips(p.get("body_html", "")), toc), tint)
     if video:
         _body = scene_dress(_body, p)
     parts.append('<div class="pb">' + _body + '</div>')
     if p.get("expressions"):
-        toc.append(("expr", p.get("expressions_heading", "오늘의 표현")))
-        parts.append(f'<h2 id="expr">{e(p.get("expressions_heading", "오늘의 표현"))}</h2>')
+        toc.append(("expr", "소리 내어 연습하기"))
+        parts.append(f'<h2 id="expr">소리 내어 연습하기</h2><p class="xp2-lead">표현 {len(p["expressions"])}개를 원문 장면으로 듣고, 3번 따라 말해 보세요. 누르면 펼쳐져요.</p><div class="xp2s">')
         for xi, x in enumerate(p["expressions"]):
             ts = ""
             shadow = ""
@@ -1371,20 +1384,18 @@ def page_post(p):
                 tips = "".join(f"<li>{e(tp)}</li>" for tp in x.get("tips", []))
                 shadow = (f'<div class="shadow">{seg_buttons(shadow_start(x, p), end)}'
                           f'{say}{f"<ul class=sh-tips>{tips}</ul>" if tips else ""}</div>')
-            toc.append((f"x{xi + 1}", x["en"]))
             orig_html = f'<div class="orig">{e(x["orig"])}' + (f'<span class="orig-ko">{e(x["origKo"])}</span>' if x.get("origKo") else "") + '</div>'
             on = re.sub(r"^(and|well|so) ", "", _nz(x.get("orig", "")))
             scn = next((v for k, v in p.get("_scene_of", {}).items() if on and len(k) >= 12 and (k in on or on in k)), None)
             if scn:  # 원문은 위 장면 카드에 이미 있으니, 여기선 장면으로 돌아가는 링크만 (중복 없이)
                 orig_html = f'<a class="xp-from" href="#sc{scn}"><span>SCENE {scn:02d}</span>에서 나온 표현 · 장면 다시 보기 ↑</a>'
 
-            parts.append(f"""<div class="box xp" id="x{xi + 1}">
-  <h3>{e(x['en'])}{ts}</h3><div>{e(x['ko'])}</div>
-  {orig_html}
+            parts.append(f"""<details class="xp2" id="x{xi + 1}"><summary><b lang="en">{e(x['en'])}</b><span>{e(x['ko'])}</span></summary>
+  <div class="xp2-b">{orig_html}
   {shadow}
-  <ul class="ex"><li><span class="en">{e(x['ex'])}</span><span class="ko">{e(x['exKo'])}</span></li></ul>
-  <div class="memo" style="margin-bottom:0"><b class="lbl">연상법</b> {e(x['memo'])}</div>
-</div>""")
+  <ul class="ex"><li><span class="en">{e(x['ex'])}</span><span class="ko">{e(x['exKo'])}</span></li></ul></div>
+</details>""")
+        parts.append('</div>')
     if p.get("think") in THINK_BY_ID:
         parts.append(f'<div class="think-box"><b>이 영상 속 마음에 남는 문장</b>은 <a href="{think_url(THINK_BY_ID[p["think"]])}">사유의 문장</a>에서 필사하고 복기할 수 있어요.</div>')
     parts.append(post_say_block(p))
@@ -1424,7 +1435,7 @@ def page_post(p):
     parts.append('<h2 class="rel-h no-print">같이 보면 좋은 글</h2><div class="cards rel list no-print">'
                  + "".join(post_card(o) for o in similar_posts(p, 4)) + "</div>")
     parts.append(AUTHOR_SIG)
-    if has_quiz:
+    if has_quiz and not video:  # 영상 글은 '복습 순서' 3칸이 목차 역할 (B안)
         parts.insert(toc_slot, f'<details class="toc-m no-print"><summary>목차 · 퀴즈 바로가기</summary>{toc_html(toc)}</details>')
     links = related_links(p)
     link_items = "".join('<li><a href="%s">%s</a></li>' % (l["href"], e(l["label"])) for l in links)
@@ -1463,7 +1474,7 @@ def page_post(p):
     desc = p.get("description", p.get("lead", ""))
     ld = ld_article(p["title"], desc, url, img, p.get("date", ""), p["_mod"], CATS[p["cat"]],
                     [("홈", "/"), (CATS[p["cat"]], f"/category/{p['cat']}/"), (p["title"], url)])
-    return layout(p["title"], desc, url, "\n".join(parts), p["cat"], data, "article", aside, og_img=img,
+    return layout(p["title"], desc, url, '<div class="pv2">' + "\n".join(parts) + '</div>', p["cat"], data, "article", aside, og_img=img,
                   seo_title=p.get("seo_title"), ld=ld, robots="noindex,follow" if p.get("noindex") else "")
 
 

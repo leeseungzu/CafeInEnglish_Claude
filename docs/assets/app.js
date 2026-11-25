@@ -553,6 +553,19 @@ ${my}
     });
   }
 
+  /* ---------- B안(2026-11-25): 예문·장면 문장을 누르면 그 줄을 들려줘요 (아이콘 대신) ---------- */
+  function initTapSay() {
+    $$(".pv2 .ex li").forEach(li => {
+      if (!li.querySelector(".en")) return;
+      li.tabIndex = 0; li.setAttribute("role", "button");
+      const go = () => { const b = li.querySelector(".say-v, .say-btn"); if (!b) return;
+        $$(".pv2 .ex li.playing").forEach(x => x.classList.remove("playing")); li.classList.add("playing");
+        setTimeout(() => li.classList.remove("playing"), 2500); b.click(); };
+      li.addEventListener("click", ev => { if (ev.target.closest("a, button:not(.say-btn):not(.say-v)")) return; if (ev.target.closest(".say-btn, .say-v")) return; go(); });
+      li.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); go(); } });
+    });
+  }
+
   /* ---------- 모바일 상단: '내 공부방' 가운데 = '사유의 문장' 가운데 ---------- */
   function alignNav() {
     const nav = $(".nav"), room = $(".room");
@@ -738,7 +751,7 @@ ${my}
     const items = DATA.quiz.map((q, i) => ({ id: `${DATA.id}:${i}`, ...q }));
     runQuiz($("#quiz"), items, { mode: "post" });
   }
-  initSpeak();
+  initSpeak(); initTapSay();
   if (DATA.type === "think") initThink();
   if (DATA.type === "notes") renderNotes($("#notes-root"));
   if ($("#copy-notes")) renderCopyNotes($("#copy-notes"));
