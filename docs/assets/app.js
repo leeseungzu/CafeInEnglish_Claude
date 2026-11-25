@@ -1029,7 +1029,7 @@ ${my}
 
   // ②③ 출근길 듣기 · 다시 꺼내기 (폰 홈, 상황별 고르기 위)
   const home = document.querySelector(".m-home"), gp = document.getElementById("gp") || (home && home.querySelector(".gp-me"));
-  if (!home || !W || !W.L || !W.L.length) return;
+  if (!home || home.classList.contains("nh-mh") || !W || !W.L || !W.L.length) return;  // 새 홈(2026-11-26)에서는 출근길 듣기 카드 뺌
   const L = W.L, at = k => L[((W.i0 - k) % L.length + L.length) % L.length];
   const week = Array.from({ length: Math.min(7, L.length) }, (_, k) => at(k)).filter(x => x.au);
   const old = at(3);

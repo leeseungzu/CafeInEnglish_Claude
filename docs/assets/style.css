@@ -3546,3 +3546,5 @@ body.pg-gray{background:#F2F4F6!important}
 .nh-mh{display:none!important}
 @media (max-width:600px){.nh-intro{display:none}.nh-mh{display:block!important;margin-bottom:24px!important}.nh-mh .hi{margin:0}}
 @media (min-width:601px) and (max-width:899px){.nh-intro{flex-direction:column;align-items:flex-start}}
+/* 휴대폰 홈 소개 띠: 헤더와 틈 없이 붙고, 아래는 흰색으로 부드럽게 (2026-11-26) */
+@media (max-width:600px){.nh-mh{margin-top:-24px!important;padding-bottom:40px!important;margin-bottom:4px!important;background:linear-gradient(#F2F4F6 0,#F2F4F6 calc(100% - 64px),#fff 100%)!important}}
