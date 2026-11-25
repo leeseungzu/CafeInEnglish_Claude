@@ -1227,7 +1227,20 @@ def mean_card(m, tint):
     return f'{m.group(1)}<div class="box mean-hi" style="background:{tint}"><b>{exprs[0]}</b><span class="m">{m.group(3)}</span>{alt}</div>'
 
 
+def post_tidy(html):
+    """B안(2026-11-25): AI가 쓴 티가 나는 꾸밈 정리.
+    - 목록의 '<b>라벨</b>: 설명' → 라벨을 한 줄 제목으로(콜론 없이)
+    - 문단 앞 알약 라벨(알아 두기·셀프 체크 등)은 떼고 문장만. '한 줄 정리'·'연상법'·'이 글에서 얻을 것'은 작은 글자 라벨로(CSS)"""
+    html = re.sub(r'<li><b>([^<]{1,40})</b>\s*[:：]\s*', r'<li><b class="li-h">\1</b>', html)
+    html = re.sub(r'<p><b class="lbl">(?:알아 두기|셀프 체크|연습법|응용 팁|참고|정리|눈여겨볼 점|직접 계산)</b>\s*', '<p>', html)
+    return html
+
+
 def post_dress(html, tint):
+    html = post_tidy(html)
+    # 'X = 뜻' 상자는 소제목과 상관없이 뜻 카드로 (B안: 수식 같은 '=' 없이 표현을 크게, 뜻은 아래)
+    html = re.sub(r'<div class="box"><b>([^<]+)</b>\s*=\s*([^<]+)</div>',
+                  lambda m: f'<div class="box mean-hi" style="background:{tint}"><b>{m.group(1).strip()}</b><span class="m">{m.group(2).strip().replace(" / ", " · ")}</span></div>', html)
     html = re.sub(r'(<h2[^>]*>뜻</h2>\s*)<div class="box"><b>(.*?)</b>\s*=\s*(.*?)</div>',
                   lambda m: mean_card(m, tint), html, count=1, flags=re.S)
     def ic(m):
