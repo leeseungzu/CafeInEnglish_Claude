@@ -2365,8 +2365,8 @@ MOVED = json.loads((CONTENT / "moved.json").read_text("utf-8")) if (CONTENT / "m
 
 
 def page_moved(old, new):
-    to = post_url(POST_BY_ID[new])
-    t = POST_BY_ID[new]["title"]
+    to = new if new.startswith("/") else post_url(POST_BY_ID[new])
+    t = "카페인영어 소개" if new.startswith("/") else POST_BY_ID[new]["title"]
     return ('<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex">'
             f'<link rel="canonical" href="{DOMAIN}{to}"><meta http-equiv="refresh" content="0;url={to}">'
             f'<title>{e(t)} | 카페인영어</title></head><body><a href="{to}">{e(t)}(으)로 이동</a></body></html>')
@@ -2487,10 +2487,11 @@ ABOUT = f"""
 <p>인터뷰와 연설 속 원어민의 말을 장면으로 듣고, 뜻과 뉘앙스를 해설하고, 퀴즈와 복습으로 내 것으로 만드는 곳이에요. 가입 없이 무료예요.</p>
 <div class="abs"><div><b>2만+</b><span>유튜브 구독자</span></div><div><b>{len(POSTS)}편</b><span>해설 글</span></div><div><b>{_audio_n()}개</b><span>예문 음성</span></div></div></div>
 <h2>카페인영어를 만든 이유</h2>
-<p>안녕하세요. 카페인영어 운영자입니다.</p>
-<p>저는 한국에서 영어를 배운 평범한 사람입니다. 외우고, 시험 보고, 취업을 위해 점수를 만들고. 그렇게 오랫동안 영어를 '공부'해 왔는데, 어느 날 돌아보니 제게 남은 건 점수였지 언어가 아니더라고요.</p>
-<p>'점수를 위한 영어'가 아니라 '생각을 넓히는 영어'를 하자는 마음에서 시작했습니다.</p>
-<p>영어는 <b>생각을 넓혀 주는 도구</b>입니다. 새로운 언어로 세상을 보면 만나는 사람과 이야기가 달라지고, 생각의 폭도 그만큼 넓어진다고 생각해요. 그래서 이 영어라는 언어를 <b>쉽고 재미있게</b>, 함께 공부하며 성장하고 싶은 사람들을 위한 마음으로 카페인영어를 만들었습니다. 매일 조금씩, 하지만 깊게. 영어로 함께 성장했으면 좋겠습니다.</p>
+<p>안녕하세요. 카페인영어를 만드는 카영 스터디언입니다.</p>
+<p>첫 직장은 은행이었어요. 그다음엔 세무사 시험을 준비했고, 이후 몇 년은 회사 재무팀에서 원가를 계산하고 견적을 내고 매달 결산을 했어요. 영어와는 거리가 먼 길이었죠.</p>
+<p>영어는 살다 보니 필수가 됐는데, 알면서도 계속 미뤘어요. 육아휴직을 하면서 더는 미룰 수 없다고 생각했고, 어차피 할 거라면 재밌게 하고 싶었어요.</p>
+<p>처음엔 제가 공부하려고 만들었어요. 좋은 연설과 인터뷰를 찾아 번역하고, 표현을 정리하고, 자막을 입혔어요. 그러다 알게 된 게 있어요. 표현 하나를 제대로 알려면 그 사람이 어떤 자리에서, 누구에게, 왜 그 말을 했는지까지 봐야 한다는 거예요. 단어는 사전에서 찾을 수 있지만, 그 말이 왜 사람을 움직이는지는 장면 안에서만 보여요.</p>
+<p>그래서 카페인영어에게 영어는 목표가 아니라 <b>더 넓은 세상을 보는 도구</b>예요. 가르치는 채널이 아니라 같이 공부하는 채널이고, 이 사이트도 제가 매일 보려고 만든 공부방이에요. 매일 조금씩, 하지만 깊게. 영어로 함께 성장했으면 좋겠습니다.</p>
 <div class="abq"><img src="/assets/icon-192.png" alt="" width="52" height="52"><div><b>매일 한 잔의 커피처럼, 대화 속 진짜 영어를 꾸준히.</b><span>오늘의 한 문장에 마침표를 찍는 곳, CafeInEnglish.</span></div></div>
 <h2>이런 걸 할 수 있어요</h2>
 <div class="about-acts">{_about_acts()}</div>
@@ -3910,7 +3911,7 @@ def build():
     write("/today/", page_today()); pages.append("/today/")
     write("/tools/today-english/", page_today_old())
     for old, new in MOVED.items():
-        if old not in POST_BY_ID and new in POST_BY_ID:
+        if old not in POST_BY_ID and (new in POST_BY_ID or new.startswith("/")):
             write(f"/p/{old}/", page_moved(old, new))
     (OUT / "manifest.webmanifest").write_text(json.dumps({
         "name": "카페인영어 - 오늘의 5분", "short_name": "카페인영어", "lang": "ko", "start_url": "/notes/?src=app", "scope": "/",
