@@ -113,6 +113,8 @@ docs/                ← GitHub Pages가 서비스하는 결과물 (직접 수�
 - style.css는 각 페이지 `<head>`에 인라인으로 들어간다 (렌더링 차단 요청 없음).
 - 유튜브 썸네일은 `images/yt/<id>.webp` (640x360)로 저장해 쓰고, 홈 첫 화면 썸네일은 fetchpriority=high.
 - GA는 페이지 load 1.5초 뒤에 불러온다.
+- CSS 묶음별 분리(2026-11-26, 모바일 63점 대응): 빌드 마지막에 `tools/css_split.py`가 docs의 HTML을 묶음(home·post·list·tools·notes·today·travel·etc)으로 모아, 그 묶음 HTML과 사이트 JS(assets/*.js)에 글자로 나오는 클래스·아이디만 남긴 `/assets/css/<묶음>.site.css`·`<묶음>.dark.css`로 링크를 바꾼다(gzip 49→26~31KB). 전체판 site.css·dark.css도 그대로 만든다. JS에서 클래스 이름을 문자열 조각으로 이어 붙이면(예: "lv-"+n) `"lv-"+` 형태여야 접두어로 인식되니, 그 외 방식으로 클래스를 만들면 css_split의 접두어 목록을 확인한다. 바꾼 뒤엔 전체판과 화면 비교(픽셀 동일) 확인.
+- 유튜브 썸네일: 작업 환경(가상 환경)은 유튜브에 접속이 안 돼 새 영상 썸네일 webp를 못 만든다 → 빌드가 `yt_src/need.txt`에 목록을 남기고, 승주가 저장소 폴더의 `유튜브썸네일받기.command`를 더블클릭하면 `yt_src/`(git 제외)에 원본이 받아지고 다음 빌드 때 images/yt/<id>.webp·-400.webp로 바뀐다. 그 전까지 홈 작은 칸·다음 글 카드는 1280px 대신 mqdefault(320px)를 쓴다.
 
 ## SEO 규칙 (2026-10 점검)
 - 카테고리 페이지 검색 제목·설명은 build.py `CAT_SEO`에서 관리. 카테고리별 OG 이미지(`og/c-<cat>.png`)와 CollectionPage·Breadcrumb 구조화 데이터 자동 생성.

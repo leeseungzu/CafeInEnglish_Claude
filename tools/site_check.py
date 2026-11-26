@@ -51,6 +51,9 @@ for need in ("/privacy/", "/contact/", "/about/"):
 if not (D / "ads.txt").exists(): bad["ads.txt 없음"].append("ads.txt")
 gz = lambda f: len(gzip.compress((D / f).read_bytes(), 9)) // 1024
 sizes = {f: gz(f) for f in ("assets/site.css", "assets/app.js", "assets/tools.js") if (D / f).exists()}
+# 2026-11-26부터 페이지는 묶음별 CSS(assets/css/<묶음>.site.css)를 씀 → 그중 가장 큰 것으로 판단
+_grp = sorted(((gz(str(f.relative_to(D))), f.name) for f in (D / "assets" / "css").glob("*.site.css")), reverse=True) if (D / "assets" / "css").exists() else []
+if _grp: sizes["assets/site.css"] = _grp[0][0]
 font = (D / "assets/pretendard-subset.woff2").stat().st_size // 1024
 home = gz("index.html")
 if sizes.get("assets/site.css", 0) > 45: warn["CSS가 큼(gzip 45KB 넘음)"].append(f"{sizes['assets/site.css']}KB")

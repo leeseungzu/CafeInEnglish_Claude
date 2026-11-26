@@ -621,7 +621,11 @@ def yt_thumb(video):
             import urllib.request, io
             from PIL import Image
             data = None
-            for q in ("maxresdefault", "hqdefault"):
+            # 작업 컴퓨터(가상 환경)가 유튜브에 못 붙을 때: 승주 맥에서 '유튜브썸네일받기.command'로 받아 둔 원본을 씀
+            src_jpg = ROOT / "yt_src" / f"{video}.jpg"
+            if src_jpg.exists() and src_jpg.stat().st_size > 2000:
+                data = src_jpg.read_bytes()
+            for q in (() if data else ("maxresdefault", "hqdefault")):
                 try:
                     data = urllib.request.urlopen(f"https://i.ytimg.com/vi/{video}/{q}.jpg", timeout=10).read()
                     break
@@ -634,6 +638,14 @@ def yt_thumb(video):
             f.parent.mkdir(parents=True, exist_ok=True)
             im.save(f, "WEBP", quality=80)
         except Exception:
+            try:  # 받아야 할 목록을 남겨 둠 → 유튜브썸네일받기.command 가 읽음
+                need = ROOT / "yt_src" / "need.txt"
+                need.parent.mkdir(exist_ok=True)
+                have = set(need.read_text().split()) if need.exists() else set()
+                if video not in have:
+                    need.write_text("\n".join(sorted(have | {video})) + "\n")
+            except Exception:
+                pass
             return f"https://i.ytimg.com/vi/{video}/maxresdefault.jpg"  # 4:3(hq)은 위아래 검은 띠 때문에 잘려 보여서 16:9로
     small = f.with_name(f"{video}-400.webp")
     if not small.exists():
@@ -650,14 +662,18 @@ def yt_ver(video, suf=""):
     return hashlib.md5(f.read_bytes()).hexdigest()[:8] if f.exists() else "0"
 
 
-def yt_img(video, attrs):
-    """휴대폰엔 400px, 큰 화면엔 640px 썸네일을 보내요"""
+def yt_img(video, attrs, sizes="(max-width:600px) 92vw, 480px", tile=False):
+    """휴대폰엔 400px, 큰 화면엔 640px 썸네일을 보내요.
+    tile=True: 홈 '방금 올라온 글' 같은 작은 칸(최대 224px). 사이트 썸네일이 아직 없으면 유튜브 1280px 대신 320px(mqdefault)을 써요"""
     src = yt_thumb(video)
+    if tile and src.startswith("https://i.ytimg.com/"):
+        return f'<img src="https://i.ytimg.com/vi/{video}/mqdefault.jpg" alt="" width="640" height="360" {attrs}>'
+
     if src.startswith("/images/yt/") and (ROOT / "images" / "yt" / f"{video}-400.webp").exists():
         # 파일 내용이 바뀌면 주소(?v=)도 바뀌어서 브라우저·카톡이 옛 이미지를 쓰지 않아요
         v1, v4 = yt_ver(video), yt_ver(video, "-400")
         return (f'<img src="/images/yt/{video}-400.webp?v={v4}" srcset="/images/yt/{video}-400.webp?v={v4} 400w, {src}?v={v1} 640w" '
-                f'sizes="(max-width:600px) 92vw, 480px" alt="" width="640" height="360" {attrs}>')
+                f'sizes="{sizes}" alt="" width="640" height="360" {attrs}>')
     return f'<img src="{src}" alt="" width="640" height="360" {attrs}>'
 
 def video_block(video, title, hint, vfrom=""):
@@ -1379,7 +1395,7 @@ def next_card(o):
     if not o:
         return ""
     th = (f'<img src="/images/yt/{o["video"]}-400.webp" alt="" width="120" height="68" loading="lazy">' if o.get("video") and (ROOT / "images" / "yt" / f'{o["video"]}-400.webp').exists()
-          else f'<img src="{yt_thumb(o["video"])}" alt="" width="120" height="68" loading="lazy">' if o.get("video")
+          else f'<img src="{yt_thumb(o["video"]).replace("/maxresdefault.jpg", "/mqdefault.jpg")}" alt="" width="120" height="68" loading="lazy">' if o.get("video")
           else (f'<span class="nx-ic">{icon_img(o["icon"])}</span>' if o.get("icon") else ""))
     return (f'<div class="nxt no-print" hidden role="dialog" aria-label="다음 글">{th}<div class="t"><small>이 글도 흥미로우실 거예요</small><b>{e(o["title"])}</b></div>'
             f'<button type="button" class="nx-c">닫기</button><a class="nx-r" href="{post_url(o)}">지금 읽기</a></div>')
@@ -2127,7 +2143,7 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
                     '<div class="nh-ex">' + "".join(f"<p>{e(t)}</p>" for t in _paras(hv)) + f'</div><a class="nh-more" href="{post_url(hv)}">이어서 보기</a></div></section>')
     def _tile(p):
         if p.get("video"):
-            return f'<span class="nh-tile yt">{yt_img(p["video"], "loading=lazy")}</span>'
+            return f'<span class="nh-tile yt">{yt_img(p["video"], "loading=lazy", sizes="224px", tile=True)}</span>'
         ic = f'<img src="/assets/icons/{p["icon"]}.webp?v={ASSET_V}" alt="" width="58" height="58" loading="lazy">' if p.get("icon") else ""
         return f'<span class="nh-tile" style="background:{chat_bg(p["id"])}">{ic}</span>'
     def _row(p, meta):
@@ -3946,6 +3962,9 @@ def build():
     if SITE.get("adsense_client"):
         pub = SITE["adsense_client"].replace("ca-", "")
         (OUT / "ads.txt").write_text(f"google.com, {pub}, DIRECT, f08c47fec0942fa0\n", "utf-8")
+    # 모바일 속도 (2026-11-26): 페이지 묶음(홈·글·목록·도구…)마다 실제 쓰는 CSS만 담은 파일로 링크를 바꿔요
+    from css_split import split_site_css
+    split_site_css(OUT, STYLE_CSS, DARK_CSS, CSS_V, DARK_V)
     after = {f for f in OUT.rglob("*") if f.is_file()}
     written = {OUT / "assets" / f.relative_to(ASSETS) for f in ASSETS.rglob("*") if f.is_file()} | {OUT / "audio" / f.name for f in AUDIO_DIR.glob("*.mp3")} | {OUT / "images" / f.relative_to(ROOT / "images") for f in (ROOT / "images").rglob("*") if f.is_file()} | {f for f in after if f.stat().st_mtime >= START}
     stale = sorted(str(f.relative_to(OUT)) for f in before - written if f.name != ".DS_Store")

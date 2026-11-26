@@ -8,3 +8,6 @@ Claude outputs/
 secrets/
 *.key
 .env
+
+# 유튜브 썸네일 원본(승주 맥에서 받아 빌드 때 webp로 바꿈)
+yt_src/
