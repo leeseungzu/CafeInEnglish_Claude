@@ -97,7 +97,7 @@
   const dueList = () => Object.values(S.srs || {}).filter(v => v.due <= DAY).sort((a, b) => a.due - b.due || a.st - b.st);
   // 발음 듣기 버튼은 어디서나 같은 동그란 스피커 아이콘 (글자 버튼은 줄바꿈되며 균형이 깨져요)
   const SPK = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
-  let rvShow = false, saidAll = false;
+  let rvShow = false, saidAll = false, view = "";
   // 이 문장이 어디서 왔는지: 'I'm down 글에서 · 2일 전에 담았어요'
   function rvSrc(v) {
     const from = v.t ? `${esc(v.t)} 글에서` : v.from ? `${esc(v.from)}에서` : "";
@@ -113,7 +113,7 @@
     const lab = k => { if (k === 1) return "어제"; const d = new Date((DAY - k) * 864e5); return (d.getUTCMonth() + 1) + "월 " + d.getUTCDate() + "일"; };
     const li = [1, 2, 3].filter(k => k < n).map(k => { const x = DAILY[((DAY - k) % n + n) % n];
       return `<a href="${esc(x.p)}" data-past="item"><span class="pt-d">${lab(k)}</span><span class="pt-t"><b>${esc(x.en)}</b><small>${esc(x.ko)}</small></span>${CH}</a>`; }).join("");
-    return `<section class="pt-card" id="past"><h3>지난 한 잔</h3><p class="pt-s">오늘 걸로 아쉽다면, 지난 표현으로 이어서 공부해요</p><div class="pt-li">${li}</div><a class="pt-all" href="/today/" data-past="all">지난 한 잔 ${n}잔 모두 보기 ${CH}</a></section>`;
+    return `<section class="pt-card" id="past"><div class="nb-hd"><h3>지난 한 잔</h3><a href="/today/" data-past="all">전체 보기 ›</a></div><div class="pt-li">${li}</div></section>`;
   }
   function rvBlock() {
     const all = Object.values(S.srs || {}); if (!all.length) return "";
@@ -210,18 +210,16 @@ ${rvShow ? `<div class="rv-a"><b>${esc(v.en)}</b>${v.a ? `<button type="button" 
     const doneN = (st1 === "done" ? 1 : 0) + (st2 === "done" ? 1 : 0), allN = 1 + (srsN ? 1 : 0);
     const headT = nxt ? (stamped ? (nxt.go === "review" ? `복습 카드 ${due.length}장만 넘기면<br>오늘 공부 완주예요` : "오늘 도장은 찍었어요.<br>한 걸음만 더 가 볼까요?") : "하나만 해도<br>오늘 도장이 찍혀요") : "오늘 할 일을 다 했어요.<br>내일 또 만나요";
     const dots = (() => { let o = ""; for (let k = 0; k < 7; k++) { const s2 = ymd(mon + k); o += `<i class="${done(s2) ? "on" : ""}${s2 === TODAY ? " td" : ""}"></i>`; } return o; })();
-    const P = (cls, num, t, sub, extra) => `<div class="np ${cls}"><span class="np-d">${cls === "done" ? "✓" : num}</span><span class="np-t"><b>${t}</b><small>${sub}</small></span>${extra || ""}</div>`;
+    const P = (cls, num, t, sub, extra, go) => { const tag = go ? (go.charAt(0) === "/" ? `a href="${esc(go)}"` : `button type="button" data-go="${go}"`) : "div", end = go ? (go.charAt(0) === "/" ? "a" : "button") : "div";
+      return `<${tag} class="np ${cls}"><span class="np-d">${cls === "done" ? "✓" : num}</span><span class="np-t"><b>${t}</b><small>${sub}</small></span>${extra || ""}</${end}>`; };
     const hero = `<section class="nt" id="week"><p class="nt-k">오늘 할 일 ${allN}개 중 ${doneN}개 끝${st ? ` · <b>${st}일 연속</b>` : ""}</p><h2 class="nt-h">${headT}</h2>
 ${nxt ? (nxt.href ? `<a class="nt-cta" href="${esc(nxt.href)}">${nxt.t} · ${nxt.m}</a>` : `<button type="button" class="nt-cta" data-go="${nxt.go}">${nxt.t} · ${nxt.m}</button>`) : ""}
 <div class="nt-wk"><span>이번 주</span>${dots}</div>
-<div class="np-path">${P(st1 === "done" ? "done" : st1 === "doing" ? "now" : (nxt && nxt.go === "routine" ? "now" : ""), 1, "오늘의 한 잔", st1 === "done" ? esc(r.en) + " · 완주" : st1 === "doing" ? `${n}/3 진행 중 · 도장 찍힘` : esc(r.en))}
-${P(st2 === "done" ? "done" : st2 === "todo" ? (nxt && nxt.go === "review" ? "now" : "") : "off", 2, "복습 카드", st2 === "none" ? "글에서 '복습에 담기'를 누르면 여기로 와요" : st2 === "todo" ? `${due.length}장이 돌아왔어요` : "오늘 복습 끝")}
-${rc0 ? P(nxt && nxt.href ? "now" : "", 3, "읽던 글 이어 읽기", esc(rc0.t) + " · " + (rc0.pct || 0) + "%", rc0.th ? `<a href="${esc(rc0.u)}" class="np-th"><img src="${esc(rc0.th)}" alt="" loading="lazy"></a>` : "") : ""}</div></section>`;
-    const recent = RC.length ? `<section class="pt-card rc-card" id="recent"><h3>최근 읽은 글</h3><div class="rc-li">${RC.slice(0, 4).map(x => `<a href="${esc(x.u)}" data-past="recent">${x.th ? `<span class="rc-th"><img src="${esc(x.th)}" alt="" loading="lazy"></span>` : ""}<span class="rc-t"><b>${esc(x.t)}</b><span class="rc-bar"><i style="width:${Math.min(100, x.pct || 0)}%"></i></span></span></a>`).join("")}</div></section>` : "";
-    const heroOld = `<section class="hx${met ? " met" : ""}${cel ? " cel" : ""}" id="week"><div class="hx-t"><b>${met ? "이번 주 목표 달성" : `이번 주 ${GOAL}잔 중 ${cnt}잔`}</b>${st ? `<span class="hx-f">🔥 ${st}일 연속</span>` : ""}</div>
-<p class="hx-s">${heroSub}</p><div class="hx-ds">${wk}</div>
-<div class="hx-todo"><button type="button" data-go="routine"${n === 3 ? ' class="ok"' : ""}>오늘의 한 잔<span>${n === 3 ? "완료" : `<b>${n}</b>/3`}</span></button><button type="button" data-go="review"${srsN && !due.length ? ' class="ok"' : ""}>오늘의 복습<span>${!srsN ? "아직 없음" : due.length ? `<b>${due.length}</b>개` : "완료"}</span></button></div></section>`;
-    root.innerHTML = `<div class="tdg${rvBlock() ? "" : " norv"}"><div class="tdg-l">${hero}<section class="rt-card${open === "s" && !r.s ? " hide-en" : ""}" id="routine">
+<div class="np-path">${P(st1 === "done" ? "done" : st1 === "doing" ? "now" : (nxt && nxt.go === "routine" ? "now" : ""), 1, "오늘의 한 잔", st1 === "done" ? esc(r.en) + " · 완주" : st1 === "doing" ? `${n}/3 진행 중 · 도장 찍힘` : esc(r.en), "", "routine")}
+${P(st2 === "done" ? "done" : st2 === "todo" ? (nxt && nxt.go === "review" ? "now" : "") : "off", 2, "복습 카드", st2 === "none" ? "글에서 '복습에 담기'를 누르면 여기로 와요" : st2 === "todo" ? `${due.length}장이 돌아왔어요` : "오늘 복습 끝", "", st2 === "none" ? "" : "review")}
+${rc0 ? P(nxt && nxt.href ? "now" : "", 3, "읽던 글 이어 읽기", esc(rc0.t) + " · " + (rc0.pct || 0) + "%", rc0.th ? `<span class="np-th"><img src="${esc(rc0.th)}" alt="" loading="lazy"></span>` : "", rc0.u) : ""}</div></section>`;
+    const recent = RC.length ? `<section class="pt-card rc-card" id="recent"><div class="nb-hd"><h3>최근 읽은 글</h3></div><div class="rc-li">${RC.slice(0, 4).map(x => `<a href="${esc(x.u)}" data-past="recent">${x.th ? `<span class="rc-th"><img src="${esc(x.th)}" alt="" loading="lazy"></span>` : ""}<span class="rc-t"><b>${esc(x.t)}</b><span class="rc-bar"><i style="width:${Math.min(100, x.pct || 0)}%"></i></span></span></a>`).join("")}</div></section>` : "";
+    const routineHTML = `<section class="rt-card${open === "s" && !r.s ? " hide-en" : ""}" id="routine">
 <div class="rt-top"><div class="a-kicker">${esc(SRC_NAME[r.src] || "오늘의 한 잔")} · 5분 루틴</div><span class="rt-prog${n === 3 ? " full" : ""}">${n === 3 ? "도장 완료" : (stamped ? "☕ " : "") + n + " / 3"}</span></div>
 <div class="rt-seg" role="tablist" aria-label="연습할 문장 고르기"><button type="button" role="tab" data-src="daily" class="${S.src === "daily" ? "on" : ""}">☕ 오늘의 한 잔</button><button type="button" role="tab" data-seg="sit" class="${S.src !== "daily" ? "on" : ""}">상황별 문장</button></div>
 ${S.src !== "daily" ? `<div class="rt-goals">${SRCS.map(g => `<button type="button" data-src="${g.id}" class="${S.src === g.id ? "on" : ""}">${g.icon ? `<img src="${g.icon}" alt="" width="26" height="26">` : ""}<span>${esc(g.short)}</span></button>`).join("")}</div>` : ""}
@@ -230,8 +228,12 @@ ${S.src !== "daily" ? `<div class="rt-goals">${SRCS.map(g => `<button type="butt
 <div class="acts">${row("l", "듣기", "원어민 발음 3번 · 1분", r)}${row("s", "말하기", "한국어만 보고 말하면 바로 확인해 줘요 · 2분", r)}${row("r", "복습하기", r.q.ago ? `${r.q.ago}일 전에 말해 본 문장, 기억나요? · 2분` : "방금 배운 문장 한 번 더 · 2분", r)}</div>
 <p class="rt-hint">${n === 3 ? `<b class="lbl">완주</b> 오늘 세 가지를 다 했어요. ${st > 1 ? "연속 " + st + "일째예요." : "내일 또 만나요."}` : stamped ? '<b class="lbl">도장</b> 오늘 도장이 찍혔어요. 세 가지를 다 하면 완주예요' : '<b class="lbl">도장</b> 하나만 해도 오늘 도장, 세 가지 다 하면 완주예요'}</p>
 ${n ? '<button type="button" class="rt-again" data-act="again">↻ 처음부터 한 번 더 연습하기</button>' : ""}
-</section>
-</div><div class="tdg-r">${rvBlock()}${recent}${pastBlock()}</div></div>`;
+</section>`;
+    const back = t => `<div class="nb-back"><button type="button" data-go="home" aria-label="오늘로 돌아가기"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>오늘</button><b>${t}</b></div>`;
+    if (view === "review" && !srsN) view = "";
+    root.innerHTML = view === "routine" ? `<div class="nb-focus">${back("오늘의 한 잔")}${routineHTML}</div>`
+      : view === "review" ? `<div class="nb-focus">${back("복습 카드")}${rvBlock()}</div>`
+      : `<div class="tdg"><div class="tdg-l">${hero}</div><div class="tdg-r">${pastBlock()}${recent}</div></div>`;
     renderSrs();
     if (logRoot) logRoot.innerHTML = `<div class="lg-sum"><div><b>${S.stamps.length}<em>개</em></b><span>찍은 도장</span></div><div><b>${st}<em>일</em></b><span>연속 공부</span></div><div><b>${said.length}<em>개</em></b><span>말해 본 문장</span></div></div>
 <h2 class="rt-h">말해 본 문장 <small>${said.length}개</small></h2>
@@ -263,7 +265,7 @@ ${installCard()}`;
     const pa = ev.target.closest("[data-past]"); if (pa) { ga("past_cup", { to: pa.dataset.past }); return; }
     const b = ev.target.closest("button"); if (!b) return;
     const r = S.days[TODAY];
-    if (b.dataset.go) { document.getElementById(b.dataset.go)?.scrollIntoView({ block: "start", behavior: "smooth" }); return; }
+    if (b.dataset.go) { view = b.dataset.go === "home" ? "" : b.dataset.go; if (view === "routine") open = null; rvShow = false; render(); history.replaceState(null, "", location.pathname + (view ? "#" + view : "")); const t = document.querySelector(".nbt") || root; const y = t.getBoundingClientRect().top + scrollY - 80; if (scrollY > y) scrollTo({ top: Math.max(0, y) }); return; }
     if (b.dataset.guide) { guide = b.dataset.guide; render(); return; }
     if (b.dataset.said) { saidAll = !saidAll; render(); return; }
     if (b.dataset.rv) {
@@ -300,7 +302,7 @@ ${installCard()}`;
       return;
     }
     const act = b.dataset.act;
-    if (act === "again") { r.l = r.s = r.r = 0; if (r.q) r.q.done = 0; open = "l"; save(); render(); document.getElementById("routine")?.scrollIntoView({ block: "start", behavior: "smooth" }); return; }
+    if (act === "again") { r.l = r.s = r.r = 0; if (r.q) r.q.done = 0; open = "l"; save(); render(); return; }
     if (act === "listen") { b.textContent = "듣는 중…"; play(r.a, 1, 3, () => { r.l = 1; learn(r); save(); open = null; render(); }); }
     if (act === "slow") play(r.a, .75, 1);
     if (act === "reveal") { const c = document.getElementById("routine"); if (c) c.classList.remove("hide-en"); }
@@ -314,7 +316,7 @@ ${installCard()}`;
   };
   root.addEventListener("click", onClick);
   document.getElementById("srs-list")?.addEventListener("click", ev => { const b = ev.target.closest("[data-play]"); if (b) play(b.dataset.play); });
-  document.getElementById("bx-due")?.addEventListener("click", ev => { const a = ev.target.closest("a"); if (a) { ev.preventDefault(); showTab("today", true); setTimeout(() => document.getElementById("review")?.scrollIntoView({ block: "start", behavior: "smooth" }), 60); } });
+  document.getElementById("bx-due")?.addEventListener("click", ev => { const a = ev.target.closest("a"); if (a) { ev.preventDefault(); view = "review"; rvShow = false; showTab("today", true); render(); history.replaceState(null, "", location.pathname + "#review"); } });
   if (logRoot) logRoot.addEventListener("click", onClick);
   async function record(b, r) {
     let stream;
@@ -335,7 +337,8 @@ ${installCard()}`;
     setTimeout(stop, 8000);
   }
   { const h = location.hash.slice(1), t = TAB_OF[h]; if (t && t !== "today") { showTab(t); if (t === "box" && h !== "box") bx(h); }
-    if (/^(routine|review|backup)$/.test(h)) setTimeout(() => document.getElementById(h)?.scrollIntoView({ block: "start" }), 50); }
+    if (h === "routine" || h === "review") view = h;
+    if (h === "backup") setTimeout(() => document.getElementById(h)?.scrollIntoView({ block: "start" }), 50); }
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
   render();
   // 말하기 도구(app.js)가 늦게 준비되면 한 번 더 그려서 마이크 버튼이 나오게

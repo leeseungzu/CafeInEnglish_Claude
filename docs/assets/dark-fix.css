@@ -103,3 +103,6 @@ html.dark .nb2 .rv-b,html.dark .nb2 .rt-again,html.dark .bx-sp,html.dark .bx-chi
 html.dark .bx-chips button.on{background:#fff!important;color:#191F28!important}
 html.dark .bxd{background:#1E3A5F}html.dark .bxd small{color:#B0B8C1}
 html.dark .bx-empty a,html.dark .nb2 #notes-root .btn.primary,html.dark .nb2 #copy-notes .btn{background:#1E3A5F!important;color:#8EC0FF!important}
+html.dark button.np:hover,html.dark a.np:hover,html.dark .nb-back button:hover{background:#2B2D33}
+html.dark .nb-back button{color:#D1D6DB}
+html.dark .nb2 .nbt [role=tab]{background:transparent!important}

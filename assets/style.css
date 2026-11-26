@@ -3881,3 +3881,19 @@ body.pg-gray:has(.nb2){background:#fff!important}
 html.dark .nb2 .pt-card .pt-li a{border-color:#2B2D33}html.dark .nb2 .pt-card .pt-t b{color:#fff}html.dark .nb2 .pt-card .pt-all{color:#D1D6DB!important}
 .nb2 .nbt .nbt-n{color:#3182F6!important;background:none!important;display:inline!important;font-size:15px!important;padding:0!important;margin:0!important;width:auto!important;height:auto!important;border-radius:0!important}
 .nb2 .nbt .nbt-n[hidden]{display:none!important}
+/* 내 공부방 단순화 (2026-11-26): 오늘 = 윗카드 + 지난 한 잔 + 최근 읽은 글, 루틴·복습은 눌러서 여는 화면 */
+.nb-hd{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.nb-hd a{font-size:14.5px;font-weight:600;color:#8B95A1!important;text-decoration:none!important;white-space:nowrap}
+.nb-hd a:hover{color:#3182F6!important}
+button.np,a.np{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:14px;width:100%;padding:11px 10px;margin:0 -10px;width:calc(100% + 20px);border-radius:14px;cursor:pointer;text-decoration:none!important;transition:background .15s}
+@media (hover:hover){button.np:hover,a.np:hover{background:#F2F4F6}button.np:hover .np-t b,a.np:hover .np-t b{color:#3182F6}a.np:hover .np-th img{transform:scale(1.06)}}
+.np-th img{transition:transform .25s}
+.nb-focus{max-width:640px;margin:0 auto}
+.nb-back{display:flex;align-items:center;gap:6px;margin:0 0 16px}
+.nb-back button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:2px;font-size:15px;font-weight:600;color:#4E5968;padding:8px 12px 8px 6px;border-radius:12px;transition:background .15s}
+.nb-back button:hover{background:#F2F4F6}
+.nb-back b{font-size:15px;color:#8B95A1;font-weight:600}.nb-back b::before{content:"·";margin:0 8px 0 2px;color:#D1D6DB}
+.nb-focus .rv,.nb-focus .rt-card{margin:0!important}
+.nb2 .tdg-r>section{width:100%!important;max-width:none!important;box-sizing:border-box;display:block!important}
+.nb2 .pt-card .pt-d{width:auto!important;min-width:52px;white-space:nowrap}
+.nb2 .nb-hd{margin-bottom:4px}
