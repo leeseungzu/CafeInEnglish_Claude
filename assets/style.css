@@ -3990,3 +3990,6 @@ button.np,a.np{all:unset;box-sizing:border-box;display:flex;align-items:center;g
 .pv2 .cq .ex .en{line-height:1.45}
 .cq .ex+.cq-lbl{margin-top:14px}
 @media (max-width:560px){.cq-ins .cq-g{grid-template-columns:1fr}.cq{padding:18px 16px 16px}.cq .ex .en{font-size:16px}}
+
+/* 여행영어 PDF 안내 띠: 글 본문 굵은 글씨 색에 덮여 제목이 안 보이던 문제 (2026-11-26) */
+.pv2 .pdf-cta b,.pv2 a.pdf-cta b{color:#fff!important}

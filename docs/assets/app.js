@@ -617,8 +617,9 @@ ${my}
       $$(".cq-v li", wrap).forEach(li => li.classList.remove("shown", "heard"));
     }));
     // 듣기 먼저 모드: 첫 번째 누름은 듣기만, 두 번째부터 문장이 보여요
-    $$(".cq-v li").forEach(li => li.addEventListener("click", () => {
-      if (!li.closest(".cq-listen")) return;
+    // 줄을 누르면 안쪽 스피커 버튼을 한 번 더 눌러 주는데(b.click), 그건 사람이 누른 게 아니라 세지 않아요 (2026-11-26)
+    $$(".cq-v li").forEach(li => li.addEventListener("click", ev => {
+      if (!ev.isTrusted || !li.closest(".cq-listen")) return;
       if (li.classList.contains("heard")) li.classList.add("shown"); else li.classList.add("heard");
     }, true));
   }
