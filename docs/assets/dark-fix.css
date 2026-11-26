@@ -106,3 +106,6 @@ html.dark .bx-empty a,html.dark .nb2 #notes-root .btn.primary,html.dark .nb2 #co
 html.dark button.np:hover,html.dark a.np:hover,html.dark .nb-back button:hover{background:#2B2D33}
 html.dark .nb-back button{color:#D1D6DB}
 html.dark .nb2 .nbt [role=tab]{background:transparent!important}
+html.dark .nb2 .rt-card .acts{background:#2B2D33!important}
+html.dark .nb2 .rt-card .rt-step.open .rt-pl,html.dark .nb2 .rt-card .rt-step.open .ks,html.dark .nb2 .rt-card .rt-step.open .rt-qz button{background:#22242A!important}
+html.dark .nb2 .rt-card .rt-step.open .rt-pl.d{background:#3182F6!important}

@@ -3897,3 +3897,10 @@ button.np,a.np{all:unset;box-sizing:border-box;display:flex;align-items:center;g
 .nb2 .tdg-r>section{width:100%!important;max-width:none!important;box-sizing:border-box;display:block!important}
 .nb2 .pt-card .pt-d{width:auto!important;min-width:52px;white-space:nowrap}
 .nb2 .nb-hd{margin-bottom:4px}
+/* 루틴 카드: 흰 목록을 둥근 카드로 (2026-11-26) */
+.nb2 .rt-card .acts{background:#fff!important;border-radius:18px;padding:2px 16px;overflow:hidden;margin:12px 0 0!important}
+.nb2 .rt-card .act,.nb2 .rt-card .act.rt-act{background:transparent!important}
+.nb2 .rt-card .rt-hint{margin:14px 2px 0!important;position:static!important}
+.nb2 .rt-card .rt-step.open .rt-pl{background:#F2F4F6!important}
+.nb2 .rt-card .rt-step.open .rt-pl.d{background:#3182F6!important;color:#fff!important}
+.nb2 .rt-card .rt-step.open .ks,.nb2 .rt-card .rt-step.open .rt-qz button{background:#F7F8FA!important}

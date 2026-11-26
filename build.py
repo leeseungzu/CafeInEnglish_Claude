@@ -1012,7 +1012,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 {ads}{ga}
 </head>
 <body{' class="pg-gray"' if "nb-band" in body[:600] else (' class="is-post"' if body.startswith('<div class="pv2">') else "")}>{'<div id="prog" aria-hidden="true"></div>' if (body.startswith('<div class="pv2">') or (path.startswith("/tools/") and path != "/tools/")) else ""}
-<header class="top{" top-gray" if ("m-home" in body or "nb-band" in body[:600]) else ""}"><div class="top-in">
+<header class="top{" top-gray" if "m-home" in body else ""}"><div class="top-in">
   <a class="logo" href="/"><img class="logo-mark" src="/assets/logo-mark.png?v=3" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
   <nav class="nav">{navlinks}<button class="srch-btn nav-srch" type="button" aria-label="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button></nav>
   {room}
