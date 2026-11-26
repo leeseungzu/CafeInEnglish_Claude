@@ -2828,7 +2828,7 @@ def page_travel():
         bh = POST_BY_ID[pid].get("body_html", "") if pid in POST_BY_ID else ""
         n_q += bh.count('<span class="hn">Q')
         ans_en = set(re.findall(r'<div class="rep-a"><span class="en">(.*?)</span>', bh))
-        for blk in re.findall(r'<ul class="ex ans">(.*?)</ul>', bh, re.S):
+        for blk in re.findall(r'<ul class="ex ans[^"]*">(.*?)</ul>', bh, re.S):
             ans_en |= set(re.findall(r'<span class="en">(.*?)</span>', blk))
         n_a += len(ans_en)
     icon_of = {pid: ic for _, ic, pid in TRAVEL_SITUATIONS}

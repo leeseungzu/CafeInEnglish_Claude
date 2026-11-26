@@ -585,12 +585,42 @@ ${my}
     $$(".pv2 .ex li").forEach(li => {
       if (!li.querySelector(".en")) return;
       li.tabIndex = 0; li.setAttribute("role", "button");
-      const go = () => { const b = li.querySelector(".say-v, .say-btn"); if (!b) return;
+      // 누른 곳의 문장을 들려줘요: 대답 칸(.rep-a)을 누르면 대답, 그 밖은 이 줄의 첫 문장 (2026-11-26)
+      const go = ev => { const ra = ev && ev.target && ev.target.closest && ev.target.closest(".rep-a");
+        const b = (ra && ra.querySelector(".say-v, .say-btn")) || li.querySelector(":scope > .en .say-v, :scope > .en .say-btn") || li.querySelector(".say-v, .say-btn"); if (!b) return;
         $$(".pv2 .ex li.playing").forEach(x => x.classList.remove("playing")); li.classList.add("playing");
         setTimeout(() => li.classList.remove("playing"), 2500); b.click(); };
-      li.addEventListener("click", ev => { if (ev.target.closest("a, button:not(.say-btn):not(.say-v)")) return; if (ev.target.closest(".say-btn, .say-v")) return; go(); });
+      li.addEventListener("click", ev => { if (ev.target.closest("a, button:not(.say-btn):not(.say-v)")) return; if (ev.target.closest(".say-btn, .say-v")) return; go(ev); });
       li.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); go(); } });
     });
+  }
+
+
+  /* ---------- 세관 질문 카드 cq (2026-11-26): 내 상황 고르기 · 품목 칩 · 듣기 먼저 모드 ---------- */
+  function initCq() {
+    $$(".cq-btns").forEach(g => g.addEventListener("click", ev => {
+      const b = ev.target.closest("button[data-p]"); if (!b) return;
+      const sec = g.closest(".cq");
+      $$("button[data-p]", g).forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+      $$(".cq-pane", sec).forEach(p => { p.hidden = p.getAttribute("data-p") !== b.getAttribute("data-p"); });
+    }));
+    $$(".cq-chips").forEach(g => g.addEventListener("click", ev => {
+      const b = ev.target.closest("button[data-i]"); if (!b) return;
+      const list = g.nextElementSibling; if (!list) return;
+      $$("button[data-i]", g).forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+      $$("li[data-i]", list).forEach(li => { li.hidden = li.getAttribute("data-i") !== b.getAttribute("data-i"); });
+      const li = list.querySelector('li[data-i="' + b.getAttribute("data-i") + '"]'); if (li) li.click();
+    }));
+    $$(".cq-sw").forEach(sw => sw.addEventListener("click", () => {
+      const wrap = sw.closest(".cq-wrap") || document.body, on = sw.getAttribute("aria-pressed") !== "true";
+      sw.setAttribute("aria-pressed", on ? "true" : "false"); wrap.classList.toggle("cq-listen", on);
+      $$(".cq-v li", wrap).forEach(li => li.classList.remove("shown", "heard"));
+    }));
+    // 듣기 먼저 모드: 첫 번째 누름은 듣기만, 두 번째부터 문장이 보여요
+    $$(".cq-v li").forEach(li => li.addEventListener("click", () => {
+      if (!li.closest(".cq-listen")) return;
+      if (li.classList.contains("heard")) li.classList.add("shown"); else li.classList.add("heard");
+    }, true));
   }
 
   /* ---------- C안 글 페이지 (2026-11-26): 읽은 만큼 차는 막대 · 다음 글 카드 · 왼쪽 저장 버튼 ---------- */
@@ -809,7 +839,7 @@ ${my}
     const items = DATA.quiz.map((q, i) => ({ id: `${DATA.id}:${i}`, ...q }));
     runQuiz($("#quiz"), items, { mode: "post" });
   }
-  initSpeak(); initTapSay(); initReader();
+  initSpeak(); initTapSay(); initCq(); initReader();
   if (DATA.type === "think") initThink();
   if (DATA.type === "notes") renderNotes($("#notes-root"));
   if ($("#copy-notes")) renderCopyNotes($("#copy-notes"));

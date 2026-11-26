@@ -3925,3 +3925,68 @@ button.np,a.np{all:unset;box-sizing:border-box;display:flex;align-items:center;g
 .pv2 .toc-m ol.toc>li.on>a{font-weight:700;color:#191F28}
 .pv2 .toc-m ol.toc>li.q>a{color:#3182F6;font-weight:700}
 .pv2 .toc-m ol.toc>li.q>a::before{content:"Q";color:#3182F6}
+
+/* ---------- 세관 질문 카드 cq (2026-11-26): 질문 변형 → 내 상황 고르기 → 이어지는 질문 ---------- */
+/* 질문·대답이 한 카드에 있을 때 누른 문장만 파랗게 (질문을 눌렀는데 대답까지 파래지던 문제) */
+.pv2 .ex.hear.qa li:has(.say-btn.on) .en{color:inherit}
+.pv2 .ex.hear.qa li>.en:has(.say-btn.on),.pv2 .ex.hear.qa .rep-a:has(.say-btn.on) .en,.pv2 .ex.hear.qa li.playing>.en{color:#3182F6}
+.cq-ins{background:#F9FAFB;border-radius:16px;padding:18px 20px;margin:0 0 16px}
+.cq-ins>b{display:block;font-size:16px;font-weight:800;margin-bottom:10px}
+.cq-ins .cq-g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cq-ins .cq-g>div{background:#fff;border-radius:12px;padding:12px;font-size:14px;font-weight:700;line-height:1.4}
+.cq-ins .cq-g small{display:block;font-size:12px;font-weight:600;color:#8B95A1;margin-top:3px}
+.pv2 .cq-ins p.cq-insp{font-size:14px;color:#4E5968;line-height:1.6;margin:10px 0 0}
+.cq-mode{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #E5E8EB;border-radius:14px;padding:12px 16px;margin:0 0 14px}
+.cq-mode b{display:block;font-size:15px}.cq-mode small{display:block;font-size:12.5px;color:#8B95A1;margin-top:2px;line-height:1.45}
+.cq-sw{width:46px;height:28px;border-radius:99px;background:#D1D6DB;position:relative;border:0;cursor:pointer;transition:background .2s;flex:none;padding:0}
+.cq-sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.cq-sw[aria-pressed="true"]{background:#3182F6}.cq-sw[aria-pressed="true"]::after{left:21px}
+.cq{border:1px solid #E5E8EB;border-radius:18px;padding:20px 20px 18px;margin:0 0 14px}
+.cq-h{display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.cq-h .hn{font-size:12px;font-weight:800;color:#3182F6}
+.cq-h .cq-k{font-size:12px;font-weight:700;color:#8B95A1}
+.pv2 .cq h3{font-size:18px;font-weight:800;line-height:1.45;margin:0 0 12px;letter-spacing:-.3px}
+.cq-lbl{display:inline-block;font-size:12px;font-weight:800;border-radius:6px;padding:2px 8px;margin:0 0 6px;background:#E8F3FF;color:#1B64DA}
+.cq-lbl.lime{background:#CDEB5B;color:#191F28}
+.pv2 .cq .ex li{border:0;border-radius:12px;padding:10px 12px;margin:0 -12px;cursor:pointer;transition:background .15s}
+.pv2 .cq .ex li+li{border-top:1px solid #F2F4F6;border-radius:0 0 12px 12px}
+.pv2 .cq .ex li.playing{background:#F2F7FF}
+.cq .ex .en{font-size:17px}
+.cq .ex .snd{display:table;font-size:13.5px;font-weight:700;color:#3182F6;background:#F2F7FF;border-radius:8px;padding:2px 8px;margin-top:6px}
+.cq .ex .ko{margin-top:4px}
+.cq-tip{font-size:13px!important;color:#6B7684;line-height:1.6!important;margin:6px 0 0!important}
+.cq-tip b{color:#4E5968;margin-right:4px}
+.cq hr{border:0;border-top:1px dashed #E5E8EB;margin:16px 0}
+.cq-btns{display:flex;gap:8px;margin:2px 0 10px}
+.cq-btns button{flex:1;border:1.5px solid #E5E8EB;background:#fff;border-radius:12px;padding:11px 0;font:inherit;font-size:15px;font-weight:700;color:#4E5968;cursor:pointer}
+.cq-btns button[aria-pressed="true"]{border-color:#3182F6;background:#F2F7FF;color:#1B64DA}
+.cq-pane[hidden]{display:none}
+.cq-chips{display:flex;flex-wrap:wrap;gap:6px;background:#F2F4F6;border-radius:14px;padding:12px 12px 6px;margin:0 0 8px}
+.cq-chips small{flex-basis:100%;font-size:12px;font-weight:700;color:#8B95A1;margin-bottom:2px}
+.cq-chips button{border:0;background:#fff;border-radius:10px;padding:7px 11px;margin-bottom:6px;font:inherit;font-size:14px;font-weight:600;color:#191F28;cursor:pointer}
+.cq-chips button i{font-style:normal;font-weight:400;font-size:12px;color:#8B95A1;margin-left:4px}
+.cq-chips button[aria-pressed="true"]{box-shadow:inset 0 0 0 1.5px #3182F6;color:#1B64DA}
+.cq .ex li[hidden]{display:none}
+.cq-next{margin-top:12px}
+.pv2 .cq .cq-next .ex li{display:grid;grid-template-columns:40px 1fr;column-gap:4px}
+.cq-next .who{grid-row:span 3;font-size:12px;font-weight:800;color:#8B95A1;padding-top:4px}
+.cq-next .who.me{color:#3182F6}
+.cq-next .en,.cq-next .ko{grid-column:2}
+.cq-sos{background:#191F28;color:#fff;border-radius:18px;padding:20px;margin:0 0 14px}
+.pv2 .cq-sos>b{display:block;font-size:16px;font-weight:800;color:#fff}
+.pv2 .cq-sos>p{font-size:13.5px!important;color:#B0B8C1!important;margin:2px 0 6px!important}
+.pv2 .cq-sos .ex li{border:0;border-radius:12px;padding:10px 12px;margin:0 -12px;cursor:pointer}
+.pv2 .cq-sos .ex li.playing{background:rgba(255,255,255,.08)}
+.pv2 .cq-sos .ex .en{color:#fff}.pv2 .cq-sos .ex li.playing .en,.pv2 .cq-sos .ex li:has(.say-btn.on) .en{color:#CDEB5B}
+.pv2 .cq-sos .ex .ko{color:#B0B8C1}
+.pv2 .cq-sos .say-btn{background:transparent;border-color:rgba(255,255,255,.3);color:#fff}
+/* 듣기 먼저 모드: 변형 질문의 영어·소리·뜻을 가리고, 들은 뒤 한 번 더 누르면 보여요 */
+.cq-listen .cq-v li:not(.shown) .en{color:transparent!important;text-shadow:0 0 9px rgba(25,31,40,.55)}
+.cq-listen .cq-v li:not(.shown) .en .say-btn{text-shadow:none;color:#8B95A1}
+.cq-listen .cq-v li:not(.shown) .snd,.cq-listen .cq-v li:not(.shown) .ko{filter:blur(6px);opacity:.5;user-select:none}
+.pv2 .cq .ex.ans{gap:8px}
+.pv2 .cq .ex.ans li,.pv2 .cq .ex.ans li+li{margin:0;padding:12px 14px;border:1px solid #E5E8EB!important;border-radius:14px}
+.pv2 .cq .ex.ans li.playing{background:#F2F7FF;border-color:#C9E2FF!important}
+.pv2 .cq .ex .en{line-height:1.45}
+.cq .ex+.cq-lbl{margin-top:14px}
+@media (max-width:560px){.cq-ins .cq-g{grid-template-columns:1fr}.cq{padding:18px 16px 16px}.cq .ex .en{font-size:16px}}
