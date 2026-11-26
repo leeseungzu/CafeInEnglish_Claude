@@ -82,6 +82,9 @@
       const tc = document.querySelector('meta[name="theme-color"]'), top = $(".top");
       if (tc) tc.content = top ? getComputedStyle(top).backgroundColor : (d.classList.contains("dark") ? "#101012" : "#FFFFFF");
       $$(".th-seg button").forEach(b => { const on = b.dataset.th === t; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
+      // 모드 바꾼 직후 휴대폰 아래 탭이 이전 색으로 남는 문제: 탭 줄을 한 번 다시 그리기 (2026-11-26)
+      const tb = $(".tabbar"), rp = () => { if (!tb) return; tb.style.display = "none"; void tb.offsetHeight; tb.style.display = ""; };
+      requestAnimationFrame(() => requestAnimationFrame(rp)); setTimeout(rp, 350);
     };
     const set = t => { try { t === "auto" ? localStorage.removeItem("theme") : localStorage.setItem("theme", t); } catch (e) {} apply(); };
     if (mq) (mq.addEventListener ? mq.addEventListener("change", apply) : mq.addListener(apply));

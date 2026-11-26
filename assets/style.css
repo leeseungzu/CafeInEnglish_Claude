@@ -3754,3 +3754,8 @@ h1,h2,h3,.nxt .t b,.nh-rt b,.nh-pop b,.srbox li a,.card h3,.nh-ttl,.sr-card h3,.
   .nh-grid .card .thumb .chatv{transition:transform .45s cubic-bezier(.2,.7,.2,1)}
   .nh-hd .nh-all:hover{color:#3182F6}
 }
+/* 사진 설명: 두 줄이 되어도 왼쪽 정렬 (첫 줄 머리에 맞춤), 2026-11-26 */
+.fig figcaption,.pv2 figure figcaption,.pv2 figure.ph2 figcaption,figure figcaption{text-align:left!important}
+/* 홈 오늘의 한 잔: '지난 한 잔 모두 보기' 대신 제목 옆 '전체 보기' */
+.nh-cup .mq-all{display:none!important}
+.nh-cup .nh-hd{display:flex}

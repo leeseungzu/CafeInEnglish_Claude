@@ -1011,7 +1011,7 @@ def layout(title, desc, path, body, nav="", data=None, og_type="website", aside=
 <link rel="stylesheet" id="dark-css" href="/assets/dark.css?v={DARK_V}" media="(prefers-color-scheme: dark)"><script>(function(){{try{{var t=localStorage.getItem('theme'),l=document.getElementById('dark-css');if(t==='dark')l.media='all';else if(t==='light')l.media='not all'}}catch(e){{}}}})();</script>
 {ads}{ga}
 </head>
-<body{' class="pg-gray"' if "nb-band" in body[:600] else (' class="is-post"' if body.startswith('<div class="pv2">') else "")}>{'<div id="prog" aria-hidden="true"></div>' if (body.startswith('<div class="pv2">') or path.startswith("/tools/")) else ""}
+<body{' class="pg-gray"' if "nb-band" in body[:600] else (' class="is-post"' if body.startswith('<div class="pv2">') else "")}>{'<div id="prog" aria-hidden="true"></div>' if (body.startswith('<div class="pv2">') or (path.startswith("/tools/") and path != "/tools/")) else ""}
 <header class="top{" top-gray" if ("m-home" in body or "nb-band" in body[:600]) else ""}"><div class="top-in">
   <a class="logo" href="/"><img class="logo-mark" src="/assets/logo-mark.png?v=3" alt="" width="30" height="30">카페인영어 <i>CafeInEnglish</i></a>
   <nav class="nav">{navlinks}<button class="srch-btn nav-srch" type="button" aria-label="표현 검색"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button></nav>
@@ -1379,6 +1379,7 @@ def next_card(o):
     if not o:
         return ""
     th = (f'<img src="/images/yt/{o["video"]}-400.webp" alt="" width="120" height="68" loading="lazy">' if o.get("video") and (ROOT / "images" / "yt" / f'{o["video"]}-400.webp').exists()
+          else f'<img src="{yt_thumb(o["video"])}" alt="" width="120" height="68" loading="lazy">' if o.get("video")
           else (f'<span class="nx-ic">{icon_img(o["icon"])}</span>' if o.get("icon") else ""))
     return (f'<div class="nxt no-print" hidden role="dialog" aria-label="다음 글">{th}<div class="t"><small>이 글도 흥미로우실 거예요</small><b>{e(o["title"])}</b></div>'
             f'<button type="button" class="nx-c">닫기</button><a class="nx-r" href="{post_url(o)}">지금 읽기</a></div>')
@@ -2151,7 +2152,7 @@ tr.addEventListener("scroll",function(){clearTimeout(tr._t);tr._t=setTimeout(pai
   <section><div class="nh-hd"><h2>영상으로 배우기</h2><a class="nh-all" href="/category/watch/">전체 보기 ›</a></div><p class="nh-sub">카영 영상 속 장면을 글로 다시 보기</p><div class="nh-rows">{vid_rows}</div></section>
 </div>
 <div class="nh-2">
-  <section class="nh-cup"><h2>오늘의 한 잔</h2><p class="nh-sub">하루에 한 문장씩, 내일 또 새 문장이 나와요</p>{mq}</section>
+  <section class="nh-cup"><div class="nh-hd"><h2>오늘의 한 잔</h2><a class="nh-all" href="/today/">전체 보기 ›</a></div><p class="nh-sub">하루에 한 문장씩, 내일 또 새 문장이 나와요</p>{mq}</section>
   <section><div class="nh-hd"><h2>{e((tr_sr or {}).get("title", "해외에서 살아남는 영어"))}</h2><a class="nh-all" href="/series/travel/">전체 보기 ›</a></div><p class="nh-sub">공항부터 호텔까지, 바로 쓰는 문장</p><div class="nh-rows">{tr_rows}</div></section>
 </div>
 {banner}
