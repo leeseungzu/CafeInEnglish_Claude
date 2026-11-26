@@ -109,3 +109,11 @@ html.dark .nb2 .nbt [role=tab]{background:transparent!important}
 html.dark .nb2 .rt-card .acts{background:#2B2D33!important}
 html.dark .nb2 .rt-card .rt-step.open .rt-pl,html.dark .nb2 .rt-card .rt-step.open .ks,html.dark .nb2 .rt-card .rt-step.open .rt-qz button{background:#22242A!important}
 html.dark .nb2 .rt-card .rt-step.open .rt-pl.d{background:#3182F6!important}
+/* 휴대폰 목차 카드 (2026-11-26) */
+html.dark .pv2 .toc-m{background:#22242A}
+html.dark .pv2 .toc-m summary{color:#F2F4F6}
+html.dark .pv2 .toc-m ol.toc{border-color:#33363D}
+html.dark .pv2 .toc-m ol.toc>li>a{color:#C9CDD2}
+html.dark .pv2 .toc-m ol.toc>li.on>a{color:#F2F4F6}
+html.dark .pv2 .toc-m ol.toc>li>a::before{color:#6B7684}
+html.dark .pv2 .toc-m ol.toc>li.q>a,html.dark .pv2 .toc-m ol.toc>li.q>a::before{color:#64A8FF}

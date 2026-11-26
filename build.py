@@ -1518,7 +1518,7 @@ def page_post(p):
                  + "".join(post_card(o) for o in similar_posts(p, 4)) + "</div>")
     parts.append(AUTHOR_SIG)
     if has_quiz and not video:  # 영상 글은 '복습 순서' 3칸이 목차 역할 (B안)
-        parts.insert(toc_slot, f'<details class="toc-m no-print"><summary>목차 · 퀴즈 바로가기</summary>{toc_html(toc)}</details>')
+        parts.insert(toc_slot, f'<details class="toc-m no-print"><summary><b>목차</b><span>소제목 {len(toc)}개 · 퀴즈</span><i aria-hidden="true"></i></summary>{toc_html(toc)}</details>')
     links = related_links(p)
     link_items = "".join('<li><a href="%s">%s</a></li>' % (l["href"], e(l["label"])) for l in links)
     if not has_quiz:  # 카영 일지: 목차·퀴즈 없이 이어서 보기만
