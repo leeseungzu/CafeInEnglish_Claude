@@ -80,3 +80,10 @@ html.dark .theme-btn .i-sun{display:none!important}html.dark .theme-btn .i-moon{
 html.dark .theme-btn .i-moon path{fill:currentColor}
 @media (hover:hover){html.dark .nh-ban:hover{background:#24466F}}
 @media (hover:hover){html.dark .nh-pop li a:hover{background:#22242A}html.dark .nh-row:hover .nh-rt b,html.dark .nh-grid .card:hover h3{color:#64A8FF!important}html.dark .nh .nh-sr .sr-card:hover{background:#22242A!important}}
+/* 고칠 곳 카드 다크 */
+html.dark .pv2 ul.ex.fix>li{background:#22242A!important}
+html.dark .pv2 ul.ex.fix .no{color:#6B7684!important;text-decoration-color:#4E5968}
+html.dark .pv2 ul.ex.fix .en{color:#fff!important}
+html.dark .pv2 ul.ex.fix .ko{color:#8B95A1}
+html.dark .pv2 ul.ex.fix .why{color:#B0B8C1!important;border-color:#3A3D45!important}
+html.dark .pv2 ul.ex.fix .why b{color:#64A8FF!important}
