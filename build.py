@@ -2380,16 +2380,20 @@ def page_notes():
     pool = today_pool()
     goals = [{**{k: g[k] for k in ("id", "name", "short")}, "icon": f'/assets/icons/{g["icon"]}.webp?v={ASSET_V}'} for g in TODAY_GOALS if pool.get(g["id"])]
     ON = ' class="on"'
-    tabs = [("today", "오늘", ""), ("wrong", "오답노트", '<i class="nbt-n js-tn-w" hidden></i>'), ("copy", "필사 노트", ""), ("log", "기록", "")]
-    body = ('<h1>내 공부방</h1>'
-            '<div class="nb-band"><div class="nbt no-print" role="tablist" aria-label="내 공부방">'
+    # 2026-11-26 시안 B: 오늘 · 복습함(담은 문장 + 틀린 퀴즈 + 필사) · 기록
+    tabs = [("today", "오늘", ""), ("box", "복습함", '<i class="nbt-n js-tn-b" hidden></i>'), ("log", "기록", "")]
+    body = ('<h1>내 공부방</h1><p class="nb-intro">담은 문장과 틀린 퀴즈가 여기에 모이고, 알맞은 날에 다시 꺼내 드려요. 기록은 이 기기에 저장돼요.</p>'
+            '<div class="nb-band nb2"><div class="nbt no-print" role="tablist" aria-label="내 공부방">'
             + "".join(f'<button type="button" role="tab" data-tab="{k}" aria-selected="{"true" if k == "today" else "false"}"{ON if k == "today" else ""}>{t}{c}</button>' for k, t, c in tabs)
             + '</div>'
             '<div class="nbp" data-p="today"><div id="today-app"></div></div>'
-            '<div class="nbp" data-p="wrong" id="wrong" hidden><div id="notes-root"></div></div>'
-            '<div class="nbp" data-p="copy" id="copy" hidden><span id="copy-count" hidden>0</span><div id="copy-notes"></div></div>'
-            '<div class="nbp" data-p="log" id="log" hidden>' + NB_APP + '<div id="log-app"></div>'
-            + BACKUP_HTML + '</div></div>'
+            '<div class="nbp" data-p="box" id="box" hidden><div class="bx-due" id="bx-due"></div>'
+            '<div class="bx-chips" role="tablist"><button type="button" data-bx="srs" class="on">담은 문장 <em class="js-bx-srs"></em></button><button type="button" data-bx="wrong">틀린 퀴즈 <em class="js-bx-wrong"></em></button><button type="button" data-bx="copy">필사 <em class="js-bx-copy"></em></button></div>'
+            '<div class="bxp" data-bx="srs" id="srs"><div id="srs-list"></div></div>'
+            '<div class="bxp" data-bx="wrong" id="wrong" hidden><div id="notes-root"></div></div>'
+            '<div class="bxp" data-bx="copy" id="copy" hidden><span id="copy-count" hidden>0</span><div id="copy-notes"></div></div></div>'
+            '<div class="nbp" data-p="log" id="log" hidden><div id="log-app"></div>'
+            + BACKUP_HTML + NB_APP + '</div></div>'
             f'<script src="/assets/today.js?v={ASSET_V}" defer></script>')
     norm_t = lambda t: re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", t))).strip()
     qa = {norm_t(q["en"]): "/audio/" + AUDIO[norm_t(q["en"])] for t in THINKS for q in t.get("quotes", []) if norm_t(q.get("en", "")) in AUDIO}

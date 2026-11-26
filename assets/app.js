@@ -599,8 +599,15 @@ ${my}
     const bar = $("#prog"), top = $(".top"), nx = $(".nxt"), key = "nx-off:" + location.pathname;
     let off = false; try { off = sessionStorage.getItem(key) === "1"; } catch (e) {}
     const end = document.querySelector(".srbox") || document.querySelector(".end-row");
+    // 내 공부방 '최근 읽은 글' (2026-11-26): 글 주소·제목·썸네일·읽은 만큼을 이 기기에 6개까지
+    const isPost = document.body.classList.contains("is-post"); let rcMax = 0, rcT = 0;
+    const rcSave = pct => { if (!isPost) return; try { const L = (JSON.parse(localStorage.getItem("ky_recent_v1")) || []).filter(x => x.u !== location.pathname);
+      const og = document.querySelector('meta[property="og:image"]'), h1 = document.querySelector(".ph h1, h1");
+      L.unshift({ u: location.pathname, t: (h1 ? h1.textContent : document.title).trim().slice(0, 80), th: og ? og.content.replace(/^https?:\/\/[^/]+/, "") : "", pct, at: Date.now() });
+      localStorage.setItem("ky_recent_v1", JSON.stringify(L.slice(0, 6))); } catch (e) {} };
     const tick = () => {
       const d = document.documentElement, r = Math.min(1, scrollY / Math.max(1, d.scrollHeight - innerHeight));
+      const pc = Math.round(r * 100); if (pc > rcMax) { rcMax = pc; clearTimeout(rcT); rcT = setTimeout(() => rcSave(rcMax), 800); }
       if (bar) { bar.style.width = (r * 100) + "%"; if (top) bar.style.top = top.getBoundingClientRect().bottom + "px"; }
       if (nx && !off) {
         const show = end ? end.getBoundingClientRect().top < innerHeight * 0.9 : r > 0.85;

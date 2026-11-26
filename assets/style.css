@@ -3778,3 +3778,106 @@ h1,h2,h3,.nxt .t b,.nh-rt b,.nh-pop b,.srbox li a,.card h3,.nh-ttl,.sr-card h3,.
 .fig figcaption{display:table-caption;caption-side:bottom;line-height:1.55}
 /* 본문 문단은 줄을 끝까지 채움 (text-wrap:pretty가 줄을 일찍 끊어 오른쪽이 비어 보이던 것 되돌림, 2026-11-26) */
 .pv2 .pb p,.pv2 .pb li,.card p,.sr-card p,.pv2 p{text-wrap:wrap!important}
+/* ===== 내 공부방 시안 B (2026-11-26): 사이트와 같은 흰 바탕 · 연회색 카드 · 파란 버튼 ===== */
+body.pg-gray:has(.nb2){background:#fff!important}
+.nb-intro{font-size:17px;color:#6B7684;line-height:1.6;margin:10px 0 24px}
+.nb2.nb-band{background:none!important;margin:0!important;padding:0!important;border-radius:0!important}
+/* 탭: 글자 + 밑줄 */
+.nb2 .nbt{display:flex!important;gap:28px;background:none!important;border:0!important;border-bottom:1px solid #E5E8EB!important;border-radius:0!important;padding:0!important;margin:0 0 30px!important;box-shadow:none!important}
+.nb2 .nbt button{all:unset;cursor:pointer;position:relative;padding:0 2px 14px;font-size:17px;font-weight:600;color:#8B95A1;display:inline-flex;align-items:center;gap:6px}
+.nb2 .nbt button.on{color:#191F28}
+.nb2 .nbt button.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:#191F28}
+.nb2 .nbt button:hover{color:#333D4B}
+.nb2 .nbt-n{font-style:normal;font-size:14px;font-weight:700;color:#3182F6;background:none!important;min-width:0;padding:0;position:static;height:auto;line-height:1}
+/* 오늘: 왼쪽(할 일 + 루틴) · 오른쪽(복습 · 최근 글 · 지난 한 잔) */
+.nb2 .tdg{display:grid!important;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:start}
+.nb2 .tdg-l,.nb2 .tdg-r{display:flex;flex-direction:column;gap:20px;min-width:0}
+.nb2 .tdg>*,.nb2 .tdg-l>*,.nb2 .tdg-r>*{grid-row:auto!important;grid-column:auto!important;margin:0!important}
+/* 오늘 할 일 카드 */
+.nt{background:#F9FAFB;border-radius:24px;padding:26px 26px 22px}
+.nt-k{font-size:14px;font-weight:600;color:#8B95A1;margin:0}.nt-k b{color:#03B26C}
+.nt-h{font-size:24px!important;line-height:1.4!important;margin:8px 0 18px!important;color:#191F28;letter-spacing:-.02em}
+.nt-cta{all:unset;box-sizing:border-box;cursor:pointer;display:block;width:100%;text-align:center;background:#3182F6;color:#fff!important;border-radius:14px;padding:15px;font-size:16.5px;font-weight:700;text-decoration:none!important;transition:background .15s}
+.nt-cta:hover{background:#1B64DA}
+.nt-wk{display:flex;align-items:center;gap:7px;margin:16px 0 6px;font-size:13.5px;color:#8B95A1}
+.nt-wk span{margin-right:4px}.nt-wk i{width:9px;height:9px;border-radius:50%;background:#E5E8EB;display:inline-block}
+.nt-wk i.on{background:#03B26C}.nt-wk i.td{box-shadow:0 0 0 2px #fff,0 0 0 3.5px #191F28}
+.np-path{position:relative;margin-top:8px;border-top:1px solid #E5E8EB;padding-top:6px}
+.np{display:flex;align-items:center;gap:14px;padding:11px 0;position:relative}
+.np-d{width:30px;height:30px;border-radius:50%;background:#E5E8EB;color:#8B95A1;display:grid;place-items:center;font-weight:700;font-size:14px;flex:none}
+.np.done .np-d{background:#03B26C;color:#fff}.np.now .np-d{background:#3182F6;color:#fff;box-shadow:0 0 0 5px #E8F3FF}
+.np.off{opacity:.6}
+.np-t{flex:1;min-width:0}.np-t b{display:block;font-size:15.5px;color:#191F28}.np-t small{display:block;font-size:13.5px;color:#8B95A1;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.np-th{flex:none;width:72px;height:40px;border-radius:8px;overflow:hidden;background:#E5E8EB}.np-th img{width:100%;height:100%;object-fit:cover;display:block}
+/* 옛 주간 카드는 새 카드로 대체 */
+.nb2 .hx{display:none!important}
+/* 루틴 · 복습 · 지난 한 잔 카드: 한 겹 연회색 */
+.nb2 .rt-card,.nb2 .rv,.nb2 .pt-card{background:#F9FAFB!important;border:0!important;box-shadow:none!important;border-radius:24px!important;padding:24px!important}
+.nb2 .rt-card .acts,.nb2 .rt-card .act{background:#fff}
+.nb2 .rt-pbox{background:#fff!important}
+.nb2 .rt-pl,.nb2 .rt-pl.d{border:0!important;background:#E8F3FF!important;color:#1B64DA!important;border-radius:12px!important;font-weight:600!important}
+.nb2 .rt-pl.d{background:#3182F6!important;color:#fff!important}
+.nb2 .rt-pl:hover{filter:brightness(.97)}
+.nb2 .rt-again{border:0!important;background:#F2F4F6!important;color:#4E5968!important;border-radius:12px!important}
+.nb2 .rv-show{border:0!important;background:#3182F6!important;color:#fff!important;border-radius:14px!important;font-weight:700!important}
+.nb2 .rv-b{border:0!important;background:#F2F4F6!important;color:#4E5968!important;border-radius:14px!important}
+.nb2 .rv-b.ok{background:#3182F6!important;color:#fff!important}
+.nb2 .pt-card h3,.nb2 .rv-top b{font-size:20px!important;color:#191F28}
+.nb2 .pt-li a{background:none!important}
+.nb2 .pt-all{background:#fff!important;border:0!important;border-radius:12px!important}
+/* 최근 읽은 글 */
+.rc-li{display:flex;flex-direction:column;margin-top:10px}
+.rc-li a{display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid #EEF0F3;text-decoration:none}
+.rc-li a:last-child{border-bottom:0}
+.rc-th{flex:none;width:88px;height:50px;border-radius:9px;overflow:hidden;background:#E5E8EB}.rc-th img{width:100%;height:100%;object-fit:cover;display:block}
+.rc-t{flex:1;min-width:0}.rc-t b{display:block;font-size:15px;line-height:1.45;color:#191F28;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rc-bar{display:block;height:4px;border-radius:2px;background:#E5E8EB;margin-top:7px;overflow:hidden}.rc-bar i{display:block;height:100%;background:#3182F6}
+@media (hover:hover){.rc-li a:hover b{color:#3182F6}}
+/* 복습함 */
+.bxd{display:flex;align-items:center;justify-content:space-between;gap:16px;background:#E8F3FF;border-radius:18px;padding:18px 22px;margin:0 0 22px}
+.bxd b{font-size:17px;color:#191F28}.bxd small{display:block;font-size:14px;color:#4E5968;margin-top:3px}
+.bxd a{flex:none;background:#3182F6;color:#fff!important;border-radius:12px;padding:12px 18px;font-weight:600;font-size:15px;text-decoration:none!important}
+.bx-chips{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}
+.bx-chips button{all:unset;cursor:pointer;padding:9px 15px;border-radius:999px;background:#F2F4F6;font-size:14.5px;font-weight:600;color:#4E5968}
+.bx-chips button em{font-style:normal;margin-left:2px}
+.bx-chips button.on{background:#191F28;color:#fff}
+.bx-it{display:flex;align-items:flex-start;gap:14px;padding:18px 0;border-bottom:1px solid #F2F4F6}
+.bx-sp{all:unset;cursor:pointer;flex:none;width:38px;height:38px;border-radius:50%;background:#F2F4F6;color:#4E5968;display:grid;place-items:center}
+.bx-sp:hover{background:#E8F3FF;color:#3182F6}.bx-sp[disabled]{opacity:.4;cursor:default}
+.bx-t{flex:1;min-width:0}.bx-t b{display:block;font-size:18px;color:#191F28;line-height:1.45}.bx-t>span{display:block;font-size:15px;color:#6B7684;margin-top:2px}
+.bx-t small{display:block;font-size:13px;color:#8B95A1;margin-top:8px}.bx-t small a{color:#8B95A1;text-decoration:underline;text-decoration-color:#D1D6DB}
+.bx-w{flex:none;font-size:13px;color:#8B95A1;white-space:nowrap;padding-top:4px}.bx-w.on{color:#3182F6;font-weight:700}
+.bx-empty{background:#F9FAFB;border-radius:20px;padding:28px 24px;text-align:left}
+.bx-empty b{font-size:17px;color:#191F28}.bx-empty p{font-size:15px;color:#6B7684;line-height:1.65;margin:6px 0 16px}
+.bx-empty a{display:inline-block;background:#E8F3FF;color:#1B64DA!important;border-radius:12px;padding:11px 16px;font-weight:600;font-size:14.5px;text-decoration:none!important}
+.nb2 .empty{background:#F9FAFB!important;border-radius:20px!important;text-align:left!important;padding:28px 24px!important;color:#6B7684!important}
+.nb2 #notes-root .btn.primary,.nb2 #copy-notes .btn{background:#E8F3FF!important;border:0!important;color:#1B64DA!important;border-radius:12px!important;font-weight:600!important}
+/* 기록: 큰 숫자 세 칸 */
+.nb2 .lg-sum{display:grid!important;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 36px}
+.nb2 .lg-sum>div{background:#F9FAFB!important;border:0!important;border-radius:20px!important;padding:22px 24px!important;text-align:left!important}
+.nb2 .lg-sum b{display:block;font-size:34px!important;color:#191F28!important;letter-spacing:-.02em}.nb2 .lg-sum b em{font-size:18px;font-style:normal;margin-left:2px}
+.nb2 .lg-sum span{font-size:15px!important;color:#6B7684!important}
+.nb2 .rt-h{font-size:22px!important}
+.nb2 .rt-install{background:#F9FAFB!important;border:0!important;border-radius:20px!important;box-shadow:none!important}
+@media (max-width:899px){
+  .nb-intro{font-size:15.5px;margin:6px 0 18px}
+  .nb2 .nbt{gap:22px;margin-bottom:22px!important}.nb2 .nbt button{font-size:16px}
+  .nb2 .tdg{grid-template-columns:1fr;gap:20px}
+  .nt{padding:22px 20px 18px}.nt-h{font-size:21px!important}
+  .nb2 .rt-card,.nb2 .rv,.nb2 .pt-card{padding:20px!important}
+  .bxd{flex-direction:column;align-items:stretch}.bxd a{text-align:center}
+  .nb2 .lg-sum{gap:8px}.nb2 .lg-sum>div{padding:16px!important}.nb2 .lg-sum b{font-size:26px!important}.nb2 .lg-sum span{font-size:13px!important}
+}
+/* 내 공부방 손질 */
+.nb2 .nbt-n:not([hidden]){display:inline!important}
+.nb2 .rt-install{display:none!important}
+.nb2 .pt-card .pt-li{display:flex!important;flex-direction:column!important;grid-template-columns:none!important;margin-top:8px}
+.nb2 .pt-card .pt-li a{display:flex!important;align-items:center;gap:14px;padding:12px 0!important;border-bottom:1px solid #EEF0F3;width:auto!important}
+.nb2 .pt-card .pt-li a:last-child{border-bottom:0}
+.nb2 .pt-card .pt-d{flex:none;width:52px;font-size:13px;color:#8B95A1}
+.nb2 .pt-card .pt-t{flex:1;min-width:0}.nb2 .pt-card .pt-t b{display:block;font-size:15.5px;color:#191F28}.nb2 .pt-card .pt-t small{display:block;font-size:13.5px;color:#8B95A1;margin-top:2px}
+.nb2 .pt-card .pt-all{display:flex!important;justify-content:center;align-items:center;gap:4px;width:100%!important;position:static!important;margin:12px 0 0!important;padding:12px!important;font-size:14.5px;font-weight:600;color:#333D4B!important;text-decoration:none!important}
+.nb2 .pt-card .pt-s{font-size:14.5px;color:#8B95A1}
+html.dark .nb2 .pt-card .pt-li a{border-color:#2B2D33}html.dark .nb2 .pt-card .pt-t b{color:#fff}html.dark .nb2 .pt-card .pt-all{color:#D1D6DB!important}
+.nb2 .nbt .nbt-n{color:#3182F6!important;background:none!important;display:inline!important;font-size:15px!important;padding:0!important;margin:0!important;width:auto!important;height:auto!important;border-radius:0!important}
+.nb2 .nbt .nbt-n[hidden]{display:none!important}

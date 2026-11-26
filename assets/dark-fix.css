@@ -87,3 +87,19 @@ html.dark .pv2 ul.ex.fix .en{color:#fff!important}
 html.dark .pv2 ul.ex.fix .ko{color:#8B95A1}
 html.dark .pv2 ul.ex.fix .why{color:#B0B8C1!important;border-color:#3A3D45!important}
 html.dark .pv2 ul.ex.fix .why b{color:#64A8FF!important}
+/* 내 공부방 시안 B 다크 */
+html.dark body.pg-gray:has(.nb2){background:var(--bg)!important}
+html.dark .nb-intro{color:#8B95A1}
+html.dark .nb2 .nbt{border-color:#2B2D33!important}html.dark .nb2 .nbt button.on{color:#fff}html.dark .nb2 .nbt button.on::after{background:#fff}
+html.dark .nt,html.dark .nb2 .rt-card,html.dark .nb2 .rv,html.dark .nb2 .pt-card,html.dark .bx-empty,html.dark .nb2 .empty,html.dark .nb2 .lg-sum>div,html.dark .nb2 .rt-install{background:#22242A!important}
+html.dark .nt-h,html.dark .np-t b,html.dark .rc-t b,html.dark .bx-t b,html.dark .bxd b,html.dark .bx-empty b,html.dark .nb2 .lg-sum b,html.dark .nb2 .pt-card h3,html.dark .nb2 .rv-top b{color:#fff!important}
+html.dark .np-path,html.dark .rc-li a,html.dark .bx-it{border-color:#2B2D33}
+html.dark .np-d,html.dark .rc-th,html.dark .rc-bar,html.dark .np-th{background:#3A3D45}
+html.dark .nt-wk i{background:#3A3D45}html.dark .nt-wk i.on{background:#03B26C}html.dark .nt-wk i.td{box-shadow:0 0 0 2px #22242A,0 0 0 3.5px #fff}
+html.dark .np.now .np-d{box-shadow:0 0 0 5px #1E3A5F}
+html.dark .nb2 .rt-card .acts,html.dark .nb2 .rt-card .act,html.dark .nb2 .rt-pbox,html.dark .nb2 .pt-all{background:#2B2D33!important}
+html.dark .nb2 .rt-pl{background:#1E3A5F!important;color:#8EC0FF!important}html.dark .nb2 .rt-pl.d{background:#3182F6!important;color:#fff!important}
+html.dark .nb2 .rv-b,html.dark .nb2 .rt-again,html.dark .bx-sp,html.dark .bx-chips button{background:#2B2D33!important;color:#D1D6DB!important}
+html.dark .bx-chips button.on{background:#fff!important;color:#191F28!important}
+html.dark .bxd{background:#1E3A5F}html.dark .bxd small{color:#B0B8C1}
+html.dark .bx-empty a,html.dark .nb2 #notes-root .btn.primary,html.dark .nb2 #copy-notes .btn{background:#1E3A5F!important;color:#8EC0FF!important}

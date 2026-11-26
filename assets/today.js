@@ -4,10 +4,13 @@
   if (!root) return;
   const logRoot = document.getElementById("log-app");
   // ── 탭: 오늘 · 오답노트 · 필사 노트 · 기록 (주소 #wrong 등으로 바로 열려요) ──
-  const TAB_OF = { routine: "today", review: "today", today: "today", wrong: "wrong", copy: "copy", log: "log", backup: "log" };
+  const TAB_OF = { routine: "today", review: "today", today: "today", box: "box", srs: "box", wrong: "box", copy: "box", log: "log", backup: "log" };
   function tabCounts() {
     const n = k => { try { return Object.keys(JSON.parse(localStorage.getItem(k)) || {}).length; } catch (e) { return 0; } };
-    const w = n("cafein_wrong_v1");
+    const w = n("cafein_wrong_v1"), c = n("cafein_copy_v1"), sr = (() => { try { return Object.keys((JSON.parse(localStorage.getItem("ky_today_v1")) || {}).srs || {}).length; } catch (e) { return 0; } })();
+    const put = (q, v) => document.querySelectorAll(q).forEach(x => x.textContent = v || "");
+    put(".js-bx-srs", sr); put(".js-bx-wrong", w); put(".js-bx-copy", c);
+    document.querySelectorAll(".js-tn-b").forEach(x => { const t = sr + w + c; x.textContent = t > 99 ? "99+" : t || ""; x.hidden = !t; });
     // 오답노트만 '다시 볼 것'이 있다는 배지로 (필사 노트는 모아 두는 곳이라 숫자 없음)
     document.querySelectorAll(".js-tn-w").forEach(x => { x.textContent = w > 99 ? "99+" : w || ""; x.hidden = !w; x.setAttribute("aria-label", w ? `다시 볼 문제 ${w}개` : ""); });
   }
@@ -15,8 +18,14 @@
     document.querySelectorAll(".nbt [data-tab]").forEach(b => { const on = b.dataset.tab === t; b.classList.toggle("on", on); b.setAttribute("aria-selected", String(on)); });
     document.querySelectorAll(".nbp").forEach(p => p.hidden = p.dataset.p !== t);
     if (push) history.replaceState(null, "", location.pathname + location.search + (t === "today" ? "" : "#" + t));
+    const h = location.hash.slice(1); if (t === "box" && /^(wrong|copy|srs)$/.test(h)) bx(h);
     tabCounts();
   }
+  function bx(k) {
+    document.querySelectorAll(".bx-chips [data-bx]").forEach(b => b.classList.toggle("on", b.dataset.bx === k));
+    document.querySelectorAll(".bxp").forEach(p => p.hidden = p.dataset.bx !== k);
+  }
+  document.querySelector(".bx-chips")?.addEventListener("click", ev => { const b = ev.target.closest("[data-bx]"); if (b) { bx(b.dataset.bx); history.replaceState(null, "", location.pathname + "#" + b.dataset.bx); ga("notes_box", { k: b.dataset.bx }); } });
   document.querySelector(".nbt")?.addEventListener("click", ev => {
     const b = ev.target.closest("[data-tab]"); if (!b) return;
     showTab(b.dataset.tab, true);
@@ -39,7 +48,7 @@
   const ymd = n => new Date(n * 864e5).toISOString().slice(0, 10);
   const TODAY = ymd(DAY);
   const ago = s => Math.round((new Date(TODAY) - new Date(s)) / 864e5);
-  const done0 = r => !!(r && r.l && r.s && r.r);
+  const done0 = r => !!(r && (r.l || r.s || r.r));  // 2026-11-26: 한 가지만 해도 오늘 도장 (세 가지 다 하면 완주)
   S.stamps = S.stamps || []; S.runs = S.runs || {};
   Object.keys(S.days).forEach(k => { if (done0(S.days[k]) && S.stamps.indexOf(k) < 0) S.stamps.push(k); });
   Object.keys(S.runs).forEach(k => { if (k.slice(0, 10) !== new Date(Math.floor((Date.now() / 1000 + 9 * 3600) / 86400) * 864e5).toISOString().slice(0, 10)) delete S.runs[k]; });
@@ -121,6 +130,14 @@ ${rvShow ? `<div class="rv-a"><b>${esc(v.en)}</b>${v.a ? `<button type="button" 
       : `<button type="button" class="rv-show" data-rv="show">정답 보기</button>`}
 <p class="rv-tip">잊을 즈음 다시 보면 오래 남아요 · 1 → 3 → 7 → 14 → 30일 뒤</p></section>`;
   }
+  function renderSrs() {
+    const box = document.getElementById("srs-list"), dd = document.getElementById("bx-due"); if (!box) return;
+    const all = Object.values(S.srs || {}).sort((a, b) => a.due - b.due), due = dueList();
+    if (dd) dd.innerHTML = due.length ? `<div class="bxd"><span><b>오늘 돌아온 문장 ${due.length}개</b><small>카드로 넘기면 ${Math.max(1, Math.ceil(due.length * 0.7))}분이면 끝나요</small></span><a href="/notes/#review">카드로 복습하기</a></div>` : "";
+    if (!all.length) { box.innerHTML = `<div class="bx-empty"><b>아직 담은 문장이 없어요</b><p>글 끝의 '복습에 담기'나 왼쪽 '저장'을 누르면 문장이 여기에 모이고, 1 · 3 · 7일 뒤에 다시 꺼내 드려요.</p><a href="/category/study/">글 읽으러 가기</a></div>`; return; }
+    const when = v => v.due <= DAY ? "오늘" : v.due - DAY === 1 ? "내일" : (v.due - DAY) + "일 뒤";
+    box.innerHTML = all.map(v => `<div class="bx-it"><button type="button" class="bx-sp" ${v.a ? `data-play="${esc(v.a)}"` : "disabled"} aria-label="발음 듣기">${SPK}</button><span class="bx-t"><b>${esc(v.en)}</b><span>${esc(v.ko || "")}</span>${v.t || v.from ? `<small>${v.p ? `<a href="${esc(v.p)}">${esc(v.t || v.from)}</a>` : esc(v.t || v.from)}</small>` : ""}</span><span class="bx-w${v.due <= DAY ? " on" : ""}">${when(v)}</span></div>`).join("");
+  }
   function learn(r) {
     if (r.l && r.s && !S.learned.some(x => x.d === TODAY && x.en === r.en)) { S.learned.push({ en: r.en, ko: r.ko, a: r.a, d: TODAY, src: r.src }); }
   }
@@ -172,7 +189,7 @@ ${rvShow ? `<div class="rv-a"><b>${esc(v.en)}</b>${v.a ? `<button type="button" 
     const set = new Set((r.src === "daily" ? DAILY : POOL[r.src] || []).map(x => x.en));
     const got = new Set(S.learned.filter(x => set.has(x.en)).map(x => x.en)).size, pct = set.size ? Math.round(got / set.size * 100) : 0;
     S.prog = { src: r.src, name: SRC_NAME[r.src] || "오늘의 한 잔", n: got, t: set.size, streak: st, day: TODAY, done: n === 3 };
-    if (n === 3 && S.stamps.indexOf(TODAY) < 0) S.stamps.push(TODAY);
+    if (n >= 1 && S.stamps.indexOf(TODAY) < 0) S.stamps.push(TODAY);
     if (n === 3 && !r.ga) { r.ga = 1; ga("routine_done", { goal: r.src }); }
     const stamped = done(TODAY);
     // 이번 주 목표 3잔: 처음 채운 날 한 번 축하
@@ -184,20 +201,38 @@ ${rvShow ? `<div class="rv-a"><b>${esc(v.en)}</b>${v.a ? `<button type="button" 
     const heroSub = met ? (cel ? "이번 주 목표를 채웠어요. 정말 꾸준했어요!" : `목표 달성 · 이번 주 ${cnt}잔째 마셨어요`)
       : stamped ? `오늘 도장 완료 · ${GOAL - cnt}잔 더 마시면 이번 주 목표예요`
       : `오늘 ${left}가지만 하면 ${cnt + 1}잔째예요`;
-    const hero = `<section class="hx${met ? " met" : ""}${cel ? " cel" : ""}" id="week"><div class="hx-t"><b>${met ? "이번 주 목표 달성" : `이번 주 ${GOAL}잔 중 ${cnt}잔`}</b>${st ? `<span class="hx-f">🔥 ${st}일 연속</span>` : ""}</div>
+    const RC = (() => { try { return (JSON.parse(localStorage.getItem("ky_recent_v1")) || []).filter(x => x && x.u); } catch (e) { return []; } })();
+    const rc0 = RC.find(x => (x.pct || 0) < 95) || null;
+    const st1 = n === 3 ? "done" : n ? "doing" : "todo", st2 = !srsN ? "none" : due.length ? "todo" : "done";
+    const nxt = st1 === "todo" || st1 === "doing" ? { go: "routine", t: n ? "오늘의 한 잔 이어서 하기" : "오늘의 한 잔 시작하기", m: n ? (3 - n) * 1 + 1 + "분" : "5분" }
+      : st2 === "todo" ? { go: "review", t: `복습 카드 ${due.length}장 넘기기`, m: Math.max(1, Math.ceil(due.length * 0.7)) + "분" }
+      : rc0 ? { href: rc0.u, t: "읽던 글 이어 읽기", m: (rc0.pct || 0) + "%" } : null;
+    const doneN = (st1 === "done" ? 1 : 0) + (st2 === "done" ? 1 : 0), allN = 1 + (srsN ? 1 : 0);
+    const headT = nxt ? (stamped ? (nxt.go === "review" ? `복습 카드 ${due.length}장만 넘기면<br>오늘 공부 완주예요` : "오늘 도장은 찍었어요.<br>한 걸음만 더 가 볼까요?") : "하나만 해도<br>오늘 도장이 찍혀요") : "오늘 할 일을 다 했어요.<br>내일 또 만나요";
+    const dots = (() => { let o = ""; for (let k = 0; k < 7; k++) { const s2 = ymd(mon + k); o += `<i class="${done(s2) ? "on" : ""}${s2 === TODAY ? " td" : ""}"></i>`; } return o; })();
+    const P = (cls, num, t, sub, extra) => `<div class="np ${cls}"><span class="np-d">${cls === "done" ? "✓" : num}</span><span class="np-t"><b>${t}</b><small>${sub}</small></span>${extra || ""}</div>`;
+    const hero = `<section class="nt" id="week"><p class="nt-k">오늘 할 일 ${allN}개 중 ${doneN}개 끝${st ? ` · <b>${st}일 연속</b>` : ""}</p><h2 class="nt-h">${headT}</h2>
+${nxt ? (nxt.href ? `<a class="nt-cta" href="${esc(nxt.href)}">${nxt.t} · ${nxt.m}</a>` : `<button type="button" class="nt-cta" data-go="${nxt.go}">${nxt.t} · ${nxt.m}</button>`) : ""}
+<div class="nt-wk"><span>이번 주</span>${dots}</div>
+<div class="np-path">${P(st1 === "done" ? "done" : st1 === "doing" ? "now" : (nxt && nxt.go === "routine" ? "now" : ""), 1, "오늘의 한 잔", st1 === "done" ? esc(r.en) + " · 완주" : st1 === "doing" ? `${n}/3 진행 중 · 도장 찍힘` : esc(r.en))}
+${P(st2 === "done" ? "done" : st2 === "todo" ? (nxt && nxt.go === "review" ? "now" : "") : "off", 2, "복습 카드", st2 === "none" ? "글에서 '복습에 담기'를 누르면 여기로 와요" : st2 === "todo" ? `${due.length}장이 돌아왔어요` : "오늘 복습 끝")}
+${rc0 ? P(nxt && nxt.href ? "now" : "", 3, "읽던 글 이어 읽기", esc(rc0.t) + " · " + (rc0.pct || 0) + "%", rc0.th ? `<a href="${esc(rc0.u)}" class="np-th"><img src="${esc(rc0.th)}" alt="" loading="lazy"></a>` : "") : ""}</div></section>`;
+    const recent = RC.length ? `<section class="pt-card rc-card" id="recent"><h3>최근 읽은 글</h3><div class="rc-li">${RC.slice(0, 4).map(x => `<a href="${esc(x.u)}" data-past="recent">${x.th ? `<span class="rc-th"><img src="${esc(x.th)}" alt="" loading="lazy"></span>` : ""}<span class="rc-t"><b>${esc(x.t)}</b><span class="rc-bar"><i style="width:${Math.min(100, x.pct || 0)}%"></i></span></span></a>`).join("")}</div></section>` : "";
+    const heroOld = `<section class="hx${met ? " met" : ""}${cel ? " cel" : ""}" id="week"><div class="hx-t"><b>${met ? "이번 주 목표 달성" : `이번 주 ${GOAL}잔 중 ${cnt}잔`}</b>${st ? `<span class="hx-f">🔥 ${st}일 연속</span>` : ""}</div>
 <p class="hx-s">${heroSub}</p><div class="hx-ds">${wk}</div>
 <div class="hx-todo"><button type="button" data-go="routine"${n === 3 ? ' class="ok"' : ""}>오늘의 한 잔<span>${n === 3 ? "완료" : `<b>${n}</b>/3`}</span></button><button type="button" data-go="review"${srsN && !due.length ? ' class="ok"' : ""}>오늘의 복습<span>${!srsN ? "아직 없음" : due.length ? `<b>${due.length}</b>개` : "완료"}</span></button></div></section>`;
-    root.innerHTML = `<div class="tdg${rvBlock() ? "" : " norv"}">${hero}<section class="rt-card${open === "s" && !r.s ? " hide-en" : ""}" id="routine">
+    root.innerHTML = `<div class="tdg${rvBlock() ? "" : " norv"}"><div class="tdg-l">${hero}<section class="rt-card${open === "s" && !r.s ? " hide-en" : ""}" id="routine">
 <div class="rt-top"><div class="a-kicker">${esc(SRC_NAME[r.src] || "오늘의 한 잔")} · 5분 루틴</div><span class="rt-prog${n === 3 ? " full" : ""}">${n === 3 ? "도장 완료" : (stamped ? "☕ " : "") + n + " / 3"}</span></div>
 <div class="rt-seg" role="tablist" aria-label="연습할 문장 고르기"><button type="button" role="tab" data-src="daily" class="${S.src === "daily" ? "on" : ""}">☕ 오늘의 한 잔</button><button type="button" role="tab" data-seg="sit" class="${S.src !== "daily" ? "on" : ""}">상황별 문장</button></div>
 ${S.src !== "daily" ? `<div class="rt-goals">${SRCS.map(g => `<button type="button" data-src="${g.id}" class="${S.src === g.id ? "on" : ""}">${g.icon ? `<img src="${g.icon}" alt="" width="26" height="26">` : ""}<span>${esc(g.short)}</span></button>`).join("")}</div>` : ""}
 <div class="rt-bar"><i style="width:${pct}%"></i></div><div class="rt-bar-t"><span>${r.src === "daily" ? "오늘의 한 잔 " + set.size + "잔" : SRC_NAME[r.src] + " " + set.size + "문장"} 중 ${got}개 말해 봄</span><span>${pct}%</span></div>
 <div class="rt-pbox"><div><p class="rt-phrase">${w.length ? esc(w.join(" ")) + " " : ""}<span class="hl">${esc(last)}</span></p><p class="rt-mean">${esc(r.ko)}</p></div><button type="button" class="rt-spk" data-play="${r.a}" aria-label="발음 듣기"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></button></div>
 <div class="acts">${row("l", "듣기", "원어민 발음 3번 · 1분", r)}${row("s", "말하기", "한국어만 보고 말하면 바로 확인해 줘요 · 2분", r)}${row("r", "복습하기", r.q.ago ? `${r.q.ago}일 전에 말해 본 문장, 기억나요? · 2분` : "방금 배운 문장 한 번 더 · 2분", r)}</div>
-<p class="rt-hint">${n === 3 ? `<b class="lbl">쾅!</b> 오늘 도장을 찍었어요. ${st > 1 ? "연속 " + st + "일째예요." : "내일 또 만나요."}` : stamped ? '<b class="lbl">도장</b> 오늘 도장은 이미 찍혔어요. 편하게 한 번 더 연습해요' : '<b class="lbl">도장</b> 듣기·말하기·복습을 다 하면 오늘 도장이 찍혀요'}</p>
+<p class="rt-hint">${n === 3 ? `<b class="lbl">완주</b> 오늘 세 가지를 다 했어요. ${st > 1 ? "연속 " + st + "일째예요." : "내일 또 만나요."}` : stamped ? '<b class="lbl">도장</b> 오늘 도장이 찍혔어요. 세 가지를 다 하면 완주예요' : '<b class="lbl">도장</b> 하나만 해도 오늘 도장, 세 가지 다 하면 완주예요'}</p>
 ${n ? '<button type="button" class="rt-again" data-act="again">↻ 처음부터 한 번 더 연습하기</button>' : ""}
 </section>
-${rvBlock()}${pastBlock()}</div>`;
+</div><div class="tdg-r">${rvBlock()}${recent}${pastBlock()}</div></div>`;
+    renderSrs();
     if (logRoot) logRoot.innerHTML = `<div class="lg-sum"><div><b>${S.stamps.length}<em>개</em></b><span>찍은 도장</span></div><div><b>${st}<em>일</em></b><span>연속 공부</span></div><div><b>${said.length}<em>개</em></b><span>말해 본 문장</span></div></div>
 <h2 class="rt-h">말해 본 문장 <small>${said.length}개</small></h2>
 ${said.length ? '<div class="acts rt-said">' + said.slice(0, saidAll ? 30 : 3).map(x => `<button type="button" class="act" data-play="${x.a}"><span class="act-ic">▶</span><span class="act-t"><b>${esc(x.en)}</b><small>${esc(x.ko)} · ${ago(x.d) ? ago(x.d) + "일 전" : "오늘"}</small></span></button>`).join("") + (said.length > 3 ? `<button type="button" class="rt-more" data-said="1">${saidAll ? "접기" : "전체 보기 · " + said.length + "개"}</button>` : "") + "</div>" : '<p class="rt-sub">루틴에서 듣고 말해 본 문장이 여기에 모여요.</p>'}
@@ -278,6 +313,8 @@ ${installCard()}`;
     if (act === "install" && deferred) { deferred.prompt(); deferred.userChoice.finally(() => { deferred = null; render(); }); }
   };
   root.addEventListener("click", onClick);
+  document.getElementById("srs-list")?.addEventListener("click", ev => { const b = ev.target.closest("[data-play]"); if (b) play(b.dataset.play); });
+  document.getElementById("bx-due")?.addEventListener("click", ev => { const a = ev.target.closest("a"); if (a) { ev.preventDefault(); showTab("today", true); setTimeout(() => document.getElementById("review")?.scrollIntoView({ block: "start", behavior: "smooth" }), 60); } });
   if (logRoot) logRoot.addEventListener("click", onClick);
   async function record(b, r) {
     let stream;
@@ -297,7 +334,7 @@ ${installCard()}`;
     setTimeout(() => b.addEventListener("click", stop), 0);
     setTimeout(stop, 8000);
   }
-  { const h = location.hash.slice(1), t = TAB_OF[h]; if (t && t !== "today") showTab(t);
+  { const h = location.hash.slice(1), t = TAB_OF[h]; if (t && t !== "today") { showTab(t); if (t === "box" && h !== "box") bx(h); }
     if (/^(routine|review|backup)$/.test(h)) setTimeout(() => document.getElementById(h)?.scrollIntoView({ block: "start" }), 50); }
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
   render();
