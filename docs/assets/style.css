@@ -3772,3 +3772,7 @@ h1,h2,h3,.nxt .t b,.nh-rt b,.nh-pop b,.srbox li a,.card h3,.nh-ttl,.sr-card h3,.
 .pv2 ul.ex.fix .ko{display:block;font-size:15px;color:#6B7684;margin:4px 0 0 30px}
 .pv2 ul.ex.fix .why{display:block!important;background:none!important;padding:14px 0 0!important;margin:14px 0 0!important;border-top:1px solid #E5E8EB!important;border-radius:0!important;font-size:15px!important;line-height:1.7!important;color:#4E5968!important}
 .pv2 ul.ex.fix .why b{display:inline!important;background:none!important;padding:0!important;margin:0 6px 0 0!important;color:#3182F6!important;font-weight:700;font-size:14px!important;border-radius:0!important}
+/* 사진 설명은 사진 폭 안에서만 (2026-11-26) */
+.fig{display:table;margin-left:auto!important;margin-right:auto!important;max-width:100%}
+.fig img{width:100%;max-width:460px}
+.fig figcaption{display:table-caption;caption-side:bottom;line-height:1.55}
