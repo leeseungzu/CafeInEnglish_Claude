@@ -3776,3 +3776,5 @@ h1,h2,h3,.nxt .t b,.nh-rt b,.nh-pop b,.srbox li a,.card h3,.nh-ttl,.sr-card h3,.
 .fig{display:table;margin-left:auto!important;margin-right:auto!important;max-width:100%}
 .fig img{width:100%;max-width:460px}
 .fig figcaption{display:table-caption;caption-side:bottom;line-height:1.55}
+/* 본문 문단은 줄을 끝까지 채움 (text-wrap:pretty가 줄을 일찍 끊어 오른쪽이 비어 보이던 것 되돌림, 2026-11-26) */
+.pv2 .pb p,.pv2 .pb li,.card p,.sr-card p,.pv2 p{text-wrap:wrap!important}
