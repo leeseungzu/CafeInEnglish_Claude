@@ -1411,7 +1411,7 @@ def page_post(p):
     _upd = (" · " + e(p["updated"].replace("-", ".")) + " 수정") if p.get("updated") and p["updated"] != p.get("date") else ""
     parts = [f'<div class="ph"><p class="ph-cat"><a href="/category/{p["cat"]}/">{CATS[p["cat"]]}</a> · {_kind}</p>'
              f'<h1>{e(p["title"])}</h1><p class="lead">{e(p.get("lead", ""))}</p>'
-             f'<p class="ph-meta">카영 스터디언 · {_mins}분 · {e(p.get("date", "").replace("-", "."))}{_upd}</p></div>']
+             f'<p class="ph-meta">카영 스터디언 · {e(p.get("date", "").replace("-", "."))}{_upd}</p></div>']
     tint = re.search(r"#[0-9A-Fa-f]{6}", chat_bg(p["id"])).group(0)
     if not video and p.get("chat"):
         c = p["chat"]
