@@ -1,13 +1,5 @@
 [
  {
-  "en": "It's not just a job. It's my passion.",
-  "ko": "그냥 일이 아니라, 제 열정이에요",
-  "desc": "not just = 단지 ~만이 아닌. 젠슨 황의 AI is not just software technology에서 건졌어요.",
-  "url": "https://www.cafeinenglish.com/p/jensen-huang-ai-five-layer-cake/",
-  "share": "https://www.cafeinenglish.com/d/its-not-just-a-job-its-my-passion/",
-  "au": "/audio/7aee72345a0e.mp3"
- },
- {
   "en": "This is a big deal.",
   "ko": "이건 정말 중요한 문제예요",
   "desc": "젠슨 황이 'AI란 무엇인가'라는 질문 바로 뒤에 붙인 말. 반대로 It's not a big deal은 '별일 아니야'.",
@@ -744,6 +736,14 @@
   "au": "/audio/49aeee692b64.mp3"
  },
  {
+  "en": "I keep making the same mistake.",
+  "ko": "자꾸 같은 실수를 해요.",
+  "desc": "'실수하다'는 do가 아니라 make. 실수는 저지르고 나면 하나 남는 결과라서요.",
+  "url": "https://www.cafeinenglish.com/p/make-vs-do/",
+  "share": "https://www.cafeinenglish.com/d/i-keep-making-the-same-mistake/",
+  "au": "/audio/de3a2b318979.mp3"
+ },
+ {
   "en": "I chose this job for three reasons.",
   "ko": "제가 이 일을 고른 이유는 세 가지예요.",
   "desc": "이유의 개수부터 말하면 듣는 사람이 길을 알아요. 이창용 전 한은 총재가 ECB 패널에서 쓴 틀이에요.",
@@ -806,5 +806,13 @@
   "url": "https://www.cafeinenglish.com/p/running-late/",
   "share": "https://www.cafeinenglish.com/d/sorry-im-running-a-little-late/",
   "au": "/audio/496cab398295.mp3"
+ },
+ {
+  "en": "It's not just a job. It's my passion.",
+  "ko": "그냥 일이 아니라, 제 열정이에요",
+  "desc": "not just = 단지 ~만이 아닌. 젠슨 황의 AI is not just software technology에서 건졌어요.",
+  "url": "https://www.cafeinenglish.com/p/jensen-huang-ai-five-layer-cake/",
+  "share": "https://www.cafeinenglish.com/d/its-not-just-a-job-its-my-passion/",
+  "au": "/audio/7aee72345a0e.mp3"
  }
 ]

@@ -1,13 +1,5 @@
 {
  "days": {
-  "2026-11-23": {
-   "en": "I'm on a diet.",
-   "ko": "나 다이어트 중이야",
-   "desc": "diet는 명사라 '다이어트 중'은 be on a diet. I'm diet라고 하지 않아요.",
-   "url": "https://www.cafeinenglish.com/p/lose-weight-english/",
-   "share": "https://www.cafeinenglish.com/d/im-on-a-diet/",
-   "au": "/audio/8b4d71d98c75.mp3"
-  },
   "2026-11-24": {
    "en": "You understood the assignment.",
    "ko": "뭘 해야 하는지 제대로 알았네",
@@ -143,6 +135,14 @@
    "url": "https://www.cafeinenglish.com/p/thanks-for-your-hard-work/",
    "share": "https://www.cafeinenglish.com/d/thank-you-for-all-your-support-this-year/",
    "au": "/audio/49aeee692b64.mp3"
+  },
+  "2026-12-11": {
+   "en": "I keep making the same mistake.",
+   "ko": "자꾸 같은 실수를 해요.",
+   "desc": "'실수하다'는 do가 아니라 make. 실수는 저지르고 나면 하나 남는 결과라서요.",
+   "url": "https://www.cafeinenglish.com/p/make-vs-do/",
+   "share": "https://www.cafeinenglish.com/d/i-keep-making-the-same-mistake/",
+   "au": "/audio/de3a2b318979.mp3"
   }
  }
 }

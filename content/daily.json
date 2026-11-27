@@ -604,5 +604,11 @@
   "en": "Should I bring anything?",
   "ko": "뭐 좀 가져갈까?",
   "desc": "초대받았을 때 건네는 한마디. 물건이 상대에게 도착하니 take가 아니라 bring이에요."
+ },
+ {
+  "post": "make-vs-do",
+  "en": "I keep making the same mistake.",
+  "ko": "자꾸 같은 실수를 해요.",
+  "desc": "'실수하다'는 do가 아니라 make. 실수는 저지르고 나면 하나 남는 결과라서요."
  }
 ]
