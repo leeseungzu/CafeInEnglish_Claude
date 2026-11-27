@@ -1,5 +1,85 @@
 [
  {
+  "en": "You don't look a day older.",
+  "ko": "하나도 안 변했네요.",
+  "desc": "오랜만에 만난 사람에게 건네는 칭찬. 강경화 대사가 박세리에게 한 말이에요.",
+  "url": "https://www.cafeinenglish.com/p/kang-kyung-wha-seri-pak-speech-english/",
+  "share": "https://www.cafeinenglish.com/d/you-dont-look-a-day-older/",
+  "au": "/audio/e044d21abc8f.mp3"
+ },
+ {
+  "en": "I chose this job for three reasons.",
+  "ko": "제가 이 일을 고른 이유는 세 가지예요.",
+  "desc": "이유의 개수부터 말하면 듣는 사람이 길을 알아요. 이창용 전 한은 총재가 ECB 패널에서 쓴 틀이에요.",
+  "url": "https://www.cafeinenglish.com/p/bok-governors-english/",
+  "share": "https://www.cafeinenglish.com/d/i-chose-this-job-for-three-reasons/",
+  "au": "/audio/b551a830cf24.mp3"
+ },
+ {
+  "en": "Don't worry. We're only human.",
+  "ko": "괜찮아요. 우리도 사람인걸요.",
+  "desc": "실수한 사람을 다독일 때. only human은 '사람일 뿐이니 실수할 수 있다'는 뜻이에요.",
+  "url": "https://www.cafeinenglish.com/p/word-of-the-year-2026-human/",
+  "share": "https://www.cafeinenglish.com/d/dont-worry-were-only-human/",
+  "au": "/audio/b6495baec389.mp3"
+ },
+ {
+  "en": "Truth be told, I'm a little nervous.",
+  "ko": "솔직히 말하면, 저 좀 떨려요.",
+  "desc": "털어놓기 어려운 말을 꺼낼 때 문장 맨 앞에 붙여요. 잡스가 졸업식 축사를 이렇게 시작했어요.",
+  "url": "https://www.cafeinenglish.com/p/great-speeches-first-sentence/",
+  "share": "https://www.cafeinenglish.com/d/truth-be-told-im-a-little-nervous/",
+  "au": "/audio/c22da3f8e690.mp3"
+ },
+ {
+  "en": "I've been really busy lately.",
+  "ko": "요즘 정말 바빴어.",
+  "desc": "오랜만에 연락할 때 근황을 전하는 한마디. lately는 '요즘'이라 I've been 같은 현재완료와 함께 써요.",
+  "url": "https://www.cafeinenglish.com/p/hard-vs-hardly/",
+  "share": "https://www.cafeinenglish.com/d/ive-been-really-busy-lately/",
+  "au": "/audio/3b37ee177d14.mp3"
+ },
+ {
+  "en": "I'm inclined to agree with you.",
+  "ko": "네 말에 동의하는 쪽이야.",
+  "desc": "단정하지 않고 내 생각을 부드럽게 밝힐 때. I agree보다 한 발 부드러워서 회의에서도 자연스러워요.",
+  "url": "https://www.cafeinenglish.com/p/kagan-would-you-want-to-live-forever/",
+  "share": "https://www.cafeinenglish.com/d/im-inclined-to-agree-with-you/",
+  "au": "/audio/f02b82692293.mp3"
+ },
+ {
+  "en": "We need to discuss the budget.",
+  "ko": "예산을 논의해야 해요",
+  "desc": "discuss 뒤에는 about 없이 바로 내용이 와요. about을 쓰려면 talk about.",
+  "url": "https://www.cafeinenglish.com/p/discuss-about/",
+  "share": "https://www.cafeinenglish.com/d/we-need-to-discuss-the-budget/",
+  "au": "/audio/d09df5bc1418.mp3"
+ },
+ {
+  "en": "Go ahead, I'm all ears.",
+  "ko": "말해 봐, 듣고 있어",
+  "desc": "온몸이 귀가 된 것처럼 집중해서 듣겠다는 말. ears의 s를 빼먹지 마세요.",
+  "url": "https://www.cafeinenglish.com/p/all-ears/",
+  "share": "https://www.cafeinenglish.com/d/go-ahead-im-all-ears/",
+  "au": "/audio/6c4d62cc0b67.mp3"
+ },
+ {
+  "en": "Sorry, I'm running a little late.",
+  "ko": "미안, 조금 늦을 것 같아",
+  "desc": "가는 중에 미리 알리는 말. 도착해서 사과할 땐 Sorry I'm late.",
+  "url": "https://www.cafeinenglish.com/p/running-late/",
+  "share": "https://www.cafeinenglish.com/d/sorry-im-running-a-little-late/",
+  "au": "/audio/496cab398295.mp3"
+ },
+ {
+  "en": "It's not just a job. It's my passion.",
+  "ko": "그냥 일이 아니라, 제 열정이에요",
+  "desc": "not just = 단지 ~만이 아닌. 젠슨 황의 AI is not just software technology에서 건졌어요.",
+  "url": "https://www.cafeinenglish.com/p/jensen-huang-ai-five-layer-cake/",
+  "share": "https://www.cafeinenglish.com/d/its-not-just-a-job-its-my-passion/",
+  "au": "/audio/7aee72345a0e.mp3"
+ },
+ {
   "en": "This is a big deal.",
   "ko": "이건 정말 중요한 문제예요",
   "desc": "젠슨 황이 'AI란 무엇인가'라는 질문 바로 뒤에 붙인 말. 반대로 It's not a big deal은 '별일 아니야'.",
@@ -744,75 +824,11 @@
   "au": "/audio/de3a2b318979.mp3"
  },
  {
-  "en": "I chose this job for three reasons.",
-  "ko": "제가 이 일을 고른 이유는 세 가지예요.",
-  "desc": "이유의 개수부터 말하면 듣는 사람이 길을 알아요. 이창용 전 한은 총재가 ECB 패널에서 쓴 틀이에요.",
-  "url": "https://www.cafeinenglish.com/p/bok-governors-english/",
-  "share": "https://www.cafeinenglish.com/d/i-chose-this-job-for-three-reasons/",
-  "au": "/audio/b551a830cf24.mp3"
- },
- {
-  "en": "Don't worry. We're only human.",
-  "ko": "괜찮아요. 우리도 사람인걸요.",
-  "desc": "실수한 사람을 다독일 때. only human은 '사람일 뿐이니 실수할 수 있다'는 뜻이에요.",
-  "url": "https://www.cafeinenglish.com/p/word-of-the-year-2026-human/",
-  "share": "https://www.cafeinenglish.com/d/dont-worry-were-only-human/",
-  "au": "/audio/b6495baec389.mp3"
- },
- {
-  "en": "Truth be told, I'm a little nervous.",
-  "ko": "솔직히 말하면, 저 좀 떨려요.",
-  "desc": "털어놓기 어려운 말을 꺼낼 때 문장 맨 앞에 붙여요. 잡스가 졸업식 축사를 이렇게 시작했어요.",
-  "url": "https://www.cafeinenglish.com/p/great-speeches-first-sentence/",
-  "share": "https://www.cafeinenglish.com/d/truth-be-told-im-a-little-nervous/",
-  "au": "/audio/c22da3f8e690.mp3"
- },
- {
-  "en": "I've been really busy lately.",
-  "ko": "요즘 정말 바빴어.",
-  "desc": "오랜만에 연락할 때 근황을 전하는 한마디. lately는 '요즘'이라 I've been 같은 현재완료와 함께 써요.",
-  "url": "https://www.cafeinenglish.com/p/hard-vs-hardly/",
-  "share": "https://www.cafeinenglish.com/d/ive-been-really-busy-lately/",
-  "au": "/audio/3b37ee177d14.mp3"
- },
- {
-  "en": "I'm inclined to agree with you.",
-  "ko": "네 말에 동의하는 쪽이야.",
-  "desc": "단정하지 않고 내 생각을 부드럽게 밝힐 때. I agree보다 한 발 부드러워서 회의에서도 자연스러워요.",
-  "url": "https://www.cafeinenglish.com/p/kagan-would-you-want-to-live-forever/",
-  "share": "https://www.cafeinenglish.com/d/im-inclined-to-agree-with-you/",
-  "au": "/audio/f02b82692293.mp3"
- },
- {
-  "en": "We need to discuss the budget.",
-  "ko": "예산을 논의해야 해요",
-  "desc": "discuss 뒤에는 about 없이 바로 내용이 와요. about을 쓰려면 talk about.",
-  "url": "https://www.cafeinenglish.com/p/discuss-about/",
-  "share": "https://www.cafeinenglish.com/d/we-need-to-discuss-the-budget/",
-  "au": "/audio/d09df5bc1418.mp3"
- },
- {
-  "en": "Go ahead, I'm all ears.",
-  "ko": "말해 봐, 듣고 있어",
-  "desc": "온몸이 귀가 된 것처럼 집중해서 듣겠다는 말. ears의 s를 빼먹지 마세요.",
-  "url": "https://www.cafeinenglish.com/p/all-ears/",
-  "share": "https://www.cafeinenglish.com/d/go-ahead-im-all-ears/",
-  "au": "/audio/6c4d62cc0b67.mp3"
- },
- {
-  "en": "Sorry, I'm running a little late.",
-  "ko": "미안, 조금 늦을 것 같아",
-  "desc": "가는 중에 미리 알리는 말. 도착해서 사과할 땐 Sorry I'm late.",
-  "url": "https://www.cafeinenglish.com/p/running-late/",
-  "share": "https://www.cafeinenglish.com/d/sorry-im-running-a-little-late/",
-  "au": "/audio/496cab398295.mp3"
- },
- {
-  "en": "It's not just a job. It's my passion.",
-  "ko": "그냥 일이 아니라, 제 열정이에요",
-  "desc": "not just = 단지 ~만이 아닌. 젠슨 황의 AI is not just software technology에서 건졌어요.",
-  "url": "https://www.cafeinenglish.com/p/jensen-huang-ai-five-layer-cake/",
-  "share": "https://www.cafeinenglish.com/d/its-not-just-a-job-its-my-passion/",
-  "au": "/audio/7aee72345a0e.mp3"
+  "en": "She sends her warmest regards.",
+  "ko": "그분이 안부 전해 달래요.",
+  "desc": "자리에 없는 사람의 안부를 대신 전할 때. regards는 늘 복수예요.",
+  "url": "https://www.cafeinenglish.com/p/kang-kyung-wha-seri-pak-speech-english/",
+  "share": "https://www.cafeinenglish.com/d/she-sends-her-warmest-regards/",
+  "au": "/audio/9425de5b9060.mp3"
  }
 ]
