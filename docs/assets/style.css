@@ -3778,6 +3778,8 @@ h1,h2,h3,.nxt .t b,.nh-rt b,.nh-pop b,.srbox li a,.card h3,.nh-ttl,.sr-card h3,.
 .fig figcaption{display:table-caption;caption-side:bottom;line-height:1.55}
 /* 본문 문단은 줄을 끝까지 채움 (text-wrap:pretty가 줄을 일찍 끊어 오른쪽이 비어 보이던 것 되돌림, 2026-11-26) */
 .pv2 .pb p,.pv2 .pb li,.card p,.sr-card p,.pv2 p{text-wrap:wrap!important}
+/* 글 머리 소제목(리드)은 어정쩡한 두 줄이 되지 않게 줄 길이를 고르게 (2026-11-27) */
+.pv2 .ph .lead{text-wrap:balance!important}
 /* ===== 내 공부방 시안 B (2026-11-26): 사이트와 같은 흰 바탕 · 연회색 카드 · 파란 버튼 ===== */
 body.pg-gray:has(.nb2){background:#fff!important}
 .nb-intro{font-size:17px;color:#6B7684;line-height:1.6;margin:10px 0 24px}
