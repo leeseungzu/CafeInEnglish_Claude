@@ -3993,3 +3993,13 @@ button.np,a.np{all:unset;box-sizing:border-box;display:flex;align-items:center;g
 
 /* 여행영어 PDF 안내 띠: 글 본문 굵은 글씨 색에 덮여 제목이 안 보이던 문제 (2026-11-26) */
 .pv2 .pdf-cta b,.pv2 a.pdf-cta b{color:#fff!important}
+
+/* PC에서 설치한 앱(2026-11-27): 아래 탭 5칸을 한 줄로, 휴대폰과 같은 떠 있는 알약 모양 + 공부방 배지 위치 */
+@media screen and (min-width:900px){
+  html.is-app .tabbar{grid-template-columns:repeat(5,1fr);left:50%;right:auto;transform:translateX(-50%);width:520px;bottom:calc(14px + env(safe-area-inset-bottom));border:1px solid rgba(0,0,0,.06);border-radius:32px;padding:6px;background:rgba(255,255,255,.86);box-shadow:0 8px 28px rgba(25,31,40,.14)}
+  html.is-app .tabbar a{position:relative;border-radius:26px;padding:7px 0 6px;font-size:11px;color:#8B95A1}
+  html.is-app .tabbar a.on{background:#F2F4F6;color:#2B1D14}
+  html.is-app .tabbar .tab-badge{position:absolute;top:2px;left:calc(50% + 5px);min-width:16px;height:16px;padding:0 4px;box-sizing:border-box;border-radius:8px;background:#CDEB5B;color:#2B1D14;font-size:10px;font-weight:800;line-height:16px;text-align:center}
+  html.is-app .tabbar .tab-badge[hidden]{display:none}
+  html.is-app body{padding-bottom:110px}
+}

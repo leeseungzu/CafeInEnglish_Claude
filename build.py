@@ -3914,7 +3914,7 @@ def build():
         if old not in POST_BY_ID and (new in POST_BY_ID or new.startswith("/")):
             write(f"/p/{old}/", page_moved(old, new))
     (OUT / "manifest.webmanifest").write_text(json.dumps({
-        "name": "카페인영어 - 오늘의 5분", "short_name": "카페인영어", "lang": "ko", "start_url": "/notes/?src=app", "scope": "/",
+        "name": "카페인영어 CafeInEnglish", "short_name": "카페인영어", "lang": "ko", "start_url": "/notes/?src=app", "scope": "/",
         "display": "standalone", "background_color": "#FFFFFF", "theme_color": "#FFFFFF",
         "description": "하루 5분, 듣고 말하고 복습하는 영어 루틴",
         "icons": [{"src": "/assets/icon-192.png?v=3", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
