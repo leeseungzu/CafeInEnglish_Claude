@@ -622,5 +622,11 @@
   "en": "She sends her warmest regards.",
   "ko": "그분이 안부 전해 달래요.",
   "desc": "자리에 없는 사람의 안부를 대신 전할 때. regards는 늘 복수예요."
+ },
+ {
+  "post": "in-the-end-vs-at-the-end",
+  "en": "In the end, it all worked out.",
+  "ko": "결국엔 다 잘 풀렸어.",
+  "desc": "이것저것 겪은 뒤의 결론을 말할 때. '결국'은 at the end가 아니라 in the end예요."
  }
 ]
